@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Data:
     m_Root: {fileID: 5539680441756384955}
     m_Mid: {fileID: 3061623410539447867}
@@ -84,7 +84,7 @@ Transform:
   m_GameObject: {fileID: 663148052}
   m_LocalRotation: {x: -0.000000059604638, y: 0.0000000038621604, z: 5.684342e-14,
     w: 1}
-  m_LocalPosition: {x: -0.43004322, y: 1.4406134, z: -0.089}
+  m_LocalPosition: {x: -0.43004322, y: 1.057, z: -0.089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1870861162}
@@ -114,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247472933}
   m_LocalRotation: {x: 0.00070005585, y: -6.32042e-10, z: 0.000000009674295, w: 0.9999998}
-  m_LocalPosition: {x: -0.08207794, y: 0.5315314, z: 0.1448}
+  m_LocalPosition: {x: -0.382, y: 0.5315314, z: 0.043}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 12816017}
@@ -144,7 +144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1637177631}
   m_LocalRotation: {x: 0.00022556473, y: 0.00000004856563, z: -1.0857093e-11, w: 1}
-  m_LocalPosition: {x: -0.7133317, y: 1.4406132, z: -0.055484172}
+  m_LocalPosition: {x: -0.539, y: 0.716, z: 0.128}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1870861162}
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Data:
     m_Root: {fileID: 431929702989971055}
     m_Mid: {fileID: 2109207236116635572}
@@ -346,7 +346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879135570}
   m_LocalRotation: {x: -6.984914e-10, y: -0, z: -9.313226e-10, w: 1}
-  m_LocalPosition: {x: -0.08207782, y: 0.08729482, z: -0.027426735}
+  m_LocalPosition: {x: -0.375, y: 0.08729482, z: -0.027426735}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 12816017}
@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 327153634}
   - component: {fileID: 327153635}
   - component: {fileID: 327153636}
+  - component: {fileID: 2133138098}
   m_Layer: 0
   m_Name: Magic
   m_TagString: Untagged
@@ -510,6 +511,19 @@ MonoBehaviour:
   - {fileID: 9020725757650200056}
   - {fileID: 4080712424315678009}
   - {fileID: 1629050667738467543}
+--- !u!114 &2133138098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36581229532476103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c50afc1c01659486281780dcd04c03f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Anim: {fileID: 327153634}
 --- !u!1 &51862490277201570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,7 +1026,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730457009955934625}
   m_LocalRotation: {x: -2.328196e-10, y: 0.000000014901161, z: 5.684342e-14, w: 1}
-  m_LocalPosition: {x: 0.08207794, y: 0.0872941, z: -0.027428411}
+  m_LocalPosition: {x: 0.313, y: 0.0872941, z: -0.027428411}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2271113838511760369}
@@ -1164,7 +1178,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2541584122999707547}
   m_LocalRotation: {x: 0.00067243725, y: 0.00000001421653, z: 0.000000011313887, w: 0.99999976}
-  m_LocalPosition: {x: 0.08207794, y: 0.5315314, z: 0.1448}
+  m_LocalPosition: {x: 0.292, y: 0.5315314, z: 0.1448}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2271113838511760369}
@@ -1716,7 +1730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Data:
     m_Root: {fileID: 3008340355956583859}
     m_Mid: {fileID: 1520324389300236331}
@@ -1838,7 +1852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Data:
     m_Root: {fileID: 2293083934892215091}
     m_Mid: {fileID: 8818534733337177971}
