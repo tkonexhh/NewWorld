@@ -91,7 +91,7 @@ Transform:
   m_Children:
   - {fileID: 598965335}
   m_Father: {fileID: 3952664827111669972}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &457659614
 MeshFilter:
@@ -716,7 +716,6 @@ Transform:
   - {fileID: 3539967129277145682}
   - {fileID: 1803946320}
   - {fileID: 868219909}
-  - {fileID: 4347208030481954001}
   - {fileID: 457659611}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -894,12 +893,13 @@ MonoBehaviour:
     crouch: 0
   m_MovementSetting:
     moveSpeed: 40
+    turnSmoothTime: 0.1
   m_AnimationSetting:
     dumpTime: 0.6
   m_CharacterController: {fileID: 191933889}
   m_CameraTrans: {fileID: 0}
   m_Anim: {fileID: 327153634}
-  tuenSmmothTime: 0.1
+  m_ForceGO: {fileID: 0}
 --- !u!1 &51862490277201570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,52 +1811,6 @@ Transform:
   m_Father: {fileID: 2373180402454153143}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3683073925676220713
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4347208030481954001}
-  - component: {fileID: 82610183}
-  m_Layer: 0
-  m_Name: CameraCenter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4347208030481954001
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3683073925676220713}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.527, y: 1.204, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3952664827111669972}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &82610183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3683073925676220713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8ca719ff2ba74fbaac2132a74fc35b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-  color: {r: 0.1911776, g: 1, b: 0, a: 1}
-  size: 0.1
 --- !u!1 &3723969538362041592
 GameObject:
   m_ObjectHideFlags: 0

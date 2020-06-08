@@ -15,6 +15,7 @@ namespace GameWish.Game
 {
     public class PlayerMove : MonoBehaviour
     {
+
         [SerializeField] private InputSetting m_InputSetting;
         [SerializeField] private MovementSetting m_MovementSetting;
         [SerializeField] private AnimationSetting m_AnimationSetting;
@@ -24,25 +25,25 @@ namespace GameWish.Game
         [SerializeField] Animator m_Anim;
 
         [SerializeField] private GameObject m_ForceGO;
-        public float tuenSmmothTime = 0.1f;
         float turnSmoothVelocity;
         private void Update()
         {
-            m_InputSetting.GetInput();
-            // float horizontal = m_InputSetting.Horizontal;
-            // float vertical = m_InputSetting.Vertical;
+            GetInput();
 
-            // Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
+            float horizontal = m_InputSetting.Horizontal;
+            float vertical = m_InputSetting.Vertical;
 
-            // if (direction.magnitude > 0.1f)
-            // {
-            //     float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + m_CameraTrans.eulerAngles.y;
-            //     float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, tuenSmmothTime);
-            //     transform.rotation = Quaternion.Euler(0f, angle, 0);
+            Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
 
-            //     Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
-            //     m_CharacterController.SimpleMove(moveDirection.normalized * direction.magnitude * 2 * m_MovementSetting.moveSpeed * Time.deltaTime);
-            // }
+            if (direction.magnitude > 0.1f)
+            {
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + m_CameraTrans.eulerAngles.y;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, m_MovementSetting.turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0);
+
+                Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+                m_CharacterController.SimpleMove(moveDirection.normalized * direction.magnitude * m_MovementSetting.moveSpeed * Time.deltaTime);
+            }
 
             SetUpAnim();
 
@@ -55,6 +56,12 @@ namespace GameWish.Game
 
         private void FixedUpdate()
         {
+
+        }
+
+        void GetInput()
+        {
+            m_InputSetting.GetInput();
 
         }
 
