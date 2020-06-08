@@ -16,11 +16,12 @@ namespace GameWish.Game
     public class Role_Magic : MonoBehaviour
     {
         [SerializeField] Animator m_Anim;
+        private float m_AnimDumpTime = 0.4f;
 
         void Update()
         {
-            m_Anim.SetFloat("x", InputMgr.S.horizontalAxis);
-            m_Anim.SetFloat("y", InputMgr.S.vertacalAxis);
+            // m_Anim.SetFloat("x", InputMgr.S.horizontalAxis, m_AnimDumpTime, Time.deltaTime);
+            // m_Anim.SetFloat("y", InputMgr.S.verticalAxis, m_AnimDumpTime, Time.deltaTime);
         }
     }
 
