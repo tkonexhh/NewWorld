@@ -24,6 +24,7 @@ namespace GameWish.Game
 
         //Parameters
         public static readonly int HashInputDetectedBool = Animator.StringToHash("InputDetected");
+        public static readonly int HashAngleDeltaRadFloat = Animator.StringToHash("AngleDeltaRad");
         public static readonly int HashForwardSpeed = Animator.StringToHash("ForwardSpeed");
         public static readonly int HashVerticalSpeed = Animator.StringToHash("VerticalSpeed");
         public static readonly int HashGroundedBool = Animator.StringToHash("Grounded");

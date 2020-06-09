@@ -28,6 +28,7 @@ namespace GameWish.Game
 
 
         protected float m_IdleTimer;
+        protected float m_AngleDiff;
 
         private void Awake()
         {
@@ -58,45 +59,37 @@ namespace GameWish.Game
         {
             TimeoutToIdle();
             SetTargetRotation();
+
+            if (m_Input.IsMoveInput)
+                UpdateOrientation();
         }
 
-        // void CalcForwardMovement()
-        // {
-        //     Vector2 moveInput = m_Input.MoveInput;
-        //     if (moveInput.sqrMagnitude > 1f)
-        //     {
-        //         moveInput.Normalize();
-        //     }
 
-        //     float m_DesiredForwardSpeed = moveInput.magnitude * m_MovementSetting.moveSpeed;
-        //     // Mathf.MoveTowards()
-        //     m_Anim.animator.SetFloat(PlayerAnim.HashForwardSpeed, moveInput.magnitude);
-        // }
-
-        // void CalcVerticalMovement()
-        // {
-
-        // }
 
         float turnSmoothVelocity;
         void SetTargetRotation()
         {
             Vector2 moveInput = m_Input.MoveInput;
 
-            Vector3 direction = new Vector3(moveInput.x, 0, moveInput.y).normalized;
+            //Vector3 direction = new Vector3(moveInput.x, 0, moveInput.y).normalized;
 
-            if (direction.magnitude > 0.1f)
+            if (moveInput.magnitude > 0.1f)
             {
-                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraSettings.camera.transform.eulerAngles.y;
+                float targetAngle = Mathf.Atan2(moveInput.x, moveInput.y) * Mathf.Rad2Deg + cameraSettings.camera.transform.eulerAngles.y;
                 float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, m_MovementSetting.turnSmoothTime);
                 transform.rotation = Quaternion.Euler(0f, angle, 0);
 
                 Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
-                m_CharCtrl.SimpleMove(moveDirection.normalized * direction.magnitude * m_MovementSetting.moveSpeed * Time.deltaTime);
+                //m_CharCtrl.SimpleMove(moveDirection.normalized * direction.magnitude * m_MovementSetting.moveSpeed * Time.deltaTime);
 
             }
 
             m_Anim.animator.SetFloat(PlayerAnim.HashForwardSpeed, moveInput.magnitude);
+        }
+
+        void UpdateOrientation()
+        {
+            m_Anim.animator.SetFloat(PlayerAnim.HashAngleDeltaRadFloat, m_AngleDiff * Mathf.Deg2Rad);
         }
 
 
