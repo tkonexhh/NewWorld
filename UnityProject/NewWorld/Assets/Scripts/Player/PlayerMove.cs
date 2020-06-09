@@ -35,15 +35,15 @@ namespace GameWish.Game
 
             Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
 
-            if (direction.magnitude > 0.1f)
-            {
-                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + m_CameraTrans.eulerAngles.y;
-                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, m_MovementSetting.turnSmoothTime);
-                transform.rotation = Quaternion.Euler(0f, angle, 0);
+            // if (direction.magnitude > 0.1f)
+            // {
+            //     float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + m_CameraTrans.eulerAngles.y;
+            //     float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, m_MovementSetting.turnSmoothTime);
+            //     transform.rotation = Quaternion.Euler(0f, angle, 0);
 
-                Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
-                m_CharacterController.SimpleMove(moveDirection.normalized * direction.magnitude * m_MovementSetting.moveSpeed * Time.deltaTime);
-            }
+            //     Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+            //     m_CharacterController.SimpleMove(moveDirection.normalized * direction.magnitude * m_MovementSetting.moveSpeed * Time.deltaTime);
+            // }
 
             SetUpAnim();
 
@@ -82,8 +82,8 @@ namespace GameWish.Game
                 m_Anim.SetFloat("y", m_InputSetting.Vertical, m_AnimationSetting.dumpTime, Time.deltaTime);
             }
 
-            m_Anim.SetBool("Crouch", m_InputSetting.crouch);
-            m_Anim.SetBool("Forcus", m_ForceGO != null);
+            // m_Anim.SetBool("Crouch", m_InputSetting.crouch);
+            // m_Anim.SetBool("Forcus", m_ForceGO != null);
 
         }
 
