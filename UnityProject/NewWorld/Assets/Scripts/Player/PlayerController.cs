@@ -18,12 +18,14 @@ namespace GameWish.Game
     public class PlayerController : MonoBehaviour
     {
         public float idleTimeout = 5f;
+        public CameraSettings cameraSettings;
 
         [SerializeField] private MovementSetting m_MovementSetting;
 
         protected CharacterController m_CharCtrl;
         protected PlayerInput m_Input;
         protected PlayerAnim m_Anim;
+
 
         protected float m_IdleTimer;
 
@@ -32,6 +34,7 @@ namespace GameWish.Game
             m_Input = GetComponent<PlayerInput>();
             m_Anim = GetComponent<PlayerAnim>();
             m_CharCtrl = GetComponent<CharacterController>();
+            cameraSettings = FindObjectOfType<CameraSettings>();
         }
 
         // private void OnAnimatorMove()
@@ -44,25 +47,58 @@ namespace GameWish.Game
             {
                 Damaged();
             }
+
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                Died();
+            }
         }
 
         private void FixedUpdate()
         {
             TimeoutToIdle();
-            SetUpAnim();
-            CalcForwardMovement();
-
+            SetTargetRotation();
         }
 
-        void CalcForwardMovement()
+        // void CalcForwardMovement()
+        // {
+        //     Vector2 moveInput = m_Input.MoveInput;
+        //     if (moveInput.sqrMagnitude > 1f)
+        //     {
+        //         moveInput.Normalize();
+        //     }
+
+        //     float m_DesiredForwardSpeed = moveInput.magnitude * m_MovementSetting.moveSpeed;
+        //     // Mathf.MoveTowards()
+        //     m_Anim.animator.SetFloat(PlayerAnim.HashForwardSpeed, moveInput.magnitude);
+        // }
+
+        // void CalcVerticalMovement()
+        // {
+
+        // }
+
+        float turnSmoothVelocity;
+        void SetTargetRotation()
         {
             Vector2 moveInput = m_Input.MoveInput;
+
+            Vector3 direction = new Vector3(moveInput.x, 0, moveInput.y).normalized;
+
+            if (direction.magnitude > 0.1f)
+            {
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraSettings.camera.transform.eulerAngles.y;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, m_MovementSetting.turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0);
+
+                Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+                m_CharCtrl.SimpleMove(moveDirection.normalized * direction.magnitude * m_MovementSetting.moveSpeed * Time.deltaTime);
+
+            }
+
             m_Anim.animator.SetFloat(PlayerAnim.HashForwardSpeed, moveInput.magnitude);
         }
-        void SetUpAnim()
-        {
-            m_Anim.animator.SetBool(PlayerAnim.HashCrouchBool, m_Input.Crouch);
-        }
+
 
         void TimeoutToIdle()
         {
@@ -88,8 +124,15 @@ namespace GameWish.Game
         void Damaged()
         {
             m_Anim.animator.SetTrigger(PlayerAnim.HashHurtTrigger);
-            m_Anim.animator.SetFloat(PlayerAnim.HasHurtFormX, Random.Range(0, 1.0f));
-            m_Anim.animator.SetFloat(PlayerAnim.HasHurtFormY, Random.Range(0, 1.0f));
+            m_Anim.animator.SetFloat(PlayerAnim.HasHurtFormX, Random.Range(-1.0f, 1.0f));
+            m_Anim.animator.SetFloat(PlayerAnim.HasHurtFormY, Random.Range(-1.0f, 1.0f));
+        }
+
+        void Died()
+        {
+            m_Anim.animator.SetTrigger(PlayerAnim.HashDeadTrigger);
+            m_Anim.animator.SetFloat(PlayerAnim.HasHurtFormX, Random.Range(-1.0f, 1.0f));
+            m_Anim.animator.SetFloat(PlayerAnim.HasHurtFormY, Random.Range(-1.0f, 1.0f));
         }
 
     }

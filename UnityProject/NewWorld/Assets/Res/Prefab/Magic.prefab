@@ -690,9 +690,10 @@ GameObject:
   - component: {fileID: 327153634}
   - component: {fileID: 327153635}
   - component: {fileID: 327153636}
-  - component: {fileID: 2133138098}
   - component: {fileID: 191933889}
-  - component: {fileID: 191933888}
+  - component: {fileID: 750592245}
+  - component: {fileID: 750592247}
+  - component: {fileID: 750592253}
   m_Layer: 0
   m_Name: Magic
   m_TagString: Player
@@ -841,19 +842,6 @@ MonoBehaviour:
   - {fileID: 9020725757650200056}
   - {fileID: 4080712424315678009}
   - {fileID: 1629050667738467543}
---- !u!114 &2133138098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 36581229532476103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c50afc1c01659486281780dcd04c03f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Anim: {fileID: 327153634}
 --- !u!143 &191933889
 CharacterController:
   m_ObjectHideFlags: 0
@@ -872,7 +860,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.97, z: 0}
---- !u!114 &191933888
+--- !u!114 &750592245
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -881,7 +869,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 36581229532476103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed10cf8d963a6434e81ae36875a85c9c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0082117a8056a466e881ba3e74d601a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputSetting:
@@ -889,17 +877,40 @@ MonoBehaviour:
     Vertical: 0
     mouseX: 0
     mouseY: 0
-    jump: 0
-    crouch: 0
+  playerInputBlocked: 0
+  jump: 0
+  Crouch: 0
+--- !u!114 &750592247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36581229532476103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25cc567732eb64c309b82657f48f153b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleTimeout: 5
+  cameraSettings: {fileID: 0}
   m_MovementSetting:
     moveSpeed: 40
     turnSmoothTime: 0.1
+--- !u!114 &750592253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36581229532476103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab14b379ce4e543fba4241b2f38029a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_AnimationSetting:
-    dumpTime: 0.6
-  m_CharacterController: {fileID: 191933889}
-  m_CameraTrans: {fileID: 0}
-  m_Anim: {fileID: 327153634}
-  m_ForceGO: {fileID: 0}
+    dumpTime: 0.4
 --- !u!1 &51862490277201570
 GameObject:
   m_ObjectHideFlags: 0

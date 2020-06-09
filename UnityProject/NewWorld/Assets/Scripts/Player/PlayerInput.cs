@@ -23,7 +23,7 @@ namespace GameWish.Game
         private float horizontal;
         private float vertical;
 
-        public bool jump;
+        public bool Jump;
         public bool Crouch;
 
         private const KeyCode Input_Crouch = KeyCode.LeftControl;
@@ -46,7 +46,8 @@ namespace GameWish.Game
                 {
                     return Vector2.zero;
                 }
-
+                float magnitude = m_Movement.magnitude;
+                m_Movement = m_Movement.normalized * magnitude;
                 return m_Movement;
             }
         }
@@ -89,8 +90,8 @@ namespace GameWish.Game
             horizontal = Mathf.SmoothDamp(horizontal, m_InputSetting.Horizontal, ref m_HorizontalVelocity, m_InputSmoothTime);
             vertical = Mathf.SmoothDamp(vertical, m_InputSetting.Vertical, ref m_VerticalVelocity, m_InputSmoothTime);
 
-            m_Movement.Set(horizontal, vertical);
 
+            m_Movement.Set(horizontal, vertical);
             if (m_Movement.magnitude <= 0.1f && Input.GetKeyDown(Input_Crouch))//确保只有在几乎静止的时候才能切换
             {
                 Crouch = !Crouch;
