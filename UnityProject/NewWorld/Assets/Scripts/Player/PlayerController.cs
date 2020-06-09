@@ -70,7 +70,6 @@ namespace GameWish.Game
         void SetTargetRotation()
         {
             Vector2 moveInput = m_Input.MoveInput;
-
             //Vector3 direction = new Vector3(moveInput.x, 0, moveInput.y).normalized;
 
             if (moveInput.magnitude > 0.1f)
@@ -83,8 +82,12 @@ namespace GameWish.Game
                 //m_CharCtrl.SimpleMove(moveDirection.normalized * direction.magnitude * m_MovementSetting.moveSpeed * Time.deltaTime);
 
             }
-
-            m_Anim.animator.SetFloat(PlayerAnim.HashForwardSpeed, moveInput.magnitude);
+            // if (moveInput.magnitude > 1f)
+            // {
+            //     if (!m_Input.Running)
+            //         moveInput.Normalize();
+            // }
+            m_Anim.animator.SetFloat(PlayerAnim.HashForwardSpeed, Mathf.Sqrt(moveInput.x * moveInput.x + moveInput.y * moveInput.y));
         }
 
         void UpdateOrientation()

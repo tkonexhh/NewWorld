@@ -23,6 +23,7 @@ namespace GameWish.Game
         private float horizontal;
         private float vertical;
 
+        public bool Running;
         public bool Jump;
         public bool Crouch;
 
@@ -46,8 +47,7 @@ namespace GameWish.Game
                 {
                     return Vector2.zero;
                 }
-                float magnitude = m_Movement.magnitude;
-                m_Movement = m_Movement.normalized * magnitude;
+
                 return m_Movement;
             }
         }
@@ -56,9 +56,10 @@ namespace GameWish.Game
         private void Update()
         {
             m_InputSetting.GetInput();
-
+            Running = false;
             if (Input.GetKey(Input_Run))
             {
+                Running = true;
                 if (m_InputSetting.Horizontal != 0)
                 {
                     if (m_InputSetting.Horizontal > 0)
