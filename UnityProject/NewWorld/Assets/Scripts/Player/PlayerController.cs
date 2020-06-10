@@ -43,28 +43,29 @@ namespace GameWish.Game
             cameraSettings.lookAt = m_CameraLookAt;
         }
 
-
-        private void OnAnimatorMove()
+        private void CheckGround()
         {
-            Debug.LogError("OnAnimatorMove");
-
             if (m_IsGrounded)
             {
                 RaycastHit hit;
                 Ray ray = new Ray(transform.position + Vector3.up * 1 * 0.5f, -Vector3.up);
+                Debug.DrawRay(transform.position + Vector3.up * 1 * 0.5f, transform.position, Color.red, 10);
                 if (Physics.Raycast(ray, out hit, 1, Physics.AllLayers, QueryTriggerInteraction.Ignore))
                 {
-
+                    Debug.LogError(hit.collider.gameObject.name);
                 }
             }
             else
             {
 
             }
-
-            Vector2 moveInput = m_Input.MoveInput;
-
         }
+
+        // private void OnAnimatorMove()
+        // {
+        //     Debug.LogError("OnAnimatorMove");
+        //     Vector2 moveInput = m_Input.MoveInput;
+        // }
 
         private void Update()
         {
@@ -77,11 +78,14 @@ namespace GameWish.Game
             {
                 Died();
             }
+            CheckGround();
         }
 
         private void FixedUpdate()
         {
+            //TODO m_CharCtrl.isGrounded 很不准确
             m_IsGrounded = m_CharCtrl.isGrounded;
+            Debug.LogError(m_CharCtrl.isGrounded);
             TimeoutToIdle();
             CalcVertcalMovement();
             SetTargetRotation();
@@ -97,8 +101,6 @@ namespace GameWish.Game
         /// </summary>
         void CalcVertcalMovement()
         {
-
-
             if (!m_Input.Jump && m_IsGrounded)
             {
                 m_ReadyToJump = true;
@@ -132,10 +134,9 @@ namespace GameWish.Game
 
             if (!m_IsGrounded)
             {
-                m_Character.animator.SetFloat(CharacterAnim.HashVerticalSpeed, m_VerticalSpeed);
+                m_Character.animator.SetFloat(CharacterAnim.HashVerticalSpeedFloat, m_VerticalSpeed);
             }
 
-            //Debug.LogError("m_IsGrounded:" + m_IsGrounded);
             m_Character.animator.SetBool(CharacterAnim.HashGroundedBool, m_IsGrounded);
 
         }
@@ -145,19 +146,19 @@ namespace GameWish.Game
             Vector2 moveInput = m_Input.MoveInput;
             Vector3 movement;
             m_Character.transform.forward = Vector3.Slerp(m_Character.transform.forward, moveInput.x * transform.right + moveInput.y * transform.forward, m_MovementSetting.turnSmoothTime);
-            movement = m_Character.transform.forward * moveInput.magnitude * m_MovementSetting.moveSpeed * (m_Input.Running ? 1.7f : 1) * Time.fixedDeltaTime;
-
+            // /movement = m_Character.transform.forward * moveInput.magnitude * m_MovementSetting.moveSpeed * (m_Input.Running ? 1.7f : 1) * Time.fixedDeltaTime;
+            movement = m_Character.transform.forward * moveInput.magnitude * m_MovementSetting.moveSpeed * Time.fixedDeltaTime;
             if (!m_IsGrounded)
             {
                 //Debug.LogError("pos:" + m_VerticalSpeed);
-                movement += 10000000 * Vector3.up;
-                Debug.LogError(movement);
+                movement += m_VerticalSpeed * m_Character.transform.up * Time.fixedDeltaTime;
             }
-            if (moveInput.magnitude > 0.1f)
+            //if (moveInput.magnitude > 0.1f)
             {
-                //m_Character.transform.forward = Vector3.Slerp(m_Character.transform.forward, moveInput.x * transform.right + moveInput.y * transform.forward, m_MovementSetting.turnSmoothTime);
-                //m_CharCtrl.SimpleMove(m_Character.transform.forward * moveInput.magnitude * m_MovementSetting.moveSpeed * (m_Input.Running ? 1.7f : 1) * Time.fixedDeltaTime);
-                m_CharCtrl.SimpleMove(movement);
+                //movement = m_Character.transform.forward * moveInput.magnitude * m_MovementSetting.moveSpeed * Time.fixedDeltaTime;
+                // m_Character.transform.forward = Vector3.Slerp(m_Character.transform.forward, moveInput.x * transform.right + moveInput.y * transform.forward, m_MovementSetting.turnSmoothTime);
+                // m_CharCtrl.SimpleMove(m_Character.transform.forward * moveInput.magnitude * m_MovementSetting.moveSpeed * (m_Input.Running ? 1.7f : 1) * Time.fixedDeltaTime);
+                m_CharCtrl.Move(movement);
             }
 
             float lerpSpeed = Mathf.Lerp(m_Character.animator.GetFloat(CharacterAnim.HashForwardSpeed), (m_Input.Running ? 2 : 1), 0.3f);

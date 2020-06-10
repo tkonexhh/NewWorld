@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace GameWish.Game
 {
-    public class FSMMessage : StateMachineBehaviour
+    public class FSMMessageSMB : StateMachineBehaviour
     {
         public string[] enterMsg;
         public string[] exitMsg;

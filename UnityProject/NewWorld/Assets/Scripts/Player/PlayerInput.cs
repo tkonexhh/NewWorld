@@ -25,7 +25,7 @@ namespace GameWish.Game
 
         public bool Running;
         public bool Jump;
-        public bool Crouch;
+        //public bool Crouch;
 
         private const KeyCode Input_Crouch = KeyCode.LeftControl;
         private const KeyCode Input_Run = KeyCode.LeftShift;
@@ -58,10 +58,10 @@ namespace GameWish.Game
             m_Movement.Set(m_InputSetting.Horizontal, m_InputSetting.Vertical);
             m_Movement = SquareToCircle(m_Movement);
 
-            if (m_Movement.magnitude <= 0.1f && Input.GetKeyDown(Input_Crouch))//确保只有在几乎静止的时候才能切换
-            {
-                Crouch = !Crouch;
-            }
+            // if (m_Movement.magnitude <= 0.1f && Input.GetKeyDown(Input_Crouch))//确保只有在几乎静止的时候才能切换
+            // {
+            //     Crouch = !Crouch;
+            // }
         }
 
         private Vector2 SquareToCircle(Vector2 input)

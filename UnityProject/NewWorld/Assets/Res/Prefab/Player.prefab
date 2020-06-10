@@ -114,7 +114,7 @@ MonoBehaviour:
   gravity: 20
   m_CameraLookAt: {fileID: 628835194565897485}
   m_MovementSetting:
-    moveSpeed: 50
+    moveSpeed: 1.25
     jumpSpeed: 40
     turnSmoothTime: 0.1
 --- !u!114 &628835194871685088
@@ -138,7 +138,6 @@ MonoBehaviour:
   playerInputBlocked: 0
   Running: 0
   Jump: 0
-  Crouch: 0
 --- !u!1001 &3035033793796064582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146,6 +145,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 628835194871685103}
     m_Modifications:
+    - target: {fileID: 327153634, guid: 8113844c23f53452fac48e2f34831302, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 577622675, guid: 8113844c23f53452fac48e2f34831302, type: 3}
       propertyPath: m_Enabled
       value: 0
