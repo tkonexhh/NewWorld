@@ -30,10 +30,6 @@ namespace GameWish.Game
         private const KeyCode Input_Crouch = KeyCode.LeftControl;
         private const KeyCode Input_Run = KeyCode.LeftShift;
 
-        private float m_HorizontalVelocity;
-        private float m_VerticalVelocity;
-        private float m_InputSmoothTime = 0.05f;
-
         public bool IsMoveInput
         {
             get { return !Mathf.Approximately(MoveInput.sqrMagnitude, 0f); }
@@ -56,47 +52,24 @@ namespace GameWish.Game
         private void Update()
         {
             m_InputSetting.GetInput();
-            Running = false;
-            if (Input.GetKey(Input_Run))
-            {
-                Running = true;
-                if (m_InputSetting.Horizontal != 0)
-                {
-                    if (m_InputSetting.Horizontal > 0)
-                    {
-                        m_InputSetting.Horizontal += 0.5f;
-                    }
-                    else
-                    {
+            Running = Input.GetKey(Input_Run);
+            Jump = m_InputSetting.jump;
 
-                        m_InputSetting.Horizontal -= 0.5f;
-                    }
+            m_Movement.Set(m_InputSetting.Horizontal, m_InputSetting.Vertical);
+            m_Movement = SquareToCircle(m_Movement);
 
-                }
-
-                if (m_InputSetting.Vertical != 0)
-                {
-                    if (m_InputSetting.Vertical > 0)
-                    {
-                        m_InputSetting.Vertical += 0.5f;
-                    }
-                    else
-                    {
-                        m_InputSetting.Vertical -= 0.5f;
-                    }
-
-                }
-            }
-
-            horizontal = Mathf.SmoothDamp(horizontal, m_InputSetting.Horizontal, ref m_HorizontalVelocity, m_InputSmoothTime);
-            vertical = Mathf.SmoothDamp(vertical, m_InputSetting.Vertical, ref m_VerticalVelocity, m_InputSmoothTime);
-
-
-            m_Movement.Set(horizontal, vertical);
             if (m_Movement.magnitude <= 0.1f && Input.GetKeyDown(Input_Crouch))//确保只有在几乎静止的时候才能切换
             {
                 Crouch = !Crouch;
             }
+        }
+
+        private Vector2 SquareToCircle(Vector2 input)
+        {
+            Vector2 output = Vector2.zero;
+            output.x = input.x * Mathf.Sqrt(1 - (input.y * input.y) / 2);
+            output.y = input.y * Mathf.Sqrt(1 - (input.x * input.x) / 2);
+            return output;
         }
 
     }

@@ -17,7 +17,8 @@ namespace GameWish.Game
     public class MovementSetting
     {
         public float moveSpeed;
-        public float turnSmoothTime = 0.1f;
+        public float jumpSpeed;
+        public float turnSmoothTime = 0.3f;
     }
 
 }

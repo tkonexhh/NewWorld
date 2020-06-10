@@ -17,6 +17,7 @@ namespace GameWish.Game
     public class AnimationSetting
     {
         public float dumpTime = 0.4f;
+        public float idleTimeout = 5f;
     }
 
 }

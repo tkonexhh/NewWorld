@@ -13,9 +13,10 @@ using UnityEngine;
 
 namespace GameWish.Game
 {
-    public class PlayerAnim : MonoBehaviour
+    [RequireComponent(typeof(Animator))]
+    public class CharacterAnim : MonoBehaviour
     {
-        [SerializeField] private AnimationSetting m_AnimationSetting;
+        [SerializeField] public AnimationSetting animationSetting;
         private Animator m_Anim;
         public Animator animator
         {
@@ -35,6 +36,11 @@ namespace GameWish.Game
         public static readonly int HashRespawnTrigger = Animator.StringToHash("Respawn");
         public static readonly int HashDeadTrigger = Animator.StringToHash("Dead");
         public static readonly int HashHurtTrigger = Animator.StringToHash("Hurt");
+
+
+
+        //temp
+        public static readonly int HashJumpTrigger = Animator.StringToHash("Jump");
 
 
         private void Awake()

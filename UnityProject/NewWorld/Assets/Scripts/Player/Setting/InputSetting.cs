@@ -20,11 +20,13 @@ namespace GameWish.Game
         public float Vertical;
         public float mouseX;
         public float mouseY;
+        public bool jump;
 
         private const string Input_Horizontal = "Horizontal";
         private const string Input_Vertical = "Vertical";
         private const string Input_MouseX = "Mouse X";
         private const string Input_MouseY = "Mouse Y";
+        private const string Input_Jump = "Jump";
 
         public void GetInput()
         {
@@ -33,6 +35,8 @@ namespace GameWish.Game
 
             mouseX = Input.GetAxis(Input_MouseX);
             mouseY = Input.GetAxis(Input_MouseY);
+
+            jump = Input.GetButton(Input_Jump);
         }
 
 

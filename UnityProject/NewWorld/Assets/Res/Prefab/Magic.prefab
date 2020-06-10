@@ -806,9 +806,8 @@ GameObject:
   - component: {fileID: 327153635}
   - component: {fileID: 327153636}
   - component: {fileID: 191933889}
-  - component: {fileID: 750592245}
-  - component: {fileID: 750592247}
-  - component: {fileID: 750592253}
+  - component: {fileID: 7300385942913129888}
+  - component: {fileID: 3912962748119174957}
   m_Layer: 0
   m_Name: Magic
   m_TagString: Player
@@ -974,44 +973,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.97, z: 0}
---- !u!114 &750592245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 36581229532476103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0082117a8056a466e881ba3e74d601a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_InputSetting:
-    Horizontal: 0
-    Vertical: 0
-    mouseX: 0
-    mouseY: 0
-  playerInputBlocked: 0
-  Jump: 0
-  Crouch: 0
---- !u!114 &750592247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 36581229532476103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25cc567732eb64c309b82657f48f153b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idleTimeout: 5
-  cameraSettings: {fileID: 0}
-  m_MovementSetting:
-    moveSpeed: 40
-    turnSmoothTime: 0.1
---- !u!114 &750592253
+--- !u!114 &7300385942913129888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1025,6 +987,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AnimationSetting:
     dumpTime: 0.4
+--- !u!114 &3912962748119174957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36581229532476103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748ad4faf3a854e6b86cf6c4a79a3e5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &51862490277201570
 GameObject:
   m_ObjectHideFlags: 0
