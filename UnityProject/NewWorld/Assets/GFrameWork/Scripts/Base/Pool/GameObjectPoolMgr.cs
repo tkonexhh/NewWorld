@@ -89,7 +89,7 @@ namespace GFrame
                 return;
             }
 
-            cell.ReturnObject(obj);
+            cell.Recycle(obj);
         }
 
         public void Recycle(GameObject obj)

@@ -9,7 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using GFrame;
 
 namespace GameWish.Game
 {
@@ -24,7 +24,8 @@ namespace GameWish.Game
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out hit))
+                LayerMask mask = 1 << LayerDefine.Layer_Ground;
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
                 {
                     Debug.LogError("----" + hit.transform.name);
                     CreateMouseClickEffect(hit.point);
@@ -35,7 +36,11 @@ namespace GameWish.Game
 
         private void CreateMouseClickEffect(Vector3 pos)
         {
-
+            AddressableResMgr.S.InstantiateAsync("Cursor_Move", (target) =>
+            {
+                target.transform.position = pos;
+                PlayerMgr.S.DoMove(pos);
+            });
         }
     }
 

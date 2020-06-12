@@ -53,7 +53,7 @@ namespace GFrame
             return obj;
         }
 
-        public void ReturnObject(GameObject obj)
+        public void Recycle(GameObject obj)
         {
             var pooledObject = obj.GetComponent<PooledObject>();
             Assert.IsNotNull(pooledObject);

@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using GFrame;
 using UnityEngine.AddressableAssets;
 
-namespace GameWish.Game
+namespace GFrame
 {
     public class Demo : MonoBehaviour
     {

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: foldermode-prefabs-role
+  m_EditorClassIdentifier: 
+  m_GroupName: foldermode-prefabs-role
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 3ca1833dd3dbf4aa5878299c8b01a1c9
+  m_SerializeEntries:
+  - m_GUID: f6eef83f9401a454388773dbb4f5b220
+    m_Address: ModularCharacters
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9c683e4341b3a423397a98767a646554, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 020586ceee6044e828779a3f95089faf, type: 2}

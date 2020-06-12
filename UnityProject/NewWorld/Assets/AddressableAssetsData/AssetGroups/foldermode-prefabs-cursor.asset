@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: foldermode-prefabs-cursor
+  m_EditorClassIdentifier: 
+  m_GroupName: foldermode-prefabs-cursor
+  m_Data:
+    m_SerializedData: []
+  m_GUID: bf92f68fa1b3a4017bba700d55147345
+  m_SerializeEntries:
+  - m_GUID: 04d6aca8d49a5440eb4fa8f0cf595fbb
+    m_Address: Cursor_Move
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9c683e4341b3a423397a98767a646554, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1f9a83a856d6a41cea24be08864928bf, type: 2}
