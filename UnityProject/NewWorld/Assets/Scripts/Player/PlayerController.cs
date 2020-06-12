@@ -21,7 +21,7 @@ namespace GameWish.Game
         [SerializeField] private Transform m_CameraLookAt;
         [SerializeField] private MovementSetting m_MovementSetting;
 
-
+        protected GroundChecker[] m_GroundCheckers;
         protected CameraSettings cameraSettings;
         protected CharacterController m_CharCtrl;
         protected PlayerInput m_Input;
@@ -37,6 +37,7 @@ namespace GameWish.Game
         {
             m_Input = GetComponent<PlayerInput>();
             m_Character = GetComponentInChildren<Character>();
+            m_GroundCheckers = GetComponentsInChildren<GroundChecker>();
             m_CharCtrl = GetComponent<CharacterController>();
             cameraSettings = FindObjectOfType<CameraSettings>();
             cameraSettings.follow = m_CameraLookAt;
@@ -45,27 +46,19 @@ namespace GameWish.Game
 
         private void CheckGround()
         {
-            if (m_IsGrounded)
+            m_IsGrounded = false;
+            //if (!m_IsGrounded)
             {
-                RaycastHit hit;
-                Ray ray = new Ray(transform.position + Vector3.up * 1 * 0.5f, -Vector3.up);
-                Debug.DrawRay(transform.position + Vector3.up * 1 * 0.5f, transform.position, Color.red, 10);
-                if (Physics.Raycast(ray, out hit, 1, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+                for (int i = 0; i < m_GroundCheckers.Length; i++)
                 {
-                    Debug.LogError(hit.collider.gameObject.name);
+                    if (m_GroundCheckers[i].isGround)
+                    {
+                        m_IsGrounded = true;
+                        break;
+                    }
                 }
             }
-            else
-            {
-
-            }
         }
-
-        // private void OnAnimatorMove()
-        // {
-        //     Debug.LogError("OnAnimatorMove");
-        //     Vector2 moveInput = m_Input.MoveInput;
-        // }
 
         private void Update()
         {
@@ -78,22 +71,18 @@ namespace GameWish.Game
             {
                 Died();
             }
-            CheckGround();
+
         }
 
         private void FixedUpdate()
         {
+            CheckGround();
             //TODO m_CharCtrl.isGrounded 很不准确
-            m_IsGrounded = m_CharCtrl.isGrounded;
-            Debug.LogError(m_CharCtrl.isGrounded);
+            //m_IsGrounded = m_CharCtrl.isGrounded;
             TimeoutToIdle();
             CalcVertcalMovement();
             SetTargetRotation();
 
-
-
-            // if (m_Input.IsMoveInput)
-            //     UpdateOrientation();
         }
 
         /// <summary>
@@ -139,6 +128,13 @@ namespace GameWish.Game
 
             m_Character.animator.SetBool(CharacterAnim.HashGroundedBool, m_IsGrounded);
 
+        }
+
+        public void Jump()
+        {
+            Debug.LogError("Jump");
+            m_VerticalSpeed = m_MovementSetting.jumpSpeed;
+            m_IsGrounded = false;
         }
 
         void SetTargetRotation()

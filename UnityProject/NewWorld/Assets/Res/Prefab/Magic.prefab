@@ -298,52 +298,6 @@ Transform:
   m_Father: {fileID: 1870861162}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &868219908
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 868219909}
-  - component: {fileID: 868219910}
-  m_Layer: 0
-  m_Name: RoleCenter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &868219909
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868219908}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
-  m_Children: []
-  m_Father: {fileID: 3952664827111669972}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &868219910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868219908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8ca719ff2ba74fbaac2132a74fc35b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-  color: {r: 1, g: 0, b: 0, a: 1}
-  size: 0.17
 --- !u!1 &1247472933
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,7 +784,6 @@ Transform:
   - {fileID: 11846823348801014}
   - {fileID: 3539967129277145682}
   - {fileID: 1803946320}
-  - {fileID: 868219909}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -985,8 +938,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab14b379ce4e543fba4241b2f38029a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AnimationSetting:
+  animationSetting:
     dumpTime: 0.4
+    idleTimeout: 5
 --- !u!114 &3912962748119174957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -999,6 +953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748ad4faf3a854e6b86cf6c4a79a3e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterAnim: {fileID: 0}
 --- !u!1 &51862490277201570
 GameObject:
   m_ObjectHideFlags: 0

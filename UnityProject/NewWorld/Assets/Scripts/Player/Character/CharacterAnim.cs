@@ -48,6 +48,11 @@ namespace GameWish.Game
             m_Anim = GetComponent<Animator>();
         }
 
+        // void OnAnimatorMove()
+        // {
+        //     //Debug.LogError("OnAnimatorMove");
+        // }
+
         public void SetLookAtTarget(Transform target)
         {
 
