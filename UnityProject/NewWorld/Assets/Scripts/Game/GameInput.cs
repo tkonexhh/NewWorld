@@ -29,6 +29,8 @@ namespace GameWish.Game
                 {
                     Debug.LogError("----" + hit.transform.name);
                     CreateMouseClickEffect(hit.point);
+
+                    //GrassMgr.S.AddExplosion(hit.point, Random.Range(1.2f, 3.2f));
                 }
             }
         }
