@@ -1,8 +1,8 @@
 /************************
-	FileName:/Scripts/Game/Mgr/BattleMgr.cs
+	FileName:/Scripts/Game/Mgr/Battle/BattleState/TurnState/TurnState_TurnChanging.cs
 	CreateAuthor:neo.xu
-	CreateTime:6/15/2020 5:05:02 PM
-	Tip:6/15/2020 5:05:02 PM
+	CreateTime:6/15/2020 6:30:34 PM
+	Tip:6/15/2020 6:30:34 PM
 ************************/
 
 
@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace GameWish.Game
 {
-    public class BattleMgr
+    public class TurnState_TurnChanging : TurnState
     {
 
     }

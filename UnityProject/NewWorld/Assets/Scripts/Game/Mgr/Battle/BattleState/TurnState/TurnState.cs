@@ -1,29 +1,29 @@
 /************************
-	FileName:/Scripts/Game/Mgr/Battle/BattleState/BattleState_Start.cs
+	FileName:/Scripts/Game/Mgr/Battle/BattleState/FightState/FightState.cs
 	CreateAuthor:neo.xu
-	CreateTime:6/15/2020 5:10:17 PM
-	Tip:6/15/2020 5:10:17 PM
+	CreateTime:6/15/2020 6:06:41 PM
+	Tip:6/15/2020 6:06:41 PM
 ************************/
 
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GFrame;
 
 
 namespace GameWish.Game
 {
-    public class BattleState_Start : BattleState
+    public class TurnState : FSMState<Battle>
     {
         public override void Enter(Battle entity)
         {
-            base.Enter(entity);
-            entity.stateMechine.SetState(BattleStateEnum.Fight);
+            Debug.LogError(stateName + "--Enter");
         }
 
         public override void Exit(Battle entity)
         {
-            base.Exit(entity);
+            Debug.LogError(stateName + "--Exit");
         }
     }
 

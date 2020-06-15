@@ -14,9 +14,17 @@ using GFrame;
 
 namespace GameWish.Game
 {
-    public class BattleState : FSMState<BattleState>
+    public class BattleState : FSMState<Battle>
     {
+        public override void Enter(Battle entity)
+        {
+            Debug.LogError(stateName + "--Enter");
+        }
 
+        public override void Exit(Battle entity)
+        {
+            Debug.LogError(stateName + "--Exit");
+        }
     }
 
 }
