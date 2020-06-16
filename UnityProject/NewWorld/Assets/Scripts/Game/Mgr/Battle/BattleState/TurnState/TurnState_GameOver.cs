@@ -13,19 +13,9 @@ using UnityEngine;
 
 namespace GameWish.Game
 {
-	public class TurnState_GameOver : MonoBehaviour
-	{
-	    // Start is called before the first frame update
-	    void Start()
-	    {
-	        
-	    }
-	
-	    // Update is called once per frame
-	    void Update()
-	    {
-	        
-	    }
-	}
-	
+    public class TurnState_GameOver : TurnState
+    {
+
+    }
+
 }

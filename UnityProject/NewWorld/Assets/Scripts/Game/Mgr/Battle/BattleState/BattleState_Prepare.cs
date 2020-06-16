@@ -18,13 +18,14 @@ namespace GameWish.Game
         public override void Enter(Battle entity)
         {
             base.Enter(entity);
-            CreateBattle(Vector3.zero);
+            CreateBattle(Vector3.zero, entity);
 
             entity.stateMechine.SetState(BattleStateEnum.Start);
         }
 
-        void CreateBattle(Vector3 poscenter)
+        void CreateBattle(Vector3 poscenter, Battle entity)
         {
+
             float m_BlockWitdh = 1f;
             float m_Step = m_BlockWitdh * Mathf.Sqrt(3) / 2;
 
@@ -48,8 +49,9 @@ namespace GameWish.Game
                             obj.transform.position = new Vector3(posX * (m_Step * 2), 0, (posY + 0.5f) * m_BlockWitdh * 2);
                         }
                         obj.transform.name = posX + "-" + posY;
-
-                        obj.GetComponent<BattleMapBlock>().SetText(obj.transform.name);
+                        var mapBlock = obj.GetComponent<BattleMapBlock>();
+                        mapBlock.SetText(obj.transform.name);
+                        entity.MapBlocks.Add(mapBlock);
                     });
                 }
             }

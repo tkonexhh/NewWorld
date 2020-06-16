@@ -16,8 +16,13 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 43534ca6a426e4acdbfb133da9c2cb35
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: f41dc1f6c3f37440088d26ddcdf64f87
+    m_Address: MapBlock
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9c683e4341b3a423397a98767a646554, type: 2}
   m_SchemaSet:
-    m_Schemas: []
+    m_Schemas:
+    - {fileID: 11400000, guid: 38c98f95b5dc3481c9c7f80520102df6, type: 2}

@@ -26,16 +26,18 @@ namespace GameWish.Game
         private FSMStateMachine<Battle> m_FSM;
         private FSMStateFactory<Battle> m_Factory;
 
+        private bool m_IsInit = false;
         public void Init(Battle battle)
         {
             m_FSM = new FSMStateMachine<Battle>(battle);
-            m_Factory = new FSMStateFactory<Battle>(true);
+            m_Factory = new FSMStateFactory<Battle>(false);
             m_Factory.RegisterState(BattleStateEnum.Prepare, new BattleState_Prepare());
             m_Factory.RegisterState(BattleStateEnum.Start, new BattleState_Start());
             m_Factory.RegisterState(BattleStateEnum.Fight, new BattleState_Fight());
             m_Factory.RegisterState(BattleStateEnum.Over, new BattleState_Over());
             m_FSM.stateFactory = m_Factory;
-            m_FSM.SetCurrentStateByID(BattleStateEnum.Prepare);
+            SetState(BattleStateEnum.Prepare);
+            m_IsInit = true;
         }
 
         public void SetState(BattleStateEnum state)
@@ -43,7 +45,11 @@ namespace GameWish.Game
             m_FSM.SetCurrentStateByID(state);
         }
 
-
+        public void Update(float dt)
+        {
+            if (!m_IsInit) return;
+            m_FSM.UpdateState(dt);
+        }
     }
 
 }

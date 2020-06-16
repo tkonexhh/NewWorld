@@ -13,7 +13,7 @@ using GFrame;
 
 namespace GameWish.Game
 {
-    public enum InnerBattleState
+    public enum TurnStateEnum
     {
         WaitingForInput,
         UnitSelected,
@@ -32,14 +32,14 @@ namespace GameWish.Game
         {
             base.Enter(entity);
             m_FSM = new FSMStateMachine<Battle>(entity);
-            m_Factory = new FSMStateFactory<Battle>(true);
-            m_Factory.RegisterState(InnerBattleState.WaitingForInput, new BattleState_Prepare());
-            m_Factory.RegisterState(InnerBattleState.UnitSelected, new BattleState_Start());
-            m_Factory.RegisterState(InnerBattleState.TurnChanging, new BattleState_Fight());
-            m_Factory.RegisterState(InnerBattleState.AITurn, new BattleState_Over());
-            m_Factory.RegisterState(InnerBattleState.GameOver, new BattleState_Over());
+            m_Factory = new FSMStateFactory<Battle>(false);
+            m_Factory.RegisterState(TurnStateEnum.WaitingForInput, new BattleState_Prepare());
+            m_Factory.RegisterState(TurnStateEnum.UnitSelected, new BattleState_Start());
+            m_Factory.RegisterState(TurnStateEnum.TurnChanging, new TurnState_TurnChanging());
+            m_Factory.RegisterState(TurnStateEnum.AITurn, new BattleState_Over());
+            m_Factory.RegisterState(TurnStateEnum.GameOver, new TurnState_GameOver());
             m_FSM.stateFactory = m_Factory;
-            m_FSM.SetCurrentStateByID(InnerBattleState.WaitingForInput);
+            m_FSM.SetCurrentStateByID(TurnStateEnum.WaitingForInput);
         }
 
         public override void Exit(Battle entity)

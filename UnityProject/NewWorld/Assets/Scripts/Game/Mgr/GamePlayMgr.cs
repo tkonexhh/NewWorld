@@ -15,24 +15,35 @@ namespace GameWish.Game
 {
     public class GamePlayMgr : TMonoSingleton<GamePlayMgr>
     {
+        private Battle m_CurBattle;
+        public bool isBattle
+        {
+            get
+            {
+                return m_CurBattle != null;
+            }
+        }
+
+
         public override void OnSingletonInit()
         {
-            //InitPools();
 
         }
 
         private void Start()
         {
-            Battle battle = new Battle();
-            battle.Init();
+            m_CurBattle = new Battle();
+            m_CurBattle.Init();
+
         }
-        // void InitPools()
-        // {
 
-        //     GameObjectPoolMgr.S.AddPool();
-        // }
+        public void ExitBattle()
+        {
+            if (m_CurBattle == null) return;
 
-
+            m_CurBattle.ExitBattle();
+            m_CurBattle = null;
+        }
 
     }
 

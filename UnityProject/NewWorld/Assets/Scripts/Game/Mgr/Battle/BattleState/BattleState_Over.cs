@@ -9,13 +9,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GFrame;
 
 
 namespace GameWish.Game
 {
     public class BattleState_Over : BattleState
     {
+        public override void Enter(Battle entity)
+        {
+            base.Enter(entity);
 
+            entity.ExitBattle();
+            GamePlayMgr.S.ExitBattle();
+        }
+
+        public override void Exit(Battle entity)
+        {
+            base.Exit(entity);
+        }
     }
 
 }
