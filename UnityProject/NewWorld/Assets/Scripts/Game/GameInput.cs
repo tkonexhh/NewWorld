@@ -19,6 +19,7 @@ namespace GameWish.Game
 
         void Update()
         {
+            
             if (Input.GetMouseButtonDown(0))
             {
                 RaycastHit hit;

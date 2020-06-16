@@ -19,6 +19,9 @@ namespace GameWish.Game
         List<BattleMapBlock> m_MapBlocks;
         BattleStateMechine m_FSM;
 
+        public List<Character> m_Team;
+        public List<Character> m_Enemy;
+
         public List<BattleMapBlock> MapBlocks
         {
             get
@@ -41,15 +44,23 @@ namespace GameWish.Game
 
             m_FSM = new BattleStateMechine();
             m_FSM.Init(this);
+            m_Team = PlayerMgr.S.Team;
+            AppLoopMgr.S.onUpdate += Update;
+        }
+
+        public void SetEnemy(List<Character> enemys)
+        {
+            m_Enemy = enemys;
         }
 
         private void Update()
         {
-            //m_FSM.Update(Time.deltaTime);
+            m_FSM.Update(Time.deltaTime);
         }
 
         public void ExitBattle()
         {
+            AppLoopMgr.S.onUpdate -= Update;
             for (int i = m_MapBlocks.Count - 1; i >= 0; i--)
             {
                 AddressableResMgr.S.ReleaseInstance(m_MapBlocks[i].gameObject);
@@ -58,6 +69,8 @@ namespace GameWish.Game
             m_MapBlocks = null;
             m_FSM = null;
         }
+
+
     }
 
 }

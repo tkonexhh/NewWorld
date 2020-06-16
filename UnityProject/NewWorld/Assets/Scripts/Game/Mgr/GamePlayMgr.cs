@@ -24,6 +24,7 @@ namespace GameWish.Game
             }
         }
 
+        public List<Character> m_Enemy;
 
         public override void OnSingletonInit()
         {
@@ -34,7 +35,7 @@ namespace GameWish.Game
         {
             m_CurBattle = new Battle();
             m_CurBattle.Init();
-
+            m_CurBattle.SetEnemy(m_Enemy);
         }
 
         public void ExitBattle()

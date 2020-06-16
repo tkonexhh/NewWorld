@@ -16,7 +16,14 @@ namespace GameWish.Game
     public class PlayerMgr : TMonoSingleton<PlayerMgr>
     {
         [SerializeField] ControlableCharacter m_Character;
-
+        [SerializeField] List<Character> m_Team;
+        public List<Character> Team
+        {
+            get
+            {
+                return m_Team;
+            }
+        }
 
         public void DoMove(Vector3 pos)
         {

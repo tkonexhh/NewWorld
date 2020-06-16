@@ -13,9 +13,8 @@ using UnityEngine;
 
 namespace GameWish.Game
 {
-    public class ControlableCharacter : MonoBehaviour
+    public class ControlableCharacter : Character
     {
-        public CharacterStatus status;
         private CharacterController m_CharCtrl;
         private bool m_Moving = false;
         private Vector3 movePos;

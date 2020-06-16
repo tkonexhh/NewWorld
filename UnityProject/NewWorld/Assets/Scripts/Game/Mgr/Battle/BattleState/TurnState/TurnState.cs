@@ -25,6 +25,11 @@ namespace GameWish.Game
         {
             Debug.LogError(stateName + "--Exit");
         }
+
+        public override void Execute(Battle entity, float dt)
+        {
+            //Debug.LogError(stateName + "--Execute");
+        }
     }
 
 }

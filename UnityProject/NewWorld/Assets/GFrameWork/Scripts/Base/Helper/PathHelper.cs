@@ -15,6 +15,10 @@ namespace GFrame
 {
     public class PathHelper
     {
+        public static string ResourcesPath2Path(string path)
+        {
+            return path.Substring(10);
+        }
 
         public static string AssetsPath2ABSPath(string assetsPath)
         {

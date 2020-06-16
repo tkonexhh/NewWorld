@@ -26,25 +26,31 @@ namespace GameWish.Game
     public class BattleState_Fight : BattleState
     {
         //子状态机
-        private FSMStateMachine<Battle> m_FSM;
+        private FSMStateMachine<Battle> m_TurnFSM;
         private FSMStateFactory<Battle> m_Factory;
         public override void Enter(Battle entity)
         {
             base.Enter(entity);
-            m_FSM = new FSMStateMachine<Battle>(entity);
+            m_TurnFSM = new FSMStateMachine<Battle>(entity);
             m_Factory = new FSMStateFactory<Battle>(false);
-            m_Factory.RegisterState(TurnStateEnum.WaitingForInput, new BattleState_Prepare());
-            m_Factory.RegisterState(TurnStateEnum.UnitSelected, new BattleState_Start());
+            m_Factory.RegisterState(TurnStateEnum.WaitingForInput, new TurnState_WaittingForInput());
+            m_Factory.RegisterState(TurnStateEnum.UnitSelected, new TurnState_UnitSelected());
             m_Factory.RegisterState(TurnStateEnum.TurnChanging, new TurnState_TurnChanging());
-            m_Factory.RegisterState(TurnStateEnum.AITurn, new BattleState_Over());
+            //m_Factory.RegisterState(TurnStateEnum.AITurn, new BattleState_Over());
             m_Factory.RegisterState(TurnStateEnum.GameOver, new TurnState_GameOver());
-            m_FSM.stateFactory = m_Factory;
-            m_FSM.SetCurrentStateByID(TurnStateEnum.WaitingForInput);
+            m_TurnFSM.stateFactory = m_Factory;
+            m_TurnFSM.SetCurrentStateByID(TurnStateEnum.WaitingForInput);
         }
 
         public override void Exit(Battle entity)
         {
             base.Exit(entity);
+        }
+
+        public override void Execute(Battle entity, float dt)
+        {
+            base.Execute(entity, dt);
+            m_TurnFSM.UpdateState(dt);
         }
     }
 

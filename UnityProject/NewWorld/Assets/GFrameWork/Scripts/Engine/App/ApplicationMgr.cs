@@ -35,6 +35,7 @@ namespace GFrame
         private void StartGame()
         {
             Debug.LogError("StartGame");
+            UIMgr.S.Init();
         }
 
 

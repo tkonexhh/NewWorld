@@ -16,6 +16,7 @@ namespace GameWish.Game
     public class LayerDefine
     {
         public const int Layer_Ground = 8;
+        public const int Layer_Role = 9;
     }
 
 }

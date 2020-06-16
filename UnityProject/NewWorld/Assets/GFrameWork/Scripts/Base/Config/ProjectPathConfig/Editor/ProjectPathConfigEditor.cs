@@ -14,14 +14,14 @@ namespace GFrame.Editor
             ProjectPathConfig data = null;
             string folderPath = "Assets/Resources/Config/";
             FileHelper.CreateDirctory(PathHelper.AssetsPath2ABSPath(folderPath));
-            string spriteDataPath = folderPath + "ProjectConfig.asset";
+            string spriteDataPath = folderPath + "ProjectPathConfig.asset";
             data = AssetDatabase.LoadAssetAtPath<ProjectPathConfig>(spriteDataPath);
             if (data == null)
             {
                 data = ScriptableObject.CreateInstance<ProjectPathConfig>();
                 AssetDatabase.CreateAsset(data, spriteDataPath);
             }
-            Log.i("#Create Project Config In Folder:" + spriteDataPath);
+            Log.i("#Create ProjectPathConfig In Folder:" + spriteDataPath);
             EditorUtility.SetDirty(data);
             AssetDatabase.SaveAssets();
         }

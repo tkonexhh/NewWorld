@@ -15,7 +15,17 @@ namespace GFrame
     [System.Serializable]
     public class ProjectPathConfig : TScriptableObjectSingleton<ProjectPathConfig>
     {
-        public string I18NSettingPath = "Resources/Config/I18NConfig";
+        [SerializeField] private string m_I18NSettingPath = "Resources/Config/I18NConfig";
+        [SerializeField] private string m_UIRootPath = "Resources/UI/UIRoot";
+
+
+        public static string uiRootPath
+        {
+            get
+            {
+                return S.m_UIRootPath;
+            }
+        }
     }
 
 }

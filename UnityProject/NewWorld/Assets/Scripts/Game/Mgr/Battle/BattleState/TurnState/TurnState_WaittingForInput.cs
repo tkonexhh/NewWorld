@@ -24,6 +24,26 @@ namespace GameWish.Game
         {
             base.Exit(entity);
         }
+
+        public override void Execute(Battle entity, float dt)
+        {
+            base.Execute(entity, dt);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                LayerMask mask = 1 << LayerDefine.Layer_Role;
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
+                {
+                    Debug.LogError("----" + hit.transform.name);
+                    //CreateMouseClickEffect(hit.point);
+
+                    //GrassMgr.S.AddExplosion(hit.point, Random.Range(1.2f, 3.2f));
+                }
+            }
+        }
     }
 
 }

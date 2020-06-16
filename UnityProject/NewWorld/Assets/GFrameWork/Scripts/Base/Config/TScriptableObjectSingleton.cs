@@ -14,7 +14,7 @@ namespace GFrame
 
         private static T LoadInstance()
         {
-            UnityEngine.Object obj = Resources.Load(ResourcesPath2Path(PROJECT_CONFIG_PATH));
+            UnityEngine.Object obj = Resources.Load(PathHelper.ResourcesPath2Path(PROJECT_CONFIG_PATH));
 
             if (obj == null)
             {
@@ -27,11 +27,6 @@ namespace GFrame
             s_Instance = obj as T;
 
             return s_Instance;
-        }
-
-        private static string ResourcesPath2Path(string path)
-        {
-            return path.Substring(10);
         }
 
 
