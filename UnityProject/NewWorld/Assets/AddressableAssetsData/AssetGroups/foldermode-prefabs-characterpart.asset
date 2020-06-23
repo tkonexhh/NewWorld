@@ -10,15 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: foldermode-prefabs
+  m_Name: foldermode-prefabs-characterpart
   m_EditorClassIdentifier: 
-  m_GroupName: foldermode-prefabs
+  m_GroupName: foldermode-prefabs-characterpart
   m_Data:
     m_SerializedData: []
-  m_GUID: 43534ca6a426e4acdbfb133da9c2cb35
+  m_GUID: a6c1e580558464f41964e81e255100e9
   m_SerializeEntries:
-  - m_GUID: f41dc1f6c3f37440088d26ddcdf64f87
-    m_Address: MapBlock
+  - m_GUID: 03adb1256cc57495c9cfee3d7539d457
+    m_Address: Chr_Hair_02_Static
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 91feeba4baaef43b7b46316abfb3d4f8
+    m_Address: Chr_Hair_01_Static
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
@@ -27,4 +33,4 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 9c683e4341b3a423397a98767a646554, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 38c98f95b5dc3481c9c7f80520102df6, type: 2}
+    - {fileID: 11400000, guid: 496d905167a374b56a404c8d5ca08630, type: 2}
