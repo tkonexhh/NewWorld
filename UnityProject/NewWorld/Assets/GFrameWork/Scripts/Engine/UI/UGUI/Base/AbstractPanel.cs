@@ -13,6 +13,7 @@ using UnityEngine;
 
 namespace GFrame
 {
+    [RequireComponent(typeof(Canvas))]
     public class AbstractPanel : MonoBehaviour
     {
         private bool m_HasInitUI;

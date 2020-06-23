@@ -10,27 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: foldermode-prefabs-role
+  m_Name: foldermode-anim
   m_EditorClassIdentifier: 
-  m_GroupName: foldermode-prefabs-role
+  m_GroupName: foldermode-anim
   m_Data:
     m_SerializedData: []
-  m_GUID: 3ca1833dd3dbf4aa5878299c8b01a1c9
+  m_GUID: 421e349b74d7e4a5b94d85da2d83bbd7
   m_SerializeEntries:
-  - m_GUID: 37a17d93ea857464799b21d70b00a57a
-    m_Address: ModularCharacters_Male
+  - m_GUID: 3d4b3fe0e4c1e4f24a6ba554624c49cc
+    m_Address: Setup_Male_Idle
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
-  - m_GUID: 55398063928fa4ffa85c72624f78b9bc
-    m_Address: ModularCharacters_Female
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
-  - m_GUID: f6eef83f9401a454388773dbb4f5b220
-    m_Address: ModularCharacters
+  - m_GUID: 55beedbd61ab24ef382dc46db3d80290
+    m_Address: Setup_Male
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
@@ -39,4 +33,4 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 9c683e4341b3a423397a98767a646554, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 020586ceee6044e828779a3f95089faf, type: 2}
+    - {fileID: 11400000, guid: a84614afcabd34f47a6276f63489e896, type: 2}

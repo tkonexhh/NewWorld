@@ -1,8 +1,8 @@
 /************************
-	FileName:/Scripts/CombineMesh.cs
+	FileName:/GFrameWork/Scripts/Base/Helper/MeshHelper.cs
 	CreateAuthor:neo.xu
-	CreateTime:6/23/2020 2:50:27 PM
-	Tip:6/23/2020 2:50:27 PM
+	CreateTime:6/23/2020 3:45:11 PM
+	Tip:6/23/2020 3:45:11 PM
 ************************/
 
 
@@ -11,23 +11,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace GameWish.Game
+namespace GFrame
 {
-    public class CombineMesh : MonoBehaviour
+    public class MeshHelper
     {
-        // 待合并的skinnedrender(需要所有skinnedMeshrenderer使用同一个材质,否则无法起到合并dc的目的)
-        public SkinnedMeshRenderer[] renders;
-        // 合并后使用的材质
-        public Material material;
-        private void Start()
+        public static void CombineSkinnedMesh(Transform transform, Material mat)
         {
-            renders = GetComponentsInChildren<SkinnedMeshRenderer>();
-            CombineMeshs();
-        }
+            SkinnedMeshRenderer[] renders = transform.GetComponentsInChildren<SkinnedMeshRenderer>();
 
-        private void CombineMeshs()
-        {
-            // 先记录当前预制件的变换矩阵，合并之后再赋值回来
             Vector3 l_position = transform.position;
             Quaternion l_rotation = transform.rotation;
             Vector3 l_scale = transform.localScale;
@@ -82,7 +73,7 @@ namespace GameWish.Game
             }
 
             // 在当前预制下创建新的蒙皮渲染器,设置属性
-            SkinnedMeshRenderer combinedSkinnedRenderer = gameObject.AddComponent<SkinnedMeshRenderer>();
+            SkinnedMeshRenderer combinedSkinnedRenderer = transform.gameObject.AddComponent<SkinnedMeshRenderer>();
             Mesh combinedMesh = new Mesh();
             combinedMesh.CombineMeshes(combineInstances.ToArray(), true, true);
             combinedSkinnedRenderer.sharedMesh = combinedMesh;
@@ -90,7 +81,7 @@ namespace GameWish.Game
             combinedSkinnedRenderer.sharedMesh.boneWeights = boneWeights.ToArray();
             combinedSkinnedRenderer.sharedMesh.bindposes = bindposes.ToArray();
             combinedSkinnedRenderer.sharedMesh.RecalculateBounds();
-            combinedSkinnedRenderer.material = material;
+            combinedSkinnedRenderer.material = mat;
 
             // 还原自身的变换矩阵
             transform.position = l_position;

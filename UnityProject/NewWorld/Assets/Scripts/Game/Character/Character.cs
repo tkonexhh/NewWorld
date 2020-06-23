@@ -13,9 +13,18 @@ using UnityEngine;
 
 namespace GameWish.Game
 {
+    [RequireComponent(typeof(CharacterAppearance))]
     public class Character : MonoBehaviour
     {
+        [SerializeField] protected CharacterAppearance appearance;
         [SerializeField] protected CharacterStatus status;
+
+
+        private void Awake()
+        {
+            if (appearance == null)
+                appearance = GetComponent<CharacterAppearance>();
+        }
     }
 
 }
