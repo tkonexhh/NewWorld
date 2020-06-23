@@ -15,7 +15,8 @@ namespace GameWish.Game
 {
     public class TurnState_WaittingForInput : TurnState
     {
-        public override void Enter(Battle entity)
+        private Character m_SelectCharacter;
+        public override void Enter(Battle entity, params object[] args)
         {
             base.Enter(entity);
         }
@@ -37,10 +38,13 @@ namespace GameWish.Game
                 LayerMask mask = 1 << LayerDefine.Layer_Role;
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
                 {
-                    Debug.LogError("----" + hit.transform.name);
-                    //CreateMouseClickEffect(hit.point);
-
-                    //GrassMgr.S.AddExplosion(hit.point, Random.Range(1.2f, 3.2f));
+                    var character = hit.transform.gameObject.GetComponent<Character>();
+                    if (character != null)
+                    {
+                        m_SelectCharacter = character;
+                        entity.SetSelectCharacter(m_SelectCharacter);
+                        Debug.LogError("----" + m_SelectCharacter);
+                    }
                 }
             }
         }

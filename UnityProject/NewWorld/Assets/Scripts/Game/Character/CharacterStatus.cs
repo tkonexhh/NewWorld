@@ -17,6 +17,11 @@ namespace GameWish.Game
     public class CharacterStatus
     {
         public float moveSpeed = 10;
+
+
+        [Header("In Battle")]
+        [SerializeField] protected int max_Action;//最大行动力
+        [SerializeField] protected int action;//行动力
     }
 
 }

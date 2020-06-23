@@ -12,7 +12,10 @@ namespace GFrame.Editor
         {
             List<string> createPath = new List<string>(){
                 "Assets/Resources/Config/",
+                "Assets/AddressableRes/FileMode/",
                 "Assets/AddressableRes/FolderMode/",
+                "Assets/Res/",
+                "Assets/Scripts/",
             };
 
             foreach (var path in createPath)

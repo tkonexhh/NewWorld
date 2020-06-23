@@ -1,10 +1,4 @@
-﻿//  Desc:        Framework For Game Develop with Unity3d
-//  Copyright:   Copyright (C) 2017 SnowCold. All rights reserved.
-//  WebSite:     https://github.com/SnowCold/Qarth
-//  Blog:        http://blog.csdn.net/snowcoldgame
-//  Author:      SnowCold
-//  E-mail:      snowcold.ouyang@gmail.com
-using System;
+﻿using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -65,17 +59,17 @@ namespace GFrame
 
         #region 状态控制
 
-        public void SetGlobalStateByID<K>(K key, bool forceCreate = false) where K : IConvertible
+        public void SetGlobalStateByID<K>(K key, params object[] args) where K : IConvertible
         {
-            FSMState<T> state = GetStateFromFactory(key, forceCreate);
+            FSMState<T> state = GetStateFromFactory(key, false);
             if (state == null)
             {
                 return;
             }
-            SetGlobalState(state);
+            SetGlobalState(state, args);
         }
 
-        public void SetGlobalState(FSMState<T> state)
+        public void SetGlobalState(FSMState<T> state, params object[] args)
         {
             if (m_GlobalState != null)
             {
@@ -86,7 +80,7 @@ namespace GFrame
 
             if (m_GlobalState != null)
             {
-                m_GlobalState.Enter(m_Entity);
+                m_GlobalState.Enter(m_Entity, args);
             }
 
             //#if UNITY_EDITOR
@@ -112,18 +106,18 @@ namespace GFrame
             }
         }
 
-        public void SetCurrentStateByID<K>(K key, bool forceCreate = false) where K : IConvertible
+        public void SetCurrentStateByID<K>(K key, params object[] args) where K : IConvertible
         {
-            FSMState<T> state = GetStateFromFactory(key, forceCreate);
+            FSMState<T> state = GetStateFromFactory(key, false);
             if (state == null)
             {
                 Log.w("Not Find State By ID:" + key);
                 return;
             }
-            SetCurrentState(state);
+            SetCurrentState(state, args);
         }
 
-        public void SetCurrentState(FSMState<T> state)
+        public void SetCurrentState(FSMState<T> state, params object[] args)
         {
             if (state == m_CurrentState)
             {
@@ -155,7 +149,7 @@ namespace GFrame
 
             if (m_CurrentState != null)
             {
-                m_CurrentState.Enter(m_Entity);
+                m_CurrentState.Enter(m_Entity, args);
             }
 
             //#if UNITY_EDITOR

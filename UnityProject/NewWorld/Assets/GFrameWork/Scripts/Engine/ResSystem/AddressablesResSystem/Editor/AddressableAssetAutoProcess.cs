@@ -22,6 +22,11 @@ namespace GFrame.Editor
 
         public static void OnPostprocessAllAssets(string[] importedAsset, string[] deleteAsset, string[] movedAssets, string[] movedFromAssetPaths)
         {
+            if (setting == null)
+            {
+                Debug.LogError("#Error Create Address Setting First");
+                return;
+            }
             ProcessImportedAssets(importedAsset);
             ProcessMovedAsset(movedAssets, movedFromAssetPaths);
         }

@@ -28,7 +28,7 @@ namespace GameWish.Game
         //子状态机
         private FSMStateMachine<Battle> m_TurnFSM;
         private FSMStateFactory<Battle> m_Factory;
-        public override void Enter(Battle entity)
+        public override void Enter(Battle entity, params object[] args)
         {
             base.Enter(entity);
             m_TurnFSM = new FSMStateMachine<Battle>(entity);

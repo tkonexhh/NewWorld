@@ -48,15 +48,27 @@ namespace GameWish.Game
             AppLoopMgr.S.onUpdate += Update;
         }
 
+        private void Update()
+        {
+            m_FSM.Update(Time.deltaTime);
+        }
+
+
         public void SetEnemy(List<Character> enemys)
         {
             m_Enemy = enemys;
         }
 
-        private void Update()
+        public void SetSelectCharacter(Character character)
         {
-            m_FSM.Update(Time.deltaTime);
+
         }
+
+        private void ShowCanReach(Character character)
+        {
+
+        }
+
 
         public void ExitBattle()
         {

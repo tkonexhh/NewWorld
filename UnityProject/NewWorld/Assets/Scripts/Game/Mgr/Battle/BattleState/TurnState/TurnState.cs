@@ -16,7 +16,7 @@ namespace GameWish.Game
 {
     public class TurnState : FSMState<Battle>
     {
-        public override void Enter(Battle entity)
+        public override void Enter(Battle entity, params object[] args)
         {
             Debug.LogError(stateName + "--Enter");
         }

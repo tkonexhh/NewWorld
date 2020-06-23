@@ -8,23 +8,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-
-namespace GameWish.Game
+namespace GFrame
 {
-	public class GImage : MonoBehaviour
-	{
-	    // Start is called before the first frame update
-	    void Start()
-	    {
-	        
-	    }
-	
-	    // Update is called once per frame
-	    void Update()
-	    {
-	        
-	    }
-	}
-	
+    [RequireComponent(typeof(Image))]
+    public class GImage : Image
+    {
+        public string I18Nkey;
+    }
+
 }

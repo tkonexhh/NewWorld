@@ -8,7 +8,7 @@ namespace GFrame.Editor
     [CustomEditor(typeof(ProjectPathConfig), false)]
     public class ProjectPathConfigEditor : UnityEditor.Editor
     {
-        [MenuItem("Assets/GFrame/Config/Build ProjectConfig")]
+        [MenuItem("Assets/GFrame/Config/Build ProjectPathConfig")]
         public static void BuildConfig()
         {
             ProjectPathConfig data = null;

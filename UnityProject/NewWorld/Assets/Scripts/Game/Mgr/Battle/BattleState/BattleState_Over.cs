@@ -16,7 +16,7 @@ namespace GameWish.Game
 {
     public class BattleState_Over : BattleState
     {
-        public override void Enter(Battle entity)
+        public override void Enter(Battle entity, params object[] args)
         {
             base.Enter(entity);
 
