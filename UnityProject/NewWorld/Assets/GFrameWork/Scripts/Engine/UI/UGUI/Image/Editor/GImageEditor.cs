@@ -15,7 +15,7 @@ namespace GFrame.Editor
         {
             base.OnEnable();
             gImage = (GImage)target;
-            gImage.raycastTarget = false;
+            //gImage.raycastTarget = false;
 
         }
 

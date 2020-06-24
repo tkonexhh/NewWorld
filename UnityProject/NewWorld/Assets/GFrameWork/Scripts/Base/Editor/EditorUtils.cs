@@ -24,7 +24,7 @@ namespace GFrame.Editor
             }
 
             ProjectPathConfigEditor.BuildConfig();
-
+            ProjectDefaultConfigEditor.BuildConfig();
 
             AssetDatabase.Refresh();
         }

@@ -15,80 +15,93 @@ namespace GFrame.Editor
         /// 添加到指定的UI元素下
         /// </summary>
         [MenuItem("GameObject/UI/Image")]
-        static void CreatImages()
+        static void CreatImage()
         {
-            var canvasObj = SecurityCheck();
-
-            if (!Selection.activeTransform)      // 在根目录创建的， 自动移动到 Canvas下
-            {
-                // Debug.Log("没有选择对象");
-                Image().transform.SetParent(canvasObj.transform);
-            }
-            else // (Selection.activeTransform)
-            {
-                if (!Selection.activeTransform.GetComponentInParent<Canvas>())    // 没有在UI树下
-                {
-                    Image().transform.SetParent(canvasObj.transform);
-                }
-                else
-                {
-                    Image();
-                }
-            }
+            CreateUI(Image);
         }
 
         [MenuItem("GameObject/UI/Text")]
-        static void CreatTexts()
+        static void CreatText()
+        {
+            CreateUI(Text);
+        }
+
+        [MenuItem("GameObject/UI/Button")]
+        static void CreatButton()
+        {
+            CreateUI(Button);
+        }
+
+        private static void CreateUI(System.Func<GameObject> callback)
         {
             var canvasObj = SecurityCheck();
 
             if (!Selection.activeTransform)      // 在根目录创建的， 自动移动到 Canvas下
             {
-                Text().transform.SetParent(canvasObj.transform);
+                callback().transform.SetParent(canvasObj.transform);
             }
             else // (Selection.activeTransform)
             {
                 if (!Selection.activeTransform.GetComponentInParent<Canvas>())    // 没有在UI树下
                 {
-                    Text().transform.SetParent(canvasObj.transform);
+                    callback().transform.SetParent(canvasObj.transform);
                 }
                 else
                 {
-                    Text();
+                    callback();
                 }
             }
-
         }
 
         private static GameObject Image()
         {
-            GameObject go = new GameObject("Img_", typeof(GImage));
-
-            go.GetComponent<GImage>().raycastTarget = false;
-
-            go.transform.SetParent(Selection.activeTransform);
-            go.transform.SetLocalPos(Vector3.zero);
-            Selection.activeGameObject = go;
-            return go;
+            System.Action<GameObject> callback = (go) =>
+            {
+                Image image = go.GetComponent<Image>();
+                image.raycastTarget = false;
+            };
+            return CreateGO<GImage>("Img_", callback);
         }
 
         private static GameObject Text()
         {
-            GameObject go = new GameObject("Txt_", typeof(GText));
-            Text text = go.GetComponent<Text>();
+            System.Action<GameObject> callback = (go) =>
+            {
+                Text text = go.GetComponent<Text>();
+                text.font = ProjectDefaultConfig.defaultTextFont;
+                text.raycastTarget = false;
+                text.alignment = TextAnchor.MiddleCenter;
+                text.color = ProjectDefaultConfig.defaultTextColor;
+                text.text = "text";
+                text.supportRichText = false;
+            };
+            return CreateGO<GText>("Txt_", callback);
+        }
 
-            text.raycastTarget = false;
-            text.alignment = TextAnchor.MiddleCenter;
-            text.color = Color.black;
-            text.text = "text";
-            text.supportRichText = false;
+        private static GameObject Button()
+        {
+            System.Action<GameObject> callback = (go) =>
+            {
+                var button = go.GetComponent<Button>();
+                var image = go.AddComponent<Image>();
+                button.targetGraphic = image;
+
+
+            };
+            return CreateGO<Button>("Btn_", callback);
+        }
+
+        private static GameObject CreateGO<T>(string defaultName, System.Action<GameObject> callback)
+        {
+            GameObject go = new GameObject(defaultName, typeof(T));
+
+            callback(go);
 
             go.transform.SetParent(Selection.activeTransform);
             go.transform.SetLocalPos(Vector3.zero);
             Selection.activeGameObject = go;
             return go;
         }
-
 
         // 如果第一次创建UI元素 可能没有 Canvas、EventSystem对象！
         private static GameObject SecurityCheck()
@@ -98,7 +111,8 @@ namespace GFrame.Editor
             if (!cc)
             {
                 canvasGO = new GameObject("Canvas", typeof(Canvas));
-                canvasGO.AddComponent<CanvasScaler>();
+                var scaler = canvasGO.AddComponent<CanvasScaler>();
+                //scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
                 canvasGO.AddComponent<GraphicRaycaster>();
                 Canvas canvas = canvasGO.GetComponent<Canvas>();
                 canvas.renderMode = RenderMode.ScreenSpaceOverlay;

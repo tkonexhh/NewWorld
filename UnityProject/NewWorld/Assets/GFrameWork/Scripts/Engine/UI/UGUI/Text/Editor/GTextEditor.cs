@@ -15,11 +15,12 @@ namespace GFrame.Editor
         {
             base.OnEnable();
             gText = (GText)target;
-            gText.raycastTarget = false;
-            gText.alignment = TextAnchor.MiddleCenter;
-            gText.color = Color.black;
-            gText.text = "text";
-            gText.supportRichText = false;
+            // gText.font = ProjectDefaultConfig.defaultTextFont;
+            // gText.raycastTarget = false;
+            // gText.alignment = TextAnchor.MiddleCenter;
+            // gText.color = ProjectDefaultConfig.defaultTextColor;
+            // gText.text = "text";
+            // gText.supportRichText = false;
         }
 
         public override void OnInspectorGUI()
