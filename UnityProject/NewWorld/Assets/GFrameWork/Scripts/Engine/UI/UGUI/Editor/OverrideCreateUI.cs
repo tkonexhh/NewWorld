@@ -32,6 +32,12 @@ namespace GFrame.Editor
             CreateUI(Button);
         }
 
+        [MenuItem("GameObject/UI/Progress")]
+        static void CreatProgress()
+        {
+            CreateUI(Progress);
+        }
+
         private static void CreateUI(System.Func<GameObject> callback)
         {
             var canvasObj = SecurityCheck();
@@ -53,12 +59,14 @@ namespace GFrame.Editor
             }
         }
 
+        #region Create
+
         private static GameObject Image()
         {
             System.Action<GameObject> callback = (go) =>
             {
                 Image image = go.GetComponent<Image>();
-                image.raycastTarget = false;
+                HandleImage(image);
             };
             return CreateGO<GImage>("Img_", callback);
         }
@@ -68,12 +76,7 @@ namespace GFrame.Editor
             System.Action<GameObject> callback = (go) =>
             {
                 Text text = go.GetComponent<Text>();
-                text.font = ProjectDefaultConfig.defaultTextFont;
-                text.raycastTarget = false;
-                text.alignment = TextAnchor.MiddleCenter;
-                text.color = ProjectDefaultConfig.defaultTextColor;
-                text.text = "text";
-                text.supportRichText = false;
+                HandleText(text);
             };
             return CreateGO<GText>("Txt_", callback);
         }
@@ -82,14 +85,71 @@ namespace GFrame.Editor
         {
             System.Action<GameObject> callback = (go) =>
             {
+                var image = go.AddComponent<GImage>();
                 var button = go.GetComponent<Button>();
-                var image = go.AddComponent<Image>();
                 button.targetGraphic = image;
 
-
+                GameObject textGo = new GameObject("Text", typeof(GText));
+                textGo.transform.SetParent(go.transform);
+                Text text = textGo.GetComponent<Text>();
+                HandleText(text);
+                RectTransform rectText = text.GetComponent<RectTransform>();
+                rectText.SetAnchor(AnchorPresets.StretchAll, 0, 0);
+                rectText.SetSize(button.GetComponent<RectTransform>().sizeDelta);
             };
-            return CreateGO<Button>("Btn_", callback);
+            return CreateGO<GButton>("Btn_", callback);
         }
+
+        private static GameObject Progress()
+        {
+            System.Action<GameObject> callback = (go) =>
+            {
+                var progress = go.GetComponent<GProgress>();
+                var image = go.AddComponent<Image>();
+                HandleImage(image);
+
+                var rect = go.GetComponent<RectTransform>();
+                rect.SetSize(new Vector2(300, 100));
+
+                GameObject progressGo = new GameObject("ImgProgress", typeof(Image));
+                RectTransform rectText = progressGo.GetComponent<RectTransform>();
+                rectText.SetAnchor(AnchorPresets.StretchAll, 0, 0);
+                rectText.SetSize(rect.sizeDelta);
+                progressGo.transform.SetParent(go.transform);
+
+                var progressImg = progressGo.GetComponent<Image>();
+                HandleImage(progressImg);
+                progressImg.type = UnityEngine.UI.Image.Type.Filled;
+                progressImg.fillMethod = UnityEngine.UI.Image.FillMethod.Horizontal;
+                // progress.SetProgress(0.5f);
+                //typeof(progress)
+            };
+            return CreateGO<GProgress>("Progress_", callback);
+        }
+        #endregion 
+
+        #region HandleUI
+
+        private static void HandleText(Text text)
+        {
+            text.raycastTarget = false;
+            text.alignment = TextAnchor.MiddleCenter;
+            text.text = "text";
+            text.supportRichText = false;
+            if (ProjectDefaultConfig.S != null)
+            {
+                text.font = ProjectDefaultConfig.defaultTextFont;
+                text.color = ProjectDefaultConfig.defaultTextColor;
+            }
+        }
+
+        private static void HandleImage(Image image)
+        {
+            image.raycastTarget = false;
+        }
+
+        #endregion
+
 
         private static GameObject CreateGO<T>(string defaultName, System.Action<GameObject> callback)
         {

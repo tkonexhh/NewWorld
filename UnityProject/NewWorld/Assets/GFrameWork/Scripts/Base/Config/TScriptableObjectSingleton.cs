@@ -18,7 +18,7 @@ namespace GFrame
 
             if (obj == null)
             {
-                Log.e("#Not Find Config File");
+                Log.e("#Not Find " + typeof(T).Name + " Config File");
                 return null;
             }
 

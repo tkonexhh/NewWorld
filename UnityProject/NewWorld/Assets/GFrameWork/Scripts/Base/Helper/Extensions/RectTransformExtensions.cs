@@ -7,6 +7,48 @@ using UnityEngine;
 
 namespace GFrame
 {
+    public enum AnchorPresets
+    {
+        TopLeft,
+        TopCenter,
+        TopRight,
+
+        MiddleLeft,
+        MiddleCenter,
+        MiddleRight,
+
+        BottomLeft,
+        BottonCenter,
+        BottomRight,
+        BottomStretch,
+
+        VertStretchLeft,
+        VertStretchRight,
+        VertStretchCenter,
+
+        HorStretchTop,
+        HorStretchMiddle,
+        HorStretchBottom,
+
+        StretchAll
+    }
+
+    public enum PivotPresets
+    {
+        TopLeft,
+        TopCenter,
+        TopRight,
+
+        MiddleLeft,
+        MiddleCenter,
+        MiddleRight,
+
+        BottomLeft,
+        BottomCenter,
+        BottomRight,
+    }
+
+
     public static class RectTransformExtensions
     {
         public static void SetDefaultScale(this RectTransform trans)
@@ -21,11 +63,111 @@ namespace GFrame
             trans.anchorMax = aVec;
         }
 
-        public static void SetAnchors(this RectTransform trans, Vector2 aVec)
+        public static void SetAnchor(this RectTransform trans, Vector2 aVec)
         {
             trans.anchorMin = aVec;
             trans.anchorMax = aVec;
         }
+
+        public static void SetAnchor(this RectTransform trans, Vector2 aVecMin, Vector2 aVecMax)
+        {
+            trans.anchorMin = aVecMin;
+            trans.anchorMax = aVecMax;
+        }
+
+        public static void SetAnchor(this RectTransform source, AnchorPresets allign, int offsetX = 0, int offsetY = 0)
+        {
+            source.anchoredPosition = new Vector3(offsetX, offsetY, 0);
+
+            switch (allign)
+            {
+                case (AnchorPresets.TopLeft):
+                    source.SetAnchor(new Vector2(0, 1));
+                    break;
+                case (AnchorPresets.TopCenter):
+                    source.SetAnchor(new Vector2(0.5f, 1));
+                    break;
+                case (AnchorPresets.TopRight):
+                    source.SetAnchor(new Vector2(1, 1));
+                    break;
+                case (AnchorPresets.MiddleLeft):
+                    source.SetAnchor(new Vector2(0, 0.5f));
+                    break;
+                case (AnchorPresets.MiddleCenter):
+                    source.SetAnchor(new Vector2(0.5f, 0.5f));
+                    break;
+                case (AnchorPresets.MiddleRight):
+                    source.SetAnchor(new Vector2(1, 0.5f));
+                    break;
+                case (AnchorPresets.BottomLeft):
+                    source.SetAnchor(new Vector2(0, 0));
+                    break;
+                case (AnchorPresets.BottonCenter):
+                    source.SetAnchor(new Vector2(0.5f, 0));
+                    break;
+                case (AnchorPresets.BottomRight):
+                    source.SetAnchor(new Vector2(1, 0));
+                    break;
+                case (AnchorPresets.HorStretchTop):
+                    source.SetAnchor(new Vector2(0, 1), new Vector2(1, 1));
+                    break;
+                case (AnchorPresets.HorStretchMiddle):
+                    source.SetAnchor(new Vector2(0, 0.5f), new Vector2(1, 0.5f));
+                    break;
+                case (AnchorPresets.HorStretchBottom):
+                    source.SetAnchor(new Vector2(0, 0), new Vector2(1, 0));
+                    break;
+                case (AnchorPresets.VertStretchLeft):
+                    source.SetAnchor(new Vector2(0, 0), new Vector2(0, 1));
+                    break;
+                case (AnchorPresets.VertStretchCenter):
+                    source.SetAnchor(new Vector2(0.5f, 0), new Vector2(0.5f, 1));
+                    break;
+                case (AnchorPresets.VertStretchRight):
+                    source.SetAnchor(new Vector2(1, 0), new Vector2(1, 1));
+                    break;
+                case (AnchorPresets.StretchAll):
+                    source.SetAnchor(new Vector2(0, 0), new Vector2(1, 1));
+                    break;
+            }
+
+        }
+
+        public static void SetPivot(this RectTransform source, PivotPresets preset)
+        {
+            switch (preset)
+            {
+                case (PivotPresets.TopLeft):
+                    source.pivot = new Vector2(0, 1);
+                    break;
+                case (PivotPresets.TopCenter):
+                    source.pivot = new Vector2(0.5f, 1);
+                    break;
+                case (PivotPresets.TopRight):
+                    source.pivot = new Vector2(1, 1);
+                    break;
+                case (PivotPresets.MiddleLeft):
+                    source.pivot = new Vector2(0, 0.5f);
+                    break;
+                case (PivotPresets.MiddleCenter):
+                    source.pivot = new Vector2(0.5f, 0.5f);
+                    break;
+                case (PivotPresets.MiddleRight):
+                    source.pivot = new Vector2(1, 0.5f);
+                    break;
+                case (PivotPresets.BottomLeft):
+                    source.pivot = new Vector2(0, 0);
+                    break;
+                case (PivotPresets.BottomCenter):
+                    source.pivot = new Vector2(0.5f, 0);
+                    break;
+                case (PivotPresets.BottomRight):
+                    source.pivot = new Vector2(1, 0);
+                    source.SetLeftTopPosition(new Vector3(0, 0));
+                    break;
+            }
+        }
+
 
         public static Vector2 GetSize(this RectTransform trans)
         {
