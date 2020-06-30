@@ -14,7 +14,7 @@ using UnityEngine;
 namespace GFrame
 {
     [TMonoSingletonAttribute("[GFrame]/[Tools]/[UIMgr]")]
-    public class UIMgr : TMonoSingleton<UIMgr>
+    public partial class UIMgr : TMonoSingleton<UIMgr>
     {
 
         private UIRoot m_UIRoot;

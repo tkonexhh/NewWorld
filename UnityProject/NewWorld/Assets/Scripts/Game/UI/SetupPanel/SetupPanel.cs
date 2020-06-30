@@ -29,7 +29,7 @@ namespace GameWish.Game
 
         private int m_HairIndex;
         private int m_HeadIndex;
-        private int Max_Hair = 22;
+        private int Max_Hair = 38;
         private int Max_Head = 20;
 
         protected override void OnUIInit()

@@ -32,10 +32,16 @@ namespace GFrame.Editor
             CreateUI(Button);
         }
 
-        [MenuItem("GameObject/UI/Progress")]
-        static void CreatProgress()
+        [MenuItem("GameObject/UI/Custom/Progress/Progress_Horizontal")]
+        static void CreatProgressHorizontal()
         {
-            CreateUI(Progress);
+            CreateUI(ProgressHorizontal);
+        }
+
+        [MenuItem("GameObject/UI/Custom/Progress/Progress_Circle")]
+        static void CreatProgressCircle()
+        {
+            CreateUI(ProgressCircle);
         }
 
         private static void CreateUI(System.Func<GameObject> callback)
@@ -100,7 +106,7 @@ namespace GFrame.Editor
             return CreateGO<GButton>("Btn_", callback);
         }
 
-        private static GameObject Progress()
+        private static GameObject ProgressHorizontal()
         {
             System.Action<GameObject> callback = (go) =>
             {
@@ -111,21 +117,71 @@ namespace GFrame.Editor
                 var rect = go.GetComponent<RectTransform>();
                 rect.SetSize(new Vector2(300, 100));
 
-                GameObject progressGo = new GameObject("ImgProgress", typeof(Image));
-                RectTransform rectText = progressGo.GetComponent<RectTransform>();
-                rectText.SetAnchor(AnchorPresets.StretchAll, 0, 0);
-                rectText.SetSize(rect.sizeDelta);
-                progressGo.transform.SetParent(go.transform);
+                GameObject progressImgGo = new GameObject("ImgProgress", typeof(Image));
+                RectTransform rectProgressImg = progressImgGo.GetComponent<RectTransform>();
+                rectProgressImg.SetAnchor(AnchorPresets.StretchAll, 0, 0);
+                rectProgressImg.SetSize(rect.sizeDelta);
+                progressImgGo.transform.SetParent(go.transform);
 
-                var progressImg = progressGo.GetComponent<Image>();
+                var progressImg = progressImgGo.GetComponent<Image>();
                 HandleImage(progressImg);
                 progressImg.type = UnityEngine.UI.Image.Type.Filled;
                 progressImg.fillMethod = UnityEngine.UI.Image.FillMethod.Horizontal;
-                // progress.SetProgress(0.5f);
-                //typeof(progress)
+
+                GameObject progressTxtGo = new GameObject("TxtProgress", typeof(Text));
+                RectTransform rectText = progressTxtGo.GetComponent<RectTransform>();
+                rectText.SetAnchor(AnchorPresets.StretchAll, 0, 0);
+                rectText.SetSize(rect.sizeDelta);
+                progressTxtGo.transform.SetParent(go.transform);
+                Text progressTxt = progressTxtGo.GetComponent<Text>();
+                HandleText(progressTxt);
+
+                ReflectionHelper.BindMenber(typeof(GProgress), "m_ImgProgress", progress, progressImg);
+                ReflectionHelper.BindMenber(typeof(GProgress), "m_TxtProgress", progress, progressTxt);
+                progress.SetProgress(0.6f);
             };
             return CreateGO<GProgress>("Progress_", callback);
         }
+
+        private static GameObject ProgressCircle()
+        {
+            System.Action<GameObject> callback = (go) =>
+            {
+                var progress = go.GetComponent<GProgress>();
+                var image = go.AddComponent<Image>();
+                HandleImage(image);
+
+                var rect = go.GetComponent<RectTransform>();
+                rect.SetSize(new Vector2(200, 200));
+
+                GameObject progressImgGo = new GameObject("ImgProgress", typeof(Image));
+                RectTransform rectProgressImg = progressImgGo.GetComponent<RectTransform>();
+                rectProgressImg.SetAnchor(AnchorPresets.StretchAll, 0, 0);
+                rectProgressImg.SetSize(rect.sizeDelta);
+                progressImgGo.transform.SetParent(go.transform);
+
+                var progressImg = progressImgGo.GetComponent<Image>();
+                HandleImage(progressImg);
+                progressImg.type = UnityEngine.UI.Image.Type.Filled;
+                progressImg.fillMethod = UnityEngine.UI.Image.FillMethod.Radial360;
+                progressImg.fillOrigin = 2;
+                progressImg.fillClockwise = false;
+
+                GameObject progressTxtGo = new GameObject("TxtProgress", typeof(Text));
+                RectTransform rectText = progressTxtGo.GetComponent<RectTransform>();
+                rectText.SetAnchor(AnchorPresets.StretchAll, 0, 0);
+                rectText.SetSize(rect.sizeDelta);
+                progressTxtGo.transform.SetParent(go.transform);
+                Text progressTxt = progressTxtGo.GetComponent<Text>();
+                HandleText(progressTxt);
+
+                ReflectionHelper.BindMenber(typeof(GProgress), "m_ImgProgress", progress, progressImg);
+                ReflectionHelper.BindMenber(typeof(GProgress), "m_TxtProgress", progress, progressTxt);
+                progress.SetProgress(0.6f);
+            };
+            return CreateGO<GProgress>("Progress_", callback);
+        }
+
         #endregion 
 
         #region HandleUI

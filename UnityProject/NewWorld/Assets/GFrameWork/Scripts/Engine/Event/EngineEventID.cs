@@ -15,7 +15,13 @@ namespace GFrame
     public enum EngineEventID
     {
         EngineEventIDMin = 1000000,
+
         OnLanguageChange,
+        OnApplicationFocusChange,
+        OnApplicationPauseChange,
+
+        OnApplicationQuit,
+
         EngineEventIDMax
     }
 

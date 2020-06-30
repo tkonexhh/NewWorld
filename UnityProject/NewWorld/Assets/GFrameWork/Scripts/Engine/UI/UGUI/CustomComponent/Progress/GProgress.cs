@@ -14,12 +14,13 @@ using UnityEngine.UI;
 namespace GFrame
 {
     /// <summary>
-    /// 简易进度条
+    /// 简易进度条 不带进度字
     /// </summary>
     public class GProgress : MonoBehaviour
     {
         [SerializeField] private Image m_ImgProgress;
-
+        [Header("可选")]
+        [SerializeField] private Text m_TxtProgress;
         public void SetProgress(float progress)
         {
             m_ImgProgress.fillAmount = progress;
