@@ -21,51 +21,39 @@ namespace GameWish.Game
         EyeBrow,
 
         Torso,
+        ArmUpperRight,
+        ArmUpperLeft,
+        ArmLowerRight,
+        ArmLowerLeft,
         Hips,
-        ArmUpper,
-        ArmLower,
+
         Hand,
         Leg
     }
 
     public class CharacterAppearance : MonoBehaviour
     {
-
-        public SkinnedMeshRenderer[] renders;
         // 合并后使用的材质
         public Material material;
+        private SkinnedMeshRenderer[] renders;
         private SkinnedMeshRenderer m_Renderer;
 
         [Header("Sex")]
         [SerializeField] private Sex sex = Sex.Male;//是否是男性
-        [Header("Hair")]
         [SerializeField] private SkinnedMeshRenderer m_Hair;
-        //[SerializeField] private Transform m_HairRoot;
-
-        [Header("Head")]
         [SerializeField] private SkinnedMeshRenderer m_Head;
-        //[SerializeField] private Transform m_HeadRoot;
-        [Header("Facial hair")]//胡子
-        [SerializeField] private Transform m_FacialHairRoot;
-        [Header("Eyebrows")]
-        [SerializeField] private Transform m_EyebrowsRoot;
-        [Header("Torso")]
-        [SerializeField] private Transform m_TorsoRoot;
-        [Header("Hips")]
-        [SerializeField] private Transform m_HipsRoot;
-        [Header("Arm Upper")]
-        [SerializeField] private Transform m_ArmUpperRightRoot;
-        [SerializeField] private Transform m_ArmUpperLeftRoot;
-        [Header("Arm Lower")]
-        [SerializeField] private Transform m_ArmLowerRightRoot;
-        [SerializeField] private Transform m_ArmLowerLeftRoot;
-        [Header("Hand")]
-        [SerializeField] private Transform m_HandRightRoot;
-        [SerializeField] private Transform m_HandLeftRoot;
-        [Header("Leg")]
-        [SerializeField] private Transform m_LegRightRoot;
-        [SerializeField] private Transform m_LegLeftRoot;
-
+        [SerializeField] private SkinnedMeshRenderer m_FacialHair;
+        [SerializeField] private SkinnedMeshRenderer m_Eyebrows;
+        [SerializeField] private SkinnedMeshRenderer m_Torso;
+        [SerializeField] private SkinnedMeshRenderer m_ArmUpperRight;
+        [SerializeField] private SkinnedMeshRenderer m_ArmUpperLeft;
+        [SerializeField] private SkinnedMeshRenderer m_ArmLowerRight;
+        [SerializeField] private SkinnedMeshRenderer m_ArmLowerLeft;
+        [SerializeField] private SkinnedMeshRenderer m_HandRight;
+        [SerializeField] private SkinnedMeshRenderer m_HandLeft;
+        [SerializeField] private SkinnedMeshRenderer m_Hips;
+        [SerializeField] private SkinnedMeshRenderer m_LegRight;
+        [SerializeField] private SkinnedMeshRenderer m_LegLeft;
 
         [Header("Head Attachment")]//头盔
         [Header("Attachment")]
@@ -93,12 +81,18 @@ namespace GameWish.Game
         [Header("基础外貌")]
         public int m_CurHairIndex;
         public int m_CurHeadIndex;
-        public int m_CurEyebrowsIndex;
-        public int m_CurTorsoIndex;
-        public int m_CurHipsIndex;
-        public int m_CurArmUpperIndex;
-        public int m_CurArmLowerIndex;
-        public int m_CurHandIndex;
+        public int m_FacialID;
+        public int m_EyebrowsID;
+        public int m_TorsoID;
+        public int m_ArmUpperRightID;
+        public int m_ArmUpperLeftID;
+        public int m_ArmLowerRightID;
+        public int m_ArmLowerLeftID;
+        public int m_HandRightID;
+        public int m_HandLeftID;
+        public int m_HipsID;
+        public int m_LegRightID;
+        public int m_LegLeftID;
 
         private void Start()
         {
@@ -113,79 +107,189 @@ namespace GameWish.Game
             switch (slot)
             {
                 case AppearanceSlot.Hair:
-
+                    SetHair(id);
                     break;
             }
         }
 
-        public void SetHair(int index)
+        #region SetPart
+        public void SetHair(int id)
         {
-            if (m_CurHairIndex != index)
+            if (m_CurHairIndex != id)
             {
-                m_Hair.gameObject.SetActive(true);
-                var newHair = CharacterHolder.S.GetHair(index);
+                var newHair = CharacterHolder.S.GetHair(id);
                 Debug.LogError(newHair.sharedMesh.name);
                 m_Hair.sharedMesh = newHair.sharedMesh;
-
-                //m_Hair = newHair;
-                //m_HeadRoot.GetChild(m_CurHairIndex).gameObject.SetActive(false);
-                //transform.GetChild(index).gameObject.SetActive(true);
-                m_CurHairIndex = index;
+                m_CurHairIndex = id;
             }
-
             CombineMeshs();
         }
 
-        public void SetHead(int index)
+        public void SetHead(int id)
         {
-            if (m_CurHeadIndex != index)
+            if (m_CurHeadIndex != id)
             {
-                m_Head.gameObject.SetActive(true);
-                var head = CharacterHolder.S.GetHead(sex, index);
-                Debug.LogError(head.sharedMesh.name);
+                var head = CharacterHolder.S.GetHead(sex, id);
                 m_Head.sharedMesh = head.sharedMesh;
-                //m_Head = head;
-                //m_HeadRoot.GetChild(m_CurHeadIndex).gameObject.SetActive(false);
-                //m_HairRoot.GetChild(index).gameObject.SetActive(true);
-                m_CurHeadIndex = index;
+                m_CurHeadIndex = id;
             }
-
             CombineMeshs();
         }
 
-        private void SetTorso(int index)
+        public void SetFacialHair(int id)
         {
-            if (m_CurTorsoIndex != index)
+            if (m_FacialID != id)
             {
-                m_TorsoRoot.GetChild(m_CurTorsoIndex).gameObject.SetActive(false);
-                //m_TorsoRoot.GetChild(index).gameObject.SetActive(true);
-                m_CurTorsoIndex = index;
+                var facialHair = CharacterHolder.S.GetFacialHair(id);
+                m_FacialHair.sharedMesh = facialHair.sharedMesh;
+                m_FacialID = id;
             }
-
             CombineMeshs();
         }
+
+        public void SetEyebrows(int id)
+        {
+            if (m_EyebrowsID != id)
+            {
+                var newSkin = CharacterHolder.S.GetEyebrows(sex, id);
+                m_Eyebrows.sharedMesh = newSkin.sharedMesh;
+                m_EyebrowsID = id;
+            }
+            CombineMeshs();
+        }
+
+        public void SetTorso(int id)
+        {
+            if (m_TorsoID != id)
+            {
+                var newSkin = CharacterHolder.S.GetTorso(sex, id);
+                m_Torso.sharedMesh = newSkin.sharedMesh;
+                m_TorsoID = id;
+            }
+            CombineMeshs();
+        }
+
+        public void SetArmUpperRight(int id)
+        {
+            if (m_ArmUpperRightID != id)
+            {
+                var newSkin = CharacterHolder.S.GetArmUpperRight(sex, id);
+                m_ArmUpperRight.sharedMesh = newSkin.sharedMesh;
+                m_ArmUpperRightID = id;
+            }
+            CombineMeshs();
+        }
+
+        public void SetArmUpperLeft(int id)
+        {
+            if (m_ArmUpperLeftID != id)
+            {
+                var newSkin = CharacterHolder.S.GetArmUpperLeft(sex, id);
+                m_ArmUpperLeft.sharedMesh = newSkin.sharedMesh;
+                m_ArmUpperLeftID = id;
+            }
+            CombineMeshs();
+        }
+
+        public void SetArmLowerRight(int id)
+        {
+            if (m_ArmLowerRightID != id)
+            {
+                var newSkin = CharacterHolder.S.GetArmLowerRight(sex, id);
+                m_ArmLowerRight.sharedMesh = newSkin.sharedMesh;
+                m_ArmLowerRightID = id;
+            }
+            CombineMeshs();
+        }
+
+        public void SetArmLowerLeft(int id)
+        {
+            if (m_ArmLowerLeftID != id)
+            {
+                var newSkin = CharacterHolder.S.GetArmLowerLeft(sex, id);
+                m_ArmLowerLeft.sharedMesh = newSkin.sharedMesh;
+                m_ArmLowerLeftID = id;
+            }
+            CombineMeshs();
+        }
+
+        public void SetHandRight(int id)
+        {
+            if (m_HandRightID != id)
+            {
+                var newSkin = CharacterHolder.S.GetHandRight(sex, id);
+                m_HandRight.sharedMesh = newSkin.sharedMesh;
+                m_HandRightID = id;
+            }
+            CombineMeshs();
+        }
+
+        public void SetHandLeft(int id)
+        {
+            if (m_HandLeftID != id)
+            {
+                var newSkin = CharacterHolder.S.GetHandLeft(sex, id);
+                m_HandLeft.sharedMesh = newSkin.sharedMesh;
+                m_HandLeftID = id;
+            }
+            CombineMeshs();
+        }
+
+        public void SetHips(int id)
+        {
+            if (m_HipsID != id)
+            {
+                var newSkin = CharacterHolder.S.GetHips(sex, id);
+                m_Hips.sharedMesh = newSkin.sharedMesh;
+                m_HipsID = id;
+            }
+            CombineMeshs();
+        }
+
+        public void SetLegRight(int id)
+        {
+            if (m_LegRightID != id)
+            {
+                var newSkin = CharacterHolder.S.GetLefRight(sex, id);
+                m_LegRight.sharedMesh = newSkin.sharedMesh;
+                m_LegRightID = id;
+            }
+            CombineMeshs();
+        }
+
+        public void SetLegLeft(int id)
+        {
+            if (m_LegLeftID != id)
+            {
+                var newSkin = CharacterHolder.S.GetLefLeft(sex, id);
+                m_LegLeft.sharedMesh = newSkin.sharedMesh;
+                m_LegLeftID = id;
+            }
+            CombineMeshs();
+        }
+
+        #endregion
 
         public void ApplyAppearance()
         {
-            //m_HairRoot.GetChild(m_CurHairIndex).gameObject.SetActive(true);
-            //m_HairRoot.GetChild(m_CurHeadIndex).gameObject.SetActive(true);
-            //m_HeadRoot.GetChild(m_CurHeadIndex).gameObject.SetActive(true);
-            //m_FacialHairRoot.GetChild(0).gameObject.SetActive(true);
-            m_EyebrowsRoot.GetChild(m_CurEyebrowsIndex).gameObject.SetActive(true);
-            m_TorsoRoot.GetChild(m_CurTorsoIndex).gameObject.SetActive(true);
-            m_HipsRoot.GetChild(m_CurHipsIndex).gameObject.SetActive(true);
+            m_Hair.gameObject.SetActive(true);
+            m_Head.gameObject.SetActive(true);
+            if (m_FacialHair)
+            {
+                m_FacialHair.gameObject.SetActive(true);
+            }
+            m_Eyebrows.gameObject.SetActive(true);
+            m_Torso.gameObject.SetActive(true);
 
-            m_ArmUpperRightRoot.GetChild(m_CurArmUpperIndex).gameObject.SetActive(true);
-            m_ArmUpperLeftRoot.GetChild(m_CurArmUpperIndex).gameObject.SetActive(true);
-
-            m_ArmLowerRightRoot.GetChild(m_CurArmLowerIndex).gameObject.SetActive(true);
-            m_ArmLowerLeftRoot.GetChild(m_CurArmLowerIndex).gameObject.SetActive(true);
-
-            m_HandRightRoot.GetChild(m_CurHandIndex).gameObject.SetActive(true);
-            m_HandLeftRoot.GetChild(m_CurHandIndex).gameObject.SetActive(true);
-
-            m_LegRightRoot.GetChild(m_CurHeadIndex).gameObject.SetActive(true);
-            m_LegLeftRoot.GetChild(m_CurHeadIndex).gameObject.SetActive(true);
+            m_ArmUpperRight.gameObject.SetActive(true);
+            m_ArmUpperLeft.gameObject.SetActive(true);
+            m_ArmLowerRight.gameObject.SetActive(true);
+            m_ArmLowerLeft.gameObject.SetActive(true);
+            m_HandRight.gameObject.SetActive(true);
+            m_HandLeft.gameObject.SetActive(true);
+            m_Hips.gameObject.SetActive(true);
+            m_LegRight.gameObject.SetActive(true);
+            m_LegLeft.gameObject.SetActive(true);
 
             //attachment
             // m_HeadAttachmentRoot.GetChild(0).gameObject.SetActive(true);

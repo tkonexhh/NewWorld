@@ -19,70 +19,114 @@ namespace GameWish.Game
     {
         ChangeHair = 101001,
         ChangeHead,
+        ChangeEyebrows,
+        ChangeTorso,
+        ChangeArmUpperRight,
+        ChangeArmUpperLeft,
+        ChangeArmLowerRight,
+        ChangeArmLowerLeft,
+        ChangeHandRight,
+        ChangeHandLeft,
+        ChangeHips,
+        ChangeLegRight,
+        ChangeLegLeft,
     }
     public class SetupPanel : AbstractPanel
     {
-        [SerializeField] Button m_BtnHairLeft;
-        [SerializeField] Button m_BtnHairRight;
-        [SerializeField] Button m_BtnHeadLeft;
-        [SerializeField] Button m_BtnHeadRight;
-
-        private int m_HairIndex;
-        private int m_HeadIndex;
-        private int Max_Hair = 38;
-        private int Max_Head = 20;
+        [SerializeField] Setup_ArrowChange m_Hair;
+        [SerializeField] Setup_ArrowChange m_Head;
+        [SerializeField] Setup_ArrowChange m_Eyebrows;
+        [SerializeField] Setup_ArrowChange m_Torso;
+        [SerializeField] Setup_ArrowChange m_ArmUpperRight;
+        [SerializeField] Setup_ArrowChange m_ArmUpperLeft;
+        [SerializeField] Setup_ArrowChange m_ArmLowerRight;
+        [SerializeField] Setup_ArrowChange m_ArmLowerLeft;
+        [SerializeField] Setup_ArrowChange m_HandRight;
+        [SerializeField] Setup_ArrowChange m_HandLeft;
+        [SerializeField] Setup_ArrowChange m_Hips;
+        [SerializeField] Setup_ArrowChange m_LeftRight;
+        [SerializeField] Setup_ArrowChange m_LeftLeft;
 
         protected override void OnUIInit()
         {
-            m_BtnHairLeft.onClick.AddListener(() =>
-            {
-                m_HairIndex--;
-                if (m_HairIndex < 0)
-                {
-                    m_HairIndex = Max_Hair;
-                }
-                ChangeHair(m_HairIndex);
-            });
-
-            m_BtnHairRight.onClick.AddListener(() =>
-            {
-                m_HairIndex++;
-                if (m_HairIndex > Max_Hair)
-                {
-                    m_HairIndex = 0;
-                }
-                ChangeHair(m_HairIndex);
-            });
-
-            m_BtnHeadLeft.onClick.AddListener(() =>
-            {
-                m_HeadIndex--;
-                if (m_HeadIndex < 0)
-                {
-                    m_HeadIndex = Max_Head;
-                }
-                ChangeHead(m_HeadIndex);
-            });
-
-            m_BtnHeadRight.onClick.AddListener(() =>
-            {
-                m_HeadIndex++;
-                if (m_HeadIndex > Max_Head)
-                {
-                    m_HeadIndex = 0;
-                }
-                ChangeHead(m_HeadIndex);
-            });
+            m_Hair.RegisterAction(ChangeHair);
+            m_Head.RegisterAction(ChangeHead);
+            m_Eyebrows.RegisterAction(ChangeEyebrows);
+            m_Torso.RegisterAction(ChangeTorso);
+            m_ArmUpperRight.RegisterAction(ChangeArmUpperRight);
+            m_ArmUpperLeft.RegisterAction(ChangeArmUpperLeft);
+            m_ArmLowerRight.RegisterAction(ChangeArmLowerRight);
+            m_ArmLowerLeft.RegisterAction(ChangeArmLowerLeft);
+            m_HandRight.RegisterAction(ChangeHandRight);
+            m_HandLeft.RegisterAction(ChangeHandLeft);
+            m_Hips.RegisterAction(ChangeHips);
+            m_LeftRight.RegisterAction(ChangeLegRight);
+            m_LeftLeft.RegisterAction(ChangeLegLeft);
         }
 
-        private void ChangeHair(int headIndex)
+        private void ChangeHair(int index)
         {
-            EventSystem.S.Send(SetupEvent.ChangeHair, headIndex);
+            EventSystem.S.Send(SetupEvent.ChangeHair, index);
         }
 
-        private void ChangeHead(int headIndex)
+        private void ChangeHead(int index)
         {
-            EventSystem.S.Send(SetupEvent.ChangeHead, headIndex);
+            EventSystem.S.Send(SetupEvent.ChangeHead, index);
+        }
+
+        private void ChangeEyebrows(int index)
+        {
+            EventSystem.S.Send(SetupEvent.ChangeEyebrows, index);
+        }
+
+        private void ChangeTorso(int index)
+        {
+            EventSystem.S.Send(SetupEvent.ChangeTorso, index);
+        }
+
+        private void ChangeArmUpperRight(int index)
+        {
+            EventSystem.S.Send(SetupEvent.ChangeArmUpperRight, index);
+        }
+
+        private void ChangeArmUpperLeft(int index)
+        {
+            EventSystem.S.Send(SetupEvent.ChangeArmUpperLeft, index);
+        }
+
+        private void ChangeArmLowerRight(int index)
+        {
+            EventSystem.S.Send(SetupEvent.ChangeArmLowerRight, index);
+        }
+
+        private void ChangeArmLowerLeft(int index)
+        {
+            EventSystem.S.Send(SetupEvent.ChangeArmLowerLeft, index);
+        }
+
+        private void ChangeHandRight(int index)
+        {
+            EventSystem.S.Send(SetupEvent.ChangeHandRight, index);
+        }
+
+        private void ChangeHandLeft(int index)
+        {
+            EventSystem.S.Send(SetupEvent.ChangeHandLeft, index);
+        }
+
+        private void ChangeHips(int index)
+        {
+            EventSystem.S.Send(SetupEvent.ChangeHips, index);
+        }
+
+        private void ChangeLegRight(int index)
+        {
+            EventSystem.S.Send(SetupEvent.ChangeLegRight, index);
+        }
+
+        private void ChangeLegLeft(int index)
+        {
+            EventSystem.S.Send(SetupEvent.ChangeLegLeft, index);
         }
     }
 
