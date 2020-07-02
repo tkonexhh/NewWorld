@@ -18,17 +18,25 @@ namespace GameWish.Game
         Hair,
         Head,
         FacialHair,//胡子
-        EyeBrow,
-
+        EyeBrows,
         Torso,
         ArmUpperRight,
         ArmUpperLeft,
         ArmLowerRight,
         ArmLowerLeft,
+        HandRight,
+        HandLeft,
         Hips,
+        LegRight,
+        LegLeft,
 
-        Hand,
-        Leg
+        ShoulderRight,
+        ShoulderLeft,
+        ElbowRight,
+        ElbowLeft,
+        KneeRight,
+        KneeLeft,
+        ElfEar,
     }
 
     public class CharacterAppearance : MonoBehaviour
@@ -41,47 +49,39 @@ namespace GameWish.Game
         [Header("Sex")]
         [SerializeField] private Sex sex = Sex.Male;//是否是男性
         [SerializeField] private SkinnedMeshRenderer m_Hair;
-        [SerializeField] private SkinnedMeshRenderer m_Head;
+        [SerializeField] private SkinApperaance m_Head;
         [SerializeField] private SkinnedMeshRenderer m_FacialHair;
-        [SerializeField] private SkinnedMeshRenderer m_Eyebrows;
+        [SerializeField] private SkinApperaance m_Eyebrows;
         [SerializeField] private SkinnedMeshRenderer m_Torso;
-        [SerializeField] private SkinnedMeshRenderer m_ArmUpperRight;
-        [SerializeField] private SkinnedMeshRenderer m_ArmUpperLeft;
-        [SerializeField] private SkinnedMeshRenderer m_ArmLowerRight;
-        [SerializeField] private SkinnedMeshRenderer m_ArmLowerLeft;
-        [SerializeField] private SkinnedMeshRenderer m_HandRight;
-        [SerializeField] private SkinnedMeshRenderer m_HandLeft;
+        [SerializeField] private SkinApperaance m_ArmUpperRight;
+        [SerializeField] private SkinApperaance m_ArmUpperLeft;
+        [SerializeField] private SkinApperaance m_ArmLowerRight;
+        [SerializeField] private SkinApperaance m_ArmLowerLeft;
+        [SerializeField] private SkinApperaance m_HandRight;
+        [SerializeField] private SkinApperaance m_HandLeft;
         [SerializeField] private SkinnedMeshRenderer m_Hips;
-        [SerializeField] private SkinnedMeshRenderer m_LegRight;
-        [SerializeField] private SkinnedMeshRenderer m_LegLeft;
+        [SerializeField] private SkinApperaance m_LegRight;
+        [SerializeField] private SkinApperaance m_LegLeft;
 
-        [Header("Head Attachment")]//头盔
-        [Header("Attachment")]
-        [SerializeField] private Transform m_HeadAttachmentRoot;
-        [Header("Head Back Attachment")]//头盔装饰
-        [SerializeField] private Transform m_HeadBackAttachmentRoot;
-        [Header("Back Attachment")]
-        [SerializeField] private Transform m_BackAttachmentRoot;
-        [Header("Shoulder Right Attachment")]
-        [SerializeField] private Transform m_ShoulderRightAttachmentRoot;
-        [Header("Shoulder Left Attachment")]
-        [SerializeField] private Transform m_ShoulderLeftAttachmentRoot;
-        [Header("Elbow Right Attachment")]
-        [SerializeField] private Transform m_ElbowRightAttachmentRoot;
-        [Header("Elbow Left Attachment")]
-        [SerializeField] private Transform m_ElbowLeftAttachmentRoot;
-        [Header("Hips Attachment")]
-        [SerializeField] private Transform m_HipsAttachmentRoot;
-        [Header("Knee Right Attachment")]
-        [SerializeField] private Transform m_KneeRightAttachmentRoot;
-        [Header("Knee Left Attachment")]
-        [SerializeField] private Transform m_KneeLeftAttachmentRoot;
+        [Header("HeadCovering")]
+        [SerializeField] private SkinnedMeshRenderer m_HeadCovering;//帽子
+        [SerializeField] private SkinnedMeshRenderer m_HeadNoElements;//头盔
+        [SerializeField] private SkinnedMeshRenderer m_HeadAttachment;//头部附属物
+        [SerializeField] private SkinnedMeshRenderer m_BackAttachment;
+        [SerializeField] private SkinApperaance m_ShoulderRight;
+        [SerializeField] private SkinApperaance m_ShoulderLeft;
+        [SerializeField] private SkinApperaance m_ElbowRight;
+        [SerializeField] private SkinApperaance m_ElbowLeft;
+        [SerializeField] private SkinnedMeshRenderer m_HipsAttachment;
+        [SerializeField] private SkinApperaance m_KneeRight;
+        [SerializeField] private SkinApperaance m_KneeLeft;
+        [SerializeField] private SkinApperaance m_ElfEar;
 
 
         [Header("基础外貌")]
-        public int m_CurHairIndex;
-        public int m_CurHeadIndex;
-        public int m_FacialID;
+        public int m_HairID;//0为光头
+        public int m_HeadID;
+        public int m_FacialHairID;//0为无胡须
         public int m_EyebrowsID;
         public int m_TorsoID;
         public int m_ArmUpperRightID;
@@ -94,11 +94,30 @@ namespace GameWish.Game
         public int m_LegRightID;
         public int m_LegLeftID;
 
+        public int m_ShoulderRightID;
+        public int m_ShoulderLeftID;
+        public int m_ElbowRightID;
+        public int m_ElbowLeftID;
+        public int m_KneeRightID;
+        public int m_KneeLeftID;
+        public int m_EarID;
+
         private void Start()
         {
             m_Renderer = gameObject.AddMissingComponent<SkinnedMeshRenderer>();
             material = Instantiate(material);
 
+            RefeshAppearance();
+        }
+
+        void RefeshAppearance()
+        {
+            // SetAppearance(AppearanceSlot.Hair, m_HairID);
+            // SetAppearance(AppearanceSlot.Head, m_HeadID);
+            // SetAppearance(AppearanceSlot.FacialHair, m_FacialHairID);
+            // SetAppearance(AppearanceSlot.EyeBrows, m_EyebrowsID);
+            // SetAppearance(AppearanceSlot.Torso, m_TorsoID);
+            // SetAppearance(AppearanceSlot.ArmUpperRight, m_ArmUpperRightID);
             CombineMeshs();
         }
 
@@ -109,130 +128,143 @@ namespace GameWish.Game
                 case AppearanceSlot.Hair:
                     SetHair(id);
                     break;
+                case AppearanceSlot.Head:
+                    SetHead(id);
+                    break;
+                case AppearanceSlot.FacialHair:
+                    SetFacialHair(id);
+                    break;
+                case AppearanceSlot.EyeBrows:
+                    SetEyebrows(id);
+                    break;
+                case AppearanceSlot.Torso:
+                    SetTorso(id);
+                    break;
+                case AppearanceSlot.ArmUpperRight:
+                    SetArmUpperRight(id);
+                    break;
+                case AppearanceSlot.ArmUpperLeft:
+                    SetArmUpperLeft(id);
+                    break;
+                case AppearanceSlot.ArmLowerRight:
+                    SetArmLowerRight(id);
+                    break;
+                case AppearanceSlot.ArmLowerLeft:
+                    SetArmLowerLeft(id);
+                    break;
+                case AppearanceSlot.HandRight:
+                    SetHandRight(id);
+                    break;
+                case AppearanceSlot.HandLeft:
+                    SetHandLeft(id);
+                    break;
+                case AppearanceSlot.Hips:
+                    SetHips(id);
+                    break;
+                case AppearanceSlot.LegRight:
+                    SetLegRight(id);
+                    break;
+                case AppearanceSlot.LegLeft:
+                    SetLegLeft(id);
+                    break;
+
+                case AppearanceSlot.ShoulderRight:
+                    SetShoulderRight(id);
+                    break;
+                case AppearanceSlot.ShoulderLeft:
+                    SetShoulderLeft(id);
+                    break;
+                case AppearanceSlot.ElbowRight:
+                    SetElbowRight(id);
+                    break;
+                case AppearanceSlot.ElbowLeft:
+                    SetElbowLeft(id);
+                    break;
+                case AppearanceSlot.KneeRight:
+                    SetKneeRight(id);
+                    break;
+                case AppearanceSlot.KneeLeft:
+                    SetKneeLeft(id);
+                    break;
+                case AppearanceSlot.ElfEar:
+                    SetElfEar(id);
+                    break;
             }
+
         }
 
         #region SetPart
         public void SetHair(int id)
         {
-            if (m_CurHairIndex != id)
+            if (m_HairID != id)
             {
                 var newHair = CharacterHolder.S.GetHair(id);
-                Debug.LogError(newHair.sharedMesh.name);
                 m_Hair.sharedMesh = newHair.sharedMesh;
-                m_CurHairIndex = id;
+
+                m_HairID = id;
             }
-            CombineMeshs();
         }
 
         public void SetHead(int id)
         {
-            if (m_CurHeadIndex != id)
-            {
-                var head = CharacterHolder.S.GetHead(sex, id);
-                m_Head.sharedMesh = head.sharedMesh;
-                m_CurHeadIndex = id;
-            }
-            CombineMeshs();
+            m_HeadID = m_Head.SetSkin(sex, id);
         }
 
         public void SetFacialHair(int id)
         {
-            if (m_FacialID != id)
+            if (m_FacialHairID != id)
             {
                 var facialHair = CharacterHolder.S.GetFacialHair(id);
                 m_FacialHair.sharedMesh = facialHair.sharedMesh;
-                m_FacialID = id;
+
+                m_FacialHairID = id;
             }
-            CombineMeshs();
         }
 
         public void SetEyebrows(int id)
         {
-            if (m_EyebrowsID != id)
-            {
-                var newSkin = CharacterHolder.S.GetEyebrows(sex, id);
-                m_Eyebrows.sharedMesh = newSkin.sharedMesh;
-                m_EyebrowsID = id;
-            }
-            CombineMeshs();
+            m_EyebrowsID = m_Eyebrows.SetSkin(sex, id);
         }
 
         public void SetTorso(int id)
         {
+
             if (m_TorsoID != id)
             {
                 var newSkin = CharacterHolder.S.GetTorso(sex, id);
                 m_Torso.sharedMesh = newSkin.sharedMesh;
                 m_TorsoID = id;
             }
-            CombineMeshs();
         }
 
         public void SetArmUpperRight(int id)
         {
-            if (m_ArmUpperRightID != id)
-            {
-                var newSkin = CharacterHolder.S.GetArmUpperRight(sex, id);
-                m_ArmUpperRight.sharedMesh = newSkin.sharedMesh;
-                m_ArmUpperRightID = id;
-            }
-            CombineMeshs();
+            m_ArmUpperRightID = m_ArmUpperRight.SetSkin(sex, id);
         }
 
         public void SetArmUpperLeft(int id)
         {
-            if (m_ArmUpperLeftID != id)
-            {
-                var newSkin = CharacterHolder.S.GetArmUpperLeft(sex, id);
-                m_ArmUpperLeft.sharedMesh = newSkin.sharedMesh;
-                m_ArmUpperLeftID = id;
-            }
-            CombineMeshs();
+            m_ArmUpperLeftID = m_ArmUpperLeft.SetSkin(sex, id);
         }
 
         public void SetArmLowerRight(int id)
         {
-            if (m_ArmLowerRightID != id)
-            {
-                var newSkin = CharacterHolder.S.GetArmLowerRight(sex, id);
-                m_ArmLowerRight.sharedMesh = newSkin.sharedMesh;
-                m_ArmLowerRightID = id;
-            }
-            CombineMeshs();
+            m_ArmLowerRightID = m_ArmLowerRight.SetSkin(sex, id);
         }
 
         public void SetArmLowerLeft(int id)
         {
-            if (m_ArmLowerLeftID != id)
-            {
-                var newSkin = CharacterHolder.S.GetArmLowerLeft(sex, id);
-                m_ArmLowerLeft.sharedMesh = newSkin.sharedMesh;
-                m_ArmLowerLeftID = id;
-            }
-            CombineMeshs();
+            m_ArmLowerLeftID = m_ArmLowerLeft.SetSkin(sex, id);
         }
 
         public void SetHandRight(int id)
         {
-            if (m_HandRightID != id)
-            {
-                var newSkin = CharacterHolder.S.GetHandRight(sex, id);
-                m_HandRight.sharedMesh = newSkin.sharedMesh;
-                m_HandRightID = id;
-            }
-            CombineMeshs();
+            m_HandRightID = m_HandRight.SetSkin(sex, id);
         }
 
         public void SetHandLeft(int id)
         {
-            if (m_HandLeftID != id)
-            {
-                var newSkin = CharacterHolder.S.GetHandLeft(sex, id);
-                m_HandLeft.sharedMesh = newSkin.sharedMesh;
-                m_HandLeftID = id;
-            }
-            CombineMeshs();
+            m_HandLeftID = m_HandLeft.SetSkin(sex, id);
         }
 
         public void SetHips(int id)
@@ -243,29 +275,51 @@ namespace GameWish.Game
                 m_Hips.sharedMesh = newSkin.sharedMesh;
                 m_HipsID = id;
             }
-            CombineMeshs();
         }
 
         public void SetLegRight(int id)
         {
-            if (m_LegRightID != id)
-            {
-                var newSkin = CharacterHolder.S.GetLefRight(sex, id);
-                m_LegRight.sharedMesh = newSkin.sharedMesh;
-                m_LegRightID = id;
-            }
-            CombineMeshs();
+            m_LegRightID = m_LegRight.SetSkin(sex, id);
         }
 
         public void SetLegLeft(int id)
         {
-            if (m_LegLeftID != id)
-            {
-                var newSkin = CharacterHolder.S.GetLefLeft(sex, id);
-                m_LegLeft.sharedMesh = newSkin.sharedMesh;
-                m_LegLeftID = id;
-            }
-            CombineMeshs();
+            m_LegLeftID = m_LegLeft.SetSkin(sex, id);
+        }
+
+        void SetShoulderRight(int id)
+        {
+            m_ShoulderRightID = m_ShoulderRight.SetSkin(sex, id);
+        }
+
+        void SetShoulderLeft(int id)
+        {
+            m_ShoulderLeftID = m_ShoulderLeft.SetSkin(sex, id);
+        }
+
+        void SetElbowRight(int id)
+        {
+            m_ElbowRightID = m_ElbowRight.SetSkin(sex, id);
+        }
+
+        void SetElbowLeft(int id)
+        {
+            m_ElbowLeftID = m_ElbowLeft.SetSkin(sex, id);
+        }
+
+        void SetKneeRight(int id)
+        {
+            m_KneeRightID = m_KneeRight.SetSkin(sex, id);
+        }
+
+        void SetKneeLeft(int id)
+        {
+            m_KneeLeftID = m_KneeLeft.SetSkin(sex, id);
+        }
+
+        public void SetElfEar(int id)
+        {
+            m_EarID = m_ElfEar.SetSkin(sex, id);
         }
 
         #endregion
@@ -291,18 +345,18 @@ namespace GameWish.Game
             m_LegRight.gameObject.SetActive(true);
             m_LegLeft.gameObject.SetActive(true);
 
-            //attachment
-            // m_HeadAttachmentRoot.GetChild(0).gameObject.SetActive(true);
-            // m_HeadBackAttachmentRoot.GetChild(0).gameObject.SetActive(true);
-            // m_BackAttachmentRoot.GetChild(0).gameObject.SetActive(true);
-            // m_ShoulderRightAttachmentRoot.GetChild(0).gameObject.SetActive(true);
-            // m_ShoulderLeftAttachmentRoot.GetChild(0).gameObject.SetActive(true);
-            // m_ElbowRightAttachmentRoot.GetChild(0).gameObject.SetActive(true);
-            // m_ElbowLeftAttachmentRoot.GetChild(0).gameObject.SetActive(true);
-            // m_HipsAttachmentRoot.GetChild(0).gameObject.SetActive(true);
-            // m_HeadBackAttachmentRoot.GetChild(0).gameObject.SetActive(true);
-            // m_KneeRightAttachmentRoot.GetChild(0).gameObject.SetActive(true);
-            // m_KneeLeftAttachmentRoot.GetChild(0).gameObject.SetActive(true);
+            // m_HeadCovering.gameObject.SetActive(true);
+            // m_HeadNoElements.gameObject.SetActive(true);
+            // m_HeadAttachment.gameObject.SetActive(true);
+            // m_BackAttachment.gameObject.SetActive(true);
+            // m_ShoulderRight.gameObject.SetActive(true);
+            // m_ShoulderLeft.gameObject.SetActive(true);
+            // m_ElbowRight.gameObject.SetActive(true);
+            // m_ElbowLeft.gameObject.SetActive(true);
+            // m_HipsAttachment.gameObject.SetActive(true);
+            // m_KneeRight.gameObject.SetActive(true);
+            // m_KneeLeft.gameObject.SetActive(true);
+            // m_ElfEar.gameObject.SetActive(true);
         }
 
         /// <summary>
@@ -313,7 +367,7 @@ namespace GameWish.Game
 
         }
 
-        private void CombineMeshs()
+        public void CombineMeshs()
         {
             ApplyAppearance();
             renders = transform.GetChild(0).GetComponentsInChildren<SkinnedMeshRenderer>();
@@ -336,10 +390,15 @@ namespace GameWish.Game
             for (int i = 0; i < length; i++)
             {
                 SkinnedMeshRenderer oneRender = renders[i];
+                Mesh sharedMesh = oneRender.sharedMesh;
+                if (sharedMesh == null)
+                    continue;
                 // 记录骨骼
                 bones.AddRange(oneRender.bones);
+
                 // 记录权重
-                BoneWeight[] meshBoneweight = oneRender.sharedMesh.boneWeights;
+
+                BoneWeight[] meshBoneweight = sharedMesh.boneWeights;
                 for (int j = 0; j < meshBoneweight.Length; ++j)
                 {
                     BoneWeight bw = meshBoneweight[j];

@@ -31,6 +31,17 @@ namespace GameWish.Game
 
         [SerializeField] private Transform m_TrsHair;
 
+        [SerializeField] private Transform m_TrsHelmetAttachment;
+        [SerializeField] private Transform m_TrsBackAttachment;
+        [SerializeField] private Transform m_TrsShoulderAttachmentRight;
+        [SerializeField] private Transform m_TrsShoulderAttachmentLeft;
+        [SerializeField] private Transform m_TrsElbowAttachmentRight;
+        [SerializeField] private Transform m_TrsElbowAttachmentLeft;
+        [SerializeField] private Transform m_TrsHipsAttachment;
+        [SerializeField] private Transform m_TrsKneeAttachmentRight;
+        [SerializeField] private Transform m_TrsKneeAttachmentLeft;
+        [SerializeField] private Transform m_TrsElfEar;
+
         [Header("Male")]
         [SerializeField] private Transform m_TrsHeadMale;
         [SerializeField] private Transform m_TrsEyebrowsMale;
@@ -69,6 +80,58 @@ namespace GameWish.Game
         [Header("Equip")]
         [SerializeField] private Transform m_TrsHeadNoElementFemale;
 
+        public SkinnedMeshRenderer GetMeshBySlot(AppearanceSlot slot, Sex sex, int id)
+        {
+            switch (slot)
+            {
+                case AppearanceSlot.Hair:
+                    return GetHair(id);
+                case AppearanceSlot.Head:
+                    return GetHead(sex, id);
+                case AppearanceSlot.FacialHair:
+                    return GetFacialHair(id);
+                case AppearanceSlot.EyeBrows:
+                    return GetEyebrows(sex, id);
+                case AppearanceSlot.Torso:
+                    return GetTorso(sex, id);
+                case AppearanceSlot.ArmUpperRight:
+                    return GetArmUpperRight(sex, id);
+                case AppearanceSlot.ArmUpperLeft:
+                    return GetArmUpperLeft(sex, id);
+                case AppearanceSlot.ArmLowerRight:
+                    return GetArmLowerRight(sex, id);
+                case AppearanceSlot.ArmLowerLeft:
+                    return GetArmLowerLeft(sex, id);
+                case AppearanceSlot.HandRight:
+                    return GetHandRight(sex, id);
+                case AppearanceSlot.HandLeft:
+                    return GetHandLeft(sex, id);
+                case AppearanceSlot.Hips:
+                    return GetHips(sex, id);
+                case AppearanceSlot.LegRight:
+                    return GetLegRight(sex, id);
+                case AppearanceSlot.LegLeft:
+                    return GetLegLeft(sex, id);
+                case AppearanceSlot.ShoulderRight:
+                    return GetShoulderRight(id);
+                case AppearanceSlot.ShoulderLeft:
+                    return GetShoulderLeft(id);
+                case AppearanceSlot.ElbowRight:
+                    return GetElbowRight(id);
+                case AppearanceSlot.ElbowLeft:
+                    return GetElbowLeft(id);
+                case AppearanceSlot.KneeRight:
+                    return GetKneeRight(id);
+                case AppearanceSlot.KneeLeft:
+                    return GetKneeLeft(id);
+                case AppearanceSlot.ElfEar:
+                    return GetElfEar(id);
+                default:
+                    return null;
+            }
+
+
+        }
 
         public SkinnedMeshRenderer GetHair(int id)
         {
@@ -140,17 +203,90 @@ namespace GameWish.Game
             return GetChild(root, id);
         }
 
-        public SkinnedMeshRenderer GetLefRight(Sex sex, int id)
+        public SkinnedMeshRenderer GetLegRight(Sex sex, int id)
         {
             Transform root = sex == Sex.Male ? m_TrsLegRightMale : m_TrsLegRightFemale;
             return GetChild(root, id);
         }
 
-        public SkinnedMeshRenderer GetLefLeft(Sex sex, int id)
+        public SkinnedMeshRenderer GetLegLeft(Sex sex, int id)
         {
             Transform root = sex == Sex.Male ? m_TrsLegLeftMale : m_TrsLegLeftFemale;
             return GetChild(root, id);
         }
+
+
+        ////////////////
+
+        public SkinnedMeshRenderer GetHeadNoElement(Sex sex, int id)
+        {
+            Transform root = sex == Sex.Male ? m_TrsHeadNoElementMale : m_TrsHeadNoElementFemale;
+            return GetChild(root, id);
+        }
+
+        public SkinnedMeshRenderer GetHeadCoveringBaseHair(int id)
+        {
+            return GetChild(m_TrsHeadCoveringBaseHair, id);
+        }
+        public SkinnedMeshRenderer GetHeadCoveringNoFacialHair(int id)
+        {
+            return GetChild(m_TrsHeadCoveringNoFacialHair, id);
+        }
+        public SkinnedMeshRenderer GetHeadCoveringNoHair(int id)
+        {
+            return GetChild(m_TrsHeadCoveringNoHair, id);
+        }
+
+        public SkinnedMeshRenderer GetHelmetAttachment(int id)
+        {
+            return GetChild(m_TrsHelmetAttachment, id);
+        }
+
+        public SkinnedMeshRenderer GetBackAttachment(int id)
+        {
+            return GetChild(m_TrsBackAttachment, id);
+        }
+
+        public SkinnedMeshRenderer GetShoulderRight(int id)
+        {
+            return GetChild(m_TrsShoulderAttachmentRight, id);
+        }
+
+        public SkinnedMeshRenderer GetShoulderLeft(int id)
+        {
+            return GetChild(m_TrsShoulderAttachmentLeft, id);
+        }
+
+        public SkinnedMeshRenderer GetElbowRight(int id)
+        {
+            return GetChild(m_TrsElbowAttachmentRight, id);
+        }
+
+        public SkinnedMeshRenderer GetElbowLeft(int id)
+        {
+            return GetChild(m_TrsElbowAttachmentLeft, id);
+        }
+
+        public SkinnedMeshRenderer GetHipsAttachment(int id)
+        {
+            return GetChild(m_TrsHipsAttachment, id);
+        }
+
+        public SkinnedMeshRenderer GetKneeRight(int id)
+        {
+            return GetChild(m_TrsKneeAttachmentRight, id);
+        }
+
+        public SkinnedMeshRenderer GetKneeLeft(int id)
+        {
+            return GetChild(m_TrsKneeAttachmentLeft, id);
+        }
+
+        public SkinnedMeshRenderer GetElfEar(int id)
+        {
+            return GetChild(m_TrsElfEar, id);
+        }
+
 
         private SkinnedMeshRenderer GetChild(Transform root, int index)
         {

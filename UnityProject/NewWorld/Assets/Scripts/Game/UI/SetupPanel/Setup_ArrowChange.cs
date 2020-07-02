@@ -10,21 +10,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using GFrame;
 
 namespace GameWish.Game
 {
     public class Setup_ArrowChange : MonoBehaviour
     {
         public int maxCount = 0;
-        [SerializeField] private int m_CurIndex;
+        [SerializeField] AppearanceSlot m_Slot;
+        [SerializeField] private Text m_TxtName;
+        [SerializeField] private Text m_TxtID;
         [SerializeField] private Button m_BtnReduce;
         [SerializeField] private Button m_BtnAdd;
 
+        private int m_CurIndex;
         System.Action<int> callback;
 
-        private void Awake()
+        private void Start()
         {
+            m_TxtName.text = m_Slot.ToString();
+
             m_BtnReduce.onClick.AddListener(() =>
             {
                 m_CurIndex--;
@@ -32,8 +37,8 @@ namespace GameWish.Game
                 {
                     m_CurIndex = maxCount;
                 }
-                if (callback != null)
-                    callback.Invoke(m_CurIndex);
+
+                CallBack();
             });
 
             m_BtnAdd.onClick.AddListener(() =>
@@ -43,15 +48,21 @@ namespace GameWish.Game
                 {
                     m_CurIndex = 0;
                 }
-                if (callback != null)
-                    callback.Invoke(m_CurIndex);
+
+                CallBack();
             });
         }
 
-        public void RegisterAction(System.Action<int> callback)
+        void CallBack()
         {
-            this.callback = callback;
+            m_TxtID.text = m_CurIndex.ToString();
+            EventSystem.S.Send(SetupEvent.ChangeAppearance, m_Slot, m_CurIndex);
         }
+
+        // public void RegisterAction(System.Action<int> callback)
+        // {
+        //     this.callback = callback;
+        // }
     }
 
 }
