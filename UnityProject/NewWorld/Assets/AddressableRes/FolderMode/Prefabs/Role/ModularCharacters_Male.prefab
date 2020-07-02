@@ -11709,13 +11709,14 @@ GameObject:
   m_Component:
   - component: {fileID: 7666273751970890478}
   - component: {fileID: 7666273751984984348}
+  - component: {fileID: 2877252414179339243}
   m_Layer: 9
-  m_Name: Chr_FacialHair_Male_01
+  m_Name: FacialHair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7666273751970890478
 Transform:
   m_ObjectHideFlags: 0
@@ -11782,6 +11783,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.000019073486, y: -1.0934143, z: 8.61198}
     m_Extent: {x: 12.358112, y: 12.018127, z: 6.965822}
   m_DirtyAABB: 0
+--- !u!114 &2877252414179339243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7666273751971387086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 184ea14d3d10e421d9f776b48f18c06c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Slot: 2
+  m_Renderer: {fileID: 7666273751984984348}
 --- !u!1 &7666273751971387088
 GameObject:
   m_ObjectHideFlags: 0
@@ -13651,11 +13666,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: ea128b040f8b0af4c9d2de400aaff30a, type: 2}
-  sex: 1
-  m_Hair: {fileID: 7666273751984984568}
-  m_Head: {fileID: 7666273751984984148}
-  m_FacialHair: {fileID: 7666273751984984348}
-  m_Eyebrows: {fileID: 7666273751984984352}
+  m_BasicApperance:
+    sex: 0
+    hairID: 0
+    faceID: 0
+    facialHairID: 0
+    eyeBrows: 0
+  m_Hair: {fileID: 5250031636285968963}
+  m_Head: {fileID: 3735502217082034848}
+  m_FacialHair: {fileID: 2877252414179339243}
+  m_Eyebrows: {fileID: 2593190504691124872}
   m_Torso: {fileID: 7666273751984985000}
   m_ArmUpperRight: {fileID: 4780649509848087384}
   m_ArmUpperLeft: {fileID: 6833950989848312519}
@@ -13678,10 +13698,6 @@ MonoBehaviour:
   m_KneeRight: {fileID: 1774319564613950071}
   m_KneeLeft: {fileID: 1692854036080424758}
   m_ElfEar: {fileID: 4533958576370323646}
-  m_HairID: 0
-  m_HeadID: 0
-  m_FacialHairID: 0
-  m_EyebrowsID: 0
   m_TorsoID: 0
   m_ArmUpperRightID: 0
   m_ArmUpperLeftID: 0
@@ -15163,8 +15179,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7666273751970891484}
   - component: {fileID: 7666273751984984568}
+  - component: {fileID: 5250031636285968963}
   m_Layer: 9
-  m_Name: Chr_Hair_01
+  m_Name: Hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15242,6 +15259,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -39.180275, y: 8.602623, z: 0}
     m_Extent: {x: 15.00658, y: 21.813066, z: 10.326805}
   m_DirtyAABB: 0
+--- !u!114 &5250031636285968963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7666273751971388092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 184ea14d3d10e421d9f776b48f18c06c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Slot: 0
+  m_Renderer: {fileID: 7666273751984984568}
 --- !u!1 &7666273751971388298
 GameObject:
   m_ObjectHideFlags: 0

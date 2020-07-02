@@ -16,8 +16,9 @@ namespace GameWish.Game
 {
     public enum Sex
     {
-        Female,
         Male,
+        Female,
+
     }
     /// <summary>
     /// 用于获取装备Mesh等相关信息
@@ -25,6 +26,7 @@ namespace GameWish.Game
     public class CharacterHolder : TMonoSingleton<CharacterHolder>
     {
         [Header("HeadCovering")]
+        [Header("General")]
         [SerializeField] private Transform m_TrsHeadCoveringBaseHair;//有头发的帽子
         [SerializeField] private Transform m_TrsHeadCoveringNoFacialHair;//没有胡子的帽子
         [SerializeField] private Transform m_TrsHeadCoveringNoHair;//没有头发的帽子

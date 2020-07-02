@@ -286,16 +286,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6968812956063299916, guid: 37a17d93ea857464799b21d70b00a57a,
-        type: 3}
-      propertyPath: m_HairID
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6968812956063299916, guid: 37a17d93ea857464799b21d70b00a57a,
-        type: 3}
-      propertyPath: m_FacialHairID
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7666273751970890548, guid: 37a17d93ea857464799b21d70b00a57a,
         type: 3}
       propertyPath: m_LocalPosition.x
