@@ -7,7 +7,7 @@ namespace GFrame.Editor
 {
     public class EditorUtils
     {
-        [MenuItem("Tools/GFrame/First Init", false, 0)]
+        [MenuItem("Tools/GFrame/Init", false, 0)]
         public static void GFrameInit()
         {
             List<string> createPath = new List<string>(){
@@ -27,6 +27,12 @@ namespace GFrame.Editor
             ProjectDefaultConfigEditor.BuildConfig();
 
             AssetDatabase.Refresh();
+        }
+
+        [MenuItem("Tools/GFrame/Module", false, 1)]
+        public static void GFrameModule()
+        {
+
         }
 
 

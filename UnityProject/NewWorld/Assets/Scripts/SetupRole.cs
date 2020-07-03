@@ -30,6 +30,8 @@ namespace GameWish.Game
             appearance.CombineMeshs();
 
 
+            Equipment_Helmet equipment = new Equipment_Helmet();
+            this.Equip(equipment);
         }
     }
 

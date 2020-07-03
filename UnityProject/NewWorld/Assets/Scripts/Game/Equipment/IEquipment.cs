@@ -15,7 +15,7 @@ namespace GameWish.Game
 {
     public interface IEquipment
     {
-        void Equip();
+        void Equip(Character character);
     }
 
 }

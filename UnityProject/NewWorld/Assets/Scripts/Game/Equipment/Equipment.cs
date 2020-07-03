@@ -17,13 +17,19 @@ namespace GameWish.Game
 
     public class Equipment : IEquipment
     {
+        public int id;
         private EquipmentType m_Type;
-        private EquipmentAppearance m_Appearance;
+        public EquipmentAppearance m_Appearance;
         private EquipmentStatus m_Status;
 
-        public void Equip()
+        public Equipment()
         {
 
+        }
+
+        public void Equip(Character character)
+        {
+            m_Appearance.ApplyAppearance(character.appearance);
         }
 
     }

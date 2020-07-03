@@ -18,8 +18,10 @@ namespace GameWish.Game
     {
         Male,
         Female,
-
     }
+
+
+
     /// <summary>
     /// 用于获取装备Mesh等相关信息
     /// </summary>
@@ -82,6 +84,13 @@ namespace GameWish.Game
         [Header("Equip")]
         [SerializeField] private Transform m_TrsHeadNoElementFemale;
 
+        public SkinnedMeshRenderer GetHelmetMesh(int id)
+        {
+            return GetHeadCoveringBaseHair(id);
+            GetHeadCoveringNoHair(id);
+            GetHeadCoveringNoFacialHair(id);
+
+        }
         public SkinnedMeshRenderer GetMeshBySlot(AppearanceSlot slot, Sex sex, int id)
         {
             switch (slot)
@@ -126,8 +135,10 @@ namespace GameWish.Game
                     return GetKneeRight(id);
                 case AppearanceSlot.KneeLeft:
                     return GetKneeLeft(id);
-                case AppearanceSlot.ElfEar:
+                case AppearanceSlot.Ear:
                     return GetElfEar(id);
+                case AppearanceSlot.HelmetWithoutHead:
+                    return GetHeadNoElement(sex, id);
                 default:
                     return null;
             }

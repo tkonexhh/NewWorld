@@ -31,4 +31,13 @@ namespace GameWish.Game
         Lengend,//传说
     }
 
+    public enum HelmetType
+    {
+        Normal,
+        NoHead,//覆盖头部
+        NoHair,
+        NoFacialHair,
+
+    }
+
 }

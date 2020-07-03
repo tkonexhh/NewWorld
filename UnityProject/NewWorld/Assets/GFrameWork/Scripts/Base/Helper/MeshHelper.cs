@@ -15,7 +15,7 @@ namespace GFrame
 {
     public class MeshHelper
     {
-        public static void CombineSkinnedMesh(Transform transform, Material mat)
+        public static void CombineSkinnedMesh(Transform transform, Material mat, SkinnedMeshRenderer parentRenderer)
         {
             SkinnedMeshRenderer[] renders = transform.GetComponentsInChildren<SkinnedMeshRenderer>();
 
@@ -37,6 +37,11 @@ namespace GFrame
             for (int i = 0; i < length; i++)
             {
                 SkinnedMeshRenderer oneRender = renders[i];
+
+                Mesh sharedMesh = oneRender.sharedMesh;
+                if (sharedMesh == null)
+                    continue;
+
                 // 记录骨骼
                 bones.AddRange(oneRender.bones);
                 // 记录权重
@@ -73,7 +78,7 @@ namespace GFrame
             }
 
             // 在当前预制下创建新的蒙皮渲染器,设置属性
-            SkinnedMeshRenderer combinedSkinnedRenderer = transform.gameObject.AddComponent<SkinnedMeshRenderer>();
+            SkinnedMeshRenderer combinedSkinnedRenderer = parentRenderer;//transform.gameObject.AddComponent<SkinnedMeshRenderer>();
             Mesh combinedMesh = new Mesh();
             combinedMesh.CombineMeshes(combineInstances.ToArray(), true, true);
             combinedSkinnedRenderer.sharedMesh = combinedMesh;

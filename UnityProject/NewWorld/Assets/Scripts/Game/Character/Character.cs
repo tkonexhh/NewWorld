@@ -14,10 +14,10 @@ using UnityEngine;
 namespace GameWish.Game
 {
     [RequireComponent(typeof(CharacterAppearance))]
-    public class Character : MonoBehaviour
+    public partial class Character : MonoBehaviour
     {
-        [SerializeField] protected CharacterAppearance appearance;
-        [SerializeField] protected CharacterStatus status;
+        [SerializeField] public CharacterAppearance appearance;
+        [SerializeField] public CharacterStatus status;
 
 
         private void Awake()
@@ -25,6 +25,14 @@ namespace GameWish.Game
             if (appearance == null)
                 appearance = GetComponent<CharacterAppearance>();
         }
+
+        public void Equip(Equipment equipment)
+        {
+            //处理属性
+            //处理外貌
+            equipment.Equip(this);
+        }
+
     }
 
 }
