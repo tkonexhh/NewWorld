@@ -2451,11 +2451,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1937332321934626790, guid: 37a17d93ea857464799b21d70b00a57a,
-        type: 3}
-      propertyPath: m_Name
-      value: HelmetWithHead
-      objectReference: {fileID: 0}
     - target: {fileID: 7666273751970890548, guid: 37a17d93ea857464799b21d70b00a57a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2510,21 +2505,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7666273751971385668, guid: 37a17d93ea857464799b21d70b00a57a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7666273751971385672, guid: 37a17d93ea857464799b21d70b00a57a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7666273751971386006, guid: 37a17d93ea857464799b21d70b00a57a,
-        type: 3}
-      propertyPath: m_Name
-      value: HelmetWithoutHead
       objectReference: {fileID: 0}
     - target: {fileID: 7666273751971387156, guid: 37a17d93ea857464799b21d70b00a57a,
         type: 3}

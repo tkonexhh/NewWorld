@@ -16,13 +16,21 @@ namespace GFrame
     public class ProjectPathConfig : TScriptableObjectSingleton<ProjectPathConfig>
     {
         [SerializeField] private string m_UIRootPath = "Resources/UI/UIRoot";
-
+        [SerializeField] private string m_DBpath = "Resources/Data/";
 
         public static string uiRootPath
         {
             get
             {
                 return S.m_UIRootPath;
+            }
+        }
+
+        public static string DBPath
+        {
+            get
+            {
+                return S.m_DBpath;
             }
         }
     }
