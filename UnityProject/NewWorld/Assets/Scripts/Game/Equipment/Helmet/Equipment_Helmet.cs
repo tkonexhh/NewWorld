@@ -18,15 +18,15 @@ namespace GameWish.Game
         private HelmetType m_Type;
         public Equipment_Helmet() : base()
         {
-            m_Type = HelmetType.Normal;
+            m_Type = HelmetType.NoHair;
 
             switch (m_Type)
             {
                 case HelmetType.Normal:
-                    m_Appearance = new EquipmentAppearance_Helmet_Normal(3);
+                    m_Appearance = new EquipmentAppearance_Helmet_Normal(1);
                     break;
                 case HelmetType.NoFacialHair:
-                    m_Appearance = new EquipmentAppearance_Helmet_NoFacialHair(4);
+                    m_Appearance = new EquipmentAppearance_Helmet_NoFacialHair(1);
                     break;
                 case HelmetType.NoHair:
                     m_Appearance = new EquipmentAppearance_Helmet_NoHair(2);

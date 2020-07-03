@@ -34,13 +34,11 @@ namespace GameWish.Game
             {
                 if (m_Slot == AppearanceSlot.HelmetWithHead)
                 {
-                    Debug.LogError("GetHelmetMesh");
                     var newSkin = CharacterHolder.S.GetHelmetMesh(id);
                     m_Renderer.sharedMesh = newSkin.sharedMesh;
                 }
                 else
                 {
-                    Debug.LogError("GetHelmetMesh2222222");
                     var newSkin = CharacterHolder.S.GetMeshBySlot(m_Slot, sex, id);
                     m_Renderer.sharedMesh = newSkin.sharedMesh;
                 }

@@ -86,9 +86,10 @@ namespace GameWish.Game
 
         public SkinnedMeshRenderer GetHelmetMesh(int id)
         {
-            return GetHeadCoveringBaseHair(id);
-            GetHeadCoveringNoHair(id);
+            GetHeadCoveringBaseHair(id);
             GetHeadCoveringNoFacialHair(id);
+            return GetHeadCoveringNoHair(id);
+
 
         }
         public SkinnedMeshRenderer GetMeshBySlot(AppearanceSlot slot, Sex sex, int id)
@@ -137,6 +138,8 @@ namespace GameWish.Game
                     return GetKneeLeft(id);
                 case AppearanceSlot.Ear:
                     return GetElfEar(id);
+                case AppearanceSlot.HipsAttach:
+                    return GetHipsAttachment(id);
                 case AppearanceSlot.HelmetWithoutHead:
                     return GetHeadNoElement(sex, id);
                 default:

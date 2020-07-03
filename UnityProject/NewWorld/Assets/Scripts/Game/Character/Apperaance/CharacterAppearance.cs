@@ -37,6 +37,7 @@ namespace GameWish.Game
         KneeRight,
         KneeLeft,
         Ear,
+        HipsAttach,
         HelmetWithoutHead,
         HelmetWithHead
     }
@@ -88,7 +89,7 @@ namespace GameWish.Game
         [SerializeField] private SkinApperaance m_ShoulderLeft;
         [SerializeField] private SkinApperaance m_ElbowRight;
         [SerializeField] private SkinApperaance m_ElbowLeft;
-        [SerializeField] private SkinnedMeshRenderer m_HipsAttachment;
+        [SerializeField] private SkinApperaance m_HipsAttachment;
         [SerializeField] private SkinApperaance m_KneeRight;
         [SerializeField] private SkinApperaance m_KneeLeft;
         [SerializeField] private SkinApperaance m_ElfEar;
@@ -109,6 +110,7 @@ namespace GameWish.Game
         public int m_ElbowLeftID;
         public int m_KneeRightID;
         public int m_KneeLeftID;
+        public int m_HipsAttachID;
         public int m_HelmetWithHeadID;
         public int m_HelmetWithoutHeadID;
 
@@ -128,6 +130,7 @@ namespace GameWish.Game
             // SetAppearance(AppearanceSlot.EyeBrows, m_EyebrowsID);
             // SetAppearance(AppearanceSlot.Torso, m_TorsoID);
             // SetAppearance(AppearanceSlot.ArmUpperRight, m_ArmUpperRightID);
+
             CombineMeshs();
         }
 
@@ -227,6 +230,8 @@ namespace GameWish.Game
                 case AppearanceSlot.Ear:
                     SetElfEar(id);
                     break;
+                case AppearanceSlot.HipsAttach:
+                    break;
                 case AppearanceSlot.HelmetWithoutHead:
                     HideSlot(AppearanceSlot.HelmetWithHead);
                     SetHelmetWithoutHead(id);
@@ -243,7 +248,6 @@ namespace GameWish.Game
         public void SetHair(int id)
         {
             m_BasicApperance.hairID = m_Hair.SetSkin(m_BasicApperance.sex, id);
-
         }
 
         public void SetHead(int id)
@@ -349,6 +353,11 @@ namespace GameWish.Game
         public void SetElfEar(int id)
         {
             m_BasicApperance.ear = m_ElfEar.SetSkin(m_BasicApperance.sex, id);
+        }
+
+        public void SetHipsAttach(int id)
+        {
+            m_HipsAttachID = m_HipsAttachment.SetSkin(m_BasicApperance.sex, id);
         }
 
         public void SetHelmetWithoutHead(int id)

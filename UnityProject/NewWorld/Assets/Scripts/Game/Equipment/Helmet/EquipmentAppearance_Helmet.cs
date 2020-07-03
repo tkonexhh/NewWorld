@@ -50,6 +50,8 @@ namespace GameWish.Game
         public override void SetAppearance(CharacterAppearance appearance)
         {
             appearance.HideSlot(AppearanceSlot.FacialHair);
+            appearance.HideSlot(AppearanceSlot.HelmetWithoutHead);
+            appearance.SetAppearance(AppearanceSlot.HelmetWithHead, id);
         }
     }
 
@@ -63,6 +65,8 @@ namespace GameWish.Game
         public override void SetAppearance(CharacterAppearance appearance)
         {
             appearance.HideSlot(AppearanceSlot.Hair);
+            appearance.HideSlot(AppearanceSlot.HelmetWithoutHead);
+            appearance.SetAppearance(AppearanceSlot.HelmetWithHead, id);
         }
     }
 

@@ -28,10 +28,6 @@ namespace GameWish.Game
             int id = (int)args[1];
             appearance.SetAppearance(slot, id);
             appearance.CombineMeshs();
-
-
-            Equipment_Helmet equipment = new Equipment_Helmet();
-            this.Equip(equipment);
         }
     }
 

@@ -17,6 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 7dee602fd8f984e53aaa77884ef3fe5a
   m_SerializeEntries:
+  - m_GUID: 5ac7024aca71343459730838a70ed77e
+    m_Address: CreateCharacterPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: d0508e3b0e6e64924af412a864141f58
     m_Address: SetupArrowPick
     m_ReadOnly: 0
