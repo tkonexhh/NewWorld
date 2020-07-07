@@ -10,21 +10,24 @@ namespace GFrame.Editor
         [MenuItem("Tools/GFrame/Init", false, 0)]
         public static void GFrameInit()
         {
+
+            ProjectPathConfigEditor.BuildConfig();
+            ProjectDefaultConfigEditor.BuildConfig();
+
             List<string> createPath = new List<string>(){
                 "Assets/Resources/Config/",
                 "Assets/AddressableRes/FileMode/",
                 "Assets/AddressableRes/FolderMode/",
-                "Assets/Res/",
                 "Assets/Scripts/",
+                "Assets/"+ ProjectPathConfig.DataBasePath,
+                "Assets/"+ ProjectPathConfig.tableCsharpPath+"Generate/",
+                "Assets/"+ ProjectPathConfig.tableCsharpPath+"Extend/",
             };
 
             foreach (var path in createPath)
             {
                 FileHelper.CreateDirctory(PathHelper.AssetsPath2ABSPath(path));
             }
-
-            ProjectPathConfigEditor.BuildConfig();
-            ProjectDefaultConfigEditor.BuildConfig();
 
             AssetDatabase.Refresh();
         }
@@ -35,10 +38,5 @@ namespace GFrame.Editor
 
         }
 
-
-        public static string GetRootResourcesPath()
-        {
-            return Application.dataPath + "/Resources";
-        }
     }
 }

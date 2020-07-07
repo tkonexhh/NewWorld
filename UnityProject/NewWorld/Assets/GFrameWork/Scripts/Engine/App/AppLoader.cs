@@ -16,7 +16,8 @@ namespace GFrame
     {
         private void Awake()
         {
-            Log.i("Init[{0}]", ApplicationMgr.S.GetType().Name);
+            Log.i("Init[{0}]", GameWish.Game.ApplicationMgr.S.GetType().Name);
+            //Log.i("Init[{0}]", ApplicationMgr.S.GetType().Name);
         }
 
         private void Start()

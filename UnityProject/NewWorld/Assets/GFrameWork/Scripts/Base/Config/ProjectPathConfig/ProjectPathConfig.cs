@@ -16,7 +16,8 @@ namespace GFrame
     public class ProjectPathConfig : TScriptableObjectSingleton<ProjectPathConfig>
     {
         [SerializeField] private string m_UIRootPath = "Resources/UI/UIRoot";
-        [SerializeField] private string m_DBpath = "Resources/Data/";
+        [SerializeField] private string m_TableCsharpPath = "Resources/Scripts/Table/";
+        [SerializeField] private string m_DataBasepath = "Resources/Data/";
 
         public static string uiRootPath
         {
@@ -26,11 +27,19 @@ namespace GFrame
             }
         }
 
-        public static string DBPath
+        public static string tableCsharpPath
         {
             get
             {
-                return S.m_DBpath;
+                return S.m_TableCsharpPath;
+            }
+        }
+
+        public static string DataBasePath
+        {
+            get
+            {
+                return S.m_DataBasepath;
             }
         }
     }

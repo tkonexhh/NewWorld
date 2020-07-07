@@ -14,24 +14,58 @@ using UnityEngine;
 
 namespace GFrame
 {
-    public enum SqlType
-    {
-        Common,
-    }
+
     public class SQLMgr : TSingleton<SQLMgr>
     {
+        private Dictionary<string, SqliteDatabase> m_DatabaseMap = new Dictionary<string, SqliteDatabase>();
 
-        private Dictionary<SqlType, SqliteDatabase> sqlDatas = new Dictionary<SqlType, SqliteDatabase>();
         public override void OnSingletonInit()
         {
-            //加载数据库
-            sqlDatas.Clear();
-            sqlDatas.Add(SqlType.Common, new SqliteDatabase("Demo"));
         }
 
-        public void Init()
-        {
+        // public void Init()
+        // {
+        //     var reader = m_Database.LoadTable("Item");
+        //     while (reader.Read())
+        //     {
+        //         for (int i = 0; i < reader.FieldCount; i++)
+        //         {
+        //             Debug.Log(reader[i].ToString());
+        //         }
+        //     }
+        // }
 
+        public SqliteDatabase Open(string dbName)
+        {
+            SqliteDatabase database;
+            if (!m_DatabaseMap.TryGetValue(dbName, out database))
+            {
+                database = new SqliteDatabase(dbName);
+                m_DatabaseMap.Add(dbName, database);
+            }
+
+            return database;
+        }
+
+        public SqliteDatabase GetDatabase(string dbName)
+        {
+            SqliteDatabase database;
+            if (m_DatabaseMap.TryGetValue(dbName, out database))
+            {
+                return database;
+            }
+
+            return null;
+        }
+
+        public void Close()
+        {
+            var enumerator = m_DatabaseMap.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                enumerator.Current.Value.Close();
+            }
+            enumerator.Dispose();
         }
     }
 

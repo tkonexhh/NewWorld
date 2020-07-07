@@ -56,6 +56,16 @@ namespace GFrame
             return IsDirctoryName(path, true);
         }
 
+        public static DirectoryInfo GetDictionary(string path)
+        {
+            if (IsDirctoryName(path))
+            {
+                DirectoryInfo folder = new DirectoryInfo(path);
+                return folder;
+            }
+            return null;
+        }
+
         /// <summary>
         /// 写入文件
         /// </summary>

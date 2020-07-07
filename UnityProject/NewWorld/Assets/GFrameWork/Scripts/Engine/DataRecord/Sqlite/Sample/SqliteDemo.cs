@@ -19,7 +19,16 @@ namespace GFrame.Sample
         void Start()
         {
 
-            SQLMgr.S.Init();
+            SQLMgr.S.Open("Game");
+            var gameDB = SQLMgr.S.GetDatabase("Game");
+            var reader = gameDB.LoadTable("Item");
+            while (reader.Read())
+            {
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    Debug.Log(reader[i].ToString());
+                }
+            }
         }
 
     }

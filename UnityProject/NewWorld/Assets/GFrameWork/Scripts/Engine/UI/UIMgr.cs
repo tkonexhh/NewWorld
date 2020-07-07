@@ -40,7 +40,7 @@ namespace GFrame
 
         public void Init()
         {
-
+            Log.i("#Init[UIMgr]");
         }
 
         private UIRoot LoadUIRoot()
@@ -57,12 +57,15 @@ namespace GFrame
 
 
 
+        public void OpenPanel<T>(T uiId, params object[] args)
+        {
 
+        }
 
+        public void ClosePanelByUIID<T>(T uiID)
+        {
 
-
-
-        //public void OpenPanel<T>(T uiId,Action)
+        }
     }
 
 }

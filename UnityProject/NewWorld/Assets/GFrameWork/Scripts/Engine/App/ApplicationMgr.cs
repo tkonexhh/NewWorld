@@ -13,10 +13,8 @@ using UnityEngine;
 namespace GFrame
 {
     [TMonoSingletonAttribute("[GFrame]/[App]/[ApplicationMgr]")]
-    public partial class ApplicationMgr : TMonoSingleton<ApplicationMgr>
+    public class ApplicationMgr : TMonoSingleton<ApplicationMgr>
     {
-        public Action onApplicationUpdate = null;
-        public Action onApplicationOnGUI = null;
 
         private void Start()
         {
@@ -26,18 +24,24 @@ namespace GFrame
         private void StartApp()
         {
             InitConfig();
+            InitGame();
             StartGame();
         }
 
-        private void InitConfig()
+        protected virtual void InitConfig()
         {
 
         }
 
-        private void StartGame()
+        private void InitGame()
         {
-            Debug.LogError("StartGame");
             UIMgr.S.Init();
+
+        }
+
+        protected virtual void StartGame()
+        {
+
         }
 
         private void OnApplicationQuit()

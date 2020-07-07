@@ -45,7 +45,7 @@ namespace GFrame
                 // 记录骨骼
                 bones.AddRange(oneRender.bones);
                 // 记录权重
-                BoneWeight[] meshBoneweight = oneRender.sharedMesh.boneWeights;
+                BoneWeight[] meshBoneweight = sharedMesh.boneWeights;
                 for (int j = 0; j < meshBoneweight.Length; ++j)
                 {
                     BoneWeight bw = meshBoneweight[j];
@@ -62,7 +62,8 @@ namespace GFrame
                 CombineInstance combineInstance = new CombineInstance();
                 Mesh mesh = new Mesh();
                 oneRender.BakeMesh(mesh);
-                mesh.uv = oneRender.sharedMesh.uv;
+                mesh.uv = sharedMesh.uv;
+
                 combineInstance.mesh = mesh;
                 combineInstance.transform = oneRender.localToWorldMatrix;
                 combineInstances.Add(combineInstance);

@@ -12,20 +12,20 @@ using UnityEngine;
 
 namespace GFrame
 {
+
     public class UIRoot : MonoBehaviour
     {
         [SerializeField] private Camera m_UICamera;
         [SerializeField] private Canvas m_UICanvas;
-        // Start is called before the first frame update
-        void Start()
-        {
 
+        public Camera uiCamera
+        {
+            get { return m_UICamera; }
         }
 
-        // Update is called once per frame
-        void Update()
+        public Canvas uiCanvas
         {
-
+            get { return m_UICanvas; }
         }
     }
 

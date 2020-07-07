@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 650e506b3745140ff9c36b9308bb9d3b, type: 3}
   m_Name: ProjectPathConfig
   m_EditorClassIdentifier: 
-  m_I18NSettingPath: Resources/Config/I18NConfig
   m_UIRootPath: Resources/UI/UIRoot
+  m_TableCsharpPath: Scripts/Table/
+  m_DataBasepath: Resources/Data/

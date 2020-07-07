@@ -13,34 +13,6 @@ using GFrame;
 
 namespace GameWish.Game
 {
-    public enum AppearanceSlot
-    {
-        Hair,
-        Head,
-        FacialHair,//胡子
-        EyeBrows,
-        Torso,
-        ArmUpperRight,
-        ArmUpperLeft,
-        ArmLowerRight,
-        ArmLowerLeft,
-        HandRight,
-        HandLeft,
-        Hips,
-        LegRight,
-        LegLeft,
-
-        ShoulderRight,
-        ShoulderLeft,
-        ElbowRight,
-        ElbowLeft,
-        KneeRight,
-        KneeLeft,
-        Ear,
-        HipsAttach,
-        HelmetWithoutHead,
-        HelmetWithHead
-    }
 
     [System.Serializable]
     public class BasicAppearance
@@ -52,7 +24,18 @@ namespace GameWish.Game
         public int eyeBrows;//眉毛
         public int ear;
         //一些颜色
+    }
 
+    [System.Serializable]
+    public class CharacterBone
+    {
+        public Transform root;
+        public Transform[] bones;
+
+        public void Init()
+        {
+            bones = root.GetComponentsInChildren<Transform>();
+        }
     }
 
 
@@ -64,6 +47,8 @@ namespace GameWish.Game
 
         [Header("基础外貌")]
         public BasicAppearance m_BasicApperance;
+        [Header("骨骼信息")]
+        public CharacterBone bones;
 
         [SerializeField] private SkinApperaance m_Hair;
         [SerializeField] private SkinApperaance m_Head;
@@ -119,6 +104,41 @@ namespace GameWish.Game
             m_Renderer = gameObject.AddMissingComponent<SkinnedMeshRenderer>();
             material = Instantiate(material);
 
+            bones.Init();
+
+            m_Hair.Init(this);
+            m_Head.Init(this);
+            if (m_FacialHair)
+            {
+                m_FacialHair.Init(this);
+            }
+            m_Eyebrows.Init(this);
+            m_Torso.Init(this);
+
+            m_ArmUpperRight.Init(this);
+            m_ArmUpperLeft.Init(this);
+            m_ArmLowerRight.Init(this);
+            m_ArmLowerLeft.Init(this);
+            m_HandRight.Init(this);
+            m_HandLeft.Init(this);
+            m_Hips.gameObject.SetActive(true);
+            m_LegRight.Init(this);
+            m_LegLeft.Init(this);
+            m_HelmetWithoutHead.Init(this);
+            m_HelmetWithHead.Init(this);
+
+
+            // m_HeadCovering.gameObject.SetActive(true);
+            // m_HeadNoElements.gameObject.SetActive(true);
+            // m_HeadAttachment.gameObject.SetActive(true);
+            // m_BackAttachment.gameObject.SetActive(true);
+            m_ShoulderLeft.Init(this);
+            m_ShoulderRight.Init(this);
+            m_ElbowRight.Init(this);
+            m_ElbowLeft.Init(this);
+            m_KneeRight.Init(this);
+            m_KneeLeft.Init(this);
+            m_ElfEar.Init(this);
             RefeshAppearance();
         }
 
@@ -381,7 +401,7 @@ namespace GameWish.Game
                 m_FacialHair.BeforeCombine();
             }
             m_Eyebrows.BeforeCombine();
-            m_Torso.gameObject.SetActive(true);
+            m_Torso.BeforeCombine();//.gameObject.SetActive(true);
 
             m_ArmUpperRight.BeforeCombine();
             m_ArmUpperLeft.BeforeCombine();
@@ -395,7 +415,8 @@ namespace GameWish.Game
             m_HelmetWithoutHead.BeforeCombine();
             m_HelmetWithHead.BeforeCombine();
 
-
+            m_HelmetWithHead.gameObject.SetActive(false);
+            m_HelmetWithoutHead.gameObject.SetActive(false);
             // m_HeadCovering.gameObject.SetActive(true);
             // m_HeadNoElements.gameObject.SetActive(true);
             // m_HeadAttachment.gameObject.SetActive(true);

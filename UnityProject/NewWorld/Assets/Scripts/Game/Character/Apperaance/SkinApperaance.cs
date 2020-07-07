@@ -21,6 +21,7 @@ namespace GameWish.Game
 
         private int m_CurID;
         private bool m_IsHide;
+        private CharacterAppearance m_Character;
 
         private void Awake()
         {
@@ -28,23 +29,42 @@ namespace GameWish.Game
                 m_Renderer = GetComponent<SkinnedMeshRenderer>();
         }
 
+        public void Init(CharacterAppearance character)
+        {
+            m_Character = character;
+        }
+
         public int SetSkin(Sex sex, int id)
         {
             if (m_CurID != id)
             {
+                SkinnedMeshRenderer newSkin = null;
                 if (m_Slot == AppearanceSlot.HelmetWithHead)
                 {
-                    var newSkin = CharacterHolder.S.GetHelmetMesh(id);
-                    m_Renderer.sharedMesh = newSkin.sharedMesh;
+                    newSkin = CharacterHolder.S.GetHelmetMesh(id);
+
                 }
                 else
                 {
-                    var newSkin = CharacterHolder.S.GetMeshBySlot(m_Slot, sex, id);
-                    m_Renderer.sharedMesh = newSkin.sharedMesh;
+                    newSkin = CharacterHolder.S.GetMeshBySlot(m_Slot, sex, id);
                 }
 
+                List<Transform> bones = new List<Transform>();
+                foreach (Transform bone in newSkin.bones)
+                {
+                    foreach (Transform hip in m_Character.bones.bones)
+                    {
+                        if (hip.name != bone.name)
+                        {
+                            continue;
+                        }
+                        bones.Add(hip);
+                        break;
+                    }
+                }
 
-
+                m_Renderer.sharedMesh = newSkin.sharedMesh;
+                m_Renderer.bones = bones.ToArray();
                 m_CurID = id;
             }
 
