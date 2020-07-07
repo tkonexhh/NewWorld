@@ -16,7 +16,8 @@ namespace GFrame
     [RequireComponent(typeof(Canvas))]
     public class AbstractPanel : MonoBehaviour
     {
-        private bool m_HasInitUI;
+        private bool m_HasInitUI = false;
+        private bool m_HasOpen = false;
 
         #region life
         protected void Awake()
@@ -26,6 +27,11 @@ namespace GFrame
                 m_HasInitUI = true;
                 OnUIInit();
             }
+        }
+
+        protected void OnDestroy()
+        {
+
         }
         #endregion
 

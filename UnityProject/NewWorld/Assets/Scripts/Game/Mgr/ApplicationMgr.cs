@@ -14,13 +14,13 @@ using GFrame;
 
 namespace GameWish.Game
 {
-    public class ApplicationMgr : GFrame.ApplicationMgr
+    public class ApplicationMgr : AbstractApplicationMgr<ApplicationMgr>
     {
         protected override void StartGame()
         {
             Debug.LogError("StartGame");
             GameMgr.S.Init();
-            GameDataMgr.S.Init();
+            //GameDataMgr.S.Init();
         }
     }
 

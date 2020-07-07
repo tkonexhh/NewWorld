@@ -18,7 +18,7 @@ namespace GameWish.Game
     {
         protected override void InitProcess()
         {
-            AddComponent(new UIDataModule());
+            //add(new UIDataModule());
         }
     }
 

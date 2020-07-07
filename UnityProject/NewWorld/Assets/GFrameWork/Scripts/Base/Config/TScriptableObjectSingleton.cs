@@ -22,7 +22,7 @@ namespace GFrame
                 return null;
             }
 
-            Log.i("Success Load " + typeof(T).Name + " Config.");
+            Log.i("#Success Load " + typeof(T).Name + " Config.");
 
             s_Instance = obj as T;
 

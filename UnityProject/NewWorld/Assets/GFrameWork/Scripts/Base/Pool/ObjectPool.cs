@@ -13,19 +13,15 @@ using UnityEngine;
 
 namespace GFrame
 {
-    public class ObjectPool : MonoBehaviour
+    public interface IPoolAble
     {
-        // Start is called before the first frame update
-        void Start()
-        {
 
-        }
+    }
 
-        // Update is called once per frame
-        void Update()
-        {
 
-        }
+    public class ObjectPool<T> : TSingleton<ObjectPool<T>> where T : IPoolAble
+    {
+
     }
 
 }

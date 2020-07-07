@@ -23,6 +23,21 @@ namespace GFrame
 
     public class AbstractComponent : IAbstractComponent
     {
+        public void Awake()
+        {
+            Log.i("#" + this.GetType().Name + "Awake");
+            OnAwake();
+        }
+        public void Start() { OnStart(); }
+        public void Destory() { OnDestory(); }
+
+        protected virtual void OnAwake() { }
+        protected virtual void OnStart() { }
+        protected virtual void OnDestory() { }
+    }
+
+    public class AbstractMonoComponent : MonoBehaviour, IAbstractComponent
+    {
         public void Awake() { OnAwake(); }
         public void Start() { OnStart(); }
         public void Destory() { OnDestory(); }

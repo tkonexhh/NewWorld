@@ -13,7 +13,7 @@ using UnityEngine;
 namespace GFrame
 {
     [TMonoSingletonAttribute("[GFrame]/[App]/[ApplicationMgr]")]
-    public class ApplicationMgr : TMonoSingleton<ApplicationMgr>
+    public class AbstractApplicationMgr<T> : TMonoSingleton<T> where T : TMonoSingleton<T>
     {
 
         private void Start()
@@ -36,7 +36,6 @@ namespace GFrame
         private void InitGame()
         {
             UIMgr.S.Init();
-
         }
 
         protected virtual void StartGame()

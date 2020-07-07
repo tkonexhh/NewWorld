@@ -37,18 +37,20 @@ namespace GameWish.Game
         public void Init()
         {
             Log.i("#Init[GameMgr]");
+            AddComponent(new UIDataModule());
         }
 
         protected override void OnModuleAwake()
         {
-            Debug.LogError("OnModuleAwake");
+
             //ShowLogoPanel();
+            AddComponent(new StartProcessModule());
         }
 
         protected override void OnModuleStart()
         {
-            Debug.LogError("OnModuleStart");
-            //AddComponent(new StartProcessModule());
+
+            UIMgr.S.OpenPanel(UIID.StartGamePanel);
         }
     }
 

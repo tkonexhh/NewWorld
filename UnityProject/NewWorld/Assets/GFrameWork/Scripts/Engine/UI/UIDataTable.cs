@@ -15,25 +15,43 @@ namespace GFrame
 {
     public class UIDataTable
     {
-        private static Dictionary<int, UIData> m_UIDataMap = new Dictionary<int, UIData>();
+        private static Dictionary<int, UIData> s_UIDataMap = new Dictionary<int, UIData>();
 
-        public static void AddPanelData<T>(T uiID, string name) where T : System.IConvertible
+        private static bool s_IsAddressMode = false;
+
+        public static void SetAddressMode(bool addressMode)
         {
-            Add(new PanelData(uiID.ToInt32(null), name));
+            s_IsAddressMode = addressMode;
         }
 
+        public static void AddPanelData<T>(T uiID, string path) where T : System.IConvertible
+        {
+            Add(new PanelData(uiID.ToInt32(null), path, s_IsAddressMode));
+        }
 
         private static void Add(UIData data)
         {
             if (data == null) return;
 
-            if (m_UIDataMap.ContainsKey(data.uiID))
+            if (s_UIDataMap.ContainsKey(data.uiID))
             {
                 Log.w("#Already Add UIID:" + data.uiID);
                 return;
             }
 
-            m_UIDataMap.Add(data.uiID, data);
+            s_UIDataMap.Add(data.uiID, data);
+        }
+
+        public static UIData Get<T>(T uiID) where T : System.IConvertible
+        {
+            UIData result = null;
+
+            if (s_UIDataMap.TryGetValue(uiID.ToInt32(null), out result))
+            {
+                return result;
+            }
+            Log.e("#InValid UIID:" + uiID.ToInt32(null));
+            return null;
         }
     }
 

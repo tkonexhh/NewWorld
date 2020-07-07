@@ -19,6 +19,14 @@ namespace GFrame
         private bool m_HasAwake = false;
         private bool m_HasStart = false;
 
+
+        public T AddComponent<T>() where T : IAbstractComponent, new()
+        {
+            T com = new T();
+            AddComponent(com);
+            return com;
+        }
+
         public void AddComponent(IAbstractComponent component)
         {
             if (component == null) return;

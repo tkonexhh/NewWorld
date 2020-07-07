@@ -15,6 +15,7 @@ namespace GameWish.Game
 {
     public enum UIID
     {
+        StartGamePanel,
         CreateCharacterPanel,
     }
 

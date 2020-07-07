@@ -18,12 +18,19 @@ namespace GameWish.Game
     {
         protected override void OnAwake()
         {
+            InitUIPath();
             RegisterPanel();
+        }
+
+        private void InitUIPath()
+        {
+            PanelData.PANEL_PATH = "Resources/UI/Panels/{0}";
         }
 
         private void RegisterPanel()
         {
-            Debug.LogError("RegisterPanel");
+            UIDataTable.SetAddressMode(false);
+            UIDataTable.AddPanelData(UIID.StartGamePanel, "SetupPanel");
         }
     }
 

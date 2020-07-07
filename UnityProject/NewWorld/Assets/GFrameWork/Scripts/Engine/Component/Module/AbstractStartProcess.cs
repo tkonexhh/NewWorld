@@ -13,9 +13,9 @@ using UnityEngine;
 
 namespace GFrame
 {
-    public class AbstractStartProcess : AbstractModule
+    public class AbstractStartProcess : AbstractMonoComponent
     {
-        protected override void OnModuleAwake()
+        protected override void OnAwake()
         {
             InitProcess();
         }
