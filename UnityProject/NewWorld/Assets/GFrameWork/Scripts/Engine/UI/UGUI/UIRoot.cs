@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 namespace GFrame
 {
 
@@ -17,6 +18,7 @@ namespace GFrame
     {
         [SerializeField] private Camera m_UICamera;
         [SerializeField] private Canvas m_UICanvas;
+        [SerializeField] private UnityEngine.EventSystems.EventSystem m_EventSystem;
 
         public Camera uiCamera
         {
@@ -26,6 +28,11 @@ namespace GFrame
         public Canvas uiCanvas
         {
             get { return m_UICanvas; }
+        }
+
+        public UnityEngine.EventSystems.EventSystem eventSystem
+        {
+            get { return m_EventSystem; }
         }
     }
 

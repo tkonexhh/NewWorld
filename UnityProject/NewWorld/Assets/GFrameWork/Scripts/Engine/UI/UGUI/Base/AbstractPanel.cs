@@ -31,9 +31,32 @@ namespace GFrame
 
         protected void OnDestroy()
         {
-
+            ClosePage();
         }
         #endregion
+
+
+        private void ClosePage()
+        {
+            if (m_HasOpen)
+            {
+                m_HasOpen = false;
+            }
+        }
+
+        private void OpenPage()
+        {
+            if (!m_HasOpen)
+            {
+                m_HasOpen = true;
+            }
+        }
+
+        public void CloseSelfPanel()
+        {
+
+        }
+
 
 
         #region 子类需重载

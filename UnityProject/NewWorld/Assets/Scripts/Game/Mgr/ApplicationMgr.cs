@@ -18,7 +18,6 @@ namespace GameWish.Game
     {
         protected override void StartGame()
         {
-            Debug.LogError("StartGame");
             GameMgr.S.Init();
             //GameDataMgr.S.Init();
         }

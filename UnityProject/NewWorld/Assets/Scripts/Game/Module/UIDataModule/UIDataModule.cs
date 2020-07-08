@@ -30,6 +30,8 @@ namespace GameWish.Game
         private void RegisterPanel()
         {
             UIDataTable.SetAddressMode(false);
+
+            UIDataTable.AddPanelData(UIID.MainMenuPanel, "MainMenuPanel");
             UIDataTable.AddPanelData(UIID.StartGamePanel, "SetupPanel");
         }
     }
