@@ -32,7 +32,8 @@ namespace GameWish.Game
             UIDataTable.SetAddressMode(false);
 
             UIDataTable.AddPanelData(UIID.MainMenuPanel, "MainMenuPanel");
-            UIDataTable.AddPanelData(UIID.StartGamePanel, "SetupPanel");
+            UIDataTable.AddPanelData(UIID.LoadingPanel, "LoadingPanel");
+            UIDataTable.AddPanelData(UIID.CreateCharacterPanel, "CreateCharacterPanel");
         }
     }
 

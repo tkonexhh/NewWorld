@@ -42,16 +42,28 @@ namespace GameWish.Game
 
         protected override void OnModuleAwake()
         {
-
             //ShowLogoPanel();
             AddComponent(new StartProcessModule());
         }
 
         protected override void OnModuleStart()
         {
-
-            UIMgr.S.OpenPanel(UIID.MainMenuPanel, null);
+            EnterMainMenu();
+            //EnterCreateRole();
         }
+
+        private void EnterMainMenu()
+        {
+            UIMgr.S.OpenPanel(UIID.MainMenuPanel);
+        }
+
+        #region Test
+        private void EnterCreateRole()
+        {
+            AddressableResMgr.S.LoadSceneAsync("CreateCharacterScene");
+            //UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        }
+        #endregion
     }
 
 

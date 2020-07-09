@@ -82,12 +82,17 @@ namespace GFrame
 
 
         #region  public Func
-        // public void OpenPanel<T>(T uiID, params object[] args)
-        // {
-        //     OpenPanel(uiID, "111", null, args);
-        // }
+        public void OpenPanel<T>(T uiID, params object[] args) where T : System.IConvertible
+        {
+            OpenPanel(uiID, PanelType.Auto, null, args);
+        }
 
         public void OpenPanel<T>(T uiID, System.Action<AbstractPanel> callback, params object[] args) where T : System.IConvertible
+        {
+            OpenPanel(uiID, PanelType.Auto, callback, args);
+        }
+
+        public void OpenPanel<T>(T uiID, PanelType type, System.Action<AbstractPanel> callback, params object[] args) where T : System.IConvertible
         {
             PanelInfo panelInfo = LoadPanelInfo(uiID.ToInt32(null));
             if (panelInfo == null)
@@ -95,7 +100,7 @@ namespace GFrame
                 return;
             }
 
-            //panelInfo.AddOpenCallback(callback);
+            panelInfo.AddOpenCallback(callback);
 
             if (panelInfo.isReady)
             {
@@ -268,7 +273,6 @@ namespace GFrame
             bool destory = true;
             if (data != null && data.cacheCount > 0)
             {
-                Debug.LogError(GetActiveAndCachedUICount(panelInfo.uiID));
                 if (GetActiveAndCachedUICount(panelInfo.uiID) <= data.cacheCount)
                 {
                     destory = false;

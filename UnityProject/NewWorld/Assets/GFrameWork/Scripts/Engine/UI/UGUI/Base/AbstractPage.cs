@@ -13,19 +13,7 @@ using UnityEngine;
 
 namespace GFrame
 {
-    //面板管理的内部事件
-    public enum ViewEvent
-    {
-        MIN = 0,
-        Action_ClosePanel,
-        Action_HidePanel,
-        Action_ShowPanel,
-        OnPanelOpen,
-        OnPanelClose,
-        OnParamUpdate,
-        OnSortingLayerUpdate,
-        DumpTest,
-    }
+
 
     public class AbstractPage : MonoBehaviour
     {
@@ -124,9 +112,6 @@ namespace GFrame
                     break;
             }
         }
-
-
-
 
 
         public void SendViewEvent(ViewEvent key, params object[] args)

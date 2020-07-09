@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: f0d93102498014c12b8d6a3b23851266
   m_SerializeEntries:
   - m_GUID: db5a701f5fe6847d3a9d5cf72ec6027c
-    m_Address: SetupScene
+    m_Address: CreateCharacterScene
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}

@@ -47,7 +47,7 @@ namespace GFrame
         }
 
 
-        #region 
+        #region 子类需重载
         protected virtual void OnPanelOpen(params object[] args) { }
         #endregion
     }

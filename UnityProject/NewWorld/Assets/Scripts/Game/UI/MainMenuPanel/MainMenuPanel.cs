@@ -60,7 +60,6 @@ namespace GameWish.Game
                 AnimatorStateInfo animatorStateInfo = m_AnimFirstInput.GetCurrentAnimatorStateInfo(0);
                 if (animatorStateInfo.IsName("Hide") && animatorStateInfo.normalizedTime > 1.0f)
                 {
-                    Debug.LogError("ShowMenu");
                     m_HasShowMenu = true;
                     m_TrsMenu.gameObject.SetActive(true);//.Play("Show");
                 }
@@ -70,10 +69,15 @@ namespace GameWish.Game
 
         private void OnClickNewGame()
         {
-            CloseSelfPanel();
-            // UIMgr.S.ClosePanel(this);
-            //场景过度
-            //AddressableResMgr.S.LoadSceneAsync("SetupScene");
+            UIMgr.S.OpenPanel(UIID.LoadingPanel, (panel) =>
+            {
+                ((LoadingPanel)panel).RegisterShowOverListener(() =>
+                {
+                    CloseSelfPanel();
+                    AddressableResMgr.S.LoadSceneAsync("CreateCharacterScene");
+                });
+            });
+
         }
 
         private void OnClickLoadGame()

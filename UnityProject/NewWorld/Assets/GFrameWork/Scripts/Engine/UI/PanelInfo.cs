@@ -162,6 +162,7 @@ namespace GFrame
                 {
                     m_Panel.gameObject.SetActive(true);
                 }
+                m_Panel.gameObject.SetAllLayer(LayerDefine.LAYER_UI);
             }
             else
             {
@@ -191,6 +192,7 @@ namespace GFrame
         public void OpenPanel()
         {
             m_Panel.OnPanelOpen(true);
+            CallOpenCallback();
         }
 
         public void ClosePanel(bool destory)
