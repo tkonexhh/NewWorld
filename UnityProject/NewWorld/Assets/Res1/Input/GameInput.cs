@@ -21,14 +21,6 @@ namespace GameWish.Game
             ""id"": ""d2ad7121-9cd0-43ee-b6d4-c1e965cc7f78"",
             ""actions"": [
                 {
-                    ""name"": ""Any"",
-                    ""type"": ""Button"",
-                    ""id"": ""3d362ae9-4043-47e0-b08f-d7154babde03"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Move"",
                     ""type"": ""Button"",
                     ""id"": ""eb9e8b92-9731-4492-9c19-510b5ed5d7c0"",
@@ -147,10 +139,34 @@ namespace GameWish.Game
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""68d7f72e-b2ac-42f7-b1cb-c12029c32907"",
+            ""actions"": [
+                {
+                    ""name"": ""Any"",
+                    ""type"": ""Button"",
+                    ""id"": ""c53eb222-b329-4f3e-be01-0184aa8a061e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 },
                 {
+                    ""name"": ""Move"",
+                    ""type"": ""Button"",
+                    ""id"": ""e8d1360e-4c24-4607-a533-72ecc11001fb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
                     ""name"": """",
-                    ""id"": ""495bd8fd-f2b2-43bc-a53c-432ea6b6c715"",
+                    ""id"": ""8abcf496-9dd4-4b53-871d-0e2f7b6c85f9"",
                     ""path"": ""<Keyboard>/anyKey"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -158,6 +174,116 @@ namespace GameWish.Game
                     ""action"": ""Any"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WSAD"",
+                    ""id"": ""a060da69-906f-4ad0-9909-eb877c6e14c8"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""738924d5-72f9-4673-8c33-9b575b830827"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""6ce2c0ae-fd88-4885-8de2-5f3080a2abae"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""5f44915d-3fc5-4ea9-bbee-d15275b1cdd7"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""eeb6301f-1b72-490b-a4a7-989a1745e671"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Arrow"",
+                    ""id"": ""3be16d5a-c4f1-4a77-b6eb-d6066d57210d"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""82956700-259f-4987-ab5e-32e47499410e"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""b10343ea-cffe-4e51-8dc7-2906c4fdb6d4"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""2814f739-3e3e-4ad6-b5e5-729385ca415a"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""6679bcc0-60f7-4724-8db7-fe9cf9d02cc6"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -169,7 +295,7 @@ namespace GameWish.Game
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": false,
+                    ""isOptional"": true,
                     ""isOR"": false
                 }
             ]
@@ -178,8 +304,11 @@ namespace GameWish.Game
 }");
             // Main
             m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
-            m_Main_Any = m_Main.FindAction("Any", throwIfNotFound: true);
             m_Main_Move = m_Main.FindAction("Move", throwIfNotFound: true);
+            // UI
+            m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+            m_UI_Any = m_UI.FindAction("Any", throwIfNotFound: true);
+            m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -229,13 +358,11 @@ namespace GameWish.Game
         // Main
         private readonly InputActionMap m_Main;
         private IMainActions m_MainActionsCallbackInterface;
-        private readonly InputAction m_Main_Any;
         private readonly InputAction m_Main_Move;
         public struct MainActions
         {
             private @GameInput m_Wrapper;
             public MainActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Any => m_Wrapper.m_Main_Any;
             public InputAction @Move => m_Wrapper.m_Main_Move;
             public InputActionMap Get() { return m_Wrapper.m_Main; }
             public void Enable() { Get().Enable(); }
@@ -246,14 +373,49 @@ namespace GameWish.Game
             {
                 if (m_Wrapper.m_MainActionsCallbackInterface != null)
                 {
-                    @Any.started -= m_Wrapper.m_MainActionsCallbackInterface.OnAny;
-                    @Any.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnAny;
-                    @Any.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnAny;
                     @Move.started -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
                 }
                 m_Wrapper.m_MainActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Move.started += instance.OnMove;
+                    @Move.performed += instance.OnMove;
+                    @Move.canceled += instance.OnMove;
+                }
+            }
+        }
+        public MainActions @Main => new MainActions(this);
+
+        // UI
+        private readonly InputActionMap m_UI;
+        private IUIActions m_UIActionsCallbackInterface;
+        private readonly InputAction m_UI_Any;
+        private readonly InputAction m_UI_Move;
+        public struct UIActions
+        {
+            private @GameInput m_Wrapper;
+            public UIActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Any => m_Wrapper.m_UI_Any;
+            public InputAction @Move => m_Wrapper.m_UI_Move;
+            public InputActionMap Get() { return m_Wrapper.m_UI; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+            public void SetCallbacks(IUIActions instance)
+            {
+                if (m_Wrapper.m_UIActionsCallbackInterface != null)
+                {
+                    @Any.started -= m_Wrapper.m_UIActionsCallbackInterface.OnAny;
+                    @Any.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnAny;
+                    @Any.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnAny;
+                    @Move.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
+                    @Move.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
+                    @Move.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
+                }
+                m_Wrapper.m_UIActionsCallbackInterface = instance;
                 if (instance != null)
                 {
                     @Any.started += instance.OnAny;
@@ -265,7 +427,7 @@ namespace GameWish.Game
                 }
             }
         }
-        public MainActions @Main => new MainActions(this);
+        public UIActions @UI => new UIActions(this);
         private int m_KeyBoardSchemeIndex = -1;
         public InputControlScheme KeyBoardScheme
         {
@@ -276,6 +438,10 @@ namespace GameWish.Game
             }
         }
         public interface IMainActions
+        {
+            void OnMove(InputAction.CallbackContext context);
+        }
+        public interface IUIActions
         {
             void OnAny(InputAction.CallbackContext context);
             void OnMove(InputAction.CallbackContext context);

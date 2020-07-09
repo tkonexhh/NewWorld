@@ -18,6 +18,8 @@ namespace GFrame
     {
         protected string m_ResPath;
         protected int m_UIID;
+        protected int m_CacheCount = 0;
+        protected bool m_IsSingleton = true;
         protected bool m_IsAddressMode = false;
 
         public string path
@@ -30,12 +32,32 @@ namespace GFrame
             get { return m_UIID; }
         }
 
+        public int cacheCount
+        {
+            get { return m_CacheCount; }
+        }
+
+        public bool isSingleton
+        {
+            get { return m_IsSingleton; }
+        }
+
 
         public UIData(int uiID, string path, bool addressMode)
         {
             m_UIID = uiID;
             //m_PanelClassType = type;
             m_ResPath = path;
+            m_IsAddressMode = addressMode;
+        }
+
+        public UIData(int uiID, string path, bool singleton, int cacheCount, bool addressMode)
+        {
+            m_UIID = uiID;
+            //m_PanelClassType = type;
+            m_ResPath = path;
+            m_IsSingleton = singleton;
+            m_CacheCount = cacheCount;
             m_IsAddressMode = addressMode;
         }
 
@@ -74,7 +96,10 @@ namespace GFrame
         public static string PANEL_PATH = "";
         public PanelData(int uiID, string path, bool addressMode) : base(uiID, path, addressMode)
         {
+        }
 
+        public PanelData(int uiID, string path, bool singleton, int cacheCount, bool addressMode) : base(uiID, path, singleton, cacheCount, addressMode)
+        {
         }
 
         protected override string prefixPath

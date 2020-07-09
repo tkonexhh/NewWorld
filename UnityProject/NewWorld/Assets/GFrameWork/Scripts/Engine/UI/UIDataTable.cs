@@ -24,9 +24,9 @@ namespace GFrame
             s_IsAddressMode = addressMode;
         }
 
-        public static void AddPanelData<T>(T uiID, string path) where T : System.IConvertible
+        public static void AddPanelData<T>(T uiID, string path, bool singleton = true, int cacheCount = 1) where T : System.IConvertible
         {
-            Add(new PanelData(uiID.ToInt32(null), path, s_IsAddressMode));
+            Add(new PanelData(uiID.ToInt32(null), path, singleton, cacheCount, s_IsAddressMode));
         }
 
         private static void Add(UIData data)

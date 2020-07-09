@@ -40,13 +40,12 @@ namespace GameWish.Game
             UIMgr.S.uiRoot.eventSystem.SetSelectedGameObject(null);
             UIMgr.S.uiRoot.eventSystem.firstSelectedGameObject = m_BtnNewGame.gameObject;
 
-            GameInputMgr.S.mainActionMap.Move.started += PressAny;
-            GameInputMgr.S.mainActionMap.Any.started += PressAny;
+
+            GameInputMgr.S.uiAction.Any.started += PressAny;
         }
 
         private void PressAny(UnityEngine.InputSystem.InputAction.CallbackContext callback)
         {
-            Debug.LogError("1111111");
             if (!m_HasInput)
             {
                 m_HasInput = true;
@@ -71,6 +70,8 @@ namespace GameWish.Game
 
         private void OnClickNewGame()
         {
+            CloseSelfPanel();
+            // UIMgr.S.ClosePanel(this);
             //场景过度
             //AddressableResMgr.S.LoadSceneAsync("SetupScene");
         }

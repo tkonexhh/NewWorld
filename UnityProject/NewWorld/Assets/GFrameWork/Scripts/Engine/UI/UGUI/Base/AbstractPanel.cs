@@ -14,82 +14,41 @@ using UnityEngine;
 namespace GFrame
 {
     [RequireComponent(typeof(Canvas))]
-    public class AbstractPanel : MonoBehaviour
+    public class AbstractPanel : AbstractPage
     {
-        private bool m_HasInitUI = false;
-        private bool m_HasOpen = false;
 
-        #region life
-        protected void Awake()
+        public void OnPanelOpen(bool firstOpen, params object[] args)
         {
-            if (!m_HasInitUI)
-            {
-                m_HasInitUI = true;
-                OnUIInit();
-            }
+            SendViewEvent(ViewEvent.OnPanelOpen);
+            OnPanelOpen(args);
         }
 
-        protected void OnDestroy()
+        public void OnPanelClose(bool destroy)
         {
-            ClosePage();
-        }
-        #endregion
-
-
-        private void ClosePage()
-        {
-            if (m_HasOpen)
-            {
-                m_HasOpen = false;
-            }
-        }
-
-        private void OpenPage()
-        {
-            if (!m_HasOpen)
-            {
-                m_HasOpen = true;
-            }
+            SendViewEvent(ViewEvent.OnPanelClose);
         }
 
         public void CloseSelfPanel()
         {
-
+            SendViewEvent(ViewEvent.Action_ClosePanel);
         }
 
 
-
-        #region 子类需重载
-        //初始化面板
-        protected virtual void OnUIInit()
+        protected override void OnPageEvent(int key, params object[] args)
         {
-
+            base.OnPageEvent(key, args);
+            ViewEvent e = (ViewEvent)args[0];
+            switch (e)
+            {
+                case ViewEvent.Action_ClosePanel:
+                    UIMgr.S.ClosePanel(this);
+                    break;
+            }
         }
 
-        /************************************************************************/
-        /* 面板开启进入，可重入界面会多次进入*/
-        /************************************************************************/
-        protected virtual void OnOpen()
-        {
 
-        }
-
-        //面板被关闭的时候进入
-        protected virtual void OnClose()
-        {
-
-        }
-
-        protected virtual void OnSortingLayerUpdate()
-        {
-
-        }
-
-        protected virtual void OnParamUpdate()
-        {
-
-        }
-
+        #region 
+        protected virtual void OnPanelOpen(params object[] args) { }
         #endregion
     }
 

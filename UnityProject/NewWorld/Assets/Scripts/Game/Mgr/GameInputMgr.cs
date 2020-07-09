@@ -9,6 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using GFrame;
 
 
@@ -18,15 +19,32 @@ namespace GameWish.Game
     {
         private GameInput m_Input;
 
-        public GameInput.MainActions mainActionMap
+        public GameInput.MainActions mainAction
         {
             get { return m_Input.Main; }
+        }
+
+        public GameInput.UIActions uiAction
+        {
+            get { return m_Input.UI; }
         }
 
         public override void OnSingletonInit()
         {
             m_Input = new GameInput();
-            Debug.LogError(m_Input.Main);
+            EnableInput();
+        }
+
+        public void EnableInput()
+        {
+            m_Input.UI.Enable();
+            m_Input.Main.Enable();
+        }
+
+        public void DisableInput()
+        {
+            m_Input.UI.Disable();
+            m_Input.Main.Disable();
         }
 
 

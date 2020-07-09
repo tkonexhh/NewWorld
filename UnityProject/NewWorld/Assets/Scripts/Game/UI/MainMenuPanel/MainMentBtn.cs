@@ -40,25 +40,21 @@ namespace GameWish.Game
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            Debug.LogError("OnPointerDown");
             m_Anim.SetBool("pressed", true);
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            Debug.LogError("OnPointerUp");
             m_Anim.SetBool("pressed", false);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.LogError("OnPointerEnter");
             m_Anim.SetBool("selected", true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            Debug.LogError("OnPointerExit");
             m_Anim.SetBool("selected", false);
         }
 

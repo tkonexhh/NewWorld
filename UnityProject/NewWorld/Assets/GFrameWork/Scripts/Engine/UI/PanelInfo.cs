@@ -9,14 +9,206 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 namespace GFrame
 {
-    public class PanelInfo
+    public class PanelInfo : IPoolAble
     {
+
+        private enum ePanelState : byte
+        {
+            UnInit,
+            Loading,
+            Ready,
+        }
+
         private AbstractPanel m_Panel;
+        private int m_PanelID;
         private int m_UIID;
+        private int m_SortingOrder = -1;
+        private ePanelState m_PanelState = ePanelState.UnInit;
+        private bool m_CacheFlag = false;
+        private Action<AbstractPanel> m_OpenCallback;
+
+        #region setter getter
+        public int panelID
+        {
+            get { return m_PanelID; }
+        }
+
+        public int uiID
+        {
+            get { return m_UIID; }
+        }
+
+        public int sortingOrder
+        {
+            set
+            {
+                m_SortingOrder = value;
+            }
+            get
+            {
+                if (m_Panel != null && m_Panel.sortingOrder > 0)
+                {
+                    return m_Panel.sortingOrder;
+                }
+                return m_SortingOrder;
+            }
+        }
+
+        public AbstractPanel abstractPanel
+        {
+            get { return m_Panel; }
+            set
+            {
+                m_Panel = value;
+                if (m_Panel != null)
+                {
+                    m_Panel.panelID = m_PanelID;
+                    m_Panel.uiID = m_UIID;
+                }
+            }
+        }
+
+        public bool isReady
+        {
+            get { return m_Panel != null; }
+        }
+        #endregion
+
+        #region cache
+        public bool cacheFlag
+        {
+            get
+            {
+                return m_CacheFlag;
+            }
+
+            set
+            {
+                m_CacheFlag = value;
+            }
+        }
+
+        public void OnCacheReset()
+        {
+            m_Panel = null;
+            m_PanelState = ePanelState.UnInit;
+            m_PanelID = -1;
+            m_UIID = -1;
+            m_SortingOrder = -1;
+            m_OpenCallback = null;
+        }
+        #endregion
+
+        public void Init(int uiID, int panelID)
+        {
+            m_UIID = uiID;
+            m_PanelID = panelID;
+        }
+
+        public void LoadPanelRes()
+        {
+            if (m_PanelState != ePanelState.UnInit) return;
+
+
+            m_PanelState = ePanelState.Loading;
+            UIData data = UIDataTable.Get(m_UIID);
+
+            if (data == null)
+            {
+                return;
+            }
+
+            GameObject prefab = ResMgr.S.GetRes(data.fullPath).asset as GameObject;
+            LoadResSuccess(prefab);
+        }
+
+        public void LoadResSuccess(GameObject prefab)
+        {
+            if (prefab == null)
+            {
+                Log.e("#Failed To Load PanelRes:" + m_PanelID);
+                return;
+            }
+
+            //默认先挂到hide下面 不触发awake
+            GameObject panelGo = GameObject.Instantiate(prefab, UIMgr.S.uiRoot.hideRoot, false);
+            panelGo.SetActive(false);
+            AbstractPanel panel = panelGo.GetComponent<AbstractPanel>();
+
+            UIMgr.S.InitPanel(panelGo);
+            abstractPanel = panel;
+
+            if (panel == null)
+            {
+                panelGo.SetActive(true);
+                Log.e("Not Find Panel Class In Prefab For Panel:" + m_UIID);
+                return;
+            }
+            m_PanelState = ePanelState.Ready;
+        }
+
+        public void SetActive(bool visible)
+        {
+            if (m_Panel == null) return;
+
+            if (visible)
+            {
+                if (!m_Panel.gameObject.activeSelf)
+                {
+                    m_Panel.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                if (m_Panel.gameObject.activeSelf)
+                {
+                    m_Panel.gameObject.SetActive(false);
+                }
+            }
+        }
+
+        public void AddOpenCallback(Action<AbstractPanel> callback)
+        {
+            if (callback == null) return;
+
+            m_OpenCallback += callback;
+        }
+
+        private void CallOpenCallback()
+        {
+            if (m_OpenCallback != null)
+            {
+                m_OpenCallback(m_Panel);
+                m_OpenCallback = null;
+            }
+        }
+
+        public void OpenPanel()
+        {
+            m_Panel.OnPanelOpen(true);
+        }
+
+        public void ClosePanel(bool destory)
+        {
+            if (m_Panel == null) return;
+
+            m_Panel.OnPanelClose(destory);
+            if (destory)
+            {
+                GameObject.Destroy(m_Panel.gameObject);
+                m_Panel = null;
+            }
+            else
+            {
+                //TODO 改为移动到外部
+                m_Panel.gameObject.SetActive(false);
+            }
+        }
     }
 
 }

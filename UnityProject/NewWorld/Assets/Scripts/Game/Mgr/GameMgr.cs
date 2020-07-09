@@ -50,7 +50,7 @@ namespace GameWish.Game
         protected override void OnModuleStart()
         {
 
-            UIMgr.S.OpenPanel(UIID.MainMenuPanel);
+            UIMgr.S.OpenPanel(UIID.MainMenuPanel, null);
         }
     }
 

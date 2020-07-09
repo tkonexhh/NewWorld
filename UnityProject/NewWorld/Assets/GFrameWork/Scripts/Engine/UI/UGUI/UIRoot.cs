@@ -19,6 +19,8 @@ namespace GFrame
         [SerializeField] private Camera m_UICamera;
         [SerializeField] private Canvas m_UICanvas;
         [SerializeField] private UnityEngine.EventSystems.EventSystem m_EventSystem;
+        [SerializeField] private Transform m_PanelRoot;
+        [SerializeField] private Transform m_HideRoot;
 
         public Camera uiCamera
         {
@@ -33,6 +35,16 @@ namespace GFrame
         public UnityEngine.EventSystems.EventSystem eventSystem
         {
             get { return m_EventSystem; }
+        }
+
+        public Transform panelRoot
+        {
+            get { return m_PanelRoot; }
+        }
+
+        public Transform hideRoot
+        {
+            get { return m_HideRoot; }
         }
     }
 

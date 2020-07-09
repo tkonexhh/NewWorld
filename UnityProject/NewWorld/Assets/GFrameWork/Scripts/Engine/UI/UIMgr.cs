@@ -16,14 +16,32 @@ namespace GFrame
     [TMonoSingletonAttribute("[GFrame]/[Tools]/[UIMgr]")]
     public partial class UIMgr : TMonoSingleton<UIMgr>
     {
+        private EventSystem m_UIEventSystem = ObjectPool<EventSystem>.S.Allocate();
         private UIRoot m_UIRoot;
-        private List<PanelData> m_ActivePanelInfoList = new List<PanelData>();
-        private Dictionary<int, PanelData> m_ActivePanelInfoMap = new Dictionary<int, PanelData>();
+        private List<PanelInfo> m_ActivePanelInfoList = new List<PanelInfo>();
+        private Dictionary<int, PanelInfo> m_ActivePanelInfoMap = new Dictionary<int, PanelInfo>();
+        private List<PanelInfo> m_CachedPanelList = new List<PanelInfo>();
+        private int m_NextPanelID = 0;
 
+        #region setter getter
         public UIRoot uiRoot
         {
             get { return m_UIRoot; }
         }
+
+        public EventSystem uiEventSystem
+        {
+            get { return m_UIEventSystem; }
+        }
+
+        private int nextPanelID
+        {
+            get
+            {
+                return ++m_NextPanelID;
+            }
+        }
+        #endregion 
 
         public override void OnSingletonInit()
         {
@@ -63,18 +81,33 @@ namespace GFrame
         }
 
 
+        #region  public Func
+        // public void OpenPanel<T>(T uiID, params object[] args)
+        // {
+        //     OpenPanel(uiID, "111", null, args);
+        // }
 
-        public void OpenPanel<T>(T uiId, params object[] args) where T : System.IConvertible
+        public void OpenPanel<T>(T uiID, System.Action<AbstractPanel> callback, params object[] args) where T : System.IConvertible
         {
-            PanelData data = LoadPanelInfo(uiId.ToInt32(null));
-            if (data == null)
+            PanelInfo panelInfo = LoadPanelInfo(uiID.ToInt32(null));
+            if (panelInfo == null)
             {
                 return;
             }
 
-            GameObject prefab = ResMgr.S.GetRes(data.fullPath).asset as GameObject;
-            GameObject panelGo = GameObject.Instantiate(prefab);
-            InitPanelGO(panelGo, uiRoot.uiCanvas.transform);
+            //panelInfo.AddOpenCallback(callback);
+
+            if (panelInfo.isReady)
+            {
+                Debug.LogError("panel is Ready");
+            }
+            else
+            {
+                panelInfo.LoadPanelRes();
+            }
+
+            panelInfo.SetActive(true);
+            panelInfo.OpenPanel();
         }
 
         public void ClosePanelAsUIID<T>(T uiID) where T : System.IConvertible
@@ -85,7 +118,7 @@ namespace GFrame
             {
                 if (m_ActivePanelInfoList[i].uiID == id)
                 {
-
+                    ClosePanelInfo(m_ActivePanelInfoList[i]);
                 }
             }
         }
@@ -93,13 +126,35 @@ namespace GFrame
         public void ClosePanel(AbstractPanel panel)
         {
             if (panel == null) return;
-            //PanelData panelData=FindPanelInfoByID(panel.)
+
+            PanelInfo panelInfo = FindPanelInfoByID(panel.panelID);
+
+            if (panelInfo == null)
+            {
+                panelInfo = GetPanelFromCache(panel.panelID, false);
+                if (panelInfo == null)
+                {
+                    Log.e("Not Find PanelInfo For Panel" + panel.name);
+                    panel.OnPanelClose(true);
+                    GameObject.Destroy(panel.gameObject);
+                }
+                return;
+            }
+
+            ClosePanelInfo(panelInfo);
 
         }
 
+        #endregion
 
-        #region 
-        private PanelData LoadPanelInfo(int uiID)
+
+        public void InitPanel(GameObject go)
+        {
+            InitPanelGO(go, m_UIRoot.panelRoot);
+        }
+
+        #region private func
+        private PanelInfo LoadPanelInfo(int uiID)
         {
             UIData data = UIDataTable.Get(uiID);
             if (data == null)
@@ -107,18 +162,158 @@ namespace GFrame
                 Log.e("#Not Find UIData for UIID:" + uiID);
                 return null;
             }
-            return data as PanelData;
+
+            bool needAdd = true;
+            PanelInfo panelInfo = GetPanelFromCache(uiID, true);
+            if (panelInfo == null)//没有缓存
+            {
+                if (data.isSingleton)
+                {
+                    panelInfo = GetPanelFromActive(uiID);
+                }
+
+                if (panelInfo == null)
+                {
+                    panelInfo = ObjectPool<PanelInfo>.S.Allocate();
+                    panelInfo.Init(uiID, nextPanelID);
+                }
+                else
+                {
+                    needAdd = false;
+                }
+            }
+
+            if (needAdd)
+            {
+                AddPanelInfo(panelInfo);
+            }
+
+            return panelInfo;
         }
 
-        private PanelData FindPanelInfoByID(int uiID)
+        private void AddPanelInfo(PanelInfo panelInfo)
         {
-            PanelData panelData = null;
-            if (m_ActivePanelInfoMap.TryGetValue(uiID, out panelData))
+            if (panelInfo == null) return;
+
+            if (m_ActivePanelInfoMap.ContainsKey(panelInfo.panelID))
             {
-                return panelData;
+                Log.e("Already Add Panel to UIMgr");
+                return;
+            }
+
+            m_ActivePanelInfoList.Add(panelInfo);
+            m_ActivePanelInfoMap.Add(panelInfo.panelID, panelInfo);
+        }
+
+        private void RemovePanelInfo(PanelInfo panelInfo)
+        {
+            if (panelInfo == null) return;
+
+            if (!m_ActivePanelInfoMap.ContainsKey(panelInfo.panelID))
+            {
+                Log.e("Already Remove Panel:" + panelInfo.uiID);
+                return;
+            }
+
+            m_ActivePanelInfoMap.Remove(panelInfo.panelID);
+            m_ActivePanelInfoList.Remove(panelInfo);
+        }
+
+        private PanelInfo GetPanelFromCache(int uiID, bool remove)
+        {
+            for (int i = m_CachedPanelList.Count - 1; i >= 0; --i)
+            {
+                if (m_CachedPanelList[i].uiID == uiID)
+                {
+                    PanelInfo panel = m_CachedPanelList[i];
+                    if (remove)
+                    {
+                        m_CachedPanelList.RemoveAt(i);
+                    }
+                    return panel;
+                }
+            }
+            return null;
+        }
+
+        private PanelInfo GetPanelFromActive(int uiID)
+        {
+            for (int i = m_ActivePanelInfoList.Count - 1; i >= 0; --i)
+            {
+                if (m_ActivePanelInfoList[i].uiID == uiID)
+                {
+                    PanelInfo panel = m_ActivePanelInfoList[i];
+                    return panel;
+                }
+            }
+            return null;
+        }
+
+        private PanelInfo FindPanelInfoByID(int uiID)
+        {
+            PanelInfo panelInfo = null;
+            if (m_ActivePanelInfoMap.TryGetValue(uiID, out panelInfo))
+            {
+                return panelInfo;
             }
 
             return null;
+        }
+
+        private void ClosePanelInfo(PanelInfo panelInfo)
+        {
+            if (panelInfo == null) return;
+
+            UIData data = UIDataTable.Get(panelInfo.uiID);
+            bool destory = true;
+            if (data != null && data.cacheCount > 0)
+            {
+                Debug.LogError(GetActiveAndCachedUICount(panelInfo.uiID));
+                if (GetActiveAndCachedUICount(panelInfo.uiID) <= data.cacheCount)
+                {
+                    destory = false;
+                }
+            }
+
+            RemovePanelInfo(panelInfo);
+
+            if (destory)
+            {
+                panelInfo.ClosePanel(true);
+            }
+            else
+            {
+                m_CachedPanelList.Add(panelInfo);
+                panelInfo.ClosePanel(false);
+            }
+
+            if (destory)
+            {
+                ObjectPool<PanelInfo>.S.Recycle(panelInfo);
+            }
+        }
+
+        //Cache 和 Active的所有该UI 总数
+        private int GetActiveAndCachedUICount(int uiID)
+        {
+            int result = 0;
+            for (int i = m_CachedPanelList.Count - 1; i >= 0; --i)
+            {
+                if (m_CachedPanelList[i].uiID == uiID)
+                {
+                    ++result;
+                }
+            }
+
+            for (int i = m_ActivePanelInfoList.Count - 1; i >= 0; --i)
+            {
+                if (m_ActivePanelInfoList[i].uiID == uiID)
+                {
+                    ++result;
+                }
+            }
+
+            return result;
         }
 
 

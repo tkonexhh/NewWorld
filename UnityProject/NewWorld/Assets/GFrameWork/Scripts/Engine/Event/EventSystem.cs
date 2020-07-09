@@ -11,28 +11,34 @@ namespace GFrame
     public delegate void OnEvent(int key, params object[] param);
     #endregion
 
-    public class EventSystem : TSingleton<EventSystem>
+    public class EventSystem : TSingleton<EventSystem>, IPoolAble
     {
         private bool m_CacheFlag = false;
         private Dictionary<int, ListenerWrap> m_AllListenerMap = new Dictionary<int, ListenerWrap>(50);
 
-        // public EventSystem()
-        // {
+        public EventSystem()
+        {
 
-        // }
+        }
+        #region poolable
+        public bool cacheFlag
+        {
+            get
+            {
+                return m_CacheFlag;
+            }
 
-        // public bool cacheFlag
-        // {
-        //     get
-        //     {
-        //         return m_CacheFlag;
-        //     }
+            set
+            {
+                m_CacheFlag = value;
+            }
+        }
 
-        //     set
-        //     {
-        //         m_CacheFlag = value;
-        //     }
-        // }
+        public void OnCacheReset()
+        {
+            m_AllListenerMap.Clear();
+        }
+        #endregion
 
         #region 内部结构
         private class ListenerWrap
@@ -145,10 +151,7 @@ namespace GFrame
             return false;
         }
 
-        public void OnCacheReset()
-        {
-            m_AllListenerMap.Clear();
-        }
+
 
         #endregion
 
