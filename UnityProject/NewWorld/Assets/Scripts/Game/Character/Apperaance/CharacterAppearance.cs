@@ -15,6 +15,18 @@ namespace GameWish.Game
 {
 
     [System.Serializable]
+    public class CharacterBone
+    {
+        public Transform root;
+        public Transform[] bones;
+
+        public void Init()
+        {
+            bones = root.GetComponentsInChildren<Transform>();
+        }
+    }
+
+    [System.Serializable]
     public class BasicAppearance
     {
         public Sex sex;
@@ -27,14 +39,32 @@ namespace GameWish.Game
     }
 
     [System.Serializable]
-    public class CharacterBone
+    public class CharacterAppearanceData
     {
-        public Transform root;
-        public Transform[] bones;
+        public BasicAppearance basicAppearance;
+        public int torsoID;
+        public int armUpperRightID;
+        public int armUpperLeftID;
+        public int armLowerRightID;
+        public int armLowerLeftID;
+        public int handRightID;
+        public int handLeftID;
+        public int hipsID;
+        public int legRightID;
+        public int legLeftID;
+        public int shoulderRightID;
+        public int shoulderLeftID;
+        public int elbowRightID;
+        public int elbowLeftID;
+        public int kneeRightID;
+        public int kneeLeftID;
+        public int hipsAttachID;
+        public int helmetWithHeadID;
+        public int helmetWithoutHeadID;
 
-        public void Init()
+        public Sex sex
         {
-            bones = root.GetComponentsInChildren<Transform>();
+            get { return basicAppearance.sex; }
         }
     }
 
@@ -45,10 +75,11 @@ namespace GameWish.Game
         public Material material;
         private SkinnedMeshRenderer m_Renderer;
 
-        [Header("基础外貌")]
-        public BasicAppearance m_BasicApperance;
+        [Header("外貌信息")]
+        public CharacterAppearanceData m_AppearanceData;
+
         [Header("骨骼信息")]
-        public CharacterBone bones;
+        public CharacterBone m_Bones;
 
         [SerializeField] private SkinApperaance m_Hair;
         [SerializeField] private SkinApperaance m_Head;
@@ -79,32 +110,13 @@ namespace GameWish.Game
         [SerializeField] private SkinApperaance m_KneeLeft;
         [SerializeField] private SkinApperaance m_ElfEar;
 
-        public int m_TorsoID;
-        public int m_ArmUpperRightID;
-        public int m_ArmUpperLeftID;
-        public int m_ArmLowerRightID;
-        public int m_ArmLowerLeftID;
-        public int m_HandRightID;
-        public int m_HandLeftID;
-        public int m_HipsID;
-        public int m_LegRightID;
-        public int m_LegLeftID;
-        public int m_ShoulderRightID;
-        public int m_ShoulderLeftID;
-        public int m_ElbowRightID;
-        public int m_ElbowLeftID;
-        public int m_KneeRightID;
-        public int m_KneeLeftID;
-        public int m_HipsAttachID;
-        public int m_HelmetWithHeadID;
-        public int m_HelmetWithoutHeadID;
 
         private void Start()
         {
             m_Renderer = gameObject.AddMissingComponent<SkinnedMeshRenderer>();
             material = Instantiate(material);
 
-            bones.Init();
+            m_Bones.Init();
 
             m_Hair.Init(this);
             m_Head.Init(this);
@@ -144,7 +156,7 @@ namespace GameWish.Game
 
         void RefeshAppearance()
         {
-            // SetAppearance(AppearanceSlot.Hair, m_HairID);
+            SetAppearance(AppearanceSlot.Hair, m_AppearanceData.basicAppearance.hairID);
             // SetAppearance(AppearanceSlot.Head, m_HeadID);
             // SetAppearance(AppearanceSlot.FacialHair, m_FacialHairID);
             // SetAppearance(AppearanceSlot.EyeBrows, m_EyebrowsID);
@@ -267,127 +279,128 @@ namespace GameWish.Game
         #region SetPart
         public void SetHair(int id)
         {
-            m_BasicApperance.hairID = m_Hair.SetSkin(m_BasicApperance.sex, id);
+            TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.Hair, m_AppearanceData.sex, id);
+            m_AppearanceData.basicAppearance.hairID = m_Hair.SetSkin(m_AppearanceData.sex, (int)data.appearance);
         }
 
         public void SetHead(int id)
         {
-            m_BasicApperance.faceID = m_Head.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.basicAppearance.faceID = m_Head.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetFacialHair(int id)
         {
-            m_BasicApperance.facialHairID = m_FacialHair.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.basicAppearance.facialHairID = m_FacialHair.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetEyebrows(int id)
         {
-            m_BasicApperance.eyeBrows = m_Eyebrows.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.basicAppearance.eyeBrows = m_Eyebrows.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetTorso(int id)
         {
-            m_TorsoID = m_Torso.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.torsoID = m_Torso.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetArmUpperRight(int id)
         {
-            m_ArmUpperRightID = m_ArmUpperRight.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.armUpperRightID = m_ArmUpperRight.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetArmUpperLeft(int id)
         {
-            m_ArmUpperLeftID = m_ArmUpperLeft.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.armUpperLeftID = m_ArmUpperLeft.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetArmLowerRight(int id)
         {
-            m_ArmLowerRightID = m_ArmLowerRight.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.armLowerRightID = m_ArmLowerRight.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetArmLowerLeft(int id)
         {
-            m_ArmLowerLeftID = m_ArmLowerLeft.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.armLowerLeftID = m_ArmLowerLeft.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetHandRight(int id)
         {
-            m_HandRightID = m_HandRight.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.handRightID = m_HandRight.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetHandLeft(int id)
         {
-            m_HandLeftID = m_HandLeft.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.handLeftID = m_HandLeft.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetHips(int id)
         {
-            if (m_HipsID != id)
+            if (m_AppearanceData.hipsID != id)
             {
-                var newSkin = CharacterHolder.S.GetHips(m_BasicApperance.sex, id);
+                var newSkin = CharacterHolder.S.GetHips(m_AppearanceData.sex, id);
                 m_Hips.sharedMesh = newSkin.sharedMesh;
-                m_HipsID = id;
+                m_AppearanceData.hipsID = id;
             }
         }
 
         public void SetLegRight(int id)
         {
-            m_LegRightID = m_LegRight.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.legRightID = m_LegRight.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetLegLeft(int id)
         {
-            m_LegLeftID = m_LegLeft.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.legLeftID = m_LegLeft.SetSkin(m_AppearanceData.sex, id);
         }
 
         void SetShoulderRight(int id)
         {
-            m_ShoulderRightID = m_ShoulderRight.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.shoulderRightID = m_ShoulderRight.SetSkin(m_AppearanceData.sex, id);
         }
 
         void SetShoulderLeft(int id)
         {
-            m_ShoulderLeftID = m_ShoulderLeft.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.shoulderLeftID = m_ShoulderLeft.SetSkin(m_AppearanceData.sex, id);
         }
 
         void SetElbowRight(int id)
         {
-            m_ElbowRightID = m_ElbowRight.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.elbowRightID = m_ElbowRight.SetSkin(m_AppearanceData.sex, id);
         }
 
         void SetElbowLeft(int id)
         {
-            m_ElbowLeftID = m_ElbowLeft.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.elbowLeftID = m_ElbowLeft.SetSkin(m_AppearanceData.sex, id);
         }
 
         void SetKneeRight(int id)
         {
-            m_KneeRightID = m_KneeRight.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.kneeRightID = m_KneeRight.SetSkin(m_AppearanceData.sex, id);
         }
 
         void SetKneeLeft(int id)
         {
-            m_KneeLeftID = m_KneeLeft.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.kneeLeftID = m_KneeLeft.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetElfEar(int id)
         {
-            m_BasicApperance.ear = m_ElfEar.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.basicAppearance.ear = m_ElfEar.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetHipsAttach(int id)
         {
-            m_HipsAttachID = m_HipsAttachment.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.hipsAttachID = m_HipsAttachment.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetHelmetWithoutHead(int id)
         {
-            m_HelmetWithoutHeadID = m_HelmetWithoutHead.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.helmetWithoutHeadID = m_HelmetWithoutHead.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetHelmetWithHead(int id)
         {
-            m_HelmetWithHeadID = m_HelmetWithHead.SetSkin(m_BasicApperance.sex, id);
+            m_AppearanceData.helmetWithHeadID = m_HelmetWithHead.SetSkin(m_AppearanceData.sex, id);
         }
 
         #endregion

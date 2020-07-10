@@ -38,34 +38,44 @@ namespace GameWish.Game
         {
             if (m_CurID != id)
             {
-                SkinnedMeshRenderer newSkin = null;
-                if (m_Slot == AppearanceSlot.HelmetWithHead)
+                if (id == -1)
                 {
-                    newSkin = CharacterHolder.S.GetHelmetMesh(id);
-
+                    m_Renderer.sharedMesh = null;
                 }
                 else
                 {
-                    newSkin = CharacterHolder.S.GetMeshBySlot(m_Slot, sex, id);
-                }
-
-                List<Transform> bones = new List<Transform>();
-                foreach (Transform bone in newSkin.bones)
-                {
-                    foreach (Transform hip in m_Character.bones.bones)
+                    SkinnedMeshRenderer newSkin = null;
+                    if (m_Slot == AppearanceSlot.HelmetWithHead)
                     {
-                        if (hip.name != bone.name)
-                        {
-                            continue;
-                        }
-                        bones.Add(hip);
-                        break;
-                    }
-                }
+                        newSkin = CharacterHolder.S.GetHelmetMesh(id);
 
-                m_Renderer.sharedMesh = newSkin.sharedMesh;
-                m_Renderer.bones = bones.ToArray();
+                    }
+                    else
+                    {
+                        newSkin = CharacterHolder.S.GetMeshBySlot(m_Slot, sex, id);
+                    }
+
+
+                    List<Transform> bones = new List<Transform>();
+                    foreach (Transform bone in newSkin.bones)
+                    {
+                        foreach (Transform hip in m_Character.m_Bones.bones)
+                        {
+                            if (hip.name != bone.name)
+                            {
+                                continue;
+                            }
+                            bones.Add(hip);
+                            break;
+                        }
+                    }
+
+                    m_Renderer.sharedMesh = newSkin.sharedMesh;
+                    m_Renderer.bones = bones.ToArray();
+
+                }
                 m_CurID = id;
+
             }
 
             m_IsHide = false;

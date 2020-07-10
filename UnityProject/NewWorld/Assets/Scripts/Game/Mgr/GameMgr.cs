@@ -48,8 +48,8 @@ namespace GameWish.Game
 
         protected override void OnModuleStart()
         {
-            EnterMainMenu();
-            //EnterCreateRole();
+            //EnterMainMenu();
+            EnterCreateRole();
         }
 
         private void EnterMainMenu()

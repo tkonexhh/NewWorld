@@ -42,7 +42,6 @@ namespace GameWish.Game
 
         public void HidePanel()
         {
-            Debug.LogError("HidePanel");
             if (m_Anim != null)
             {
                 m_Anim.SetTrigger(ANIM_HIDE);
@@ -51,13 +50,11 @@ namespace GameWish.Game
 
         public void ShowComplete()
         {
-            Debug.LogError("ShowComplete");
             AfterShowComplete();
         }
 
         public void HideComplete()
         {
-            Debug.LogError("HideComplete");
             CloseSelfPanel();
             //AfterHideComplete();
         }

@@ -9172,7 +9172,7 @@ Animator:
   m_GameObject: {fileID: 7666273751971387156}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 038320a534bd8b444b43734860d1a211, type: 3}
-  m_Controller: {fileID: 9100000, guid: b24c2658bd1606148b085291900ae2f6, type: 2}
+  m_Controller: {fileID: 9100000, guid: 55beedbd61ab24ef382dc46db3d80290, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -9309,14 +9309,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: ea128b040f8b0af4c9d2de400aaff30a, type: 2}
-  m_BasicApperance:
-    sex: 0
-    hairID: 0
-    faceID: 0
-    facialHairID: 0
-    eyeBrows: 0
-    ear: 0
-  bones:
+  m_AppearanceData:
+    basicAppearance:
+      sex: 0
+      hairID: 0
+      faceID: 0
+      facialHairID: 0
+      eyeBrows: 0
+      ear: 0
+    torsoID: 0
+    armUpperRightID: 0
+    armUpperLeftID: 0
+    armLowerRightID: 0
+    armLowerLeftID: 0
+    handRightID: 0
+    handLeftID: 0
+    hipsID: 0
+    legRightID: 0
+    legLeftID: 0
+    shoulderRightID: 0
+    shoulderLeftID: 0
+    elbowRightID: 0
+    elbowLeftID: 0
+    kneeRightID: 0
+    kneeLeftID: 0
+    hipsAttachID: 0
+    helmetWithHeadID: 0
+    helmetWithoutHeadID: 0
+  m_Bones:
     root: {fileID: 7666273751970905206}
     bones: []
   m_Hair: {fileID: 5250031636285968963}
@@ -9345,25 +9365,6 @@ MonoBehaviour:
   m_KneeRight: {fileID: 1774319564613950071}
   m_KneeLeft: {fileID: 1692854036080424758}
   m_ElfEar: {fileID: 4533958576370323646}
-  m_TorsoID: 0
-  m_ArmUpperRightID: 0
-  m_ArmUpperLeftID: 0
-  m_ArmLowerRightID: 0
-  m_ArmLowerLeftID: 0
-  m_HandRightID: 0
-  m_HandLeftID: 0
-  m_HipsID: 0
-  m_LegRightID: 0
-  m_LegLeftID: 0
-  m_ShoulderRightID: 0
-  m_ShoulderLeftID: 0
-  m_ElbowRightID: 0
-  m_ElbowLeftID: 0
-  m_KneeRightID: 0
-  m_KneeLeftID: 0
-  m_HipsAttachID: 0
-  m_HelmetWithHeadID: 0
-  m_HelmetWithoutHeadID: 0
 --- !u!114 &6968812956063299919
 MonoBehaviour:
   m_ObjectHideFlags: 0

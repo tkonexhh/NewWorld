@@ -29,7 +29,7 @@ namespace GameWish.Game
         private void Start()
         {
             m_TxtName.text = m_Slot.ToString();
-
+            m_TxtID.text = m_CurIndex.ToString();
             m_BtnReduce.onClick.AddListener(() =>
             {
                 m_CurIndex--;
@@ -59,10 +59,10 @@ namespace GameWish.Game
             EventSystem.S.Send(SetupEvent.ChangeAppearance, m_Slot, m_CurIndex);
         }
 
-        // public void RegisterAction(System.Action<int> callback)
-        // {
-        //     this.callback = callback;
-        // }
+        public void SetMaxCount(Sex sex)
+        {
+            maxCount = TDCharacterAppearanceTable.GetAppearanceCount(m_Slot, sex);
+        }
     }
 
 }

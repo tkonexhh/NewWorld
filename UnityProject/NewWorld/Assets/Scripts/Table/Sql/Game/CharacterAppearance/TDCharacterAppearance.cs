@@ -13,13 +13,25 @@ using UnityEngine;
 
 namespace GameWish.Game
 {
+    public enum SexType
+    {
+        General,
+        Male,
+        Female,
+    }
+
     public class TDCharacterAppearance
     {
-        public int id;
-        public int sex;
+
+        public long id;
+        public SexType sex = SexType.General;
         public AppearanceSlot part;
-        public int appearance;
+        public long appearance = -1;
         public string name;
     }
+
+
+
+
 
 }

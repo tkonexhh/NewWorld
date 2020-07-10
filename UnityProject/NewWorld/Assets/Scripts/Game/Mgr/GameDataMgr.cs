@@ -18,12 +18,12 @@ namespace GameWish.Game
         public override void OnSingletonInit()
         {
             InitCharacterAppearanceData();
-            InitEquipmentData();
+            //InitEquipmentData();
         }
 
         public void Init()
         {
-
+            Log.i("Init[GameDataMgr]");
         }
 
         private void InitCharacterAppearanceData()
@@ -46,6 +46,7 @@ namespace GameWish.Game
                 int id = (int)reader[0];
                 string name = reader[1].ToString();
                 EquipmentType type = StringToEquipmentType(reader[2].ToString());
+                Debug.LogError(type);
                 int appearance = (int)reader[3];
             }
         }

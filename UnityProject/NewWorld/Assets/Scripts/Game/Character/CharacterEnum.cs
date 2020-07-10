@@ -21,9 +21,17 @@ namespace GameWish.Game
             {
                 case "Hair":
                     return AppearanceSlot.Hair;
+                case "Head":
+                    return AppearanceSlot.Head;
             }
             return AppearanceSlot.Length;
         }
+    }
+
+    public enum Sex
+    {
+        Male,
+        Female,
     }
 
     public enum AppearanceSlot

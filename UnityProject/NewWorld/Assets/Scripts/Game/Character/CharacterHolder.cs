@@ -14,11 +14,7 @@ using GFrame;
 
 namespace GameWish.Game
 {
-    public enum Sex
-    {
-        Male,
-        Female,
-    }
+
 
 
 
