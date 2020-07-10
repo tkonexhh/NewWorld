@@ -23,6 +23,10 @@ namespace GameWish.Game
                     return AppearanceSlot.Hair;
                 case "Head":
                     return AppearanceSlot.Head;
+                case "FacialHair":
+                    return AppearanceSlot.FacialHair;
+                case "EyeBrows":
+                    return AppearanceSlot.EyeBrows;
             }
             return AppearanceSlot.Length;
         }
@@ -30,7 +34,7 @@ namespace GameWish.Game
 
     public enum Sex
     {
-        Male,
+        Male = 0,
         Female,
     }
 
@@ -62,6 +66,13 @@ namespace GameWish.Game
         HelmetWithoutHead,
         HelmetWithHead,
         Length,
+    }
+
+    public enum AppearanceColor
+    {
+        Hair,
+        Skin,
+        Eye,
     }
 
 }

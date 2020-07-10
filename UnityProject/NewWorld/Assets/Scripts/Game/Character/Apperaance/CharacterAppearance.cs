@@ -36,6 +36,7 @@ namespace GameWish.Game
         public int eyeBrows;//眉毛
         public int ear;
         //一些颜色
+        public Color hairColor;
     }
 
     [System.Serializable]
@@ -69,7 +70,7 @@ namespace GameWish.Game
     }
 
 
-    public class CharacterAppearance : MonoBehaviour
+    public partial class CharacterAppearance : MonoBehaviour
     {
         // 合并后使用的材质
         public Material material;
@@ -157,9 +158,9 @@ namespace GameWish.Game
         void RefeshAppearance()
         {
             SetAppearance(AppearanceSlot.Hair, m_AppearanceData.basicAppearance.hairID);
-            // SetAppearance(AppearanceSlot.Head, m_HeadID);
-            // SetAppearance(AppearanceSlot.FacialHair, m_FacialHairID);
-            // SetAppearance(AppearanceSlot.EyeBrows, m_EyebrowsID);
+            SetAppearance(AppearanceSlot.Head, m_AppearanceData.basicAppearance.faceID);
+            SetAppearance(AppearanceSlot.FacialHair, m_AppearanceData.basicAppearance.facialHairID);
+            SetAppearance(AppearanceSlot.EyeBrows, m_AppearanceData.basicAppearance.eyeBrows);
             // SetAppearance(AppearanceSlot.Torso, m_TorsoID);
             // SetAppearance(AppearanceSlot.ArmUpperRight, m_ArmUpperRightID);
 
@@ -285,17 +286,20 @@ namespace GameWish.Game
 
         public void SetHead(int id)
         {
-            m_AppearanceData.basicAppearance.faceID = m_Head.SetSkin(m_AppearanceData.sex, id);
+            TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.Head, m_AppearanceData.sex, id);
+            m_AppearanceData.basicAppearance.faceID = m_Head.SetSkin(m_AppearanceData.sex, (int)data.appearance);
         }
 
         public void SetFacialHair(int id)
         {
-            m_AppearanceData.basicAppearance.facialHairID = m_FacialHair.SetSkin(m_AppearanceData.sex, id);
+            TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.FacialHair, m_AppearanceData.sex, id);
+            m_AppearanceData.basicAppearance.facialHairID = m_FacialHair.SetSkin(m_AppearanceData.sex, (int)data.appearance);
         }
 
         public void SetEyebrows(int id)
         {
-            m_AppearanceData.basicAppearance.eyeBrows = m_Eyebrows.SetSkin(m_AppearanceData.sex, id);
+            TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.EyeBrows, m_AppearanceData.sex, id);
+            m_AppearanceData.basicAppearance.eyeBrows = m_Eyebrows.SetSkin(m_AppearanceData.sex, (int)data.appearance);
         }
 
         public void SetTorso(int id)
@@ -404,6 +408,8 @@ namespace GameWish.Game
         }
 
         #endregion
+
+
 
         public void ApplyAppearance()
         {

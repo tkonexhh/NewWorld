@@ -35,7 +35,7 @@ namespace GameWish.Game
                 m_CurIndex--;
                 if (m_CurIndex < 0)
                 {
-                    m_CurIndex = maxCount;
+                    m_CurIndex = maxCount - 1;
                 }
 
                 CallBack();

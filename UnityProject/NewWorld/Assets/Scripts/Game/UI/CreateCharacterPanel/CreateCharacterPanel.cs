@@ -31,6 +31,9 @@ namespace GameWish.Game
         private void RefeshSex()
         {
             m_Hair.SetMaxCount(m_CurrentSex);
+            m_Face.SetMaxCount(m_CurrentSex);
+            m_FacialHair.SetMaxCount(m_CurrentSex);
+            m_EyeBrows.SetMaxCount(m_CurrentSex);
         }
     }
 

@@ -16,101 +16,55 @@ namespace GameWish.Game
 {
     public partial class TDCharacterAppearanceTable
     {
-        private static Dictionary<long, TDCharacterAppearance> m_DataCache = new Dictionary<long, TDCharacterAppearance>();
-        private static List<TDCharacterAppearance> m_DataList = new List<TDCharacterAppearance>();
-
-        private static List<TDCharacterAppearance> m_HairDataList = new List<TDCharacterAppearance>();
-        private static Dictionary<long, TDCharacterAppearance> m_HairDataCache = new Dictionary<long, TDCharacterAppearance>();
-        private static List<TDCharacterAppearance> m_HeadDataList = new List<TDCharacterAppearance>();
-        private static Dictionary<long, TDCharacterAppearance> m_HeadDataCache = new Dictionary<long, TDCharacterAppearance>();
+        private static TDCharacterAppearanceData_General m_HairData = new TDCharacterAppearanceData_General();
+        private static TDCharacterAppearanceData_Sexual m_HeadData = new TDCharacterAppearanceData_Sexual();
+        private static TDCharacterAppearanceData_Sexual m_FacialHairData = new TDCharacterAppearanceData_Sexual();
+        private static TDCharacterAppearanceData_Sexual m_EyeBrowsData = new TDCharacterAppearanceData_Sexual();
 
         public static void Parse(SqliteDataReader reader)
         {
-            // m_DataCache.Clear();
-            // m_DataList.Clear();
-
-            // m_HairDataList.Clear();
-            // m_HairDataCache.Clear();
-
             TDCharacterAppearance data = new TDCharacterAppearance();
             data.id = (long)reader[0];
-            data.sex = GetSexType((long)reader[1]);
+            data.sex = (long)reader[1];
 
             data.part = CharacterEnumHelper.GetSlotByName((string)reader[2]);
             if (reader[3] != null)
                 data.appearance = (long)reader[3];
             data.name = reader[4].ToString();
 
-            m_DataList.Add(data);
-            m_DataCache.Add(data.id, data);
-
             switch (data.part)
             {
                 case AppearanceSlot.Hair:
-                    {
-                        m_HairDataCache.Add(m_HairDataList.Count, data);
-                        m_HairDataList.Add(data);
-                        break;
-                    }
+                    m_HairData.OnAddData(data);
+                    break;
                 case AppearanceSlot.Head:
-                    {
-                        m_HairDataCache.Add(m_HairDataList.Count, data);
-                        m_HeadDataList.Add(data);
-                        break;
-                    }
-            }
-        }
-
-        public static int count
-        {
-            get
-            {
-                return m_DataCache.Count;
-            }
-        }
-
-        public static List<TDCharacterAppearance> dataList
-        {
-            get
-            {
-                return m_DataList;
-            }
-        }
-
-        public static TDCharacterAppearance GetData(int key)
-        {
-            if (m_DataCache.ContainsKey(key))
-            {
-                return m_DataCache[key];
-            }
-            else
-            {
-                Log.w(string.Format("Can't find key {0} in TDCharacterAppearance", key));
-                return null;
+                    m_HeadData.OnAddData(data);
+                    break;
+                case AppearanceSlot.FacialHair:
+                    m_FacialHairData.OnAddData(data);
+                    break;
+                case AppearanceSlot.EyeBrows:
+                    m_EyeBrowsData.OnAddData(data);
+                    break;
             }
         }
     }
 
+
     public partial class TDCharacterAppearanceTable
     {
-        public static SexType GetSexType(long sex)
-        {
-            switch (sex)
-            {
-                case 1:
-                    return SexType.Male;
-                case 2:
-                    return SexType.Female;
-                default:
-                    return SexType.General;
-            }
-        }
         public static int GetAppearanceCount(AppearanceSlot slot, Sex sex)
         {
             switch (slot)
             {
                 case AppearanceSlot.Hair:
-                    return m_HairDataList.Count;
+                    return m_HairData.GetDataCount();//m_HairDataMap.Count;
+                case AppearanceSlot.Head:
+                    return m_HeadData.GetDataCount(sex);
+                case AppearanceSlot.FacialHair:
+                    return m_FacialHairData.GetDataCount(sex);
+                case AppearanceSlot.EyeBrows:
+                    return m_EyeBrowsData.GetDataCount(sex);
             }
             return 0;
         }
@@ -120,10 +74,92 @@ namespace GameWish.Game
             switch (slot)
             {
                 case AppearanceSlot.Hair:
-                    return m_HairDataList[index];
+                    return m_HairData.GetAppearanceByIndex(index);
+                case AppearanceSlot.Head:
+                    return m_HeadData.GetAppearanceByIndex(sex, index);
+                case AppearanceSlot.FacialHair:
+                    return m_FacialHairData.GetAppearanceByIndex(sex, index);
+                case AppearanceSlot.EyeBrows:
+                    return m_EyeBrowsData.GetAppearanceByIndex(sex, index);
             }
             return null;
         }
     }
+
+    #region dataclass
+    public class TDCharacterAppearanceData
+    {
+        public virtual void OnAddData(TDCharacterAppearance conf)
+        {
+        }
+    }
+
+    public class TDCharacterAppearanceData_General : TDCharacterAppearanceData
+    {
+        private Dictionary<long, TDCharacterAppearance> m_DataMap = new Dictionary<long, TDCharacterAppearance>();
+        public override void OnAddData(TDCharacterAppearance conf)
+        {
+            m_DataMap.Add(m_DataMap.Count, conf);
+        }
+
+        public int GetDataCount()
+        {
+            return m_DataMap.Count;
+        }
+
+        public TDCharacterAppearance GetAppearanceByIndex(int index)
+        {
+            TDCharacterAppearance data;
+            if (m_DataMap.TryGetValue(index, out data))
+            {
+                return data;
+            }
+            return null;
+        }
+    }
+
+    public class TDCharacterAppearanceData_Sexual : TDCharacterAppearanceData
+    {
+        private Dictionary<int, Dictionary<long, TDCharacterAppearance>> m_DataMap = new Dictionary<int, Dictionary<long, TDCharacterAppearance>>();
+
+        public override void OnAddData(TDCharacterAppearance conf)
+        {
+            Dictionary<long, TDCharacterAppearance> map;
+            if (!m_DataMap.TryGetValue((int)conf.sex, out map))
+            {
+                map = new Dictionary<long, TDCharacterAppearance>();
+                m_DataMap.Add((int)conf.sex, map);
+            }
+
+            map.Add(map.Count, conf);
+        }
+
+        public int GetDataCount(Sex sex)
+        {
+            Dictionary<long, TDCharacterAppearance> map;
+            if (m_DataMap.TryGetValue((int)sex, out map))
+            {
+                return map.Count;
+            }
+            return 0;
+        }
+
+        public TDCharacterAppearance GetAppearanceByIndex(Sex sex, int index)
+        {
+            Dictionary<long, TDCharacterAppearance> headData;
+            if (m_DataMap.TryGetValue((int)sex, out headData))
+            {
+                TDCharacterAppearance data;
+                if (headData.TryGetValue(index, out data))
+                {
+                    return data;
+                }
+                return null;
+            }
+            return null;
+        }
+    }
+
+    #endregion
 
 }

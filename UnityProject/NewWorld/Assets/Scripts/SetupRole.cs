@@ -20,14 +20,30 @@ namespace GameWish.Game
         void Start()
         {
             EventSystem.S.Register(SetupEvent.ChangeAppearance, HandleEvent);
+            EventSystem.S.Register(SetupEvent.ChangeColor, HandleEvent);
         }
 
         public void HandleEvent(int key, params object[] args)
         {
-            AppearanceSlot slot = (AppearanceSlot)args[0];
-            int id = (int)args[1];
-            appearance.SetAppearance(slot, id);
-            appearance.CombineMeshs();
+            switch (key)
+            {
+                case (int)SetupEvent.ChangeAppearance:
+                    {
+                        AppearanceSlot slot = (AppearanceSlot)args[0];
+                        int id = (int)args[1];
+                        appearance.SetAppearance(slot, id);
+                        appearance.CombineMeshs();
+                        break;
+                    }
+                case (int)SetupEvent.ChangeColor:
+                    {
+                        AppearanceColor slot = (AppearanceColor)args[0];
+                        Color color = (Color)args[1];
+                        appearance.SetColor(slot, color);
+                        break;
+                    }
+            }
+
         }
     }
 

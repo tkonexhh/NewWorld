@@ -18,6 +18,7 @@ namespace GameWish.Game
     public enum SetupEvent
     {
         ChangeAppearance = 101001,
+        ChangeColor,
     }
     public class SetupPanel : AbstractPanel
     {
