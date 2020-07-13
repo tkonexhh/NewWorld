@@ -32,6 +32,7 @@ namespace GameWish.Game
         public void Init(CharacterAppearance character)
         {
             m_Character = character;
+            m_CurID = -100;
         }
 
         public int SetSkin(Sex sex, int id)
@@ -48,7 +49,6 @@ namespace GameWish.Game
                     if (m_Slot == AppearanceSlot.HelmetWithHead)
                     {
                         newSkin = CharacterHolder.S.GetHelmetMesh(id);
-
                     }
                     else
                     {
@@ -79,7 +79,7 @@ namespace GameWish.Game
             }
 
             m_IsHide = false;
-            gameObject.SetActive(true);
+            gameObject.SetActive(id != -1);
             return m_CurID;
         }
 

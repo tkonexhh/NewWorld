@@ -26,6 +26,11 @@ namespace GameWish.Game
         private int m_CurIndex;
         System.Action<int> callback;
 
+        public int CurIndex
+        {
+            get { return m_CurIndex; }
+        }
+
         private void Start()
         {
             m_TxtName.text = m_Slot.ToString();

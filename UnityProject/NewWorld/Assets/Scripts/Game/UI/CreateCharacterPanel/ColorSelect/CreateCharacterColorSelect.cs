@@ -17,28 +17,31 @@ namespace GameWish.Game
     {
         [SerializeField] private CreateSelectColorBtn m_ColorBtnPrefab;
         [SerializeField] private Transform m_ColorRoot;
+        [SerializeField] private Transform m_Selected;
 
         private List<CreateSelectColorBtn> m_ColorBtns = new List<CreateSelectColorBtn>();
+        private int m_SelectIndex = 0;
 
         protected virtual List<Color> targetColors
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         protected virtual AppearanceColor colorSlot
         {
-            get
-            {
-                return AppearanceColor.Hair;
-            }
+            get { return AppearanceColor.Hair; }
         }
+
+        public int SelectIndex
+        {
+            get { return m_SelectIndex; }
+        }
+
 
         private void Start()
         {
             CreateColors();
+            SetSelect(m_SelectIndex);
         }
 
         void CreateColors()
@@ -49,14 +52,26 @@ namespace GameWish.Game
             {
                 var colorBtn = GameObject.Instantiate<CreateSelectColorBtn>(m_ColorBtnPrefab, m_ColorRoot, false);
                 colorBtn.Init(colors[i]);
+                int index = i;
                 colorBtn.RegisterListener(() =>
                 {
-                    Color color = colorBtn.color;
-                    EventSystem.S.Send(SetupEvent.ChangeColor, colorSlot, color);
+                    SetSelect(index);
+
                 });
                 m_ColorBtns.Add(colorBtn);
             }
         }
+
+        void SetSelect(int index)
+        {
+            m_SelectIndex = index;
+            m_Selected.SetParent(m_ColorBtns[m_SelectIndex].transform);
+            m_Selected.localPosition = Vector3.zero;
+            m_Selected.SetAsFirstSibling();
+            EventSystem.S.Send(SetupEvent.ChangeColor, colorSlot, targetColors[m_SelectIndex]);
+        }
+
+
     }
 
 }

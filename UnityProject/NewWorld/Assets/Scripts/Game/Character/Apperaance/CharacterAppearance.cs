@@ -26,50 +26,6 @@ namespace GameWish.Game
         }
     }
 
-    [System.Serializable]
-    public class BasicAppearance
-    {
-        public Sex sex;
-        public int hairID;//发型
-        public int faceID;//面部
-        public int facialHairID;//胡子
-        public int eyeBrows;//眉毛
-        public int ear;
-        //一些颜色
-        public Color hairColor;
-    }
-
-    [System.Serializable]
-    public class CharacterAppearanceData
-    {
-        public BasicAppearance basicAppearance;
-        public int torsoID;
-        public int armUpperRightID;
-        public int armUpperLeftID;
-        public int armLowerRightID;
-        public int armLowerLeftID;
-        public int handRightID;
-        public int handLeftID;
-        public int hipsID;
-        public int legRightID;
-        public int legLeftID;
-        public int shoulderRightID;
-        public int shoulderLeftID;
-        public int elbowRightID;
-        public int elbowLeftID;
-        public int kneeRightID;
-        public int kneeLeftID;
-        public int hipsAttachID;
-        public int helmetWithHeadID;
-        public int helmetWithoutHeadID;
-
-        public Sex sex
-        {
-            get { return basicAppearance.sex; }
-        }
-    }
-
-
     public partial class CharacterAppearance : MonoBehaviour
     {
         // 合并后使用的材质
@@ -122,9 +78,8 @@ namespace GameWish.Game
             m_Hair.Init(this);
             m_Head.Init(this);
             if (m_FacialHair)
-            {
                 m_FacialHair.Init(this);
-            }
+
             m_Eyebrows.Init(this);
             m_Torso.Init(this);
 
@@ -161,6 +116,12 @@ namespace GameWish.Game
             SetAppearance(AppearanceSlot.Head, m_AppearanceData.basicAppearance.faceID);
             SetAppearance(AppearanceSlot.FacialHair, m_AppearanceData.basicAppearance.facialHairID);
             SetAppearance(AppearanceSlot.EyeBrows, m_AppearanceData.basicAppearance.eyeBrows);
+            SetAppearance(AppearanceSlot.ShoulderRight, m_AppearanceData.shoulderRightID);
+            SetAppearance(AppearanceSlot.ShoulderLeft, m_AppearanceData.shoulderLeftID);
+            SetAppearance(AppearanceSlot.KneeRight, m_AppearanceData.kneeRightID);
+            SetAppearance(AppearanceSlot.KneeLeft, m_AppearanceData.kneeLeftID);
+            SetAppearance(AppearanceSlot.ElbowRight, m_AppearanceData.elbowRightID);
+            SetAppearance(AppearanceSlot.ElbowLeft, m_AppearanceData.elbowLeftID);
             // SetAppearance(AppearanceSlot.Torso, m_TorsoID);
             // SetAppearance(AppearanceSlot.ArmUpperRight, m_ArmUpperRightID);
 

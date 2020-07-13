@@ -229,6 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 482314469}
   - component: {fileID: 482314468}
+  - component: {fileID: 482314470}
   m_Layer: 0
   m_Name: SetupMgr
   m_TagString: Untagged
@@ -262,6 +263,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &482314470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482314467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c928273576bc4374850d9cede0dab27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RotateSpeed: 1
+  m_RotateMaxSpeed: 5
+  m_TrsCharacter: {fileID: 2102728263}
 --- !u!1001 &595485925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -269,6 +285,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2102728263}
     m_Modifications:
+    - target: {fileID: 6968812956063299916, guid: 37a17d93ea857464799b21d70b00a57a,
+        type: 3}
+      propertyPath: m_AppearanceData.shoulderRightID
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968812956063299916, guid: 37a17d93ea857464799b21d70b00a57a,
+        type: 3}
+      propertyPath: m_AppearanceData.shoulderLeftID
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968812956063299916, guid: 37a17d93ea857464799b21d70b00a57a,
+        type: 3}
+      propertyPath: m_AppearanceData.elbowRightID
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968812956063299916, guid: 37a17d93ea857464799b21d70b00a57a,
+        type: 3}
+      propertyPath: m_AppearanceData.elbowLeftID
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968812956063299916, guid: 37a17d93ea857464799b21d70b00a57a,
+        type: 3}
+      propertyPath: m_AppearanceData.kneeRightID
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968812956063299916, guid: 37a17d93ea857464799b21d70b00a57a,
+        type: 3}
+      propertyPath: m_AppearanceData.kneeLeftID
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7666273751970890548, guid: 37a17d93ea857464799b21d70b00a57a,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -73,6 +73,7 @@ namespace GameWish.Game
         Hair,
         Skin,
         Eye,
+        FaceArt,
     }
 
 }
