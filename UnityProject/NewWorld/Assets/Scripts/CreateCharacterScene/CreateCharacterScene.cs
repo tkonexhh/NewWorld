@@ -32,8 +32,7 @@ namespace GameWish.Game
         private void Start()
         {
             UIMgr.S.OpenPanel(UIID.CreateCharacterPanel);
-            Debug.LogError(GameInputMgr.S.mainAction.enabled);
-
+            //UIMgr.S.OpenPanel(UIID.Inventorypanel);
         }
 
 

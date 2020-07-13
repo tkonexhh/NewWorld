@@ -34,6 +34,8 @@ namespace GameWish.Game
             UIDataTable.AddPanelData(UIID.MainMenuPanel, "MainMenuPanel");
             UIDataTable.AddPanelData(UIID.LoadingPanel, "LoadingPanel");
             UIDataTable.AddPanelData(UIID.CreateCharacterPanel, "CreateCharacterPanel");
+
+            UIDataTable.AddPanelData(UIID.Inventorypanel, "Inventorypanel");
         }
     }
 

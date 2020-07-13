@@ -16,6 +16,7 @@ namespace GameWish.Game
     public class Item
     {
         public int id;
+        public float weight;//重量
 
         public Item(int id)
         {

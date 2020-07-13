@@ -16,7 +16,10 @@ namespace GameWish.Game
     [System.Serializable]
     public class CharacterStatus
     {
+        public int strength;
+
         public float moveSpeed = 10;
+
 
 
         [Header("In Battle")]

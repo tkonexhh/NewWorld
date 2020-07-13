@@ -19,6 +19,8 @@ namespace GameWish.Game
         LoadingPanel,
         StartGamePanel,
         CreateCharacterPanel,
+        //Game
+        Inventorypanel,
     }
 
 }

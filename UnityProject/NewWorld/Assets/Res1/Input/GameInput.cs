@@ -27,22 +27,6 @@ namespace GameWish.Game
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
-                },
-                {
-                    ""name"": ""SetpUpRotate"",
-                    ""type"": ""Value"",
-                    ""id"": ""2f6b3a92-11bd-44f9-9e54-9934be8c35e0"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""SetpUpRotateMode"",
-                    ""type"": ""Button"",
-                    ""id"": ""7f4e272f-887d-44ea-8ba9-4c58370949ad"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -155,28 +139,6 @@ namespace GameWish.Game
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""66bb77f9-1492-4491-837e-111fbfe77d06"",
-                    ""path"": ""<Pointer>/delta"",
-                    ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=2,y=2)"",
-                    ""groups"": """",
-                    ""action"": ""SetpUpRotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""973117cf-006a-45f2-9fe4-3a98e3435a70"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SetpUpRotateMode"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -196,6 +158,22 @@ namespace GameWish.Game
                     ""name"": ""Move"",
                     ""type"": ""Button"",
                     ""id"": ""e8d1360e-4c24-4607-a533-72ecc11001fb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SetpUpRotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""7674ccc0-f445-4d0d-baa3-4e08a5f4f53c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SetpUpRotateMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""59ea45cd-7091-4c30-9abc-3a5b02fddecd"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -322,6 +300,28 @@ namespace GameWish.Game
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4132a3d7-eca2-439d-99d3-7ebd74e1fa56"",
+                    ""path"": ""<Pointer>/delta"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=2,y=2)"",
+                    ""groups"": """",
+                    ""action"": ""SetpUpRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51bef014-b058-4ff4-a1de-bd8724616fb0"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SetpUpRotateMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -343,12 +343,12 @@ namespace GameWish.Game
             // Main
             m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
             m_Main_Move = m_Main.FindAction("Move", throwIfNotFound: true);
-            m_Main_SetpUpRotate = m_Main.FindAction("SetpUpRotate", throwIfNotFound: true);
-            m_Main_SetpUpRotateMode = m_Main.FindAction("SetpUpRotateMode", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Any = m_UI.FindAction("Any", throwIfNotFound: true);
             m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
+            m_UI_SetpUpRotate = m_UI.FindAction("SetpUpRotate", throwIfNotFound: true);
+            m_UI_SetpUpRotateMode = m_UI.FindAction("SetpUpRotateMode", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -399,15 +399,11 @@ namespace GameWish.Game
         private readonly InputActionMap m_Main;
         private IMainActions m_MainActionsCallbackInterface;
         private readonly InputAction m_Main_Move;
-        private readonly InputAction m_Main_SetpUpRotate;
-        private readonly InputAction m_Main_SetpUpRotateMode;
         public struct MainActions
         {
             private @GameInput m_Wrapper;
             public MainActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Main_Move;
-            public InputAction @SetpUpRotate => m_Wrapper.m_Main_SetpUpRotate;
-            public InputAction @SetpUpRotateMode => m_Wrapper.m_Main_SetpUpRotateMode;
             public InputActionMap Get() { return m_Wrapper.m_Main; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -420,12 +416,6 @@ namespace GameWish.Game
                     @Move.started -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
-                    @SetpUpRotate.started -= m_Wrapper.m_MainActionsCallbackInterface.OnSetpUpRotate;
-                    @SetpUpRotate.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnSetpUpRotate;
-                    @SetpUpRotate.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnSetpUpRotate;
-                    @SetpUpRotateMode.started -= m_Wrapper.m_MainActionsCallbackInterface.OnSetpUpRotateMode;
-                    @SetpUpRotateMode.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnSetpUpRotateMode;
-                    @SetpUpRotateMode.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnSetpUpRotateMode;
                 }
                 m_Wrapper.m_MainActionsCallbackInterface = instance;
                 if (instance != null)
@@ -433,12 +423,6 @@ namespace GameWish.Game
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
-                    @SetpUpRotate.started += instance.OnSetpUpRotate;
-                    @SetpUpRotate.performed += instance.OnSetpUpRotate;
-                    @SetpUpRotate.canceled += instance.OnSetpUpRotate;
-                    @SetpUpRotateMode.started += instance.OnSetpUpRotateMode;
-                    @SetpUpRotateMode.performed += instance.OnSetpUpRotateMode;
-                    @SetpUpRotateMode.canceled += instance.OnSetpUpRotateMode;
                 }
             }
         }
@@ -449,12 +433,16 @@ namespace GameWish.Game
         private IUIActions m_UIActionsCallbackInterface;
         private readonly InputAction m_UI_Any;
         private readonly InputAction m_UI_Move;
+        private readonly InputAction m_UI_SetpUpRotate;
+        private readonly InputAction m_UI_SetpUpRotateMode;
         public struct UIActions
         {
             private @GameInput m_Wrapper;
             public UIActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @Any => m_Wrapper.m_UI_Any;
             public InputAction @Move => m_Wrapper.m_UI_Move;
+            public InputAction @SetpUpRotate => m_Wrapper.m_UI_SetpUpRotate;
+            public InputAction @SetpUpRotateMode => m_Wrapper.m_UI_SetpUpRotateMode;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -470,6 +458,12 @@ namespace GameWish.Game
                     @Move.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
+                    @SetpUpRotate.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSetpUpRotate;
+                    @SetpUpRotate.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSetpUpRotate;
+                    @SetpUpRotate.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSetpUpRotate;
+                    @SetpUpRotateMode.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSetpUpRotateMode;
+                    @SetpUpRotateMode.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSetpUpRotateMode;
+                    @SetpUpRotateMode.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSetpUpRotateMode;
                 }
                 m_Wrapper.m_UIActionsCallbackInterface = instance;
                 if (instance != null)
@@ -480,6 +474,12 @@ namespace GameWish.Game
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
+                    @SetpUpRotate.started += instance.OnSetpUpRotate;
+                    @SetpUpRotate.performed += instance.OnSetpUpRotate;
+                    @SetpUpRotate.canceled += instance.OnSetpUpRotate;
+                    @SetpUpRotateMode.started += instance.OnSetpUpRotateMode;
+                    @SetpUpRotateMode.performed += instance.OnSetpUpRotateMode;
+                    @SetpUpRotateMode.canceled += instance.OnSetpUpRotateMode;
                 }
             }
         }
@@ -496,13 +496,13 @@ namespace GameWish.Game
         public interface IMainActions
         {
             void OnMove(InputAction.CallbackContext context);
-            void OnSetpUpRotate(InputAction.CallbackContext context);
-            void OnSetpUpRotateMode(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {
             void OnAny(InputAction.CallbackContext context);
             void OnMove(InputAction.CallbackContext context);
+            void OnSetpUpRotate(InputAction.CallbackContext context);
+            void OnSetpUpRotateMode(InputAction.CallbackContext context);
         }
     }
 }
