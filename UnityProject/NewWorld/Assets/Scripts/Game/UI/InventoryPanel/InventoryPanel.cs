@@ -14,19 +14,9 @@ using GFrame;
 namespace GameWish.Game
 {
     public class InventoryPanel : AbstractPanel
-
     {
-        // Start is called before the first frame update
-        void Start()
-        {
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        [SerializeField] private SetupRole m_Role;
     }
 
 }

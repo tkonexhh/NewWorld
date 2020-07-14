@@ -11,7 +11,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-namespace Qarth
+namespace GFrame
 {
     public class PopButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {

@@ -2,10 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Qarth;
 using UnityEngine.UI;
 
-namespace Qarth
+namespace GFrame
 {
     public class ToggleExtend : MonoBehaviour
     {

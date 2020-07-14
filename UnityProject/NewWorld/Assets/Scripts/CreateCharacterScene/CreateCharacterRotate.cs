@@ -23,16 +23,16 @@ namespace GameWish.Game
         private void Start()
         {
 
-            GameInputMgr.S.uiAction.SetpUpRotateMode.started += OnSetUpRotateModeStart;
-            GameInputMgr.S.uiAction.SetpUpRotateMode.canceled += OnSetUpRotateModeCancled;
-            GameInputMgr.S.uiAction.SetpUpRotate.performed += OnSetUpRotate;
+            // GameInputMgr.S.uiAction.SetpUpRotateMode.started += OnSetUpRotateModeStart;
+            // GameInputMgr.S.uiAction.SetpUpRotateMode.canceled += OnSetUpRotateModeCancled;
+            // GameInputMgr.S.uiAction.SetpUpRotate.performed += OnSetUpRotate;
         }
 
         private void OnDestroy()
         {
-            GameInputMgr.S.uiAction.SetpUpRotateMode.started -= OnSetUpRotateModeStart;
-            GameInputMgr.S.uiAction.SetpUpRotateMode.canceled -= OnSetUpRotateModeCancled;
-            GameInputMgr.S.uiAction.SetpUpRotate.performed -= OnSetUpRotate;
+            // GameInputMgr.S.uiAction.SetpUpRotateMode.started -= OnSetUpRotateModeStart;
+            // GameInputMgr.S.uiAction.SetpUpRotateMode.canceled -= OnSetUpRotateModeCancled;
+            // GameInputMgr.S.uiAction.SetpUpRotate.performed -= OnSetUpRotate;
         }
 
         private void OnSetUpRotateModeStart(UnityEngine.InputSystem.InputAction.CallbackContext callback)

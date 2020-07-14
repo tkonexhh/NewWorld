@@ -44,6 +44,18 @@ namespace GFrame.Editor
             CreateUI(ProgressCircle);
         }
 
+        [MenuItem("GameObject/UI/Custom/Toggle")]
+        static void CreatToggle()
+        {
+            CreateUI(Toggle);
+        }
+
+        [MenuItem("GameObject/UI/Custom/LoopListView")]
+        static void CreatLoopListView()
+        {
+            //CreateUI(Toggle);
+        }
+
         private static void CreateUI(System.Func<GameObject> callback)
         {
             var canvasObj = SecurityCheck();
@@ -180,6 +192,36 @@ namespace GFrame.Editor
                 progress.SetProgress(0.6f);
             };
             return CreateGO<GProgress>("Progress_", callback);
+        }
+
+        private static GameObject Toggle()
+        {
+            System.Action<GameObject> callback = (go) =>
+            {
+                var toggle = go.GetComponent<Toggle>();
+                var image = go.AddComponent<NoOverdrawImage>();
+                toggle.targetGraphic = image;
+
+                GameObject enableGo = new GameObject("Enable");
+                enableGo.transform.SetParent(go.transform);
+                GameObject disableGo = new GameObject("Disable");
+                disableGo.transform.SetParent(go.transform);
+
+                var toggleExtend = go.AddComponent<ToggleExtend>();
+                ReflectionHelper.BindMenber(typeof(ToggleExtend), "m_Toggle", toggleExtend, toggle);
+                ReflectionHelper.BindMenber(typeof(ToggleExtend), "m_EnableStateRoot", toggleExtend, enableGo);
+                ReflectionHelper.BindMenber(typeof(ToggleExtend), "m_DisableStateRoot", toggleExtend, disableGo);
+            };
+            return CreateGO<Toggle>("Toggle_", callback);
+        }
+
+        private static GameObject LoopListView()
+        {
+            System.Action<GameObject> callback = (go) =>
+            {
+
+            };
+            return CreateGO<USimpleListView>("ListView_", callback);
         }
 
         #endregion 

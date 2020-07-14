@@ -12,6 +12,7 @@ using UnityEngine.UI;
 
 namespace GFrame
 {
+    //不渲染但可以相应点击
     public class NoOverdrawImage : Graphic
     {
         public override void Rebuild(CanvasUpdate update)
