@@ -5,7 +5,7 @@
 	Tip:7/14/2020 3:49:02 PM
 ************************/
 
-
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,24 +16,67 @@ namespace GameWish.Game
 {
     public class InventoryBag : MonoBehaviour
     {
-        [SerializeField] private Toggle m_Toggle;
+        [SerializeField] private Toggle m_ToggleEquipment;
+        [SerializeField] private Toggle m_ToggleMaterial;
         [SerializeField] private IUListView m_ListView;
 
+        private List<AbstractItem> m_ShowItems = new List<AbstractItem>();
         private void Awake()
         {
-            m_Toggle.onValueChanged.AddListener(Test);
+            InventoryMgr.S.AddItem(1);
+            InventoryMgr.S.AddItem(1, 10);
+            InventoryMgr.S.AddItem(2, 3);
+            InventoryMgr.S.AddItem(2, 3);
+            InventoryMgr.S.AddItem(3);
+            InventoryMgr.S.AddItem(4);
+            InventoryMgr.S.AddItem(4);
+            InventoryMgr.S.AddItem(4);
+            InventoryMgr.S.AddItem(4);
+
+            m_ToggleEquipment.onValueChanged.AddListener(ShowEquipment);
+            m_ToggleMaterial.onValueChanged.AddListener(ShowSupply);
             m_ListView.SetCellRenderer(OnCellRenderer);
-            m_ListView.SetDataCount(200);
+
+
+            m_ToggleEquipment.isOn = false;
+            m_ToggleEquipment.Select();
         }
 
-        private void Test(bool ison)
+        private void ShowEquipment(bool ison)
         {
-            Debug.LogError(ison);
+            if (ison)
+            {
+                ShowPage(InventoryItemType.Equipment);
+            }
+        }
+
+        private void ShowSupply(bool ison)
+        {
+            if (ison)
+            {
+                ShowPage(InventoryItemType.Supplies);
+            }
+        }
+
+        private void ShowPage(InventoryItemType type)
+        {
+            m_ShowItems.Clear();
+            switch (type)
+            {
+                case InventoryItemType.Equipment:
+                    m_ShowItems = InventoryMgr.S.LstEquipment.Cast<AbstractItem>().ToList();
+                    break;
+                case InventoryItemType.Supplies:
+                    m_ShowItems = InventoryMgr.S.LstSupply.Cast<AbstractItem>().ToList();
+                    break;
+            }
+
+            m_ListView.SetDataCount(m_ShowItems.Count);
         }
 
         private void OnCellRenderer(Transform root, int index)
         {
-
+            root.GetComponent<InventoryBagItem>().SetData(m_ShowItems[index]);
         }
     }
 

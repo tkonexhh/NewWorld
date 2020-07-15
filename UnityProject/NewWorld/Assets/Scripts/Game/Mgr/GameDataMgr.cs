@@ -19,6 +19,7 @@ namespace GameWish.Game
         {
             InitCharacterAppearanceData();
             //InitEquipmentData();
+            InitItemData();
         }
 
         public void Init()
@@ -33,7 +34,6 @@ namespace GameWish.Game
             while (reader.Read())
             {
                 TDCharacterAppearanceTable.Parse(reader);
-
             }
         }
 
@@ -63,6 +63,16 @@ namespace GameWish.Game
                     return EquipmentType.Length;
             }
 
+        }
+
+        private void InitItemData()
+        {
+            var database = SQLMgr.S.Open("Game");
+            var reader = database.LoadTable("Item");
+            while (reader.Read())
+            {
+                TDItemTable.Parse(reader);
+            }
         }
 
     }

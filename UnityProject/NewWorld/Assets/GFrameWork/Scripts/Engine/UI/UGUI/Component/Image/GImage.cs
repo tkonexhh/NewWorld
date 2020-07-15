@@ -12,7 +12,6 @@ using UnityEngine.UI;
 
 namespace GFrame
 {
-    [RequireComponent(typeof(Image))]
     public class GImage : Image
     {
         public string I18Nkey;

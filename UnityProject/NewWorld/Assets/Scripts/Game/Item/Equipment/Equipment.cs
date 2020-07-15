@@ -15,17 +15,18 @@ namespace GameWish.Game
 {
 
 
-    public class Equipment : Item, IEquipment
+    public class Equipment : AbstractItem, IEquipment
     {
         private EquipmentType m_Type;
         public EquipmentAppearance m_Appearance;
         private EquipmentStatus m_Status;
 
-        public Equipment(int id) : base(id)
+        public Equipment(long id) : base(id)
         {
 
         }
 
+        #region IEquip
         public void Equip(Character character)
         {
             m_Appearance.ApplyAppearance(character.appearance);
@@ -35,6 +36,11 @@ namespace GameWish.Game
         {
             //m_Appearance.ApplyAppearance(character.appearance);
         }
+        #endregion
+
+
+        #region abstractItem
+        #endregion
 
     }
 

@@ -17,6 +17,7 @@ namespace GameWish.Game
     {
         Equipment,
         Material,//材料
+        Supplies,//消耗品
     }
 
 }

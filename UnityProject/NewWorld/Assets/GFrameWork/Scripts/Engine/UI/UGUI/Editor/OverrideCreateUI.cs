@@ -202,9 +202,20 @@ namespace GFrame.Editor
                 var image = go.AddComponent<NoOverdrawImage>();
                 toggle.targetGraphic = image;
 
+                if (go.transform.parent != null)
+                {
+                    var toggleGroup = go.transform.parent.GetComponent<ToggleGroup>();
+                    if (toggleGroup != null)
+                    {
+                        toggle.group = toggleGroup;
+                    }
+                }
+
                 GameObject enableGo = new GameObject("Enable");
+                enableGo.AddComponent<RectTransform>();
                 enableGo.transform.SetParent(go.transform);
                 GameObject disableGo = new GameObject("Disable");
+                disableGo.AddComponent<RectTransform>();
                 disableGo.transform.SetParent(go.transform);
 
                 var toggleExtend = go.AddComponent<ToggleExtend>();
@@ -252,12 +263,10 @@ namespace GFrame.Editor
         private static GameObject CreateGO<T>(string defaultName, System.Action<GameObject> callback)
         {
             GameObject go = new GameObject(defaultName, typeof(T));
-
-            callback(go);
-
             go.transform.SetParent(Selection.activeTransform);
             go.transform.SetLocalPos(Vector3.zero);
             Selection.activeGameObject = go;
+            callback(go);
             return go;
         }
 

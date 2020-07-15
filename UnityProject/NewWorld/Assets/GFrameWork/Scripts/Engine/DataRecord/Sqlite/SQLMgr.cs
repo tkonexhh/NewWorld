@@ -15,6 +15,17 @@ using UnityEngine;
 namespace GFrame
 {
 
+    /// <summary>
+    /// 枚举数据库Sqlite支持的几种类型
+    /// </summary>
+    public enum ColType
+    {
+        INTEGER,
+        TEXT,
+        REAL,
+        BLOB
+    }
+
     public class SQLMgr : TSingleton<SQLMgr>
     {
         private Dictionary<string, SqliteDatabase> m_DatabaseMap = new Dictionary<string, SqliteDatabase>();
