@@ -26,11 +26,11 @@ namespace GameWish.Game
             data.name = (string)reader[2];
             data.type = (string)reader[3];
             data.iconName = (string)reader[4];
-            Debug.LogError(reader[5]);
-            Debug.LogError((float)reader[5]);
-            // if (reader[5] != null)
-            //     Debug.LogError((double)reader[5]);
 
+            if (reader[5] != null)
+            {
+                data.weight = (float)reader[5];
+            }
             s_ItemMap.Add(data.id, data);
         }
 

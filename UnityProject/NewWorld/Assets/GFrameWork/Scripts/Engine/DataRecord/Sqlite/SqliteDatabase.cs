@@ -63,6 +63,16 @@ namespace GFrame
 
         }
 
+        public SqliteDataReader GetAllTableName()
+        {
+            return ExecuteQuery("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;");
+        }
+
+        public SqliteDataReader GetTableInfo(string tableName)
+        {
+            return ExecuteQuery("PRAGMA table_info([" + tableName + "])");
+        }
+
         public SqliteDataReader LoadTable(string tableName)
         {
             // m_SqlCommand.

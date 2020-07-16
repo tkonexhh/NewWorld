@@ -34,17 +34,40 @@ namespace GFrame
         {
         }
 
-        // public void Init()
-        // {
-        //     var reader = m_Database.LoadTable("Item");
-        //     while (reader.Read())
-        //     {
-        //         for (int i = 0; i < reader.FieldCount; i++)
-        //         {
-        //             Debug.Log(reader[i].ToString());
-        //         }
-        //     }
-        // }
+        #region static
+        public static ColType GetColType(string type)
+        {
+            switch (type)
+            {
+                case "INTEGER":
+                    return ColType.INTEGER;
+                case "TEXT":
+                    return ColType.TEXT;
+                case "REAL":
+                    return ColType.REAL;
+                case "BLOB":
+                    return ColType.BLOB;
+            }
+            return ColType.TEXT;
+        }
+
+        public static System.Type GetType(string type)
+        {
+            switch (type)
+            {
+                case "INTEGER":
+                    return typeof(long);
+                case "TEXT":
+                    return typeof(string);
+                case "REAL":
+                    return typeof(float);
+                case "BLOB":
+                    return typeof(byte[]);
+            }
+            return typeof(string);
+        }
+
+        #endregion
 
         public SqliteDatabase Open(string dbName)
         {

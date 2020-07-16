@@ -13,14 +13,14 @@ using UnityEngine;
 
 namespace GameWish.Game
 {
-    public class TDItem
+    public partial class TDItem
     {
         public long id;
         public long subId;
         public string name;
         public string type;
         public string iconName;
-        public float weight;
+        public float weight = 0;
 
         public ItemType itemType
         {

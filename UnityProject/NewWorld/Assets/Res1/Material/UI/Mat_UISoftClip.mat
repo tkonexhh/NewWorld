@@ -57,8 +57,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _ClipSoftX: 15
-    - _ClipSoftY: 15
+    - _ClipSoftX: 0
+    - _ClipSoftY: 50
     - _ColorMask: 15
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1

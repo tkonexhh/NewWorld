@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace GameWish.Game
 {
-    public class TDCharacterAppearance
+    public partial class TDCharacterAppearance
     {
 
         public long id;

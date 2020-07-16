@@ -38,6 +38,7 @@ namespace GameWish.Game
         {
             Log.i("#Init[GameMgr]");
             AddComponent(new UIDataModule());
+            AddComponent(new DataBaseModule());
         }
 
         protected override void OnModuleAwake()
