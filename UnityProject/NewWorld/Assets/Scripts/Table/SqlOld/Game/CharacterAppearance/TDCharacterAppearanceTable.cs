@@ -16,6 +16,7 @@ namespace GameWish.Game
 {
     public partial class TDCharacterAppearanceTable
     {
+        private static TDSqlMetaData m_MetaData = new TDSqlMetaData(TDCharacterAppearanceTable.Parse, "Game", "CharacterAppearance");
         private static TDCharacterAppearanceData_General m_HairData = new TDCharacterAppearanceData_General();
         private static TDCharacterAppearanceData_Sexual m_HeadData = new TDCharacterAppearanceData_Sexual();
         private static TDCharacterAppearanceData_Sexual m_FacialHairData = new TDCharacterAppearanceData_Sexual();

@@ -17,7 +17,11 @@ namespace GFrame
     {
         public const string referencedefaultPath = "Scripts/Game/UIScripts/";
         public const string prefabdefaultPath = "Resources/UI/Panels/";
-        public const string namespaceStr = "GameWish.Game";
+
+        public static string namespaceStr
+        {
+            get { return ProjectDefaultConfig.defaultNameSpace; }
+        }
         public const int space = 20;
 
 

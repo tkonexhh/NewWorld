@@ -7,7 +7,7 @@ namespace GFrame.Editor
 
     public class ScriptCreatorEditor : UnityEditor.AssetModificationProcessor
     {
-        static string namespaceName = "GameWish.Game";
+        static string namespaceName = ProjectDefaultConfig.defaultNameSpace;// "GameWish.Game";
         //static string namespaceNameEditor = "GFrame.Editor";
 
         /// <summary>
@@ -52,6 +52,7 @@ namespace GFrame.Editor
             newStr += "\tTip:" + System.DateTime.Now.ToString() + "\n";
             newStr += "************************/\n\n\n";
 
+
             //增加命名空间
             if (!str.Contains("namespace"))
             {
@@ -76,5 +77,6 @@ namespace GFrame.Editor
                 File.WriteAllText(Application.dataPath + path, newStr);
             }
         }
+
     }
 }

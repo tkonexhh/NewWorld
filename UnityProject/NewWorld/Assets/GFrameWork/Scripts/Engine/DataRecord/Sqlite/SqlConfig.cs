@@ -20,8 +20,20 @@ namespace GFrame
 
     public class TDSqlMetaData
     {
+        private OnSqlParse m_OnParse;
+        public OnSqlParse onParse
+        {
+            get { return m_OnParse; }
+        }
 
-
+        public string databaseName { get; set; }
+        public string tableName { get; set; }
+        public TDSqlMetaData(OnSqlParse onParse, string databaseName, string tableName)
+        {
+            m_OnParse = onParse;
+            this.databaseName = databaseName;
+            this.tableName = tableName;
+        }
     }
 
 }

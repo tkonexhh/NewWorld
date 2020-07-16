@@ -32,10 +32,17 @@ namespace GFrame.Editor
 
                     string tdClassName = "TD" + tableName;
 
+                    CodeCompileUnit unit = new CodeCompileUnit();
+                    CodeNamespace nameSpace = new CodeNamespace("GameWish.Game");
+
                     CodeTypeDeclaration tdClass = new CodeTypeDeclaration(tdClassName); //生成类
+                    tdClass.Comments.Add(new CodeCommentStatement("Auto Generate Don't Edit it"));
                     tdClass.IsPartial = true;
                     tdClass.IsClass = true;
                     tdClass.TypeAttributes = TypeAttributes.Public;
+                    nameSpace.Types.Add(tdClass);
+                    nameSpace.Imports.Add(new CodeNamespaceImport("GFrame"));
+                    unit.Namespaces.Add(nameSpace);
 
                     while (tableReader.Read())
                     {
@@ -65,15 +72,29 @@ namespace GFrame.Editor
                     string outputPath = dirName + tdClassName + ".cs";     //指定文件的输出路径
                     WriteCode(outputPath, tdClass);
 
-
                     //Table
                     string tdTableClassName = tdClassName + "Table";
                     string outputTablePath = dirName + tdTableClassName + ".cs";
                     CodeTypeDeclaration tdTableClass = new CodeTypeDeclaration(tdTableClassName); //生成类
                     tdTableClass.IsPartial = true;
                     tdTableClass.IsClass = true;
+                    tdTableClass.Attributes = MemberAttributes.Static;
                     tdTableClass.TypeAttributes = TypeAttributes.Public;
+
+                    //private static TDSqlMetaData m_MetaData = new TDSqlMetaData(TDCharacterAppearanceTable.Parse, "Game", "CharacterAppearance");
+                    CodeMemberField metaDataMember = new CodeMemberField(typeof(TDSqlMetaData), "m_MetaData");
+                    metaDataMember.Attributes = MemberAttributes.Private | MemberAttributes.Static;
+
+                    // metaDataMember.Statements.Add(new CodeVariableDeclarationStatement(
+                    //                new CodeTypeReference("CodeDOMCreatedClass"), "testClass",
+                    //                objectCreate));
+                    CodeObjectCreateExpression initExp = new CodeObjectCreateExpression();
+                    initExp.CreateType = metaDataMember.Type;
+                    metaDataMember.InitExpression = initExp;
+                    tdTableClass.Members.Add(metaDataMember);
+
                     WriteCode(outputTablePath, tdTableClass);
+
 
                     //Extend
                     string dirExtendName = Application.dataPath + "/" + ProjectPathConfig.tableCsharpPath + "Sql/Extend/" + dbName + "/" + tableName + "/";

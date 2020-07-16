@@ -16,8 +16,11 @@ namespace GFrame
     [System.Serializable]
     public class ProjectDefaultConfig : TScriptableObjectSingleton<ProjectDefaultConfig>
     {
+        [Header("UI")]
         [SerializeField] private Font m_DefaultTextFont;
         [SerializeField] private Color m_DefaultTextColor = Color.white;
+        [Header("Script")]
+        [SerializeField] private string m_DefaultNameSpace = "GameWish.Game";
 
 
         public static Font defaultTextFont
@@ -42,6 +45,23 @@ namespace GFrame
             get
             {
                 return S.m_DefaultTextColor;
+            }
+        }
+
+
+        public static string defaultNameSpace
+        {
+            get
+            {
+                if (S == null)
+                {
+                    return "GameWish.Game";
+                }
+                else
+                {
+                    return S.m_DefaultNameSpace;
+                }
+
             }
         }
 

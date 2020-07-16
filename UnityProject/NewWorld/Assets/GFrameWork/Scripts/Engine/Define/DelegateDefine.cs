@@ -9,13 +9,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Mono.Data.Sqlite;
 
 namespace GFrame
 {
-    public class DelegateDefine
-    {
-        public delegate void OnSqlParse();
-    }
+
+    public delegate void OnSqlParse(SqliteDataReader reader);
+
 
 }
