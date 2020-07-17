@@ -1,4 +1,4 @@
-//Auto Generate Don't Edit it
+﻿//Auto Generate Don't Edit it
 using UnityEngine;
 using System;
 using System.IO;
@@ -7,34 +7,37 @@ using System.Collections.Generic;
 using Mono.Data.Sqlite;
 using GFrame;
 
-namespace {{.NameSpace}}
+namespace GameWish.Game
 {
-    public static partial class TD{{.ClassName}}Table
+    public static partial class TDItemTable
     {
-        private static TDSqlMetaData m_MetaData = new TDSqlMetaData(TD{{.ClassName}}Table.OnAddRow, "{{.DataBaseName}}", "{{.TableName}}");
+        private static TDSqlMetaData m_MetaData = new TDSqlMetaData(TDItemTable.OnAddRow, "Game", "Item");
 
         public static TDSqlMetaData metaData
         {
             get { return m_MetaData; }
         }
         
-        private static Dictionary<{{.KeyType}}, TD{{.ClassName}}> m_DataCache = new Dictionary<{{.KeyType}}, TD{{.ClassName}}>();
-        private static List<TD{{.ClassName}}> m_DataList = new List<TD{{.ClassName}} >();
+        private static Dictionary<long, TDItem> m_DataCache = new Dictionary<long, TDItem>();
+        private static List<TDItem> m_DataList = new List<TDItem >();
         
         public static void OnAddRow(SqliteDataReader reader)
         {
-            TD{{.ClassName}} data = new TD{{.ClassName}}();
-            data.ReadRow(reader);
+            TDItem data = new TDItem();
+
+            
+
             OnAddData(data);
             CompleteRowAdd(data);
+
         }
 
-        private static void OnAddData(TD{{.ClassName}} memberInstance)
+        private static void OnAddData(TDItem memberInstance)
         {
-            {{.KeyType}} key = memberInstance.{{.KeyPropName}};
+            long key = memberInstance.id;
             if (m_DataCache.ContainsKey(key))
             {
-                Log.e(string.Format("Invaild,  TD{{.ClassName}}Table Id already exists {0}", key));
+                Log.e(string.Format("Invaild,  TDItemTable Id already exists {0}", key));
             }
             else
             {
@@ -51,7 +54,7 @@ namespace {{.NameSpace}}
             }
         }
 
-        public static List<TD{{.ClassName}}> dataList
+        public static List<TDItem> dataList
         {
             get 
             {
@@ -59,7 +62,7 @@ namespace {{.NameSpace}}
             }    
         }
 
-        public static TD{{.ClassName}} GetData({{.KeyType}} key)
+        public static TDItem GetData(long key)
         {
             if (m_DataCache.ContainsKey(key))
             {
@@ -67,7 +70,7 @@ namespace {{.NameSpace}}
             }
             else
             {
-                Log.w(string.Format("Can't find key {0} in TD{{.ClassName}}", key));
+                Log.w(string.Format("Can't find key {0} in TDItem", key));
                 return null;
             }
         }

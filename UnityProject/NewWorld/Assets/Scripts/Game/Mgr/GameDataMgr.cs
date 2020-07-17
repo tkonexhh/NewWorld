@@ -33,7 +33,7 @@ namespace GameWish.Game
             var reader = database.LoadTable("CharacterAppearance");
             while (reader.Read())
             {
-                TDCharacterAppearanceTable.Parse(reader);
+                TDCharacterAppearanceTable.OnAddRow(reader);
             }
         }
 

@@ -8,14 +8,19 @@ using System.Reflection;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.IO;
+using System.Text;
 
 namespace GFrame.Editor
 {
     public class SQlEditor : UnityEditor.Editor
     {
-        [MenuItem("Assets/GFrame/SQL/Table To C#", false, 0)]
+        [MenuItem("Assets/GFrame/SQL/Table To C#")]
         public static void SQLTableToCSharp()
         {
+            //读取文件信息
+
+
+
             var folder = FileHelper.GetDictionary(Application.dataPath + "/" + ProjectPathConfig.DataBasePath);
             var db = folder.GetFiles("*.db");
             for (int i = 0; i < db.Length; i++)
@@ -30,111 +35,79 @@ namespace GFrame.Editor
                     string tableName = (string)reader[0];
                     var tableReader = database.GetTableInfo(tableName);
 
-                    string tdClassName = "TD" + tableName;
-
-                    CodeCompileUnit unit = new CodeCompileUnit();
-                    CodeNamespace nameSpace = new CodeNamespace("GameWish.Game");
-
-                    CodeTypeDeclaration tdClass = new CodeTypeDeclaration(tdClassName); //生成类
-                    tdClass.Comments.Add(new CodeCommentStatement("Auto Generate Don't Edit it"));
-                    tdClass.IsPartial = true;
-                    tdClass.IsClass = true;
-                    tdClass.TypeAttributes = TypeAttributes.Public;
-                    nameSpace.Types.Add(tdClass);
-                    nameSpace.Imports.Add(new CodeNamespaceImport("GFrame"));
-                    unit.Namespaces.Add(nameSpace);
-
-                    while (tableReader.Read())
-                    {
-                        string name = (string)tableReader[1];
-                        string typeName = (string)tableReader[2];
-
-                        CodeMemberField member = new CodeMemberField(SQLMgr.GetType(typeName), "m_" + name); //生成字段
-                        //添加注释
-                        //member.Comments.Add(new CodeCommentStatement("asdasdasd"));
-                        member.Attributes = MemberAttributes.Private;
-                        tdClass.Members.Add(member); //把生成的字段加入到生成的类中
-
-                        CodeMemberProperty property = new CodeMemberProperty();
-                        property.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-                        property.Type = member.Type;
-                        property.HasGet = true;
-                        property.Name = name;
-                        // 返回属性值
-                        CodeMethodReturnStatement ret = new CodeMethodReturnStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), member.Name));
-                        property.GetStatements.Add(ret);
-                        tdClass.Members.Add(property);
-                    }
-
                     string dirName = Application.dataPath + "/" + ProjectPathConfig.tableCsharpPath + "Sql/Genetate/" + dbName + "/" + tableName + "/";
-                    FileHelper.CreateDirctory(dirName);
-
-                    string outputPath = dirName + tdClassName + ".cs";     //指定文件的输出路径
-                    WriteCode(outputPath, tdClass);
-
-                    //Table
-                    string tdTableClassName = tdClassName + "Table";
-                    string outputTablePath = dirName + tdTableClassName + ".cs";
-                    CodeTypeDeclaration tdTableClass = new CodeTypeDeclaration(tdTableClassName); //生成类
-                    tdTableClass.IsPartial = true;
-                    tdTableClass.IsClass = true;
-                    tdTableClass.Attributes = MemberAttributes.Static;
-                    tdTableClass.TypeAttributes = TypeAttributes.Public;
-
-                    //private static TDSqlMetaData m_MetaData = new TDSqlMetaData(TDCharacterAppearanceTable.Parse, "Game", "CharacterAppearance");
-                    CodeMemberField metaDataMember = new CodeMemberField(typeof(TDSqlMetaData), "m_MetaData");
-                    metaDataMember.Attributes = MemberAttributes.Private | MemberAttributes.Static;
-
-                    // metaDataMember.Statements.Add(new CodeVariableDeclarationStatement(
-                    //                new CodeTypeReference("CodeDOMCreatedClass"), "testClass",
-                    //                objectCreate));
-                    CodeObjectCreateExpression initExp = new CodeObjectCreateExpression();
-                    initExp.CreateType = metaDataMember.Type;
-                    metaDataMember.InitExpression = initExp;
-                    tdTableClass.Members.Add(metaDataMember);
-
-                    WriteCode(outputTablePath, tdTableClass);
-
-
-                    //Extend
+                    GenerateDataFile(tableName, tableReader, dirName);
+                    GenerateDataTableFile(dbName, tableName, tableReader, dirName);
                     string dirExtendName = Application.dataPath + "/" + ProjectPathConfig.tableCsharpPath + "Sql/Extend/" + dbName + "/" + tableName + "/";
-                    FileHelper.CreateDirctory(dirExtendName);
-                    string outputPathExtend = dirExtendName + tdClassName + "Extend.cs";
-                    GenerateExtend(outputPathExtend, tdClassName);
+                    GenratteDataTableExtendFile(tableName, dirExtendName);
 
-                    string outputPathTabelExtend = dirExtendName + tdTableClassName + "Extend.cs";
-                    GenerateExtend(outputPathTabelExtend, tdTableClassName);
                 }
-
             }
+
             AssetDatabase.Refresh();
-
         }
 
-        private static void GenerateExtend(string path, string className)
+        private static void GenerateDataFile(string tableName, SqliteDataReader tableReader, string dirName)
         {
-            if (!FileHelper.IsExists(path))
-            {
-                CodeTypeDeclaration tdExtendClass = new CodeTypeDeclaration(className); //生成类
-                tdExtendClass.IsPartial = true;
-                tdExtendClass.IsClass = true;
-                tdExtendClass.TypeAttributes = TypeAttributes.Public;
+            string tmplPath = Application.dataPath + "/GFrameWork/InternalResources/template/Data.tmpl";
 
-                WriteCode(path, tdExtendClass);
+            string className = tableName;
+
+            string textData = FileHelper.ReadText(tmplPath);
+            textData = textData.Replace("{{.NameSpace}}", ProjectDefaultConfig.defaultNameSpace);
+            textData = textData.Replace("{{.ClassName}}", tableName);
+            StringBuilder variable = new StringBuilder();
+            StringBuilder member = new StringBuilder();
+            while (tableReader.Read())
+            {
+                string name = (string)tableReader[1];
+                string typeName = (string)tableReader[2];
+
+                variable.Append("\t\tprivate " + SQLMgr.GetTypeStr(typeName) + " m_" + name + ";\n");
+                member.Append("\t\tpublic " + SQLMgr.GetTypeStr(typeName) + " " + name + "\n");
+                member.Append("\t\t{\n");
+                member.Append("\t\t\tget {return m_" + name + ";}\n");
+                member.Append("\t\t}\n");
             }
+            textData = textData.Replace("{{.Attribute}}}", variable.ToString());
+            textData = textData.Replace("{{.Mebmber}}", member.ToString());
+
+
+            FileHelper.CreateDirctory(dirName);
+            string outputPath = dirName + "TD" + className + ".cs";
+            FileHelper.WriteText(outputPath, textData.ToString());
         }
 
-        private static void WriteCode(string path, CodeTypeDeclaration classDeclaration)
+        private static void GenerateDataTableFile(string databaseName, string tableName, SqliteDataReader tableReader, string dirName)
         {
-            CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
-            CodeGeneratorOptions options = new CodeGeneratorOptions();    //代码生成风格
-            options.BracingStyle = "C";
-            options.BlankLinesBetweenMembers = true;
+            string tmplPath = Application.dataPath + "/GFrameWork/InternalResources/template/DataTable.tmpl";
 
-            using (StreamWriter sw = new StreamWriter(path))
-            {
-                provider.GenerateCodeFromType(classDeclaration, sw, options); //生成文件
-            }
+            string className = tableName;
+            string textData = FileHelper.ReadText(tmplPath);
+            textData = textData.Replace("{{.NameSpace}}", ProjectDefaultConfig.defaultNameSpace);
+            textData = textData.Replace("{{.ClassName}}", tableName);
+            textData = textData.Replace("{{.DataBaseName}}", databaseName);
+            textData = textData.Replace("{{.TableName}}", tableName);
+            textData = textData.Replace("{{.KeyType}}", "long");
+            textData = textData.Replace("{{.KeyPropName}}", "id");
+
+            FileHelper.CreateDirctory(dirName);
+            string outputPath = dirName + "TD" + className + "Table.cs";
+            FileHelper.WriteText(outputPath, textData.ToString());
+        }
+
+        private static void GenratteDataTableExtendFile(string tableName, string dirName)
+        {
+            string className = tableName;
+            string outputPath = dirName + "TD" + className + "TableExtend.cs";
+            if (FileHelper.IsExists(outputPath)) return;
+
+            string tmplPath = Application.dataPath + "/GFrameWork/InternalResources/template/DataTableExtend.tmpl";
+            string textData = FileHelper.ReadText(tmplPath);
+            textData = textData.Replace("{{.NameSpace}}", ProjectDefaultConfig.defaultNameSpace);
+            textData = textData.Replace("{{.ClassName}}", tableName);
+            FileHelper.CreateDirctory(dirName);
+            FileHelper.WriteText(outputPath, textData.ToString());
         }
 
     }

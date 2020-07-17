@@ -1,4 +1,4 @@
-//Auto Generate Don't Edit it
+﻿//Auto Generate Don't Edit it
 using UnityEngine;
 using System;
 using System.IO;
@@ -7,34 +7,37 @@ using System.Collections.Generic;
 using Mono.Data.Sqlite;
 using GFrame;
 
-namespace {{.NameSpace}}
+namespace GameWish.Game
 {
-    public static partial class TD{{.ClassName}}Table
+    public static partial class TDEquipmentAppearanceTable
     {
-        private static TDSqlMetaData m_MetaData = new TDSqlMetaData(TD{{.ClassName}}Table.OnAddRow, "{{.DataBaseName}}", "{{.TableName}}");
+        private static TDSqlMetaData m_MetaData = new TDSqlMetaData(TDEquipmentAppearanceTable.OnAddRow, "Game", "EquipmentAppearance");
 
         public static TDSqlMetaData metaData
         {
             get { return m_MetaData; }
         }
         
-        private static Dictionary<{{.KeyType}}, TD{{.ClassName}}> m_DataCache = new Dictionary<{{.KeyType}}, TD{{.ClassName}}>();
-        private static List<TD{{.ClassName}}> m_DataList = new List<TD{{.ClassName}} >();
+        private static Dictionary<long, TDEquipmentAppearance> m_DataCache = new Dictionary<long, TDEquipmentAppearance>();
+        private static List<TDEquipmentAppearance> m_DataList = new List<TDEquipmentAppearance >();
         
         public static void OnAddRow(SqliteDataReader reader)
         {
-            TD{{.ClassName}} data = new TD{{.ClassName}}();
-            data.ReadRow(reader);
+            TDEquipmentAppearance data = new TDEquipmentAppearance();
+
+            
+
             OnAddData(data);
             CompleteRowAdd(data);
+
         }
 
-        private static void OnAddData(TD{{.ClassName}} memberInstance)
+        private static void OnAddData(TDEquipmentAppearance memberInstance)
         {
-            {{.KeyType}} key = memberInstance.{{.KeyPropName}};
+            long key = memberInstance.id;
             if (m_DataCache.ContainsKey(key))
             {
-                Log.e(string.Format("Invaild,  TD{{.ClassName}}Table Id already exists {0}", key));
+                Log.e(string.Format("Invaild,  TDEquipmentAppearanceTable Id already exists {0}", key));
             }
             else
             {
@@ -51,7 +54,7 @@ namespace {{.NameSpace}}
             }
         }
 
-        public static List<TD{{.ClassName}}> dataList
+        public static List<TDEquipmentAppearance> dataList
         {
             get 
             {
@@ -59,7 +62,7 @@ namespace {{.NameSpace}}
             }    
         }
 
-        public static TD{{.ClassName}} GetData({{.KeyType}} key)
+        public static TDEquipmentAppearance GetData(long key)
         {
             if (m_DataCache.ContainsKey(key))
             {
@@ -67,7 +70,7 @@ namespace {{.NameSpace}}
             }
             else
             {
-                Log.w(string.Format("Can't find key {0} in TD{{.ClassName}}", key));
+                Log.w(string.Format("Can't find key {0} in TDEquipmentAppearance", key));
                 return null;
             }
         }

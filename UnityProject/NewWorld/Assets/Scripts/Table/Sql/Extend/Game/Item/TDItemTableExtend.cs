@@ -1,16 +1,16 @@
-/************************
-	FileName:/Scripts/Table/Sql/Extend/Game/Item/TDItemTableExtend.cs
-	CreateAuthor:neo.xu
-	CreateTime:7/16/2020 4:38:44 PM
-	Tip:7/16/2020 4:38:44 PM
-************************/
-
-
+﻿using UnityEngine;
+using System;
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace GameWish.Game
 {
-	public partial class TDItemTable
-	{
-	}
-	
+    public partial class TDItemTable
+    {
+        static void CompleteRowAdd(TDItem tdData)
+        {
+
+        }
+    }
 }

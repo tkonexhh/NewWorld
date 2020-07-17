@@ -67,6 +67,22 @@ namespace GFrame
             return typeof(string);
         }
 
+        public static string GetTypeStr(string type)
+        {
+            switch (type)
+            {
+                case "INTEGER":
+                    return "long";
+                case "TEXT":
+                    return "string";
+                case "REAL":
+                    return "float";
+                case "BLOB":
+                    return "byte[]";
+            }
+            return "string";
+        }
+
         #endregion
 
         public SqliteDatabase Open(string dbName)

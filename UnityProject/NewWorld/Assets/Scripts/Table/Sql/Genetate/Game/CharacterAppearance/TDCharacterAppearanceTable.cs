@@ -1,4 +1,4 @@
-//Auto Generate Don't Edit it
+﻿//Auto Generate Don't Edit it
 using UnityEngine;
 using System;
 using System.IO;
@@ -7,59 +7,59 @@ using System.Collections.Generic;
 using Mono.Data.Sqlite;
 using GFrame;
 
-namespace {{.NameSpace}}
+namespace GameWish.Game
 {
-    public static partial class TD{{.ClassName}}Table
+    public static partial class TDCharacterAppearanceTable
     {
-        private static TDSqlMetaData m_MetaData = new TDSqlMetaData(TD{{.ClassName}}Table.OnAddRow, "{{.DataBaseName}}", "{{.TableName}}");
+        private static TDSqlMetaData m_MetaData = new TDSqlMetaData(TDCharacterAppearanceTable.OnAddRow, "Game", "CharacterAppearance");
 
         public static TDSqlMetaData metaData
         {
             get { return m_MetaData; }
         }
-        
-        private static Dictionary<{{.KeyType}}, TD{{.ClassName}}> m_DataCache = new Dictionary<{{.KeyType}}, TD{{.ClassName}}>();
-        private static List<TD{{.ClassName}}> m_DataList = new List<TD{{.ClassName}} >();
-        
+
+        private static Dictionary<long, TDCharacterAppearance> m_DataCache = new Dictionary<long, TDCharacterAppearance>();
+        private static List<TDCharacterAppearance> m_DataList = new List<TDCharacterAppearance>();
+
         public static void OnAddRow(SqliteDataReader reader)
         {
-            TD{{.ClassName}} data = new TD{{.ClassName}}();
+            TDCharacterAppearance data = new TDCharacterAppearance();
             data.ReadRow(reader);
             OnAddData(data);
             CompleteRowAdd(data);
         }
 
-        private static void OnAddData(TD{{.ClassName}} memberInstance)
+        private static void OnAddData(TDCharacterAppearance memberInstance)
         {
-            {{.KeyType}} key = memberInstance.{{.KeyPropName}};
+            long key = memberInstance.ID;
             if (m_DataCache.ContainsKey(key))
             {
-                Log.e(string.Format("Invaild,  TD{{.ClassName}}Table Id already exists {0}", key));
+                Log.e(string.Format("Invaild,  TDCharacterAppearanceTable Id already exists {0}", key));
             }
             else
             {
                 m_DataCache.Add(key, memberInstance);
                 m_DataList.Add(memberInstance);
             }
-        } 
+        }
 
         public static int count
         {
-            get 
+            get
             {
                 return m_DataCache.Count;
             }
         }
 
-        public static List<TD{{.ClassName}}> dataList
+        public static List<TDCharacterAppearance> dataList
         {
-            get 
+            get
             {
                 return m_DataList;
-            }    
+            }
         }
 
-        public static TD{{.ClassName}} GetData({{.KeyType}} key)
+        public static TDCharacterAppearance GetData(long key)
         {
             if (m_DataCache.ContainsKey(key))
             {
@@ -67,7 +67,7 @@ namespace {{.NameSpace}}
             }
             else
             {
-                Log.w(string.Format("Can't find key {0} in TD{{.ClassName}}", key));
+                Log.w(string.Format("Can't find key {0} in TDCharacterAppearance", key));
                 return null;
             }
         }

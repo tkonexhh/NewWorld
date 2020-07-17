@@ -34,16 +34,7 @@ namespace GameWish.Game
             s_ItemMap.Add(data.id, data);
         }
 
-        public static TDItem GetData(long id)
-        {
-            TDItem item = null;
-            if (s_ItemMap.TryGetValue(id, out item))
-            {
-                return item;
-            }
-            Log.w("Not Find Data By:" + id);
-            return null;
-        }
+
     }
 
 }

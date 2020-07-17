@@ -1,16 +1,16 @@
-/************************
-	FileName:/Scripts/Table/Sql/Extend/Game/Equipment/TDEquipmentTableExtend.cs
-	CreateAuthor:neo.xu
-	CreateTime:7/16/2020 4:38:44 PM
-	Tip:7/16/2020 4:38:44 PM
-************************/
-
-
+﻿using UnityEngine;
+using System;
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace GameWish.Game
 {
-	public partial class TDEquipmentTable
-	{
-	}
-	
+    public partial class TDEquipmentTable
+    {
+        static void CompleteRowAdd(TDEquipment tdData)
+        {
+
+        }
+    }
 }
