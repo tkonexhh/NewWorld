@@ -24,17 +24,15 @@ namespace GameWish.Game
         public static void OnAddRow(SqliteDataReader reader)
         {
             TDEquipmentAppearance data = new TDEquipmentAppearance();
-
-            
-
+            data.ReadRow(reader);
             OnAddData(data);
+            data.Reset();
             CompleteRowAdd(data);
-
         }
 
         private static void OnAddData(TDEquipmentAppearance memberInstance)
         {
-            long key = memberInstance.id;
+            long key = memberInstance.ID;
             if (m_DataCache.ContainsKey(key))
             {
                 Log.e(string.Format("Invaild,  TDEquipmentAppearanceTable Id already exists {0}", key));

@@ -44,7 +44,7 @@ namespace GameWish.Game
 
         public string GetName()
         {
-            return Conf.name;
+            return Conf.Name;
         }
 
     }

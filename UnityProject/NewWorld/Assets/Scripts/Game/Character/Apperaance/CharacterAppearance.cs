@@ -242,25 +242,25 @@ namespace GameWish.Game
         public void SetHair(int id)
         {
             TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.Hair, m_AppearanceData.sex, id);
-            m_AppearanceData.basicAppearance.hairID = m_Hair.SetSkin(m_AppearanceData.sex, (int)data.appearance);
+            m_AppearanceData.basicAppearance.hairID = m_Hair.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
         }
 
         public void SetHead(int id)
         {
             TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.Head, m_AppearanceData.sex, id);
-            m_AppearanceData.basicAppearance.faceID = m_Head.SetSkin(m_AppearanceData.sex, (int)data.appearance);
+            m_AppearanceData.basicAppearance.faceID = m_Head.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
         }
 
         public void SetFacialHair(int id)
         {
             TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.FacialHair, m_AppearanceData.sex, id);
-            m_AppearanceData.basicAppearance.facialHairID = m_FacialHair.SetSkin(m_AppearanceData.sex, (int)data.appearance);
+            m_AppearanceData.basicAppearance.facialHairID = m_FacialHair.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
         }
 
         public void SetEyebrows(int id)
         {
             TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.EyeBrows, m_AppearanceData.sex, id);
-            m_AppearanceData.basicAppearance.eyeBrows = m_Eyebrows.SetSkin(m_AppearanceData.sex, (int)data.appearance);
+            m_AppearanceData.basicAppearance.eyeBrows = m_Eyebrows.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
         }
 
         public void SetTorso(int id)

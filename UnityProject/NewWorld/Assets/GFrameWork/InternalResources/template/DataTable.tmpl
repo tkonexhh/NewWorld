@@ -26,6 +26,7 @@ namespace {{.NameSpace}}
             TD{{.ClassName}} data = new TD{{.ClassName}}();
             data.ReadRow(reader);
             OnAddData(data);
+            data.Reset();
             CompleteRowAdd(data);
         }
 

@@ -1,18 +1,19 @@
 ﻿//Auto Generate Don't Edit it
+using Mono.Data.Sqlite;
 
 namespace GameWish.Game
 {
     public partial class TDItem
     {
 
-       		private long m_ID;
+        		private long m_ID;
 		private long m_SubID;
 		private string m_Name;
 		private string m_Type;
 		private string m_Icon;
 		private float m_Weight;
 
-       		public long ID
+        		public long ID
 		{
 			get {return m_ID;}
 		}
@@ -37,5 +38,17 @@ namespace GameWish.Game
 			get {return m_Weight;}
 		}
 
+
+		public void ReadRow(SqliteDataReader reader)
+        {
+       	   
+           			m_ID = (long)reader[0];
+			m_SubID = (long)reader[1];
+			m_Name = (string)reader[2];
+			m_Type = (string)reader[3];
+			m_Icon = (string)reader[4];
+			m_Weight = (float)reader[5];
+
+        }
     }
 }

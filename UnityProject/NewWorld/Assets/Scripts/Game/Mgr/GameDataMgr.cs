@@ -71,7 +71,7 @@ namespace GameWish.Game
             var reader = database.LoadTable("Item");
             while (reader.Read())
             {
-                TDItemTable.Parse(reader);
+                TDItemTable.OnAddRow(reader);
             }
         }
 

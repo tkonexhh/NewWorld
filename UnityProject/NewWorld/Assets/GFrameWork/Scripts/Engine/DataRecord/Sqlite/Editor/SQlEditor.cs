@@ -18,9 +18,6 @@ namespace GFrame.Editor
         public static void SQLTableToCSharp()
         {
             //读取文件信息
-
-
-
             var folder = FileHelper.GetDictionary(Application.dataPath + "/" + ProjectPathConfig.DataBasePath);
             var db = folder.GetFiles("*.db");
             for (int i = 0; i < db.Length; i++)
@@ -39,7 +36,8 @@ namespace GFrame.Editor
                     GenerateDataFile(tableName, tableReader, dirName);
                     GenerateDataTableFile(dbName, tableName, tableReader, dirName);
                     string dirExtendName = Application.dataPath + "/" + ProjectPathConfig.tableCsharpPath + "Sql/Extend/" + dbName + "/" + tableName + "/";
-                    GenratteDataTableExtendFile(tableName, dirExtendName);
+                    GenerateDataExtendFile(tableName, dirExtendName);
+                    GenerateDataTableExtendFile(tableName, dirExtendName);
 
                 }
             }
@@ -58,20 +56,27 @@ namespace GFrame.Editor
             textData = textData.Replace("{{.ClassName}}", tableName);
             StringBuilder variable = new StringBuilder();
             StringBuilder member = new StringBuilder();
+            StringBuilder initValue = new StringBuilder();
+            int index = 0;
             while (tableReader.Read())
             {
                 string name = (string)tableReader[1];
                 string typeName = (string)tableReader[2];
 
-                variable.Append("\t\tprivate " + SQLMgr.GetTypeStr(typeName) + " m_" + name + ";\n");
-                member.Append("\t\tpublic " + SQLMgr.GetTypeStr(typeName) + " " + name + "\n");
+                string typeStr = SQLMgr.GetTypeStr(typeName);
+
+                variable.Append("\t\tprivate " + typeStr + " m_" + name + ";\n");
+                member.Append("\t\tpublic " + typeStr + " " + name + "\n");
                 member.Append("\t\t{\n");
                 member.Append("\t\t\tget {return m_" + name + ";}\n");
                 member.Append("\t\t}\n");
+
+                initValue.Append("\t\tm_" + name + " = (" + typeStr + ")reader[" + index + "];\n");
+                index++;
             }
             textData = textData.Replace("{{.Attribute}}}", variable.ToString());
             textData = textData.Replace("{{.Mebmber}}", member.ToString());
-
+            textData = textData.Replace("{{.InitValue}}", initValue.ToString());
 
             FileHelper.CreateDirctory(dirName);
             string outputPath = dirName + "TD" + className + ".cs";
@@ -89,14 +94,28 @@ namespace GFrame.Editor
             textData = textData.Replace("{{.DataBaseName}}", databaseName);
             textData = textData.Replace("{{.TableName}}", tableName);
             textData = textData.Replace("{{.KeyType}}", "long");
-            textData = textData.Replace("{{.KeyPropName}}", "id");
+            textData = textData.Replace("{{.KeyPropName}}", "ID");
 
             FileHelper.CreateDirctory(dirName);
             string outputPath = dirName + "TD" + className + "Table.cs";
             FileHelper.WriteText(outputPath, textData.ToString());
         }
 
-        private static void GenratteDataTableExtendFile(string tableName, string dirName)
+        private static void GenerateDataExtendFile(string tableName, string dirName)
+        {
+            string className = tableName;
+            string outputPath = dirName + "TD" + className + "Extend.cs";
+            if (FileHelper.IsExists(outputPath)) return;
+
+            string tmplPath = Application.dataPath + "/GFrameWork/InternalResources/template/DataExtend.tmpl";
+            string textData = FileHelper.ReadText(tmplPath);
+            textData = textData.Replace("{{.NameSpace}}", ProjectDefaultConfig.defaultNameSpace);
+            textData = textData.Replace("{{.ClassName}}", tableName);
+            FileHelper.CreateDirctory(dirName);
+            FileHelper.WriteText(outputPath, textData.ToString());
+        }
+
+        private static void GenerateDataTableExtendFile(string tableName, string dirName)
         {
             string className = tableName;
             string outputPath = dirName + "TD" + className + "TableExtend.cs";

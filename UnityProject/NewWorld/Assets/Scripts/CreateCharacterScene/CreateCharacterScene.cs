@@ -32,7 +32,7 @@ namespace GameWish.Game
         private void Start()
         {
             UIMgr.S.OpenPanel(UIID.CreateCharacterPanel);
-            UIMgr.S.OpenPanel(UIID.Inventorypanel);
+            //UIMgr.S.OpenPanel(UIID.Inventorypanel);
         }
 
 
