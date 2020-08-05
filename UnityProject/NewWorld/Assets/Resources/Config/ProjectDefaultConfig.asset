@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultTextFont: {fileID: 12800000, guid: b185044385be4ec4082befe58fc63b22, type: 3}
   m_DefaultTextColor: {r: 1, g: 1, b: 1, a: 1}
+  m_DefaultNameSpace: GameWish.Game
