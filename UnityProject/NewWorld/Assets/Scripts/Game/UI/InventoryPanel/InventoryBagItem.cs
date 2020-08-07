@@ -19,12 +19,26 @@ namespace GameWish.Game
         [SerializeField] private Image m_ImgIcon;
         [SerializeField] private Text m_TxtName;
         [SerializeField] private Text m_TxtNum;
+        [SerializeField] private Button m_BtnBg;
+
+        private AbstractItem m_Item;
+
+        private void Awake()
+        {
+            m_BtnBg.onClick.AddListener(OnClickBg);
+        }
 
         public void SetData(AbstractItem item)
         {
+            m_Item = item;
             m_TxtName.text = item.GetName();
             m_TxtNum.text = item.num.ToString();
             m_TxtNum.gameObject.SetActive(item.num > 1);
+        }
+
+        private void OnClickBg()
+        {
+
         }
     }
 
