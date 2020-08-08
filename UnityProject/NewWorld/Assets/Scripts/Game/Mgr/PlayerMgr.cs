@@ -15,9 +15,9 @@ namespace GameWish.Game
 {
     public class PlayerMgr : TMonoSingleton<PlayerMgr>
     {
-        [SerializeField] ControlableCharacter m_Character;
-        [SerializeField] List<Character> m_Team;
-        public List<Character> Team
+
+        [SerializeField] List<Role> m_Team;
+        public List<Role> Team
         {
             get
             {
@@ -27,7 +27,6 @@ namespace GameWish.Game
 
         public void DoMove(Vector3 pos)
         {
-            m_Character.SetMovePos(pos);
         }
     }
 

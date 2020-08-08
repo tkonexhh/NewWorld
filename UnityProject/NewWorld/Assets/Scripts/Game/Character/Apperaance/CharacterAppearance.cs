@@ -33,7 +33,7 @@ namespace GameWish.Game
         private SkinnedMeshRenderer m_Renderer;
 
         [Header("外貌信息")]
-        public CharacterAppearanceData m_AppearanceData;
+        public RoleAppearanceData m_AppearanceData;
 
         [Header("骨骼信息")]
         public CharacterBone m_Bones;

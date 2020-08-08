@@ -22,7 +22,8 @@ namespace GameWish.Game
 
         private void Start()
         {
-
+            Role role = new Role();
+            //role.gameObject.SetActive();
             // GameInputMgr.S.uiAction.SetpUpRotateMode.started += OnSetUpRotateModeStart;
             // GameInputMgr.S.uiAction.SetpUpRotateMode.canceled += OnSetUpRotateModeCancled;
             // GameInputMgr.S.uiAction.SetpUpRotate.performed += OnSetUpRotate;

@@ -27,12 +27,12 @@ namespace GameWish.Game
         }
 
         #region IEquip
-        public void Equip(Character character)
+        public void Equip(Role character)
         {
             m_Appearance.ApplyAppearance(character.appearance);
         }
 
-        public void UnEquip(Character character)
+        public void UnEquip(Role character)
         {
             //m_Appearance.ApplyAppearance(character.appearance);
         }

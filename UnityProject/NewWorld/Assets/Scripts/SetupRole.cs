@@ -14,7 +14,7 @@ using GFrame;
 
 namespace GameWish.Game
 {
-    public class SetupRole : Character, IEventListener
+    public class SetupRole : Role, IEventListener
     {
         // Start is called before the first frame update
         void Start()

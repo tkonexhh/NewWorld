@@ -15,6 +15,11 @@ namespace GameWish.Game
 {
     public class EntityControl : IEntityControl
     {
+        protected Entity m_Entity;
+        public EntityControl(Entity entity)
+        {
+            m_Entity = entity;
+        }
 
         #region IEntityControl
         public virtual void OnInit() { }
