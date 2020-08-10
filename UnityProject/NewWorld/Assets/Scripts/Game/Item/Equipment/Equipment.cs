@@ -15,8 +15,13 @@ namespace GameWish.Game
 {
 
 
-    public class Equipment : AbstractItem, IEquipment
+    public class Equipment : Item, IEquipment
     {
+        public override ItemType type
+        {
+            get { return ItemType.Equipment; }
+        }
+
         private EquipmentType m_Type;
         public EquipmentAppearance m_Appearance;
         private EquipmentStatus m_Status;

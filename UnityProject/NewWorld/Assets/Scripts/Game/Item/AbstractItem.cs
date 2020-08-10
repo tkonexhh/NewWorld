@@ -15,9 +15,14 @@ namespace GameWish.Game
 {
     public abstract class AbstractItem
     {
-        public long id;
-        public int num;
-        public float weight;//重量
+        public virtual ItemType type
+        {
+            get { return ItemType.Other; }
+        }
+        public long id { get; private set; }
+        public float weight { get; private set; }
+        public string name { get; private set; }
+
 
         protected TDItem m_Conf;
         public TDItem Conf
@@ -39,13 +44,9 @@ namespace GameWish.Game
         public AbstractItem(long id)
         {
             this.id = id;
+            name = Conf.Name;
         }
 
-
-        public string GetName()
-        {
-            return Conf.Name;
-        }
 
     }
 

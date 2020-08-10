@@ -11,10 +11,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GFrame;
+using UnityEngine.EventSystems;
 
 namespace GameWish.Game
 {
-    public class InventoryBagItem : IUListItemView
+    public class InventoryBagItem : IUListItemView, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private Image m_ImgIcon;
         [SerializeField] private Text m_TxtName;
@@ -31,14 +32,33 @@ namespace GameWish.Game
         public void SetData(AbstractItem item)
         {
             m_Item = item;
-            m_TxtName.text = item.GetName();
-            m_TxtNum.text = item.num.ToString();
-            m_TxtNum.gameObject.SetActive(item.num > 1);
+            m_TxtName.text = item.name;
+            if (item is StackableItem)
+            {
+                m_TxtNum.text = (item as StackableItem).num.ToString();
+                m_TxtNum.gameObject.SetActive((item as StackableItem).num > 1);
+            }
+            else
+            {
+                m_TxtNum.gameObject.SetActive(false);
+            }
+
         }
 
         private void OnClickBg()
         {
 
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (m_Item == null) return;
+            InventroyItemTipsPage.S.ShowTips(m_Item);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            InventroyItemTipsPage.S.HideTips();
         }
     }
 

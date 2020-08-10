@@ -15,6 +15,11 @@ namespace GameWish.Game
 {
     public class Food : SupplyItem, IFood
     {
+        public override ItemType type
+        {
+            get { return ItemType.Food; }
+        }
+
         public Food(long id) : base(id)
         {
 

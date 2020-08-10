@@ -13,8 +13,13 @@ using UnityEngine;
 
 namespace GameWish.Game
 {
-    public class SupplyItem : AbstractItem
+    public class SupplyItem : StackableItem
     {
+        public override ItemType type
+        {
+            get { return ItemType.Other; }
+        }
+
         public SupplyItem(long id) : base(id)
         {
 
