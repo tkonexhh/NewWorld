@@ -16,7 +16,7 @@ namespace GameWish.Game
     public class InventoryPanel : AbstractPanel
     {
 
-        [SerializeField] private SetupRole m_Role;
+        [SerializeField] private Role m_Role;
     }
 
 }

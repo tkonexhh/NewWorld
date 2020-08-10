@@ -9,6 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GFrame;
 
 
 namespace GameWish.Game
@@ -28,9 +29,16 @@ namespace GameWish.Game
         {
             m_Data = new RoleData(this);
 
-            m_GameObject = new GameObject();
+            m_GameObject = new GameObject("Role");
+            //TODO 加载物体
+            //某些组件依赖此物体,需要等加载完成后才能添加组件
+            AddressableResMgr.S.InstantiateAsync("ModularCharacters_Male", (target) =>
+            {
+                target.transform.SetParent(m_GameObject.transform);
+                AddComponent(new RoleAppearanceComponent());
+            });
 
-            AddComponent(new RoleAppearanceComponent());
+
             AddComponent(new RoleEquipComponent());
         }
 

@@ -9,15 +9,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GFrame;
 
 
 namespace GameWish.Game
 {
-    public class RoleAppearanceComponent : EntityComponennt
+    public class RoleAppearanceComponent : EntityComponennt, IEventListener
     {
         private CharacterAppearance m_Appearance;
         public override void Init(Entity ownner)
         {
+            base.Init(ownner);
+            m_Appearance = (ownner as Role).gameObject.GetComponentInChildren<CharacterAppearance>();
+
+            EventSystem.S.Register(SetupEvent.ChangeAppearance, HandleEvent);
+            EventSystem.S.Register(SetupEvent.ChangeColor, HandleEvent);
+        }
+
+        public void HandleEvent(int key, params object[] args)
+        {
+            switch (key)
+            {
+                case (int)SetupEvent.ChangeAppearance:
+                    {
+                        AppearanceSlot slot = (AppearanceSlot)args[0];
+                        int id = (int)args[1];
+                        m_Appearance.SetAppearance(slot, id);
+                        m_Appearance.CombineMeshs();
+                        break;
+                    }
+                case (int)SetupEvent.ChangeColor:
+                    {
+                        AppearanceColor slot = (AppearanceColor)args[0];
+                        Color color = (Color)args[1];
+                        m_Appearance.SetColor(slot, color);
+                        break;
+                    }
+            }
 
         }
     }
