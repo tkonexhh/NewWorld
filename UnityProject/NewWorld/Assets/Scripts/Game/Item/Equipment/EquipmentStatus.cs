@@ -15,7 +15,6 @@ namespace GameWish.Game
 {
     public class EquipmentStatus
     {
-        public EquipmentQuality quality;//品质
         public int def;//防御值
     }
 

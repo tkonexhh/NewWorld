@@ -17,7 +17,7 @@ namespace GameWish.Game
 		public void ReadRow(SqliteDataReader reader)
         {
        	   
-           			m_ID = (long)reader[0];
+           		m_ID = (long)reader[0];
 
         }
     }

@@ -22,6 +22,7 @@ namespace GameWish.Game
         public long id { get; private set; }
         public float weight { get; private set; }
         public string name { get; private set; }
+        public ItemQuality quality { get; private set; }
 
 
         protected TDItem m_Conf;
@@ -45,6 +46,9 @@ namespace GameWish.Game
         {
             this.id = id;
             name = Conf.Name;
+            weight = Conf.Weight;
+            quality = (ItemQuality)Conf.Quality;
+            Debug.LogError(quality);
         }
 
 

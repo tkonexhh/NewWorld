@@ -20,4 +20,12 @@ namespace GameWish.Game
         Other,
     }
 
+    public enum ItemQuality
+    {
+        Common,
+        UnCommon,
+        Rare,//稀有
+        Lengend,//传说
+    }
+
 }

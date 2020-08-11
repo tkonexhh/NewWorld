@@ -24,13 +24,7 @@ namespace GameWish.Game
         Length,
     }
 
-    public enum EquipmentQuality
-    {
-        Common,
-        UnCommon,
-        Rare,//稀有
-        Lengend,//传说
-    }
+
 
     public enum HelmetType
     {
