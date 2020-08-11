@@ -48,7 +48,6 @@ namespace GameWish.Game
             name = Conf.Name;
             weight = Conf.Weight;
             quality = (ItemQuality)Conf.Quality;
-            Debug.LogError(quality);
         }
 
 
