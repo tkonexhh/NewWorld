@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc29e3c44d6d5453e814cbfbef5f4918, type: 3}
   m_Name: ProjectDefaultConfig
   m_EditorClassIdentifier: 
-  m_DefaultTextFont: {fileID: 12800000, guid: b185044385be4ec4082befe58fc63b22, type: 3}
+  m_DefaultTextFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultTextColor: {r: 1, g: 1, b: 1, a: 1}
   m_DefaultNameSpace: GameWish.Game

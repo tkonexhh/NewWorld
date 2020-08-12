@@ -52,9 +52,9 @@ namespace GameWish.Game
                 case ItemQuality.UnCommon:
                     return new Color(1, 1, 1, 1);
                 case ItemQuality.Rare:
-                    return new Color(1, 1, 1, 1);
+                    return new Color(40 / 255.0f, 144 / 255.0f, 42 / 255.0f, 1);
                 case ItemQuality.Lengend:
-                    return new Color(1, 1, 1, 1);
+                    return new Color(130 / 255.0f, 76 / 255.0f, 35 / 255.0f, 1);
                 default:
                     return Color.white;
             }
