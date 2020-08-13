@@ -21,22 +21,11 @@ namespace GameWish.Game
         [SerializeField] private IUListView m_ListView;
 
         private List<AbstractItem> m_ShowItems = new List<AbstractItem>();
-        private void Awake()
+        public void Init()
         {
-            InventoryMgr.S.AddItem(1);
-            InventoryMgr.S.AddItem(1, 10);
-            InventoryMgr.S.AddItem(2, 3);
-            InventoryMgr.S.AddItem(2, 3);
-            InventoryMgr.S.AddItem(3);
-            InventoryMgr.S.AddItem(4);
-            InventoryMgr.S.AddItem(4);
-            InventoryMgr.S.AddItem(4);
-            InventoryMgr.S.AddItem(4);
-
             m_ToggleEquipment.onValueChanged.AddListener(ShowEquipment);
             m_ToggleMaterial.onValueChanged.AddListener(ShowSupply);
             m_ListView.SetCellRenderer(OnCellRenderer);
-
 
             m_ToggleEquipment.isOn = false;
             m_ToggleEquipment.Select();

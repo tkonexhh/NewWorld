@@ -14,7 +14,7 @@ using GFrame;
 
 namespace GameWish.Game
 {
-    public class InventroyItemTipsPage : TMonoSingleton<InventroyItemTipsPage>
+    public class InventroyItemTipsPage : AbstractPage
     {
         [SerializeField] private Image m_ImgTitle;
         [SerializeField] private Text m_TxtName;
@@ -23,9 +23,10 @@ namespace GameWish.Game
         [SerializeField] private Transform m_MainRoot;
         [SerializeField] private Text m_TxtWeight;
 
+        [SerializeField] private Animator m_Anim;
+
         public void ShowTips(AbstractItem item)
         {
-            gameObject.SetActive(true);
 
             Color qualityColor = GetColorByQuality(item.quality);
             m_TxtName.color = qualityColor;
@@ -34,12 +35,12 @@ namespace GameWish.Game
             m_TxtWeight.text = item.weight.ToString();
             m_TxtName.text = item.name;
             m_TxtType.text = item.type.ToString();
-
+            m_Anim.Play("Show");
         }
 
         public void HideTips()
         {
-            gameObject.SetActive(false);
+            m_Anim.Play("Hide");
         }
 
 
