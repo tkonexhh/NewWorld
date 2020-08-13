@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Mono.Data.Sqlite;
 using GFrame;
 
-namespace GameWish.Game
+namespace Game.Logic
 {
     public static partial class TDCharacterAppearanceTable
     {
@@ -17,10 +17,10 @@ namespace GameWish.Game
         {
             get { return m_MetaData; }
         }
-        
+
         private static Dictionary<long, TDCharacterAppearance> m_DataCache = new Dictionary<long, TDCharacterAppearance>();
-        private static List<TDCharacterAppearance> m_DataList = new List<TDCharacterAppearance >();
-        
+        private static List<TDCharacterAppearance> m_DataList = new List<TDCharacterAppearance>();
+
         public static void OnAddRow(SqliteDataReader reader)
         {
             TDCharacterAppearance data = new TDCharacterAppearance();
@@ -42,11 +42,11 @@ namespace GameWish.Game
                 m_DataCache.Add(key, memberInstance);
                 m_DataList.Add(memberInstance);
             }
-        } 
+        }
 
         public static int count
         {
-            get 
+            get
             {
                 return m_DataCache.Count;
             }
@@ -54,10 +54,10 @@ namespace GameWish.Game
 
         public static List<TDCharacterAppearance> dataList
         {
-            get 
+            get
             {
                 return m_DataList;
-            }    
+            }
         }
 
         public static TDCharacterAppearance GetData(long key)

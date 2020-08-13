@@ -4,7 +4,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace GameWish.Game
+namespace Game.Logic
 {
     public partial class TDEquipmentTable
     {

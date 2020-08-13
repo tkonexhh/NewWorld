@@ -10,7 +10,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using GFrame;
 
-namespace GameWish.Game
+namespace Game.Logic
 {
     public class EntityMgr : TSingleton<EntityMgr>
     {

@@ -13,7 +13,7 @@ using UnityEngine.InputSystem;
 using GFrame;
 
 
-namespace GameWish.Game
+namespace Game.Logic
 {
     public class GameInputMgr : TSingleton<GameInputMgr>
     {

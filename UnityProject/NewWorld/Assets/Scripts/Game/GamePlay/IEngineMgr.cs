@@ -1,8 +1,8 @@
 /************************
-	FileName:/Scripts/Game/Mgr/CursorMgr.cs
+	FileName:/Scripts/Game/GamePlay/IEngineMgr.cs
 	CreateAuthor:neo.xu
-	CreateTime:6/12/2020 3:49:46 PM
-	Tip:6/12/2020 3:49:46 PM
+	CreateTime:8/13/2020 7:46:27 PM
+	Tip:8/13/2020 7:46:27 PM
 ************************/
 
 
@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class CursorMgr : MonoBehaviour
+    public class IEngineMgr : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()

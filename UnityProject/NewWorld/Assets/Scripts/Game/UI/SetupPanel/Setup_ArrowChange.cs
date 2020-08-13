@@ -12,7 +12,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using GFrame;
 
-namespace GameWish.Game
+namespace Game.Logic
 {
     public class Setup_ArrowChange : MonoBehaviour
     {

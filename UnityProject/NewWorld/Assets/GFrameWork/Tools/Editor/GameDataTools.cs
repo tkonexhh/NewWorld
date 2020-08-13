@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 
-namespace GameWish.Game
+namespace Game.Logic
 {
     public class PlayerPrefTools
     {

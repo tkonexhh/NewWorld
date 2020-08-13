@@ -12,7 +12,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace GameWish.Game
+namespace Game.Logic
 {
     public class CreateSelectColorBtn : MonoBehaviour
     {

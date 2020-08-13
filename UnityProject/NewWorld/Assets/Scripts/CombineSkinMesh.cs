@@ -12,7 +12,7 @@ using UnityEngine;
 using GFrame;
 
 
-namespace GameWish.Game
+namespace Game.Logic
 {
     public class CombineSkinMesh : MonoBehaviour
     {

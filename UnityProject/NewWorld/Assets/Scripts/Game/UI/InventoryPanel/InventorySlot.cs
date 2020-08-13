@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace GameWish.Game
+namespace Game.Logic
 {
     public class InventorySlot : MonoBehaviour
     {

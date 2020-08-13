@@ -13,7 +13,7 @@ using UnityEngine.UI;
 using GFrame;
 using UnityEngine.EventSystems;
 
-namespace GameWish.Game
+namespace Game.Logic
 {
     public class InventoryBagItem : IUListItemView, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
     {

@@ -1,4 +1,4 @@
-﻿namespace GameWish.Game
+﻿namespace Game.Logic
 {
     public partial class TDEquipmentAppearance
     {

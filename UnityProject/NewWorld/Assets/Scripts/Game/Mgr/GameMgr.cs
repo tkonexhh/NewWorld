@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GFrame;
 
-namespace GameWish.Game
+namespace Game.Logic
 {
     [TMonoSingletonAttribute("[GFrame]/[Game]/[GameMgr]")]
     public class GameMgr : AbstractModule, ISingleton

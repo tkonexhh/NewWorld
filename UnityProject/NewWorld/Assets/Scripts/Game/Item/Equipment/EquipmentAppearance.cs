@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace GameWish.Game
+namespace Game.Logic
 {
     /// <summary>
     /// 装备外观数据(可以用来做幻化)

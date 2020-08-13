@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using GFrame;
-using GameWish.Game;
+using Game.Logic;
 
 namespace GameWish.Editor
 {

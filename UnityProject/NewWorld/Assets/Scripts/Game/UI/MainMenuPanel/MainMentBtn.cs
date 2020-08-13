@@ -15,7 +15,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 
-namespace GameWish.Game
+namespace Game.Logic
 {
     public class MainMentBtn : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
     {

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace GameWish.Game
+namespace Game.Logic
 {
     public class @GameInput : IInputActionCollection, IDisposable
     {
