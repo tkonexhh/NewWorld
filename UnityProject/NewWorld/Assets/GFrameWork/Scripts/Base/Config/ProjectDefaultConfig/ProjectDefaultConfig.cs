@@ -20,7 +20,7 @@ namespace GFrame
         [SerializeField] private Font m_DefaultTextFont;
         [SerializeField] private Color m_DefaultTextColor = Color.white;
         [Header("Script")]
-        [SerializeField] private string m_DefaultNameSpace = "GameWish.Game";
+        [SerializeField] private string m_DefaultNameSpace = "Game.Logic";
 
 
         public static Font defaultTextFont
@@ -55,7 +55,7 @@ namespace GFrame
             {
                 if (S == null)
                 {
-                    return "GameWish.Game";
+                    return "Game.Logic";
                 }
                 else
                 {

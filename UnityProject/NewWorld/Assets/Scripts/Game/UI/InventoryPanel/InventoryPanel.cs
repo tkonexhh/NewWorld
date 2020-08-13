@@ -24,15 +24,15 @@ namespace Game.Logic
             base.OnUIInit();
             Debug.LogError("UIInit");
 
-            InventoryMgr.S.AddItem(1);
-            InventoryMgr.S.AddItem(1, 10);
-            InventoryMgr.S.AddItem(2, 3);
-            InventoryMgr.S.AddItem(2, 3);
-            InventoryMgr.S.AddItem(3);
-            InventoryMgr.S.AddItem(4);
-            InventoryMgr.S.AddItem(4);
-            InventoryMgr.S.AddItem(4);
-            InventoryMgr.S.AddItem(4);
+            PlayerMgr.S.inventoryMgr.AddItem(1);
+            PlayerMgr.S.inventoryMgr.AddItem(1, 10);
+            PlayerMgr.S.inventoryMgr.AddItem(2, 3);
+            PlayerMgr.S.inventoryMgr.AddItem(2, 3);
+            PlayerMgr.S.inventoryMgr.AddItem(3);
+            PlayerMgr.S.inventoryMgr.AddItem(4);
+            PlayerMgr.S.inventoryMgr.AddItem(4);
+            PlayerMgr.S.inventoryMgr.AddItem(4);
+            PlayerMgr.S.inventoryMgr.AddItem(4);
 
 
             m_Bag.Init();

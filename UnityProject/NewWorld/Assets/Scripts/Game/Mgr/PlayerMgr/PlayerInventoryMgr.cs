@@ -14,24 +14,23 @@ using GFrame;
 
 namespace Game.Logic
 {
-    public class InventoryMgr : TSingleton<InventoryMgr>
+    public class PlayerInventoryMgr : MonoBehaviour, IPlayerComponent
     {
         private List<Equipment> m_LstEquipment = new List<Equipment>();
         private List<SupplyItem> m_LstSupply = new List<SupplyItem>();
 
-        public List<SupplyItem> LstSupply
-        {
-            get { return m_LstSupply; }
-        }
+        public List<SupplyItem> LstSupply { get => m_LstSupply; }
 
-        public List<Equipment> LstEquipment
-        {
-            get { return m_LstEquipment; }
-        }
+        public List<Equipment> LstEquipment { get => m_LstEquipment; }
 
-        public override void OnSingletonInit()
-        {
-        }
+
+        #region IPlayerComponent
+
+        public void OnInit() { }
+        public void OnUpdate() { }
+        public void OnDestroyed() { }
+        #endregion
+
 
         public void AddItem(long id, int num = 1)
         {

@@ -21,6 +21,7 @@ namespace Game.Logic
         [SerializeField] private IUListView m_ListView;
 
         private List<AbstractItem> m_ShowItems = new List<AbstractItem>();
+
         public void Init()
         {
             m_ToggleEquipment.onValueChanged.AddListener(ShowEquipment);
@@ -53,10 +54,10 @@ namespace Game.Logic
             switch (type)
             {
                 case InventoryItemType.Equipment:
-                    m_ShowItems = InventoryMgr.S.LstEquipment.Cast<AbstractItem>().ToList();
+                    m_ShowItems = PlayerMgr.S.inventoryMgr.LstEquipment.Cast<AbstractItem>().ToList();
                     break;
                 case InventoryItemType.Supplies:
-                    m_ShowItems = InventoryMgr.S.LstSupply.Cast<AbstractItem>().ToList();
+                    m_ShowItems = PlayerMgr.S.inventoryMgr.LstSupply.Cast<AbstractItem>().ToList();
                     break;
             }
 
