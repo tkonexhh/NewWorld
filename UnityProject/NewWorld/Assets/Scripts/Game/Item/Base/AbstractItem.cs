@@ -23,6 +23,9 @@ namespace Game.Logic
         public float weight { get; private set; }
         public string name { get; private set; }
         public ItemQuality quality { get; private set; }
+        public int width { get; private set; }
+        public int height { get; private set; }
+
 
 
         protected TDItem m_Conf;
@@ -48,6 +51,8 @@ namespace Game.Logic
             name = Conf.Name;
             weight = Conf.Weight;
             quality = (ItemQuality)Conf.Quality;
+            width = (int)Conf.Width;
+            height = (int)Conf.Height;
         }
 
 

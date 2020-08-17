@@ -17,10 +17,10 @@ namespace Game.Logic
         {
             get { return m_MetaData; }
         }
-
+        
         private static Dictionary<long, TDEquipment> m_DataCache = new Dictionary<long, TDEquipment>();
-        private static List<TDEquipment> m_DataList = new List<TDEquipment>();
-
+        private static List<TDEquipment> m_DataList = new List<TDEquipment >();
+        
         public static void OnAddRow(SqliteDataReader reader)
         {
             TDEquipment data = new TDEquipment();
@@ -42,11 +42,11 @@ namespace Game.Logic
                 m_DataCache.Add(key, memberInstance);
                 m_DataList.Add(memberInstance);
             }
-        }
+        } 
 
         public static int count
         {
-            get
+            get 
             {
                 return m_DataCache.Count;
             }
@@ -54,10 +54,10 @@ namespace Game.Logic
 
         public static List<TDEquipment> dataList
         {
-            get
+            get 
             {
                 return m_DataList;
-            }
+            }    
         }
 
         public static TDEquipment GetData(long key)

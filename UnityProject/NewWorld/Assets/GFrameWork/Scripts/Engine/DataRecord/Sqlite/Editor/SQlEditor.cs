@@ -66,10 +66,8 @@ namespace GFrame.Editor
                 string typeStr = SQLMgr.GetTypeStr(typeName);
 
                 variable.Append("\t\tprivate " + typeStr + " m_" + name + ";\n");
-                member.Append("\t\tpublic " + typeStr + " " + name + "\n");
-                member.Append("\t\t{\n");
-                member.Append("\t\t\tget {return m_" + name + ";}\n");
-                member.Append("\t\t}\n");
+
+                member.Append("\t\tpublic " + typeStr + " " + name + "{ get => m_" + name + ";}\n");
 
                 initValue.Append("\t\tm_" + name + " = (" + typeStr + ")reader[" + index + "];\n");
                 index++;

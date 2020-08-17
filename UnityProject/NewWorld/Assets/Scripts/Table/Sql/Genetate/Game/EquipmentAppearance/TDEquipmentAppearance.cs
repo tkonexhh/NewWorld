@@ -8,10 +8,7 @@ namespace Game.Logic
 
         private long m_ID;
 
-        public long ID
-        {
-            get { return m_ID; }
-        }
+        public long ID { get => m_ID; }
 
 
         public void ReadRow(SqliteDataReader reader)

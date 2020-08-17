@@ -12,26 +12,11 @@ namespace Game.Logic
         private long m_Appearance;
         private string m_Name;
 
-        public long ID
-        {
-            get { return m_ID; }
-        }
-        public long Sex
-        {
-            get { return m_Sex; }
-        }
-        public string Part
-        {
-            get { return m_Part; }
-        }
-        public long Appearance
-        {
-            get { return m_Appearance; }
-        }
-        public string Name
-        {
-            get { return m_Name; }
-        }
+        public long ID { get => m_ID; }
+        public long Sex { get => m_Sex; }
+        public string Part { get => m_Part; }
+        public long Appearance { get => m_Appearance; }
+        public string Name { get => m_Name; }
 
 
         public void ReadRow(SqliteDataReader reader)

@@ -13,35 +13,18 @@ namespace Game.Logic
         private string m_Icon;
         private float m_Weight;
         private long m_Quality;
+        private long m_Width;
+        private long m_Height;
 
-        public long ID
-        {
-            get { return m_ID; }
-        }
-        public long SubID
-        {
-            get { return m_SubID; }
-        }
-        public string Name
-        {
-            get { return m_Name; }
-        }
-        public string Type
-        {
-            get { return m_Type; }
-        }
-        public string Icon
-        {
-            get { return m_Icon; }
-        }
-        public float Weight
-        {
-            get { return m_Weight; }
-        }
-        public long Quality
-        {
-            get { return m_Quality; }
-        }
+        public long ID { get => m_ID; }
+        public long SubID { get => m_SubID; }
+        public string Name { get => m_Name; }
+        public string Type { get => m_Type; }
+        public string Icon { get => m_Icon; }
+        public float Weight { get => m_Weight; }
+        public long Quality { get => m_Quality; }
+        public long Width { get => m_Width; }
+        public long Height { get => m_Height; }
 
 
         public void ReadRow(SqliteDataReader reader)
@@ -54,6 +37,8 @@ namespace Game.Logic
             m_Icon = (string)reader[4];
             m_Weight = (float)reader[5];
             m_Quality = (long)reader[6];
+            m_Width = (long)reader[7];
+            m_Height = (long)reader[8];
 
         }
     }
