@@ -24,7 +24,7 @@ namespace Game.Logic
 
         private void Awake()
         {
-            viewModel = new DemoViewModel();
+            this.viewModel = new DemoViewModel();
             demoViewModel.ID.OnValueChanged += IDValueChanged;
         }
 

@@ -1,8 +1,8 @@
 /************************
-	FileName:/Scripts/Game/UI/InventoryPanel/Inventory/InventoryCellViewModel.cs
+	FileName:/Scripts/Game/Module/Inventory/Player/PlayerInventoryCellView.cs
 	CreateAuthor:neo.xu
-	CreateTime:8/17/2020 12:45:25 PM
-	Tip:8/17/2020 12:45:25 PM
+	CreateTime:8/18/2020 1:07:33 PM
+	Tip:8/18/2020 1:07:33 PM
 ************************/
 
 
@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class InventoryCellViewModel
+    public class PlayerInventoryCellView : InventoryCellView
     {
 
     }

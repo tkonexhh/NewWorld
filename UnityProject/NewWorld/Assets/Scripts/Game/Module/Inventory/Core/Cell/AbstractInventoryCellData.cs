@@ -15,8 +15,8 @@ namespace Game.Logic
 {
     public class AbstractInventoryCellData : IInventoryCellData
     {
-        public int Width { get; private set; }
-        public int Height { get; private set; }
+        public int Width { get; protected set; }
+        public int Height { get; protected set; }
     }
 
 }

@@ -13,10 +13,10 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-	public interface IInventoryCell
-	{
-		RectTransform RectTransform { get; }
-	    IInventoryCellData CellData { get; }
-	}
-	
+    public interface IInventoryCellView
+    {
+        RectTransform RectTransform { get; }
+        IInventoryCellData CellData { get; }
+    }
+
 }

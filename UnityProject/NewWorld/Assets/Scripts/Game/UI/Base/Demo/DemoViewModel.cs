@@ -15,6 +15,16 @@ namespace Game.Logic
 {
     public class DemoViewModel : ViewModel
     {
+        // private int m_ID;
+
+        // public int id
+        // {
+        //     get => m_ID;
+        //     set
+        //     {
+        //         this.Set<int>(ref m_ID, value);
+        //     }
+        // }
         public BindableProperty<int> ID = new BindableProperty<int>();
 
 

@@ -13,10 +13,8 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class InventoryCellData : IInventoryCellData
+    public class InventoryCellData : AbstractInventoryCellData
     {
-        public int Width { get; private set; }
-        public int Height { get; private set; }
 
         public InventoryCellData(AbstractItem item)
         {
