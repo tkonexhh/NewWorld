@@ -19,8 +19,8 @@ namespace Game.Logic
 
         public IInventoryCellData[] CellData { get; }
 
-        public int CapacityWidth { get; }
-        public int CapacityHeight { get; }
+        public int width { get; }
+        public int height { get; }
 
         bool[] mask;
 
@@ -36,8 +36,8 @@ namespace Game.Logic
 
             IsDirty = true;
             CellData = cellData;
-            CapacityWidth = capacityWidth;
-            CapacityHeight = capacityHeight;
+            width = capacityWidth;
+            height = capacityHeight;
 
             UpdateMask();
         }
@@ -87,13 +87,13 @@ namespace Game.Logic
             var height = cellData.Height;
 
             // check width
-            if ((id % CapacityWidth) + (width - 1) >= CapacityWidth)
+            if ((id % this.width) + (width - 1) >= this.width)
             {
                 return false;
             }
 
             // check height
-            if (id + ((height - 1) * CapacityWidth) >= CellData.Length)
+            if (id + ((height - 1) * this.width) >= CellData.Length)
             {
                 return false;
             }
@@ -102,7 +102,7 @@ namespace Game.Logic
             {
                 for (var t = 0; t < height; t++)
                 {
-                    if (mask[id + i + (t * CapacityWidth)])
+                    if (mask[id + i + (t * this.width)])
                     {
                         return false;
                     }
@@ -115,7 +115,7 @@ namespace Game.Logic
 
         protected void UpdateMask()
         {
-            mask = new bool[CapacityWidth * CapacityHeight];
+            mask = new bool[width * height];
 
             for (var i = 0; i < CellData.Length; i++)
             {
@@ -131,7 +131,7 @@ namespace Game.Logic
                 {
                     for (var h = 0; h < height; h++)
                     {
-                        var checkIndex = i + w + (h * CapacityWidth);
+                        var checkIndex = i + w + (h * this.width);
                         if (checkIndex < mask.Length)
                         {
                             mask[checkIndex] = true;

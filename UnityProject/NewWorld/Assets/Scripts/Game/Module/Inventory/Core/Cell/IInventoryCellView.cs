@@ -17,6 +17,11 @@ namespace Game.Logic
     {
         RectTransform RectTransform { get; }
         IInventoryCellData CellData { get; }
+
+        Vector2 DefaultCellSize { get; }
+        Vector2 MargineSpace { get; }
+
+        void Apply(IInventoryCellData data);
     }
 
 }

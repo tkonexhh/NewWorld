@@ -1,6 +1,24 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.IO;
+
+
+/*
+常见ASCII码
+. 46
+/ 47
+0 48
+1 49
+2 50
+3 51
+4 52
+5 53
+6 54
+7 55
+8 56
+9 57
+*/
+
 public class CreateFont : EditorWindow
 {
     [MenuItem("Tools/创建字体(sprite)")]
@@ -84,7 +102,7 @@ public class CreateFont : EditorWindow
                 return;
             }
             string fontPathName = fontPath + fontName + ".fontsettings";
-            string matPathName = fontPath + fontName + ".mat";
+            string matPathName = fontPath + fontName + "Mat.mat";
             float lineSpace = 0.1f;
             //string loadPath = selectionPath.Remove(selectionPath.Length - selectionExt.Length).Replace("Assets/Resources/", "");
             string loadPath = selectionPath.Replace(selectionExt, "").Substring(selectionPath.IndexOf("/Resources/") + "/Resources/".Length);
@@ -109,8 +127,8 @@ public class CreateFont : EditorWindow
                     CharacterInfo info = new CharacterInfo();
                     try
                     {
-                        info.index = System.Convert.ToInt32(48 + i);
-                        //info.index = System.Convert.ToInt32(spr.name);
+                        //info.index = System.Convert.ToInt32(48 + i);
+                        info.index = System.Convert.ToInt32(spr.name);
                     }
                     catch
                     {

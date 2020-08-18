@@ -13,10 +13,23 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class AbstractInventoryCellView : MonoBehaviour, IInventoryCellView
+    public abstract class AbstractInventoryCellView : MonoBehaviour, IInventoryCellView
     {
+        #region IInventoryCellView
         public RectTransform RectTransform { get; }
-        public IInventoryCellData CellData { get; }
+        public IInventoryCellData CellData { get; protected set; }
+        public virtual Vector2 DefaultCellSize { get; set; }
+        public virtual Vector2 MargineSpace { get; set; }
+
+        public void Apply(IInventoryCellData cellData)
+        {
+            CellData = cellData;
+            OnApply();
+        }
+
+        protected abstract void OnApply();
+        #endregion
+
     }
 
 }

@@ -15,7 +15,35 @@ namespace Game.Logic
 {
     public class InventoryCellView : AbstractInventoryCellView
     {
+        [SerializeField] private Vector2 defaultCellSize;
+        [SerializeField] private Vector2 margineSpace;
 
+        [SerializeField] protected RectTransform rootRectTrans;
+
+        #region IInventoryCellView
+        public override Vector2 DefaultCellSize => defaultCellSize;
+        public override Vector2 MargineSpace => margineSpace;
+        #endregion
+
+        #region abstract
+        protected override void OnApply()
+        {
+        }
+        #endregion
+
+        #region public func
+        public Vector2 GetCellSize()
+        {
+            var width = ((CellData?.Width ?? 1) * (defaultCellSize.x + margineSpace.x)) - margineSpace.x;
+            var height = ((CellData?.Height ?? 1) * (defaultCellSize.y + margineSpace.y)) - margineSpace.y;
+            return new Vector2(width, height);
+        }
+
+        protected virtual void ApplySize()
+        {
+            rootRectTrans.sizeDelta = GetCellSize();
+        }
+        #endregion
     }
 
 }

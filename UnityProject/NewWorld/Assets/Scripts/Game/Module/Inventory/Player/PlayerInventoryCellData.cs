@@ -17,7 +17,7 @@ namespace Game.Logic
     {
         public PlayerInventoryCellData(AbstractItem item) : base(item)
         {
-
+            Debug.LogError(item.width);
         }
     }
 

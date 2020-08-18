@@ -13,14 +13,14 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class PlayerInventoryData : InventoryViewData
+    public class PlayerInventoryViewData : InventoryViewData
     {
-        public PlayerInventoryData(int capacityWidth, int capacityHeight)
+        public PlayerInventoryViewData(int capacityWidth, int capacityHeight)
                            : this(new IInventoryCellData[capacityWidth * capacityHeight], capacityWidth, capacityHeight)
         {
         }
 
-        public PlayerInventoryData(IInventoryCellData[] cellData, int capacityWidth, int capacityHeight) : base(cellData, capacityWidth, capacityHeight)
+        public PlayerInventoryViewData(IInventoryCellData[] cellData, int capacityWidth, int capacityHeight) : base(cellData, capacityWidth, capacityHeight)
         {
 
         }

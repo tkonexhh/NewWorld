@@ -15,7 +15,17 @@ namespace Game.Logic
 {
     public class InventoryView : AbstractInventoryView
     {
+        #region IInventoryView
+        public override void Apply(IInventoryViewData data)
+        {
+            base.Apply(data);
+        }
 
+        public override void ReApply()
+        {
+            base.ReApply();
+        }
+        #endregion
     }
 
 }

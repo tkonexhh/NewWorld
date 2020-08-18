@@ -50,7 +50,8 @@ namespace Game.Logic
         protected override void OnModuleStart()
         {
             //EnterMainMenu();
-            EnterCreateRole();
+            // EnterCreateRole();
+            EnterInventoryDemo();
         }
 
         private void EnterMainMenu()
@@ -62,7 +63,11 @@ namespace Game.Logic
         private void EnterCreateRole()
         {
             AddressableResMgr.S.LoadSceneAsync("CreateCharacterScene");
-            //UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        }
+
+        private void EnterInventoryDemo()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
         #endregion
     }

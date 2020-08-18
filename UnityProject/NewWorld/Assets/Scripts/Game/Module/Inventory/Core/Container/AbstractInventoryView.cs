@@ -15,11 +15,25 @@ namespace Game.Logic
 {
     public class AbstractInventoryView : MonoBehaviour, IInventoryView
     {
-        [SerializeField] private AbstractInventoryCellView m_CellPrefab;
+        [SerializeField] protected AbstractInventoryCellView cellPrefab;
 
-        public AbstractInventoryViewData Data { get; private set; }
+        public AbstractInventoryViewData viewData { get; private set; }
+        public int CellCount => viewData.width * viewData.height;
+        protected IInventoryCellView[] itemViews;
 
 
+
+        #region IInventoryView
+
+        public virtual void Apply(IInventoryViewData data)
+        {
+            viewData = (AbstractInventoryViewData)data;
+        }
+        public virtual void ReApply()
+        {
+
+        }
+        #endregion
 
     }
 

@@ -15,7 +15,8 @@ namespace Game.Logic
 {
     public interface IInventoryView
     {
-
+        void Apply(IInventoryViewData data);
+        void ReApply();
     }
 
 }
