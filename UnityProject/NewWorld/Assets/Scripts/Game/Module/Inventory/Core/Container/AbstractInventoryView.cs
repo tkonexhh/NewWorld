@@ -5,7 +5,7 @@
 	Tip:8/18/2020 12:33:48 PM
 ************************/
 
-
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,8 +22,25 @@ namespace Game.Logic
         protected IInventoryCellView[] itemViews;
 
 
+        protected Action<IInventoryCellView> onCellClick;
+        protected Action<IInventoryCellView> onCellOptionClick;
+        protected Action<IInventoryCellView> onCellEnter;
+        protected Action<IInventoryCellView> onCellExit;
+
 
         #region IInventoryView
+
+        public virtual void SetCellCallback(
+            Action<IInventoryCellView> onCellClick,
+            Action<IInventoryCellView> onCellOptionClick,
+            Action<IInventoryCellView> onCellEnter,
+            Action<IInventoryCellView> onCellExit)
+        {
+            this.onCellClick = onCellClick;
+            this.onCellOptionClick = onCellOptionClick;
+            this.onCellEnter = onCellEnter;
+            this.onCellExit = onCellExit;
+        }
 
         public virtual void Apply(IInventoryViewData data)
         {

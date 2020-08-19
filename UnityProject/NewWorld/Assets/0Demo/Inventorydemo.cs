@@ -19,6 +19,7 @@ namespace Game.Logic
 
         void Start()
         {
+            m_InventoryView.SetCellCallback(OnCellClick, onCellOptionClick, onCellEnter, onCellExit);
             PlayerInventoryViewData viewData = new PlayerInventoryViewData(10, 10);
 
             for (int i = 0; i < 10; i++)
@@ -34,11 +35,27 @@ namespace Game.Logic
 
         }
 
-        // Update is called once per frame
-        void Update()
+
+        private void OnCellClick(IInventoryCellView cell)
         {
 
         }
+
+        private void onCellOptionClick(IInventoryCellView cell)
+        {
+
+        }
+
+        private void onCellEnter(IInventoryCellView cell)
+        {
+
+        }
+
+        private void onCellExit(IInventoryCellView cell)
+        {
+
+        }
+
     }
 
 }

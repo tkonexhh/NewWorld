@@ -17,7 +17,7 @@ namespace Game.Logic
     {
         [SerializeField] private Image m_ImgIcon;
         [SerializeField] private Sprite m_SpTest;
-
+        [SerializeField] InventoryCellButton button;
 
         #region abstract
         protected override void OnApply()
@@ -36,6 +36,7 @@ namespace Game.Logic
                 m_ImgIcon.gameObject.SetActive(true);
 
                 m_ImgIcon.sprite = m_SpTest;
+                m_ImgIcon.SetNativeSize();
                 Debug.LogError(m_ImgIcon.sprite);
             }
         }

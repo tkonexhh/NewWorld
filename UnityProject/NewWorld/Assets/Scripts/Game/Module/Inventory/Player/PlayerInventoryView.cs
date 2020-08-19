@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace Game.Logic
 {
@@ -38,6 +39,13 @@ namespace Game.Logic
                     var itemView = Instantiate(cellPrefab, m_GridLayoutGroup.transform).GetComponent<PlayerInventoryCellView>();
                     itemViews[i] = itemView;
                     itemView.transform.SetAsFirstSibling();
+                    itemView.SetCellCallback(
+                       onCellClick,
+                       onCellOptionClick,
+                       onCellEnter,
+                       onCellExit,
+                       _ => m_ScrollRect.enabled = false,
+                       _ => m_ScrollRect.enabled = true);
                     itemView.Apply(null);
                 }
 
@@ -58,6 +66,8 @@ namespace Game.Logic
             base.ReApply();
         }
         #endregion
+
+
     }
 
 }
