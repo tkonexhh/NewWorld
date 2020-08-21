@@ -25,9 +25,9 @@ namespace GFrame.AssetPreprocessor
         [SerializeField] private int AnisoLevel = 1;
 
         [Header("Compression Settings")]
-        [SerializeField] private TexturePlatformPreprocessorConfig StandaloneConfig;
-        [SerializeField] private TexturePlatformPreprocessorConfig AndroidConfig;
-        [SerializeField] private TexturePlatformPreprocessorConfig IOSConfig;
+        [SerializeField] private TextureStandalonePreprocessorConfig StandaloneConfig;
+        [SerializeField] private TextureAndroidPreprocessorConfig AndroidConfig;
+        [SerializeField] private TextureIOSPreprocessorConfig IOSConfig;
 
         public static int maxTextureSize => S.MaxTextureSize;
         public static bool enableReadWirte => S.EnableReadWrite;
@@ -40,20 +40,44 @@ namespace GFrame.AssetPreprocessor
         public static FilterMode filterMode => S.FilterMode;
         public static int anisoLevel => S.AnisoLevel;
 
-        public static TexturePlatformPreprocessorConfig standaloneConfig => S.StandaloneConfig;
-        public static TexturePlatformPreprocessorConfig androidConfig => S.AndroidConfig;
-        public static TexturePlatformPreprocessorConfig iosConfig => S.IOSConfig;
+        public static TextureStandalonePreprocessorConfig standaloneConfig => S.StandaloneConfig;
+        public static TextureAndroidPreprocessorConfig androidConfig => S.AndroidConfig;
+        public static TextureIOSPreprocessorConfig iosConfig => S.IOSConfig;
 
     }
 
     [System.Serializable]
     public class TexturePlatformPreprocessorConfig
     {
+
+        [SerializeField] public TextureCompressionQuality TextureCompressionQuality = TextureCompressionQuality.Normal;
+    }
+
+    [System.Serializable]
+    public class TextureStandalonePreprocessorConfig : TexturePlatformPreprocessorConfig
+    {
         [Tooltip("Format used if the texture does NOT have an alpha channel.")]
         [SerializeField] public TextureImporterFormat RGBFormat = TextureImporterFormat.Automatic;
         [Tooltip("Format used if the texture has an alpha channel.")]
         [SerializeField] public TextureImporterFormat RGBAFormat = TextureImporterFormat.Automatic;
-        [SerializeField] public TextureCompressionQuality TextureCompressionQuality = TextureCompressionQuality.Normal;
+    }
+
+    [System.Serializable]
+    public class TextureAndroidPreprocessorConfig : TexturePlatformPreprocessorConfig
+    {
+        [Tooltip("Format used if the texture does NOT have an alpha channel.")]
+        [SerializeField] public TextureImporterFormat RGBFormat = TextureImporterFormat.ETC_RGB4;
+        [Tooltip("Format used if the texture has an alpha channel.")]
+        [SerializeField] public TextureImporterFormat RGBAFormat = TextureImporterFormat.ETC2_RGBA8;
+    }
+
+    [System.Serializable]
+    public class TextureIOSPreprocessorConfig : TexturePlatformPreprocessorConfig
+    {
+        [Tooltip("Format used if the texture does NOT have an alpha channel.")]
+        [SerializeField] public TextureImporterFormat RGBFormat = TextureImporterFormat.ASTC_6x6;
+        [Tooltip("Format used if the texture has an alpha channel.")]
+        [SerializeField] public TextureImporterFormat RGBAFormat = TextureImporterFormat.ASTC_6x6;
     }
 
 }

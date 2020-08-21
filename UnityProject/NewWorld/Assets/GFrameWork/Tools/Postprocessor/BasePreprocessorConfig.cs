@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using GFrame;
 
 namespace GFrame.AssetPreprocessor
 {
@@ -43,8 +42,15 @@ namespace GFrame.AssetPreprocessor
                 return s_Instance;
             }
         }
+        #endregion
+
+        [Header("Config Settings")]
+
+        [Tooltip("Whether this config should be considered when processing assets.")]
+        [SerializeField] private bool IsEnabled = true;
+
+        public static bool isEnabled => S.IsEnabled;
     }
-    #endregion
 
 
 
@@ -64,6 +70,24 @@ namespace GFrame.AssetPreprocessor
                 AssetDatabase.CreateAsset(data, spriteDataPath);
             }
             Log.i("#Create TexturePreprocessorConfig In Folder:" + spriteDataPath);
+            EditorUtility.SetDirty(data);
+            AssetDatabase.SaveAssets();
+        }
+
+        [MenuItem("Assets/GFrame/Config/Preprocessor/Build AudioPreprocessorConfig")]
+        public static void BuildAudioPreprocessorConfig()
+        {
+            AudioPreprocessorConfig data = null;
+            string folderPath = "Assets/Resources/Config/Preprocessor/";
+            FileHelper.CreateDirctory(PathHelper.AssetsPath2ABSPath(folderPath));
+            string spriteDataPath = folderPath + "AudioPreprocessorConfig.asset";
+            data = AssetDatabase.LoadAssetAtPath<AudioPreprocessorConfig>(spriteDataPath);
+            if (data == null)
+            {
+                data = ScriptableObject.CreateInstance<AudioPreprocessorConfig>();
+                AssetDatabase.CreateAsset(data, spriteDataPath);
+            }
+            Log.i("#Create AudioPreprocessorConfig In Folder:" + spriteDataPath);
             EditorUtility.SetDirty(data);
             AssetDatabase.SaveAssets();
         }

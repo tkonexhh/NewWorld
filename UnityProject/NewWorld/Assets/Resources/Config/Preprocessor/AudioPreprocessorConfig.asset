@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c8ade4d9ce7418d93cf38162b53044, type: 3}
+  m_Name: AudioPreprocessorConfig
+  m_EditorClassIdentifier: 
+  IsEnabled: 1
+  ForceToMono: 1
+  Ambisonic: 0
+  MaxClipLengthInSeconds: 999
+  LoadInBackground: 0
+  AudioClipLoadType: 0
+  androidConfig:
+    Quality: 1
+    PreloadAudioData: 1
+    AudioCompressionFormat: 1
+  iosConfig:
+    Quality: 1
+    PreloadAudioData: 1
+    AudioCompressionFormat: 1

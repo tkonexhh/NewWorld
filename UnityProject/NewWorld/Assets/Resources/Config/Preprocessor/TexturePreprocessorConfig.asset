@@ -22,14 +22,14 @@ MonoBehaviour:
   FilterMode: 1
   AnisoLevel: 1
   StandaloneConfig:
+    TextureCompressionQuality: 50
     RGBFormat: -1
     RGBAFormat: -1
-    TextureCompressionQuality: 50
   AndroidConfig:
-    RGBFormat: -1
-    RGBAFormat: -1
     TextureCompressionQuality: 50
+    RGBFormat: 34
+    RGBAFormat: 47
   IOSConfig:
-    RGBFormat: -1
-    RGBAFormat: -1
     TextureCompressionQuality: 50
+    RGBFormat: 50
+    RGBAFormat: 50

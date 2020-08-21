@@ -21,10 +21,11 @@ namespace GFrame.AssetPreprocessor.Editor
     {
         public void OnPreprocessTexture()
         {
+            if (!TexturePreprocessorConfig.isEnabled) return;
+
             Debug.Log("OnPreProcessTexture=" + this.assetPath);
             TextureImporter importer = this.assetImporter as TextureImporter;
             if (importer == null) return;
-
 
             importer.mipmapEnabled = TexturePreprocessorConfig.enableMipmap;
             importer.streamingMipmaps = TexturePreprocessorConfig.enableMipmapStreaming;
@@ -48,6 +49,7 @@ namespace GFrame.AssetPreprocessor.Editor
             var maxTextureSize = TexturePreprocessorConfig.maxTextureSize;
             var multipliedNativeRes = Mathf.RoundToInt(nativeSize * TexturePreprocessorConfig.nativeTextureSizeMultiplier);
             var textureSize = Mathf.Min(multipliedNativeRes, maxTextureSize);
+
 
             // importer.textureType = TextureImporterType.Sprite;
             // importer.spriteImportMode = SpriteImportMode.Single;
@@ -100,25 +102,6 @@ namespace GFrame.AssetPreprocessor.Editor
                 allowsAlphaSplitting = false,
             });
         }
-
-        // private static void SetTextureImporterPlatformSetting(TextureImporter textureImporter, int textureSize, TextureImporterFormat format)
-        // {
-        //     Debug.Log($"Setting: {textureSize} | Format: {format} ");
-
-        //     TexturePreprocessorConfig.platformsRegexList.ForEach(platformRegexString =>
-        //     {
-        //         textureImporter.SetPlatformTextureSettings(new TextureImporterPlatformSettings
-        //         {
-        //             overridden = true,
-        //             name = platformRegexString,
-        //             maxTextureSize = textureSize,
-        //             format = format,
-        //             //compressionQuality = (int)config.TextureCompressionQuality,
-        //             allowsAlphaSplitting = false
-        //         });
-        //     });
-
-        // }
 
 
         private static Size GetOriginalTextureSize(TextureImporter importer)
