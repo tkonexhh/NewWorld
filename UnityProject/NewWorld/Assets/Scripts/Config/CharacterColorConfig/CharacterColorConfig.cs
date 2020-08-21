@@ -19,21 +19,8 @@ namespace Game.Logic
         [SerializeField] private List<Color> m_HairColors;
         [SerializeField] private List<Color> m_SkinColors;
 
-        public static List<Color> hairColors
-        {
-            get
-            {
-                return S.m_HairColors;
-            }
-        }
-
-        public static List<Color> skinColors
-        {
-            get
-            {
-                return S.m_SkinColors;
-            }
-        }
+        public static List<Color> hairColors => S.m_HairColors;
+        public static List<Color> skinColors => S.m_SkinColors;
 
     }
 

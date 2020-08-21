@@ -40,13 +40,7 @@ namespace GFrame
         }
 
 
-        public static Color defaultTextColor
-        {
-            get
-            {
-                return S.m_DefaultTextColor;
-            }
-        }
+        public static Color defaultTextColor => S.m_DefaultTextColor;
 
 
         public static string defaultNameSpace

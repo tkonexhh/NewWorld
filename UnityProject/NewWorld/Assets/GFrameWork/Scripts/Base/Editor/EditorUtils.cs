@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using GFrame.AssetPreprocessor;
 
 namespace GFrame.Editor
 {
@@ -13,6 +14,7 @@ namespace GFrame.Editor
 
             ProjectPathConfigEditor.BuildConfig();
             ProjectDefaultConfigEditor.BuildConfig();
+            PreprocessorConfigEditor.BuildTexturePreprocessorConfig();
 
             List<string> createPath = new List<string>(){
                 "Assets/Resources/Config/",

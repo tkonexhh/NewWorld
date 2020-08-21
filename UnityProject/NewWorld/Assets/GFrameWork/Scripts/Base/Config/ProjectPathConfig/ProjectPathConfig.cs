@@ -19,29 +19,9 @@ namespace GFrame
         [SerializeField] private string m_TableCsharpPath = "Resources/Scripts/Table/";
         [SerializeField] private string m_DataBasepath = "Resources/Data/";
 
-        public static string uiRootPath
-        {
-            get
-            {
-                return S.m_UIRootPath;
-            }
-        }
-
-        public static string tableCsharpPath
-        {
-            get
-            {
-                return S.m_TableCsharpPath;
-            }
-        }
-
-        public static string DataBasePath
-        {
-            get
-            {
-                return S.m_DataBasepath;
-            }
-        }
+        public static string uiRootPath => S.m_UIRootPath;
+        public static string tableCsharpPath => S.m_TableCsharpPath;
+        public static string DataBasePath => S.m_DataBasepath;
     }
 
 }

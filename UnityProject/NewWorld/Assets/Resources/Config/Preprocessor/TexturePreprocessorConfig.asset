@@ -12,10 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0893e533fdd414c9a1693d82bbd61d, type: 3}
   m_Name: TexturePreprocessorConfig
   m_EditorClassIdentifier: 
-  PlatformsRegexList:
-  - Android
-  - iOS
-  - Standalone
   MaxTextureSize: 4096
   EnableReadWrite: 0
-  GenerateMipMaps: 0
+  EnableMipmap: 0
+  EnableMipMapStreaming: 0
+  AlphaSource: 0
+  NativeTextureSizeMultiplier: 1
+  ForceFilterMode: 0
+  FilterMode: 1
+  AnisoLevel: 1
+  StandaloneConfig:
+    RGBFormat: -1
+    RGBAFormat: -1
+    TextureCompressionQuality: 50
+  AndroidConfig:
+    RGBFormat: -1
+    RGBAFormat: -1
+    TextureCompressionQuality: 50
+  IOSConfig:
+    RGBFormat: -1
+    RGBAFormat: -1
+    TextureCompressionQuality: 50
