@@ -18,7 +18,7 @@ namespace GFrame.AssetPreprocessor
 
         [Header("Quality Settings")]
         [SerializeField] private bool ForceToMono = true;//单声道
-        [SerializeField] private bool Ambisonic;
+        [SerializeField] private bool Ambisonic = false; //环绕声
 
         //[Range(0, 1)] [SerializeField] private float Quality = 1f;
 
@@ -31,14 +31,16 @@ namespace GFrame.AssetPreprocessor
 
 
         [Header("Platform")]
+        [SerializeField] private AudioPlatformPreprocessorConfig StandaloneConfig;
         [SerializeField] private AudioPlatformPreprocessorConfig AndroidConfig;
         [SerializeField] private AudioPlatformPreprocessorConfig IOSConfig;
 
 
         public static bool forceToMono => S.ForceToMono;
-
+        public static bool ambisonic => S.Ambisonic;
         public static bool loadInBackground => S.LoadInBackground;
 
+        public static AudioPlatformPreprocessorConfig standaloneConfig => S.StandaloneConfig;
         public static AudioPlatformPreprocessorConfig androidConfig => S.AndroidConfig;
         public static AudioPlatformPreprocessorConfig iosConfig => S.IOSConfig;
 
@@ -48,9 +50,33 @@ namespace GFrame.AssetPreprocessor
     [System.Serializable]
     public class AudioPlatformPreprocessorConfig
     {
-        [Range(0, 1)] [SerializeField] private float Quality = 1f;
-        [SerializeField] private bool PreloadAudioData = true;
-        [SerializeField] private AudioCompressionFormat AudioCompressionFormat = AudioCompressionFormat.Vorbis;
+        [Range(0, 1)] public float Quality = 1f;
+        public bool PreloadAudioData = false;
+        public AudioCompressionFormat AudioCompressionFormat = AudioCompressionFormat.Vorbis;
+
     }
+
+    // [System.Serializable]
+    // public class AudioStandalonePreprocessorConfig : AudioPlatformPreprocessorConfig
+    // {
+
+    //     public bool PreloadAudioData = true;
+    //     public AudioCompressionFormat AudioCompressionFormat = AudioCompressionFormat.Vorbis;
+    // }
+
+    // [System.Serializable]
+    // public class AudioAnndroidPreprocessorConfig : AudioPlatformPreprocessorConfig
+    // {
+
+    //     public bool PreloadAudioData = true;
+    //     public AudioCompressionFormat AudioCompressionFormat = AudioCompressionFormat.Vorbis;
+    // }
+
+    // [System.Serializable]
+    // public class AudioIOSPreprocessorConfig : AudioPlatformPreprocessorConfig
+    // {
+    //     public bool PreloadAudioData = true;
+    //     public AudioCompressionFormat AudioCompressionFormat = AudioCompressionFormat.MP3;
+    // }
 
 }

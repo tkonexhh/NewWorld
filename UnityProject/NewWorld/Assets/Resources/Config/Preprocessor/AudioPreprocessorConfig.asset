@@ -18,11 +18,15 @@ MonoBehaviour:
   MaxClipLengthInSeconds: 999
   LoadInBackground: 0
   AudioClipLoadType: 0
-  androidConfig:
+  StandaloneConfig:
     Quality: 1
     PreloadAudioData: 1
     AudioCompressionFormat: 1
-  iosConfig:
+  AndroidConfig:
     Quality: 1
     PreloadAudioData: 1
     AudioCompressionFormat: 1
+  IOSConfig:
+    Quality: 1
+    PreloadAudioData: 1
+    AudioCompressionFormat: 3
