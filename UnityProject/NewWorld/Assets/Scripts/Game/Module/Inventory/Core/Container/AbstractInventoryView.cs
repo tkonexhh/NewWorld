@@ -9,6 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 namespace Game.Logic
@@ -50,6 +51,15 @@ namespace Game.Logic
         {
 
         }
+
+        public virtual void OnPrePick(IInventoryCellView stareCell) { }
+        public virtual bool OnPick(IInventoryCellView stareCell) { return false; }
+        public virtual void OnDrag(IInventoryCellView stareCell, IInventoryCellView effectCell, PointerEventData pointerEventData) { }
+        public virtual bool OnDrop(IInventoryCellView stareCell, IInventoryCellView effectCell) { return false; }
+        public virtual void OnDroped(bool isDroped) { }
+        public virtual void OnCellEnter(IInventoryCellView stareCell, IInventoryCellView effectCell) { }
+        public virtual void OnCellExit(IInventoryCellView stareCell) { }
+
         #endregion
 
     }

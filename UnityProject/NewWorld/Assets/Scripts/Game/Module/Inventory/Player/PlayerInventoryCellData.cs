@@ -15,9 +15,10 @@ namespace Game.Logic
 {
     public class PlayerInventoryCellData : InventoryCellData
     {
+        public AbstractItem item { get; set; }
         public PlayerInventoryCellData(AbstractItem item) : base(item)
         {
-            Debug.LogError(item.width);
+            this.item = item;
         }
     }
 

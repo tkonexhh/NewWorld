@@ -35,7 +35,7 @@ namespace Game.Logic
 
 
         #region IInventoryCellView
-        public RectTransform RectTransform { get; }
+        public RectTransform RectTransform => (RectTransform)transform;
         public IInventoryCellData CellData { get; protected set; }
         public virtual Vector2 DefaultCellSize { get; set; }
         public virtual Vector2 MargineSpace { get; set; }

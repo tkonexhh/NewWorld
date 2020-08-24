@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 
 namespace Game.Logic
 {
@@ -24,6 +24,15 @@ namespace Game.Logic
 
         void Apply(IInventoryViewData data);
         void ReApply();
+
+        void OnPrePick(IInventoryCellView stareCell);
+        bool OnPick(IInventoryCellView stareCell);
+        void OnDrag(IInventoryCellView stareCell, IInventoryCellView effectCell, PointerEventData pointerEventData);
+        bool OnDrop(IInventoryCellView stareCell, IInventoryCellView effectCell);
+        void OnDroped(bool isDroped);
+
+        void OnCellEnter(IInventoryCellView stareCell, IInventoryCellView effectCell);
+        void OnCellExit(IInventoryCellView stareCell);
     }
 
 }

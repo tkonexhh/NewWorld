@@ -8,6 +8,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -18,14 +19,18 @@ namespace Game.Logic
     {
         protected List<IInventoryView> InventoryViews { get; set; } = new List<IInventoryView>();
 
-        protected virtual AbstractInventoryView CellPrefab { get; set; }
+        protected virtual AbstractInventoryCellView CellPrefab { get; set; }
         protected virtual RectTransform EffectCellParent { get; set; }
 
-        protected IInventoryCellView effectCell;
+        protected IInventoryCellView stareCell;
+        protected AbstractInventoryCellView effectCell;
+
+        Vector2 cursorPosition;
 
         public void Init()
         {
-            effectCell = Instantiate(CellPrefab.gameObject, EffectCellParent).GetComponent<IInventoryCellView>();
+            var go = Instantiate(CellPrefab.gameObject, EffectCellParent);
+            effectCell = go.GetComponent<AbstractInventoryCellView>();
             effectCell.RectTransform.gameObject.SetActive(false);
             //effectCell.SetSelectable(false);
         }
@@ -44,17 +49,49 @@ namespace Game.Logic
         #region event
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
+            if (eventData.button != PointerEventData.InputButton.Left)
+            {
+                return;
+            }
 
+            foreach (var inventoryViews in InventoryViews)
+            {
+                inventoryViews.OnPrePick(stareCell);
+            }
+
+            var stareData = stareCell?.CellData;
+            var isHold = InventoryViews.Any(x => x.OnPick(stareCell));
+
+            if (!isHold)
+            {
+                return;
+            }
+
+            effectCell.RectTransform.gameObject.SetActive(true);
+            effectCell.Apply(stareData);
         }
 
         public virtual void OnDrag(PointerEventData eventData)
         {
+            if (effectCell?.CellData == null)
+            {
+                return;
+            }
+            foreach (var inventoryViews in InventoryViews)
+            {
+                inventoryViews.OnDrag(stareCell, effectCell, eventData);
+            }
 
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(EffectCellParent, eventData.position, eventData.enterEventCamera, out cursorPosition);
+
+
+            effectCell.RectTransform.localPosition = cursorPosition + new Vector2(
+                effectCell.DefaultCellSize.x * 0.5f,
+                -1 * effectCell.DefaultCellSize.y * 0.5f);
         }
 
         public virtual void OnEndDrag(PointerEventData eventData)
         {
-
         }
         #endregion
 
@@ -69,22 +106,22 @@ namespace Game.Logic
 
         protected virtual void OnCellEnter(IInventoryCellView cell)
         {
-            // stareCell = cell;
+            stareCell = cell;
 
-            // foreach (var inventoryView in InventoryViews)
-            // {
-            //     inventoryView.OnCellEnter(stareCell, effectCell);
-            // }
+            foreach (var inventoryView in InventoryViews)
+            {
+                inventoryView.OnCellEnter(stareCell, effectCell);
+            }
         }
 
         protected virtual void OnCellExit(IInventoryCellView cell)
         {
-            // foreach (var inventoryView in InventoryViews)
-            // {
-            //     inventoryView.OnCellExit(stareCell);
-            // }
+            foreach (var inventoryView in InventoryViews)
+            {
+                inventoryView.OnCellExit(stareCell);
+            }
 
-            // stareCell = null;
+            stareCell = null;
         }
     }
 

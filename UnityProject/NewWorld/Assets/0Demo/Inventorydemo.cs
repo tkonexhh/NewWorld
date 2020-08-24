@@ -15,11 +15,15 @@ namespace Game.Logic
 {
     public class Inventorydemo : MonoBehaviour
     {
+        [SerializeField] private AbstractInventoryCore m_InventoryCore;
         [SerializeField] private PlayerInventoryView m_InventoryView;
 
         void Start()
         {
-            m_InventoryView.SetCellCallback(OnCellClick, onCellOptionClick, onCellEnter, onCellExit);
+            m_InventoryCore.Init();
+            m_InventoryCore.AddInventoryView(m_InventoryView);
+
+
             PlayerInventoryViewData viewData = new PlayerInventoryViewData(10, 10);
 
             for (int i = 0; i < 10; i++)
@@ -29,32 +33,17 @@ namespace Game.Logic
                 viewData.InsertInventoryItem(viewData.GetInsertableId(cellData).Value, cellData);
             }
 
+            for (int i = 0; i < 10; i++)
+            {
+                var item = new SupplyItem(Random.Range(1, 4));
+                PlayerInventoryCellData cellData = new PlayerInventoryCellData(item);
+                viewData.InsertInventoryItem(viewData.GetInsertableId(cellData).Value, cellData);
+            }
+
             m_InventoryView.Apply(viewData);
 
-            Debug.LogError(viewData.CellData.Length);
-
         }
 
-
-        private void OnCellClick(IInventoryCellView cell)
-        {
-
-        }
-
-        private void onCellOptionClick(IInventoryCellView cell)
-        {
-
-        }
-
-        private void onCellEnter(IInventoryCellView cell)
-        {
-
-        }
-
-        private void onCellExit(IInventoryCellView cell)
-        {
-
-        }
 
     }
 
