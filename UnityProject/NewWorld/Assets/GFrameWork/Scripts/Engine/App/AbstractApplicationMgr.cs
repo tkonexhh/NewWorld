@@ -36,6 +36,7 @@ namespace GFrame
         private void InitGame()
         {
             UIMgr.S.Init();
+            SceneMgr.S.Init();
         }
 
         protected virtual void StartGame()

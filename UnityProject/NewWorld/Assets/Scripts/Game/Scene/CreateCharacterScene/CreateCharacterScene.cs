@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GFrame;
+using UnityEngine.Rendering.Universal;
 
 
 namespace Game.Logic
@@ -27,6 +28,7 @@ namespace Game.Logic
         private void Awake()
         {
             m_Singenton = this;
+            Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(UIMgr.S.uiRoot.uiCamera);
         }
 
         private void Start()

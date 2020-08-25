@@ -29,7 +29,7 @@ namespace Game.Logic
 
         private void RegisterPanel()
         {
-            UIDataTable.SetAddressMode(false);
+            UIDataTable.SetLoadMode(LoadStrategy.Resource);
 
             UIDataTable.AddPanelData(UIID.MainMenuPanel, "MainMenuPanel");
             UIDataTable.AddPanelData(UIID.LoadingPanel, "LoadingPanel");

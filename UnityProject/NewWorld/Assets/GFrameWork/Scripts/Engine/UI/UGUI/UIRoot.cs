@@ -22,30 +22,11 @@ namespace GFrame
         [SerializeField] private Transform m_PanelRoot;
         [SerializeField] private Transform m_HideRoot;
 
-        public Camera uiCamera
-        {
-            get { return m_UICamera; }
-        }
-
-        public Canvas uiCanvas
-        {
-            get { return m_UICanvas; }
-        }
-
-        public UnityEngine.EventSystems.EventSystem eventSystem
-        {
-            get { return m_EventSystem; }
-        }
-
-        public Transform panelRoot
-        {
-            get { return m_PanelRoot; }
-        }
-
-        public Transform hideRoot
-        {
-            get { return m_HideRoot; }
-        }
+        public Camera uiCamera => m_UICamera;
+        public Canvas uiCanvas => m_UICanvas;
+        public UnityEngine.EventSystems.EventSystem eventSystem => m_EventSystem;
+        public Transform panelRoot => m_PanelRoot;
+        public Transform hideRoot => m_HideRoot;
     }
 
 }

@@ -92,6 +92,27 @@ namespace Game.Logic
 
         public virtual void OnEndDrag(PointerEventData eventData)
         {
+            if (effectCell.CellData == null)
+            {
+                return;
+            }
+
+            var isRelease = InventoryViews.Any(x => x.OnDrop(stareCell, effectCell));
+
+            // if (!isRelease && originEffectCellRotate.HasValue)
+            // {
+            //     effectCell.CellData.IsRotate = originEffectCellRotate.Value;
+            //     effectCell.Apply(effectCell.CellData);
+            //     originEffectCellRotate = null;
+            // }
+
+            foreach (var inventoryViews in InventoryViews)
+            {
+                inventoryViews.OnDroped(isRelease);
+            }
+
+            effectCell.RectTransform.gameObject.SetActive(false);
+            effectCell.Apply(null);
         }
         #endregion
 

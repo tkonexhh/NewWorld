@@ -16,17 +16,16 @@ namespace GFrame
     public class UIDataTable
     {
         private static Dictionary<int, UIData> s_UIDataMap = new Dictionary<int, UIData>();
+        private static LoadStrategy m_LoadStrategy = LoadStrategy.Resource;
 
-        private static bool s_IsAddressMode = false;
-
-        public static void SetAddressMode(bool addressMode)
+        public static void SetLoadMode(LoadStrategy loadMode)
         {
-            s_IsAddressMode = addressMode;
+            m_LoadStrategy = loadMode;
         }
 
         public static void AddPanelData<T>(T uiID, string path, bool singleton = true, int cacheCount = 1) where T : System.IConvertible
         {
-            Add(new PanelData(uiID.ToInt32(null), path, singleton, cacheCount, s_IsAddressMode));
+            Add(new PanelData(uiID.ToInt32(null), path, singleton, cacheCount, m_LoadStrategy));
         }
 
         private static void Add(UIData data)

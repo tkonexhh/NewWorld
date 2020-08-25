@@ -28,16 +28,17 @@ namespace Game.Logic
                 return s_Instance;
             }
         }
+
         public void OnSingletonInit()
         {
 
         }
 
-
         public void Init()
         {
             Log.i("#Init[GameMgr]");
             AddComponent(new UIDataModule());
+            AddComponent(new SceneDataModule());
             AddComponent(new DataBaseModule());
         }
 
@@ -50,8 +51,8 @@ namespace Game.Logic
         protected override void OnModuleStart()
         {
             //EnterMainMenu();
-            // EnterCreateRole();
-            EnterInventoryDemo();
+            EnterCreateRole();
+            // EnterInventoryDemo();
         }
 
         private void EnterMainMenu()
