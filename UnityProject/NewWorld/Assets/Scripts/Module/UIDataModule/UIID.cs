@@ -17,7 +17,6 @@ namespace Game.Logic
     {
         MainMenuPanel,
         LoadingPanel,
-        StartGamePanel,
         CreateCharacterPanel,
         //Game
         Inventorypanel,

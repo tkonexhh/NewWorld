@@ -11,25 +11,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Game.Logic
+namespace GFrame
 {
     public class AbstractScene : MonoBehaviour, IScene
     {
-        #region IScene
 
-        public void EnterScene()
+        private void Awake()
         {
-
+            OnSceneInit();
         }
 
-        public void ExitScene()
+        private void Start()
         {
+            SceneEnter();
+        }
 
+        private void OnDestroy()
+        {
+            SceneExit();
+        }
+
+        #region IScene
+
+        public void SceneEnter()
+        {
+            OnSceneEnter();
+        }
+
+        public void SceneExit()
+        {
+            OnSceneExit();
         }
         #endregion
 
-        protected virtual void OnEnterScene() { }
-        protected virtual void OnExitScene() { }
+
+        protected virtual void OnSceneInit() { }
+        protected virtual void OnSceneEnter() { }
+        protected virtual void OnSceneExit() { }
     }
 
 }

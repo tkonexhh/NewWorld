@@ -50,20 +50,21 @@ namespace Game.Logic
 
         protected override void OnModuleStart()
         {
-            //EnterMainMenu();
-            EnterCreateRole();
+            EnterMainMenuScene();
+            // EnterCreateRole();
             // EnterInventoryDemo();
         }
 
-        private void EnterMainMenu()
+        private void EnterMainMenuScene()
         {
-            UIMgr.S.OpenPanel(UIID.MainMenuPanel);
+            // UIMgr.S.OpenPanel(UIID.MainMenuPanel);
+            SceneMgr.S.OpenScene(SceneID.MainMenuScene);
         }
 
         #region Test
         private void EnterCreateRole()
         {
-            AddressableResMgr.S.LoadSceneAsync("CreateCharacterScene");
+            SceneMgr.S.OpenScene(SceneID.CreateCharacterScene);
         }
 
         private void EnterInventoryDemo()

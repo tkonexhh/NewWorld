@@ -29,19 +29,13 @@ namespace GFrame
         private int m_UIID;
         private int m_SortingOrder = -1;
         private ePanelState m_PanelState = ePanelState.UnInit;
-        private bool m_CacheFlag = false;
+
         private Action<AbstractPanel> m_OpenCallback;
 
         #region setter getter
-        public int panelID
-        {
-            get { return m_PanelID; }
-        }
+        public int panelID => m_PanelID;
 
-        public int uiID
-        {
-            get { return m_UIID; }
-        }
+        public int uiID => m_UIID;
 
         public int sortingOrder
         {
@@ -73,24 +67,14 @@ namespace GFrame
             }
         }
 
-        public bool isReady
-        {
-            get { return m_Panel != null; }
-        }
+        public bool isReady => m_Panel != null;
         #endregion
 
         #region cache
         public bool cacheFlag
         {
-            get
-            {
-                return m_CacheFlag;
-            }
-
-            set
-            {
-                m_CacheFlag = value;
-            }
+            get;
+            set;
         }
 
         public void OnCacheReset()

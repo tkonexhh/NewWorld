@@ -33,6 +33,18 @@ namespace GFrame
             return handle;
         }
 
+        public AsyncOperationHandle UnloadSceneAsync(AsyncOperationHandle<SceneInstance> sceneHandle)
+        {
+            var handle = Addressables.UnloadSceneAsync(sceneHandle).AddCompleteCallback(
+                (result) =>
+                {
+
+                });
+            //public static AsyncOperationHandle<SceneInstance> UnloadSceneAsync(AsyncOperationHandle<SceneInstance> handle, bool autoReleaseHandle = true);
+            //public static AsyncOperationHandle<SceneInstance> UnloadSceneAsync(AsyncOperationHandle handle, bool autoReleaseHandle = true);
+            return handle;
+        }
+
         public AddressableGameObjectRes InstantiateAsync(string assetName, Action<GameObject> completeCallback = null, string label = "")
         {
             BaseAddressableRes res = null;

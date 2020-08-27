@@ -69,12 +69,13 @@ namespace Game.Logic
 
         private void OnClickNewGame()
         {
+            //SceneMgr.S.OpenScene(SceneID.CreateCharacterScene);
             UIMgr.S.OpenPanel(UIID.LoadingPanel, (panel) =>
             {
                 ((LoadingPanel)panel).RegisterShowOverListener(() =>
                 {
                     CloseSelfPanel();
-                    AddressableResMgr.S.LoadSceneAsync("CreateCharacterScene");
+                    SceneMgr.S.OpenScene(SceneID.CreateCharacterScene);
                 });
             });
 

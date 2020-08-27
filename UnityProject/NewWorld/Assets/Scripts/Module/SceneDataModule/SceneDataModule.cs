@@ -9,6 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using GFrame;
 
 namespace Game.Logic
@@ -18,26 +19,19 @@ namespace Game.Logic
         protected override void OnAwake()
         {
             InitScenePath();
-            // RegisterPanel();
+            RegisterScene();
         }
 
         private void InitScenePath()
         {
-            SceneData.SCENE_PATH = "Resources/UI/Panels/{0}";
+            SceneData.SCENE_PATH = "AddressableRes/FolderMode/Scene/{0}";
         }
 
         private void RegisterScene()
         {
-            SceneDataTable.SetLoadMode(LoadStrategy.Addressable);
-
-            SceneDataTable.AddSceneData(SceneID.CreateCharacterScene, "CreateCharacterScene");
-            //     UIDataTable.SetAddressMode(false);
-
-            //     UIDataTable.AddPanelData(UIID.MainMenuPanel, "MainMenuPanel");
-            //     UIDataTable.AddPanelData(UIID.LoadingPanel, "LoadingPanel");
-            //     UIDataTable.AddPanelData(UIID.CreateCharacterPanel, "CreateCharacterPanel");
-
-            //     UIDataTable.AddPanelData(UIID.Inventorypanel, "Inventorypanel");
+            SceneDataTable.SetLoadMode(SceneLoadStatgy.Addressable);
+            SceneDataTable.AddSceneData(SceneID.CreateCharacterScene, "CreateCharacterScene", LoadSceneMode.Single);
+            SceneDataTable.AddSceneData(SceneID.MainMenuScene, "MainMenuScene", LoadSceneMode.Single);
         }
     }
 

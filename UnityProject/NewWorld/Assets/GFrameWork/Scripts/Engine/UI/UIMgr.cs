@@ -24,15 +24,8 @@ namespace GFrame
         private int m_NextPanelID = 0;
 
         #region setter getter
-        public UIRoot uiRoot
-        {
-            get { return m_UIRoot; }
-        }
-
-        public EventSystem uiEventSystem
-        {
-            get { return m_UIEventSystem; }
-        }
+        public UIRoot uiRoot => m_UIRoot;
+        public EventSystem uiEventSystem => m_UIEventSystem;
 
         private int nextPanelID
         {

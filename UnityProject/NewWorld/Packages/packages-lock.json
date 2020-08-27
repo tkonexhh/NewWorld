@@ -28,7 +28,7 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.animation.rigging": {
-      "version": "0.2.6-preview",
+      "version": "0.2.7-preview",
       "depth": 0,
       "source": "registry",
       "dependencies": {

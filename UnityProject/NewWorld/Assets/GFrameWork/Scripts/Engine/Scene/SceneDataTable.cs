@@ -9,6 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace GFrame
@@ -16,16 +17,16 @@ namespace GFrame
     public class SceneDataTable
     {
         private static Dictionary<int, SceneData> s_SceneDataMap = new Dictionary<int, SceneData>();
-        private static LoadStrategy m_LoadStrategy = LoadStrategy.Resource;
+        private static SceneLoadStatgy m_LoadStrategy = SceneLoadStatgy.Addressable;
 
-        public static void SetLoadMode(LoadStrategy loadMode)
+        public static void SetLoadMode(SceneLoadStatgy loadMode)
         {
             m_LoadStrategy = loadMode;
         }
 
-        public static void AddSceneData<T>(T sceneID, string path) where T : System.IConvertible
+        public static void AddSceneData<T>(T sceneID, string path, LoadSceneMode mode) where T : System.IConvertible
         {
-            Add(new SceneData(sceneID.ToInt32(null), path, m_LoadStrategy));
+            Add(new SceneData(sceneID.ToInt32(null), path, m_LoadStrategy, mode));
         }
 
         private static void Add(SceneData data)
@@ -34,22 +35,22 @@ namespace GFrame
 
             if (s_SceneDataMap.ContainsKey(data.sceneID))
             {
-                Log.w("#Already Add UIID:" + data.sceneID);
+                Log.w("#Already Add SceneID:" + data.sceneID);
                 return;
             }
 
             s_SceneDataMap.Add(data.sceneID, data);
         }
 
-        public static SceneData Get<T>(T uiID) where T : System.IConvertible
+        public static SceneData Get<T>(T sceneID) where T : System.IConvertible
         {
             SceneData result = null;
 
-            if (s_SceneDataMap.TryGetValue(uiID.ToInt32(null), out result))
+            if (s_SceneDataMap.TryGetValue(sceneID.ToInt32(null), out result))
             {
                 return result;
             }
-            Log.e("#InValid UIID:" + uiID.ToInt32(null));
+            Log.e("#InValid SceneID:" + sceneID.ToInt32(null));
             return null;
         }
     }

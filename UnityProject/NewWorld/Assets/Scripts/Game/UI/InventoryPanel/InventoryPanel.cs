@@ -22,7 +22,6 @@ namespace Game.Logic
         protected override void OnUIInit()
         {
             base.OnUIInit();
-            Debug.LogError("UIInit");
 
             PlayerMgr.S.inventoryMgr.AddItem(1);
             PlayerMgr.S.inventoryMgr.AddItem(1, 10);
@@ -41,7 +40,6 @@ namespace Game.Logic
         protected override void OnOpen()
         {
             base.OnOpen();
-            Debug.LogError("OnOpen");
         }
 
 

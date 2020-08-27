@@ -11,12 +11,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Game.Logic
+namespace GFrame
 {
     public interface IScene
     {
-        void EnterScene();
-        void ExitScene();
+        void SceneEnter();
+        void SceneExit();
     }
 
 }

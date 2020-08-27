@@ -26,6 +26,7 @@ namespace GFrame
         public int uiID => m_UIID;
         public int cacheCount => m_CacheCount;
         public bool isSingleton => m_IsSingleton;
+        public string fileName => FileName(m_ResPath);
 
 
         public UIData(int uiID, string path, LoadStrategy loadMode)
@@ -52,7 +53,7 @@ namespace GFrame
             {
                 if (m_LoadStrategy == LoadStrategy.Addressable)
                 {
-                    return m_ResPath;
+                    return fileName;
                 }
 
                 return string.Format(prefixPath, m_ResPath);

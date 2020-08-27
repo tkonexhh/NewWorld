@@ -19,4 +19,9 @@ namespace GFrame
         Addressable,
     }
 
+    public enum SceneLoadStatgy
+    {
+        BuildIn,
+        Addressable,
+    }
 }
