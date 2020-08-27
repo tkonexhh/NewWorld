@@ -16,6 +16,9 @@ namespace GFrame
 
     public class UIRoot : MonoBehaviour
     {
+
+        public const int TOP_PANEL_INDEX = 10000000;
+
         [SerializeField] private Camera m_UICamera;
         [SerializeField] private Canvas m_UICanvas;
         [SerializeField] private UnityEngine.EventSystems.EventSystem m_EventSystem;
@@ -27,6 +30,41 @@ namespace GFrame
         public UnityEngine.EventSystems.EventSystem eventSystem => m_EventSystem;
         public Transform panelRoot => m_PanelRoot;
         public Transform hideRoot => m_HideRoot;
+
+        private int m_AutoPanelOrder = 0;
+        private int m_TopPanelOrder = TOP_PANEL_INDEX;
+
+
+        public int RequireNextPanelSortingOrder(PanelType type)
+        {
+            switch (type)
+            {
+                case PanelType.Auto:
+                    m_AutoPanelOrder += 10;
+                    return m_AutoPanelOrder;
+                case PanelType.Top:
+                    m_TopPanelOrder += 10;
+                    return m_TopPanelOrder;
+                case PanelType.Bottom:
+                    return 0;
+                default:
+                    break;
+            }
+
+            return m_AutoPanelOrder;
+        }
+
+        public void ReleasePanelSortingOrder(int sortingIndex)
+        {
+            if (m_AutoPanelOrder == sortingIndex)
+            {
+                m_AutoPanelOrder -= 10;
+            }
+            else if (m_TopPanelOrder == sortingIndex)
+            {
+                m_TopPanelOrder -= 10;
+            }
+        }
     }
 
 }

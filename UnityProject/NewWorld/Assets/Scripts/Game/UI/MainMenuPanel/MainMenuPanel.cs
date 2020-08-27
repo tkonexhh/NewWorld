@@ -70,7 +70,7 @@ namespace Game.Logic
         private void OnClickNewGame()
         {
             //SceneMgr.S.OpenScene(SceneID.CreateCharacterScene);
-            UIMgr.S.OpenPanel(UIID.LoadingPanel, (panel) =>
+            UIMgr.S.OpenTopPanel(UIID.LoadingPanel, (panel) =>
             {
                 ((LoadingPanel)panel).RegisterShowOverListener(() =>
                 {

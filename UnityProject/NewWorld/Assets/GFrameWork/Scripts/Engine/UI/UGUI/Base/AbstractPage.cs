@@ -17,21 +17,14 @@ namespace GFrame
 
     public class AbstractPage : MonoBehaviour
     {
-        protected int m_SortingOrder = -1;
+
         protected int m_PanelID = -1;
         protected int m_UIID;
 
         private bool m_HasInitUI = false;
         private bool m_HasOpen = false;
 
-
-
         #region setter getter
-        public int sortingOrder
-        {
-            get { return m_SortingOrder; }
-        }
-
         public int panelID
         {
             get { return m_PanelID; }

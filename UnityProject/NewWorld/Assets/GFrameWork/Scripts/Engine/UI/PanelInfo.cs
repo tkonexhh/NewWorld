@@ -34,7 +34,6 @@ namespace GFrame
 
         #region setter getter
         public int panelID => m_PanelID;
-
         public int uiID => m_UIID;
 
         public int sortingOrder
@@ -50,6 +49,19 @@ namespace GFrame
                     return m_Panel.sortingOrder;
                 }
                 return m_SortingOrder;
+            }
+        }
+
+        public int maxSortingOrder
+        {
+            get
+            {
+                if (m_Panel == null)
+                {
+                    return -1;
+                }
+
+                return m_Panel.maxSortingOrder;
             }
         }
 
@@ -195,6 +207,31 @@ namespace GFrame
                 m_Panel.gameObject.SetActive(false);
             }
         }
+
+
+        #region sorting order
+        public void SetSiblingIndexAndSortingOrder(int siblingIndex, int sortingOrder)
+        {
+            if (m_Panel == null)
+            {
+                return;
+            }
+
+            m_Panel.SetSiblingIndexAndSortingOrder(siblingIndex, sortingOrder);
+        }
+
+        // public void SetSortingOrderDirty()
+        // {
+        //     if (m_Panel == null)
+        //     {
+        //         return;
+        //     }
+
+        //     m_Panel.SetSortingOrderDirty();
+        // }
+
+        #endregion
+
     }
 
 }

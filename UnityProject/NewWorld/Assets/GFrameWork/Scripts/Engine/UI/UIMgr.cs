@@ -16,11 +16,16 @@ namespace GFrame
     [TMonoSingletonAttribute("[GFrame]/[Tools]/[UIMgr]")]
     public partial class UIMgr : TMonoSingleton<UIMgr>
     {
+        public static int CANVAS_OFFSET = 10;
+
         private EventSystem m_UIEventSystem = ObjectPool<EventSystem>.S.Allocate();
         private UIRoot m_UIRoot;
-        private List<PanelInfo> m_ActivePanelInfoList = new List<PanelInfo>();
+        protected List<PanelInfo> m_ActivePanelInfoList = new List<PanelInfo>();
         private Dictionary<int, PanelInfo> m_ActivePanelInfoMap = new Dictionary<int, PanelInfo>();
         private List<PanelInfo> m_CachedPanelList = new List<PanelInfo>();
+
+
+
         private int m_NextPanelID = 0;
 
         #region setter getter
@@ -85,6 +90,16 @@ namespace GFrame
             OpenPanel(uiID, PanelType.Auto, callback, args);
         }
 
+        public void OpenTopPanel<T>(T uiID, params object[] args) where T : System.IConvertible
+        {
+            OpenPanel(uiID, PanelType.Top, null, args);
+        }
+
+        public void OpenTopPanel<T>(T uiID, System.Action<AbstractPanel> callback, params object[] args) where T : System.IConvertible
+        {
+            OpenPanel(uiID, PanelType.Top, callback, args);
+        }
+
         public void OpenPanel<T>(T uiID, PanelType type, System.Action<AbstractPanel> callback, params object[] args) where T : System.IConvertible
         {
             PanelInfo panelInfo = LoadPanelInfo(uiID.ToInt32(null));
@@ -93,6 +108,7 @@ namespace GFrame
                 return;
             }
 
+            panelInfo.sortingOrder = m_UIRoot.RequireNextPanelSortingOrder(type);
             panelInfo.AddOpenCallback(callback);
 
             if (panelInfo.isReady)
@@ -201,6 +217,7 @@ namespace GFrame
 
             m_ActivePanelInfoList.Add(panelInfo);
             m_ActivePanelInfoMap.Add(panelInfo.panelID, panelInfo);
+            m_IsPanelInfoListChange = true;
         }
 
         private void RemovePanelInfo(PanelInfo panelInfo)
@@ -215,6 +232,7 @@ namespace GFrame
 
             m_ActivePanelInfoMap.Remove(panelInfo.panelID);
             m_ActivePanelInfoList.Remove(panelInfo);
+            m_IsPanelInfoListChange = true;
         }
 
         private PanelInfo GetPanelFromCache(int uiID, bool remove)
@@ -273,6 +291,9 @@ namespace GFrame
             }
 
             RemovePanelInfo(panelInfo);
+
+            //恢复层级记录
+            m_UIRoot.ReleasePanelSortingOrder(panelInfo.sortingOrder);
 
             if (destory)
             {
@@ -346,6 +367,6 @@ namespace GFrame
             }
         }
         #endregion
-    }
 
+    }
 }

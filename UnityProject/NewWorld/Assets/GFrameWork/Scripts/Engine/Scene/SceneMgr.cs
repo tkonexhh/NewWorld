@@ -58,7 +58,7 @@ namespace GFrame
         #region private func
         private void OnOpenScene(System.Action callback)
         {
-            UIMgr.S.OpenPanel(Game.Logic.UIID.LoadingPanel, (panel) =>
+            UIMgr.S.OpenTopPanel(Game.Logic.UIID.LoadingPanel, (panel) =>
             {
                 ((Game.Logic.LoadingPanel)panel).RegisterShowOverListener(() =>
                 {

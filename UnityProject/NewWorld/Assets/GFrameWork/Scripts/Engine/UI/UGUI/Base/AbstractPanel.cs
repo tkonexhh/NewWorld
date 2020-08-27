@@ -13,9 +13,27 @@ using UnityEngine;
 
 namespace GFrame
 {
+
     [RequireComponent(typeof(Canvas))]
     public class AbstractPanel : AbstractPage
     {
+        protected int m_SortingOrder = -1;
+        protected int m_MaxSortingOrder = -1;
+        protected bool m_IsOrderDirty = false;
+
+
+        public int sortingOrder => m_SortingOrder;
+        public int maxSortingOrder
+        {
+            get { return m_MaxSortingOrder; }
+            set { m_MaxSortingOrder = value; }
+        }
+
+        protected void Start()
+        {
+            m_IsOrderDirty = true;
+            UIMgr.S.SetPanelSortingOrderDirty();
+        }
 
         public void OnPanelOpen(bool firstOpen, params object[] args)
         {
@@ -47,9 +65,57 @@ namespace GFrame
         }
 
 
+        #region sorting order
+        public void SetSortingOrderDirty()
+        {
+            m_IsOrderDirty = true;
+        }
+
+        public void SetSiblingIndexAndSortingOrder(int siblingIndex, int sortingOrder)
+        {
+            if (m_IsOrderDirty || m_SortingOrder != sortingOrder)
+            {
+
+                m_SortingOrder = sortingOrder;
+                transform.SetSiblingIndex(siblingIndex);
+                UpdateCanvasSortingOrder();
+            }
+        }
+
+        protected void UpdateCanvasSortingOrder()
+        {
+            m_MaxSortingOrder = m_SortingOrder;
+
+            Canvas[] canvas = GetComponentsInChildren<Canvas>(true);
+
+            int offset = 0;
+            if (canvas != null)
+            {
+                for (int i = 0; i < canvas.Length; ++i)
+                {
+
+                    canvas[i].overrideSorting = true;
+                    canvas[i].pixelPerfect = false;
+                    canvas[i].sortingOrder = m_SortingOrder + offset;
+                    offset += UIMgr.CANVAS_OFFSET;
+                }
+
+                m_MaxSortingOrder += offset;
+            }
+
+            SendViewEvent(ViewEvent.OnSortingLayerUpdate);
+
+            m_IsOrderDirty = false;
+        }
+
+        #endregion
+
         #region 子类需重载
         protected virtual void OnPanelOpen(params object[] args) { }
         #endregion
+
+
+
     }
 
 }
