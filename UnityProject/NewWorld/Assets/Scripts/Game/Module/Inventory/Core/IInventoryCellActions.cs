@@ -15,6 +15,7 @@ namespace Game.Logic
 {
     public interface IInventoryCellActions
     {
+        void SetActive(bool value);
         void SetCallback(
             Action onPointerClick,//鼠标左键  
             Action onPointerClickOption,//鼠标右键

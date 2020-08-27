@@ -175,24 +175,23 @@ namespace Game.Logic
                 return false;
             }
 
-            // if (!viewData.CheckInsert(index.Value, effectCell.CellData))
-            // {
-            //     // check free space in case
-            //     if (stareCell.CellData != null && stareCell.CellData is VariableInventorySystem.IStandardCaseCellData caseData)
-            //     {
-            //         var id = caseData.CaseData.GetInsertableId(effectCell.CellData);
-            //         if (id.HasValue)
-            //         {
-            //             caseData.CaseData.InsertInventoryItem(id.Value, effectCell.CellData);
+            if (!viewData.CheckInsert(index.Value, effectCell.CellData))
+            {
+                //     // check free space in case
+                //     if (stareCell.CellData != null && stareCell.CellData is VariableInventorySystem.IStandardCaseCellData caseData)
+                //     {
+                //         var id = caseData.CaseData.GetInsertableId(effectCell.CellData);
+                //         if (id.HasValue)
+                //         {
+                //             caseData.CaseData.InsertInventoryItem(id.Value, effectCell.CellData);
 
-            //             originalId = null;
-            //             originalCellData = null;
-            //             return true;
-            //         }
-            //     }
-
-            //     return false;
-            // }
+                //             originalId = null;
+                //             originalCellData = null;
+                //             return true;
+                //         }
+                //     }
+                return false;
+            }
 
             // place
             viewData.InsertInventoryItem(index.Value, effectCell.CellData);
@@ -202,6 +201,7 @@ namespace Game.Logic
             originalCellData = null;
             return true;
         }
+
         public override void OnDroped(bool isDroped)
         {
             conditionTransform.gameObject.SetActive(false);
@@ -256,7 +256,6 @@ namespace Game.Logic
             // offset index
             int width = effectCellData.Width;
             int height = effectCellData.Height;
-            //var (width, height) = GetRotateSize(effectCellData);
             if (width % 2 == 0)
             {
                 if ((cellCorner & CellCorner.Left) != CellCorner.None)

@@ -14,7 +14,7 @@ using GFrame;
 
 namespace Game.Logic
 {
-    public class PlayerInventoryMgr : MonoBehaviour, IPlayerComponent
+    public class PlayerInventoryMgr : MonoBehaviour, IPlayerMgr
     {
         private List<Equipment> m_LstEquipment = new List<Equipment>();
         private List<SupplyItem> m_LstSupply = new List<SupplyItem>();
@@ -25,7 +25,6 @@ namespace Game.Logic
 
 
         #region IPlayerComponent
-
         public void OnInit() { }
         public void OnUpdate() { }
         public void OnDestroyed() { }

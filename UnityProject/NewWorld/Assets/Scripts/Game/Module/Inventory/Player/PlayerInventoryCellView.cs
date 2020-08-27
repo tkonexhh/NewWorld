@@ -16,14 +16,14 @@ namespace Game.Logic
 {
     public class PlayerInventoryCellView : InventoryCellView
     {
+        [SerializeField] Graphic background;
         [SerializeField] private Image m_ImgIcon;
-        [SerializeField] private Sprite m_SpTest;
         [SerializeField] InventoryCellButton button;
         [SerializeField] private Text m_TxtName;
         [SerializeField] private Text m_TxtNum;
         [SerializeField] Graphic highlight;
 
-
+        protected bool isSelectable = true;
         protected override IInventoryCellActions ButtonActions => button;
         public PlayerInventoryCellData inventoryCellData { get; protected set; }
 
@@ -37,13 +37,15 @@ namespace Game.Logic
         protected override void OnApply()
         {
             base.OnApply();
-            this.rootRectTrans.gameObject.SetActive(CellData != null);
+            SetHighLight(false);
+            this.sizeRoot.gameObject.SetActive(CellData != null);
             this.ApplySize();
 
 
             if (CellData == null)
             {
                 m_ImgIcon.gameObject.SetActive(false);
+                background.gameObject.SetActive(false);
             }
             else
             {
@@ -64,7 +66,15 @@ namespace Game.Logic
                     m_TxtNum.gameObject.SetActive(false);
                 }
                 m_TxtName.GetComponent<RectTransform>().SetSize(button.GetComponent<RectTransform>().sizeDelta);
+
+                background.gameObject.SetActive(true && isSelectable);
             }
+        }
+
+        public override void SetSelectable(bool value)
+        {
+            ButtonActions.SetActive(value);
+            isSelectable = value;
         }
         #endregion
     }

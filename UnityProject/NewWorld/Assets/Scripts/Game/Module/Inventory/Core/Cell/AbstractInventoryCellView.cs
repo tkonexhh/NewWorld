@@ -46,9 +46,11 @@ namespace Game.Logic
             OnApply();
         }
 
-        protected abstract void OnApply();
-        #endregion
+        public abstract void SetSelectable(bool isSelectable);
 
+
+        #endregion
+        protected abstract void OnApply();
     }
 
 }

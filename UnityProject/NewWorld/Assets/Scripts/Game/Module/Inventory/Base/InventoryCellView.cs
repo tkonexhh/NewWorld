@@ -18,7 +18,7 @@ namespace Game.Logic
         [SerializeField] private Vector2 defaultCellSize;
         [SerializeField] private Vector2 margineSpace;
 
-        [SerializeField] protected RectTransform rootRectTrans;
+        [SerializeField] protected RectTransform sizeRoot;
 
         #region IInventoryCellView
 
@@ -29,6 +29,11 @@ namespace Game.Logic
         #region abstract
         protected override void OnApply()
         {
+        }
+
+        public override void SetSelectable(bool value)
+        {
+
         }
         #endregion
 
@@ -42,7 +47,7 @@ namespace Game.Logic
 
         protected virtual void ApplySize()
         {
-            rootRectTrans.sizeDelta = GetCellSize();
+            sizeRoot.sizeDelta = GetCellSize();
         }
         #endregion
     }

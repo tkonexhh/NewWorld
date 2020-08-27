@@ -22,6 +22,8 @@ namespace Game.Logic
         Vector2 MargineSpace { get; }
 
         void Apply(IInventoryCellData data);
+
+        void SetSelectable(bool isSelectable);
     }
 
 }

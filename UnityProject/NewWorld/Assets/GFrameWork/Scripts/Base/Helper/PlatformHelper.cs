@@ -8,7 +8,7 @@ namespace GFrame
 {
     public class PlatformHelper
     {
-        public static bool IsAndroid
+        public static bool isAndroid
         {
             get
             {
@@ -20,7 +20,7 @@ namespace GFrame
             }
         }
 
-        public static bool IsEditor
+        public static bool isEditor
         {
             get
             {
@@ -32,7 +32,7 @@ namespace GFrame
             }
         }
 
-        public static bool IsIOS
+        public static bool isIOS
         {
             get
             {
@@ -44,7 +44,21 @@ namespace GFrame
             }
         }
 
-        public static bool IsAndroidSimulator
+
+        public static bool isMobile
+        {
+            get
+            {
+                bool value = false;
+
+#if (UNITY_IOS || UNITY_ANDROID)
+                value = true;
+#endif
+                return value;
+            }
+        }
+
+        public static bool isAndroidSimulator
         {
             get
             {

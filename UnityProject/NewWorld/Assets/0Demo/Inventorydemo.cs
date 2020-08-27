@@ -24,7 +24,7 @@ namespace Game.Logic
             m_InventoryCore.AddInventoryView(m_InventoryView);
 
 
-            PlayerInventoryViewData viewData = new PlayerInventoryViewData(10, 10);
+            PlayerInventoryViewData viewData = new PlayerInventoryViewData(10, 50);
 
             for (int i = 0; i < 10; i++)
             {

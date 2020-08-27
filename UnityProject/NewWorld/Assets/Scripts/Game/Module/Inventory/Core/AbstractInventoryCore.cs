@@ -23,7 +23,7 @@ namespace Game.Logic
         protected virtual RectTransform EffectCellParent { get; set; }
 
         protected IInventoryCellView stareCell;
-        protected AbstractInventoryCellView effectCell;
+        protected IInventoryCellView effectCell;
 
         Vector2 cursorPosition;
 
@@ -32,7 +32,7 @@ namespace Game.Logic
             var go = Instantiate(CellPrefab.gameObject, EffectCellParent);
             effectCell = go.GetComponent<AbstractInventoryCellView>();
             effectCell.RectTransform.gameObject.SetActive(false);
-            //effectCell.SetSelectable(false);
+            effectCell.SetSelectable(false);
         }
 
         public virtual void AddInventoryView(IInventoryView variableInventoryView)

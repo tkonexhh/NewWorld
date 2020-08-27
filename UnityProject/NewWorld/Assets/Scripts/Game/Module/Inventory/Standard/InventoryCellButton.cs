@@ -25,6 +25,17 @@ namespace Game.Logic
         private Action onPointerDown;
         private Action onPointerUp;
 
+        Coroutine longPointerCoroutine;
+
+        public void SetActive(bool value)
+        {
+            enabled = value;
+            foreach (var graphic in GetComponentsInChildren<Graphic>())
+            {
+                graphic.raycastTarget = value;
+            }
+        }
+
         public void SetCallback(
              Action onPointerClick,
              Action onPointerOptionClick,
@@ -46,7 +57,7 @@ namespace Game.Logic
         {
             base.OnPointerClick(eventData);
 
-            if (PlatformHelper.IsAndroid || PlatformHelper.IsIOS)
+            if (PlatformHelper.isMobile)
             {
                 onPointerClick?.Invoke();
             }
@@ -77,17 +88,23 @@ namespace Game.Logic
 
         public override void OnPointerDown(PointerEventData eventData)
         {
-#if (UNITY_IOS || UNITY_ANDROID)
-            if (longPointerCoroutine != null)
+            if (PlatformHelper.isMobile)
             {
-                StopCoroutine(longPointerCoroutine);
+                if (longPointerCoroutine != null)
+                {
+                    StopCoroutine(longPointerCoroutine);
+                }
+
+                longPointerCoroutine = StartCoroutine(LongPointerDownCoroutine(eventData));
+            }
+            else
+            {
+                base.OnPointerDown(eventData);
+                onPointerDown?.Invoke();
             }
 
-            longPointerCoroutine = StartCoroutine(LongPointerDownCoroutine(eventData));
-#endif
 
-            base.OnPointerDown(eventData);
-            onPointerDown?.Invoke();
+
         }
 
         public override void OnPointerUp(PointerEventData eventData)
@@ -95,6 +112,30 @@ namespace Game.Logic
             base.OnPointerUp(eventData);
             onPointerUp?.Invoke();
         }
+
+
+
+        IEnumerator LongPointerDownCoroutine(PointerEventData eventData)
+        {
+            var pressTime = Time.unscaledTime;
+            var pressPosition = eventData.position;
+
+            while (Time.unscaledTime < pressTime + 1.0f)
+            {
+                if ((eventData.position - pressPosition).magnitude > 10.0f)
+                {
+                    longPointerCoroutine = null;
+                    yield break;
+                }
+
+                yield return null;
+            }
+
+            onPointerOptionClick?.Invoke();
+            longPointerCoroutine = null;
+            yield break;
+        }
+
     }
 
 }

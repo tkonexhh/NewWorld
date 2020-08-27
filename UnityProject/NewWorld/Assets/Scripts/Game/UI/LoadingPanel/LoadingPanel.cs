@@ -17,7 +17,7 @@ namespace Game.Logic
     public class LoadingPanel : AnimatorPanel
     {
         protected bool m_ShowComplete = false;
-        private float m_MinStayTime = 3.5f;
+        private float m_MinStayTime = 1.5f;
         private float m_StayTimer = 0;
         private System.Action m_ShowOverCallback;
 
