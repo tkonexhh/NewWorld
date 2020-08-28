@@ -17,6 +17,7 @@ namespace Game.Logic
     public class PlayerInventoryCellView : InventoryCellView
     {
         [SerializeField] Graphic background;
+        [SerializeField] RectTransform target;
         [SerializeField] private Image m_ImgIcon;
         [SerializeField] InventoryCellButton button;
         [SerializeField] private Text m_TxtName;
@@ -38,7 +39,7 @@ namespace Game.Logic
         {
             base.OnApply();
             SetHighLight(false);
-            this.sizeRoot.gameObject.SetActive(CellData != null);
+            target.gameObject.SetActive(CellData != null);
             this.ApplySize();
 
 
@@ -52,7 +53,7 @@ namespace Game.Logic
                 inventoryCellData = CellData as PlayerInventoryCellData;
                 m_ImgIcon.gameObject.SetActive(true);
                 m_ImgIcon.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1);
-                m_ImgIcon.GetComponent<RectTransform>().sizeDelta = GetCellSize();
+                m_ImgIcon.GetComponent<RectTransform>().sizeDelta = GetCellSize() * 0.9f;
                 // m_ImgIcon.sprite = m_SpTest;
                 // m_ImgIcon.SetNativeSize();
                 m_TxtName.text = inventoryCellData.item.name;
@@ -69,6 +70,12 @@ namespace Game.Logic
 
                 background.gameObject.SetActive(true && isSelectable);
             }
+        }
+
+        protected override void ApplySize()
+        {
+            base.ApplySize();
+            target.sizeDelta = GetCellSize();
         }
 
         public override void SetSelectable(bool value)

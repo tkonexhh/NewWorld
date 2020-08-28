@@ -24,6 +24,10 @@ namespace Game.Logic
 
         bool[] mask;
 
+        public AbstractInventoryViewData(Vector2Int size) : this(new IInventoryCellData[size.x * size.y], size.x, size.y)
+        {
+
+        }
 
         public AbstractInventoryViewData(int capacityWidth, int capacityHeight)
                     : this(new IInventoryCellData[capacityWidth * capacityHeight], capacityWidth, capacityHeight)
@@ -112,6 +116,13 @@ namespace Game.Logic
             return true;
         }
 
+        public virtual void Clear()
+        {
+            for (int i = 0; i < CellData.Length; i++)
+            {
+
+            }
+        }
 
         protected void UpdateMask()
         {

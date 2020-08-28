@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class PlayerInventoryCellData : InventoryCellData
+    public class PlayerInventoryCellData : AbstractInventoryCellData
     {
         public AbstractItem item { get; set; }
         public PlayerInventoryCellData(AbstractItem item) : base(item)

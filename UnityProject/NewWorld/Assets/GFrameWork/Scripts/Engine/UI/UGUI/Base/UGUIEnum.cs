@@ -27,7 +27,7 @@ namespace GFrame
         DumpTest,
     }
 
-    public enum PanelType : byte
+    public enum PanelSortType : byte
     {
         Bottom,
         Auto,

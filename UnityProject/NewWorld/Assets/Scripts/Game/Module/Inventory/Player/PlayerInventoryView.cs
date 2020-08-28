@@ -177,6 +177,10 @@ namespace Game.Logic
 
             if (!viewData.CheckInsert(index.Value, effectCell.CellData))
             {
+                //TODO 检测是否可以合并 交换
+                //if(stareCell.CellData!=null&&effectCell.)
+
+
                 //     // check free space in case
                 //     if (stareCell.CellData != null && stareCell.CellData is VariableInventorySystem.IStandardCaseCellData caseData)
                 //     {
@@ -221,7 +225,7 @@ namespace Game.Logic
         public override void OnCellEnter(IInventoryCellView stareCell, IInventoryCellView effectCell)
         {
             conditionTransform.gameObject.SetActive(effectCell?.CellData != null);
-            (stareCell as PlayerInventoryCellView).SetHighLight(false);
+            (stareCell as PlayerInventoryCellView).SetHighLight(true);
         }
         public override void OnCellExit(IInventoryCellView stareCell)
         {

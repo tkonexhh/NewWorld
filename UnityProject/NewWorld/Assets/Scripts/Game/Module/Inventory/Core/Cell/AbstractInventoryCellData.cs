@@ -17,6 +17,12 @@ namespace Game.Logic
     {
         public int Width { get; protected set; }
         public int Height { get; protected set; }
+
+        public AbstractInventoryCellData(AbstractItem item)
+        {
+            Width = item.width;
+            Height = item.height;
+        }
     }
 
 }

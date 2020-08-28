@@ -17,7 +17,6 @@ namespace Game.Logic
     {
         [SerializeField] private Vector2 defaultCellSize;
         [SerializeField] private Vector2 margineSpace;
-
         [SerializeField] protected RectTransform sizeRoot;
 
         #region IInventoryCellView

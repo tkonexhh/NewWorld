@@ -18,15 +18,15 @@ namespace Game.Logic
     {
         [SerializeField] private Toggle m_ToggleEquipment;
         [SerializeField] private Toggle m_ToggleMaterial;
-        [SerializeField] private IUListView m_ListView;
-
+        [SerializeField] private PlayerInventoryView m_InventoryView;
         private List<AbstractItem> m_ShowItems = new List<AbstractItem>();
+
+        public PlayerInventoryView inventoryView => m_InventoryView;
 
         public void Init()
         {
             m_ToggleEquipment.onValueChanged.AddListener(ShowEquipment);
             m_ToggleMaterial.onValueChanged.AddListener(ShowSupply);
-            m_ListView.SetCellRenderer(OnCellRenderer);
 
             m_ToggleEquipment.isOn = false;
             m_ToggleEquipment.Select();
@@ -60,8 +60,6 @@ namespace Game.Logic
                     m_ShowItems = PlayerMgr.S.inventoryMgr.LstSupply.Cast<AbstractItem>().ToList();
                     break;
             }
-
-            m_ListView.SetDataCount(m_ShowItems.Count);
         }
 
         private void OnCellRenderer(Transform root, int index)

@@ -35,17 +35,17 @@ namespace GFrame
         private int m_TopPanelOrder = TOP_PANEL_INDEX;
 
 
-        public int RequireNextPanelSortingOrder(PanelType type)
+        public int RequireNextPanelSortingOrder(PanelSortType type)
         {
             switch (type)
             {
-                case PanelType.Auto:
+                case PanelSortType.Auto:
                     m_AutoPanelOrder += 10;
                     return m_AutoPanelOrder;
-                case PanelType.Top:
+                case PanelSortType.Top:
                     m_TopPanelOrder += 10;
                     return m_TopPanelOrder;
-                case PanelType.Bottom:
+                case PanelSortType.Bottom:
                     return 0;
                 default:
                     break;

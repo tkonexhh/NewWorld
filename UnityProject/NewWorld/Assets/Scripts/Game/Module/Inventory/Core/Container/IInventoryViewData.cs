@@ -21,6 +21,7 @@ namespace Game.Logic
         int? GetInsertableId(IInventoryCellData cellData);
         void InsertInventoryItem(int id, IInventoryCellData cellData);
         bool CheckInsert(int id, IInventoryCellData cellData);
+        void Clear();
     }
 
 }

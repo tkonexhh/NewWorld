@@ -82,25 +82,25 @@ namespace GFrame
         #region  public Func
         public void OpenPanel<T>(T uiID, params object[] args) where T : System.IConvertible
         {
-            OpenPanel(uiID, PanelType.Auto, null, args);
+            OpenPanel(uiID, PanelSortType.Auto, null, args);
         }
 
         public void OpenPanel<T>(T uiID, System.Action<AbstractPanel> callback, params object[] args) where T : System.IConvertible
         {
-            OpenPanel(uiID, PanelType.Auto, callback, args);
+            OpenPanel(uiID, PanelSortType.Auto, callback, args);
         }
 
         public void OpenTopPanel<T>(T uiID, params object[] args) where T : System.IConvertible
         {
-            OpenPanel(uiID, PanelType.Top, null, args);
+            OpenPanel(uiID, PanelSortType.Top, null, args);
         }
 
         public void OpenTopPanel<T>(T uiID, System.Action<AbstractPanel> callback, params object[] args) where T : System.IConvertible
         {
-            OpenPanel(uiID, PanelType.Top, callback, args);
+            OpenPanel(uiID, PanelSortType.Top, callback, args);
         }
 
-        public void OpenPanel<T>(T uiID, PanelType type, System.Action<AbstractPanel> callback, params object[] args) where T : System.IConvertible
+        public void OpenPanel<T>(T uiID, PanelSortType type, System.Action<AbstractPanel> callback, params object[] args) where T : System.IConvertible
         {
             PanelInfo panelInfo = LoadPanelInfo(uiID.ToInt32(null));
             if (panelInfo == null)

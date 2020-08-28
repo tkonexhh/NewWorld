@@ -99,13 +99,6 @@ namespace Game.Logic
 
             var isRelease = InventoryViews.Any(x => x.OnDrop(stareCell, effectCell));
 
-            // if (!isRelease && originEffectCellRotate.HasValue)
-            // {
-            //     effectCell.CellData.IsRotate = originEffectCellRotate.Value;
-            //     effectCell.Apply(effectCell.CellData);
-            //     originEffectCellRotate = null;
-            // }
-
             foreach (var inventoryViews in InventoryViews)
             {
                 inventoryViews.OnDroped(isRelease);

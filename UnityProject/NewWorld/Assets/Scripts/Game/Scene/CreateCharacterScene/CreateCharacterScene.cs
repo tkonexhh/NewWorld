@@ -25,7 +25,7 @@ namespace Game.Logic
 
         protected override void OnSceneEnter()
         {
-            UIMgr.S.OpenPanel(UIID.CreateCharacterPanel);
+            // UIMgr.S.OpenPanel(UIID.CreateCharacterPanel);
             UIMgr.S.OpenPanel(UIID.Inventorypanel);
         }
 
