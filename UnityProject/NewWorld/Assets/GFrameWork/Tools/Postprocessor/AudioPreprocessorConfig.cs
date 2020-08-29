@@ -22,12 +22,12 @@ namespace GFrame.AssetPreprocessor
 
         //[Range(0, 1)] [SerializeField] private float Quality = 1f;
 
-        [Header("Match Criteria")]
-        [SerializeField] private float MaxClipLengthInSeconds = 999f;
+        // [Header("Match Criteria")]
+        // [SerializeField] private float MaxClipLengthInSeconds = 999f;
 
         [Header("Load Settings")]
         [SerializeField] private bool LoadInBackground = false;
-        [SerializeField] private AudioClipLoadType AudioClipLoadType = AudioClipLoadType.DecompressOnLoad;
+        //[SerializeField] private AudioClipLoadType AudioClipLoadType = AudioClipLoadType.DecompressOnLoad;
 
 
         [Header("Platform")]

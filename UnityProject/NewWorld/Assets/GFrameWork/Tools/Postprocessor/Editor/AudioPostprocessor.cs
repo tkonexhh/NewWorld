@@ -34,34 +34,51 @@ namespace GFrame.AssetPreprocessor.Editor
             importer.ambisonic = AudioPreprocessorConfig.ambisonic;
             importer.loadInBackground = AudioPreprocessorConfig.loadInBackground;
 
-            Log.e(audioClip.length);
+            //Log.e(audioClip.length);
 
-            SetAudioImporterStandaloneSetting(importer);
-            SetAudioImporterAndroidSetting(importer);
-            SetAudioImporterIOSSetting(importer);
+            AudioClipLoadType loadType = AudioClipLoadType.DecompressOnLoad;
+            if (audioClip.length < 10)
+            {
+                loadType = AudioClipLoadType.DecompressOnLoad;
+            }
+            else if (audioClip.length < 120)
+            {
+                loadType = AudioClipLoadType.CompressedInMemory;
+            }
+            else
+            {
+                loadType = AudioClipLoadType.Streaming;
+            }
+
+            SetAudioImporterStandaloneSetting(importer, loadType);
+            SetAudioImporterAndroidSetting(importer, loadType);
+            SetAudioImporterIOSSetting(importer, loadType);
         }
 
-        private void SetAudioImporterStandaloneSetting(AudioImporter audioImporter)
+        private void SetAudioImporterStandaloneSetting(AudioImporter audioImporter, AudioClipLoadType loadType)
         {
             audioImporter.SetOverrideSampleSettings("Standalone", new AudioImporterSampleSettings
             {
                 quality = AudioPreprocessorConfig.standaloneConfig.Quality,
+                loadType = loadType
             });
         }
 
-        private void SetAudioImporterAndroidSetting(AudioImporter audioImporter)
+        private void SetAudioImporterAndroidSetting(AudioImporter audioImporter, AudioClipLoadType loadType)
         {
             audioImporter.SetOverrideSampleSettings("Android", new AudioImporterSampleSettings
             {
                 quality = AudioPreprocessorConfig.androidConfig.Quality,
+                loadType = loadType
             });
         }
 
-        private void SetAudioImporterIOSSetting(AudioImporter audioImporter)
+        private void SetAudioImporterIOSSetting(AudioImporter audioImporter, AudioClipLoadType loadType)
         {
             audioImporter.SetOverrideSampleSettings("iOS", new AudioImporterSampleSettings
             {
                 quality = AudioPreprocessorConfig.iosConfig.Quality,
+                loadType = loadType
             });
         }
     }

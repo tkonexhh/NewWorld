@@ -56,6 +56,7 @@ namespace GFrame.AssetPreprocessor
 
     public class PreprocessorConfigEditor : UnityEditor.Editor
     {
+
         [MenuItem("Assets/GFrame/Config/Preprocessor/Build TexturePreprocessorConfig")]
         public static void BuildTexturePreprocessorConfig()
         {
@@ -88,6 +89,24 @@ namespace GFrame.AssetPreprocessor
                 AssetDatabase.CreateAsset(data, spriteDataPath);
             }
             Log.i("#Create AudioPreprocessorConfig In Folder:" + spriteDataPath);
+            EditorUtility.SetDirty(data);
+            AssetDatabase.SaveAssets();
+        }
+
+        [MenuItem("Assets/GFrame/Config/Preprocessor/Build ModelPreprocessorConfig")]
+        public static void BuildModelPreprocessorConfig()
+        {
+            ModelPreprocessorConfig data = null;
+            string folderPath = "Assets/Resources/Config/Preprocessor/";
+            FileHelper.CreateDirctory(PathHelper.AssetsPath2ABSPath(folderPath));
+            string spriteDataPath = folderPath + "ModelPreprocessorConfig.asset";
+            data = AssetDatabase.LoadAssetAtPath<ModelPreprocessorConfig>(spriteDataPath);
+            if (data == null)
+            {
+                data = ScriptableObject.CreateInstance<ModelPreprocessorConfig>();
+                AssetDatabase.CreateAsset(data, spriteDataPath);
+            }
+            Log.i("#Create ModelPreprocessorConfig In Folder:" + spriteDataPath);
             EditorUtility.SetDirty(data);
             AssetDatabase.SaveAssets();
         }
