@@ -21,11 +21,11 @@ namespace GFrame.AssetPreprocessor.Editor
     {
         public void OnPreprocessTexture()
         {
-            if (!TexturePreprocessorConfig.isEnabled) return;
+            if (!TexturePreprocessorConfig.S.ShouldProcessAsset(assetImporter))
+                return;
 
             Debug.Log("OnPreProcessTexture=" + this.assetPath);
             TextureImporter importer = this.assetImporter as TextureImporter;
-            if (importer == null) return;
 
             importer.mipmapEnabled = TexturePreprocessorConfig.enableMipmap;
             importer.streamingMipmaps = TexturePreprocessorConfig.enableMipmapStreaming;

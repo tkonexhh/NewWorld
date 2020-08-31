@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: ModelPreprocessorConfig
   m_EditorClassIdentifier: 
   IsEnabled: 1
-  EnableReadWrite: 0
+  IgnoreRegexList:
+  - .*\w*.fbx
+  SortHierarchyByName: 1
+  EnableReadWrite: 1

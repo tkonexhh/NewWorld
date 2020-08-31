@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -42,6 +43,38 @@ namespace GFrame.AssetPreprocessor
                 return s_Instance;
             }
         }
+
+
+        public bool ShouldProcessAsset(AssetImporter importer)
+        {
+            if (!IsEnabled) return false;
+
+            var assetPath = importer.assetPath;
+            //使用正则来匹配忽略的资源
+            if (AssetPreprocessorUtils.DoesRegexStringListMatchString(FilterOutBadRegexStrings(IgnoreRegexList), assetPath))
+                return false;
+
+            return true;
+        }
+
+        private List<string> FilterOutBadRegexStrings(List<string> regexStrings)
+        {
+            for (var i = 0; i < regexStrings.Count; i++)
+            {
+                var regexString = regexStrings[i];
+                Debug.LogError(regexString);
+                if (regexString == string.Empty)
+                {
+                    regexStrings.RemoveAt(i);
+
+                    i--;
+                }
+            }
+
+            return regexStrings;
+        }
+
+
         #endregion
 
         [Header("Config Settings")]
@@ -49,7 +82,9 @@ namespace GFrame.AssetPreprocessor
         [Tooltip("Whether this config should be considered when processing assets.")]
         [SerializeField] private bool IsEnabled = true;
 
-        public static bool isEnabled => S.IsEnabled;
+        [Tooltip("Any asset path matching the ignore regex list will be ignored.")]
+        [SerializeField] private List<string> IgnoreRegexList = new List<string>();
+
     }
 
 

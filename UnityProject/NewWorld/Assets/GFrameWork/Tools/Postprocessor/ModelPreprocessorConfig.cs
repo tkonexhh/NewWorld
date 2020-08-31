@@ -16,7 +16,21 @@ namespace GFrame.AssetPreprocessor
     public class ModelPreprocessorConfig : BasePreprocessorConfig<ModelPreprocessorConfig>
     {
         [Header("Import Settings")]
-        public bool EnableReadWrite = false;
+        [SerializeField] private bool SortHierarchyByName = true;
+        [SerializeField] private bool EnableReadWrite = false;
+
+
+        [Header("Scene Settings")]
+        [SerializeField] private bool ImportLights = false;
+        [SerializeField] private bool ImportVisibility = false;
+        [SerializeField] private bool ImportCameras = false;
+
+        public bool sortHierarchyByName => S.SortHierarchyByName;
+        public bool enableReadWrite => S.EnableReadWrite;
+
+        public bool importLights => S.ImportLights;
+        public bool importVisibility => S.ImportVisibility;
+        public bool importCameras => S.ImportCameras;
     }
 
 }

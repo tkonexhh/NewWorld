@@ -23,12 +23,11 @@ namespace GFrame.AssetPreprocessor.Editor
         /// </summary>
         private void OnPostprocessAudio(AudioClip audioClip)
         {
-            if (!AudioPreprocessorConfig.isEnabled) return;
+            if (!AudioPreprocessorConfig.S.ShouldProcessAsset(assetImporter))
+                return;
 
             Debug.Log("OnPostprocessAudio=" + this.assetPath);
             var importer = assetImporter as AudioImporter;
-
-            if (importer == null) return;
 
             importer.forceToMono = AudioPreprocessorConfig.forceToMono;
             importer.ambisonic = AudioPreprocessorConfig.ambisonic;

@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: AudioPreprocessorConfig
   m_EditorClassIdentifier: 
   IsEnabled: 1
+  IgnoreRegexList: []
   ForceToMono: 1
   Ambisonic: 0
-  MaxClipLengthInSeconds: 999
   LoadInBackground: 0
-  AudioClipLoadType: 0
   StandaloneConfig:
     Quality: 1
     PreloadAudioData: 1
