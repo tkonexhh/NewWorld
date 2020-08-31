@@ -10,6 +10,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
+
 
 namespace GFrame.AssetPreprocessor
 {
@@ -24,6 +28,7 @@ namespace GFrame.AssetPreprocessor
         [SerializeField] private bool ImportLights = false;
         [SerializeField] private bool ImportVisibility = false;
         [SerializeField] private bool ImportCameras = false;
+        
 
         public bool sortHierarchyByName => S.SortHierarchyByName;
         public bool enableReadWrite => S.EnableReadWrite;

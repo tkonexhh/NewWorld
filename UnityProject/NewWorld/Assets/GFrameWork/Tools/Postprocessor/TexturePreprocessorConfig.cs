@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+#if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
+
 namespace GFrame.AssetPreprocessor
 {
     [System.Serializable]
@@ -21,7 +25,15 @@ namespace GFrame.AssetPreprocessor
 
         [Header("Filtering Settings")]
         [SerializeField] private bool ForceFilterMode;
+
+#if ODIN_INSPECTOR
+        [ShowIf(nameof(forceFilterMode))]
+#endif
         [SerializeField] private FilterMode FilterMode = FilterMode.Bilinear;
+
+#if ODIN_INSPECTOR
+        [ShowIf(nameof(forceFilterMode))]
+#endif
         [SerializeField] private int AnisoLevel = 1;
 
         [Header("Compression Settings")]
@@ -37,8 +49,11 @@ namespace GFrame.AssetPreprocessor
         public static float nativeTextureSizeMultiplier => S.NativeTextureSizeMultiplier;
 
         public static bool forceFilterMode => S.ForceFilterMode;
+
         public static FilterMode filterMode => S.FilterMode;
         public static int anisoLevel => S.AnisoLevel;
+
+
 
         public static TextureStandalonePreprocessorConfig standaloneConfig => S.StandaloneConfig;
         public static TextureAndroidPreprocessorConfig androidConfig => S.AndroidConfig;
