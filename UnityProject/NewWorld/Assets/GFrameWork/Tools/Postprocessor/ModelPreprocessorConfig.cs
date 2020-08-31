@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace GFrame.AssetPreprocessor
 {
-    public class ModelPreprocessorConfig : BasePreprocessorConfig<AudioPreprocessorConfig>
+    public class ModelPreprocessorConfig : BasePreprocessorConfig<ModelPreprocessorConfig>
     {
         [Header("Import Settings")]
         public bool EnableReadWrite = false;

@@ -25,7 +25,19 @@ namespace Game.Logic
 
 
         #region IPlayerComponent
-        public void OnInit() { }
+        public void OnInit()
+        {
+            AddItem(1);
+            AddItem(1, 10);
+            AddItem(2, 3);
+            AddItem(2, 3);
+            AddItem(3);
+            AddItem(4);
+            AddItem(4);
+            AddItem(4);
+            AddItem(4);
+
+        }
         public void OnUpdate() { }
         public void OnDestroyed() { }
         #endregion

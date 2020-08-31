@@ -13,10 +13,11 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-	public interface IInventoryCellData 
-	{
-	    int Width { get; }
+    public interface IInventoryCellData
+    {
+        Vector2Int size { get; }
+        int Width { get; }
         int Height { get; }
-	}
-	
+    }
+
 }

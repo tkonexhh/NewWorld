@@ -22,7 +22,7 @@ namespace Game.Logic
         protected virtual AbstractInventoryCellView CellPrefab { get; set; }
         protected virtual RectTransform EffectCellParent { get; set; }
 
-        protected IInventoryCellView stareCell;
+        protected IInventoryCellView targetCell;
         protected IInventoryCellView effectCell;
 
         Vector2 cursorPosition;
@@ -56,11 +56,11 @@ namespace Game.Logic
 
             foreach (var inventoryViews in InventoryViews)
             {
-                inventoryViews.OnPrePick(stareCell);
+                inventoryViews.OnPrePick(targetCell);
             }
 
-            var stareData = stareCell?.CellData;
-            var isHold = InventoryViews.Any(x => x.OnPick(stareCell));
+            var stareData = targetCell?.CellData;
+            var isHold = InventoryViews.Any(x => x.OnPick(targetCell));
 
             if (!isHold)
             {
@@ -79,7 +79,7 @@ namespace Game.Logic
             }
             foreach (var inventoryViews in InventoryViews)
             {
-                inventoryViews.OnDrag(stareCell, effectCell, eventData);
+                inventoryViews.OnDrag(targetCell, effectCell, eventData);
             }
 
             RectTransformUtility.ScreenPointToLocalPointInRectangle(EffectCellParent, eventData.position, eventData.enterEventCamera, out cursorPosition);
@@ -97,7 +97,7 @@ namespace Game.Logic
                 return;
             }
 
-            var isRelease = InventoryViews.Any(x => x.OnDrop(stareCell, effectCell));
+            var isRelease = InventoryViews.Any(x => x.OnDrop(targetCell, effectCell));
 
             foreach (var inventoryViews in InventoryViews)
             {
@@ -120,11 +120,11 @@ namespace Game.Logic
 
         protected virtual void OnCellEnter(IInventoryCellView cell)
         {
-            stareCell = cell;
+            targetCell = cell;
 
             foreach (var inventoryView in InventoryViews)
             {
-                inventoryView.OnCellEnter(stareCell, effectCell);
+                inventoryView.OnCellEnter(targetCell, effectCell);
             }
         }
 
@@ -132,10 +132,10 @@ namespace Game.Logic
         {
             foreach (var inventoryView in InventoryViews)
             {
-                inventoryView.OnCellExit(stareCell);
+                inventoryView.OnCellExit(targetCell);
             }
 
-            stareCell = null;
+            targetCell = null;
         }
     }
 

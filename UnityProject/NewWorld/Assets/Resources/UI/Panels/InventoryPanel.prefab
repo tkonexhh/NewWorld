@@ -2016,6 +2016,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7159260399592900652, guid: 038bc01a8096f4c7097a239bf67d0035,
+        type: 3}
+      propertyPath: m_InventoryView
+      value: 
+      objectReference: {fileID: 4389478760847602730}
     - target: {fileID: 7645960399925951080, guid: 038bc01a8096f4c7097a239bf67d0035,
         type: 3}
       propertyPath: m_Name
@@ -2033,6 +2038,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5573944c1e68144c294ad3ec47e806b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4389478760847602730 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5420181269103764696, guid: 038bc01a8096f4c7097a239bf67d0035,
+    type: 3}
+  m_PrefabInstance: {fileID: 8634198218572730610}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5be9f9f15534f43987c5e94a76ccf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &9071885185050523529 stripped

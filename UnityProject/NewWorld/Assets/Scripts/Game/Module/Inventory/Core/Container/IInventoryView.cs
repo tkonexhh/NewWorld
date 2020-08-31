@@ -25,14 +25,14 @@ namespace Game.Logic
         void Apply(IInventoryViewData data);
         void ReApply();
 
-        void OnPrePick(IInventoryCellView stareCell);
-        bool OnPick(IInventoryCellView stareCell);
-        void OnDrag(IInventoryCellView stareCell, IInventoryCellView effectCell, PointerEventData pointerEventData);
-        bool OnDrop(IInventoryCellView stareCell, IInventoryCellView effectCell);
+        void OnPrePick(IInventoryCellView targetCell);
+        bool OnPick(IInventoryCellView targetCell);
+        void OnDrag(IInventoryCellView targetCell, IInventoryCellView effectCell, PointerEventData pointerEventData);
+        bool OnDrop(IInventoryCellView targetCell, IInventoryCellView effectCell);
         void OnDroped(bool isDroped);
 
-        void OnCellEnter(IInventoryCellView stareCell, IInventoryCellView effectCell);
-        void OnCellExit(IInventoryCellView stareCell);
+        void OnCellEnter(IInventoryCellView targetCell, IInventoryCellView effectCell);
+        void OnCellExit(IInventoryCellView targetCell);
     }
 
 }

@@ -20,4 +20,10 @@ namespace Game.Logic
         Supplies,//消耗品
     }
 
+    public enum InventoryToggleType
+    {
+        Equipment,
+        Supplies,
+    }
+
 }

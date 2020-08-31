@@ -84,27 +84,28 @@ namespace Game.Logic
             playerInventoryviewData.IsDirty = false;
         }
 
-        public override void OnPrePick(IInventoryCellView stareCell)
+        public override void OnPrePick(IInventoryCellView targetCell)
         {
-            if (stareCell?.CellData == null)
+            if (targetCell?.CellData == null)
             {
                 return;
             }
 
-            conditionTransform.sizeDelta = new Vector2(stareCell.DefaultCellSize.x * stareCell.CellData.Width, stareCell.DefaultCellSize.y * stareCell.CellData.Height);
+            conditionTransform.sizeDelta = new Vector2(targetCell.DefaultCellSize.x * targetCell.CellData.Width, targetCell.DefaultCellSize.y * targetCell.CellData.Height);
         }
-        public override bool OnPick(IInventoryCellView stareCell)
+        public override bool OnPick(IInventoryCellView targetCell)
         {
-            if (stareCell?.CellData == null)
+            if (targetCell?.CellData == null)
             {
                 return false;
             }
+            Debug.LogError("OnPick");
 
-            var id = viewData.GetId(stareCell.CellData);
+            var id = viewData.GetId(targetCell.CellData);
             if (id.HasValue)
             {
                 originalId = id;
-                originalCellData = stareCell.CellData;
+                originalCellData = targetCell.CellData;
 
                 itemViews[id.Value].Apply(null);
                 viewData.InsertInventoryItem(id.Value, null);
@@ -113,9 +114,9 @@ namespace Game.Logic
 
             return false;
         }
-        public override void OnDrag(IInventoryCellView stareCell, IInventoryCellView effectCell, PointerEventData pointerEventData)
+        public override void OnDrag(IInventoryCellView targetCell, IInventoryCellView effectCell, PointerEventData pointerEventData)
         {
-            if (stareCell == null)
+            if (targetCell == null)
             {
                 return;
             }
@@ -138,38 +139,38 @@ namespace Game.Logic
             }
 
             // depends on anchor
-            var pointerLocalPosition = GetLocalPosition(stareCell.RectTransform, pointerEventData.position, pointerEventData.enterEventCamera);
-            var anchor = new Vector2(stareCell.DefaultCellSize.x * 0.5f, -stareCell.DefaultCellSize.y * 0.5f);
+            var pointerLocalPosition = GetLocalPosition(targetCell.RectTransform, pointerEventData.position, pointerEventData.enterEventCamera);
+            var anchor = new Vector2(targetCell.DefaultCellSize.x * 0.5f, -targetCell.DefaultCellSize.y * 0.5f);
             var anchoredPosition = pointerLocalPosition + anchor;
             conditionOffset = new Vector3(
-                Mathf.Floor(anchoredPosition.x / stareCell.DefaultCellSize.x) * stareCell.DefaultCellSize.x,
-                Mathf.Ceil(anchoredPosition.y / stareCell.DefaultCellSize.y) * stareCell.DefaultCellSize.y);
+                Mathf.Floor(anchoredPosition.x / targetCell.DefaultCellSize.x) * targetCell.DefaultCellSize.x,
+                Mathf.Ceil(anchoredPosition.y / targetCell.DefaultCellSize.y) * targetCell.DefaultCellSize.y);
 
             // cell corner
             var prevCorner = cellCorner;
-            cellCorner = GetCorner((new Vector2(anchoredPosition.x % stareCell.DefaultCellSize.x, anchoredPosition.y % stareCell.DefaultCellSize.y) - anchor) * 0.5f);
+            cellCorner = GetCorner((new Vector2(anchoredPosition.x % targetCell.DefaultCellSize.x, anchoredPosition.y % targetCell.DefaultCellSize.y) - anchor) * 0.5f);
 
             // shift the position only even number size
             int width = effectCell.CellData.Width;
             int height = effectCell.CellData.Height;
-            var evenNumberOffset = GetEvenNumberOffset(width, height, stareCell.DefaultCellSize.x * 0.5f, stareCell.DefaultCellSize.y * 0.5f);
-            conditionTransform.position = stareCell.RectTransform.position + ((conditionOffset + evenNumberOffset) * stareCell.RectTransform.lossyScale.x);
+            var evenNumberOffset = GetEvenNumberOffset(width, height, targetCell.DefaultCellSize.x * 0.5f, targetCell.DefaultCellSize.y * 0.5f);
+            conditionTransform.position = targetCell.RectTransform.position + ((conditionOffset + evenNumberOffset) * targetCell.RectTransform.lossyScale.x);
 
             // update condition
             if (prevCorner != cellCorner)
             {
-                UpdateCondition(stareCell, effectCell);
+                UpdateCondition(targetCell, effectCell);
             }
         }
-        public override bool OnDrop(IInventoryCellView stareCell, IInventoryCellView effectCell)
+        public override bool OnDrop(IInventoryCellView targetCell, IInventoryCellView effectCell)
         {
-            if (!itemViews.Any(item => item == stareCell))
+            if (!itemViews.Any(item => item == targetCell))
             {
                 return false;
             }
 
             // check target;
-            var index = GetIndex(stareCell, effectCell.CellData, cellCorner);
+            var index = GetIndex(targetCell, effectCell.CellData, cellCorner);
             if (!index.HasValue)
             {
                 return false;
@@ -178,11 +179,31 @@ namespace Game.Logic
             if (!viewData.CheckInsert(index.Value, effectCell.CellData))
             {
                 //TODO 检测是否可以合并 交换
-                //if(stareCell.CellData!=null&&effectCell.)
+                if (targetCell.CellData != null)
+                {
+                    if (targetCell.CellData.size == effectCell.CellData.size)//大小一致 交换
+                    {
+                        if (originalId.HasValue)
+                        {
+                            //大小一致的就可以换
+                            var cellData = targetCell.CellData as PlayerInventoryCellData;
+                            var originCellData = originalCellData as PlayerInventoryCellData;
+                            Debug.LogError("origin:" + originCellData.item.id);
+                            targetCell.Apply(originalCellData);
+                            itemViews[originalId.Value].Apply(cellData);
+
+                            originalId = null;
+                            originalCellData = null;
+                            return true;
+                        }
+                    }
+
+
+                }
 
 
                 //     // check free space in case
-                //     if (stareCell.CellData != null && stareCell.CellData is VariableInventorySystem.IStandardCaseCellData caseData)
+                //     if (targetCell.CellData != null && targetCell.CellData is VariableInventorySystem.IStandardCaseCellData caseData)
                 //     {
                 //         var id = caseData.CaseData.GetInsertableId(effectCell.CellData);
                 //         if (id.HasValue)
@@ -222,29 +243,29 @@ namespace Game.Logic
             originalCellData = null;
         }
 
-        public override void OnCellEnter(IInventoryCellView stareCell, IInventoryCellView effectCell)
+        public override void OnCellEnter(IInventoryCellView targetCell, IInventoryCellView effectCell)
         {
             conditionTransform.gameObject.SetActive(effectCell?.CellData != null);
-            (stareCell as PlayerInventoryCellView).SetHighLight(true);
+            (targetCell as PlayerInventoryCellView).SetHighLight(true);
         }
-        public override void OnCellExit(IInventoryCellView stareCell)
+        public override void OnCellExit(IInventoryCellView targetCell)
         {
             conditionTransform.gameObject.SetActive(false);
             condition.color = defaultColor;
 
             cellCorner = CellCorner.None;
 
-            (stareCell as PlayerInventoryCellView).SetHighLight(false);
+            (targetCell as PlayerInventoryCellView).SetHighLight(false);
         }
 
         #endregion
 
-        protected virtual int? GetIndex(IInventoryCellView stareCell)
+        protected virtual int? GetIndex(IInventoryCellView targetCell)
         {
             var index = (int?)null;
             for (var i = 0; i < itemViews.Length; i++)
             {
-                if (itemViews[i] == stareCell)
+                if (itemViews[i] == targetCell)
                 {
                     index = i;
                 }
@@ -253,9 +274,9 @@ namespace Game.Logic
             return index;
         }
 
-        protected virtual int? GetIndex(IInventoryCellView stareCell, IInventoryCellData effectCellData, CellCorner cellCorner)
+        protected virtual int? GetIndex(IInventoryCellView targetCell, IInventoryCellData effectCellData, CellCorner cellCorner)
         {
-            var index = GetIndex(stareCell);
+            var index = GetIndex(targetCell);
 
             // offset index
             int width = effectCellData.Width;
@@ -348,9 +369,9 @@ namespace Game.Logic
             return evenNumberOffset;
         }
 
-        protected virtual void UpdateCondition(IInventoryCellView stareCell, IInventoryCellView effectCell)
+        protected virtual void UpdateCondition(IInventoryCellView targetCell, IInventoryCellView effectCell)
         {
-            var index = GetIndex(stareCell, effectCell.CellData, cellCorner);
+            var index = GetIndex(targetCell, effectCell.CellData, cellCorner);
             if ((index.HasValue && viewData.CheckInsert(index.Value, effectCell.CellData)))
             {
                 condition.color = positiveColor;
@@ -359,8 +380,8 @@ namespace Game.Logic
             {
                 condition.color = negativeColor;
                 // // check free space in case
-                // if (stareCell.CellData != null &&
-                //     stareCell.CellData is VariableInventorySystem.IStandardCaseCellData caseData &&
+                // if (targetCell.CellData != null &&
+                //     targetCell.CellData is VariableInventorySystem.IStandardCaseCellData caseData &&
                 //     caseData.CaseData.GetInsertableId(effectCell.CellData).HasValue)
                 // {
                 //     condition.color = positiveColor;

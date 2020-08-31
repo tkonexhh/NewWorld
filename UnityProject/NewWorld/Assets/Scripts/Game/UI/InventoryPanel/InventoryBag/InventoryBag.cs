@@ -19,9 +19,12 @@ namespace Game.Logic
         [SerializeField] private Toggle m_ToggleEquipment;
         [SerializeField] private Toggle m_ToggleMaterial;
         [SerializeField] private PlayerInventoryView m_InventoryView;
+
         private List<AbstractItem> m_ShowItems = new List<AbstractItem>();
+        private InventoryBag_ViewModel m_ViewModel;
 
         public PlayerInventoryView inventoryView => m_InventoryView;
+
 
         public void Init()
         {
@@ -30,13 +33,16 @@ namespace Game.Logic
 
             m_ToggleEquipment.isOn = false;
             m_ToggleEquipment.Select();
+
+            m_ViewModel = new InventoryBag_ViewModel();
+            m_ViewModel.Init();
         }
 
         private void ShowEquipment(bool ison)
         {
             if (ison)
             {
-                ShowPage(InventoryItemType.Equipment);
+                ShowPage(InventoryToggleType.Equipment);
             }
         }
 
@@ -44,28 +50,26 @@ namespace Game.Logic
         {
             if (ison)
             {
-                ShowPage(InventoryItemType.Supplies);
+                ShowPage(InventoryToggleType.Supplies);
             }
         }
 
-        private void ShowPage(InventoryItemType type)
+        private void ShowPage(InventoryToggleType type)
         {
             m_ShowItems.Clear();
             switch (type)
             {
-                case InventoryItemType.Equipment:
+                case InventoryToggleType.Equipment:
                     m_ShowItems = PlayerMgr.S.inventoryMgr.LstEquipment.Cast<AbstractItem>().ToList();
                     break;
-                case InventoryItemType.Supplies:
+                case InventoryToggleType.Supplies:
                     m_ShowItems = PlayerMgr.S.inventoryMgr.LstSupply.Cast<AbstractItem>().ToList();
                     break;
             }
+
+            inventoryView.Apply(m_ViewModel.GetDataByType(type));
         }
 
-        private void OnCellRenderer(Transform root, int index)
-        {
-            root.GetComponent<InventoryBagItem>().SetData(m_ShowItems[index]);
-        }
     }
 
 }

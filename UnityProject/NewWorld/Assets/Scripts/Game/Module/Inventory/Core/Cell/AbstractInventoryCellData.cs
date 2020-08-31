@@ -15,8 +15,11 @@ namespace Game.Logic
 {
     public class AbstractInventoryCellData : IInventoryCellData
     {
+        #region IInventoryCellData
         public int Width { get; protected set; }
         public int Height { get; protected set; }
+        public Vector2Int size { get => new Vector2Int(Width, Height); }
+        #endregion
 
         public AbstractInventoryCellData(AbstractItem item)
         {
