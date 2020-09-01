@@ -1,8 +1,8 @@
 /************************
-	FileName:/Scripts/Data/InventoryViewData.cs
+	FileName:/Scripts/Game/Module/Inventory/Base/ScorlInventoryViewData.cs
 	CreateAuthor:neo.xu
-	CreateTime:8/18/2020 11:38:47 AM
-	Tip:8/18/2020 11:38:47 AM
+	CreateTime:9/1/2020 8:32:51 PM
+	Tip:9/1/2020 8:32:51 PM
 ************************/
 
 
@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class AbstractInventoryViewData : IInventoryViewData
+    public class ScorllInventoryViewData : IInventoryViewData
     {
         public bool IsDirty { get; set; }
 
@@ -24,17 +24,17 @@ namespace Game.Logic
 
         bool[] mask;
 
-        public AbstractInventoryViewData(Vector2Int size) : this(new IInventoryCellData[size.x * size.y], size.x, size.y)
+        public ScorllInventoryViewData(Vector2Int size) : this(new IInventoryCellData[size.x * size.y], size.x, size.y)
         {
 
         }
 
-        public AbstractInventoryViewData(int capacityWidth, int capacityHeight)
+        public ScorllInventoryViewData(int capacityWidth, int capacityHeight)
                     : this(new IInventoryCellData[capacityWidth * capacityHeight], capacityWidth, capacityHeight)
         {
         }
 
-        public AbstractInventoryViewData(IInventoryCellData[] cellData, int capacityWidth, int capacityHeight)
+        public ScorllInventoryViewData(IInventoryCellData[] cellData, int capacityWidth, int capacityHeight)
         {
             Debug.Assert(cellData.Length == capacityWidth * capacityHeight);
 

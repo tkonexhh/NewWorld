@@ -1004,6 +1004,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ToggleEquipment: {fileID: 4569820077103836291}
   m_ToggleMaterial: {fileID: 6169055672218725136}
+  m_InventoryView: {fileID: 5420181269103764696}
 --- !u!1 &7713745523080338527
 GameObject:
   m_ObjectHideFlags: 0

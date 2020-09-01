@@ -17,6 +17,7 @@ namespace Game.Logic
 {
     public class PlayerInventoryView : AbstractInventoryView
     {
+        [SerializeField] protected AbstractInventoryCellView cellPrefab;
         [SerializeField] private ScrollRect m_ScrollRect;
         [SerializeField] private GridLayoutGroup m_GridLayoutGroup;
         [SerializeField] Graphic condition;
@@ -99,7 +100,6 @@ namespace Game.Logic
             {
                 return false;
             }
-            Debug.LogError("OnPick");
 
             var id = viewData.GetId(targetCell.CellData);
             if (id.HasValue)
@@ -171,7 +171,8 @@ namespace Game.Logic
 
             // check target;
             var index = GetIndex(targetCell, effectCell.CellData, cellCorner);
-            if (!index.HasValue)
+            Debug.LogError("OnDrop index:" + index);
+            if (!index.HasValue || index.Value < 0)
             {
                 return false;
             }
@@ -179,27 +180,34 @@ namespace Game.Logic
             if (!viewData.CheckInsert(index.Value, effectCell.CellData))
             {
                 //TODO 检测是否可以合并 交换
-                if (targetCell.CellData != null)
-                {
-                    if (targetCell.CellData.size == effectCell.CellData.size)//大小一致 交换
-                    {
-                        if (originalId.HasValue)
-                        {
-                            //大小一致的就可以换
-                            var cellData = targetCell.CellData as PlayerInventoryCellData;
-                            var originCellData = originalCellData as PlayerInventoryCellData;
-                            Debug.LogError("origin:" + originCellData.item.id);
-                            targetCell.Apply(originalCellData);
-                            itemViews[originalId.Value].Apply(cellData);
+                if (targetCell.CellData == null) return false;
 
+                if (targetCell.CellData is PlayerInventoryCellData) //如果目标也是道具栏位
+                {
+                    int? targetID = viewData.GetId(targetCell.CellData);
+                    Debug.LogError(index.Value + "---" + targetID.Value);
+                    if (targetCell.CellData.size == effectCell.CellData.size)//大小一致 交换 并且完全盖住的时候
+                    {
+                        if (originalId.HasValue && originalCellData != null)
+                        {
+                            itemViews[targetID.Value].Apply(targetCell.CellData);
+                            itemViews[originalId.Value].Apply(originalCellData);
+                            viewData.InsertInventoryItem(originalId.Value, originalCellData);
+                            viewData.ExchangeInventoryItem(targetID.Value, originalId.Value);
+                            Debug.LogError("Exchange");
+                            //ReApply();
                             originalId = null;
                             originalCellData = null;
                             return true;
                         }
                     }
+                }
 
+                if (targetCell.CellData is PlayerEquipmentCellData equipmentCellData)
+                {
 
                 }
+
 
 
                 //     // check free space in case
@@ -378,6 +386,7 @@ namespace Game.Logic
             }
             else
             {
+                // /if(targetCell.CellData!=null)
                 condition.color = negativeColor;
                 // // check free space in case
                 // if (targetCell.CellData != null &&

@@ -16,6 +16,7 @@ namespace Game.Logic
     public class InventoryPanel : AbstractPanel
     {
         [SerializeField] private InventoryBag m_Bag;
+        [SerializeField] private InventoryEquipment m_Equipment;
         [SerializeField] private InventroyItemTipsPage m_ItemTips;
         [SerializeField] private AbstractInventoryCore m_InventoryCore;
 
@@ -26,9 +27,11 @@ namespace Game.Logic
 
             m_InventoryCore.Init();
             m_InventoryCore.AddInventoryView(m_Bag.inventoryView);
+            m_InventoryCore.AddInventoryView(m_Equipment.equipmentView);
 
 
             m_Bag.Init();
+            m_Equipment.Init();
         }
 
         protected override void OnOpen()

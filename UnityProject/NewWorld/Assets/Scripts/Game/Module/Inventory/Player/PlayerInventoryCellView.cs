@@ -42,7 +42,6 @@ namespace Game.Logic
             target.gameObject.SetActive(CellData != null);
             this.ApplySize();
 
-
             if (CellData == null)
             {
                 m_ImgIcon.gameObject.SetActive(false);

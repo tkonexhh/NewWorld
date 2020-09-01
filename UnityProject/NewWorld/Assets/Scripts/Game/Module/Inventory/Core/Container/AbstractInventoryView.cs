@@ -16,7 +16,7 @@ namespace Game.Logic
 {
     public class AbstractInventoryView : MonoBehaviour, IInventoryView
     {
-        [SerializeField] protected AbstractInventoryCellView cellPrefab;
+
 
         public AbstractInventoryViewData viewData { get; private set; }
         public int CellCount => viewData.width * viewData.height;
