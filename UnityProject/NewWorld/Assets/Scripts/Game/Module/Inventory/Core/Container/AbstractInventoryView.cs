@@ -14,14 +14,11 @@ using UnityEngine.EventSystems;
 
 namespace Game.Logic
 {
-    public class AbstractInventoryView : MonoBehaviour, IInventoryView
+    public abstract class AbstractInventoryView : MonoBehaviour, IInventoryView
     {
-
-
         public AbstractInventoryViewData viewData { get; private set; }
-        public int CellCount => viewData.width * viewData.height;
-        protected IInventoryCellView[] itemViews;
 
+        protected IInventoryCellView[] itemViews;
 
         protected Action<IInventoryCellView> onCellClick;
         protected Action<IInventoryCellView> onCellOptionClick;

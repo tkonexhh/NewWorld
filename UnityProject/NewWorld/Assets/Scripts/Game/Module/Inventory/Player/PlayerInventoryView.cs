@@ -31,7 +31,7 @@ namespace Game.Logic
         [SerializeField] Color negativeColor;
 
         public PlayerInventoryViewData playerInventoryviewData;
-
+        public int CellCount => playerInventoryviewData.width * playerInventoryviewData.height;
         int? originalId;
         IInventoryCellData originalCellData;
         protected CellCorner cellCorner;
@@ -193,7 +193,7 @@ namespace Game.Logic
                             itemViews[targetID.Value].Apply(targetCell.CellData);
                             itemViews[originalId.Value].Apply(originalCellData);
                             viewData.InsertInventoryItem(originalId.Value, originalCellData);
-                            viewData.ExchangeInventoryItem(targetID.Value, originalId.Value);
+                            playerInventoryviewData.ExchangeInventoryItem(targetID.Value, originalId.Value);
                             Debug.LogError("Exchange");
                             //ReApply();
                             originalId = null;
@@ -301,12 +301,12 @@ namespace Game.Logic
             {
                 if ((cellCorner & CellCorner.Top) != CellCorner.None)
                 {
-                    index -= viewData.width;
+                    index -= playerInventoryviewData.width;
                 }
             }
 
             index -= (width - 1) / 2;
-            index -= (height - 1) / 2 * viewData.width;
+            index -= (height - 1) / 2 * playerInventoryviewData.width;
             return index;
         }
 

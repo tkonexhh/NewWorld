@@ -13,33 +13,19 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class ScorllInventoryViewData : IInventoryViewData
+    //格子样式
+    public class ScorllInventoryViewData : AbstractInventoryViewData
     {
-        public bool IsDirty { get; set; }
-
-        public IInventoryCellData[] CellData { get; }
-
         public int width { get; }
         public int height { get; }
 
         bool[] mask;
 
-        public ScorllInventoryViewData(Vector2Int size) : this(new IInventoryCellData[size.x * size.y], size.x, size.y)
-        {
 
-        }
-
-        public ScorllInventoryViewData(int capacityWidth, int capacityHeight)
-                    : this(new IInventoryCellData[capacityWidth * capacityHeight], capacityWidth, capacityHeight)
-        {
-        }
-
-        public ScorllInventoryViewData(IInventoryCellData[] cellData, int capacityWidth, int capacityHeight)
+        public ScorllInventoryViewData(IInventoryCellData[] cellData, int capacityWidth, int capacityHeight) : base(cellData)
         {
             Debug.Assert(cellData.Length == capacityWidth * capacityHeight);
 
-            IsDirty = true;
-            CellData = cellData;
             width = capacityWidth;
             height = capacityHeight;
 
@@ -47,7 +33,7 @@ namespace Game.Logic
         }
 
         #region IInventoryViewData
-        public virtual int? GetId(IInventoryCellData cellData)
+        public override int? GetId(IInventoryCellData cellData)
         {
             for (var i = 0; i < CellData.Length; i++)
             {
@@ -60,7 +46,7 @@ namespace Game.Logic
             return null;
         }
 
-        public virtual int? GetInsertableId(IInventoryCellData cellData)
+        public override int? GetInsertableId(IInventoryCellData cellData)
         {
             for (var i = 0; i < mask.Length; i++)
             {
@@ -73,7 +59,7 @@ namespace Game.Logic
             return null;
         }
 
-        public virtual void InsertInventoryItem(int id, IInventoryCellData cellData)
+        public override void InsertInventoryItem(int id, IInventoryCellData cellData)
         {
             CellData[id] = cellData;
             IsDirty = true;
@@ -81,7 +67,7 @@ namespace Game.Logic
             UpdateMask();
         }
 
-        public virtual bool CheckInsert(int id, IInventoryCellData cellData)
+        public override bool CheckInsert(int id, IInventoryCellData cellData)
         {
             if (id < 0)
             {
@@ -116,7 +102,7 @@ namespace Game.Logic
             return true;
         }
 
-        public void Clear()
+        public override void Clear()
         {
 
         }
