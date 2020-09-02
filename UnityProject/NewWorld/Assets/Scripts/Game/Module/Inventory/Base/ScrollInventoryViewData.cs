@@ -14,7 +14,7 @@ using UnityEngine;
 namespace Game.Logic
 {
     //格子样式
-    public class ScorllInventoryViewData : AbstractInventoryViewData
+    public class ScrollInventoryViewData : AbstractInventoryViewData
     {
         public int width { get; }
         public int height { get; }
@@ -22,7 +22,7 @@ namespace Game.Logic
         bool[] mask;
 
 
-        public ScorllInventoryViewData(IInventoryCellData[] cellData, int capacityWidth, int capacityHeight) : base(cellData)
+        public ScrollInventoryViewData(IInventoryCellData[] cellData, int capacityWidth, int capacityHeight) : base(cellData)
         {
             Debug.Assert(cellData.Length == capacityWidth * capacityHeight);
 

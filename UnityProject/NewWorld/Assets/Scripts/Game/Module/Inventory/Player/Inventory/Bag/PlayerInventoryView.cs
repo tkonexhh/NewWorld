@@ -177,7 +177,7 @@ namespace Game.Logic
             {
                 return false;
             }
-
+            Debug.LogError(GetType().ToString() + "OnDrop" + (effectCell.CellData.GetType()));
             // check target;
             var index = GetIndex(targetCell, effectCell.CellData, cellCorner);
 
@@ -188,14 +188,13 @@ namespace Game.Logic
 
             if (!viewData.CheckInsert(index.Value, effectCell.CellData))
             {
-                Debug.LogError("PlayerInventoryView OnDrop CheckInsert");
                 //TODO 检测是否可以合并 交换
                 if (targetCell.CellData == null) return false;
 
                 if (targetCell.CellData is PlayerInventoryCellData) //如果目标也是道具栏位
                 {
                     int? targetID = viewData.GetId(targetCell.CellData);
-                    Debug.LogError(index.Value + "---" + targetID.Value);
+                    // Debug.LogError(index.Value + "---" + targetID.Value);
                     if (targetCell.CellData.size == effectCell.CellData.size)//大小一致 交换 并且完全盖住的时候
                     {
                         if (originalId.HasValue && originalCellData != null)
@@ -229,10 +228,16 @@ namespace Game.Logic
                 return false;
             }
 
+            var newCellData = effectCell.CellData;
+            if (effectCell.CellData is PlayerEquipmentCellData equipmentCellData)
+            {
+                newCellData = new PlayerInventoryCellData(equipmentCellData.item);
+                Debug.LogError(newCellData.GetType());
+            }
 
             // place
-            viewData.InsertInventoryItem(index.Value, effectCell.CellData);
-            itemViews[index.Value].Apply(effectCell.CellData);
+            viewData.InsertInventoryItem(index.Value, newCellData);
+            itemViews[index.Value].Apply(newCellData);
 
             originalId = null;
             originalCellData = null;

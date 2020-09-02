@@ -15,17 +15,13 @@ namespace Game.Logic
 {
     public abstract class AbstractItem
     {
-        public virtual ItemType type
-        {
-            get { return ItemType.Other; }
-        }
+        public virtual ItemType itemType => ItemType.Other;
         public long id { get; private set; }
         public float weight { get; private set; }
         public string name { get; private set; }
         public ItemQuality quality { get; private set; }
         public int width { get; private set; }
         public int height { get; private set; }
-
 
 
         protected TDItem m_Conf;

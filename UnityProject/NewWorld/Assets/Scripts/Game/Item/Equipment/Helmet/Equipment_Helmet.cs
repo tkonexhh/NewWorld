@@ -15,6 +15,8 @@ namespace Game.Logic
 {
     public class Equipment_Helmet : Equipment
     {
+        public override EquipmentType equipmentType => EquipmentType.Helmet;
+
         private HelmetType m_Type;
         public Equipment_Helmet(int id) : base(id)
         {

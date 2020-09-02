@@ -197,6 +197,7 @@ MonoBehaviour:
   defaultCellSize: {x: 0, y: 0}
   margineSpace: {x: 0, y: 0}
   sizeRoot: {fileID: 1630702686050472679}
+  m_Slot: 1
   target: {fileID: 5509769919772952207}
   m_ImgIcon: {fileID: 5194865350964161957}
   m_TxtName: {fileID: 3359725768167774649}
@@ -693,7 +694,7 @@ GameObject:
   - component: {fileID: 4930883364472801184}
   - component: {fileID: 3371904853199641495}
   m_Layer: 5
-  m_Name: Head
+  m_Name: Helmet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -772,6 +773,7 @@ MonoBehaviour:
   defaultCellSize: {x: 0, y: 0}
   margineSpace: {x: 0, y: 0}
   sizeRoot: {fileID: 8778048532699195823}
+  m_Slot: 0
   target: {fileID: 6669041141999451919}
   m_ImgIcon: {fileID: 7201683341976806720}
   m_TxtName: {fileID: 7110672501831045747}

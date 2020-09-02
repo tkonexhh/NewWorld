@@ -15,10 +15,7 @@ namespace Game.Logic
 {
     public class SupplyItem : StackableItem
     {
-        public override ItemType type
-        {
-            get { return ItemType.Other; }
-        }
+        public override ItemType itemType => ItemType.Other;
 
         public SupplyItem(long id) : base(id)
         {

@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class PlayerInventoryViewData : ScorllInventoryViewData
+    public class PlayerInventoryViewData : ScrollInventoryViewData
     {
         public PlayerInventoryViewData(Vector2Int size) : this(new IInventoryCellData[size.x * size.y], size.x, size.y)
         {

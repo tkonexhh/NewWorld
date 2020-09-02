@@ -1940,6 +1940,26 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3371904853199641495, guid: de210926c742f4bedb90b60f55b822ab,
+        type: 3}
+      propertyPath: defaultCellSize.x
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3371904853199641495, guid: de210926c742f4bedb90b60f55b822ab,
+        type: 3}
+      propertyPath: defaultCellSize.y
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 5555043014894097419, guid: de210926c742f4bedb90b60f55b822ab,
+        type: 3}
+      propertyPath: defaultCellSize.x
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 5555043014894097419, guid: de210926c742f4bedb90b60f55b822ab,
+        type: 3}
+      propertyPath: defaultCellSize.y
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 8150604449768889081, guid: de210926c742f4bedb90b60f55b822ab,
         type: 3}
       propertyPath: m_Name

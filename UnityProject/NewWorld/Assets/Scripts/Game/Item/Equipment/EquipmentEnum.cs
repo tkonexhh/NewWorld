@@ -15,6 +15,7 @@ namespace Game.Logic
 {
     public enum EquipmentType
     {
+        None = -1,
         Helmet,//头盔
         Torso,//身体
         Shoulder,//护肩

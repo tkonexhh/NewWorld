@@ -17,12 +17,9 @@ namespace Game.Logic
 
     public class Equipment : Item, IEquipment
     {
-        public override ItemType type
-        {
-            get { return ItemType.Equipment; }
-        }
+        public override ItemType itemType => ItemType.Equipment;
+        public virtual EquipmentType equipmentType => EquipmentType.None;
 
-        private EquipmentType m_Type;
         public EquipmentAppearance m_Appearance;
         private EquipmentStatus m_Status;
 

@@ -37,15 +37,51 @@ namespace Game.Logic
             return null;
         }
         public override int? GetInsertableId(IInventoryCellData cellData) { return null; }
+
         public override void InsertInventoryItem(int id, IInventoryCellData cellData)
         {
             CellData[id] = cellData;
             IsDirty = true;
         }
-        public override bool CheckInsert(int id, IInventoryCellData cellData) { return false; }
+
+        public override bool CheckInsert(int id, IInventoryCellData cellData)
+        {
+            if (cellData is PlayerInventoryCellData inventoryCellData && inventoryCellData.item is Equipment equipment)
+            {
+                var equipCellData = CellData[id] as PlayerEquipmentCellData;
+                Debug.LogError(equipCellData.slot);
+                Debug.LogError(equipment.equipmentType);
+                // Debug.LogError(GetType().ToString() + "drop" + "---" + equipCellData.slot + ":" + equipment.equipmentType);
+                if (CheckCanEquip(equipCellData.slot, equipment.equipmentType))
+                {
+                    Debug.LogError(GetType().ToString() + "Equip");
+
+
+                    return true;
+                }
+            }
+            return false;
+        }
         public override void Clear() { }
         #endregion
 
+
+        private bool CheckCanEquip(InventoryEquipSlot slot, EquipmentType type)
+        {
+            switch (slot)
+            {
+                case InventoryEquipSlot.Helmet:
+                    if (type == EquipmentType.Helmet)
+                        return true;
+                    break;
+
+                case InventoryEquipSlot.Torso:
+                    if (type == EquipmentType.Torso)
+                        return true;
+                    break;
+            }
+            return false;
+        }
     }
 
 }

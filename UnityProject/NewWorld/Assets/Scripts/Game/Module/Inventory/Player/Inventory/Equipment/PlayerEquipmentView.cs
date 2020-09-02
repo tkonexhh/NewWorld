@@ -107,19 +107,31 @@ namespace Game.Logic
             {
                 return false;
             }
+            Debug.LogError(GetType().ToString() + "OnDrop" + (effectCell.CellData.GetType()));
+            var cellView = targetCell as PlayerEquipmentCellView;
 
-            // if (targetCell.CellData != null && targetCell.CellData is PlayerInventoryCellData inventoryCellData)
+            //TODO
+            if (playerEquipmentViewData.CheckInsert((int)cellView.slot, effectCell.CellData))
+            {
+                Debug.LogError(GetType().ToString() + "Equip");
+                targetCell.Apply(new PlayerEquipmentCellData(cellView.slot, (cellView.CellData as PlayerEquipmentCellData).item as Equipment));
+                playerEquipmentViewData.InsertInventoryItem((int)cellView.slot, cellView.CellData);
+            }
+            // //如果拿起的物品是装备 并且装备类型和格子类型匹配的话 就装备上
+            // if (effectCell.CellData is PlayerInventoryCellData inventoryCellData && inventoryCellData.item is Equipment equipment)
             // {
-            //     Debug.LogError("Back to inventory");
-            //     // var id = inventoryCellData.GetInsertableId(effectCell.CellData);
-            //     // if (id.HasValue)
-            //     // {
-            //     //     caseData.CaseData.InsertInventoryItem(id.Value, effectCell.CellData);
 
-            //     //     originalId = null;
-            //     //     originalCellData = null;
-            //     //     return true;
-            //     // }
+
+            //     Debug.LogError(GetType().ToString() + "drop" + "---" + cellView.slot + ":" + equipment.equipmentType);
+            //     if (CheckCanEquip(cellView.slot, equipment.equipmentType))
+            //     {
+            //         Debug.LogError(GetType().ToString() + "Equip");
+            //         targetCell.Apply(new PlayerEquipmentCellData(cellView.slot, equipment));
+            //         playerEquipmentViewData.InsertInventoryItem((int)cellView.slot, inventoryCellData);
+            //         // playerEquipmentViewData.CheckInsert()
+
+            //         return true;
+            //     }
             // }
 
             return false;
@@ -155,6 +167,24 @@ namespace Game.Logic
                 return cellView;
             }
             return null;
+        }
+
+
+        private bool CheckCanEquip(InventoryEquipSlot slot, EquipmentType type)
+        {
+            switch (slot)
+            {
+                case InventoryEquipSlot.Helmet:
+                    if (type == EquipmentType.Helmet)
+                        return true;
+                    break;
+
+                case InventoryEquipSlot.Torso:
+                    if (type == EquipmentType.Torso)
+                        return true;
+                    break;
+            }
+            return false;
         }
     }
 

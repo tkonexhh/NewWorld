@@ -34,7 +34,7 @@ namespace Game.Logic
 
             m_TxtWeight.text = item.weight.ToString();
             m_TxtName.text = item.name;
-            m_TxtType.text = item.type.ToString();
+            m_TxtType.text = item.itemType.ToString();
             m_Anim.Play("Show");
         }
 
