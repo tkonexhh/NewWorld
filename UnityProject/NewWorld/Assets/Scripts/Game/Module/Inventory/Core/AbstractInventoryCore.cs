@@ -70,6 +70,11 @@ namespace Game.Logic
 
             effectCell.RectTransform.gameObject.SetActive(true);
             effectCell.Apply(stareData);
+
+            foreach (var inventoryViews in InventoryViews)
+            {
+                inventoryViews.OnPicked(effectCell);
+            }
         }
 
         public virtual void OnDrag(PointerEventData eventData)

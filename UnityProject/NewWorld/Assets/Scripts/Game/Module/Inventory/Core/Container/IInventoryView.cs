@@ -27,6 +27,7 @@ namespace Game.Logic
 
         void OnPrePick(IInventoryCellView targetCell);
         bool OnPick(IInventoryCellView targetCell);
+        void OnPicked(IInventoryCellView effectCell);
         void OnDrag(IInventoryCellView targetCell, IInventoryCellView effectCell, PointerEventData pointerEventData);
         bool OnDrop(IInventoryCellView targetCell, IInventoryCellView effectCell);
         void OnDroped(bool isDroped);

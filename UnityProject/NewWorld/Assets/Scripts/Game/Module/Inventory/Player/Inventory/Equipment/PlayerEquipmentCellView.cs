@@ -15,8 +15,9 @@ namespace Game.Logic
 {
     public class PlayerEquipmentCellView : InventoryCellView
     {
-
+        [SerializeField] RectTransform target;
         [SerializeField] private Image m_ImgIcon;
+        [SerializeField] private Text m_TxtName;
         [SerializeField] InventoryCellButton button;
 
         protected override IInventoryCellActions ButtonActions => button;
@@ -27,17 +28,17 @@ namespace Game.Logic
         protected override void OnApply()
         {
             base.OnApply();
-
             if (CellData == null)
             {
-                m_ImgIcon.gameObject.SetActive(false);
+                target.gameObject.SetActive(false);
             }
             else
             {
                 equipmentCellData = CellData as PlayerEquipmentCellData;
 
-                m_ImgIcon.gameObject.SetActive(true);
+                target.gameObject.SetActive(true);
                 m_ImgIcon.color = Color.black;
+                m_TxtName.text = equipmentCellData.item.name;
             }
         }
         #endregion 

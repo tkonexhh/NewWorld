@@ -35,7 +35,12 @@ namespace Game.Logic
             AddItem(4);
             AddItem(4);
             AddItem(4);
+            AddItem(5);
             AddItem(4);
+            AddItem(5);
+            AddItem(5);
+            AddItem(4);
+            AddItem(5);
 
         }
         public void OnUpdate() { }

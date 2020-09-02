@@ -65,8 +65,8 @@ namespace Game.Logic
             {
                 return;
             }
-
         }
+
         public override bool OnPick(IInventoryCellView targetCell)
         {
             if (targetCell?.CellData == null)
@@ -88,6 +88,12 @@ namespace Game.Logic
 
             return false;
         }
+
+        public override void OnPicked(IInventoryCellView effectCell)
+        {
+
+        }
+
         public override void OnDrag(IInventoryCellView targetCell, IInventoryCellView effectCell, PointerEventData pointerEventData)
         {
             if (targetCell == null)
@@ -101,13 +107,25 @@ namespace Game.Logic
             {
                 return false;
             }
-            Debug.LogError("PlayerEquipmentView OnDrop" + effectCell.CellData);
+
+            // if (targetCell.CellData != null && targetCell.CellData is PlayerInventoryCellData inventoryCellData)
+            // {
+            //     Debug.LogError("Back to inventory");
+            //     // var id = inventoryCellData.GetInsertableId(effectCell.CellData);
+            //     // if (id.HasValue)
+            //     // {
+            //     //     caseData.CaseData.InsertInventoryItem(id.Value, effectCell.CellData);
+
+            //     //     originalId = null;
+            //     //     originalCellData = null;
+            //     //     return true;
+            //     // }
+            // }
+
             return false;
         }
         public override void OnDroped(bool isDroped)
         {
-            Debug.LogError("PlayerEquipmentView OnDroped");
-
             if (!isDroped && originalId.HasValue)
             {
                 // revert

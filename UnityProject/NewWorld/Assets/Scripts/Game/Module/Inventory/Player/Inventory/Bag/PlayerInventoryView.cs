@@ -91,9 +91,7 @@ namespace Game.Logic
             {
                 return;
             }
-
-
-            conditionTransform.sizeDelta = new Vector2(targetCell.DefaultCellSize.x * targetCell.CellData.Width, targetCell.DefaultCellSize.y * targetCell.CellData.Height);
+            // conditionTransform.sizeDelta = new Vector2(targetCell.DefaultCellSize.x * targetCell.CellData.Width, targetCell.DefaultCellSize.y * targetCell.CellData.Height);
         }
         public override bool OnPick(IInventoryCellView targetCell)
         {
@@ -101,7 +99,6 @@ namespace Game.Logic
             {
                 return false;
             }
-
 
             var id = viewData.GetId(targetCell.CellData);
             if (id.HasValue)
@@ -117,14 +114,17 @@ namespace Game.Logic
             return false;
         }
 
+        public override void OnPicked(IInventoryCellView effectCell)
+        {
+            conditionTransform.sizeDelta = new Vector2(effectCell.DefaultCellSize.x * effectCell.CellData.Width, effectCell.DefaultCellSize.y * effectCell.CellData.Height);
+        }
+
         public override void OnDrag(IInventoryCellView targetCell, IInventoryCellView effectCell, PointerEventData pointerEventData)
         {
             if (targetCell == null)
             {
                 return;
             }
-
-            if (!originalId.HasValue) return;
 
             // auto scroll
             var pointerViewportPosition = GetLocalPosition(m_ScrollRect.viewport, pointerEventData.position, pointerEventData.enterEventCamera);
@@ -155,12 +155,16 @@ namespace Game.Logic
             var prevCorner = cellCorner;
             cellCorner = GetCorner((new Vector2(anchoredPosition.x % targetCell.DefaultCellSize.x, anchoredPosition.y % targetCell.DefaultCellSize.y) - anchor) * 0.5f);
 
+
             // shift the position only even number size
             int width = effectCell.CellData.Width;
             int height = effectCell.CellData.Height;
+
+            //Debug.LogError(cellCorner);
+            if (cellCorner == CellCorner.None) return;
+
             var evenNumberOffset = GetEvenNumberOffset(width, height, targetCell.DefaultCellSize.x * 0.5f, targetCell.DefaultCellSize.y * 0.5f);
             conditionTransform.position = targetCell.RectTransform.position + ((conditionOffset + evenNumberOffset) * targetCell.RectTransform.lossyScale.x);
-
             // update condition
             if (prevCorner != cellCorner)
             {
@@ -174,11 +178,9 @@ namespace Game.Logic
                 return false;
             }
 
-            Debug.LogError("PlayerInventoryView OnDrop");
-
             // check target;
             var index = GetIndex(targetCell, effectCell.CellData, cellCorner);
-            Debug.LogError("OnDrop index:" + index);
+
             if (!index.HasValue || index.Value < 0)
             {
                 return false;
@@ -186,6 +188,7 @@ namespace Game.Logic
 
             if (!viewData.CheckInsert(index.Value, effectCell.CellData))
             {
+                Debug.LogError("PlayerInventoryView OnDrop CheckInsert");
                 //TODO 检测是否可以合并 交换
                 if (targetCell.CellData == null) return false;
 
@@ -210,13 +213,6 @@ namespace Game.Logic
                     }
                 }
 
-                if (targetCell.CellData is PlayerEquipmentCellData equipmentCellData)
-                {
-
-                }
-
-
-
                 //     // check free space in case
                 //     if (targetCell.CellData != null && targetCell.CellData is VariableInventorySystem.IStandardCaseCellData caseData)
                 //     {
@@ -224,14 +220,15 @@ namespace Game.Logic
                 //         if (id.HasValue)
                 //         {
                 //             caseData.CaseData.InsertInventoryItem(id.Value, effectCell.CellData);
-
                 //             originalId = null;
                 //             originalCellData = null;
                 //             return true;
                 //         }
                 //     }
+
                 return false;
             }
+
 
             // place
             viewData.InsertInventoryItem(index.Value, effectCell.CellData);

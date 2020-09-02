@@ -49,13 +49,14 @@ namespace Game.Logic
 
         }
 
-        public virtual void OnPrePick(IInventoryCellView targetCell) { }
-        public virtual bool OnPick(IInventoryCellView targetCell) { return false; }
-        public virtual void OnDrag(IInventoryCellView targetCell, IInventoryCellView effectCell, PointerEventData pointerEventData) { }
-        public virtual bool OnDrop(IInventoryCellView targetCell, IInventoryCellView effectCell) { return false; }
-        public virtual void OnDroped(bool isDroped) { }
-        public virtual void OnCellEnter(IInventoryCellView targetCell, IInventoryCellView effectCell) { }
-        public virtual void OnCellExit(IInventoryCellView targetCell) { }
+        public abstract void OnPrePick(IInventoryCellView targetCell);
+        public abstract bool OnPick(IInventoryCellView targetCell);
+        public abstract void OnPicked(IInventoryCellView effectCell);
+        public abstract void OnDrag(IInventoryCellView targetCell, IInventoryCellView effectCell, PointerEventData pointerEventData);
+        public abstract bool OnDrop(IInventoryCellView targetCell, IInventoryCellView effectCell);
+        public abstract void OnDroped(bool isDroped);
+        public abstract void OnCellEnter(IInventoryCellView targetCell, IInventoryCellView effectCell);
+        public abstract void OnCellExit(IInventoryCellView targetCell);
 
         #endregion
 

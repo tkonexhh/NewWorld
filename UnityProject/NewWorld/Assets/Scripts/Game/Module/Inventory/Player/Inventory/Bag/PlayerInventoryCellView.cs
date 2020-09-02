@@ -26,7 +26,7 @@ namespace Game.Logic
 
         protected bool isSelectable = true;
         protected override IInventoryCellActions ButtonActions => button;
-        public PlayerInventoryCellData inventoryCellData { get; protected set; }
+        public PlayerInventoryItemData inventoryCellData { get; protected set; }
 
 
         public virtual void SetHighLight(bool value)
@@ -49,7 +49,7 @@ namespace Game.Logic
             }
             else
             {
-                inventoryCellData = CellData as PlayerInventoryCellData;
+                inventoryCellData = CellData as PlayerInventoryItemData;
                 m_ImgIcon.gameObject.SetActive(true);
                 m_ImgIcon.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1);
                 m_ImgIcon.GetComponent<RectTransform>().sizeDelta = GetCellSize() * 0.9f;
