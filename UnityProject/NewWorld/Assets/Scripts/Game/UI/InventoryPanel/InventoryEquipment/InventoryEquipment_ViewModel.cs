@@ -13,19 +13,20 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-	public class InventoryEquipment_ViewModel : MonoBehaviour
-	{
-	    // Start is called before the first frame update
-	    void Start()
-	    {
-	        
-	    }
-	
-	    // Update is called once per frame
-	    void Update()
-	    {
-	        
-	    }
-	}
-	
+    public class InventoryEquipment_ViewModel
+    {
+        private PlayerEquipmentViewData m_EquipmentViewData = new PlayerEquipmentViewData();
+
+        public PlayerEquipmentViewData viewData => m_EquipmentViewData;
+
+        public void Init()
+        {
+            PlayerEquipmentCellData cellData_Helmet = new PlayerEquipmentCellData(new Equipment_Helmet(4));
+            PlayerEquipmentCellData cellData_Torso = new PlayerEquipmentCellData(new Equipment_Torso(5));
+
+            m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Helmet, cellData_Helmet);
+            m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Torso, cellData_Torso);
+        }
+    }
+
 }

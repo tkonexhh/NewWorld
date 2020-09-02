@@ -17,13 +17,17 @@ namespace Game.Logic
     {
         [SerializeField] private PlayerEquipmentView m_EquipmentView;
 
-        private List<AbstractItem> m_ShowItems = new List<AbstractItem>();
+        private InventoryEquipment_ViewModel m_ViewModel;
 
         public PlayerEquipmentView equipmentView => m_EquipmentView;
 
 
         public void Init()
         {
+            m_ViewModel = new InventoryEquipment_ViewModel();
+            m_ViewModel.Init();
+
+            m_EquipmentView.Apply(m_ViewModel.viewData);
         }
     }
 

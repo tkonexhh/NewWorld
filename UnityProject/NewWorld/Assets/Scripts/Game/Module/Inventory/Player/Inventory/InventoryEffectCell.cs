@@ -1,8 +1,8 @@
 /************************
-	FileName:/Scripts/Game/UI/InventoryPanel/InventoryEquipment/Cell/PlayerEquipmentCellView.cs
+	FileName:/Scripts/Game/Module/Inventory/Player/PlayerInventoryEffectCell.cs
 	CreateAuthor:neo.xu
-	CreateTime:9/1/2020 8:00:01 PM
-	Tip:9/1/2020 8:00:01 PM
+	CreateTime:9/2/2020 1:51:52 PM
+	Tip:9/2/2020 1:51:52 PM
 ************************/
 
 
@@ -13,21 +13,14 @@ using UnityEngine.UI;
 
 namespace Game.Logic
 {
-    public class PlayerEquipmentCellView : InventoryCellView
+    public class InventoryEffectCell : InventoryCellView
     {
-
         [SerializeField] private Image m_ImgIcon;
-        [SerializeField] InventoryCellButton button;
-
-        protected override IInventoryCellActions ButtonActions => button;
-        public PlayerEquipmentCellData equipmentCellData { get; protected set; }
-
-
-        #region abstract
+        [SerializeField] private Text m_TxtName;
         protected override void OnApply()
         {
             base.OnApply();
-
+            this.ApplySize();
 
             if (CellData == null)
             {
@@ -36,9 +29,13 @@ namespace Game.Logic
             else
             {
                 m_ImgIcon.gameObject.SetActive(true);
+
+                m_ImgIcon.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1);
+                m_ImgIcon.GetComponent<RectTransform>().sizeDelta = GetCellSize() * 0.9f;
+
+                m_TxtName.text = (CellData as PlayerInventoryItemData).item.name;
             }
         }
-        #endregion 
     }
 
 }

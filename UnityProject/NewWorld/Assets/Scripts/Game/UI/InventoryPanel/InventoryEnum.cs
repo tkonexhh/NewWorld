@@ -13,17 +13,19 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public enum InventoryItemType
-    {
-        Equipment,
-        Material,//材料
-        Supplies,//消耗品
-    }
+
 
     public enum InventoryToggleType
     {
         Equipment,
         Supplies,
+    }
+
+    public enum InventoryEquipSlot
+    {
+        Helmet,
+        Torso,
+        Length
     }
 
 }

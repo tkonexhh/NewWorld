@@ -92,6 +92,7 @@ namespace Game.Logic
                 return;
             }
 
+
             conditionTransform.sizeDelta = new Vector2(targetCell.DefaultCellSize.x * targetCell.CellData.Width, targetCell.DefaultCellSize.y * targetCell.CellData.Height);
         }
         public override bool OnPick(IInventoryCellView targetCell)
@@ -100,6 +101,7 @@ namespace Game.Logic
             {
                 return false;
             }
+
 
             var id = viewData.GetId(targetCell.CellData);
             if (id.HasValue)
@@ -114,12 +116,15 @@ namespace Game.Logic
 
             return false;
         }
+
         public override void OnDrag(IInventoryCellView targetCell, IInventoryCellView effectCell, PointerEventData pointerEventData)
         {
             if (targetCell == null)
             {
                 return;
             }
+
+            if (!originalId.HasValue) return;
 
             // auto scroll
             var pointerViewportPosition = GetLocalPosition(m_ScrollRect.viewport, pointerEventData.position, pointerEventData.enterEventCamera);
@@ -168,6 +173,8 @@ namespace Game.Logic
             {
                 return false;
             }
+
+            Debug.LogError("PlayerInventoryView OnDrop");
 
             // check target;
             var index = GetIndex(targetCell, effectCell.CellData, cellCorner);
@@ -254,7 +261,8 @@ namespace Game.Logic
         public override void OnCellEnter(IInventoryCellView targetCell, IInventoryCellView effectCell)
         {
             conditionTransform.gameObject.SetActive(effectCell?.CellData != null);
-            (targetCell as PlayerInventoryCellView).SetHighLight(true);
+            if (targetCell is PlayerInventoryCellView)
+                (targetCell as PlayerInventoryCellView).SetHighLight(true);
         }
         public override void OnCellExit(IInventoryCellView targetCell)
         {
@@ -263,7 +271,8 @@ namespace Game.Logic
 
             cellCorner = CellCorner.None;
 
-            (targetCell as PlayerInventoryCellView).SetHighLight(false);
+            if (targetCell is PlayerInventoryCellView)
+                (targetCell as PlayerInventoryCellView).SetHighLight(false);
         }
 
         #endregion

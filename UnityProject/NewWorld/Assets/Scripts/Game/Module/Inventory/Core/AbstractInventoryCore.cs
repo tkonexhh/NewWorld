@@ -29,6 +29,7 @@ namespace Game.Logic
 
         public void Init()
         {
+            //TODO 从资源加载
             var go = Instantiate(CellPrefab.gameObject, EffectCellParent);
             effectCell = go.GetComponent<AbstractInventoryCellView>();
             effectCell.RectTransform.gameObject.SetActive(false);

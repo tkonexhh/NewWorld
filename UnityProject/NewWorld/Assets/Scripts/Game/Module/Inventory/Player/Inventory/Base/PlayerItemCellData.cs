@@ -1,8 +1,8 @@
 /************************
-	FileName:/Scripts/Game/Module/Inventory/Player/PlayerInventoryCellData.cs
+	FileName:/Scripts/Game/Module/Inventory/Player/Inventory/Base/PlayerInventoryItemData.cs
 	CreateAuthor:neo.xu
-	CreateTime:8/18/2020 1:07:18 PM
-	Tip:8/18/2020 1:07:18 PM
+	CreateTime:9/2/2020 2:04:58 PM
+	Tip:9/2/2020 2:04:58 PM
 ************************/
 
 
@@ -13,14 +13,13 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class PlayerInventoryCellData : AbstractInventoryCellData
+    public class PlayerInventoryItemData : AbstractInventoryCellData
     {
         public AbstractItem item { get; private set; }
-        public PlayerInventoryCellData(AbstractItem item) : base(item)
+        public PlayerInventoryItemData(AbstractItem item) : base(item.width, item.height)
         {
             this.item = item;
         }
-
     }
 
 }

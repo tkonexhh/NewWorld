@@ -21,10 +21,10 @@ namespace Game.Logic
         public Vector2Int size { get => new Vector2Int(Width, Height); }
         #endregion
 
-        public AbstractInventoryCellData(AbstractItem item)
+        public AbstractInventoryCellData(int width, int height)
         {
-            Width = item.width;
-            Height = item.height;
+            Width = width;
+            Height = height;
         }
     }
 

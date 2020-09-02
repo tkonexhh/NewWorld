@@ -13,12 +13,10 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class PlayerEquipmentCellData : AbstractInventoryCellData
+    public class PlayerEquipmentCellData : PlayerInventoryItemData
     {
-        public Equipment item { get; private set; }
         public PlayerEquipmentCellData(Equipment item) : base(item)
         {
-            this.item = item;
         }
     }
 
