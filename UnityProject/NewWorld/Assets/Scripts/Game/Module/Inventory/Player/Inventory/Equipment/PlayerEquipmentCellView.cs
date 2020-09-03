@@ -39,6 +39,7 @@ namespace Game.Logic
 
                 target.gameObject.SetActive(true);
                 m_ImgIcon.color = Color.black;
+                m_ImgIcon.GetComponent<RectTransform>().sizeDelta = GetCellSize() * 0.9f;
                 m_TxtName.text = equipmentCellData.item.name;
             }
         }

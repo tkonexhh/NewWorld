@@ -18,7 +18,7 @@ namespace Game.Logic
         public override EquipmentType equipmentType => EquipmentType.Helmet;
 
         private HelmetType m_Type;
-        public Equipment_Helmet(int id) : base(id)
+        public Equipment_Helmet(long id) : base(id)
         {
             m_Type = HelmetType.NoHair;
 

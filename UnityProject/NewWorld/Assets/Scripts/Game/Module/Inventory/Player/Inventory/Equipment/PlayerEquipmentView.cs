@@ -13,7 +13,7 @@ using UnityEngine.EventSystems;
 
 namespace Game.Logic
 {
-    //TODO 装备类型改成装备slot 
+
     public class PlayerEquipmentView : AbstractInventoryView
     {
         [SerializeField] private PlayerEquipmentCellView m_Head;
@@ -75,7 +75,6 @@ namespace Game.Logic
             }
 
             var id = viewData.GetId(targetCell.CellData);
-
             if (id.HasValue)
             {
                 originalId = id;
@@ -85,6 +84,7 @@ namespace Game.Logic
                 viewData.InsertInventoryItem(id.Value, null);
                 return true;
             }
+
 
             return false;
         }
@@ -107,32 +107,34 @@ namespace Game.Logic
             {
                 return false;
             }
-            Debug.LogError(GetType().ToString() + "OnDrop" + (effectCell.CellData.GetType()));
+            // Debug.LogError(GetType().ToString() + "OnDrop" + (effectCell.CellData.GetType()));
             var cellView = targetCell as PlayerEquipmentCellView;
 
-            //TODO
-            if (playerEquipmentViewData.CheckInsert((int)cellView.slot, effectCell.CellData))
-            {
-                Debug.LogError(GetType().ToString() + "Equip");
-                targetCell.Apply(new PlayerEquipmentCellData(cellView.slot, (cellView.CellData as PlayerEquipmentCellData).item as Equipment));
-                playerEquipmentViewData.InsertInventoryItem((int)cellView.slot, cellView.CellData);
-            }
-            // //如果拿起的物品是装备 并且装备类型和格子类型匹配的话 就装备上
-            // if (effectCell.CellData is PlayerInventoryCellData inventoryCellData && inventoryCellData.item is Equipment equipment)
+
+            // if (playerEquipmentViewData.CheckInsert((int)cellView.slot, effectCell.CellData))
             // {
-
-
-            //     Debug.LogError(GetType().ToString() + "drop" + "---" + cellView.slot + ":" + equipment.equipmentType);
-            //     if (CheckCanEquip(cellView.slot, equipment.equipmentType))
-            //     {
-            //         Debug.LogError(GetType().ToString() + "Equip");
-            //         targetCell.Apply(new PlayerEquipmentCellData(cellView.slot, equipment));
-            //         playerEquipmentViewData.InsertInventoryItem((int)cellView.slot, inventoryCellData);
-            //         // playerEquipmentViewData.CheckInsert()
-
-            //         return true;
-            //     }
+            //     Debug.LogError(GetType().ToString() + "Equip");
+            //     targetCell.Apply(new PlayerEquipmentCellData(cellView.slot, (cellView.CellData as PlayerEquipmentCellData).item as Equipment));
+            //     playerEquipmentViewData.InsertInventoryItem((int)cellView.slot, cellView.CellData);
             // }
+
+
+            //如果拿起的物品是装备 并且装备类型和格子类型匹配的话 就装备上
+            if (effectCell.CellData is PlayerInventoryCellData inventoryCellData && inventoryCellData.item is Equipment equipment)
+            {
+                Debug.LogError(GetType().ToString() + "drop" + "---" + cellView.slot + ":" + equipment.equipmentType);
+
+                if (CheckCanEquip(cellView.slot, equipment.equipmentType))
+                {
+                    Debug.LogError(GetType().ToString() + "Equip");
+                    var equipCellData = new PlayerEquipmentCellData(equipment);
+                    targetCell.Apply(equipCellData);
+                    Debug.LogError(cellView.slot + "--" + inventoryCellData);
+                    playerEquipmentViewData.InsertInventoryItem((int)cellView.slot, equipCellData);
+                    //TODO 处理交换
+                    return true;
+                }
+            }
 
             return false;
         }

@@ -18,8 +18,8 @@ namespace Game.Logic
         public override void OnSingletonInit()
         {
             InitCharacterAppearanceData();
-            //InitEquipmentData();
             InitItemData();
+            InitEquipmentData();
         }
 
         public void Init()
@@ -43,26 +43,8 @@ namespace Game.Logic
             var reader = database.LoadTable("Equipment");
             while (reader.Read())
             {
-                int id = (int)reader[0];
-                string name = reader[1].ToString();
-                EquipmentType type = StringToEquipmentType(reader[2].ToString());
-                Debug.LogError(type);
-                int appearance = (int)reader[3];
+                TDEquipmentTable.OnAddRow(reader);
             }
-        }
-
-        private EquipmentType StringToEquipmentType(string value)
-        {
-            switch (value)
-            {
-                case "Helmet":
-                    return EquipmentType.Helmet;
-                case "Torso":
-                    return EquipmentType.Torso;
-                default:
-                    return EquipmentType.Length;
-            }
-
         }
 
         private void InitItemData()

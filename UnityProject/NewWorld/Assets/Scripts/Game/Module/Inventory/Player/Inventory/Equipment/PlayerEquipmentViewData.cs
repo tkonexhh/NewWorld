@@ -36,7 +36,10 @@ namespace Game.Logic
             }
             return null;
         }
-        public override int? GetInsertableId(IInventoryCellData cellData) { return null; }
+        public override int? GetInsertableId(IInventoryCellData cellData)
+        {
+            return null;
+        }
 
         public override void InsertInventoryItem(int id, IInventoryCellData cellData)
         {
@@ -46,20 +49,17 @@ namespace Game.Logic
 
         public override bool CheckInsert(int id, IInventoryCellData cellData)
         {
-            if (cellData is PlayerInventoryCellData inventoryCellData && inventoryCellData.item is Equipment equipment)
-            {
-                var equipCellData = CellData[id] as PlayerEquipmentCellData;
-                Debug.LogError(equipCellData.slot);
-                Debug.LogError(equipment.equipmentType);
-                // Debug.LogError(GetType().ToString() + "drop" + "---" + equipCellData.slot + ":" + equipment.equipmentType);
-                if (CheckCanEquip(equipCellData.slot, equipment.equipmentType))
-                {
-                    Debug.LogError(GetType().ToString() + "Equip");
-
-
-                    return true;
-                }
-            }
+            // if (cellData is PlayerInventoryCellData inventoryCellData && inventoryCellData.item is Equipment equipment)
+            // {
+            //     var equipCellData = CellData[id] as PlayerEquipmentCellData;
+            //     Debug.LogError(equipment.equipmentType);
+            //     // Debug.LogError(GetType().ToString() + "drop" + "---" + equipCellData.slot + ":" + equipment.equipmentType);
+            //     if (CheckCanEquip(equipCellData.slot, equipment.equipmentType))
+            //     {
+            //         Debug.LogError(GetType().ToString() + "Equip");
+            //         return true;
+            //     }
+            // }
             return false;
         }
         public override void Clear() { }

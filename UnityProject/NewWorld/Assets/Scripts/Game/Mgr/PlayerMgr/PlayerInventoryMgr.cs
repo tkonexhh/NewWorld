@@ -41,6 +41,7 @@ namespace Game.Logic
             AddItem(5);
             AddItem(4);
             AddItem(5);
+            AddItem(6);
 
         }
         public void OnUpdate() { }
@@ -80,8 +81,12 @@ namespace Game.Logic
 
         public void AddEquipment(TDItem itemConf, long id)
         {
-            Equipment equipment = new Equipment(id);
-            equipment.Conf = itemConf;
+            Equipment equipment = PlayerInventoryFactory.CreateEquipment(itemConf, id);
+            if (equipment == null)
+            {
+                Debug.LogError("Failed to Add Equipment");
+                return;
+            }
             m_LstEquipment.Add(equipment);
         }
     }

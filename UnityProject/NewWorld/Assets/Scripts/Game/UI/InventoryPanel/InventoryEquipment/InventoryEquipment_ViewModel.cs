@@ -21,8 +21,8 @@ namespace Game.Logic
 
         public void Init()
         {
-            PlayerEquipmentCellData cellData_Helmet = new PlayerEquipmentCellData(InventoryEquipSlot.Helmet, new Equipment_Helmet(4));
-            PlayerEquipmentCellData cellData_Torso = new PlayerEquipmentCellData(InventoryEquipSlot.Torso, new Equipment_Torso(5));
+            PlayerEquipmentCellData cellData_Helmet = new PlayerEquipmentCellData(new Equipment_Helmet(4));
+            PlayerEquipmentCellData cellData_Torso = new PlayerEquipmentCellData(new Equipment_Torso(5));
 
             m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Helmet, cellData_Helmet);
             m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Torso, cellData_Torso);

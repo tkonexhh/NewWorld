@@ -16,10 +16,8 @@ namespace Game.Logic
     public class PlayerEquipmentCellData : PlayerInventoryItemData
     {
         public Equipment equipment => item as Equipment;
-        public InventoryEquipSlot slot { get; set; }
-        public PlayerEquipmentCellData(InventoryEquipSlot slot, Equipment item) : base(item)
+        public PlayerEquipmentCellData(Equipment item) : base(item)
         {
-            this.slot = slot;
         }
     }
 
