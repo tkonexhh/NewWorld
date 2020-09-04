@@ -17,6 +17,8 @@ namespace Game.Logic
     {
         [SerializeField] private Image m_ImgIcon;
         [SerializeField] private Text m_TxtName;
+
+
         protected override void OnApply()
         {
             base.OnApply();

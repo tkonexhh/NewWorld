@@ -40,6 +40,8 @@ namespace Game.Logic
             this.onCellExit = onCellExit;
         }
 
+        public virtual void Init() { }
+
         public virtual void Apply(IInventoryViewData data)
         {
             viewData = (AbstractInventoryViewData)data;
@@ -55,11 +57,18 @@ namespace Game.Logic
         public abstract void OnDrag(IInventoryCellView targetCell, IInventoryCellView effectCell, PointerEventData pointerEventData);
         public abstract bool OnDrop(IInventoryCellView targetCell, IInventoryCellView effectCell);
         public abstract void OnDroped(bool isDroped);
+        public abstract void OnCellClick(IInventoryCellView targetCell);
+        public abstract void OnCellOptionClick(IInventoryCellView targetCell);
         public abstract void OnCellEnter(IInventoryCellView targetCell, IInventoryCellView effectCell);
         public abstract void OnCellExit(IInventoryCellView targetCell);
 
         #endregion
 
+        protected void ApplyCell(IInventoryCellView cellView, int cellIndex, IInventoryCellData cellData)
+        {
+            cellView.Apply(cellData);
+            viewData.InsertInventoryItem(cellIndex, cellData);
+        }
     }
 
 }

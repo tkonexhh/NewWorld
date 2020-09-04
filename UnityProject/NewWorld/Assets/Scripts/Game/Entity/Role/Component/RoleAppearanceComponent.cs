@@ -22,6 +22,17 @@ namespace Game.Logic
             base.Init(ownner);
             m_Appearance = (ownner as Role).gameObject.GetComponentInChildren<CharacterAppearance>();
 
+            RegisterEvent();
+        }
+
+        #region IEventListener
+        public void RegisterEvent()
+        {
+            EventSystem.S.Register(SetupEvent.ChangeAppearance, HandleEvent);
+            EventSystem.S.Register(SetupEvent.ChangeColor, HandleEvent);
+        }
+        public void UnRegisterEvent()
+        {
             EventSystem.S.Register(SetupEvent.ChangeAppearance, HandleEvent);
             EventSystem.S.Register(SetupEvent.ChangeColor, HandleEvent);
         }
@@ -48,6 +59,8 @@ namespace Game.Logic
             }
 
         }
+
+        #endregion
     }
 
 }

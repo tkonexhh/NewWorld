@@ -15,6 +15,8 @@ namespace GFrame
 {
     public interface IEventListener
     {
+        void RegisterEvent();
+        void UnRegisterEvent();
         void HandleEvent(int key, params object[] args);
     }
 

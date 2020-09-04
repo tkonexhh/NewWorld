@@ -22,6 +22,7 @@ namespace Game.Logic
                    Action<IInventoryCellView> onCellEnter,
                    Action<IInventoryCellView> onCellExit);
 
+        void Init();
         void Apply(IInventoryViewData data);
         void ReApply();
 
@@ -32,6 +33,8 @@ namespace Game.Logic
         bool OnDrop(IInventoryCellView targetCell, IInventoryCellView effectCell);
         void OnDroped(bool isDroped);
 
+        void OnCellClick(IInventoryCellView targetCell);
+        void OnCellOptionClick(IInventoryCellView targetCell);
         void OnCellEnter(IInventoryCellView targetCell, IInventoryCellView effectCell);
         void OnCellExit(IInventoryCellView targetCell);
     }

@@ -10,11 +10,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using GFrame;
 
 namespace Game.Logic
 {
 
-    public class PlayerEquipmentView : AbstractInventoryView
+    public class PlayerEquipmentView : AbstractInventoryView, IEventListener
     {
         [SerializeField] private PlayerEquipmentCellView m_Head;
         [SerializeField] private PlayerEquipmentCellView m_Torso;
@@ -26,7 +27,37 @@ namespace Game.Logic
 
         public PlayerEquipmentViewData playerEquipmentViewData;
 
+        #region IEventListener
+        public void RegisterEvent()
+        {
+            GFrame.EventSystem.S.Register(EventID.OnEquipInventroy, HandleEvent);
+        }
+        public void UnRegisterEvent()
+        {
+            GFrame.EventSystem.S.UnRegister(EventID.OnEquipInventroy, HandleEvent);
+        }
+        public void HandleEvent(int key, params object[] args)
+        {
+            switch (key)
+            {
+                case (int)EventID.OnEquipInventroy:
+                    PlayerInventoryCellData cellData = (PlayerInventoryCellData)args[0];
+                    if (cellData.item is Equipment equipment)
+                    {
+                        PlayerEquipmentCellView equipmentCellView = GetCellByEquipmentType(equipment.equipmentType);
+                        Equip(equipmentCellView, equipment);
+                    }
+                    break;
+            }
+        }
+        #endregion
+
         #region IInventoryView
+        public override void Init()
+        {
+            RegisterEvent();
+        }
+
         public override void Apply(IInventoryViewData data)
         {
             base.Apply(data);
@@ -80,8 +111,7 @@ namespace Game.Logic
                 originalId = id;
                 originalCellData = targetCell.CellData;
 
-                itemViews[id.Value].Apply(null);
-                viewData.InsertInventoryItem(id.Value, null);
+                ApplyCell(itemViews[id.Value], id.Value, null);
                 return true;
             }
 
@@ -110,14 +140,12 @@ namespace Game.Logic
             // Debug.LogError(GetType().ToString() + "OnDrop" + (effectCell.CellData.GetType()));
             var cellView = targetCell as PlayerEquipmentCellView;
 
-
             // if (playerEquipmentViewData.CheckInsert((int)cellView.slot, effectCell.CellData))
             // {
             //     Debug.LogError(GetType().ToString() + "Equip");
             //     targetCell.Apply(new PlayerEquipmentCellData(cellView.slot, (cellView.CellData as PlayerEquipmentCellData).item as Equipment));
             //     playerEquipmentViewData.InsertInventoryItem((int)cellView.slot, cellView.CellData);
             // }
-
 
             //如果拿起的物品是装备 并且装备类型和格子类型匹配的话 就装备上
             if (effectCell.CellData is PlayerInventoryCellData inventoryCellData && inventoryCellData.item is Equipment equipment)
@@ -126,12 +154,7 @@ namespace Game.Logic
 
                 if (CheckCanEquip(cellView.slot, equipment.equipmentType))
                 {
-                    Debug.LogError(GetType().ToString() + "Equip");
-                    var equipCellData = new PlayerEquipmentCellData(equipment);
-                    targetCell.Apply(equipCellData);
-                    Debug.LogError(cellView.slot + "--" + inventoryCellData);
-                    playerEquipmentViewData.InsertInventoryItem((int)cellView.slot, equipCellData);
-                    //TODO 处理交换
+                    Equip(cellView, equipment);
                     return true;
                 }
             }
@@ -143,13 +166,31 @@ namespace Game.Logic
             if (!isDroped && originalId.HasValue)
             {
                 // revert
-                itemViews[originalId.Value].Apply(originalCellData);
-                viewData.InsertInventoryItem(originalId.Value, originalCellData);
+                ApplyCell(itemViews[originalId.Value], originalId.Value, originalCellData);
             }
 
             originalId = null;
             originalCellData = null;
         }
+
+        public override void OnCellClick(IInventoryCellView targetCell)
+        {
+            //Debug.LogError(this.GetType().ToString() + "OnCellClick");
+        }
+        public override void OnCellOptionClick(IInventoryCellView targetCell)
+        {
+            if (!itemViews.Any(item => item == targetCell))
+            {
+                return;
+            }
+
+            //  右键脱下装备
+            if (targetCell.CellData is PlayerEquipmentCellData equipmentCellData)
+            {
+                if (equipmentCellData.item is Equipment) { Equip(targetCell as PlayerEquipmentCellView, null); }
+            }
+        }
+
         public override void OnCellEnter(IInventoryCellView targetCell, IInventoryCellView effectCell) { }
         public override void OnCellExit(IInventoryCellView targetCell) { }
         #endregion
@@ -171,6 +212,13 @@ namespace Game.Logic
             return null;
         }
 
+        private PlayerEquipmentCellView GetCellByEquipmentType(EquipmentType type)
+        {
+            //TODO 暂时把EquipmentType 和SlotType一一对应起来，后续有可能出现不对应的情况
+            return GetCellBySlot((int)type);
+            //return null;
+        }
+
 
         private bool CheckCanEquip(InventoryEquipSlot slot, EquipmentType type)
         {
@@ -187,6 +235,29 @@ namespace Game.Logic
                     break;
             }
             return false;
+        }
+
+
+        private void Equip(PlayerEquipmentCellView cellView, Equipment equipment)
+        {
+            var nowEquipment = cellView.CellData as PlayerEquipmentCellData;
+            if (nowEquipment != null)
+            {
+                Debug.LogError(GetType().ToString() + "Has Equip");
+                GFrame.EventSystem.S.Send(EventID.OnAddInventory, new PlayerInventoryCellData(nowEquipment.item));
+            }
+
+            if (equipment == null)
+            {
+                ApplyCell(cellView, (int)cellView.slot, null);
+            }
+            else
+            {
+                var equipCellData = new PlayerEquipmentCellData(equipment);
+                ApplyCell(cellView, (int)cellView.slot, equipCellData);
+            }
+
+
         }
     }
 

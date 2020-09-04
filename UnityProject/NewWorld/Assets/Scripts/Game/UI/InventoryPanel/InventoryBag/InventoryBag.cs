@@ -67,7 +67,7 @@ namespace Game.Logic
                     break;
             }
 
-            inventoryView.Apply(m_ViewModel.GetDataByType(type));
+            m_InventoryView.Apply(m_ViewModel.GetDataByType(type));
         }
 
     }

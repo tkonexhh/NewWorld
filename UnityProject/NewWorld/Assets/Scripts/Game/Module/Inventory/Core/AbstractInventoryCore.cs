@@ -15,9 +15,10 @@ using UnityEngine.EventSystems;
 
 namespace Game.Logic
 {
-    public class AbstractInventoryCore : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public abstract class AbstractInventoryCore : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         protected List<IInventoryView> InventoryViews { get; set; } = new List<IInventoryView>();
+        private Dictionary<string, IInventoryView> inventoryViewMap = new Dictionary<string, IInventoryView>();
 
         protected virtual AbstractInventoryCellView CellPrefab { get; set; }
         protected virtual RectTransform EffectCellParent { get; set; }
@@ -36,19 +37,20 @@ namespace Game.Logic
             effectCell.SetSelectable(false);
         }
 
-        public virtual void AddInventoryView(IInventoryView variableInventoryView)
+        public void AddInventoryView(IInventoryView variableInventoryView)
         {
+            variableInventoryView.Init();
             InventoryViews.Add(variableInventoryView);
             variableInventoryView.SetCellCallback(OnCellClick, OnCellOptionClick, OnCellEnter, OnCellExit);
         }
 
-        public virtual void RemoveInventoryView(IInventoryView variableInventoryView)
+        public void RemoveInventoryView(IInventoryView variableInventoryView)
         {
             InventoryViews.Remove(variableInventoryView);
         }
 
         #region event
-        public virtual void OnBeginDrag(PointerEventData eventData)
+        public void OnBeginDrag(PointerEventData eventData)
         {
             if (eventData.button != PointerEventData.InputButton.Left)
             {
@@ -77,7 +79,7 @@ namespace Game.Logic
             }
         }
 
-        public virtual void OnDrag(PointerEventData eventData)
+        public void OnDrag(PointerEventData eventData)
         {
             if (effectCell?.CellData == null)
             {
@@ -90,13 +92,12 @@ namespace Game.Logic
 
             RectTransformUtility.ScreenPointToLocalPointInRectangle(EffectCellParent, eventData.position, eventData.enterEventCamera, out cursorPosition);
 
-
             effectCell.RectTransform.localPosition = cursorPosition + new Vector2(
                 effectCell.DefaultCellSize.x * 0.5f,
                 -1 * effectCell.DefaultCellSize.y * 0.5f);
         }
 
-        public virtual void OnEndDrag(PointerEventData eventData)
+        public void OnEndDrag(PointerEventData eventData)
         {
             if (effectCell.CellData == null)
             {
@@ -118,10 +119,27 @@ namespace Game.Logic
 
         protected virtual void OnCellClick(IInventoryCellView cell)
         {
+            if (cell.CellData == null)
+            {
+                return;
+            }
+            foreach (var inventoryViews in InventoryViews)
+            {
+                inventoryViews.OnCellClick(cell);
+            }
         }
 
         protected virtual void OnCellOptionClick(IInventoryCellView cell)
         {
+            if (cell.CellData == null)
+            {
+                return;
+            }
+
+            foreach (var inventoryViews in InventoryViews)
+            {
+                inventoryViews.OnCellOptionClick(cell);
+            }
         }
 
         protected virtual void OnCellEnter(IInventoryCellView cell)
@@ -143,6 +161,7 @@ namespace Game.Logic
 
             targetCell = null;
         }
+
     }
 
 }

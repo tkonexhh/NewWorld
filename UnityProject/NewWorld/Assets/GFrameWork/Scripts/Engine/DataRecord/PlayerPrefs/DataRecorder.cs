@@ -98,7 +98,8 @@ namespace GFrame
         private bool m_IsDataDirty = false;
         public void Init()
         {
-            EventSystem.S.Register(EngineEventID.OnApplicationQuit, HandleEvent);
+            RegisterEvent();
+
             Load();
         }
 
@@ -255,6 +256,17 @@ namespace GFrame
             return "";
         }
 
+
+        #region IEventListener
+        public void RegisterEvent()
+        {
+            EventSystem.S.Register(EngineEventID.OnApplicationQuit, HandleEvent);
+        }
+        public void UnRegisterEvent()
+        {
+            EventSystem.S.UnRegister(EngineEventID.OnApplicationQuit, HandleEvent);
+        }
+
         public void HandleEvent(int key, params object[] args)
         {
             switch (key)
@@ -265,6 +277,8 @@ namespace GFrame
                     break;
             }
         }
+
+        #endregion
     }
 
 }

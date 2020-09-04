@@ -27,6 +27,17 @@ namespace Game.Logic
             Log.i("Init[GameDataMgr]");
         }
 
+        private void ReadTable(TDSqlMetaData metaData)
+        {
+            var database = SQLMgr.S.Open(metaData.databaseName);
+            var reader = database.LoadTable(metaData.tableName);
+            while (reader.Read())
+            {
+
+                TDCharacterAppearanceTable.OnAddRow(reader);
+            }
+        }
+
         private void InitCharacterAppearanceData()
         {
             var database = SQLMgr.S.Open("Game");
@@ -35,6 +46,8 @@ namespace Game.Logic
             {
                 TDCharacterAppearanceTable.OnAddRow(reader);
             }
+
+
         }
 
         private void InitEquipmentData()

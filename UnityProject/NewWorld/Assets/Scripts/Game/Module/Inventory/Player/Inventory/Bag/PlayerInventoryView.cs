@@ -12,10 +12,11 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using GFrame;
 
 namespace Game.Logic
 {
-    public class PlayerInventoryView : AbstractInventoryView
+    public class PlayerInventoryView : AbstractInventoryView, IEventListener
     {
         [SerializeField] protected AbstractInventoryCellView cellPrefab;
         [SerializeField] private ScrollRect m_ScrollRect;
@@ -37,7 +38,41 @@ namespace Game.Logic
         protected CellCorner cellCorner;
         Vector3 conditionOffset;
 
+        #region IEventListener
+        public void RegisterEvent()
+        {
+            GFrame.EventSystem.S.Register(EventID.OnAddInventory, HandleEvent);
+        }
+        public void UnRegisterEvent()
+        {
+            GFrame.EventSystem.S.UnRegister(EventID.OnAddInventory, HandleEvent);
+        }
+        public void HandleEvent(int key, params object[] args)
+        {
+            switch (key)
+            {
+                case (int)EventID.OnAddInventory:
+                    if (args == null || args.Length <= 0) return;
+                    IInventoryCellData data = (IInventoryCellData)args[0];
+                    var insertID = viewData.GetInsertableId(data);
+                    if (insertID.HasValue)
+                    {
+                        itemViews[insertID.Value].Apply(data);
+                        viewData.InsertInventoryItem(insertID.Value, data);
+                    }
+                    break;
+            }
+        }
+        #endregion
+
+
         #region IInventoryView
+        public override void Init()
+        {
+            RegisterEvent();
+        }
+
+
         public override void Apply(IInventoryViewData data)
         {
             base.Apply(data);
@@ -236,8 +271,7 @@ namespace Game.Logic
             }
 
             // place
-            viewData.InsertInventoryItem(index.Value, newCellData);
-            itemViews[index.Value].Apply(newCellData);
+            ApplyCell(itemViews[index.Value], index.Value, newCellData);
 
             originalId = null;
             originalCellData = null;
@@ -252,12 +286,33 @@ namespace Game.Logic
             if (!isDroped && originalId.HasValue)
             {
                 // revert
-                itemViews[originalId.Value].Apply(originalCellData);
-                viewData.InsertInventoryItem(originalId.Value, originalCellData);
+                ApplyCell(itemViews[originalId.Value], originalId.Value, originalCellData);
             }
 
             originalId = null;
             originalCellData = null;
+        }
+
+        public override void OnCellClick(IInventoryCellView targetCell)
+        {
+            // if (!itemViews.Any(item => item == targetCell))
+            // {
+            //     return;
+            // }
+            // Debug.LogError(this.GetType().ToString() + "OnCellClick");
+        }
+
+        public override void OnCellOptionClick(IInventoryCellView targetCell)
+        {
+            if (!itemViews.Any(item => item == targetCell))
+            {
+                return;
+            }
+
+            if (targetCell.CellData is PlayerInventoryCellData inventoryCellData)
+            {
+                if (inventoryCellData.item is Equipment) { HandleEquipmentOptionClick(targetCell); }
+            }
         }
 
         public override void OnCellEnter(IInventoryCellView targetCell, IInventoryCellView effectCell)
@@ -266,6 +321,7 @@ namespace Game.Logic
             if (targetCell is PlayerInventoryCellView)
                 (targetCell as PlayerInventoryCellView).SetHighLight(true);
         }
+
         public override void OnCellExit(IInventoryCellView targetCell)
         {
             conditionTransform.gameObject.SetActive(false);
@@ -275,6 +331,25 @@ namespace Game.Logic
 
             if (targetCell is PlayerInventoryCellView)
                 (targetCell as PlayerInventoryCellView).SetHighLight(false);
+        }
+
+        #endregion
+
+
+        #region CellClick
+        /// <summary>
+        /// 装备点击右键 直接穿上装备
+        /// </summary>
+        private void HandleEquipmentOptionClick(IInventoryCellView cellView)
+        {
+            int? cellIndex = GetIndex(cellView);
+            if (cellIndex.HasValue)
+            {
+                var cellData = cellView.CellData;
+                ApplyCell(cellView, cellIndex.Value, null);
+                GFrame.EventSystem.S.Send(EventID.OnEquipInventroy, cellData);
+            }
+
         }
 
         #endregion

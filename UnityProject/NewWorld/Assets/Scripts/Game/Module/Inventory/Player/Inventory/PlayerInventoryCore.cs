@@ -20,6 +20,11 @@ namespace Game.Logic
 
         protected override AbstractInventoryCellView CellPrefab => cellPrefab;
         protected override RectTransform EffectCellParent => effectCellParent;
+
+        /*
+        同一个view之间的交换在自己的view直接进行，不同view之间的交换使用事件进行？
+        
+        */
     }
 
 }
