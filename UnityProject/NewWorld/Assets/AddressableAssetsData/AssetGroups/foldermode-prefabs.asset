@@ -17,8 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 43534ca6a426e4acdbfb133da9c2cb35
   m_SerializeEntries:
-  - m_GUID: f41dc1f6c3f37440088d26ddcdf64f87
-    m_Address: MapBlock
+  - m_GUID: d123987553ef648eeb4239a232fe1e9a
+    m_Address: InventoryRoleScene
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
