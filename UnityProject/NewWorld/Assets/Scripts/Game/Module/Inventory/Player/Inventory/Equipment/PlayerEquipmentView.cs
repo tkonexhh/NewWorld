@@ -82,8 +82,6 @@ namespace Game.Logic
                 }
             }
 
-
-
             for (var i = 0; i < playerEquipmentViewData.CellData.Length; i++)
             {
                 itemViews[i].Apply(playerEquipmentViewData.CellData[i]);
@@ -150,7 +148,7 @@ namespace Game.Logic
             //如果拿起的物品是装备 并且装备类型和格子类型匹配的话 就装备上
             if (effectCell.CellData is PlayerInventoryCellData inventoryCellData && inventoryCellData.item is Equipment equipment)
             {
-                Debug.LogError(GetType().ToString() + "drop" + "---" + cellView.slot + ":" + equipment.equipmentType);
+                //Debug.LogError(GetType().ToString() + "drop" + "---" + cellView.slot + ":" + equipment.equipmentType);
 
                 if (CheckCanEquip(cellView.slot, equipment.equipmentType))
                 {
@@ -243,7 +241,6 @@ namespace Game.Logic
             var nowEquipment = cellView.CellData as PlayerEquipmentCellData;
             if (nowEquipment != null)
             {
-                Debug.LogError(GetType().ToString() + "Has Equip");
                 GFrame.EventSystem.S.Send(EventID.OnAddInventory, new PlayerInventoryCellData(nowEquipment.item));
             }
 
@@ -256,7 +253,8 @@ namespace Game.Logic
                 var equipCellData = new PlayerEquipmentCellData(equipment);
                 ApplyCell(cellView, (int)cellView.slot, equipCellData);
             }
-
+            Debug.LogError(equipment.equipmentAppearance);
+            GFrame.EventSystem.S.Send(EventID.OnRefeshAppearance, equipment);
 
         }
     }

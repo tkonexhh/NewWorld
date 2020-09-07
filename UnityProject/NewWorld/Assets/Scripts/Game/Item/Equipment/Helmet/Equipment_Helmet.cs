@@ -20,7 +20,7 @@ namespace Game.Logic
         private HelmetType m_Type;
         public Equipment_Helmet(long id) : base(id)
         {
-            m_Type = HelmetType.NoHair;
+            m_Type = HelmetType.Normal;
 
             switch (m_Type)
             {

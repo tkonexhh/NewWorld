@@ -19,27 +19,32 @@ namespace Game.Logic
     {
         protected GameObject m_GameObject;
         protected RoleData m_Data;
+        //protected RoleView m_RoleView;
 
-        public GameObject gameObject { get => m_GameObject; }
-        public RoleData data { get => m_Data; }
+        public GameObject gameObject => m_GameObject;
+        public RoleData data => m_Data;
 
-        [SerializeField] public CharacterAppearance appearance;
+        private RoleAppearanceComponent m_AppearanceComponent;
+        private RoleEquipComponent m_RoleEquipComponent;
 
         public Role() : base()
         {
             m_Data = new RoleData(this);
-
             m_GameObject = new GameObject("Role");
+            //m_RoleView = m_GameObject.AddComponent<RoleView>();
+
             //TODO 加载物体
             //某些组件依赖此物体,需要等加载完成后才能添加组件
             AddressableResMgr.S.InstantiateAsync("ModularCharacters_Male", (target) =>
             {
                 target.transform.SetParent(m_GameObject.transform);
-                AddComponent(new RoleAppearanceComponent());
+                m_AppearanceComponent = AddComponent(new RoleAppearanceComponent());
+
+                //m_RoleView.appearance = target.GetComponent<CharacterAppearance>();
             });
 
 
-            AddComponent(new RoleEquipComponent());
+            m_RoleEquipComponent = AddComponent(new RoleEquipComponent());
         }
 
 
@@ -47,7 +52,7 @@ namespace Game.Logic
         {
             //处理属性
             //处理外貌
-            equipment.Equip(this);
+            equipment.equipmentAppearance.ApplyAppearance(m_AppearanceComponent.appearance);
         }
 
     }

@@ -20,8 +20,28 @@ namespace Game.Logic
         public override ItemType itemType => ItemType.Equipment;
         public virtual EquipmentType equipmentType => EquipmentType.None;
 
-        public EquipmentAppearance m_Appearance;
+        protected EquipmentAppearance m_Appearance;
         private EquipmentStatus m_Status;
+
+        public EquipmentAppearance equipmentAppearance => m_Appearance;
+
+
+        protected TDEquipment m_EquipmentConf;
+        public TDEquipment EquipmentConf
+        {
+            get
+            {
+                if (m_EquipmentConf == null)
+                {
+                    m_EquipmentConf = TDEquipmentTable.GetData(Conf.SubID);
+                }
+                return m_EquipmentConf;
+            }
+            set
+            {
+                m_EquipmentConf = value;
+            }
+        }
 
         public Equipment(long id) : base(id)
         {
@@ -31,7 +51,7 @@ namespace Game.Logic
         #region IEquip
         public void Equip(Role character)
         {
-            m_Appearance.ApplyAppearance(character.appearance);
+            //m_Appearance.ApplyAppearance(character.appearance);
         }
 
         public void UnEquip(Role character)

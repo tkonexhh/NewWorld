@@ -14,10 +14,11 @@ using GFrame;
 
 namespace Game.Logic
 {
-    public class InventoryRoleShow : MonoBehaviour
+    public class InventoryRoleShow : MonoBehaviour, IEventListener
     {
         [SerializeField] private RawImage m_RawImage;
 
+        private CharacterAppearance m_CharacterAppearance;
         private void Awake()
         {
             m_RawImage.SetNativeSize();
@@ -25,11 +26,40 @@ namespace Game.Logic
 
         private void Start()
         {
+            RegisterEvent();
             AddressableResMgr.S.InstantiateAsync("InventoryRoleScene", (target) =>
             {
                 target.transform.position = Vector3.one * 5000;
+                m_CharacterAppearance = target.GetComponentInChildren<CharacterAppearance>();
             });
         }
+
+        #region IEventListener
+        public void RegisterEvent()
+        {
+            EventSystem.S.Register(EventID.OnRefeshAppearance, HandleEvent);
+        }
+
+        public void UnRegisterEvent()
+        {
+            EventSystem.S.UnRegister(EventID.OnRefeshAppearance, HandleEvent);
+        }
+
+        public void HandleEvent(int key, params object[] args)
+        {
+            switch (key)
+            {
+                case (int)EventID.OnRefeshAppearance:
+                    if (m_CharacterAppearance != null)
+                    {
+                        Equipment equipment = (Equipment)args[0];
+                        PlayerMgr.S.role.Equip(equipment);
+                        equipment.equipmentAppearance.ApplyAppearance(m_CharacterAppearance);
+                    }
+                    break;
+            }
+        }
+        #endregion
     }
 }
 

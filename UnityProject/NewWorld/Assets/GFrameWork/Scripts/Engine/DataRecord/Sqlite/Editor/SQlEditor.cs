@@ -14,6 +14,13 @@ namespace GFrame.Editor
 {
     public class SQlEditor : UnityEditor.Editor
     {
+        [MenuItem("Assets/GFrame/SQL/Close Sql")]
+        public static void CloseSQL()
+        {
+            SQLMgr.S.Close();
+        }
+
+
         [MenuItem("Assets/GFrame/SQL/Table To C#")]
         public static void SQLTableToCSharp()
         {

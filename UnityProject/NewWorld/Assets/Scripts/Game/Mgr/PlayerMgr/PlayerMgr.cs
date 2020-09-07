@@ -15,23 +15,33 @@ namespace Game.Logic
 {
     public class PlayerMgr : TMonoSingleton<PlayerMgr>
     {
+        private Role m_Role;
         private PlayerInventoryMgr m_InventoryMgr = null;
+        private PlayerEquipmentMgr m_EquipmentMgr = null;
 
-        public PlayerInventoryMgr inventoryMgr { get => m_InventoryMgr; }
+        public Role role => m_Role;
+        public PlayerInventoryMgr inventoryMgr => m_InventoryMgr;
+        public PlayerEquipmentMgr equipmentMgr => m_EquipmentMgr;
 
 
         public override void OnSingletonInit()
         {
             m_InventoryMgr = gameObject.AddComponent<PlayerInventoryMgr>();
+            m_EquipmentMgr = gameObject.AddComponent<PlayerEquipmentMgr>();
 
 
             m_InventoryMgr.OnInit();
+            m_EquipmentMgr.OnInit();
+
+
+            m_Role = new Role();
         }
 
 
         private void Update()
         {
             m_InventoryMgr?.OnUpdate();
+            m_EquipmentMgr?.OnUpdate();
         }
     }
 

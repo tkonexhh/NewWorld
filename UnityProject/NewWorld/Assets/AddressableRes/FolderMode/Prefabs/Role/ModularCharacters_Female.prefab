@@ -31810,7 +31810,6 @@ GameObject:
   - component: {fileID: 1741953855}
   - component: {fileID: 1741953859}
   - component: {fileID: 1111042145}
-  - component: {fileID: 1111042146}
   m_Layer: 9
   m_Name: ModularCharacters_Female
   m_TagString: Untagged
@@ -31981,54 +31980,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 713375f4074264c5b9b1bed8760825ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renders: []
   material: {fileID: 2100000, guid: ea128b040f8b0af4c9d2de400aaff30a, type: 2}
-  m_IsMale: 0
-  m_HairRoot: {fileID: 779722151024628437}
-  m_HeadRoot: {fileID: 779722151024628497}
-  m_FacialHairRoot: {fileID: 779722151024628097}
-  m_EyebrowsRoot: {fileID: 779722151024628111}
-  m_TorsoRoot: {fileID: 779722151024628099}
-  m_HipsRoot: {fileID: 779722151024628145}
-  m_ArmUpperRightRoot: {fileID: 779722151024628101}
-  m_ArmUpperLeftRoot: {fileID: 779722151024628103}
-  m_ArmLowerRightRoot: {fileID: 779722151024628153}
-  m_ArmLowerLeftRoot: {fileID: 779722151024628155}
-  m_HandRightRoot: {fileID: 779722151024628157}
-  m_HandLeftRoot: {fileID: 779722151024628159}
-  m_LegRightRoot: {fileID: 779722151024628147}
-  m_LegLeftRoot: {fileID: 779722151024628149}
-  m_HeadAttachmentRoot: {fileID: 779722151024628499}
-  m_HeadBackAttachmentRoot: {fileID: 779722151024628135}
-  m_BackAttachmentRoot: {fileID: 779722151024628427}
-  m_ShoulderRightAttachmentRoot: {fileID: 779722151024628429}
-  m_ShoulderLeftAttachmentRoot: {fileID: 779722151024628431}
-  m_ElbowRightAttachmentRoot: {fileID: 779722151024628417}
-  m_ElbowLeftAttachmentRoot: {fileID: 779722151024628419}
-  m_HipsAttachmentRoot: {fileID: 779722151024628421}
-  m_KneeRightAttachmentRoot: {fileID: 779722151024628423}
-  m_KneeLeftAttachmentRoot: {fileID: 779722151024628473}
-  m_CurHairIndex: 0
-  m_CurHeadIndex: 0
-  m_CurTorsoIndex: 0
-  m_CurHipsIndex: 0
---- !u!114 &1111042146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 779722151024657977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b6b133712ed64351b6c35f0ea03fe4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  appearance: {fileID: 1111042145}
-  status:
-    moveSpeed: 10
-    max_Action: 0
-    action: 0
+  m_AppearanceData:
+    basicAppearance:
+      sex: 0
+      hairID: 0
+      faceID: 0
+      facialHairID: 0
+      eyeBrows: 0
+      ear: 0
+      hairColor: {r: 0, g: 0, b: 0, a: 0}
+      skinColor: {r: 0, g: 0, b: 0, a: 0}
+    torsoID: 0
+    armUpperRightID: 0
+    armUpperLeftID: 0
+    armLowerRightID: 0
+    armLowerLeftID: 0
+    handRightID: 0
+    handLeftID: 0
+    hipsID: 0
+    legRightID: 0
+    legLeftID: 0
+    shoulderRightID: 0
+    shoulderLeftID: 0
+    elbowRightID: 0
+    elbowLeftID: 0
+    kneeRightID: 0
+    kneeLeftID: 0
+    hipsAttachID: 0
+    helmetWithHeadID: 0
+    helmetWithoutHeadID: 0
+  m_Bones:
+    root: {fileID: 0}
+    bones: []
+  m_Hair: {fileID: 0}
+  m_Head: {fileID: 0}
+  m_FacialHair: {fileID: 0}
+  m_Eyebrows: {fileID: 0}
+  m_Torso: {fileID: 0}
+  m_ArmUpperRight: {fileID: 0}
+  m_ArmUpperLeft: {fileID: 0}
+  m_ArmLowerRight: {fileID: 0}
+  m_ArmLowerLeft: {fileID: 0}
+  m_HandRight: {fileID: 0}
+  m_HandLeft: {fileID: 0}
+  m_Hips: {fileID: 0}
+  m_LegRight: {fileID: 0}
+  m_LegLeft: {fileID: 0}
+  m_HelmetWithoutHead: {fileID: 0}
+  m_HelmetWithHead: {fileID: 0}
+  m_HeadAttachment: {fileID: 0}
+  m_BackAttachment: {fileID: 0}
+  m_ShoulderRight: {fileID: 0}
+  m_ShoulderLeft: {fileID: 0}
+  m_ElbowRight: {fileID: 0}
+  m_ElbowLeft: {fileID: 0}
+  m_HipsAttachment: {fileID: 0}
+  m_KneeRight: {fileID: 0}
+  m_KneeLeft: {fileID: 0}
+  m_ElfEar: {fileID: 0}
 --- !u!1 &779722151024657985
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,9 @@ namespace Game.Logic
     public class RoleAppearanceComponent : EntityComponennt, IEventListener
     {
         private CharacterAppearance m_Appearance;
+
+        public CharacterAppearance appearance => m_Appearance;
+
         public override void Init(Entity ownner)
         {
             base.Init(ownner);

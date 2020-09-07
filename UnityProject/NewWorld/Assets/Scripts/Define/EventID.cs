@@ -17,7 +17,7 @@ namespace Game.Logic
     {
         OnAddInventory,
         OnEquipInventroy,
-
+        OnRefeshAppearance,
     }
 
 }

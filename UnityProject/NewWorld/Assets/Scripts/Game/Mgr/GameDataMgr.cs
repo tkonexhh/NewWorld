@@ -20,6 +20,7 @@ namespace Game.Logic
             InitCharacterAppearanceData();
             InitItemData();
             InitEquipmentData();
+            //InitEquipmentDataAppearance();
         }
 
         public void Init()
@@ -67,6 +68,17 @@ namespace Game.Logic
             while (reader.Read())
             {
                 TDItemTable.OnAddRow(reader);
+            }
+        }
+
+        private void InitEquipmentDataAppearance()
+        {
+            var database = SQLMgr.S.Open("Game");
+            var reader = database.LoadTable("EquipmentAppearance");
+            while (reader.Read())
+            {
+                Debug.LogError("InitEquipmentDataAppearance");
+                TDEquipmentAppearanceTable.OnAddRow(reader);
             }
         }
 

@@ -212,7 +212,7 @@ namespace Game.Logic
             {
                 return false;
             }
-            Debug.LogError(GetType().ToString() + "OnDrop" + (effectCell.CellData.GetType()));
+            // Debug.LogError(GetType().ToString() + "OnDrop" + (effectCell.CellData.GetType()));
             // check target;
             var index = GetIndex(targetCell, effectCell.CellData, cellCorner);
 

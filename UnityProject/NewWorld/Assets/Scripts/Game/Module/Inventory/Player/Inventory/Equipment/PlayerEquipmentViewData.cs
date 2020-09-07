@@ -66,22 +66,22 @@ namespace Game.Logic
         #endregion
 
 
-        private bool CheckCanEquip(InventoryEquipSlot slot, EquipmentType type)
-        {
-            switch (slot)
-            {
-                case InventoryEquipSlot.Helmet:
-                    if (type == EquipmentType.Helmet)
-                        return true;
-                    break;
+        // private bool CheckCanEquip(InventoryEquipSlot slot, EquipmentType type)
+        // {
+        //     switch (slot)
+        //     {
+        //         case InventoryEquipSlot.Helmet:
+        //             if (type == EquipmentType.Helmet)
+        //                 return true;
+        //             break;
 
-                case InventoryEquipSlot.Torso:
-                    if (type == EquipmentType.Torso)
-                        return true;
-                    break;
-            }
-            return false;
-        }
+        //         case InventoryEquipSlot.Torso:
+        //             if (type == EquipmentType.Torso)
+        //                 return true;
+        //             break;
+        //     }
+        //     return false;
+        // }
     }
 
 }
