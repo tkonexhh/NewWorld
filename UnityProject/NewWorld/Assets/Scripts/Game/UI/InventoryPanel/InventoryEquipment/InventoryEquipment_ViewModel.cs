@@ -23,9 +23,13 @@ namespace Game.Logic
         {
             PlayerEquipmentCellData cellData_Helmet = new PlayerEquipmentCellData(new Equipment_Helmet(4));
             PlayerEquipmentCellData cellData_Torso = new PlayerEquipmentCellData(new Equipment_Torso(5));
+            PlayerEquipmentCellData cellData_Hands = new PlayerEquipmentCellData(new Equipment_Hands(7));
+            PlayerEquipmentCellData cellData_Legs = new PlayerEquipmentCellData(new Equipment_Legs(8));
 
             m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Helmet, cellData_Helmet);
             m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Torso, cellData_Torso);
+            m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Hands, cellData_Hands);
+            m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Legs, cellData_Legs);
         }
     }
 

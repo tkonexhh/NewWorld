@@ -7,7 +7,6 @@
 
         }
 
-
         public EquipmentType equipmentType
         {
             get
@@ -18,6 +17,10 @@
                         return EquipmentType.Helmet;
                     case "Torso":
                         return EquipmentType.Torso;
+                    case "Hands":
+                        return EquipmentType.Hands;
+                    case "Legs":
+                        return EquipmentType.Legs;
                 }
                 return EquipmentType.None;
             }

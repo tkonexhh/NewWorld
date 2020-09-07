@@ -25,6 +25,9 @@ namespace Game.Logic
     {
         Helmet,
         Torso,
+        Hands,
+        Legs,
+
         Length
     }
 

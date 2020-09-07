@@ -19,6 +19,8 @@ namespace Game.Logic
     {
         [SerializeField] private PlayerEquipmentCellView m_Head;
         [SerializeField] private PlayerEquipmentCellView m_Torso;
+        [SerializeField] private PlayerEquipmentCellView m_Hands;
+        [SerializeField] private PlayerEquipmentCellView m_Legs;
 
         public int CellCount => (int)InventoryEquipSlot.Length;
         private Dictionary<int, PlayerEquipmentCellView> m_CellViewMap = new Dictionary<int, PlayerEquipmentCellView>();
@@ -198,6 +200,8 @@ namespace Game.Logic
             m_CellViewMap.Clear();
             m_CellViewMap.Add((int)InventoryEquipSlot.Helmet, m_Head);
             m_CellViewMap.Add((int)InventoryEquipSlot.Torso, m_Torso);
+            m_CellViewMap.Add((int)InventoryEquipSlot.Hands, m_Hands);
+            m_CellViewMap.Add((int)InventoryEquipSlot.Legs, m_Legs);
         }
 
         private PlayerEquipmentCellView GetCellBySlot(int slot)
@@ -226,9 +230,16 @@ namespace Game.Logic
                     if (type == EquipmentType.Helmet)
                         return true;
                     break;
-
                 case InventoryEquipSlot.Torso:
                     if (type == EquipmentType.Torso)
+                        return true;
+                    break;
+                case InventoryEquipSlot.Hands:
+                    if (type == EquipmentType.Hands)
+                        return true;
+                    break;
+                case InventoryEquipSlot.Legs:
+                    if (type == EquipmentType.Legs)
                         return true;
                     break;
             }
@@ -252,9 +263,10 @@ namespace Game.Logic
             {
                 var equipCellData = new PlayerEquipmentCellData(equipment);
                 ApplyCell(cellView, (int)cellView.slot, equipCellData);
+                GFrame.EventSystem.S.Send(EventID.OnRefeshAppearance, equipment);
             }
-            Debug.LogError(equipment.equipmentAppearance);
-            GFrame.EventSystem.S.Send(EventID.OnRefeshAppearance, equipment);
+            //Debug.LogError(equipment.equipmentAppearance);
+
 
         }
     }

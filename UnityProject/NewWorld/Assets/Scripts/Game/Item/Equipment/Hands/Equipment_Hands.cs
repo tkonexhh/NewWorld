@@ -15,11 +15,11 @@ namespace Game.Logic
 {
     public class Equipment_Hands : Equipment
     {
-        public override EquipmentType equipmentType => EquipmentType.Arm;
+        public override EquipmentType equipmentType => EquipmentType.Hands;
 
-        public Equipment_Hands(int id) : base(id)
+        public Equipment_Hands(long id) : base(id)
         {
-            m_Appearance = new EquipmentAppearance_Hands(10);
+            m_Appearance = new EquipmentAppearance_Hands(1);
         }
     }
 

@@ -15,9 +15,9 @@ namespace Game.Logic
 {
     public class Equipment_Legs : Equipment
     {
-        public override EquipmentType equipmentType => EquipmentType.Leg;
+        public override EquipmentType equipmentType => EquipmentType.Legs;
 
-        public Equipment_Legs(int id) : base(id)
+        public Equipment_Legs(long id) : base(id)
         {
             m_Appearance = new EquipmentAppearance_Legs(10);
         }

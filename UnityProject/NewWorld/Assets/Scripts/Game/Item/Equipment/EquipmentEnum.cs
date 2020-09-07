@@ -19,9 +19,9 @@ namespace Game.Logic
         Helmet,//头盔
         Torso,//身体
         Shoulder,//护肩
-        Arm,//手臂
+        Hands,//手臂
         Hip,//臀部
-        Leg,//腿
+        Legs,//腿
         Length,
     }
 

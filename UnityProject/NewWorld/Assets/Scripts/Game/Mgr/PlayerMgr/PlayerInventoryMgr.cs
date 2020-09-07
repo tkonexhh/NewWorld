@@ -42,7 +42,9 @@ namespace Game.Logic
             AddItem(4);
             AddItem(5);
             AddItem(6);
-
+            AddItem(7);
+            AddItem(7);
+            AddItem(7);
         }
         public void OnUpdate() { }
         public void OnDestroyed() { }

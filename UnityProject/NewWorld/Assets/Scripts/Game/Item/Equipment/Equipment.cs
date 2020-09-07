@@ -45,7 +45,7 @@ namespace Game.Logic
 
         public Equipment(long id) : base(id)
         {
-
+            Debug.LogError(equipmentType);
         }
 
         #region IEquip

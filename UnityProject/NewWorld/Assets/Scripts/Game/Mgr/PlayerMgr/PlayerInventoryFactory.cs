@@ -28,6 +28,12 @@ namespace Game.Logic
                 case EquipmentType.Torso:
                     equipment = new Equipment_Torso(id);
                     break;
+                case EquipmentType.Hands:
+                    equipment = new Equipment_Hands(id);
+                    break;
+                case EquipmentType.Legs:
+                    equipment = new Equipment_Legs(id);
+                    break;
             }
 
             if (equipment != null)
