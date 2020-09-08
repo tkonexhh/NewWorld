@@ -52,11 +52,13 @@ namespace GFrame
         private void OnApplicationPause(bool pauseStatus)
         {
             EventSystem.S.Send(EngineEventID.OnApplicationPauseChange, pauseStatus);
+            EventSystem.S.Send(EngineEventID.OnAfterApplicationPauseChange, pauseStatus);
         }
 
         private void OnApplicationFocus(bool focusStatus)
         {
             EventSystem.S.Send(EngineEventID.OnApplicationFocusChange, focusStatus);
+            EventSystem.S.Send(EngineEventID.OnAfterApplicationFocusChange, focusStatus);
         }
 
     }

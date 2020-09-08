@@ -45,13 +45,13 @@ namespace Game.Logic
 
         public Equipment(long id) : base(id)
         {
-            Debug.LogError(equipmentType);
+
         }
 
         #region IEquip
-        public void Equip(Role character)
+        public void Equip(Role role)
         {
-            //m_Appearance.ApplyAppearance(character.appearance);
+            m_Appearance.ApplyAppearance(role.appearanceComponent.appearance);
         }
 
         public void UnEquip(Role character)

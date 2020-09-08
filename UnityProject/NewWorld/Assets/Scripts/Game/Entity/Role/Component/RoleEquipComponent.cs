@@ -15,7 +15,13 @@ namespace Game.Logic
 {
     public class RoleEquipComponent : EntityComponennt
     {
+        private Dictionary<int, Equipment> m_EquipmentMap = new Dictionary<int, Equipment>();
 
+        public override void Init(Entity ownner)
+        {
+            base.Init(ownner);
+
+        }
     }
 
 }

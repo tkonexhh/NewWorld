@@ -137,7 +137,7 @@ namespace Game.Logic
             {
                 return false;
             }
-            // Debug.LogError(GetType().ToString() + "OnDrop" + (effectCell.CellData.GetType()));
+
             var cellView = targetCell as PlayerEquipmentCellView;
 
             // if (playerEquipmentViewData.CheckInsert((int)cellView.slot, effectCell.CellData))
@@ -150,8 +150,6 @@ namespace Game.Logic
             //如果拿起的物品是装备 并且装备类型和格子类型匹配的话 就装备上
             if (effectCell.CellData is PlayerInventoryCellData inventoryCellData && inventoryCellData.item is Equipment equipment)
             {
-                //Debug.LogError(GetType().ToString() + "drop" + "---" + cellView.slot + ":" + equipment.equipmentType);
-
                 if (CheckCanEquip(cellView.slot, equipment.equipmentType))
                 {
                     Equip(cellView, equipment);
@@ -217,8 +215,18 @@ namespace Game.Logic
         private PlayerEquipmentCellView GetCellByEquipmentType(EquipmentType type)
         {
             //TODO 暂时把EquipmentType 和SlotType一一对应起来，后续有可能出现不对应的情况
-            return GetCellBySlot((int)type);
-            //return null;
+            switch (type)
+            {
+                case EquipmentType.Helmet:
+                    return GetCellBySlot((int)InventoryEquipSlot.Helmet);
+                case EquipmentType.Torso:
+                    return GetCellBySlot((int)InventoryEquipSlot.Torso);
+                case EquipmentType.Hands:
+                    return GetCellBySlot((int)InventoryEquipSlot.Hands);
+                case EquipmentType.Legs:
+                    return GetCellBySlot((int)InventoryEquipSlot.Legs);
+            }
+            return null;
         }
 
 
@@ -263,11 +271,9 @@ namespace Game.Logic
             {
                 var equipCellData = new PlayerEquipmentCellData(equipment);
                 ApplyCell(cellView, (int)cellView.slot, equipCellData);
-                GFrame.EventSystem.S.Send(EventID.OnRefeshAppearance, equipment);
+
             }
-            //Debug.LogError(equipment.equipmentAppearance);
-
-
+            GFrame.EventSystem.S.Send(EventID.OnRefeshAppearance, cellView.slot, equipment);
         }
     }
 

@@ -52,9 +52,17 @@ namespace Game.Logic
                 case (int)EventID.OnRefeshAppearance:
                     if (m_CharacterAppearance != null)
                     {
-                        Equipment equipment = (Equipment)args[0];
-                        PlayerMgr.S.role.Equip(equipment);
-                        equipment.equipmentAppearance.ApplyAppearance(m_CharacterAppearance);
+                        InventoryEquipSlot slot = (InventoryEquipSlot)args[0];
+                        Equipment equipment = (Equipment)args[1];
+                        if (equipment != null)
+                        {
+                            equipment.Equip(PlayerMgr.S.role);
+                            equipment.equipmentAppearance.ApplyAppearance(m_CharacterAppearance);
+                        }
+                        else
+                        {
+
+                        }
                     }
                     break;
             }

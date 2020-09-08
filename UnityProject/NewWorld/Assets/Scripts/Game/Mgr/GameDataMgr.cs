@@ -17,15 +17,32 @@ namespace Game.Logic
     {
         public override void OnSingletonInit()
         {
-            InitCharacterAppearanceData();
-            InitItemData();
-            InitEquipmentData();
-            //InitEquipmentDataAppearance();
+            //数据分两种 运行是必要的数据 还有一种可以慢慢加载
+            InitPreLoadData();
+            InitDelayLoadData();
         }
 
         public void Init()
         {
             Log.i("Init[GameDataMgr]");
+        }
+
+        private void InitPreLoadData()
+        {
+            PreloadSqlData();
+        }
+
+        private void InitDelayLoadData()
+        {
+
+        }
+
+        private void PreloadSqlData()
+        {
+            InitCharacterAppearanceData();
+            InitItemData();
+            InitEquipmentData();
+            //InitEquipmentDataAppearance();
         }
 
         private void ReadTable(TDSqlMetaData metaData)
@@ -47,8 +64,6 @@ namespace Game.Logic
             {
                 TDCharacterAppearanceTable.OnAddRow(reader);
             }
-
-
         }
 
         private void InitEquipmentData()

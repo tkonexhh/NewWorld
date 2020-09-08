@@ -15,6 +15,6 @@ namespace GFrame
 {
 
     public delegate void OnSqlParse(SqliteDataReader reader);
-
+    public delegate void Run<T>(T v);
 
 }

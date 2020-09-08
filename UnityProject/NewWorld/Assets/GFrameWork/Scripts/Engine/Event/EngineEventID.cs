@@ -18,9 +18,14 @@ namespace GFrame
 
         OnLanguageChange,
         OnApplicationFocusChange,
+        OnAfterApplicationFocusChange,
         OnApplicationPauseChange,
+        OnAfterApplicationPauseChange,
+
 
         OnApplicationQuit,
+
+        OnDateUpdate,
 
         EngineEventIDMax
     }

@@ -13,6 +13,13 @@ using UnityEngine;
 
 namespace GFrame
 {
+
+    //主动提供缓存管理的类型
+    public interface ICacheType
+    {
+        void Recycle2Cache();
+    }
+
     public interface IPoolAble
     {
         void OnCacheReset();
