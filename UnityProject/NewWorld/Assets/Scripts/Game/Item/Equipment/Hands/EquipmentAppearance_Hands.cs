@@ -32,6 +32,16 @@ namespace Game.Logic
             appearance.SetAppearance(AppearanceSlot.ElbowRight, m_ElbowID);
             appearance.SetAppearance(AppearanceSlot.ElbowLeft, m_ElbowID);
         }
+
+        public override void Removeppearance(CharacterAppearance appearance)
+        {
+            appearance.SetAppearance(AppearanceSlot.ArmLowerRight, 0);
+            appearance.SetAppearance(AppearanceSlot.ArmLowerLeft, 0);
+            appearance.SetAppearance(AppearanceSlot.HandRight, 0);
+            appearance.SetAppearance(AppearanceSlot.HandLeft, 0);
+            appearance.SetAppearance(AppearanceSlot.ElbowRight, -1);
+            appearance.SetAppearance(AppearanceSlot.ElbowLeft, -1);
+        }
     }
 
 }

@@ -35,8 +35,13 @@ namespace Game.Logic
 
         public override void SetAppearance(CharacterAppearance appearance)
         {
+            Debug.LogError("EquipmentAppearance_Helmet_Normal SetAppearance");
             appearance.HideSlot(AppearanceSlot.HelmetWithoutHead);
             appearance.SetAppearance(AppearanceSlot.HelmetWithHead, id);
+        }
+
+        public override void Removeppearance(CharacterAppearance appearance)
+        {
         }
     }
 

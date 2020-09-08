@@ -19,7 +19,7 @@ namespace Game.Logic
 
         public Equipment_Hands(long id) : base(id)
         {
-            m_Appearance = new EquipmentAppearance_Hands(1);
+            m_Appearance = new EquipmentAppearance_Hands((int)EquipmentConf.Appearance);
         }
     }
 

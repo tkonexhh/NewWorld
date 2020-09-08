@@ -412,13 +412,6 @@ namespace Game.Logic
         }
 
 
-        #region 装备穿戴
-        public void Equip(EquipmentAppearance equipment)
-        {
-
-        }
-        #endregion
-
         /// <summary>
         /// 带上头盔 ，隐藏面部
         /// </summary>

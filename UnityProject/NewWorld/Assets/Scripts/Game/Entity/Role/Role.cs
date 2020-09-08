@@ -52,6 +52,10 @@ namespace Game.Logic
             equipment.Equip(this);
         }
 
+        public void UnEquip(Equipment equipment)
+        {
+            equipment.UnEquip(this);
+        }
 
 
     }

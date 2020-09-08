@@ -43,11 +43,11 @@ namespace Game.Logic
         public int hipsID;
         public int legRightID;
         public int legLeftID;
-        public int shoulderRightID;
-        public int shoulderLeftID;
-        public int elbowRightID;
-        public int elbowLeftID;
-        public int kneeRightID;
+        public int shoulderRightID = -1;
+        public int shoulderLeftID = -1;
+        public int elbowRightID = -1;
+        public int elbowLeftID = -1;
+        public int kneeRightID = -1;
         public int kneeLeftID;
         public int hipsAttachID;
         public int helmetWithHeadID;

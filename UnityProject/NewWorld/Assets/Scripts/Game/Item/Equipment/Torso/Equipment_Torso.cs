@@ -21,6 +21,7 @@ namespace Game.Logic
         {
             m_Appearance = new EquipmentAppearance_Torso((int)EquipmentConf.Appearance);
         }
+
     }
 
 }

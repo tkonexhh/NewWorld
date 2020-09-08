@@ -34,6 +34,12 @@ namespace Game.Logic
                 case EquipmentType.Legs:
                     equipment = new Equipment_Legs(id);
                     break;
+                case EquipmentType.Hips:
+                    equipment = new Equipment_Hips(id);
+                    break;
+                case EquipmentType.Shoulders:
+                    equipment = new Equipment_Shoulders(id);
+                    break;
             }
 
             if (equipment != null)

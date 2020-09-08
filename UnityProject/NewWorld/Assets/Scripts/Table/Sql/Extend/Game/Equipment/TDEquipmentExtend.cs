@@ -21,6 +21,10 @@
                         return EquipmentType.Hands;
                     case "Legs":
                         return EquipmentType.Legs;
+                    case "Hips":
+                        return EquipmentType.Hips;
+                    case "Shoulders":
+                        return EquipmentType.Shoulders;
                 }
                 return EquipmentType.None;
             }

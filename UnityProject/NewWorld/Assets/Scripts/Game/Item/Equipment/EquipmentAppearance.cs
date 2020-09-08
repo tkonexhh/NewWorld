@@ -34,10 +34,8 @@ namespace Game.Logic
             appearance.CombineMeshs();
         }
 
-        public virtual void SetAppearance(CharacterAppearance appearance)
-        {
-
-        }
+        public virtual void Removeppearance(CharacterAppearance appearance) { }
+        public virtual void SetAppearance(CharacterAppearance appearance) { }
 
 
 

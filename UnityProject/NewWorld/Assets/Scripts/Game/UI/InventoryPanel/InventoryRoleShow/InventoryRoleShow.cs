@@ -54,15 +54,12 @@ namespace Game.Logic
                     {
                         InventoryEquipSlot slot = (InventoryEquipSlot)args[0];
                         Equipment equipment = (Equipment)args[1];
-                        if (equipment != null)
-                        {
-                            equipment.Equip(PlayerMgr.S.role);
-                            equipment.equipmentAppearance.ApplyAppearance(m_CharacterAppearance);
-                        }
-                        else
-                        {
+                        Equipment oldEquipment = (Equipment)args[2];
+                        oldEquipment?.equipmentAppearance.Removeppearance(m_CharacterAppearance);
+                        //对装备栏角色产生装备效果
+                        equipment?.equipmentAppearance.ApplyAppearance(m_CharacterAppearance);
+                        m_CharacterAppearance.CombineMeshs();
 
-                        }
                     }
                     break;
             }

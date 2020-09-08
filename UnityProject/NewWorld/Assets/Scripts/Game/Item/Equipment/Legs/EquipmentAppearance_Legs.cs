@@ -28,6 +28,14 @@ namespace Game.Logic
             appearance.SetAppearance(AppearanceSlot.KneeRight, m_KneeID);
             appearance.SetAppearance(AppearanceSlot.KneeLeft, m_KneeID);
         }
+
+        public override void Removeppearance(CharacterAppearance appearance)
+        {
+            appearance.SetAppearance(AppearanceSlot.LegRight, 0);
+            appearance.SetAppearance(AppearanceSlot.LegLeft, 0);
+            appearance.SetAppearance(AppearanceSlot.KneeRight, -1);
+            appearance.SetAppearance(AppearanceSlot.KneeLeft, -1);
+        }
     }
 
 }

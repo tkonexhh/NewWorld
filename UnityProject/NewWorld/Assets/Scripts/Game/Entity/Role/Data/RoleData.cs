@@ -17,9 +17,19 @@ namespace Game.Logic
     {
         public BasicAppearance basicAppearance;
         public RoleAppearanceData appearanceData;
+        private RoleEquipmentData m_EquipmentData;
+
+        public RoleEquipmentData equipmentData => m_EquipmentData;
 
         public RoleData(Entity owner) : base(owner)
         {
+            m_EquipmentData = new RoleEquipmentData();
+            m_EquipmentData.helmetID = 4;
+            m_EquipmentData.torsoID = 5;
+            m_EquipmentData.handsID = 7;
+            m_EquipmentData.legsID = 8;
+            m_EquipmentData.hipsID = 9;
+            m_EquipmentData.shouldersID = 10;
         }
     }
 

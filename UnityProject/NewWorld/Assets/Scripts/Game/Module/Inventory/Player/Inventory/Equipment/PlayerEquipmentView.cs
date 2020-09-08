@@ -19,8 +19,10 @@ namespace Game.Logic
     {
         [SerializeField] private PlayerEquipmentCellView m_Head;
         [SerializeField] private PlayerEquipmentCellView m_Torso;
+        [SerializeField] private PlayerEquipmentCellView m_Hips;
         [SerializeField] private PlayerEquipmentCellView m_Hands;
         [SerializeField] private PlayerEquipmentCellView m_Legs;
+        [SerializeField] private PlayerEquipmentCellView m_Shoulders;
 
         public int CellCount => (int)InventoryEquipSlot.Length;
         private Dictionary<int, PlayerEquipmentCellView> m_CellViewMap = new Dictionary<int, PlayerEquipmentCellView>();
@@ -185,7 +187,11 @@ namespace Game.Logic
             //  右键脱下装备
             if (targetCell.CellData is PlayerEquipmentCellData equipmentCellData)
             {
-                if (equipmentCellData.item is Equipment) { Equip(targetCell as PlayerEquipmentCellView, null); }
+                if (equipmentCellData.item is Equipment)
+                {
+                    UnEquip(targetCell as PlayerEquipmentCellView);
+                    // Equip(targetCell as PlayerEquipmentCellView, null);
+                }
             }
         }
 
@@ -200,6 +206,8 @@ namespace Game.Logic
             m_CellViewMap.Add((int)InventoryEquipSlot.Torso, m_Torso);
             m_CellViewMap.Add((int)InventoryEquipSlot.Hands, m_Hands);
             m_CellViewMap.Add((int)InventoryEquipSlot.Legs, m_Legs);
+            m_CellViewMap.Add((int)InventoryEquipSlot.Hips, m_Hips);
+            m_CellViewMap.Add((int)InventoryEquipSlot.Shoulders, m_Shoulders);
         }
 
         private PlayerEquipmentCellView GetCellBySlot(int slot)
@@ -214,7 +222,6 @@ namespace Game.Logic
 
         private PlayerEquipmentCellView GetCellByEquipmentType(EquipmentType type)
         {
-            //TODO 暂时把EquipmentType 和SlotType一一对应起来，后续有可能出现不对应的情况
             switch (type)
             {
                 case EquipmentType.Helmet:
@@ -225,6 +232,10 @@ namespace Game.Logic
                     return GetCellBySlot((int)InventoryEquipSlot.Hands);
                 case EquipmentType.Legs:
                     return GetCellBySlot((int)InventoryEquipSlot.Legs);
+                case EquipmentType.Hips:
+                    return GetCellBySlot((int)InventoryEquipSlot.Hips);
+                case EquipmentType.Shoulders:
+                    return GetCellBySlot((int)InventoryEquipSlot.Shoulders);
             }
             return null;
         }
@@ -250,6 +261,14 @@ namespace Game.Logic
                     if (type == EquipmentType.Legs)
                         return true;
                     break;
+                case InventoryEquipSlot.Hips:
+                    if (type == EquipmentType.Hips)
+                        return true;
+                    break;
+                case InventoryEquipSlot.Shoulders:
+                    if (type == EquipmentType.Shoulders)
+                        return true;
+                    break;
             }
             return false;
         }
@@ -260,21 +279,29 @@ namespace Game.Logic
             var nowEquipment = cellView.CellData as PlayerEquipmentCellData;
             if (nowEquipment != null)
             {
+                PlayerMgr.S.role.UnEquip(nowEquipment.equipment);
                 GFrame.EventSystem.S.Send(EventID.OnAddInventory, new PlayerInventoryCellData(nowEquipment.item));
             }
 
-            if (equipment == null)
-            {
-                ApplyCell(cellView, (int)cellView.slot, null);
-            }
-            else
-            {
-                var equipCellData = new PlayerEquipmentCellData(equipment);
-                ApplyCell(cellView, (int)cellView.slot, equipCellData);
-
-            }
-            GFrame.EventSystem.S.Send(EventID.OnRefeshAppearance, cellView.slot, equipment);
+            var equipCellData = new PlayerEquipmentCellData(equipment);
+            ApplyCell(cellView, (int)cellView.slot, equipCellData);
+            PlayerMgr.S.role.Equip(equipment);
+            GFrame.EventSystem.S.Send(EventID.OnRefeshAppearance, cellView.slot, equipment, nowEquipment?.equipment);
         }
+
+        private void UnEquip(PlayerEquipmentCellView cellView)
+        {
+            var nowEquipment = cellView.CellData as PlayerEquipmentCellData;
+            if (nowEquipment != null)
+            {
+                PlayerMgr.S.role.UnEquip(nowEquipment.equipment);
+                GFrame.EventSystem.S.Send(EventID.OnAddInventory, new PlayerInventoryCellData(nowEquipment.item));
+            }
+
+            ApplyCell(cellView, (int)cellView.slot, null);
+            GFrame.EventSystem.S.Send(EventID.OnRefeshAppearance, cellView.slot, null, nowEquipment?.equipment);
+        }
+
     }
 
 }

@@ -27,7 +27,8 @@ namespace Game.Logic
         Torso,
         Hands,
         Legs,
-
+        Hips,
+        Shoulders,
         Length
     }
 

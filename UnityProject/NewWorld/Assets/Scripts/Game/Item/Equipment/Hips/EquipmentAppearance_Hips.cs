@@ -1,8 +1,8 @@
 /************************
-	FileName:/Scripts/Game/Equipment/Torso/EquipmentAppearance_Torso.cs
+	FileName:/Scripts/Game/Item/Equipment/Hips/EquipmentAppearance_Hips.cs
 	CreateAuthor:neo.xu
-	CreateTime:7/3/2020 10:53:58 AM
-	Tip:7/3/2020 10:53:58 AM
+	CreateTime:9/8/2020 8:28:57 PM
+	Tip:9/8/2020 8:28:57 PM
 ************************/
 
 
@@ -13,21 +13,21 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class EquipmentAppearance_Torso : EquipmentAppearance
+    public class EquipmentAppearance_Hips : EquipmentAppearance
     {
-        public EquipmentAppearance_Torso(int id) : base(id)
-        {
 
+        public EquipmentAppearance_Hips(int id) : base(id)
+        {
         }
 
         public override void SetAppearance(CharacterAppearance appearance)
         {
-            appearance.SetAppearance(AppearanceSlot.Torso, id);
+            appearance.SetAppearance(AppearanceSlot.Hips, id);
         }
 
         public override void Removeppearance(CharacterAppearance appearance)
         {
-            appearance.SetAppearance(AppearanceSlot.Torso, 0);
+            appearance.SetAppearance(AppearanceSlot.Hips, 0);
         }
     }
 

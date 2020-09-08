@@ -54,9 +54,10 @@ namespace Game.Logic
             m_Appearance.ApplyAppearance(role.appearanceComponent.appearance);
         }
 
-        public void UnEquip(Role character)
+        public void UnEquip(Role role)
         {
-            //m_Appearance.ApplyAppearance(character.appearance);
+            m_Appearance.Removeppearance(role.appearanceComponent.appearance);
+            role.appearanceComponent.appearance.CombineMeshs();
         }
         #endregion
 

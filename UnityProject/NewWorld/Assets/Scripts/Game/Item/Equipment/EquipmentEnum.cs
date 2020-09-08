@@ -18,9 +18,9 @@ namespace Game.Logic
         None = -1,
         Helmet,//头盔
         Torso,//身体
-        Shoulder,//护肩
+        Shoulders,//护肩
         Hands,//手臂
-        Hip,//臀部
+        Hips,//臀部
         Legs,//腿
         Length,
     }
