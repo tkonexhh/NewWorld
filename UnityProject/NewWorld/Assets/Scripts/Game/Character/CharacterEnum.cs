@@ -73,7 +73,7 @@ namespace Game.Logic
         Hair,
         Skin,
         Eye,
-        FaceArt,
+        BodyArt,
     }
 
 }

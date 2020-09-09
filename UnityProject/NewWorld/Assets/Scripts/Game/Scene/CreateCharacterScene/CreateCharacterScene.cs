@@ -17,7 +17,7 @@ namespace Game.Logic
 {
     public class CreateCharacterScene : AbstractScene
     {
-
+        [SerializeField] private Transform m_TransRoleRoot;
         protected override void OnSceneInit()
         {
             Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(UIMgr.S.uiRoot.uiCamera);
@@ -25,8 +25,12 @@ namespace Game.Logic
 
         protected override void OnSceneEnter()
         {
-            // UIMgr.S.OpenPanel(UIID.CreateCharacterPanel);
-            UIMgr.S.OpenPanel(UIID.Inventorypanel);
+            UIMgr.S.OpenPanel(UIID.CreateCharacterPanel);
+
+            Role setupRole = new Role();
+            setupRole.transform.SetParent(m_TransRoleRoot);
+            setupRole.transform.localPosition = Vector3.zero;
+            // UIMgr.S.OpenPanel(UIID.Inventorypanel);
         }
 
     }

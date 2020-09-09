@@ -20,21 +20,21 @@ namespace Game.Logic
         private HelmetType m_Type;
         public Equipment_Helmet(long id) : base(id)
         {
-            m_Type = HelmetType.Normal;
+            m_Type = HelmetType.NoHair;
 
             switch (m_Type)
             {
                 case HelmetType.Normal:
-                    m_Appearance = new EquipmentAppearance_Helmet_Normal(1);
+                    m_Appearance = new EquipmentAppearance_Helmet_Normal(5);
                     break;
                 case HelmetType.NoFacialHair:
-                    m_Appearance = new EquipmentAppearance_Helmet_NoFacialHair(1);
+                    m_Appearance = new EquipmentAppearance_Helmet_NoFacialHair(5);
                     break;
                 case HelmetType.NoHair:
-                    m_Appearance = new EquipmentAppearance_Helmet_NoHair(2);
+                    m_Appearance = new EquipmentAppearance_Helmet_NoHair(5);
                     break;
                 case HelmetType.NoHead:
-                    m_Appearance = new EquipmentAppearance_Helmet_NoHead(3);
+                    m_Appearance = new EquipmentAppearance_Helmet_NoHead(5);
                     break;
             }
         }

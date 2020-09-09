@@ -17,6 +17,7 @@ namespace Game.Logic
     {
         MainMenuScene,
         CreateCharacterScene,
+        GameScene,
     }
 
 }

@@ -18,9 +18,11 @@ namespace Game.Logic
     {
         [SerializeField] private List<Color> m_HairColors;
         [SerializeField] private List<Color> m_SkinColors;
+        [SerializeField] private List<Color> m_BodyColors;
 
         public static List<Color> hairColors => S.m_HairColors;
         public static List<Color> skinColors => S.m_SkinColors;
+        public static List<Color> bodyColors => S.m_BodyColors;
 
     }
 

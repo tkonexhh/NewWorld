@@ -26,6 +26,7 @@ namespace Game.Logic
         //一些颜色
         public Color hairColor;
         public Color skinColor;
+        public Color bodyArtColor;
     }
 
 

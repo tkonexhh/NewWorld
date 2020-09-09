@@ -4633,7 +4633,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7666273751970890150
 Transform:
   m_ObjectHideFlags: 0
@@ -5079,7 +5079,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7666273751970890184
 Transform:
   m_ObjectHideFlags: 0
@@ -9328,12 +9328,12 @@ MonoBehaviour:
     hipsID: 0
     legRightID: 0
     legLeftID: 0
-    shoulderRightID: 0
-    shoulderLeftID: 0
-    elbowRightID: 0
-    elbowLeftID: 0
-    kneeRightID: 0
-    kneeLeftID: 0
+    shoulderRightID: -1
+    shoulderLeftID: -1
+    elbowRightID: -1
+    elbowLeftID: -1
+    kneeRightID: -1
+    kneeLeftID: -1
     hipsAttachID: 0
     helmetWithHeadID: 0
     helmetWithoutHeadID: 0

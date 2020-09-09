@@ -24,6 +24,7 @@ namespace Game.Logic
 
         [SerializeField] private CreateCharacterColorSelect m_HairColor;
         [SerializeField] private CreateCharacterColorSelect m_SkinColor;
+        [SerializeField] private CreateCharacterColorSelect m_BodyArtColor;
 
         [SerializeField] private Button m_BtnCreate;
 
@@ -53,6 +54,9 @@ namespace Game.Logic
 
             basicAppearance.hairColor = CharacterColorConfig.hairColors[m_HairColor.SelectIndex];
             basicAppearance.skinColor = CharacterColorConfig.skinColors[m_SkinColor.SelectIndex];
+            basicAppearance.bodyArtColor = CharacterColorConfig.bodyColors[m_BodyArtColor.SelectIndex];
+
+            SceneMgr.S.OpenScene(SceneID.GameScene);
         }
     }
 

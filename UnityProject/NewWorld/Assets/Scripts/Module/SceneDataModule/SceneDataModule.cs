@@ -32,6 +32,7 @@ namespace Game.Logic
             SceneDataTable.SetLoadMode(SceneLoadStatgy.Addressable);
             SceneDataTable.AddSceneData(SceneID.CreateCharacterScene, "CreateCharacterScene", LoadSceneMode.Single);
             SceneDataTable.AddSceneData(SceneID.MainMenuScene, "MainMenuScene", LoadSceneMode.Single);
+            SceneDataTable.AddSceneData(SceneID.GameScene, "GameScene", LoadSceneMode.Single);
         }
     }
 

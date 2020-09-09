@@ -15,6 +15,11 @@ namespace Game.Logic
 {
     public partial class CharacterAppearance : MonoBehaviour
     {
+        private int m_ShaderHash_BodyArt;
+        public void InitColor()
+        {
+            m_ShaderHash_BodyArt = Shader.PropertyToID("_Color_BodyArt");
+        }
 
         public void SetColor(AppearanceColor appearance, Color color)
         {
@@ -26,6 +31,9 @@ namespace Game.Logic
                     break;
                 case AppearanceColor.Skin:
                     SetSkinColor(color);
+                    break;
+                case AppearanceColor.BodyArt:
+                    SetBodyArtColor(color);
                     break;
             }
         }
@@ -40,6 +48,10 @@ namespace Game.Logic
         public void SetSkinColor(Color color)
         {
             material.SetColor("_Color_Skin", color);
+        }
+        public void SetBodyArtColor(Color color)
+        {
+            material.SetColor(m_ShaderHash_BodyArt, color);
         }
     }
 

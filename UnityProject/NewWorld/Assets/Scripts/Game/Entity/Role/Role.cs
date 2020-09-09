@@ -18,9 +18,11 @@ namespace Game.Logic
     public partial class Role : Entity
     {
         protected GameObject m_GameObject;
+        protected Transform m_Transform;
         protected RoleData m_Data;
 
         public GameObject gameObject => m_GameObject;
+        public Transform transform => m_Transform;
         public RoleData data => m_Data;
 
         private RoleAppearanceComponent m_AppearanceComponent;
@@ -33,11 +35,13 @@ namespace Game.Logic
         {
             m_Data = new RoleData(this);
             m_GameObject = new GameObject("Role");
+            m_Transform = m_GameObject.transform;
 
             //某些组件依赖此物体,需要等加载完成后才能添加组件
             AddressableResMgr.S.InstantiateAsync("ModularCharacters_Male", (target) =>
             {
                 target.transform.SetParent(m_GameObject.transform);
+                target.transform.localPosition = Vector3.zero;
                 m_AppearanceComponent = AddComponent(new RoleAppearanceComponent());
             });
 

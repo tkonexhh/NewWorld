@@ -108,6 +108,9 @@ namespace Game.Logic
             m_KneeLeft.Init(this);
             m_ElfEar.Init(this);
             RefeshAppearance();
+
+
+            InitColor();
         }
 
         void RefeshAppearance()
@@ -365,6 +368,7 @@ namespace Game.Logic
 
         public void SetHelmetWithHead(int id)
         {
+            Debug.LogError("SetHelmetWithHead:" + id);
             m_AppearanceData.helmetWithHeadID = m_HelmetWithHead.SetSkin(m_AppearanceData.sex, id);
         }
 
