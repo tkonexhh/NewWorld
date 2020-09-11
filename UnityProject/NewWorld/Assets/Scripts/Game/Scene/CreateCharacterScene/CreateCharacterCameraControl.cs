@@ -71,7 +71,16 @@ namespace Game.Logic
                     SetCameraType(CameraType.Face);
                     break;
                 case (int)SetupEvent.ChangeColor:
-                    SetCameraType(CameraType.Body);
+                    AppearanceColor colorSlot = (AppearanceColor)args[0];
+                    if (colorSlot == AppearanceColor.Hair || colorSlot == AppearanceColor.Eye)
+                    {
+                        SetCameraType(CameraType.Face);
+                    }
+                    else
+                    {
+                        SetCameraType(CameraType.Body);
+                    }
+
                     break;
             }
         }
