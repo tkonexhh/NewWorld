@@ -15,10 +15,19 @@ namespace Game.Logic
 {
     public partial class CharacterAppearance : MonoBehaviour
     {
-        private int m_ShaderHash_BodyArt;
+        private int m_ShaderHash_ColorBodyArt;
+        private int m_ShaderHash_ColorHair;
+        private int m_ShaderHash_ColorStubble;
+        private int m_ShaderHash_ColorSkin;
+        private int m_ShaderHash_ColorScar;
+
         public void InitColor()
         {
-            m_ShaderHash_BodyArt = Shader.PropertyToID("_Color_BodyArt");
+            m_ShaderHash_ColorBodyArt = Shader.PropertyToID("_Color_BodyArt");
+            m_ShaderHash_ColorHair = Shader.PropertyToID("_Color_Hair");
+            m_ShaderHash_ColorStubble = Shader.PropertyToID("_Color_Stubble");
+            m_ShaderHash_ColorSkin = Shader.PropertyToID("_Color_Skin");
+            m_ShaderHash_ColorScar = Shader.PropertyToID("_Color_Scar");
         }
 
         public void SetColor(AppearanceColor appearance, Color color)
@@ -40,18 +49,19 @@ namespace Game.Logic
 
         public void SetHairColor(Color color)
         {
-            material.SetColor("_Color_Hair", color);
-            material.SetColor("_Color_Stubble", color * 0.75f);
-
+            material.SetColor(m_ShaderHash_ColorHair, color);
+            material.SetColor(m_ShaderHash_ColorStubble, color * 0.75f);
         }
 
         public void SetSkinColor(Color color)
         {
-            material.SetColor("_Color_Skin", color);
+            material.SetColor(m_ShaderHash_ColorSkin, color);
+            material.SetColor(m_ShaderHash_ColorScar, color * 0.65f);//伤疤的颜色比皮肤颜色要深
         }
+
         public void SetBodyArtColor(Color color)
         {
-            material.SetColor(m_ShaderHash_BodyArt, color);
+            material.SetColor(m_ShaderHash_ColorBodyArt, color);
         }
     }
 

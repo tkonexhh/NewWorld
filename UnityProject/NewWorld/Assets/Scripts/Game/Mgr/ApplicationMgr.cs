@@ -19,6 +19,7 @@ namespace Game.Logic
         protected override void StartGame()
         {
             GameDataMgr.S.Init();
+            GameResMgr.S.Init();
             GameMgr.S.Init();
 
         }

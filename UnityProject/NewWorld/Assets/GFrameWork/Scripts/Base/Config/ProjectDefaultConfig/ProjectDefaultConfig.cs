@@ -16,9 +16,13 @@ namespace GFrame
     [System.Serializable]
     public class ProjectDefaultConfig : TScriptableObjectSingleton<ProjectDefaultConfig>
     {
-        [Header("UI")]
+        [Header("UGUI")]
         [SerializeField] private Font m_DefaultTextFont;
         [SerializeField] private Color m_DefaultTextColor = Color.white;
+
+        [Header("TextMeshPro")]
+        [SerializeField] private TextMeshProConfig m_TMPConfig;
+
         [Header("Script")]
         [SerializeField] private string m_DefaultNameSpace = "Game.Logic";
 
@@ -41,6 +45,8 @@ namespace GFrame
 
 
         public static Color defaultTextColor => S.m_DefaultTextColor;
+
+        public static TextMeshProConfig textMeshProConfig => S.m_TMPConfig;
 
 
         public static string defaultNameSpace

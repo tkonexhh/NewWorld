@@ -305,7 +305,8 @@ namespace Game.Logic
         {
             if (m_AppearanceData.hipsID != id)
             {
-                var newSkin = CharacterHolder.S.GetHips(m_AppearanceData.sex, id);
+                var newSkin = GameResMgr.S.globalRes.roleHolder.GetHips(m_AppearanceData.sex, id);
+                //  var newSkin = CharacterHolder.S.GetHips(m_AppearanceData.sex, id);
                 m_Hips.sharedMesh = newSkin.sharedMesh;
                 m_AppearanceData.hipsID = id;
             }

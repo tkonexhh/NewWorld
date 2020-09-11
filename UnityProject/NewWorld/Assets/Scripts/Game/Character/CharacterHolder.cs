@@ -21,7 +21,7 @@ namespace Game.Logic
     /// <summary>
     /// 用于获取装备Mesh等相关信息
     /// </summary>
-    public class CharacterHolder : TMonoSingleton<CharacterHolder>
+    public class CharacterHolder : MonoBehaviour// TMonoSingleton<CharacterHolder>
     {
         [Header("HeadCovering")]
         [Header("General")]
@@ -80,14 +80,19 @@ namespace Game.Logic
         [Header("Equip")]
         [SerializeField] private Transform m_TrsHeadNoElementFemale;
 
+
+        // public override void OnSingletonInit()
+        // {
+        //     GameObject.DontDestroyOnLoad(gameObject);
+        // }
+
         public SkinnedMeshRenderer GetHelmetMesh(int id)
         {
             GetHeadCoveringBaseHair(id);
             GetHeadCoveringNoFacialHair(id);
             return GetHeadCoveringNoHair(id);
-
-
         }
+
         public SkinnedMeshRenderer GetMeshBySlot(AppearanceSlot slot, Sex sex, int id)
         {
             switch (slot)

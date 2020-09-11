@@ -13,6 +13,7 @@ using GFrame;
 
 namespace Game.Logic
 {
+    [TMonoSingletonAttribute("[Game]/[PlayerMgr]")]
     public class PlayerMgr : TMonoSingleton<PlayerMgr>
     {
         private Role m_Role;

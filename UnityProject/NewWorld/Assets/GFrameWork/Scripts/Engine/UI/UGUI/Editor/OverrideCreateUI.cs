@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
+using TMPro;
 
 namespace GFrame.Editor
 {
@@ -26,11 +27,18 @@ namespace GFrame.Editor
             CreateUI(Text);
         }
 
+        [MenuItem("GameObject/UI/Text Mesh Pro")]
+        static void CreatTextMeshPro()
+        {
+            CreateUI(TextMeshProUGUI);
+        }
+
         [MenuItem("GameObject/UI/Button")]
         static void CreatButton()
         {
             CreateUI(Button);
         }
+
 
         [MenuItem("GameObject/UI/Custom/Progress/Progress_Horizontal")]
         static void CreatProgressHorizontal()
@@ -97,6 +105,16 @@ namespace GFrame.Editor
                 HandleText(text);
             };
             return CreateGO<GText>("Txt_", callback);
+        }
+
+        private static GameObject TextMeshProUGUI()
+        {
+            System.Action<GameObject> callback = (go) =>
+           {
+               TextMeshProUGUI text = go.GetComponent<TextMeshProUGUI>();
+               HandleTextMeshPro(text);
+           };
+            return CreateGO<TextMeshProUGUI>("TMP_", callback);
         }
 
         private static GameObject Button()
@@ -250,6 +268,20 @@ namespace GFrame.Editor
                 text.font = ProjectDefaultConfig.defaultTextFont;
                 text.color = ProjectDefaultConfig.defaultTextColor;
             }
+        }
+
+        private static void HandleTextMeshPro(TextMeshProUGUI tmp)
+        {
+            tmp.raycastTarget = false;
+            tmp.richText = false;
+            if (ProjectDefaultConfig.textMeshProConfig.font != null)
+            {
+                tmp.font = ProjectDefaultConfig.textMeshProConfig.font;
+            }
+            tmp.text = "Text";
+            tmp.alignment = ProjectDefaultConfig.textMeshProConfig.textAlignment;
+            tmp.color = ProjectDefaultConfig.textMeshProConfig.color;
+            tmp.fontSize = ProjectDefaultConfig.textMeshProConfig.fontSize;
         }
 
         private static void HandleImage(Image image)

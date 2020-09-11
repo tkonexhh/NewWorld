@@ -14,4 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultTextFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultTextColor: {r: 1, g: 1, b: 1, a: 1}
+  m_TMPConfig:
+    font: {fileID: 11400000, guid: d70f485aa27dc43f79a8fd168f58435c, type: 2}
+    textAlignment: 514
+    color: {r: 0.754717, g: 0.28835887, b: 0.28835887, a: 1}
+    fontSize: 36
   m_DefaultNameSpace: Game.Logic

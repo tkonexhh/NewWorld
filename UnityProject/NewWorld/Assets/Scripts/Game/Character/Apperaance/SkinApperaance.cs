@@ -48,11 +48,12 @@ namespace Game.Logic
                     SkinnedMeshRenderer newSkin = null;
                     if (m_Slot == AppearanceSlot.HelmetWithHead)
                     {
-                        newSkin = CharacterHolder.S.GetHelmetMesh(id);
+                        newSkin = GameResMgr.S.globalRes.roleHolder.GetHelmetMesh(id);
+
                     }
                     else
                     {
-                        newSkin = CharacterHolder.S.GetMeshBySlot(m_Slot, sex, id);
+                        newSkin = GameResMgr.S.globalRes.roleHolder.GetMeshBySlot(m_Slot, sex, id);
                     }
 
 

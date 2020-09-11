@@ -13,6 +13,7 @@ using UnityEngine;
 
 namespace GFrame
 {
+    [TMonoSingletonAttribute("[GFrame]/[Tools]/[AudioMgr]")]
     public class AudioMgr : TMonoSingleton<AudioMgr>
     {
         protected float m_SoundVolume;
