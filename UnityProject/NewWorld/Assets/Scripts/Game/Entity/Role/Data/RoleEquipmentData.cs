@@ -23,6 +23,32 @@ namespace Game.Logic
         public int hipsID = -1;
         public int shouldersID = -1;
         public int backID = -1;
+
+
+        public void SetData(EquipmentType type, int id)
+        {
+            switch (type)
+            {
+                case EquipmentType.Torso:
+                    torsoID = id;
+                    return;
+                case EquipmentType.Hands:
+                    handsID = id;
+                    return;
+                case EquipmentType.Legs:
+                    legsID = id;
+                    return;
+                case EquipmentType.Hips:
+                    hipsID = id;
+                    return;
+                case EquipmentType.Shoulders:
+                    shouldersID = id;
+                    return;
+                case EquipmentType.Back:
+                    backID = id;
+                    return;
+            }
+        }
     }
 
 }

@@ -57,12 +57,13 @@ namespace Game.Logic
             //处理属性
             //处理外貌
             equipment.Equip(this);
-            //m_Data.equipmentData.
+            m_Data.equipmentData.SetData(equipment.equipmentType, (int)equipment.id);
         }
 
         public void UnEquip(Equipment equipment)
         {
             equipment.UnEquip(this);
+            m_Data.equipmentData.SetData(equipment.equipmentType, -1);
         }
 
 

@@ -38,6 +38,11 @@ namespace Game.Logic
             m_Role = new Role();
         }
 
+        public void Init()
+        {
+
+        }
+
 
         private void Update()
         {
