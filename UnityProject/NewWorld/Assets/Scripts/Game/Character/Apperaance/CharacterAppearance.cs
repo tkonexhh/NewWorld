@@ -38,6 +38,7 @@ namespace Game.Logic
         [Header("骨骼信息")]
         [SerializeField] private CharacterBone m_Bones;
 
+        [Header("各个皮肤信息")]
         [SerializeField] private SkinApperaance m_Hair;
         [SerializeField] private SkinApperaance m_Head;
         [SerializeField] private SkinApperaance m_FacialHair;
@@ -49,7 +50,7 @@ namespace Game.Logic
         [SerializeField] private SkinApperaance m_ArmLowerLeft;
         [SerializeField] private SkinApperaance m_HandRight;
         [SerializeField] private SkinApperaance m_HandLeft;
-        [SerializeField] private SkinnedMeshRenderer m_Hips;
+        [SerializeField] private SkinApperaance m_Hips;
         [SerializeField] private SkinApperaance m_LegRight;
         [SerializeField] private SkinApperaance m_LegLeft;
 
@@ -68,6 +69,7 @@ namespace Game.Logic
         [SerializeField] private SkinApperaance m_ElfEar;
 
 
+        private List<SkinApperaance> m_Skins = new List<SkinApperaance>();
         public CharacterBone bone => m_Bones;
 
 
@@ -78,39 +80,39 @@ namespace Game.Logic
 
             m_Bones.Init();
 
-            m_Hair.Init(this);
-            m_Head.Init(this);
+            m_Skins.Add(m_Hair);
+            m_Skins.Add(m_Head);
+            if (m_FacialHair != null)
+            {
+                m_Skins.Add(m_FacialHair);
+            }
+            m_Skins.Add(m_Eyebrows);
+            m_Skins.Add(m_Torso);
+            m_Skins.Add(m_ArmUpperRight);
+            m_Skins.Add(m_ArmUpperLeft);
+            m_Skins.Add(m_ArmLowerRight);
+            m_Skins.Add(m_ArmLowerLeft);
+            m_Skins.Add(m_HandRight);
+            m_Skins.Add(m_HandLeft);
+            m_Skins.Add(m_Hips);
+            m_Skins.Add(m_LegRight);
+            m_Skins.Add(m_LegLeft);
+            m_Skins.Add(m_HelmetWithoutHead);
+            m_Skins.Add(m_HelmetWithHead);
+            m_Skins.Add(m_ShoulderLeft);
+            m_Skins.Add(m_ShoulderRight);
+            m_Skins.Add(m_ElbowRight);
+            m_Skins.Add(m_ElbowLeft);
+            m_Skins.Add(m_KneeRight);
+            m_Skins.Add(m_KneeLeft);
+            m_Skins.Add(m_ElfEar);
+            m_Skins.Add(m_BackAttachment);
 
-            m_FacialHair?.Init(this);
-
-            m_Eyebrows.Init(this);
-            m_Torso.Init(this);
-
-            m_ArmUpperRight.Init(this);
-            m_ArmUpperLeft.Init(this);
-            m_ArmLowerRight.Init(this);
-            m_ArmLowerLeft.Init(this);
-            m_HandRight.Init(this);
-            m_HandLeft.Init(this);
-            m_Hips.gameObject.SetActive(true);
-            m_LegRight.Init(this);
-            m_LegLeft.Init(this);
-            m_HelmetWithoutHead.Init(this);
-            m_HelmetWithHead.Init(this);
-
+            m_Skins.ForEach(skin => skin.Init(this));
 
             // m_HeadCovering.gameObject.SetActive(true);
             // m_HeadNoElements.gameObject.SetActive(true);
             // m_HeadAttachment.gameObject.SetActive(true);
-            // m_BackAttachment.gameObject.SetActive(true);
-            m_ShoulderLeft.Init(this);
-            m_ShoulderRight.Init(this);
-            m_ElbowRight.Init(this);
-            m_ElbowLeft.Init(this);
-            m_KneeRight.Init(this);
-            m_KneeLeft.Init(this);
-            m_ElfEar.Init(this);
-            m_BackAttachment.Init(this);
             RefeshAppearance();
 
             InitColor();
@@ -122,13 +124,14 @@ namespace Game.Logic
             SetAppearance(AppearanceSlot.Head, m_AppearanceData.basicAppearance.faceID);
             SetAppearance(AppearanceSlot.FacialHair, m_AppearanceData.basicAppearance.facialHairID);
             SetAppearance(AppearanceSlot.EyeBrows, m_AppearanceData.basicAppearance.eyeBrows);
+            SetAppearance(AppearanceSlot.Hips, m_AppearanceData.hipsID);
             SetAppearance(AppearanceSlot.ShoulderRight, m_AppearanceData.shoulderRightID);
             SetAppearance(AppearanceSlot.ShoulderLeft, m_AppearanceData.shoulderLeftID);
             SetAppearance(AppearanceSlot.KneeRight, m_AppearanceData.kneeRightID);
             SetAppearance(AppearanceSlot.KneeLeft, m_AppearanceData.kneeLeftID);
             SetAppearance(AppearanceSlot.ElbowRight, m_AppearanceData.elbowRightID);
             SetAppearance(AppearanceSlot.ElbowLeft, m_AppearanceData.elbowLeftID);
-            // SetAppearance(AppearanceSlot.Torso, m_TorsoID);
+            // SetAppearance(AppearanceSlot.Torso, m_AppearanceData.torsoID);
             // SetAppearance(AppearanceSlot.ArmUpperRight, m_ArmUpperRightID);
             SetAppearance(AppearanceSlot.BackAttach, m_AppearanceData.backAttachID);
 
@@ -310,13 +313,7 @@ namespace Game.Logic
 
         public void SetHips(int id)
         {
-            if (m_AppearanceData.hipsID != id)
-            {
-                var newSkin = GameResMgr.S.globalRes.roleHolder.GetHips(m_AppearanceData.sex, id);
-                //  var newSkin = CharacterHolder.S.GetHips(m_AppearanceData.sex, id);
-                m_Hips.sharedMesh = newSkin.sharedMesh;
-                m_AppearanceData.hipsID = id;
-            }
+            m_AppearanceData.hipsID = m_Hips.SetSkin(m_AppearanceData.sex, id);
         }
 
         public void SetLegRight(int id)
@@ -387,55 +384,17 @@ namespace Game.Logic
 
         #endregion
 
-
-
         public void ApplyAppearance()
         {
-            m_Hair.BeforeCombine();
-            m_Head.BeforeCombine();
-            if (m_FacialHair)
-            {
-                m_FacialHair.BeforeCombine();
-            }
-            m_Eyebrows.BeforeCombine();
-            m_Torso.BeforeCombine();//.gameObject.SetActive(true);
-
-            m_ArmUpperRight.BeforeCombine();
-            m_ArmUpperLeft.BeforeCombine();
-            m_ArmLowerRight.BeforeCombine();
-            m_ArmLowerLeft.BeforeCombine();
-            m_HandRight.BeforeCombine();
-            m_HandLeft.BeforeCombine();
-            m_Hips.gameObject.SetActive(true);
-            m_LegRight.BeforeCombine();
-            m_LegLeft.BeforeCombine();
-            m_HelmetWithoutHead.BeforeCombine();
-            m_HelmetWithHead.BeforeCombine();
-
+            m_Skins.ForEach(skin => { skin.BeforeCombine(); });
             m_HelmetWithHead.gameObject.SetActive(false);
             m_HelmetWithoutHead.gameObject.SetActive(false);
             // m_HeadCovering.gameObject.SetActive(true);
             // m_HeadNoElements.gameObject.SetActive(true);
             // m_HeadAttachment.gameObject.SetActive(true);
             // m_BackAttachment.gameObject.SetActive(true);
-            m_ShoulderLeft.BeforeCombine();
-            m_ShoulderRight.BeforeCombine();
-            m_ElbowRight.BeforeCombine();
-            m_ElbowLeft.BeforeCombine();
-            m_KneeRight.BeforeCombine();
-            m_KneeLeft.BeforeCombine();
-            m_ElfEar.BeforeCombine();
-            m_BackAttachment.BeforeCombine();
+
             // m_HipsAttachment.gameObject.SetActive(true);
-        }
-
-
-        /// <summary>
-        /// 带上头盔 ，隐藏面部
-        /// </summary>
-        private void ToggleShowFace()
-        {
-
         }
 
         public void CombineMeshs()

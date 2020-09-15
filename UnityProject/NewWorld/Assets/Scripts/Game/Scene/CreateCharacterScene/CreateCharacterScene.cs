@@ -30,7 +30,7 @@ namespace Game.Logic
             Role setupRole = new Role();
             setupRole.transform.SetParent(m_TransRoleRoot);
             setupRole.transform.localPosition = Vector3.zero;
-            // UIMgr.S.OpenPanel(UIID.Inventorypanel);
+            UIMgr.S.OpenPanel(UIID.Inventorypanel);
         }
 
     }

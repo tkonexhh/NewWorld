@@ -22,6 +22,7 @@ namespace Game.Logic
         public int legsID = -1;
         public int hipsID = -1;
         public int shouldersID = -1;
+        public int backID = -1;
     }
 
 }

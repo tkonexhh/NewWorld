@@ -27,12 +27,12 @@ namespace Game.Logic
         {
             if (m_Renderer == null)
                 m_Renderer = GetComponent<SkinnedMeshRenderer>();
+            m_CurID = -100;
         }
 
         public void Init(CharacterAppearance character)
         {
             m_Character = character;
-            m_CurID = -100;
         }
 
         public int SetSkin(Sex sex, int id)
@@ -70,7 +70,6 @@ namespace Game.Logic
                             break;
                         }
                     }
-
                     m_Renderer.sharedMesh = newSkin.sharedMesh;
                     m_Renderer.bones = bones.ToArray();
 

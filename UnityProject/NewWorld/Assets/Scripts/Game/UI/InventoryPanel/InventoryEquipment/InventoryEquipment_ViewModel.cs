@@ -27,7 +27,7 @@ namespace Game.Logic
             PlayerEquipmentCellData cellData_Legs = new PlayerEquipmentCellData(new Equipment_Legs(PlayerMgr.S.role.data.equipmentData.legsID));
             PlayerEquipmentCellData cellData_Hips = new PlayerEquipmentCellData(new Equipment_Hips(PlayerMgr.S.role.data.equipmentData.hipsID));
             PlayerEquipmentCellData cellData_Shoulders = new PlayerEquipmentCellData(new Equipment_Shoulders(PlayerMgr.S.role.data.equipmentData.shouldersID));
-            // PlayerEquipmentCellData cellData_Shoulders = new PlayerEquipmentCellData(new Equipment_Shoulders(PlayerMgr.S.role.data.equipmentData.shouldersID));
+            PlayerEquipmentCellData cellData_Back = new PlayerEquipmentCellData(new Equipment_Back(PlayerMgr.S.role.data.equipmentData.backID));
 
             m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Helmet, cellData_Helmet);
             m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Torso, cellData_Torso);
@@ -35,6 +35,7 @@ namespace Game.Logic
             m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Legs, cellData_Legs);
             m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Hips, cellData_Hips);
             m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Shoulders, cellData_Shoulders);
+            m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Back, cellData_Back);
         }
     }
 
