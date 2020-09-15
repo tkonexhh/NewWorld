@@ -27,6 +27,7 @@ namespace Game.Logic
             PlayerEquipmentCellData cellData_Legs = new PlayerEquipmentCellData(new Equipment_Legs(PlayerMgr.S.role.data.equipmentData.legsID));
             PlayerEquipmentCellData cellData_Hips = new PlayerEquipmentCellData(new Equipment_Hips(PlayerMgr.S.role.data.equipmentData.hipsID));
             PlayerEquipmentCellData cellData_Shoulders = new PlayerEquipmentCellData(new Equipment_Shoulders(PlayerMgr.S.role.data.equipmentData.shouldersID));
+            // PlayerEquipmentCellData cellData_Shoulders = new PlayerEquipmentCellData(new Equipment_Shoulders(PlayerMgr.S.role.data.equipmentData.shouldersID));
 
             m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Helmet, cellData_Helmet);
             m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Torso, cellData_Torso);

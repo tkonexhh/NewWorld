@@ -60,7 +60,7 @@ namespace Game.Logic
                     List<Transform> bones = new List<Transform>();
                     foreach (Transform bone in newSkin.bones)
                     {
-                        foreach (Transform hip in m_Character.m_Bones.bones)
+                        foreach (Transform hip in m_Character.bone.bones)
                         {
                             if (hip.name != bone.name)
                             {

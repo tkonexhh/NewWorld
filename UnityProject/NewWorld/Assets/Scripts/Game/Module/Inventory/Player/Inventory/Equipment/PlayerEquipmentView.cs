@@ -23,6 +23,7 @@ namespace Game.Logic
         [SerializeField] private PlayerEquipmentCellView m_Hands;
         [SerializeField] private PlayerEquipmentCellView m_Legs;
         [SerializeField] private PlayerEquipmentCellView m_Shoulders;
+        [SerializeField] private PlayerEquipmentCellView m_Back;
 
         public int CellCount => (int)InventoryEquipSlot.Length;
         private Dictionary<int, PlayerEquipmentCellView> m_CellViewMap = new Dictionary<int, PlayerEquipmentCellView>();
@@ -208,6 +209,7 @@ namespace Game.Logic
             m_CellViewMap.Add((int)InventoryEquipSlot.Legs, m_Legs);
             m_CellViewMap.Add((int)InventoryEquipSlot.Hips, m_Hips);
             m_CellViewMap.Add((int)InventoryEquipSlot.Shoulders, m_Shoulders);
+            m_CellViewMap.Add((int)InventoryEquipSlot.Back, m_Back);
         }
 
         private PlayerEquipmentCellView GetCellBySlot(int slot)
@@ -236,6 +238,8 @@ namespace Game.Logic
                     return GetCellBySlot((int)InventoryEquipSlot.Hips);
                 case EquipmentType.Shoulders:
                     return GetCellBySlot((int)InventoryEquipSlot.Shoulders);
+                case EquipmentType.Back:
+                    return GetCellBySlot((int)InventoryEquipSlot.Back);
             }
             return null;
         }
@@ -267,6 +271,10 @@ namespace Game.Logic
                     break;
                 case InventoryEquipSlot.Shoulders:
                     if (type == EquipmentType.Shoulders)
+                        return true;
+                    break;
+                case InventoryEquipSlot.Back:
+                    if (type == EquipmentType.Back)
                         return true;
                     break;
             }

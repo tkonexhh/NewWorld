@@ -22,6 +22,7 @@ namespace Game.Logic
         Hands,//手臂
         Hips,//臀部
         Legs,//腿
+        Back,
         Length,
     }
 

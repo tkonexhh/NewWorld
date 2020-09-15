@@ -62,6 +62,7 @@ namespace Game.Logic
         KneeRight,
         KneeLeft,
         Ear,
+        BackAttach,
         HipsAttach,
         HelmetWithoutHead,
         HelmetWithHead,

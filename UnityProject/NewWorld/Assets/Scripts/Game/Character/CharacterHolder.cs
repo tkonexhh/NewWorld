@@ -81,11 +81,6 @@ namespace Game.Logic
         [SerializeField] private Transform m_TrsHeadNoElementFemale;
 
 
-        // public override void OnSingletonInit()
-        // {
-        //     GameObject.DontDestroyOnLoad(gameObject);
-        // }
-
         public SkinnedMeshRenderer GetHelmetMesh(int id)
         {
             GetHeadCoveringBaseHair(id);
@@ -143,6 +138,8 @@ namespace Game.Logic
                     return GetHipsAttachment(id);
                 case AppearanceSlot.HelmetWithoutHead:
                     return GetHeadNoElement(sex, id);
+                case AppearanceSlot.BackAttach:
+                    return GetBackAttachment(id);
                 default:
                     return null;
             }

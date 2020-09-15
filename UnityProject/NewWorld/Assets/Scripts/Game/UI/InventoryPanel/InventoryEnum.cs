@@ -29,6 +29,7 @@ namespace Game.Logic
         Legs,
         Hips,
         Shoulders,
+        Back,
         Length
     }
 

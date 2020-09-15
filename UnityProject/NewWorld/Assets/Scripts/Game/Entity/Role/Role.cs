@@ -46,6 +46,11 @@ namespace Game.Logic
                 target.transform.localPosition = Vector3.zero;
                 m_AppearanceComponent = AddComponent(new RoleAppearanceComponent());
                 m_RoleAnimComponent = AddComponent(new RoleAnimComponent());
+
+                Timer.S.Post2Scale(i =>
+                {
+                    m_AppearanceComponent.appearance.SetAppearance(AppearanceSlot.BackAttach, Random.Range(1, 10));
+                }, 2.0f, 30);
             });
 
             m_RoleEquipComponent = AddComponent(new RoleEquipComponent());
