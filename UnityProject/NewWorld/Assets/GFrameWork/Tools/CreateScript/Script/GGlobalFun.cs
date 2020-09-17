@@ -13,8 +13,6 @@ namespace GFrame
     {
         private static readonly char[] replaceChars = new char[] { ' ', '(', ')' };
 
-
-
         /// <summary>
         /// 写入路径
         /// </summary>
@@ -59,24 +57,7 @@ namespace GFrame
             }
         }
 
-        public static string GetPlatform()
-        {
-            switch (Application.platform)
-            {
-                case RuntimePlatform.OSXEditor:
-                    return "window";
-                case RuntimePlatform.IPhonePlayer:
-                    return "ios";
-                case RuntimePlatform.WindowsEditor:
-                    return "window";
-                case RuntimePlatform.WindowsPlayer:
-                    return "window";
-                case RuntimePlatform.Android:
-                    return "android";
-                default:
-                    return "android";
-            }
-        }
+
 
         public static string GetDeviceCode()
         {
@@ -228,11 +209,6 @@ namespace GFrame
             return list.ToArray();
         }
 
-        public static Sprite ToSprite(this Texture2D value)
-        {
-            return Sprite.Create(value, new Rect(0, 0, value.width, value.height), Vector2.zero, 1f);
-        }
-
         public static bool IsPointerOverLayer(int layer)
         {
             PointerEventData pointerData = new PointerEventData(UnityEngine.EventSystems.EventSystem.current);
@@ -251,10 +227,6 @@ namespace GFrame
             return results.Count > 0 && results[0].gameObject.layer == layer;
         }
 
-        public static float Distance(this float a, float b)
-        {
-            return Mathf.Abs(a) - Mathf.Abs(b);
-        }
 
         /// <summary>
         /// 2D旋转矩阵

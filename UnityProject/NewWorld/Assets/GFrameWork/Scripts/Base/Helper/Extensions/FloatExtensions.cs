@@ -13,10 +13,27 @@ namespace GFrame
         /// <summary>
         /// Returns a float rounded up to the set number of decimals.
         /// </summary>
-        public static float Round(this float f, int decimals = 1) { return (float)Math.Round(f, decimals); }
+        public static float Round(this float f, int decimals = 1)
+        {
+            return (float)Math.Round(f, decimals);
+        }
         /// <summary>
         /// Returns the float rounded to the nearest integer.
         /// </summary>
-        public static float Round(this float f) { return Mathf.Round(f); }
+        public static float Round(this float f)
+        {
+            return Mathf.Round(f);
+        }
+
+        /// <summary>
+        /// a 距离 b 有多大
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static float Distance(this float a, float b)
+        {
+            return Mathf.Abs(a) - Mathf.Abs(b);
+        }
     }
 }

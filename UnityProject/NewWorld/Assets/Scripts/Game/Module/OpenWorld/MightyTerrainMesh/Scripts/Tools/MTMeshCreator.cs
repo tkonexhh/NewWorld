@@ -5,12 +5,12 @@ using UnityEditor;
 using System.IO;
 using MightyTerrainMesh;
 using System;
-//
+
 [Serializable]
 public class MTMeshLODSetting
 {
-    public int Subdivision = 3;
-    public float SlopeAngleError = 5f;
+    public int Subdivision = 3;//网格细分
+    public float SlopeAngleError = 5f;//斜率容限
     public bool bEditorUIFoldout = true;
 }
 //
@@ -24,6 +24,8 @@ public class MTMeshCreator : MonoBehaviour
     public string DataName = "";
     //intermediate data
     private CreateDataJob mCreateDataJob;
+
+
     public float EditorCreateDataProgress
     {
         get
@@ -151,13 +153,16 @@ public class MTMeshCreator : MonoBehaviour
             Transform[] lodParent = new Transform[LOD.Length];
             for (int i = 0; i < LOD.Length; ++i)
             {
-                GameObject lodGo = new GameObject("lod" + i);
+                GameObject lodGo = new GameObject("LOD" + i);
                 lodGo.transform.parent = transform;
                 lodParent[i] = lodGo.transform;
             }
             MTQuadTreeHeader header = MTFileUtils.LoadQuadTreeHeader(DataName);
-            Debug.LogError(header);
-            Debug.LogError(header.Meshes.Values.Count);
+            Debug.LogError("RuntimeMats:" + header.RuntimeMats.Length);
+            for (int i = 0; i < header.RuntimeMats.Length; i++)
+            {
+                Debug.LogError("name:" + header.RuntimeMats[i].name);
+            }
             foreach (var m in header.Meshes.Values)
             {
                 Mesh[] lods = new Mesh[LOD.Length];
@@ -166,7 +171,7 @@ public class MTMeshCreator : MonoBehaviour
                 {
                     MeshFilter meshF;
                     MeshRenderer meshR;
-                    GameObject meshGo = new GameObject("meshObj");
+                    GameObject meshGo = new GameObject("meshObj" + i);
                     meshGo.transform.parent = lodParent[i];
                     meshF = meshGo.AddComponent<MeshFilter>();
                     meshR = meshGo.AddComponent<MeshRenderer>();

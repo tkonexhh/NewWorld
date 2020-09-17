@@ -90,6 +90,25 @@ namespace GFrame
 
             return false;
         }
+
+        public static string GetPlatform()
+        {
+            switch (Application.platform)
+            {
+                case RuntimePlatform.OSXEditor:
+                    return "macOs";
+                case RuntimePlatform.IPhonePlayer:
+                    return "ios";
+                case RuntimePlatform.WindowsEditor:
+                    return "window";
+                case RuntimePlatform.WindowsPlayer:
+                    return "window";
+                case RuntimePlatform.Android:
+                    return "android";
+                default:
+                    return "null";
+            }
+        }
     }
 
 }

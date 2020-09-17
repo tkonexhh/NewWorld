@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class MTViewer : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class MTViewer : MonoBehaviour
     private RaycastHit mHit = new RaycastHit();
     private MTLoader mLoader;
     private Vector3 mUp;
+
     private void Awake()
     {
         mLoader = GetComponent<MTLoader>();

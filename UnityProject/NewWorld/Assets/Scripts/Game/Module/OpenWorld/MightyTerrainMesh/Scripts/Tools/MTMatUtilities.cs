@@ -1,10 +1,12 @@
-﻿namespace MightyTerrainMesh
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+using UnityEditor;
+using GFrame;
+
+namespace MightyTerrainMesh
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.IO;
-    using UnityEngine;
-    using UnityEditor;
 
     public static class MTMatUtils
     {
@@ -12,24 +14,24 @@
         {
             if (matIdx >= t.terrainData.alphamapTextureCount)
                 return;
-            string mathPath = string.Format("Assets/MightyTerrainMesh/Resources/{0}_{1}.mat", dataName, matIdx);
+
+            string mathPath = PathHelper.ABSPath2AssetsPath(string.Format("{0}/{1}/{1}_{2}.mat", MTFileUtils.s_DataPath, dataName, matIdx));
             Material mat = AssetDatabase.LoadAssetAtPath<Material>(mathPath);
             if (mat != null)
                 AssetDatabase.DeleteAsset(mathPath);
             //alpha map
             byte[] alphaMapData = t.terrainData.alphamapTextures[matIdx].EncodeToTGA();
-            string alphaMapSavePath = string.Format("{0}/MightyTerrainMesh/Resources/{1}_alpha{2}.tga",
-                Application.dataPath, dataName, matIdx);
+
+            string alphaMapSavePath = string.Format("{0}/{1}/{1}_alpha{2}.tga", MTFileUtils.s_DataPath, dataName, matIdx);
             if (File.Exists(alphaMapSavePath))
                 File.Delete(alphaMapSavePath);
             FileStream stream = File.Open(alphaMapSavePath, FileMode.Create);
             stream.Write(alphaMapData, 0, alphaMapData.Length);
             stream.Close();
             AssetDatabase.Refresh();
-            string alphaMapPath = string.Format("Assets/MightyTerrainMesh/Resources/{0}_alpha{1}.tga",
-                dataName, matIdx);
-            //the alpha map texture has to be set to best compression quality, otherwise the black spot may
-            //show on the ground
+
+            string alphaMapPath = PathHelper.ABSPath2AssetsPath(string.Format("{0}/{1}/{1}_alpha{2}.tga", MTFileUtils.s_DataPath, dataName, matIdx));
+            //the alpha map texture has to be set to best compression quality, otherwise the black spot may show on the ground
             TextureImporter importer = AssetImporter.GetAtPath(alphaMapPath) as TextureImporter;
             if (importer == null)
             {
@@ -74,6 +76,7 @@
                 return;
             }
             int matCount = t.terrainData.alphamapTextureCount;
+
             if (matCount <= 0)
                 return;
             //base pass

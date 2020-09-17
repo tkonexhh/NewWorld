@@ -279,5 +279,15 @@ namespace GFrame
             var myRegExp = new Regex(a);
             return myRegExp.Match(b).Success;
         }
+
+        /// <summary>
+        /// 获得首字母大写
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string GetFirstUpper(string value)
+        {
+            return char.ToUpper(value[0]) + value.Substring(1);
+        }
     }
 }

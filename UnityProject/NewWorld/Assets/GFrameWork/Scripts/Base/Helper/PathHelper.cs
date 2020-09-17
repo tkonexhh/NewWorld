@@ -21,6 +21,15 @@ namespace GFrame
             return assetRootPath.Replace("\\", "/");
         }
 
+        public static string ABSPath2AssetsPath(string absPath)
+        {
+            string assetPath = absPath;
+            assetPath = assetPath.Replace(Application.dataPath, "");
+            assetPath = "Assets" + assetPath;
+            return assetPath;
+        }
+
+
         public static string AssetPath2ReltivePath(string path)
         {
             if (path == null)

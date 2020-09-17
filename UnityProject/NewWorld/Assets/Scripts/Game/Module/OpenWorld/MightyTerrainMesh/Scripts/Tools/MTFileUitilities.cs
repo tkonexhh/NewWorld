@@ -110,8 +110,9 @@ namespace MightyTerrainMesh
             for (int i = 0; i < header.RuntimeMats.Length; ++i)
             {
                 string mathPath = string.Format("{0}_{1}", header.DataName, i);
-                Debug.LogError(mathPath);
-                header.RuntimeMats[i] = Resources.Load<Material>(mathPath);
+                string resPath = PathHelper.ABSPath2AssetsPath(string.Format("{0}/{1}/{2}.mat", s_DataPath, header.DataName, mathPath));
+                //TODO 修改资源加载方式 需要兼顾预览模式和实际运行
+                header.RuntimeMats[i] = UnityEditor.AssetDatabase.LoadAssetAtPath<Material>(resPath);//Resources.Load<Material>(mathPath);
             }
             return header;
         }
@@ -124,8 +125,6 @@ namespace MightyTerrainMesh
                 FileHelper.DeleteFile(path);
             }
 
-            // if (File.Exists(path))
-            //     File.Delete(path);
             FileStream stream = File.Open(path, FileMode.Create);
             //lods
             byte[] uBuff = BitConverter.GetBytes(data.lods.Length);

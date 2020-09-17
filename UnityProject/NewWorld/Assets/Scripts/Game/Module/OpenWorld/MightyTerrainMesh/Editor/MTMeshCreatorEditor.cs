@@ -2,10 +2,18 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using GFrame;
 
 [CustomEditor(typeof(MTMeshCreator))]
 public class MTMeshCreatorEditor : Editor
 {
+    //TODO 摸索下来比较合适的配置
+    //因为是Lowpoly风格的游戏 所以地形并不需要那么高的面数 
+    //LOD1 Subdivision 5 Slope 20
+    //LOD2 Subdivision 4 Slope 20
+    //LOD3 Subdivision 3 Slope 20
+    //LOD4 Subdivision 2 Slope 20
+
     private void DrawSetting(int idx, MTMeshLODSetting setting)
     {
         bool bFold = EditorGUILayout.Foldout(setting.bEditorUIFoldout, string.Format("LOD {0}", idx));
@@ -27,6 +35,8 @@ public class MTMeshCreatorEditor : Editor
             setting.bEditorUIFoldout = bFold;
         }
     }
+
+
     public override void OnInspectorGUI()
     {
         MTMeshCreator comp = (MTMeshCreator)target;
@@ -40,7 +50,7 @@ public class MTMeshCreatorEditor : Editor
             lodCount = Mathf.Clamp(lod, 1, 4);
             MTMeshLODSetting[] old = comp.LOD;
             comp.LOD = new MTMeshLODSetting[lodCount];
-            for(int i=0; i< lodCount; ++i)
+            for (int i = 0; i < lodCount; ++i)
             {
                 comp.LOD[i] = new MTMeshLODSetting();
                 if (i < old.Length)
@@ -62,7 +72,7 @@ public class MTMeshCreatorEditor : Editor
                 return;
             }
             comp.EditorCreateDataBegin();
-            for(int i= 0; i<int.MaxValue; ++i)
+            for (int i = 0; i < int.MaxValue; ++i)
             {
                 comp.EditorCreateDataUpdate();
                 EditorUtility.DisplayProgressBar("creating data", "scaning volumn", comp.EditorCreateDataProgress);
@@ -91,6 +101,24 @@ public class MTMeshCreatorEditor : Editor
         {
             comp.EditorClearPreview();
         }
+
+
+        GUILayout.BeginHorizontal();
+        for (int i = 0; i < comp.LOD.Length; i++)
+        {
+            int index = i;
+            if (GUILayout.Button("LOD" + i))
+            {
+                var childs = comp.transform.GetChildTrsList();
+                for (int j = 0; j < childs.Count; j++)
+                {
+                    childs[j].gameObject.SetActive(j == index + 1);
+                }
+
+                // /comp.EditorClearPreview();
+            }
+        }
+        GUILayout.EndHorizontal();
         // Apply changes to the serializedProperty - always do this in the end of OnInspectorGUI.
         serializedObject.ApplyModifiedProperties();
     }

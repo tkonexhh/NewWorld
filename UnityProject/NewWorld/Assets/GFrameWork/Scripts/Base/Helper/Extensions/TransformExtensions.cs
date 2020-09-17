@@ -666,6 +666,14 @@ namespace GFrame
             return parts;
         }
 
+        public static void IterateChild(this Transform transform, System.Action<Transform> action)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                action(transform.GetChild(i));
+            }
+        }
+
         public static void RemoveAllChild(this Transform transform)
         {
             var childs = GetChildTrsList(transform);

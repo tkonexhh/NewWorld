@@ -22,6 +22,7 @@ namespace GFrame
             return null;
         }
 
+
         /// <summary>
         /// 设置变量
         /// ReflectionHelper.BindMenber(typeof(GProgress), "m_ImgProgress", progress, progressImg);
