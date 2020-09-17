@@ -616,8 +616,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645195379}
-  m_LocalRotation: {x: 0.0012157677, y: 0.9986959, z: -0.04211707, w: 0.028828738}
-  m_LocalPosition: {x: -0.14491564, y: 2.019158, z: 2.5080185}
+  m_LocalRotation: {x: 0.0012157621, y: 0.9986959, z: -0.042117078, w: 0.028828608}
+  m_LocalPosition: {x: -0.14491497, y: 2.019158, z: 2.5080185}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -754,7 +754,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764364664}
-  m_LocalRotation: {x: 0.0011919305, y: 0.9987304, z: -0.041291293, w: 0.02882974}
+  m_LocalRotation: {x: 0.0011919248, y: 0.9987304, z: -0.041291293, w: 0.028829606}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -828,7 +828,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809921872}
-  m_LocalRotation: {x: 0.0023824705, y: 0.99617046, z: -0.08253444, w: 0.028755834}
+  m_LocalRotation: {x: 0.0023824587, y: 0.99617046, z: -0.08253444, w: 0.028755695}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -902,8 +902,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 828554736}
-  m_LocalRotation: {x: 0.000015444399, y: 0.9995835, z: -0.00053502986, w: 0.028854398}
-  m_LocalPosition: {x: -0.00000014901161, y: 0, z: 0}
+  m_LocalRotation: {x: 0.000015444439, y: 0.9995835, z: -0.0005350343, w: 0.028854232}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 149761985}
@@ -1405,7 +1405,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1528524236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.14491564, y: 2.019158, z: 2.5080185}
+  m_LocalPosition: {x: -0.14491497, y: 2.019158, z: 2.5080185}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 809921874}

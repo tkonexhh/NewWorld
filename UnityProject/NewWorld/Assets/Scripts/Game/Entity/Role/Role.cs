@@ -27,11 +27,13 @@ namespace Game.Logic
 
         private RoleAppearanceComponent m_AppearanceComponent;
         private RoleEquipComponent m_RoleEquipComponent;
-        private RoleAnimComponent m_RoleAnimComponent;
+        private RoleAnimComponent m_AnimComponent;
+        private RoleInputComponent m_InputComponent;
 
 
         public RoleAppearanceComponent appearanceComponent => m_AppearanceComponent;
-        public RoleAnimComponent animComponent => m_RoleAnimComponent;
+        public RoleAnimComponent animComponent => m_AnimComponent;
+        public RoleInputComponent inputComponent => m_InputComponent;
 
         public Role() : base()
         {
@@ -45,10 +47,11 @@ namespace Game.Logic
                 target.transform.SetParent(m_GameObject.transform);
                 target.transform.localPosition = Vector3.zero;
                 m_AppearanceComponent = AddComponent(new RoleAppearanceComponent());
-                m_RoleAnimComponent = AddComponent(new RoleAnimComponent());
+                m_AnimComponent = AddComponent(new RoleAnimComponent());
             });
 
             m_RoleEquipComponent = AddComponent(new RoleEquipComponent());
+            m_InputComponent = AddComponent(new RoleInputComponent());
         }
 
 

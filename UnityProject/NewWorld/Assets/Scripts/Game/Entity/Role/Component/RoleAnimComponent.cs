@@ -13,12 +13,16 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class RoleAnimComponent : EntityComponennt
+    public class RoleAnimComponent : RoleBaseComponent
     {
+        private Animator m_Animator;
+
+        public Animator animator => m_Animator;
+
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
-
+            m_Animator = role.gameObject.GetComponentInChildren<Animator>();
         }
     }
 
