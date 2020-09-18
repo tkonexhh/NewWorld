@@ -22,10 +22,8 @@ namespace Game.Logic
         }
 
         #region override funcs
-        public virtual void Start()
-        {
-
-        }
+        public virtual void Start() { }
+        public virtual void Update(float dt) { }
         #endregion
     }
 

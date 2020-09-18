@@ -146,22 +146,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "SetpUpRotate",
-                    "type": "Value",
-                    "id": "7674ccc0-f445-4d0d-baa3-4e08a5f4f53c",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "SetpUpRotateMode",
-                    "type": "Button",
-                    "id": "59ea45cd-7091-4c30-9abc-3a5b02fddecd",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -285,28 +269,6 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "4132a3d7-eca2-439d-99d3-7ebd74e1fa56",
-                    "path": "<Pointer>/delta",
-                    "interactions": "",
-                    "processors": "ScaleVector2(x=2,y=2)",
-                    "groups": "",
-                    "action": "SetpUpRotate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "51bef014-b058-4ff4-a1de-bd8724616fb0",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SetpUpRotateMode",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }

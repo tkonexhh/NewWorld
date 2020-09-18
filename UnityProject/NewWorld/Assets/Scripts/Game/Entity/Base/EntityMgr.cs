@@ -29,11 +29,11 @@ namespace Game.Logic
             //entity.Dispose();
         }
 
-        public void Tick(float fDeltaTime)
+        public void Update(float fDeltaTime)
         {
             for (int i = 0; i < _entities.Count; i++)
             {
-                _entities[i].Tick(fDeltaTime);
+                _entities[i].Update(fDeltaTime);
             }
         }
     }

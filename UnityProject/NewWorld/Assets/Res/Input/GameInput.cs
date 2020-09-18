@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Res1/Input/GameInput.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Res/Input/GameInput.inputactions'
 
 using System;
 using System.Collections;
@@ -161,22 +161,6 @@ namespace Game.Logic
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
-                },
-                {
-                    ""name"": ""SetpUpRotate"",
-                    ""type"": ""Value"",
-                    ""id"": ""7674ccc0-f445-4d0d-baa3-4e08a5f4f53c"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""SetpUpRotateMode"",
-                    ""type"": ""Button"",
-                    ""id"": ""59ea45cd-7091-4c30-9abc-3a5b02fddecd"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -300,28 +284,6 @@ namespace Game.Logic
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4132a3d7-eca2-439d-99d3-7ebd74e1fa56"",
-                    ""path"": ""<Pointer>/delta"",
-                    ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=2,y=2)"",
-                    ""groups"": """",
-                    ""action"": ""SetpUpRotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""51bef014-b058-4ff4-a1de-bd8724616fb0"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SetpUpRotateMode"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -347,8 +309,6 @@ namespace Game.Logic
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Any = m_UI.FindAction("Any", throwIfNotFound: true);
             m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
-            m_UI_SetpUpRotate = m_UI.FindAction("SetpUpRotate", throwIfNotFound: true);
-            m_UI_SetpUpRotateMode = m_UI.FindAction("SetpUpRotateMode", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -433,16 +393,12 @@ namespace Game.Logic
         private IUIActions m_UIActionsCallbackInterface;
         private readonly InputAction m_UI_Any;
         private readonly InputAction m_UI_Move;
-        private readonly InputAction m_UI_SetpUpRotate;
-        private readonly InputAction m_UI_SetpUpRotateMode;
         public struct UIActions
         {
             private @GameInput m_Wrapper;
             public UIActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @Any => m_Wrapper.m_UI_Any;
             public InputAction @Move => m_Wrapper.m_UI_Move;
-            public InputAction @SetpUpRotate => m_Wrapper.m_UI_SetpUpRotate;
-            public InputAction @SetpUpRotateMode => m_Wrapper.m_UI_SetpUpRotateMode;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -458,12 +414,6 @@ namespace Game.Logic
                     @Move.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
-                    @SetpUpRotate.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSetpUpRotate;
-                    @SetpUpRotate.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSetpUpRotate;
-                    @SetpUpRotate.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSetpUpRotate;
-                    @SetpUpRotateMode.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSetpUpRotateMode;
-                    @SetpUpRotateMode.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSetpUpRotateMode;
-                    @SetpUpRotateMode.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSetpUpRotateMode;
                 }
                 m_Wrapper.m_UIActionsCallbackInterface = instance;
                 if (instance != null)
@@ -474,12 +424,6 @@ namespace Game.Logic
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
-                    @SetpUpRotate.started += instance.OnSetpUpRotate;
-                    @SetpUpRotate.performed += instance.OnSetpUpRotate;
-                    @SetpUpRotate.canceled += instance.OnSetpUpRotate;
-                    @SetpUpRotateMode.started += instance.OnSetpUpRotateMode;
-                    @SetpUpRotateMode.performed += instance.OnSetpUpRotateMode;
-                    @SetpUpRotateMode.canceled += instance.OnSetpUpRotateMode;
                 }
             }
         }
@@ -501,8 +445,6 @@ namespace Game.Logic
         {
             void OnAny(InputAction.CallbackContext context);
             void OnMove(InputAction.CallbackContext context);
-            void OnSetpUpRotate(InputAction.CallbackContext context);
-            void OnSetpUpRotateMode(InputAction.CallbackContext context);
         }
     }
 }

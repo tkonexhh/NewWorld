@@ -21,9 +21,14 @@ namespace Game.Logic
 
         }
 
-        public void ExitBattle()
+        public void Init()
         {
 
+        }
+
+        public void Update()
+        {
+            EntityMgr.S.Update(Time.deltaTime);
         }
 
     }

@@ -40,6 +40,9 @@ namespace Game.Logic
             AddComponent(new UIDataModule());
             AddComponent(new SceneDataModule());
             AddComponent(new DataBaseModule());
+
+            //TODO
+            GamePlayMgr.S.Init();
         }
 
         protected override void OnModuleAwake()

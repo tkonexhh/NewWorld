@@ -34,11 +34,10 @@ namespace Game.Logic
             _components.ForEach(p => p.Start());
         }
 
-        public virtual void Tick(float dt)
+        public virtual void Update(float dt)
         {
-
+            _components.ForEach(p => p.Update(dt));
         }
-
 
     }
 
