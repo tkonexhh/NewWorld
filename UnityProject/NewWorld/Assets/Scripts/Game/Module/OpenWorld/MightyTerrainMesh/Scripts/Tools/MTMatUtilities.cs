@@ -41,6 +41,7 @@ namespace MightyTerrainMesh
             importer.textureCompression = TextureImporterCompression.Uncompressed;
             importer.textureType = TextureImporterType.Default;
             importer.wrapMode = TextureWrapMode.Clamp;
+            importer.filterMode = FilterMode.Point;
             EditorUtility.SetDirty(importer);
             importer.SaveAndReimport();
             Texture2D alphaMap = AssetDatabase.LoadAssetAtPath<Texture2D>(alphaMapPath);

@@ -15,9 +15,9 @@
         }
     }
 
-    public class MTQuadTreeHeader
+    public class MTQuadTreeHeader//四叉树
     {
-        public int QuadTreeDepth = 0;
+        public int QuadTreeDepth = 0;//深度
         public Vector3 BoundMin = Vector3.zero;
         public Vector3 BoundMax = Vector3.zero;
         public int LOD = 1;
@@ -84,7 +84,7 @@
                 if (mSubNode == null)
                 {
                     float distance = Vector3.Distance(viewCenter, Bound.center);
-                    for (uint lod=0; lod<lodPolicy.Length; ++lod)
+                    for (uint lod = 0; lod < lodPolicy.Length; ++lod)
                     {
                         if (distance <= lodPolicy[lod])
                         {
