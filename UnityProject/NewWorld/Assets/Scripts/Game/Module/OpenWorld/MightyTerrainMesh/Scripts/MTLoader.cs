@@ -6,17 +6,22 @@ using MightyTerrainMesh;
 internal class MTRuntimeMesh
 {
     public int MeshID { get; private set; }
-    private Mesh[] mLOD;
+    private Mesh[] m_LODMeshs;
+
     public MTRuntimeMesh(int meshid, int lod, string dataName)
     {
         MeshID = meshid;
-        mLOD = new Mesh[lod];
-        MTFileUtils.LoadMesh(mLOD, dataName, meshid);
+        m_LODMeshs = new Mesh[lod];
+
+        //加载所有LOD mesh 存在数组里
+        MTFileUtils.LoadMesh(m_LODMeshs, dataName, meshid);
     }
+
     public Mesh GetMesh(int lod)
     {
-        lod = Mathf.Clamp(lod, 0, mLOD.Length - 1);
-        return mLOD[lod];
+        Debug.LogError("GetMesh:" + lod);
+        lod = Mathf.Clamp(lod, 0, m_LODMeshs.Length - 1);
+        return m_LODMeshs[lod];
     }
 }
 
@@ -34,7 +39,7 @@ public class MTLoader : MonoBehaviour
     private Dictionary<uint, MTPatch> m_PatchesFlipBuffer = new Dictionary<uint, MTPatch>();
     //meshes
     private Dictionary<int, MTRuntimeMesh> m_MeshPool = new Dictionary<int, MTRuntimeMesh>();
-    private bool mbDirty = true;
+    private bool m_Dirty = true;
     private Mesh GetMesh(uint patchId)
     {
         int mId = (int)(patchId >> 2);
@@ -50,7 +55,7 @@ public class MTLoader : MonoBehaviour
 
     public void SetDirty()
     {
-        mbDirty = true;
+        m_Dirty = true;
     }
 
     private void Awake()
@@ -96,9 +101,9 @@ public class MTLoader : MonoBehaviour
     void Update()
     {
         //every 10 frame update once
-        if (m_Camera == null || m_Root == null || !m_Camera.enabled || !mbDirty)
+        if (m_Camera == null || m_Root == null || !m_Camera.enabled || !m_Dirty)
             return;
-        mbDirty = false;
+        m_Dirty = false;
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(m_Camera);
         mVisiblePatches.Reset();
         m_Root.RetrieveVisibleMesh(planes, transform.position, lodPolicy, mVisiblePatches);

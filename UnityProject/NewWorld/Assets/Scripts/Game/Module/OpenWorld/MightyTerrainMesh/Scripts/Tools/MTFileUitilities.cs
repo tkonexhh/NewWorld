@@ -78,6 +78,7 @@ namespace MightyTerrainMesh
             }
             stream.Close();
         }
+
         public static MTQuadTreeHeader LoadQuadTreeHeader(string dataName)
         {
             MTQuadTreeHeader header = new MTQuadTreeHeader(dataName);
@@ -116,6 +117,7 @@ namespace MightyTerrainMesh
             }
             return header;
         }
+
         public static void SaveMesh(string dataName, MTMeshData data)
         {
             string path = string.Format("{0}/{1}/{1}_{2}.bytes", s_DataPath, dataName, data.meshId);

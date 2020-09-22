@@ -53,6 +53,9 @@ namespace MightyTerrainMesh
                 Debug.LogError("export terrain material failed");
                 return;
             }
+
+
+
             for (int l = layerStart; l < layerStart + 4 && l < t.terrainData.terrainLayers.Length; ++l)
             {
                 int idx = l - layerStart;

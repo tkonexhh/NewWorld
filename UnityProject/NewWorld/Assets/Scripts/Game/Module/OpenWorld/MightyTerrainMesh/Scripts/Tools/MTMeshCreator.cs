@@ -17,6 +17,7 @@ public class MTMeshLODSetting
 public class MTMeshCreator : MonoBehaviour
 {
     public Bounds VolumnBound;
+    [Range(2, 6)]
     public int QuadTreeDepth;
     [HideInInspector]
     public MTMeshLODSetting[] LOD = new MTMeshLODSetting[0];

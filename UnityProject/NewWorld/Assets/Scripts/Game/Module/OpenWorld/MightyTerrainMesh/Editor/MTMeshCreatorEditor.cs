@@ -112,7 +112,7 @@ public class MTMeshCreatorEditor : Editor
                 var childs = comp.transform.GetChildTrsList();
                 for (int j = 0; j < childs.Count; j++)
                 {
-                    childs[j].gameObject.SetActive(j == index + 1);
+                    childs[j].gameObject.SetActive(j == index);
                 }
 
                 // /comp.EditorClearPreview();
