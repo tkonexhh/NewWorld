@@ -26,7 +26,7 @@ internal class MTPatch
     }
     public static void Push(MTPatch p)
     {
-        p.m_Go.SetActive(false);
+        p.gameObject.SetActive(false);
         _qPool.Enqueue(p);
     }
     public static void Clear()
@@ -40,29 +40,31 @@ internal class MTPatch
 
 
     public uint PatchId { get; private set; }
-    private GameObject m_Go;
+    public GameObject gameObject { get; private set; }
     private MeshFilter m_Mesh;
+
     public MTPatch(Material[] mats)
     {
-        m_Go = new GameObject("_TerrainPatch");
+        gameObject = new GameObject("_TerrainPatch");
         MeshRenderer meshR;
-        m_Mesh = m_Go.AddComponent<MeshFilter>();
-        meshR = m_Go.AddComponent<MeshRenderer>();
+        m_Mesh = gameObject.AddComponent<MeshFilter>();
+        meshR = gameObject.AddComponent<MeshRenderer>();
         meshR.materials = mats;
     }
     public void Reset(uint id, Mesh m)
     {
-        m_Go.SetActive(true);
+        gameObject.SetActive(true);
         PatchId = id;
         m_Mesh.mesh = m;
     }
     private void DestroySelf()
     {
-        if (m_Go != null)
-            MonoBehaviour.Destroy(m_Go);
-        m_Go = null;
+        if (gameObject != null)
+            MonoBehaviour.Destroy(gameObject);
+        gameObject = null;
         m_Mesh = null;
     }
+
 }
 
 // }

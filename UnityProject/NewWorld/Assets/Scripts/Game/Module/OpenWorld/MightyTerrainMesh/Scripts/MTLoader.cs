@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MightyTerrainMesh;
+using GFrame;
 
 internal class MTRuntimeMesh
 {
@@ -19,7 +20,6 @@ internal class MTRuntimeMesh
 
     public Mesh GetMesh(int lod)
     {
-        Debug.LogError("GetMesh:" + lod);
         lod = Mathf.Clamp(lod, 0, m_LODMeshs.Length - 1);
         return m_LODMeshs[lod];
     }
@@ -39,6 +39,9 @@ public class MTLoader : MonoBehaviour
     private Dictionary<uint, MTPatch> m_PatchesFlipBuffer = new Dictionary<uint, MTPatch>();
     //meshes
     private Dictionary<int, MTRuntimeMesh> m_MeshPool = new Dictionary<int, MTRuntimeMesh>();
+
+
+    private GameObject m_Go;
     private bool m_Dirty = true;
     private Mesh GetMesh(uint patchId)
     {
@@ -62,17 +65,18 @@ public class MTLoader : MonoBehaviour
     {
         if (DataName == "")
             return;
+        m_Go = new GameObject("Chunk");
+        m_Go.Reset();
+
         try
         {
             m_Header = MTFileUtils.LoadQuadTreeHeader(DataName);
 
-            m_Root = new MTQuadTreeNode(m_Header.QuadTreeDepth, m_Header.BoundMin, m_Header.BoundMax);
+            m_Root = new MTQuadTreeNode(m_Header.QuadTreeDepth, m_Header.BoundMin, m_Header.BoundMax, Vector3.zero);
             foreach (var mh in m_Header.Meshes.Values)
                 m_Root.AddMesh(mh);
             int gridMax = 1 << m_Header.QuadTreeDepth;//1<< X 相当于 2的X次方
-            mVisiblePatches = new MTArray<uint>(gridMax * gridMax);
-            //以上其实就相当于
-            // mVisiblePatches = new MTArray<uint>((int)Mathf.Pow(2, 2 * m_Header.QuadTreeDepth));
+            mVisiblePatches = new MTArray<uint>(gridMax * gridMax);//(int)Mathf.Pow(2, 2 * m_Header.QuadTreeDepth)
 
             if (lodPolicy.Length < m_Header.LOD)
             {
@@ -90,6 +94,7 @@ public class MTLoader : MonoBehaviour
             m_Root = null;
             Debug.LogError("MTLoader load quadtree header failed");
         }
+
         m_Camera = GetComponent<Camera>();
     }
 
@@ -104,9 +109,10 @@ public class MTLoader : MonoBehaviour
         if (m_Camera == null || m_Root == null || !m_Camera.enabled || !m_Dirty)
             return;
         m_Dirty = false;
-        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(m_Camera);
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(m_Camera);//视景平面 得到摄像机视锥
         mVisiblePatches.Reset();
-        m_Root.RetrieveVisibleMesh(planes, transform.position, lodPolicy, mVisiblePatches);
+        //transform 为玩家中心点
+        m_Root.GetVisibleMesh(planes, transform.position, lodPolicy, mVisiblePatches);
         m_PatchesFlipBuffer.Clear();
         for (int i = 0; i < mVisiblePatches.Length; ++i)
         {
@@ -123,6 +129,7 @@ public class MTLoader : MonoBehaviour
                 if (m != null)
                 {
                     MTPatch patch = MTPatch.Pop(m_Header.RuntimeMats);
+                    patch.gameObject.transform.SetParent(m_Go.transform);
                     patch.Reset(pId, m);
                     m_PatchesFlipBuffer.Add(pId, patch);
                 }

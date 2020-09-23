@@ -9,7 +9,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Qarth
+namespace GFrame.Sample
 {
     public class TimerTest : MonoBehaviour
     {

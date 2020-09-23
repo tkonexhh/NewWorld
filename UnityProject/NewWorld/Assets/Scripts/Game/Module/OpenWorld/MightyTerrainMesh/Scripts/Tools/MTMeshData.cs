@@ -15,10 +15,10 @@
         }
     }
 
-    public class MTQuadTreeHeader//四叉树
+    public class MTQuadTreeHeader//四叉树头
     {
         public int QuadTreeDepth = 0;//深度
-        public Vector3 BoundMin = Vector3.zero;
+        public Vector3 BoundMin = Vector3.zero;//边界
         public Vector3 BoundMax = Vector3.zero;
         public int LOD = 1;
         public string DataName { get; private set; }
@@ -50,38 +50,42 @@
         }
     }
 
-    public class MTQuadTreeNode
+    public class MTQuadTreeNode//四叉树Node
     {
-        public Bounds Bound { get; private set; }
+        public Bounds Bound { get; private set; }//包围盒
+        public Vector3 Offset { get; private set; }
         public int MeshID { get; private set; }
-        protected MTQuadTreeNode[] mSubNode;
-        public MTQuadTreeNode(int depth, Vector3 min, Vector3 max)
+        protected MTQuadTreeNode[] m_SubNodes;//四个子Node
+        public MTQuadTreeNode(int depth, Vector3 min, Vector3 max, Vector3 offset)
         {
             Vector3 center = 0.5f * (min + max);
             Vector3 size = max - min;
-            Bound = new Bounds(center, size);
+            Bound = new Bounds(center + offset, size);
+            Offset = offset;
             if (depth > 0)
             {
-                mSubNode = new MTQuadTreeNode[4];
+                m_SubNodes = new MTQuadTreeNode[4];
                 Vector3 subMin = new Vector3(center.x - 0.5f * size.x, min.y, center.z - 0.5f * size.z);
                 Vector3 subMax = new Vector3(center.x, max.y, center.z);
-                mSubNode[0] = new MTQuadTreeNode(depth - 1, subMin, subMax);
+                m_SubNodes[0] = new MTQuadTreeNode(depth - 1, subMin, subMax, offset);
                 subMin = new Vector3(center.x, min.y, center.z - 0.5f * size.z);
                 subMax = new Vector3(center.x + 0.5f * size.x, max.y, center.z);
-                mSubNode[1] = new MTQuadTreeNode(depth - 1, subMin, subMax);
+                m_SubNodes[1] = new MTQuadTreeNode(depth - 1, subMin, subMax, offset);
                 subMin = new Vector3(center.x - 0.5f * size.x, min.y, center.z);
                 subMax = new Vector3(center.x, max.y, center.z + 0.5f * size.z);
-                mSubNode[2] = new MTQuadTreeNode(depth - 1, subMin, subMax);
+                m_SubNodes[2] = new MTQuadTreeNode(depth - 1, subMin, subMax, offset);
                 subMin = new Vector3(center.x, min.y, center.z);
                 subMax = new Vector3(center.x + 0.5f * size.x, max.y, center.z + 0.5f * size.z);
-                mSubNode[3] = new MTQuadTreeNode(depth - 1, subMin, subMax);
+                m_SubNodes[3] = new MTQuadTreeNode(depth - 1, subMin, subMax, offset);
             }
         }
-        public void RetrieveVisibleMesh(Plane[] planes, Vector3 viewCenter, float[] lodPolicy, MTArray<uint> visible)
+
+        public void GetVisibleMesh(Plane[] planes, Vector3 viewCenter, float[] lodPolicy, MTArray<uint> visible)
         {
+            //TODO 原理是只有这个块完全在视野内 在会显示 有问题 需要只露出一点点就显示
             if (GeometryUtility.TestPlanesAABB(planes, Bound))
             {
-                if (mSubNode == null)
+                if (m_SubNodes == null)
                 {
                     float distance = Vector3.Distance(viewCenter, Bound.center);
                     for (uint lod = 0; lod < lodPolicy.Length; ++lod)
@@ -98,24 +102,25 @@
                 }
                 else
                 {
-                    for (int i = 0; i < 4; ++i)
+                    for (int i = 0; i < 4; ++i)//递归一下
                     {
-                        mSubNode[i].RetrieveVisibleMesh(planes, viewCenter, lodPolicy, visible);
+                        m_SubNodes[i].GetVisibleMesh(planes, viewCenter, lodPolicy, visible);
                     }
                 }
             }
         }
+
         public void AddMesh(MTMeshHeader meshh)
         {
-            if (mSubNode == null && Bound.Contains(meshh.Center))
+            if (m_SubNodes == null && Bound.Contains(meshh.Center + Offset))
             {
                 MeshID = meshh.MeshID;
             }
-            else if (mSubNode != null)
+            else if (m_SubNodes != null)
             {
                 for (int i = 0; i < 4; ++i)
                 {
-                    mSubNode[i].AddMesh(meshh);
+                    m_SubNodes[i].AddMesh(meshh);
                 }
             }
         }

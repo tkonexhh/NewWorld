@@ -102,7 +102,7 @@ namespace GFrame
         public static readonly string uiCode_Panel =
             "using UnityEngine;\n" +
             "using UnityEngine.UI;\n" +
-            "using Qarth;\n" +
+            "using GFrame;\n" +
             "using System;\n\n" +
             "namespace " + GConfigureDefine.namespaceStr + "\n{{\n" +
             "\tpublic partial class {0} : AbstractPanel\n" +
@@ -112,7 +112,7 @@ namespace GFrame
         public static readonly string uiCode_AnimPanel =
             "using UnityEngine;\n" +
             "using UnityEngine.UI;\n" +
-            "using Qarth;\n" +
+            "using GFrame;\n" +
             "using System;\n\n" +
             "namespace " + GConfigureDefine.namespaceStr + "\n{{\n" +
             "\tpublic partial class {0} : AbstractAnimPanel\n" +
@@ -125,7 +125,7 @@ namespace GFrame
             "using UnityEngine.UI;\n" +
             "using UnityEngine.Assertions;\n" +
             "using System;\n\n" +
-            "using Qarth;\n\n" +
+            "using GFrame;\n\n" +
             "namespace " + GConfigureDefine.namespaceStr + "\n{{\n" +
             "\tpublic partial class {0} \n" +
             "\t{{\n{1}\n}}\n}" +
