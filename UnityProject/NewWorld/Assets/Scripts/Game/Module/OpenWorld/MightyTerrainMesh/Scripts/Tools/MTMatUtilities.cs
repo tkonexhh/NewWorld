@@ -84,7 +84,9 @@ namespace MightyTerrainMesh
             if (matCount <= 0)
                 return;
             //base pass
-            SaveMaterail(dataName, t, 0, 0, "MT/Standard-BasePass");
+            //Universal Render Pipeline/Terrain/Lit
+            // SaveMaterail(dataName, t, 0, 0, "MT/Standard-BasePass");
+            SaveMaterail(dataName, t, 0, 0, "Universal Render Pipeline/Terrain/Lit");
             for (int i = 1; i < matCount; ++i)
             {
                 SaveMaterail(dataName, t, i, i * 4, "MT/Standard-AddPass");

@@ -26,8 +26,23 @@ namespace Game.Logic
         private Dictionary<uint, MTPatch> m_PatchesFlipBuffer = new Dictionary<uint, MTPatch>();
         //meshes
         private Dictionary<int, MTRuntimeMesh> m_MeshPool = new Dictionary<int, MTRuntimeMesh>();
-        private GameObject m_Go;
+        private GameObject gameObject;
+        public Vector2Int pos { set; get; }
+
         private bool m_Dirty = true;
+        private bool m_ClearFlag = false;
+        public bool ClearFlag
+        {
+            get => m_ClearFlag;
+            set
+            {
+                m_ClearFlag = value;
+                CheckClear = false;
+                m_ClearTimer = 0;
+            }
+        }
+        public bool CheckClear { get; private set; }
+        private float m_ClearTimer = 0;
 
         public Camera camera { set; get; }
         public Transform forcusTrans { set; get; }
@@ -36,12 +51,10 @@ namespace Game.Logic
         public MapChunk(string dataName, Vector3 pos)
         {
             m_DataName = dataName;
-            m_Go = new GameObject("MapChunk");
-            var collider = m_Go.AddComponent<BoxCollider>();
-            collider.center = m_Go.transform.position + new Vector3(WorldDefine.ChunkSize / 2, 0, WorldDefine.ChunkSize / 2);
-            collider.size = new Vector3(WorldDefine.ChunkSize * 2, WorldDefine.ChunkSize, WorldDefine.ChunkSize * 2);
-            m_Go.Reset();
-            m_Go.transform.position = pos;
+            gameObject = new GameObject("MapChunk" + pos);
+
+            gameObject.Reset();
+            gameObject.transform.position = pos;
             if (m_DataName == "")
                 return;
 
@@ -103,8 +116,21 @@ namespace Game.Logic
 
         public void Update()
         {
+            if (m_ClearFlag)
+            {
+                m_ClearTimer += Time.deltaTime;
+                if (m_ClearTimer >= WorldDefine.DelayReleaseTime)
+                {
+                    m_ClearTimer = 0;
+                    CheckClear = true;
+                    return;
+                }
+
+            }
+
+
             //every 10 frame update once
-            if (camera == null || m_Root == null || forcusTrans == null || !camera.enabled || !m_Dirty)
+            if (camera == null || m_Root == null || forcusTrans == null || !camera.enabled || !m_Dirty || CheckClear)
                 return;
             m_Dirty = false;
             Plane[] planes = GeometryUtility.CalculateFrustumPlanes(camera);//视景平面 得到摄像机视锥
@@ -129,10 +155,14 @@ namespace Game.Logic
                     if (m != null)
                     {
                         MTPatch patch = MTPatch.Pop(m_Header.RuntimeMats);
-                        patch.gameObject.transform.SetParent(m_Go.transform);
-                        patch.gameObject.Reset();
-                        patch.Reset(pId, m);
-                        m_PatchesFlipBuffer.Add(pId, patch);
+                        if (patch.gameObject != null)
+                        {
+                            patch.gameObject.transform.SetParent(gameObject.transform);
+                            patch.gameObject.Reset();
+                            patch.Reset(pId, m);
+                            m_PatchesFlipBuffer.Add(pId, patch);
+                        }
+
                     }
                 }
             }
@@ -151,6 +181,19 @@ namespace Game.Logic
         {
             Gizmos.color = new Color(1, 0, 0, 0.7f);
             Gizmos.DrawWireCube(m_Root.Bound.center, m_Root.Bound.extents * 2);
+        }
+
+        public void Release()
+        {
+            camera = null;
+            m_Root = null;
+            forcusTrans = null;
+            m_MeshPool.Clear();
+            m_PatchesFlipBuffer.Clear();
+            m_ActivePatches.Clear();
+            //TODO
+            WorldMgr.Destroy(gameObject);
+
         }
     }
 

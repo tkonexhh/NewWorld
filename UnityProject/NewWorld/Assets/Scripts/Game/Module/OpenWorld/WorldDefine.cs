@@ -16,6 +16,12 @@ namespace Game.Logic
     public class WorldDefine
     {
         public const int ChunkSize = 1000;
+        public static Vector2Int WorldSize = new Vector2Int(500, 500);
+        public static float ChunckMaxDistance = 1.41422f;//根号2的近似值 1.414214
+
+        public const float CheckTime = 0.1f;
+        public const float DelayReleaseTime = 1.0f;
     }
+
 
 }
