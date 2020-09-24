@@ -21,7 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: demo2_0
-  m_Shader: {fileID: 4800000, guid: 69c1f799e772cb6438f56c23efccb782, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: e5dac8cdabd8d43d8a055be1ab4c8f92,
+    type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -32,6 +33,26 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_1153DA41:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_366FE97C:
+        m_Texture: {fileID: 2800000, guid: 8b9eddcfb1e924e6eb7aa509d9c5a158, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_BBFEDFBE:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_C8E11E4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_E627767C:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Control:
         m_Texture: {fileID: 2800000, guid: 8b9eddcfb1e924e6eb7aa509d9c5a158, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -95,7 +116,9 @@ Material:
     m_Floats:
     - _EnableHeightBlend: 0
     - _EnableInstancedPerPixelNormal: 1
+    - _Glossiness: 0.5
     - _HeightTransition: 0
+    - _Metallic: 0
     - _Metallic0: 0
     - _Metallic1: 0
     - _Metallic2: 0
@@ -106,4 +129,6 @@ Material:
     - _Smoothness2: 0.5
     - _Smoothness3: 0.5
     m_Colors:
+    - Vector2_9D1E9F7E: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}

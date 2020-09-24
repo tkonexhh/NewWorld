@@ -9,25 +9,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 
 namespace Game.Logic
 {
     public class RoleTest : MonoBehaviour
     {
+        [SerializeField] private CinemachineVirtualCamera m_Camera;
         // Start is called before the first frame update
         void Start()
         {
             GamePlayMgr.S.Init();
             var role = EntityFactory.CreateRole();
             role.transform.position = Vector3.zero;
+
+            m_Camera.Follow = role.transform;
+            m_Camera.LookAt = role.transform;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
 
-        }
     }
 
 }
