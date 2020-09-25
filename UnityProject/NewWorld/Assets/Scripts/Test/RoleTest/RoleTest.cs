@@ -22,10 +22,12 @@ namespace Game.Logic
         {
             GamePlayMgr.S.Init();
             var role = EntityFactory.CreateRole();
-            //role.transform.position = Vector3.zero;
+            role.onRoleCreated += (r) =>
+            {
+                m_Camera.Follow = r.transform;
+                m_Camera.LookAt = r.transform;
+            };
 
-            m_Camera.Follow = role.transform;
-            m_Camera.LookAt = role.transform;
         }
 
 

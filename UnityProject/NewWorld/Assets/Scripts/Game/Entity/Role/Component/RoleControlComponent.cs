@@ -9,6 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GFrame;
 
 
 namespace Game.Logic
@@ -17,11 +18,18 @@ namespace Game.Logic
     {
         private bool isDead = false;
         private bool isInjured = false;
+        private bool canAction = true;
+
+        private Role_Player player;
 
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
+            player = (Role_Player)role;
+
+
         }
+
     }
 
 }

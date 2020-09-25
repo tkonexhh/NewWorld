@@ -55,9 +55,27 @@ namespace Game.Logic
 
         public void SetVelocity(Vector2 vec)
         {
-            m_Animator.SetBool(m_KeyHash_BoolMoving, true);
+            //m_Animator.SetBool(m_KeyHash_BoolMoving, true);
             m_Animator.SetFloat(m_KeyHash_FloatVelocityX, vec.x);
             m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, vec.y);
+        }
+
+        public void SetTalking()
+        {
+            // currentConversation = Random.Range(1, 9);
+            m_Animator.SetInteger(m_KeyHash_IntTalking, Random.Range(1, 9));
+            Debug.LogError(m_Animator.GetInteger(m_KeyHash_IntTalking));
+        }
+
+        public void SetTalking(int index)
+        {
+            Debug.LogError("SetTalking:" + index);
+            m_Animator.SetInteger(m_KeyHash_IntTalking, index);
+        }
+
+        public void StopTalking()
+        {
+            m_Animator.SetInteger(m_KeyHash_IntTalking, 0);
         }
     }
 

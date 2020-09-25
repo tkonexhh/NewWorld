@@ -9,15 +9,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using GFrame;
 
 namespace Game.Logic
 {
-    public class EntityStateMachineComponent : EntityComponennt
+    public class EntityFSMComponent : EntityComponennt
     {
+        private FSMStateMachine<Entity> m_FSM;
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
+            m_FSM = new FSMStateMachine<Entity>(ownner);
         }
     }
 

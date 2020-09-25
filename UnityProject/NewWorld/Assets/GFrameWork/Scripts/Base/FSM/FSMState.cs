@@ -10,9 +10,9 @@ namespace GFrame
             get { return this.GetType().Name; }
         }
 
+
         public virtual void Enter(T entity, params object[] args)
         {
-
         }
 
         public virtual void Execute(T entity, float dt)
@@ -22,7 +22,6 @@ namespace GFrame
 
         public virtual void Exit(T entity)
         {
-
         }
 
         public virtual void OnMsg(T entity, int key, params object[] args)

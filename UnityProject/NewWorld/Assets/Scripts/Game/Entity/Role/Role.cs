@@ -28,10 +28,12 @@ namespace Game.Logic
         private RoleAppearanceComponent m_AppearanceComponent;
         private RoleEquipComponent m_RoleEquipComponent;
         private RoleAnimComponent m_AnimComponent;
+        private RoleMonoReference m_MonoReference;
 
 
         public RoleAppearanceComponent appearanceComponent => m_AppearanceComponent;
         public RoleAnimComponent animComponent => m_AnimComponent;
+        public RoleMonoReference monoReference => m_MonoReference;
 
 
         public delegate void OnRoleCreated(Role role);
@@ -51,6 +53,7 @@ namespace Game.Logic
                 m_Transform = m_GameObject.transform;
                 target.transform.localPosition = Vector3.zero;
 
+                m_MonoReference = target.GetComponent<RoleMonoReference>();
                 m_AppearanceComponent = AddComponent(new RoleAppearanceComponent());
                 m_AnimComponent = AddComponent(new RoleAnimComponent());
 

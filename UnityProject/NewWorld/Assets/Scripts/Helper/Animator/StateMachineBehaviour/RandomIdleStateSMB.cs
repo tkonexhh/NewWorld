@@ -15,13 +15,14 @@ namespace Game.Logic
 {
     public class RandomIdleStateSMB : StateMachineBehaviour
     {
+
         public int numberOfStates = 3;
         public float minNormTime = 0f;
         public float maxNormTime = 5f;
 
         protected float m_RandomNormTime;
 
-        readonly int m_HashRandomIdle = Animator.StringToHash("RandomIdle");
+        readonly int m_HashRandomIdle = Animator.StringToHash("Talking");
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -34,7 +35,8 @@ namespace Game.Logic
             // If trainsitioning away from this state reset the random idle parameter to -1.
             if (animator.IsInTransition(0) && animator.GetCurrentAnimatorStateInfo(0).fullPathHash == stateInfo.fullPathHash)
             {
-                animator.SetInteger(m_HashRandomIdle, -1);
+                Debug.LogError("OnStateUpdate---0");
+                animator.SetInteger(m_HashRandomIdle, 0);
             }
 
             // If the state is beyond the randomly decided normalised time and not yet transitioning then set a random idle.
