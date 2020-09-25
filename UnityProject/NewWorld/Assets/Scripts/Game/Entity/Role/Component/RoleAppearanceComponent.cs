@@ -14,7 +14,7 @@ using GFrame;
 
 namespace Game.Logic
 {
-    public class RoleAppearanceComponent : EntityComponennt, IEventListener
+    public class RoleAppearanceComponent : RoleBaseComponent, IEventListener
     {
         private CharacterAppearance m_Appearance;
 
@@ -23,7 +23,7 @@ namespace Game.Logic
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
-            m_Appearance = (ownner as Role).gameObject.GetComponentInChildren<CharacterAppearance>();
+            m_Appearance = role.gameObject.GetComponentInChildren<CharacterAppearance>();
 
             RegisterEvent();
         }

@@ -35,7 +35,7 @@ namespace Game.Logic
             m_EquipmentMgr.OnInit();
 
 
-            m_Role = new Role();
+            m_Role = new Role_Player();
         }
 
         public void Init()

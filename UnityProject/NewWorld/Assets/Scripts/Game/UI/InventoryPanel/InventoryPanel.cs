@@ -9,12 +9,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using GFrame;
 
 namespace Game.Logic
 {
     public class InventoryPanel : AbstractPanel
     {
+        [SerializeField] private Button m_BtnClose;
         [SerializeField] private InventoryBag m_Bag;
         [SerializeField] private InventoryEquipment m_Equipment;
         [SerializeField] private InventroyItemTipsPage m_ItemTips;
@@ -24,11 +26,11 @@ namespace Game.Logic
         protected override void OnUIInit()
         {
             base.OnUIInit();
+            m_BtnClose.onClick.AddListener(CloseSelfPanel);
 
             m_InventoryCore.Init();
             m_InventoryCore.AddInventoryView(m_Bag.inventoryView);
             m_InventoryCore.AddInventoryView(m_Equipment.equipmentView);
-
 
             m_Bag.Init();
             m_Equipment.Init();

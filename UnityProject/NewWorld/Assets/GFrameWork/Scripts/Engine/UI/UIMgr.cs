@@ -32,14 +32,8 @@ namespace GFrame
         public UIRoot uiRoot => m_UIRoot;
         public EventSystem uiEventSystem => m_UIEventSystem;
 
-        private int nextPanelID
-        {
-            get
-            {
-                return ++m_NextPanelID;
-            }
-        }
-        #endregion 
+        private int nextPanelID => ++m_NextPanelID;
+        #endregion
 
         public override void OnSingletonInit()
         {

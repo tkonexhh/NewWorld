@@ -18,7 +18,7 @@ namespace Game.Logic
         public static Role CreateRole()
         {
             Role role = new Role();
-            EntityMgr.S.RegisterEntity(role);
+            // EntityMgr.S.RegisterEntity(role);
 
             return role;
         }

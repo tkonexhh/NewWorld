@@ -28,34 +28,43 @@ namespace Game.Logic
         private RoleAppearanceComponent m_AppearanceComponent;
         private RoleEquipComponent m_RoleEquipComponent;
         private RoleAnimComponent m_AnimComponent;
-        private RoleInputComponent m_InputComponent;
 
 
         public RoleAppearanceComponent appearanceComponent => m_AppearanceComponent;
         public RoleAnimComponent animComponent => m_AnimComponent;
-        public RoleInputComponent inputComponent => m_InputComponent;
 
+
+        public delegate void OnRoleCreated(Role role);
+        public OnRoleCreated onRoleCreated;
+
+        protected virtual string resName => "ModularCharacters_Male";
         public Role() : base()
         {
             m_Data = new RoleData(this);
-            m_GameObject = new GameObject("Role");
-            m_Transform = m_GameObject.transform;
+            // m_GameObject = new GameObject("Role");
 
             //某些组件依赖此物体,需要等加载完成后才能添加组件
-            AddressableResMgr.S.InstantiateAsync("ModularCharacters_Male", (target) =>
+            AddressableResMgr.S.InstantiateAsync(resName, (target) =>
             {
-                target.transform.SetParent(m_GameObject.transform);
+                // target.name = "Player";
+                m_GameObject = target;
+                m_Transform = m_GameObject.transform;
                 target.transform.localPosition = Vector3.zero;
+
                 m_AppearanceComponent = AddComponent(new RoleAppearanceComponent());
                 m_AnimComponent = AddComponent(new RoleAnimComponent());
 
+                OnResLoaded(target);
 
-                target.AddComponent<RoleAnimEvent>();
+                if (onRoleCreated != null)
+                    onRoleCreated(this);
             });
-
+            EntityMgr.S.RegisterEntity(this);
             m_RoleEquipComponent = AddComponent(new RoleEquipComponent());
-            m_InputComponent = AddComponent(new RoleInputComponent());
         }
+
+        protected virtual void OnResLoaded(GameObject obj) { }
+
 
 
         public void Equip(Equipment equipment)

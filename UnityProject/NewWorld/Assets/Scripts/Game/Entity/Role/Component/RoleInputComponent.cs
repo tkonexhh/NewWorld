@@ -17,13 +17,14 @@ namespace Game.Logic
     //响应Input
     public class RoleInputComponent : RoleBaseComponent
     {
+        private CharacterController m_Controller;
         private Vector2 m_InputMove = Vector2.zero;
         private Vector2 m_VecMove = Vector2.zero;
         private float m_VecSpeed = 3.0f;
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
-
+            m_Controller = role.gameObject.GetComponentInChildren<CharacterController>();
             GameInputMgr.S.mainAction.Move.performed += OnMovePerformed;
             GameInputMgr.S.mainAction.Move.canceled += OnMoveCancled;
         }
@@ -32,13 +33,11 @@ namespace Game.Logic
         {
             m_InputMove = callback.ReadValue<Vector2>();
             Debug.LogError(m_InputMove);
-            // role.animComponent.SetVelocity(m_InputMove);
         }
 
         private void OnMoveCancled(InputAction.CallbackContext callback)
         {
             m_InputMove = Vector2.zero;
-            // role.animComponent.SetVelocity(m_InputMove);
         }
 
         public override void Update(float dt)

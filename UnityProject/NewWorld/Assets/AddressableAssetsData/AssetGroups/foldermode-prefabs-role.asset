@@ -29,6 +29,12 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: 64aa4b83d87a742b8a6f6cb2d320fc3f
+    m_Address: ModularCharacters_Male_Game
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: e0dac01e589ea40acabba3334c5bd7db
     m_Address: ModularCharacters_Male_Backup
     m_ReadOnly: 0

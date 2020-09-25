@@ -54,7 +54,7 @@ namespace GFrame
             if (UIMgr.isApplicationQuit) return;
 
             ClosePage();
-
+            UnRegisterPageEvent();
             BeforeDestory();
 
         }
@@ -121,7 +121,6 @@ namespace GFrame
             if (m_HasOpen)
             {
                 m_HasOpen = false;
-                UnRegisterPageEvent();
                 OnClose();
             }
         }

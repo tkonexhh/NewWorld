@@ -19,15 +19,9 @@ namespace Game.Logic
     {
         private GameInput m_Input;
 
-        public GameInput.MainActions mainAction
-        {
-            get { return m_Input.Main; }
-        }
-
-        public GameInput.UIActions uiAction
-        {
-            get { return m_Input.UI; }
-        }
+        public GameInput.MainActions mainAction => m_Input.Main;
+        public GameInput.UIActions uiAction => m_Input.UI;
+        public GameInput.ShortcutActions shortcutActions => m_Input.Shortcut;
 
         public override void OnSingletonInit()
         {
@@ -39,12 +33,14 @@ namespace Game.Logic
         {
             m_Input.UI.Enable();
             m_Input.Main.Enable();
+            m_Input.Shortcut.Enable();
         }
 
         public void DisableInput()
         {
             m_Input.UI.Disable();
             m_Input.Main.Disable();
+            m_Input.Shortcut.Disable();
         }
 
 

@@ -1,8 +1,8 @@
 /************************
-	FileName:/Scripts/Game/GamePlay/IEngineMgr.cs
+	FileName:/Scripts/Define/GameDefine.cs
 	CreateAuthor:neo.xu
-	CreateTime:8/13/2020 7:46:27 PM
-	Tip:8/13/2020 7:46:27 PM
+	CreateTime:9/25/2020 2:15:05 PM
+	Tip:9/25/2020 2:15:05 PM
 ************************/
 
 
@@ -13,9 +13,9 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public interface IEngineMgr
+    public class GameDefine
     {
-
+        public const float role_Rotate_Speed = 10;
     }
 
 }

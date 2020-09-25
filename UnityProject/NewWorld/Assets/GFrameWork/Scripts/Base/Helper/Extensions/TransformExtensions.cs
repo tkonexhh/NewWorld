@@ -89,6 +89,11 @@ namespace GFrame
             transform.position = newPosition;
         }
 
+        public static void SetXYZ(this Transform transform, Vector3 pos)
+        {
+            transform.position = pos;
+        }
+
         /// <summary>
         /// Translates this transform along the X axis.
         /// </summary>

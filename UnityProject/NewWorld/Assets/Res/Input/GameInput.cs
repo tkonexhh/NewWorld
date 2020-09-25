@@ -161,6 +161,14 @@ namespace Game.Logic
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Button"",
+                    ""id"": ""d9a0dcd1-eb2d-4d01-858c-b2c0c28be808"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -284,6 +292,66 @@ namespace Game.Logic
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""77a6ede1-8f17-4921-a3ee-c114f58c4398"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""f6a97f26-3a00-4038-bdec-a290eea31d7f"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""911f8308-611f-45f2-9638-1b39d5087696"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
+        },
+        {
+            ""name"": ""Shortcut"",
+            ""id"": ""f79117a0-28f6-41bf-a1ba-54763ee3664d"",
+            ""actions"": [
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""9cab53e5-e000-4192-9c1c-d08f8ccb764b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9acad71e-74a5-4416-b502-5010da23be24"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -309,6 +377,10 @@ namespace Game.Logic
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Any = m_UI.FindAction("Any", throwIfNotFound: true);
             m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
+            m_UI_Rotate = m_UI.FindAction("Rotate", throwIfNotFound: true);
+            // Shortcut
+            m_Shortcut = asset.FindActionMap("Shortcut", throwIfNotFound: true);
+            m_Shortcut_Inventory = m_Shortcut.FindAction("Inventory", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -393,12 +465,14 @@ namespace Game.Logic
         private IUIActions m_UIActionsCallbackInterface;
         private readonly InputAction m_UI_Any;
         private readonly InputAction m_UI_Move;
+        private readonly InputAction m_UI_Rotate;
         public struct UIActions
         {
             private @GameInput m_Wrapper;
             public UIActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @Any => m_Wrapper.m_UI_Any;
             public InputAction @Move => m_Wrapper.m_UI_Move;
+            public InputAction @Rotate => m_Wrapper.m_UI_Rotate;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -414,6 +488,9 @@ namespace Game.Logic
                     @Move.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
+                    @Rotate.started -= m_Wrapper.m_UIActionsCallbackInterface.OnRotate;
+                    @Rotate.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnRotate;
+                    @Rotate.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnRotate;
                 }
                 m_Wrapper.m_UIActionsCallbackInterface = instance;
                 if (instance != null)
@@ -424,10 +501,46 @@ namespace Game.Logic
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
+                    @Rotate.started += instance.OnRotate;
+                    @Rotate.performed += instance.OnRotate;
+                    @Rotate.canceled += instance.OnRotate;
                 }
             }
         }
         public UIActions @UI => new UIActions(this);
+
+        // Shortcut
+        private readonly InputActionMap m_Shortcut;
+        private IShortcutActions m_ShortcutActionsCallbackInterface;
+        private readonly InputAction m_Shortcut_Inventory;
+        public struct ShortcutActions
+        {
+            private @GameInput m_Wrapper;
+            public ShortcutActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Inventory => m_Wrapper.m_Shortcut_Inventory;
+            public InputActionMap Get() { return m_Wrapper.m_Shortcut; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(ShortcutActions set) { return set.Get(); }
+            public void SetCallbacks(IShortcutActions instance)
+            {
+                if (m_Wrapper.m_ShortcutActionsCallbackInterface != null)
+                {
+                    @Inventory.started -= m_Wrapper.m_ShortcutActionsCallbackInterface.OnInventory;
+                    @Inventory.performed -= m_Wrapper.m_ShortcutActionsCallbackInterface.OnInventory;
+                    @Inventory.canceled -= m_Wrapper.m_ShortcutActionsCallbackInterface.OnInventory;
+                }
+                m_Wrapper.m_ShortcutActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Inventory.started += instance.OnInventory;
+                    @Inventory.performed += instance.OnInventory;
+                    @Inventory.canceled += instance.OnInventory;
+                }
+            }
+        }
+        public ShortcutActions @Shortcut => new ShortcutActions(this);
         private int m_KeyBoardSchemeIndex = -1;
         public InputControlScheme KeyBoardScheme
         {
@@ -445,6 +558,11 @@ namespace Game.Logic
         {
             void OnAny(InputAction.CallbackContext context);
             void OnMove(InputAction.CallbackContext context);
+            void OnRotate(InputAction.CallbackContext context);
+        }
+        public interface IShortcutActions
+        {
+            void OnInventory(InputAction.CallbackContext context);
         }
     }
 }

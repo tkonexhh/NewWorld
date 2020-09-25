@@ -46,6 +46,7 @@ namespace Game.Logic
 
         private void OnClickCreate()
         {
+
             BasicAppearance basicAppearance = new BasicAppearance();
             basicAppearance.hairID = m_Hair.CurIndex;
             basicAppearance.faceID = m_Face.CurIndex;
@@ -57,6 +58,7 @@ namespace Game.Logic
             basicAppearance.bodyArtColor = CharacterColorConfig.bodyColors[m_BodyArtColor.SelectIndex];
 
             SceneMgr.S.OpenScene(SceneID.GameScene);
+            CloseSelfPanel();
         }
     }
 

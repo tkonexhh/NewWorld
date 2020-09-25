@@ -11,13 +11,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GFrame;
+using UnityEngine.InputSystem;
 
 namespace Game.Logic
 {
     public class InventoryRoleShow : MonoBehaviour, IEventListener
     {
         [SerializeField] private RawImage m_RawImage;
-
+        private float m_RoleRotateSpeed;
         private CharacterAppearance m_CharacterAppearance;
         private void Awake()
         {
@@ -32,6 +33,28 @@ namespace Game.Logic
                 target.transform.position = Vector3.one * 5000;
                 m_CharacterAppearance = target.GetComponentInChildren<CharacterAppearance>();
             });
+
+            GameInputMgr.S.uiAction.Rotate.performed += OnRoleRotatePerformed;
+            GameInputMgr.S.uiAction.Rotate.canceled += OnRoleRotateCanceled;
+        }
+
+        private void OnRoleRotatePerformed(InputAction.CallbackContext callback)
+        {
+            m_RoleRotateSpeed = -callback.ReadValue<float>() * 10;
+        }
+
+        private void OnRoleRotateCanceled(InputAction.CallbackContext callback)
+        {
+            m_RoleRotateSpeed = 0;
+        }
+
+        private void Update()
+        {
+            if (m_RoleRotateSpeed != 0)
+            {
+                Vector3 target_angle = m_CharacterAppearance.transform.rotation.eulerAngles;
+                m_CharacterAppearance.transform.rotation = Quaternion.Euler(target_angle + new Vector3(0, m_RoleRotateSpeed, 0));
+            }
         }
 
         #region IEventListener

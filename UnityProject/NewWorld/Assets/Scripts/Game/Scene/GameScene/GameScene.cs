@@ -11,18 +11,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using GFrame;
 using UnityEngine.Rendering.Universal;
+using Cinemachine;
 
 namespace Game.Logic
 {
     public class GameScene : AbstractScene
     {
+        [SerializeField] private CinemachineVirtualCamera m_CameraPlayer;
+
         protected override void OnSceneInit()
         {
             Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(UIMgr.S.uiRoot.uiCamera);
         }
         protected override void OnSceneEnter()
         {
-            //PlayerMgr.S.role.transform.SetXYZ(Vector3.zero);
+            PlayerMgr.S.role.onRoleCreated += (role) =>
+            {
+                role.transform.SetXYZ(Vector3.zero);
+                m_CameraPlayer.Follow = role.transform;
+                m_CameraPlayer.LookAt = role.transform;
+            };
         }
     }
 
