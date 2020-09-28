@@ -27,7 +27,7 @@ namespace Game.Logic
         {
             base.Init(ownner);
             player = (Role_Player)role;
-
+            player.fsmComponent.SetRoleState(RoleState.Sit);
         }
 
         public bool Moving

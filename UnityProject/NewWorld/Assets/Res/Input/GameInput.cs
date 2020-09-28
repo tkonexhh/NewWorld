@@ -27,6 +27,14 @@ namespace Game.Logic
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Any"",
+                    ""type"": ""Button"",
+                    ""id"": ""92f933a8-6bd2-4500-b0c7-ed1c9f97f06b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -139,6 +147,17 @@ namespace Game.Logic
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f509e303-1cf0-49cf-9bf7-9b0e4451cbf0"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Any"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -373,6 +392,7 @@ namespace Game.Logic
             // Main
             m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
             m_Main_Move = m_Main.FindAction("Move", throwIfNotFound: true);
+            m_Main_Any = m_Main.FindAction("Any", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Any = m_UI.FindAction("Any", throwIfNotFound: true);
@@ -431,11 +451,13 @@ namespace Game.Logic
         private readonly InputActionMap m_Main;
         private IMainActions m_MainActionsCallbackInterface;
         private readonly InputAction m_Main_Move;
+        private readonly InputAction m_Main_Any;
         public struct MainActions
         {
             private @GameInput m_Wrapper;
             public MainActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Main_Move;
+            public InputAction @Any => m_Wrapper.m_Main_Any;
             public InputActionMap Get() { return m_Wrapper.m_Main; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -448,6 +470,9 @@ namespace Game.Logic
                     @Move.started -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
+                    @Any.started -= m_Wrapper.m_MainActionsCallbackInterface.OnAny;
+                    @Any.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnAny;
+                    @Any.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnAny;
                 }
                 m_Wrapper.m_MainActionsCallbackInterface = instance;
                 if (instance != null)
@@ -455,6 +480,9 @@ namespace Game.Logic
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
+                    @Any.started += instance.OnAny;
+                    @Any.performed += instance.OnAny;
+                    @Any.canceled += instance.OnAny;
                 }
             }
         }
@@ -553,6 +581,7 @@ namespace Game.Logic
         public interface IMainActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnAny(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

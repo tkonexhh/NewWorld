@@ -25,6 +25,7 @@ namespace Game.Logic
             m_FSM.stateFactory = new FSMStateFactory<Role>(false);
             m_FSM.stateFactory.RegisterState(RoleState.Talking, new RoleFSMState_Talking());
             m_FSM.stateFactory.RegisterState(RoleState.Relax, new RoleFSMState_Relax());
+            m_FSM.stateFactory.RegisterState(RoleState.Sit, new RoleFSMState_Sit());
         }
 
         public override void Update(float dt)
@@ -42,6 +43,7 @@ namespace Game.Logic
     {
         Relax,
         Talking,
+        Sit,
     }
 
 }
