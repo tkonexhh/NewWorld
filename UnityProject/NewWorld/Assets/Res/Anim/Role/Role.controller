@@ -1389,21 +1389,6 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 50, y: -30, z: 0}
   m_ParentStateMachinePosition: {x: 30, y: 70, z: 0}
   m_DefaultState: {fileID: -4863548320790485176}
---- !u!114 &1511651664131152938
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 188add9e7ce9743cf8f8d6e789f591bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberOfStates: 8
-  minNormTime: 0
-  maxNormTime: 3
 --- !u!206 &1750187988858242365
 BlendTree:
   m_ObjectHideFlags: 1
@@ -2019,8 +2004,7 @@ AnimatorStateMachine:
   - {fileID: -3462232382198721488}
   - {fileID: 1055535669235583175}
   m_StateMachineTransitions: {}
-  m_StateMachineBehaviours:
-  - {fileID: 1511651664131152938}
+  m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -10, y: -80, z: 0}
   m_EntryPosition: {x: 0, y: 140, z: 0}
   m_ExitPosition: {x: 820, y: 110, z: 0}

@@ -18,6 +18,7 @@ namespace Game.Logic
         private float m_Timer;
         public override void Enter(Role entity, params object[] args)
         {
+            Debug.LogError("RoleFSMState_Talking Enter");
             m_Timer = 0;
             RandomTalk(entity);
         }

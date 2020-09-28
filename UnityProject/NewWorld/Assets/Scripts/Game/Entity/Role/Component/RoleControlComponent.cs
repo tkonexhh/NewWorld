@@ -16,6 +16,7 @@ namespace Game.Logic
 {
     public class RoleControlComponent : RoleBaseComponent
     {
+        private bool moving = false;
         private bool isDead = false;
         private bool isInjured = false;
         private bool canAction = true;
@@ -27,8 +28,28 @@ namespace Game.Logic
             base.Init(ownner);
             player = (Role_Player)role;
 
-
         }
+
+        public bool Moving
+        {
+            get => moving;
+            set
+            {
+                moving = value;
+                role.animComponent.SetMoving(moving);
+            }
+        }
+
+        public bool IsInjured
+        {
+            get => isInjured;
+            set
+            {
+                isInjured = value;
+                role.animComponent.SetInjured(isInjured);
+            }
+        }
+
 
     }
 

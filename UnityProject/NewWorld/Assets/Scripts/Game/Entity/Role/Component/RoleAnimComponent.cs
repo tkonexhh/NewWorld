@@ -60,22 +60,25 @@ namespace Game.Logic
             m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, vec.y);
         }
 
-        public void SetTalking()
+        public void SetMoving(bool moving)
         {
-            // currentConversation = Random.Range(1, 9);
-            m_Animator.SetInteger(m_KeyHash_IntTalking, Random.Range(1, 9));
-            Debug.LogError(m_Animator.GetInteger(m_KeyHash_IntTalking));
+            m_Animator.SetBool(m_KeyHash_BoolMoving, moving);
+        }
+
+        public void SetInjured(bool injured)
+        {
+            m_Animator.SetBool(m_KeyHash_BoolInjured, injured);
+        }
+
+        public void SetCrouch(bool crouch)
+        {
+            m_Animator.SetBool(m_KeyHash_BoolCrouch, crouch);
         }
 
         public void SetTalking(int index)
         {
             Debug.LogError("SetTalking:" + index);
             m_Animator.SetInteger(m_KeyHash_IntTalking, index);
-        }
-
-        public void StopTalking()
-        {
-            m_Animator.SetInteger(m_KeyHash_IntTalking, 0);
         }
     }
 

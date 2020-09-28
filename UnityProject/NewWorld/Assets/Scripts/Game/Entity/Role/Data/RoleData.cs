@@ -15,7 +15,6 @@ namespace Game.Logic
 {
     public class RoleData : EntityData
     {
-        public BasicAppearance basicAppearance;
         private RoleAppearanceData m_AppearanceData;
         private RoleEquipmentData m_EquipmentData;
 

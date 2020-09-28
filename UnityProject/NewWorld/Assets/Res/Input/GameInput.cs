@@ -33,7 +33,7 @@ namespace Game.Logic
                 {
                     ""name"": ""WSAD"",
                     ""id"": ""4b268592-915f-4df5-bf3d-249fdcdf48a4"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=1)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -88,7 +88,7 @@ namespace Game.Logic
                 {
                     ""name"": ""Arrow"",
                     ""id"": ""e268f849-8a38-469c-86f1-4d1f5fb4a757"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=1)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
