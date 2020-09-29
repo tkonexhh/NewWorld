@@ -63,7 +63,7 @@ namespace Game.Logic
 
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                role.animComponent.SetCastTrigger();
+                Cast(Random.Range(1, 7));
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha5))
@@ -124,6 +124,12 @@ namespace Game.Logic
         {
             m_InputMove = Vector2.zero;
             player.controlComponent.Moving = false;
+        }
+
+        private void Cast(int action)
+        {
+            player.animComponent.SetAction(action);
+            player.animComponent.SetCastTrigger();
         }
 
     }
