@@ -61,7 +61,44 @@ namespace Game.Logic
                 role.animComponent.SetBlocking(false);
             }
 
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                role.animComponent.SetCastTrigger();
+            }
 
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                role.animComponent.SetCastEndTrigger();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                role.animComponent.SetAttackCastTrigger();
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                role.animComponent.SetCrouch(true);
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftControl))
+            {
+                role.animComponent.SetCrouch(false);
+            }
+
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                role.animComponent.SetLeftRight(1);
+                role.animComponent.SetAction(Random.Range(1, 4));
+                role.animComponent.SetAttackTrigger();
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                role.animComponent.SetLeftRight(2);
+                role.animComponent.SetAction(Random.Range(1, 4));
+                role.animComponent.SetAttackTrigger();
+            }
         }
 
         public override void Exit(Role entity)

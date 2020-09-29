@@ -24,6 +24,7 @@ namespace Game.Logic
 
         private string m_Key_IntTalking = "Talking";
         private string m_Key_IntAction = "Action";
+        private string m_Key_IntLeftRight = "LeftRight";
 
         private string m_Key_FloatVelocityX = "Velocity X";
         private string m_Key_FloatVelocityZ = "Velocity Z";
@@ -38,6 +39,11 @@ namespace Game.Logic
         private string m_Key_Trigger_GetHurt = "GetHurtTrigger";
         private string m_Key_Trigger_Block = "BlockTrigger";
         private string m_Key_Trigger_BlockBreak = "BlockBreakTrigger";
+        private string m_Key_Trigger_Cast = "CastTrigger";
+        private string m_Key_Trigger_AttackCast = "AttackCastTrigger";
+        private string m_Key_Trigger_CastEnd = "CastEndTrigger";
+        private string m_Key_Trigger_Attack = "AttackTrigger";
+        private string m_Key_Trigger_AttackKick = "AttackKickTrigger";
 
         private int m_KeyHash_BoolMoving;
         private int m_KeyHash_BoolInjured;
@@ -46,6 +52,7 @@ namespace Game.Logic
 
         private int m_KeyHash_IntTalking;
         private int m_KeyHash_IntAction;
+        private int m_KeyHash_IntLeftRight;
 
         private int m_KeyHash_FloatVelocityX;
         private int m_KeyHash_FloatVelocityZ;
@@ -60,6 +67,12 @@ namespace Game.Logic
         private int m_KeyHash_TriggerGetHurt;
         private int m_KeyHash_TriggerBlock;
         private int m_KeyHash_TriggerBlockBreak;
+        private int m_KeyHash_TriggerCast;
+        private int m_KeyHash_TriggerAttackCast;
+        private int m_KeyHash_TriggerCastEnd;
+        private int m_KeyHash_TriggerAttact;
+        private int m_KeyHash_TriggerAttactKick;
+
 
         public Animator animator => m_Animator;
 
@@ -74,6 +87,7 @@ namespace Game.Logic
             m_KeyHash_BoolBlock = Animator.StringToHash(m_Key_BoolBlock);
             m_KeyHash_IntTalking = Animator.StringToHash(m_Key_IntTalking);
             m_KeyHash_IntAction = Animator.StringToHash(m_Key_IntAction);
+            m_KeyHash_IntLeftRight = Animator.StringToHash(m_Key_IntLeftRight);
             m_KeyHash_FloatVelocityX = Animator.StringToHash(m_Key_FloatVelocityX);
             m_KeyHash_FloatVelocityZ = Animator.StringToHash(m_Key_FloatVelocityZ);
             m_KeyHash_TriggerTurnLeft = Animator.StringToHash(m_Key_Trigger_TurnLeft);
@@ -86,6 +100,11 @@ namespace Game.Logic
             m_KeyHash_TriggerGetHurt = Animator.StringToHash(m_Key_Trigger_GetHurt);
             m_KeyHash_TriggerBlock = Animator.StringToHash(m_Key_Trigger_Block);
             m_KeyHash_TriggerBlockBreak = Animator.StringToHash(m_Key_Trigger_BlockBreak);
+            m_KeyHash_TriggerCast = Animator.StringToHash(m_Key_Trigger_Cast);
+            m_KeyHash_TriggerAttackCast = Animator.StringToHash(m_Key_Trigger_AttackCast);
+            m_KeyHash_TriggerCastEnd = Animator.StringToHash(m_Key_Trigger_CastEnd);
+            m_KeyHash_TriggerAttact = Animator.StringToHash(m_Key_Trigger_Attack);
+            m_KeyHash_TriggerAttactKick = Animator.StringToHash(m_Key_Trigger_AttackKick);
         }
 
 
@@ -116,6 +135,9 @@ namespace Game.Logic
         }
         #endregion
 
+        #region int
+
+
         public void SetTalking(int index)
         {
             m_Animator.SetInteger(m_KeyHash_IntTalking, index);
@@ -126,6 +148,18 @@ namespace Game.Logic
             m_Animator.SetInteger(m_KeyHash_IntAction, index);
         }
 
+        /// <summary>
+        /// 0 null
+        /// 1 left
+        /// 2 right
+        /// </summary>
+        /// <param name="leftorRight"></param>
+        public void SetLeftRight(int leftorRight)
+        {
+            m_Animator.SetInteger(m_KeyHash_IntLeftRight, leftorRight);
+        }
+
+        #endregion
         public void SetActionTrigger()
         {
             m_Animator.SetTrigger(m_KeyHash_TriggerAction);
@@ -164,6 +198,34 @@ namespace Game.Logic
         public void SetBlockBreakTrigger()
         {
             m_Animator.SetTrigger(m_KeyHash_TriggerBlockBreak);
+        }
+
+        public void SetCastTrigger()
+        {
+            SetTrigger(m_KeyHash_TriggerCast);
+        }
+
+        public void SetAttackCastTrigger()
+        {
+            SetTrigger(m_KeyHash_TriggerAttackCast);
+        }
+
+        public void SetCastEndTrigger()
+        {
+            SetTrigger(m_KeyHash_TriggerCastEnd);
+        }
+        public void SetAttackTrigger()
+        {
+            SetTrigger(m_KeyHash_TriggerAttact);
+        }
+        public void SetAttackKickTrigger()
+        {
+            SetTrigger(m_KeyHash_TriggerAttactKick);
+        }
+
+        private void SetTrigger(int keyhash)
+        {
+            m_Animator.SetTrigger(keyhash);
         }
     }
 

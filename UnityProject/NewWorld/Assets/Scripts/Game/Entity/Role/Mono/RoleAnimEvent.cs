@@ -30,6 +30,11 @@ namespace Game.Logic
         {
 
         }
+
+        public void Shoot()
+        {
+            //施法到目标
+        }
     }
 
 }
