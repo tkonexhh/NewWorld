@@ -25,6 +25,11 @@ namespace Game.Logic
         {
             // Debug.LogError("FootL");
         }
+
+        public void Hit()
+        {
+
+        }
     }
 
 }

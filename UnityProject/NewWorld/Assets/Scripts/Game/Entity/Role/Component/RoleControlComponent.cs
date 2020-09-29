@@ -20,6 +20,7 @@ namespace Game.Logic
         private bool isDead = false;
         private bool isInjured = false;
         private bool canAction = true;
+        private bool weapon = false;
 
         private Role_Player player;
 
@@ -27,7 +28,7 @@ namespace Game.Logic
         {
             base.Init(ownner);
             player = (Role_Player)role;
-            player.fsmComponent.SetRoleState(RoleState.Sit);
+            player.fsmComponent.SetRoleState(RoleState.Relax);
         }
 
         public bool Moving
@@ -47,6 +48,15 @@ namespace Game.Logic
             {
                 isInjured = value;
                 role.animComponent.SetInjured(isInjured);
+            }
+        }
+
+        public bool IsWeapon
+        {
+            get => weapon;
+            set
+            {
+                weapon = value;
             }
         }
 

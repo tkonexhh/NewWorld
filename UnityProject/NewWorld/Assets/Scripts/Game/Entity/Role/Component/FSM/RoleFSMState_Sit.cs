@@ -17,17 +17,13 @@ namespace Game.Logic
     public class RoleFSMState_Sit : FSMState<Role>
     {
         private Role m_Role;
-        public override void Init()
-        {
-            GameInputMgr.S.mainAction.Any.performed += OnAnyPerformed;
-        }
 
         public override void Enter(Role entity, params object[] args)
         {
+            GameInputMgr.S.mainAction.Any.performed += OnAnyPerformed;
             m_Role = entity;
             entity.animComponent.SetAction(0);
             entity.animComponent.SetActionTrigger();
-
         }
 
         public override void Execute(Role entity, float dt)
@@ -39,6 +35,7 @@ namespace Game.Logic
         {
             entity.animComponent.SetAction(-1);
             entity.animComponent.SetActionTrigger();
+            GameInputMgr.S.mainAction.Any.performed -= OnAnyPerformed;
         }
 
         public override void OnMsg(Role entity, int key, params object[] args)

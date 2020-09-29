@@ -65,7 +65,7 @@ namespace GFrame
             {
                 return;
             }
-            state.Init();
+
             m_StateCache.Add(key, state);
         }
 

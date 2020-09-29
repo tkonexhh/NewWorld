@@ -10,8 +10,6 @@ namespace GFrame
             get { return this.GetType().Name; }
         }
 
-        public virtual void Init() { }
-
         public virtual void Enter(T entity, params object[] args)
         {
         }

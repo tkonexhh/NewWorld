@@ -22,10 +22,13 @@ namespace Game.Logic
         {
             base.Init(ownner);
             m_FSM = new FSMStateMachine<Role>(role);
+            m_FSM.SetGlobalState(new RoleFSMState_Global());
             m_FSM.stateFactory = new FSMStateFactory<Role>(false);
             m_FSM.stateFactory.RegisterState(RoleState.Talking, new RoleFSMState_Talking());
             m_FSM.stateFactory.RegisterState(RoleState.Relax, new RoleFSMState_Relax());
             m_FSM.stateFactory.RegisterState(RoleState.Sit, new RoleFSMState_Sit());
+            m_FSM.stateFactory.RegisterState(RoleState.Weapon, new RoleFSMState_Weapon());
+            m_FSM.stateFactory.RegisterState(RoleState.Death, new RoleFSMState_Death());
         }
 
         public override void Update(float dt)
@@ -44,6 +47,8 @@ namespace Game.Logic
         Relax,
         Talking,
         Sit,
+        Weapon,
+        Death,
     }
 
 }
