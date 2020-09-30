@@ -15,20 +15,9 @@ namespace GFrame
         private bool m_IsRunning = true;
         #region 属性
 
-        public FSMState<T> currentState
-        {
-            get { return m_CurrentState; }
-        }
-
-        public FSMState<T> globalState
-        {
-            get { return m_GlobalState; }
-        }
-
-        public FSMState<T> previousState
-        {
-            get { return m_PreviousState; }
-        }
+        public FSMState<T> currentState => m_CurrentState;
+        public FSMState<T> globalState => m_GlobalState;
+        public FSMState<T> previousState => m_PreviousState;
 
         public FSMStateFactory<T> stateFactory
         {

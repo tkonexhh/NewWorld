@@ -28,6 +28,8 @@ namespace Game.Logic
 
         private string m_Key_FloatVelocityX = "Velocity X";
         private string m_Key_FloatVelocityZ = "Velocity Z";
+        private string m_Key_FloatHurtX = "Hurt X";
+        private string m_Key_FloatHurtZ = "Hurt Z";
 
         private string m_Key_Trigger_TurnLeft = "TurnLeftTrigger";
         private string m_Key_Trigger_TurnRight = "TurnLeftTrigger";
@@ -56,6 +58,8 @@ namespace Game.Logic
 
         private int m_KeyHash_FloatVelocityX;
         private int m_KeyHash_FloatVelocityZ;
+        private int m_KeyHash_FloatHurtX;
+        private int m_KeyHash_FloatHurtZ;
 
         private int m_KeyHash_TriggerTurnLeft;
         private int m_KeyHash_TriggerTurnRight;
@@ -90,6 +94,8 @@ namespace Game.Logic
             m_KeyHash_IntLeftRight = Animator.StringToHash(m_Key_IntLeftRight);
             m_KeyHash_FloatVelocityX = Animator.StringToHash(m_Key_FloatVelocityX);
             m_KeyHash_FloatVelocityZ = Animator.StringToHash(m_Key_FloatVelocityZ);
+            m_KeyHash_FloatHurtX = Animator.StringToHash(m_Key_FloatHurtX);
+            m_KeyHash_FloatHurtZ = Animator.StringToHash(m_Key_FloatHurtZ);
             m_KeyHash_TriggerTurnLeft = Animator.StringToHash(m_Key_Trigger_TurnLeft);
             m_KeyHash_TriggerTurnRight = Animator.StringToHash(m_Key_Trigger_TurnRight);
             m_KeyHash_TriggerAction = Animator.StringToHash(m_Key_Trigger_Action);
@@ -112,6 +118,12 @@ namespace Game.Logic
         {
             m_Animator.SetFloat(m_KeyHash_FloatVelocityX, vec.x);
             m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, vec.y);
+        }
+
+        public void SetHurt(Vector2 vec)
+        {
+            m_Animator.SetFloat(m_KeyHash_FloatHurtX, vec.x);
+            m_Animator.SetFloat(m_KeyHash_FloatHurtZ, vec.y);
         }
         #region bool
         public void SetMoving(bool moving)

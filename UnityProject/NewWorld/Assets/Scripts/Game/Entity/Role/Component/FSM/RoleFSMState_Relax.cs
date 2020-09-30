@@ -37,7 +37,7 @@ namespace Game.Logic
 
             if (Input.GetKeyDown(KeyCode.R))
             {
-                player.fsmComponent.SetRoleState(RoleState.Weapon);
+                player.fsmComponent.SetRoleState(RoleState.Battle);
             }
         }
 

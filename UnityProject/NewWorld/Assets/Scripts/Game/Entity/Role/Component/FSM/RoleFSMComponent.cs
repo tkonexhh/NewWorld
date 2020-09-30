@@ -17,6 +17,8 @@ namespace Game.Logic
     {
         private FSMStateMachine<Role> m_FSM;
 
+        public FSMStateMachine<Role> stateMachine => m_FSM;
+
 
         public override void Init(Entity ownner)
         {
@@ -27,7 +29,7 @@ namespace Game.Logic
             m_FSM.stateFactory.RegisterState(RoleState.Talking, new RoleFSMState_Talking());
             m_FSM.stateFactory.RegisterState(RoleState.Relax, new RoleFSMState_Relax());
             m_FSM.stateFactory.RegisterState(RoleState.Sit, new RoleFSMState_Sit());
-            m_FSM.stateFactory.RegisterState(RoleState.Weapon, new RoleFSMState_Weapon());
+            m_FSM.stateFactory.RegisterState(RoleState.Battle, new RoleFSMState_Battle());
             m_FSM.stateFactory.RegisterState(RoleState.Death, new RoleFSMState_Death());
         }
 
@@ -47,7 +49,7 @@ namespace Game.Logic
         Relax,
         Talking,
         Sit,
-        Weapon,
+        Battle,
         Death,
     }
 

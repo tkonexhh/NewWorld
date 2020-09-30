@@ -17,10 +17,8 @@ namespace Game.Logic
     public class RoleControlComponent : RoleBaseComponent
     {
         private bool moving = false;
-        private bool isDead = false;
         private bool isInjured = false;
         private bool canAction = true;
-        private bool weapon = false;
 
         private Role_Player player;
 
@@ -48,15 +46,6 @@ namespace Game.Logic
             {
                 isInjured = value;
                 role.animComponent.SetInjured(isInjured);
-            }
-        }
-
-        public bool IsWeapon
-        {
-            get => weapon;
-            set
-            {
-                weapon = value;
             }
         }
 
