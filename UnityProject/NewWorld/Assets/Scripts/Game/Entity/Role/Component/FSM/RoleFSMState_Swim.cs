@@ -14,7 +14,7 @@ using UnityEngine.InputSystem;
 
 namespace Game.Logic
 {
-    public class RoleFSMState_Global : FSMState<Role>
+    public class RoleFSMState_Swim : FSMState<Role>
     {
         private Role_Player player;
 
@@ -22,23 +22,15 @@ namespace Game.Logic
         public override void Enter(Role role, params object[] args)
         {
             player = role as Role_Player;
+
+            role.animComponent.SwimTrigger();
         }
 
         public override void Execute(Role role, float dt)
         {
-            if (Input.GetKeyDown(KeyCode.Z))
-            {
-                player.fsmComponent.SetRoleState(RoleState.Death);
-            }
-
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                player.fsmComponent.SetRoleState(RoleState.Swim);
-            }
-
             if (Input.GetKeyDown(KeyCode.C))
             {
-                player.animComponent.ReviveTrigger();
+                player.fsmComponent.SetRoleState(RoleState.Relax);
             }
         }
 

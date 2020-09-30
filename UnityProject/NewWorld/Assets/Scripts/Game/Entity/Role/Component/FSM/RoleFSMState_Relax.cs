@@ -17,6 +17,7 @@ namespace Game.Logic
     public enum RoleRelaxState
     {
         Move,
+        Crouch,
         Talking,
         Sit,
     }
@@ -39,7 +40,7 @@ namespace Game.Logic
                 m_FSM.stateFactory.RegisterState(RoleRelaxState.Talking, new RoleRelaxFSMState_Talking());
                 m_FSM.stateFactory.RegisterState(RoleRelaxState.Sit, new RoleRelaxFSMState_Sit());
                 m_FSM.stateFactory.RegisterState(RoleRelaxState.Move, new RoleRelaxFSMState_Move());
-
+                m_FSM.stateFactory.RegisterState(RoleRelaxState.Crouch, new RoleRelaxFSMState_Crouch());
             }
 
             SetRelaxState(RoleRelaxState.Move);

@@ -14,6 +14,11 @@ using UnityEngine.InputSystem;
 
 namespace Game.Logic
 {
+    public enum RoleWeapon
+    {
+        Unarmed = 0,
+        DualHandAxe = 3,
+    }
     public class RoleBattleFSMState_Battle : FSMState<Role_Player>
     {
         private Role_Player player;
@@ -26,6 +31,7 @@ namespace Game.Logic
             player = role;
             GameInputMgr.S.mainAction.Move.performed += OnMovePerformed;
             GameInputMgr.S.mainAction.Move.canceled += OnMoveCancled;
+            SetWeapon(-1);
         }
 
         public override void Execute(Role_Player role, float dt)
@@ -39,7 +45,6 @@ namespace Game.Logic
             {
                 GetHurt();
             }
-
 
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
@@ -118,6 +123,11 @@ namespace Game.Logic
         {
             player.animComponent.SetAction(action);
             player.animComponent.SetCastTrigger();
+        }
+
+        private void SetWeapon(int weapon)
+        {
+
         }
     }
 

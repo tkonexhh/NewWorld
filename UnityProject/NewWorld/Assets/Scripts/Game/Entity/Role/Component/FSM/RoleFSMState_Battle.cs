@@ -28,8 +28,7 @@ namespace Game.Logic
         public override void Enter(Role entity, params object[] args)
         {
             player = entity as Role_Player;
-            entity.animComponent.SetWeaponUnSheathTrigger();
-
+            entity.animComponent.SetWeapon(-1);
             if (m_FSM == null)
             {
                 m_FSM = new FSMStateMachine<Role_Player>(player);
@@ -41,6 +40,7 @@ namespace Game.Logic
             }
 
             SetBattleState(RoleBattleState.Battle);
+            entity.animComponent.SetWeaponUnSheathTrigger();
         }
 
         public override void Execute(Role role, float dt)

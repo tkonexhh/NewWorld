@@ -25,6 +25,7 @@ namespace Game.Logic
         private string m_Key_IntTalking = "Talking";
         private string m_Key_IntAction = "Action";
         private string m_Key_IntLeftRight = "LeftRight";
+        private string m_Key_IntWeapon = "Weapon";
 
         private string m_Key_FloatVelocityX = "Velocity X";
         private string m_Key_FloatVelocityZ = "Velocity Z";
@@ -46,6 +47,7 @@ namespace Game.Logic
         private string m_Key_Trigger_CastEnd = "CastEndTrigger";
         private string m_Key_Trigger_Attack = "AttackTrigger";
         private string m_Key_Trigger_AttackKick = "AttackKickTrigger";
+        private string m_Key_Trigger_Swim = "SwimTrigger";
 
         private int m_KeyHash_BoolMoving;
         private int m_KeyHash_BoolInjured;
@@ -55,6 +57,7 @@ namespace Game.Logic
         private int m_KeyHash_IntTalking;
         private int m_KeyHash_IntAction;
         private int m_KeyHash_IntLeftRight;
+        private int m_KeyHash_IntWeapon;
 
         private int m_KeyHash_FloatVelocityX;
         private int m_KeyHash_FloatVelocityZ;
@@ -76,6 +79,7 @@ namespace Game.Logic
         private int m_KeyHash_TriggerCastEnd;
         private int m_KeyHash_TriggerAttact;
         private int m_KeyHash_TriggerAttactKick;
+        private int m_KeyHash_TriggerSwim;
 
 
         public Animator animator => m_Animator;
@@ -92,6 +96,7 @@ namespace Game.Logic
             m_KeyHash_IntTalking = Animator.StringToHash(m_Key_IntTalking);
             m_KeyHash_IntAction = Animator.StringToHash(m_Key_IntAction);
             m_KeyHash_IntLeftRight = Animator.StringToHash(m_Key_IntLeftRight);
+            m_KeyHash_IntWeapon = Animator.StringToHash(m_Key_IntWeapon);
             m_KeyHash_FloatVelocityX = Animator.StringToHash(m_Key_FloatVelocityX);
             m_KeyHash_FloatVelocityZ = Animator.StringToHash(m_Key_FloatVelocityZ);
             m_KeyHash_FloatHurtX = Animator.StringToHash(m_Key_FloatHurtX);
@@ -111,6 +116,7 @@ namespace Game.Logic
             m_KeyHash_TriggerCastEnd = Animator.StringToHash(m_Key_Trigger_CastEnd);
             m_KeyHash_TriggerAttact = Animator.StringToHash(m_Key_Trigger_Attack);
             m_KeyHash_TriggerAttactKick = Animator.StringToHash(m_Key_Trigger_AttackKick);
+            m_KeyHash_TriggerSwim = Animator.StringToHash(m_Key_Trigger_Swim);
         }
 
 
@@ -148,8 +154,6 @@ namespace Game.Logic
         #endregion
 
         #region int
-
-
         public void SetTalking(int index)
         {
             m_Animator.SetInteger(m_KeyHash_IntTalking, index);
@@ -162,8 +166,9 @@ namespace Game.Logic
 
         /// <summary>
         /// 0 null
-        /// 1 left
-        /// 2 right
+        /// 1 left 左手
+        /// 2 right 右手
+        /// 3 double 双手
         /// </summary>
         /// <param name="leftorRight"></param>
         public void SetLeftRight(int leftorRight)
@@ -171,6 +176,17 @@ namespace Game.Logic
             m_Animator.SetInteger(m_KeyHash_IntLeftRight, leftorRight);
         }
 
+        /// <summary>
+        /// 武器动作
+        /// 0 无武器
+        /// 
+        /// 3 为双手斧
+        /// </summary>
+        /// <param name="weapon"></param>
+        public void SetWeapon(int weapon)
+        {
+            m_Animator.SetInteger(m_KeyHash_IntWeapon, weapon);
+        }
         #endregion
         public void SetActionTrigger()
         {
@@ -192,7 +208,7 @@ namespace Game.Logic
             m_Animator.SetTrigger(m_KeyHash_TriggerDeath);
         }
 
-        public void SetReviveTrigger()
+        public void ReviveTrigger()
         {
             m_Animator.SetTrigger(m_KeyHash_TriggerRevive);
         }
@@ -230,9 +246,13 @@ namespace Game.Logic
         {
             SetTrigger(m_KeyHash_TriggerAttact);
         }
-        public void SetAttackKickTrigger()
+        public void AttackKickTrigger()
         {
             SetTrigger(m_KeyHash_TriggerAttactKick);
+        }
+        public void SwimTrigger()
+        {
+            SetTrigger(m_KeyHash_TriggerSwim);
         }
 
         private void SetTrigger(int keyhash)
