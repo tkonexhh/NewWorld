@@ -38,9 +38,9 @@ namespace Game.Logic
                 m_FSM.stateFactory.RegisterState(RoleBattleState.Battle, new RoleBattleFSMState_Battle());
                 m_FSM.stateFactory.RegisterState(RoleBattleState.Blocking, new RoleBattleFSMState_Blocking());
                 m_FSM.stateFactory.RegisterState(RoleBattleState.Crouch, new RoleBattleFSMState_Crouch());
-                m_FSM.SetCurrentStateByID(RoleBattleState.Battle);
             }
 
+            SetBattleState(RoleBattleState.Battle);
         }
 
         public override void Execute(Role role, float dt)
@@ -49,22 +49,6 @@ namespace Game.Logic
                 return;
 
             m_FSM?.UpdateState(dt);
-
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                Cast(Random.Range(1, 7));
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                role.animComponent.SetCastEndTrigger();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha6))
-            {
-                role.animComponent.SetAttackCastTrigger();
-            }
-
         }
 
         public override void Exit(Role entity)
@@ -74,13 +58,6 @@ namespace Game.Logic
 
         public override void OnMsg(Role entity, int key, params object[] args)
         {
-
-        }
-
-        private void Cast(int action)
-        {
-            player.animComponent.SetAction(action);
-            player.animComponent.SetCastTrigger();
         }
 
         public void SetBattleState(RoleBattleState state)

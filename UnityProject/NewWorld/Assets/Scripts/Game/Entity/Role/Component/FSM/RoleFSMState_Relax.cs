@@ -14,55 +14,55 @@ using UnityEngine.InputSystem;
 
 namespace Game.Logic
 {
+    public enum RoleRelaxState
+    {
+        Move,
+        Talking,
+        Sit,
+    }
+
     public class RoleFSMState_Relax : FSMState<Role>
     {
         private Role_Player player;
-        private Vector2 m_InputMove = Vector2.zero;
-        private Vector2 m_VecMove = Vector2.zero;
-        private float m_VecSpeed = 3.0f;
+        private FSMStateMachine<Role> m_FSM;
+
 
         public override void Enter(Role entity, params object[] args)
         {
             player = entity as Role_Player;
-            GameInputMgr.S.mainAction.Move.performed += OnMovePerformed;
-            GameInputMgr.S.mainAction.Move.canceled += OnMoveCancled;
+
+
+            if (m_FSM == null)
+            {
+                m_FSM = new FSMStateMachine<Role>(player);
+                m_FSM.stateFactory = new FSMStateFactory<Role>(false);
+                m_FSM.stateFactory.RegisterState(RoleRelaxState.Talking, new RoleRelaxFSMState_Talking());
+                m_FSM.stateFactory.RegisterState(RoleRelaxState.Sit, new RoleRelaxFSMState_Sit());
+                m_FSM.stateFactory.RegisterState(RoleRelaxState.Move, new RoleRelaxFSMState_Move());
+
+            }
+
+            SetRelaxState(RoleRelaxState.Move);
         }
 
         public override void Execute(Role role, float dt)
         {
-            if (role.animComponent == null)
-                return;
-            m_VecMove = Vector2.Lerp(m_VecMove, m_InputMove, dt * m_VecSpeed);
-            role.animComponent.SetVelocity(m_VecMove);
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                player.fsmComponent.SetRoleState(RoleState.Battle);
-            }
+            m_FSM?.UpdateState(dt);
         }
 
         public override void Exit(Role entity)
         {
-            GameInputMgr.S.mainAction.Move.performed -= OnMovePerformed;
-            GameInputMgr.S.mainAction.Move.canceled -= OnMoveCancled;
         }
 
         public override void OnMsg(Role entity, int key, params object[] args)
         {
-
         }
 
-        private void OnMovePerformed(InputAction.CallbackContext callback)
+        public void SetRelaxState(RoleRelaxState state)
         {
-            m_InputMove = callback.ReadValue<Vector2>();
-            player.controlComponent.Moving = true;
+            m_FSM.SetCurrentStateByID(state);
         }
 
-        private void OnMoveCancled(InputAction.CallbackContext callback)
-        {
-            m_InputMove = Vector2.zero;
-            player.controlComponent.Moving = false;
-        }
     }
 
 }

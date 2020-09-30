@@ -26,9 +26,7 @@ namespace Game.Logic
             m_FSM = new FSMStateMachine<Role>(role);
             m_FSM.SetGlobalState(new RoleFSMState_Global());
             m_FSM.stateFactory = new FSMStateFactory<Role>(false);
-            m_FSM.stateFactory.RegisterState(RoleState.Talking, new RoleFSMState_Talking());
             m_FSM.stateFactory.RegisterState(RoleState.Relax, new RoleFSMState_Relax());
-            m_FSM.stateFactory.RegisterState(RoleState.Sit, new RoleFSMState_Sit());
             m_FSM.stateFactory.RegisterState(RoleState.Battle, new RoleFSMState_Battle());
             m_FSM.stateFactory.RegisterState(RoleState.Death, new RoleFSMState_Death());
         }
@@ -47,8 +45,6 @@ namespace Game.Logic
     public enum RoleState
     {
         Relax,
-        Talking,
-        Sit,
         Battle,
         Death,
     }

@@ -28,21 +28,12 @@ namespace Game.Logic
 
         }
 
-
-
         public override void Update(float dt)
         {
             if (Input.GetKeyDown(KeyCode.T))
             {
                 player.controlComponent.IsInjured = !player.controlComponent.IsInjured;
             }
-
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                player.fsmComponent.SetRoleState(RoleState.Sit);
-            }
-
-
         }
 
     }

@@ -63,6 +63,21 @@ namespace Game.Logic
                 }
             }
 
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                Cast(Random.Range(1, 7));
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                role.animComponent.SetCastEndTrigger();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                role.animComponent.SetAttackCastTrigger();
+            }
+
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 (role.fsmComponent.stateMachine.currentState as RoleFSMState_Battle).SetBattleState(RoleBattleState.Crouch);
@@ -97,6 +112,12 @@ namespace Game.Logic
         {
             player.animComponent.SetHurt(new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)));
             player.animComponent.SetGetHurtTrigger();
+        }
+
+        private void Cast(int action)
+        {
+            player.animComponent.SetAction(action);
+            player.animComponent.SetCastTrigger();
         }
     }
 

@@ -1,8 +1,8 @@
 /************************
-	FileName:/Scripts/Game/Entity/Role/Component/FSM/RoleFSMState_Sit.cs
+	FileName:/Scripts/Game/Entity/Role/Component/FSM/RelaxFSM/RoleRelaxFSMState_Talking.cs
 	CreateAuthor:neo.xu
-	CreateTime:9/28/2020 6:25:39 PM
-	Tip:9/28/2020 6:25:39 PM
+	CreateTime:9/30/2020 1:43:03 PM
+	Tip:9/30/2020 1:43:03 PM
 ************************/
 
 
@@ -14,14 +14,14 @@ using UnityEngine.InputSystem;
 
 namespace Game.Logic
 {
-    public class RoleFSMState_Sit : FSMState<Role>
+    public class RoleRelaxFSMState_Sit : FSMState<Role>
     {
-        private Role m_Role;
+        private Role_Player m_Role;
 
         public override void Enter(Role entity, params object[] args)
         {
+            m_Role = entity as Role_Player;
             GameInputMgr.S.mainAction.Any.performed += OnAnyPerformed;
-            m_Role = entity;
             entity.animComponent.SetAction(0);
             entity.animComponent.SetActionTrigger();
         }
@@ -45,7 +45,7 @@ namespace Game.Logic
 
         private void OnAnyPerformed(InputAction.CallbackContext callback)
         {
-            (m_Role as Role_Player).fsmComponent.SetRoleState(RoleState.Relax);
+            (m_Role.fsmComponent.stateMachine.currentState as RoleFSMState_Relax).SetRelaxState(RoleRelaxState.Move);
         }
     }
 
