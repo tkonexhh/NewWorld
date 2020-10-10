@@ -18,7 +18,7 @@ namespace Game.Logic
     public class CharacterBone
     {
         public Transform root;
-        public Transform[] bones;
+        [HideInInspector] public Transform[] bones;
 
         public void Init()
         {
@@ -33,7 +33,7 @@ namespace Game.Logic
         private SkinnedMeshRenderer m_Renderer;
 
         [Header("外貌信息")]
-        public RoleAppearanceData m_AppearanceData;
+        private RoleAppearanceData m_AppearanceData;
 
         [Header("骨骼信息")]
         [SerializeField] private CharacterBone m_Bones;
@@ -73,7 +73,7 @@ namespace Game.Logic
         public CharacterBone bone => m_Bones;
 
 
-        private void Start()
+        private void Awake()
         {
             m_Renderer = gameObject.AddMissingComponent<SkinnedMeshRenderer>();
             material = Instantiate(material);
@@ -113,9 +113,9 @@ namespace Game.Logic
             // m_HeadCovering.gameObject.SetActive(true);
             // m_HeadNoElements.gameObject.SetActive(true);
             // m_HeadAttachment.gameObject.SetActive(true);
-            RefeshAppearance();
 
-            InitColor();
+            // RefeshAppearance();
+            // InitColor();
         }
 
         void RefeshAppearance()
@@ -131,9 +131,15 @@ namespace Game.Logic
             SetAppearance(AppearanceSlot.KneeLeft, m_AppearanceData.kneeLeftID);
             SetAppearance(AppearanceSlot.ElbowRight, m_AppearanceData.elbowRightID);
             SetAppearance(AppearanceSlot.ElbowLeft, m_AppearanceData.elbowLeftID);
-            // SetAppearance(AppearanceSlot.Torso, m_AppearanceData.torsoID);
-            // SetAppearance(AppearanceSlot.ArmUpperRight, m_ArmUpperRightID);
             SetAppearance(AppearanceSlot.BackAttach, m_AppearanceData.backAttachID);
+            SetAppearance(AppearanceSlot.Ear, m_AppearanceData.basicAppearance.ear);
+            SetAppearance(AppearanceSlot.LegLeft, m_AppearanceData.legLeftID);
+            SetAppearance(AppearanceSlot.LegRight, m_AppearanceData.legRightID);
+            SetAppearance(AppearanceSlot.Torso, m_AppearanceData.torsoID);
+            SetAppearance(AppearanceSlot.ArmLowerLeft, m_AppearanceData.armLowerLeftID);
+            SetAppearance(AppearanceSlot.ArmLowerRight, m_AppearanceData.armLowerRightID);
+            SetAppearance(AppearanceSlot.ArmUpperLeft, m_AppearanceData.armUpperLeftID);
+            SetAppearance(AppearanceSlot.ArmUpperRight, m_AppearanceData.armUpperRightID);
 
             CombineMeshs();
         }
@@ -400,6 +406,14 @@ namespace Game.Logic
 
             // m_HipsAttachment.gameObject.SetActive(true);
         }
+        public void SetAppearanceData(RoleAppearanceData data)
+        {
+            m_AppearanceData = data;
+            RefeshAppearance();
+            ApplyAppearance();
+            InitColor();
+        }
+
 
         public void CombineMeshs()
         {

@@ -3344,7 +3344,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7666273751971385756}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.0510384e-29, y: 9.447606, z: 12.272215}
+  m_LocalPosition: {x: 0, y: 9.3, z: 12.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7666273751970905514}
@@ -4210,8 +4210,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7666273751970890250}
-  - {fileID: 7666273751970890484}
-  - {fileID: 7666273751970890486}
   m_Father: {fileID: 7666273751970890710}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5293,172 +5291,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Slot: 17
   m_Renderer: {fileID: 7666273751984984394}
---- !u!1 &7666273751971387092
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7666273751970890484}
-  - component: {fileID: 7666273751984984398}
-  m_Layer: 9
-  m_Name: Chr_Ear_Ear_02
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &7666273751970890484
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7666273751971387092}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7666273751970889904}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!137 &7666273751984984398
-SkinnedMeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7666273751971387092}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: ea128b040f8b0af4c9d2de400aaff30a, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  serializedVersion: 2
-  m_Quality: 0
-  m_UpdateWhenOffscreen: 0
-  m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4301332, guid: 038320a534bd8b444b43734860d1a211, type: 3}
-  m_Bones:
-  - {fileID: 7666273751970905514}
-  m_BlendShapeWeights: []
-  m_RootBone: {fileID: 7666273751970905514}
-  m_AABB:
-    m_Center: {x: 0, y: 9.84494, z: -4.077961}
-    m_Extent: {x: 15.2256775, y: 6.8673706, z: 6.4995394}
-  m_DirtyAABB: 0
---- !u!1 &7666273751971387094
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7666273751970890486}
-  - component: {fileID: 7666273751984984392}
-  m_Layer: 9
-  m_Name: Chr_Ear_Ear_03
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &7666273751970890486
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7666273751971387094}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7666273751970889904}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!137 &7666273751984984392
-SkinnedMeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7666273751971387094}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: ea128b040f8b0af4c9d2de400aaff30a, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  serializedVersion: 2
-  m_Quality: 0
-  m_UpdateWhenOffscreen: 0
-  m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4301334, guid: 038320a534bd8b444b43734860d1a211, type: 3}
-  m_Bones:
-  - {fileID: 7666273751970905514}
-  m_BlendShapeWeights: []
-  m_RootBone: {fileID: 7666273751970905514}
-  m_AABB:
-    m_Center: {x: 0, y: 9.273102, z: -3.9475594}
-    m_Extent: {x: 20.010834, y: 6.295532, z: 6.369138}
-  m_DirtyAABB: 0
 --- !u!1 &7666273751971387114
 GameObject:
   m_ObjectHideFlags: 0
@@ -5471,7 +5303,7 @@ GameObject:
   - component: {fileID: 7666273751984984396}
   - component: {fileID: 4533958576370323646}
   m_Layer: 9
-  m_Name: Chr_Ear_Ear_01
+  m_Name: Ear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5726,7 +5558,10 @@ Animator:
   m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'Neck'\n\tTransform 'Spine_03'\n\tTransform 'Neck'\n\tTransform
+    'Spine_03'\n\tTransform 'Neck'\n\tTransform 'Spine_03'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -5840,37 +5675,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: ea128b040f8b0af4c9d2de400aaff30a, type: 2}
-  m_AppearanceData:
-    basicAppearance:
-      sex: 0
-      hairID: 0
-      faceID: 0
-      facialHairID: 0
-      eyeBrows: 0
-      ear: 0
-      hairColor: {r: 0, g: 0, b: 0, a: 0}
-      skinColor: {r: 0, g: 0, b: 0, a: 0}
-      bodyArtColor: {r: 0, g: 0, b: 0, a: 0}
-    torsoID: 0
-    armUpperRightID: 0
-    armUpperLeftID: 0
-    armLowerRightID: 0
-    armLowerLeftID: 0
-    handRightID: 0
-    handLeftID: 0
-    hipsID: 0
-    legRightID: 0
-    legLeftID: 0
-    shoulderRightID: -1
-    shoulderLeftID: -1
-    elbowRightID: -1
-    elbowLeftID: -1
-    kneeRightID: -1
-    kneeLeftID: -1
-    hipsAttachID: -1
-    helmetWithHeadID: 0
-    helmetWithoutHeadID: 0
-    backAttachID: -1
   m_Bones:
     root: {fileID: 7666273751970905206}
     bones: []
@@ -5985,6 +5789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headAnimIK: {fileID: 6968812957136774084}
+  transRoleHead: {fileID: 7666273751970905514}
 --- !u!1 &7666273751971387168
 GameObject:
   m_ObjectHideFlags: 0

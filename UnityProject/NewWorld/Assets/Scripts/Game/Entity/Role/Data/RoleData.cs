@@ -24,6 +24,7 @@ namespace Game.Logic
         public RoleData(Entity owner) : base(owner)
         {
             m_AppearanceData = new RoleAppearanceData();
+            m_AppearanceData.basicAppearance = new BasicAppearance();
 
             m_EquipmentData = new RoleEquipmentData();
             m_EquipmentData.helmetID = 4;

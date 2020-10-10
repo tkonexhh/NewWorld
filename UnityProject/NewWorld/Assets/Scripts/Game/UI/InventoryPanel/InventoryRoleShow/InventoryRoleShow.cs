@@ -25,13 +25,14 @@ namespace Game.Logic
             m_RawImage.SetNativeSize();
         }
 
-        private void Start()
+        public void Init()
         {
             RegisterEvent();
             AddressableResMgr.S.InstantiateAsync("InventoryRoleScene", (target) =>
             {
                 target.transform.position = Vector3.one * 5000;
                 m_CharacterAppearance = target.GetComponentInChildren<CharacterAppearance>();
+                m_CharacterAppearance.SetAppearanceData(PlayerMgr.S.role.data.appearanceData);
             });
 
             GameInputMgr.S.uiAction.Rotate.performed += OnRoleRotatePerformed;

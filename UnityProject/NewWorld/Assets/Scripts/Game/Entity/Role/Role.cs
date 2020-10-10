@@ -43,7 +43,6 @@ namespace Game.Logic
         public Role() : base()
         {
             m_Data = new RoleData(this);
-            // m_GameObject = new GameObject("Role");
 
             //某些组件依赖此物体,需要等加载完成后才能添加组件
             AddressableResMgr.S.InstantiateAsync(resName, (target) =>
@@ -57,18 +56,40 @@ namespace Game.Logic
                 m_AppearanceComponent = AddComponent(new RoleAppearanceComponent());
                 m_AnimComponent = AddComponent(new RoleAnimComponent());
 
+                m_AppearanceComponent.appearance.SetAppearanceData(m_Data.appearanceData);
                 OnResLoaded(target);
 
                 if (onRoleCreated != null)
+                {
                     onRoleCreated(this);
+                }
+
             });
             EntityMgr.S.RegisterEntity(this);
             m_RoleEquipComponent = AddComponent(new RoleEquipComponent());
         }
 
-        protected virtual void OnResLoaded(GameObject obj) { }
+        protected virtual void OnResLoaded(GameObject obj)
+        {
+        }
 
-
+        protected void ApplyEquipment()
+        {
+            var helmet = new Equipment_Helmet(m_Data.equipmentData.helmetID);
+            var torso = new Equipment_Torso(m_Data.equipmentData.torsoID);
+            var hands = new Equipment_Hands(m_Data.equipmentData.handsID);
+            var legs = new Equipment_Legs(m_Data.equipmentData.legsID);
+            var hips = new Equipment_Hips(m_Data.equipmentData.hipsID);
+            var shoulders = new Equipment_Shoulders(m_Data.equipmentData.shouldersID);
+            var back = new Equipment_Back(m_Data.equipmentData.backID);
+            Equip(helmet);
+            Equip(torso);
+            Equip(hands);
+            Equip(legs);
+            Equip(hips);
+            Equip(shoulders);
+            Equip(back);
+        }
 
         public void Equip(Equipment equipment)
         {

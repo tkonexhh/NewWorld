@@ -15,7 +15,7 @@ namespace Game.Logic
 {
     public class PlayerInventoryFactory
     {
-        public static Equipment CreateEquipment(TDItem itemConf, long id)
+        public static Equipment CreateEquipment(TDItem itemConf)
         {
             var conf_Equipment = TDEquipmentTable.GetData(itemConf.SubID);
 
@@ -23,25 +23,25 @@ namespace Game.Logic
             switch (conf_Equipment.equipmentType)
             {
                 case EquipmentType.Helmet:
-                    equipment = new Equipment_Helmet(id);
+                    equipment = new Equipment_Helmet(itemConf.ID);
                     break;
                 case EquipmentType.Torso:
-                    equipment = new Equipment_Torso(id);
+                    equipment = new Equipment_Torso(itemConf.ID);
                     break;
                 case EquipmentType.Hands:
-                    equipment = new Equipment_Hands(id);
+                    equipment = new Equipment_Hands(itemConf.ID);
                     break;
                 case EquipmentType.Legs:
-                    equipment = new Equipment_Legs(id);
+                    equipment = new Equipment_Legs(itemConf.ID);
                     break;
                 case EquipmentType.Hips:
-                    equipment = new Equipment_Hips(id);
+                    equipment = new Equipment_Hips(itemConf.ID);
                     break;
                 case EquipmentType.Shoulders:
-                    equipment = new Equipment_Shoulders(id);
+                    equipment = new Equipment_Shoulders(itemConf.ID);
                     break;
                 case EquipmentType.Back:
-                    equipment = new Equipment_Back(id);
+                    equipment = new Equipment_Back(itemConf.ID);
                     break;
             }
 

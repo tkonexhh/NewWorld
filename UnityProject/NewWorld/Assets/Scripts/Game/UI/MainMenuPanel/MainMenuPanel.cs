@@ -75,7 +75,7 @@ namespace Game.Logic
                 ((LoadingPanel)panel).RegisterShowOverListener(() =>
                 {
                     CloseSelfPanel();
-                    SceneMgr.S.OpenScene(SceneID.CreateCharacterScene);
+                    SceneMgr.S.OpenScene(SceneID.CreateRoleScene);
                 });
             });
 

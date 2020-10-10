@@ -367,6 +367,7 @@ MonoBehaviour:
   m_BtnClose: {fileID: 1414359317475308154}
   m_Bag: {fileID: 1479459889248409822}
   m_Equipment: {fileID: 1324554263195234268}
+  m_Role: {fileID: 1570167804019938888}
   m_ItemTips: {fileID: 9066425042337060310}
   m_InventoryCore: {fileID: 6133730946804982738}
 --- !u!222 &877225795153778724

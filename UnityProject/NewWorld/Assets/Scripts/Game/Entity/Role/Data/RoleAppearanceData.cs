@@ -22,7 +22,7 @@ namespace Game.Logic
         public int faceID = 0;//面部
         public int facialHairID = 0;//胡子
         public int eyeBrows = 0;//眉毛
-        public int ear = 0;
+        public int ear = -1;
         //一些颜色
         public Color hairColor;
         public Color skinColor;
@@ -49,7 +49,7 @@ namespace Game.Logic
         public int elbowRightID = -1;
         public int elbowLeftID = -1;
         public int kneeRightID = -1;
-        public int kneeLeftID;
+        public int kneeLeftID = -1;
         public int hipsAttachID;
         public int helmetWithHeadID;
         public int helmetWithoutHeadID;

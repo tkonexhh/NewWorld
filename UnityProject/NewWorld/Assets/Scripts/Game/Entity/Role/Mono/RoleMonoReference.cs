@@ -19,7 +19,7 @@ namespace Game.Logic
         [Header("AnimIK")]
         public Transform headAnimIK;
 
-
+        public Transform transRoleHead;
 
     }
 

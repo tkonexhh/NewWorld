@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -422,6 +422,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7666273751970905532, guid: 37a17d93ea857464799b21d70b00a57a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.0510384e-29
+      objectReference: {fileID: 0}
+    - target: {fileID: 7666273751970905532, guid: 37a17d93ea857464799b21d70b00a57a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.447606
+      objectReference: {fileID: 0}
+    - target: {fileID: 7666273751970905532, guid: 37a17d93ea857464799b21d70b00a57a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.272215
+      objectReference: {fileID: 0}
     - target: {fileID: 7666273751971387156, guid: 37a17d93ea857464799b21d70b00a57a,
         type: 3}
       propertyPath: m_Name
@@ -431,6 +446,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7666273751980746772, guid: 37a17d93ea857464799b21d70b00a57a,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'Neck'\n\tTransform 'Spine_03'\n\tTransform
+        'Neck'\n\tTransform 'Spine_03'\n\tTransform 'Neck'\n\tTransform 'Spine_03'"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37a17d93ea857464799b21d70b00a57a, type: 3}

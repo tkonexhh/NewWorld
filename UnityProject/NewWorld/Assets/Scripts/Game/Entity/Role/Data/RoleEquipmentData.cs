@@ -29,6 +29,9 @@ namespace Game.Logic
         {
             switch (type)
             {
+                case EquipmentType.Helmet:
+                    helmetID = id;
+                    break;
                 case EquipmentType.Torso:
                     torsoID = id;
                     return;
@@ -49,6 +52,7 @@ namespace Game.Logic
                     return;
             }
         }
+
     }
 
 }

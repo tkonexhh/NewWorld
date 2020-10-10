@@ -30,7 +30,7 @@ namespace Game.Logic
         private void RegisterScene()
         {
             SceneDataTable.SetLoadMode(SceneLoadStatgy.Addressable);
-            SceneDataTable.AddSceneData(SceneID.CreateCharacterScene, "CreateCharacterScene", LoadSceneMode.Single);
+            SceneDataTable.AddSceneData(SceneID.CreateRoleScene, "CreateCharacterScene", LoadSceneMode.Single);
             SceneDataTable.AddSceneData(SceneID.MainMenuScene, "MainMenuScene", LoadSceneMode.Single);
             SceneDataTable.AddSceneData(SceneID.GameScene, "GameScene", LoadSceneMode.Single);
         }

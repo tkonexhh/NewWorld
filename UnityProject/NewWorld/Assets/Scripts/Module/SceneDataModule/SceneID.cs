@@ -16,7 +16,7 @@ namespace Game.Logic
     public enum SceneID
     {
         MainMenuScene,
-        CreateCharacterScene,
+        CreateRoleScene,
         GameScene,
     }
 

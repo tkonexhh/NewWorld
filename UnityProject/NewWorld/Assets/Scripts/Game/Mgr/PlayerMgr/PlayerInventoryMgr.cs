@@ -59,7 +59,7 @@ namespace Game.Logic
             switch (itemConf.itemType)
             {
                 case ItemType.Equipment:
-                    AddEquipment(itemConf, id);
+                    AddEquipment(itemConf);
                     break;
                 case ItemType.Food:
                     AddSupply(itemConf, id, num);
@@ -83,9 +83,9 @@ namespace Game.Logic
             }
         }
 
-        public void AddEquipment(TDItem itemConf, long id)
+        public void AddEquipment(TDItem itemConf)
         {
-            Equipment equipment = PlayerInventoryFactory.CreateEquipment(itemConf, id);
+            Equipment equipment = PlayerInventoryFactory.CreateEquipment(itemConf);
             if (equipment == null)
             {
                 Debug.LogError("Failed to Add Equipment");

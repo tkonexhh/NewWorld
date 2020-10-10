@@ -32,6 +32,8 @@ namespace Game.Logic
             m_ControlComponent = AddComponent(new RoleControlComponent());
 
             target.AddComponent<RoleAnimEvent>();
+
+            ApplyEquipment();
         }
     }
 

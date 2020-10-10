@@ -54,8 +54,8 @@ namespace Game.Logic
         protected override void OnModuleStart()
         {
             // EnterMainMenuScene();
-            // EnterCreateRole();
-            EnterGameScene();
+            EnterCreateRole();
+            // EnterGameScene();
         }
 
         private void EnterMainMenuScene()
@@ -66,7 +66,7 @@ namespace Game.Logic
         #region Test
         private void EnterCreateRole()
         {
-            SceneMgr.S.OpenScene(SceneID.CreateCharacterScene);
+            SceneMgr.S.OpenScene(SceneID.CreateRoleScene);
         }
 
         private void EnterGameScene()
