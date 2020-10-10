@@ -288,7 +288,9 @@ namespace Game.Logic
 
         public void SetTorso(int id)
         {
-            m_AppearanceData.torsoID = m_Torso.SetSkin(m_AppearanceData.sex, id);
+            TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.Torso, m_AppearanceData.sex, id);
+            if (data != null)
+                m_AppearanceData.torsoID = m_Torso.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
         }
 
         public void SetArmUpperRight(int id)

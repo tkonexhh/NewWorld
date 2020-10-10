@@ -27,6 +27,8 @@ namespace Game.Logic
                     return AppearanceSlot.FacialHair;
                 case "EyeBrows":
                     return AppearanceSlot.EyeBrows;
+                case "Torso":
+                    return AppearanceSlot.Torso;
             }
             return AppearanceSlot.Length;
         }

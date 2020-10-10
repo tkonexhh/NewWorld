@@ -12,6 +12,8 @@ namespace Game.Logic
         private static TDCharacterAppearanceData_Sexual m_HeadData = new TDCharacterAppearanceData_Sexual();
         private static TDCharacterAppearanceData_Sexual m_FacialHairData = new TDCharacterAppearanceData_Sexual();
         private static TDCharacterAppearanceData_Sexual m_EyeBrowsData = new TDCharacterAppearanceData_Sexual();
+        private static TDCharacterAppearanceData_Sexual m_TorsoData = new TDCharacterAppearanceData_Sexual();
+
         static void CompleteRowAdd(TDCharacterAppearance tdData)
         {
             switch (CharacterEnumHelper.GetSlotByName(tdData.Part))
@@ -27,6 +29,9 @@ namespace Game.Logic
                     break;
                 case AppearanceSlot.EyeBrows:
                     m_EyeBrowsData.OnAddData(tdData);
+                    break;
+                case AppearanceSlot.Torso:
+                    m_TorsoData.OnAddData(tdData);
                     break;
             }
         }
@@ -48,6 +53,8 @@ namespace Game.Logic
                     return m_FacialHairData.GetDataCount(sex);
                 case AppearanceSlot.EyeBrows:
                     return m_EyeBrowsData.GetDataCount(sex);
+                case AppearanceSlot.Torso:
+                    return m_EyeBrowsData.GetDataCount(sex);
             }
             return 0;
         }
@@ -64,6 +71,8 @@ namespace Game.Logic
                     return m_FacialHairData.GetAppearanceByIndex(sex, index);
                 case AppearanceSlot.EyeBrows:
                     return m_EyeBrowsData.GetAppearanceByIndex(sex, index);
+                case AppearanceSlot.Torso:
+                    return m_TorsoData.GetAppearanceByIndex(sex, index);
             }
             return null;
         }
