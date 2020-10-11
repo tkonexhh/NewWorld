@@ -18,6 +18,7 @@ namespace Game.Logic
     public class CreateCharacterScene : AbstractScene
     {
         [SerializeField] private Transform m_TransRoleRoot;
+        [SerializeField] private CreateCharacterCameraControl m_CameraControl;
 
         private float m_RoleRotateSpeed;
         protected override void OnSceneInit()
@@ -34,6 +35,8 @@ namespace Game.Logic
             {
                 role.transform.SetParent(m_TransRoleRoot);
                 role.transform.localPosition = Vector3.zero;
+
+                m_CameraControl.SetFocusRole(role);
             };
 
             GameInputMgr.S.uiAction.Rotate.performed += OnRoleRotatePerformed;
@@ -44,7 +47,7 @@ namespace Game.Logic
 
         private void OnRoleRotatePerformed(InputAction.CallbackContext callback)
         {
-            m_RoleRotateSpeed = -callback.ReadValue<float>() * 10;
+            m_RoleRotateSpeed = -callback.ReadValue<float>() * 7;
         }
 
         private void OnRoleRotateCanceled(InputAction.CallbackContext callback)
@@ -52,12 +55,12 @@ namespace Game.Logic
             m_RoleRotateSpeed = 0;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (m_RoleRotateSpeed != 0)
             {
                 Vector3 target_angle = m_TransRoleRoot.rotation.eulerAngles;
-                m_TransRoleRoot.rotation = Quaternion.Euler(target_angle + new Vector3(0, m_RoleRotateSpeed, 0));
+                m_TransRoleRoot.rotation = Quaternion.Lerp(m_TransRoleRoot.rotation, Quaternion.Euler(target_angle + new Vector3(0, m_RoleRotateSpeed, 0)), 0.5f);
             }
         }
 

@@ -21,8 +21,10 @@ MonoBehaviour:
     m_Address: InventoryRoleScene
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 5931388540967842071, guid: d123987553ef648eeb4239a232fe1e9a,
+      type: 3}
+    m_TargetAsset: {fileID: 5931388540967842071, guid: d123987553ef648eeb4239a232fe1e9a,
+      type: 3}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9c683e4341b3a423397a98767a646554, type: 2}
   m_SchemaSet:

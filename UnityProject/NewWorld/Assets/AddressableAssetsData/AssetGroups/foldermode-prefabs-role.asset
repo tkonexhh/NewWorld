@@ -21,32 +21,42 @@ MonoBehaviour:
     m_Address: ModularCharacters_Male
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 7666273751971387156, guid: 37a17d93ea857464799b21d70b00a57a,
+      type: 3}
+    m_TargetAsset: {fileID: 7666273751971387156, guid: 37a17d93ea857464799b21d70b00a57a,
+      type: 3}
   - m_GUID: 55398063928fa4ffa85c72624f78b9bc
     m_Address: ModularCharacters_Female
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 779722151024657977, guid: 55398063928fa4ffa85c72624f78b9bc,
+      type: 3}
+    m_TargetAsset: {fileID: 779722151024657977, guid: 55398063928fa4ffa85c72624f78b9bc,
+      type: 3}
   - m_GUID: 64aa4b83d87a742b8a6f6cb2d320fc3f
     m_Address: ModularCharacters_Male_Game
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 856864625733102410, guid: 64aa4b83d87a742b8a6f6cb2d320fc3f,
+      type: 3}
+    m_TargetAsset: {fileID: 856864625733102410, guid: 64aa4b83d87a742b8a6f6cb2d320fc3f,
+      type: 3}
   - m_GUID: e0dac01e589ea40acabba3334c5bd7db
     m_Address: ModularCharacters_Male_Backup
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 43645908913330980, guid: e0dac01e589ea40acabba3334c5bd7db,
+      type: 3}
+    m_TargetAsset: {fileID: 43645908913330980, guid: e0dac01e589ea40acabba3334c5bd7db,
+      type: 3}
   - m_GUID: f6eef83f9401a454388773dbb4f5b220
     m_Address: ModularCharactersHolder
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 779722151024657977, guid: f6eef83f9401a454388773dbb4f5b220,
+      type: 3}
+    m_TargetAsset: {fileID: 779722151024657977, guid: f6eef83f9401a454388773dbb4f5b220,
+      type: 3}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9c683e4341b3a423397a98767a646554, type: 2}
   m_SchemaSet:

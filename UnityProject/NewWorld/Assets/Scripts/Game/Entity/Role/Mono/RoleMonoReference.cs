@@ -9,7 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Animations.Rigging;
 
 namespace Game.Logic
 {
@@ -17,8 +17,10 @@ namespace Game.Logic
     public class RoleMonoReference : MonoBehaviour
     {
         [Header("AnimIK")]
-        public Transform headAnimIK;
+        public MultiAimConstraint headIK;
+        public Transform headAimTarget;
 
+        [Header("Transform")]
         public Transform transRoleHead;
 
     }

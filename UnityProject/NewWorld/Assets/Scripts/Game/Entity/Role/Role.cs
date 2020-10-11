@@ -28,11 +28,13 @@ namespace Game.Logic
         private RoleAppearanceComponent m_AppearanceComponent;
         private RoleEquipComponent m_RoleEquipComponent;
         private RoleAnimComponent m_AnimComponent;
+        private RoleIKComponent m_IKComponent;
         private RoleMonoReference m_MonoReference;
 
 
         public RoleAppearanceComponent appearanceComponent => m_AppearanceComponent;
         public RoleAnimComponent animComponent => m_AnimComponent;
+        public RoleIKComponent iKComponent => m_IKComponent;
         public RoleMonoReference monoReference => m_MonoReference;
 
 
@@ -55,6 +57,7 @@ namespace Game.Logic
                 m_MonoReference = target.GetComponent<RoleMonoReference>();
                 m_AppearanceComponent = AddComponent(new RoleAppearanceComponent());
                 m_AnimComponent = AddComponent(new RoleAnimComponent());
+                m_IKComponent = AddComponent(new RoleIKComponent());
 
                 m_AppearanceComponent.appearance.SetAppearanceData(m_Data.appearanceData);
                 OnResLoaded(target);
@@ -103,6 +106,11 @@ namespace Game.Logic
         {
             equipment.UnEquip(this);
             m_Data.equipmentData.SetData(equipment.equipmentType, -1);
+        }
+
+        public void SetFocus(Transform focus)
+        {
+            m_IKComponent.SetFocusTarget(focus);
         }
 
 

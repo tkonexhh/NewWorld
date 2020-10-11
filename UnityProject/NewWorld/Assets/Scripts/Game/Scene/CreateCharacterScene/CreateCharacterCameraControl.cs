@@ -19,6 +19,8 @@ namespace Game.Logic
         [SerializeField] private CinemachineVirtualCamera m_CameraBody;
         [SerializeField] private CinemachineVirtualCamera m_CameraFace;
 
+        private Role m_FocusRole;
+
         private CameraType m_CameraType;
 
         private void Awake()
@@ -37,15 +39,24 @@ namespace Game.Logic
             UnRegisterEvent();
         }
 
+        public void SetFocusRole(Role role)
+        {
+            m_FocusRole = role;
+
+        }
+
         private void SetCameraType(CameraType type)
         {
             switch (type)
             {
                 case CameraType.Body:
+                    m_FocusRole?.SetFocus(null);
                     m_CameraBody.Priority = 10;
                     m_CameraFace.Priority = 1;
+
                     break;
                 case CameraType.Face:
+                    m_FocusRole?.SetFocus(transform);
                     m_CameraBody.Priority = 1;
                     m_CameraFace.Priority = 10;
                     break;

@@ -412,7 +412,6 @@ namespace Game.Logic
         {
             m_AppearanceData = data;
             RefeshAppearance();
-            ApplyAppearance();
             InitColor();
         }
 
