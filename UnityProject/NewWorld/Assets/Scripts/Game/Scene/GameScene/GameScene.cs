@@ -25,6 +25,8 @@ namespace Game.Logic
         }
         protected override void OnSceneEnter()
         {
+            UIMgr.S.OpenPanel(UIID.GamePanel);
+
             PlayerMgr.S.role.onRoleCreated += (role) =>
             {
                 role.transform.SetXYZ(Vector3.zero);

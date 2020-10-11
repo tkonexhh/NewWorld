@@ -25,14 +25,15 @@ namespace Game.Logic
         public Transform transform => m_Transform;
         public RoleData data => m_Data;
 
-        private RoleAppearanceComponent m_AppearanceComponent;
-        private RoleEquipComponent m_RoleEquipComponent;
-        private RoleAnimComponent m_AnimComponent;
-        private RoleIKComponent m_IKComponent;
-        private RoleMonoReference m_MonoReference;
+        protected RoleAppearanceComponent m_AppearanceComponent;
+        protected RoleEquipComponent m_EquipComponent;
+        protected RoleAnimComponent m_AnimComponent;
+        protected RoleIKComponent m_IKComponent;
+        protected RoleMonoReference m_MonoReference;
 
 
         public RoleAppearanceComponent appearanceComponent => m_AppearanceComponent;
+        public RoleEquipComponent equipComponent => m_EquipComponent;
         public RoleAnimComponent animComponent => m_AnimComponent;
         public RoleIKComponent iKComponent => m_IKComponent;
         public RoleMonoReference monoReference => m_MonoReference;
@@ -55,7 +56,9 @@ namespace Game.Logic
                 target.transform.localPosition = Vector3.zero;
 
                 m_MonoReference = target.GetComponent<RoleMonoReference>();
+
                 m_AppearanceComponent = AddComponent(new RoleAppearanceComponent());
+                m_EquipComponent = AddComponent(new RoleEquipComponent());
                 m_AnimComponent = AddComponent(new RoleAnimComponent());
                 m_IKComponent = AddComponent(new RoleIKComponent());
 
@@ -69,43 +72,21 @@ namespace Game.Logic
 
             });
             EntityMgr.S.RegisterEntity(this);
-            m_RoleEquipComponent = AddComponent(new RoleEquipComponent());
+
         }
 
         protected virtual void OnResLoaded(GameObject obj)
         {
         }
 
-        protected void ApplyEquipment()
-        {
-            var helmet = new Equipment_Helmet(m_Data.equipmentData.helmetID);
-            var torso = new Equipment_Torso(m_Data.equipmentData.torsoID);
-            var hands = new Equipment_Hands(m_Data.equipmentData.handsID);
-            var legs = new Equipment_Legs(m_Data.equipmentData.legsID);
-            var hips = new Equipment_Hips(m_Data.equipmentData.hipsID);
-            var shoulders = new Equipment_Shoulders(m_Data.equipmentData.shouldersID);
-            var back = new Equipment_Back(m_Data.equipmentData.backID);
-            Equip(helmet);
-            Equip(torso);
-            Equip(hands);
-            Equip(legs);
-            Equip(hips);
-            Equip(shoulders);
-            Equip(back);
-        }
-
         public void Equip(Equipment equipment)
         {
-            //处理属性
-            //处理外貌
-            equipment.Equip(this);
-            m_Data.equipmentData.SetData(equipment.equipmentType, (int)equipment.id);
+            m_EquipComponent.Equip(equipment);
         }
 
         public void UnEquip(Equipment equipment)
         {
-            equipment.UnEquip(this);
-            m_Data.equipmentData.SetData(equipment.equipmentType, -1);
+            m_EquipComponent.UnEquip(equipment);
         }
 
         public void SetFocus(Transform focus)

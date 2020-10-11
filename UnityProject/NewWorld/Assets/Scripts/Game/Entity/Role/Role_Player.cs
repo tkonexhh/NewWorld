@@ -33,7 +33,7 @@ namespace Game.Logic
 
             target.AddComponent<RoleAnimEvent>();
 
-            ApplyEquipment();
+            m_EquipComponent.ApplyEquipment();
         }
     }
 

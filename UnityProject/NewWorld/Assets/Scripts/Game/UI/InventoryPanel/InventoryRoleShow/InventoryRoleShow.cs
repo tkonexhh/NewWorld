@@ -41,7 +41,7 @@ namespace Game.Logic
 
         private void OnRoleRotatePerformed(InputAction.CallbackContext callback)
         {
-            m_RoleRotateSpeed = -callback.ReadValue<float>() * 10;
+            m_RoleRotateSpeed = -callback.ReadValue<float>() * 7;
         }
 
         private void OnRoleRotateCanceled(InputAction.CallbackContext callback)
@@ -49,12 +49,12 @@ namespace Game.Logic
             m_RoleRotateSpeed = 0;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (m_RoleRotateSpeed != 0)
             {
                 Vector3 target_angle = m_CharacterAppearance.transform.rotation.eulerAngles;
-                m_CharacterAppearance.transform.rotation = Quaternion.Euler(target_angle + new Vector3(0, m_RoleRotateSpeed, 0));
+                m_CharacterAppearance.transform.rotation = Quaternion.Lerp(m_CharacterAppearance.transform.rotation, Quaternion.Euler(target_angle + new Vector3(0, m_RoleRotateSpeed, 0)), 0.5f);
             }
         }
 
