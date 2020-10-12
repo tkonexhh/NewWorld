@@ -28,12 +28,12 @@ namespace Game.Logic
 
             m_EquipmentData = new RoleEquipmentData();
             m_EquipmentData.helmetID = 4;
-            m_EquipmentData.torsoID = 5;
-            m_EquipmentData.handsID = 7;
-            m_EquipmentData.legsID = 8;
-            m_EquipmentData.hipsID = 9;
-            m_EquipmentData.shouldersID = 10;
-            m_EquipmentData.backID = 11;
+            m_EquipmentData.torsoID = 24;
+            m_EquipmentData.handsID = 33;
+            m_EquipmentData.legsID = 34;
+            m_EquipmentData.hipsID = 35;
+            m_EquipmentData.shouldersID = 63;
+            m_EquipmentData.backID = 86;
         }
     }
 

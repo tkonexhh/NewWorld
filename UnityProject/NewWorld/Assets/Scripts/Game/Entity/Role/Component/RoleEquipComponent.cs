@@ -25,7 +25,7 @@ namespace Game.Logic
             m_EquipmentMap.Add((int)EquipmentType.Hands, new Equipment_Hands(role.data.equipmentData.handsID));
             m_EquipmentMap.Add((int)EquipmentType.Legs, new Equipment_Legs(role.data.equipmentData.legsID));
             m_EquipmentMap.Add((int)EquipmentType.Hips, new Equipment_Hips(role.data.equipmentData.hipsID));
-            m_EquipmentMap.Add((int)EquipmentType.Shoulders, new Equipment_Hips(role.data.equipmentData.shouldersID));
+            m_EquipmentMap.Add((int)EquipmentType.Shoulders, new Equipment_Shoulders(role.data.equipmentData.shouldersID));
             m_EquipmentMap.Add((int)EquipmentType.Back, new Equipment_Back(role.data.equipmentData.backID));
         }
 

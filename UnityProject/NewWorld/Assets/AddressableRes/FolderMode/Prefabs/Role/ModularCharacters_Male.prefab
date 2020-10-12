@@ -306,14 +306,14 @@ MonoBehaviour:
       m_Item7:
         transform: {fileID: 0}
         weight: 0
-    m_Offset: {x: 0, y: -7, z: 45}
+    m_Offset: {x: 0, y: 0, z: 45}
     m_MinLimit: -70
     m_MaxLimit: 70
     m_AimAxis: 3
-    m_MaintainOffset: 1
+    m_MaintainOffset: 0
     m_ConstrainedAxes:
       x: 1
-      y: 1
+      y: 0
       z: 1
   m_SourceObjectsGUIToggle: 1
   m_SettingsGUIToggle: 1
@@ -832,7 +832,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7666273751971385428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.188968, y: -6.661338e-16, z: -4.624413e-15}
+  m_LocalPosition: {x: -11.188968, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7666273751970905514}

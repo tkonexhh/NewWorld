@@ -42,7 +42,7 @@ namespace Game.Logic
             InitCharacterAppearanceData();
             InitItemData();
             InitEquipmentData();
-            //InitEquipmentDataAppearance();
+            InitEquipmentDataAppearance();
         }
 
         private void ReadTable(TDSqlMetaData metaData)
@@ -92,7 +92,6 @@ namespace Game.Logic
             var reader = database.LoadTable("EquipmentAppearance");
             while (reader.Read())
             {
-                Debug.LogError("InitEquipmentDataAppearance");
                 TDEquipmentAppearanceTable.OnAddRow(reader);
             }
         }

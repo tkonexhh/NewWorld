@@ -9,7 +9,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 namespace Game.Logic
 {
@@ -27,9 +26,17 @@ namespace Game.Logic
         {
             if (m_RootFocus)
             {
-                role.monoReference.headAimTarget.position =
-                    Vector3.Lerp(role.monoReference.headAimTarget.position, m_RootFocus.position, m_AimSpeed * Time.deltaTime);
-                role.monoReference.headIK.weight = Mathf.Clamp01(role.monoReference.headIK.weight + m_AimSpeed * Time.deltaTime);
+                float dot = Vector3.Dot(role.transform.forward, m_RootFocus.transform.forward);
+                float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
+                if (angle < 80)
+                {
+                    role.monoReference.headIK.weight = Mathf.Clamp01(role.monoReference.headIK.weight - m_AimSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    role.monoReference.headAimTarget.position = Vector3.Lerp(role.monoReference.headAimTarget.position, m_RootFocus.position, 3 * m_AimSpeed * Time.deltaTime);
+                    role.monoReference.headIK.weight = Mathf.Clamp01(role.monoReference.headIK.weight + m_AimSpeed * Time.deltaTime);
+                }
             }
             else
             {
