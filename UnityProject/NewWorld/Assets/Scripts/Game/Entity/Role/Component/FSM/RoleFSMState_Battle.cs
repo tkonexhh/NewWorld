@@ -28,13 +28,19 @@ namespace Game.Logic
         public override void Enter(Role entity, params object[] args)
         {
             player = entity as Role_Player;
-            entity.animComponent.SetWeapon(-1);
+            // entity.animComponent.SetWeapon(-1);
+            // entity.animComponent.SetWeaponSwitch(3);
+
+            //0空拳
+            //3双手Axe
+            entity.animComponent.SetWeapon(3);
+            entity.animComponent.SetWeaponSwitch(0);
             if (m_FSM == null)
             {
                 m_FSM = new FSMStateMachine<Role_Player>(player);
                 m_FSM.SetGlobalState(new RoleBattleFSMState_Global());
                 m_FSM.stateFactory = new FSMStateFactory<Role_Player>(false);
-                m_FSM.stateFactory.RegisterState(RoleBattleState.Battle, new RoleBattleFSMState_Battle());
+                m_FSM.stateFactory.RegisterState(RoleBattleState.Battle, new RoleBattleFSMState_Move());
                 m_FSM.stateFactory.RegisterState(RoleBattleState.Blocking, new RoleBattleFSMState_Blocking());
                 m_FSM.stateFactory.RegisterState(RoleBattleState.Crouch, new RoleBattleFSMState_Crouch());
             }

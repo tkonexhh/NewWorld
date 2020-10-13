@@ -223,7 +223,6 @@ namespace Game.Logic
 
             if (!viewData.CheckInsert(index.Value, effectCell.CellData))
             {
-                //TODO 检测是否可以合并 交换
                 if (targetCell.CellData == null) return false;
 
                 if (targetCell.CellData is PlayerInventoryCellData) //如果目标也是道具栏位

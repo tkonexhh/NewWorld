@@ -35,6 +35,11 @@ namespace Game.Logic
         {
             //施法到目标
         }
+
+        public void WeaponSwitch()
+        {
+            //换武器的音效
+        }
     }
 
 }

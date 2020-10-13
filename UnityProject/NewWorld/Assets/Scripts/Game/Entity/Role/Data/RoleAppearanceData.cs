@@ -18,9 +18,9 @@ namespace Game.Logic
     public class BasicAppearance
     {
         public Sex sex = Sex.Male;
-        public int hairID = 1;//发型
+        public int hairID = 0;//发型
         public int headID = 0;//面部
-        public int facialHairID = 1;//胡子
+        public int facialHairID = 0;//胡子
         public int eyeBrows = 0;//眉毛
         public int ear = -1;
         //一些颜色

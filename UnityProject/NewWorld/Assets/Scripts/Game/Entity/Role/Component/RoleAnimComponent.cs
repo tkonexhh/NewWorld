@@ -26,6 +26,7 @@ namespace Game.Logic
         private string m_Key_IntAction = "Action";
         private string m_Key_IntLeftRight = "LeftRight";
         private string m_Key_IntWeapon = "Weapon";
+        private string m_Key_IntWeaponSwitch = "WeaponSwitch";
 
         private string m_Key_FloatVelocityX = "Velocity X";
         private string m_Key_FloatVelocityZ = "Velocity Z";
@@ -58,6 +59,7 @@ namespace Game.Logic
         private int m_KeyHash_IntAction;
         private int m_KeyHash_IntLeftRight;
         private int m_KeyHash_IntWeapon;
+        private int m_KeyHash_IntWeaponSwitch;
 
         private int m_KeyHash_FloatVelocityX;
         private int m_KeyHash_FloatVelocityZ;
@@ -97,6 +99,7 @@ namespace Game.Logic
             m_KeyHash_IntAction = Animator.StringToHash(m_Key_IntAction);
             m_KeyHash_IntLeftRight = Animator.StringToHash(m_Key_IntLeftRight);
             m_KeyHash_IntWeapon = Animator.StringToHash(m_Key_IntWeapon);
+            m_KeyHash_IntWeaponSwitch = Animator.StringToHash(m_Key_IntWeaponSwitch);
             m_KeyHash_FloatVelocityX = Animator.StringToHash(m_Key_FloatVelocityX);
             m_KeyHash_FloatVelocityZ = Animator.StringToHash(m_Key_FloatVelocityZ);
             m_KeyHash_FloatHurtX = Animator.StringToHash(m_Key_FloatHurtX);
@@ -187,6 +190,12 @@ namespace Game.Logic
         {
             m_Animator.SetInteger(m_KeyHash_IntWeapon, weapon);
         }
+
+        public void SetWeaponSwitch(int weaponSwitch)
+        {
+            m_Animator.SetInteger(m_KeyHash_IntWeaponSwitch, weaponSwitch);
+        }
+
         #endregion
         public void SetActionTrigger()
         {

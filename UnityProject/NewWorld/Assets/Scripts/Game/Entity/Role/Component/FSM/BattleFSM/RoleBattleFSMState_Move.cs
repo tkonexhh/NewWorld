@@ -19,7 +19,7 @@ namespace Game.Logic
         Unarmed = 0,
         DualHandAxe = 3,
     }
-    public class RoleBattleFSMState_Battle : FSMState<Role_Player>
+    public class RoleBattleFSMState_Move : FSMState<Role_Player>
     {
         private Role_Player player;
         private Vector2 m_InputMove = Vector2.zero;

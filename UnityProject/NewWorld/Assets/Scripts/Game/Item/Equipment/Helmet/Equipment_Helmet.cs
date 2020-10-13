@@ -20,6 +20,7 @@ namespace Game.Logic
         private HelmetType m_Type;
         public Equipment_Helmet(long id) : base(id)
         {
+            //TODO 在装备信息中定义子类型
             m_Type = HelmetType.NoHead;
 
             switch (m_Type)
