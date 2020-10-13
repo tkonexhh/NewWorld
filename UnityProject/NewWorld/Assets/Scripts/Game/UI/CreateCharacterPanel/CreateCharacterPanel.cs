@@ -49,7 +49,7 @@ namespace Game.Logic
 
             BasicAppearance basicAppearance = new BasicAppearance();
             basicAppearance.hairID = m_Hair.CurIndex;
-            basicAppearance.faceID = m_Face.CurIndex;
+            basicAppearance.headID = m_Face.CurIndex;
             basicAppearance.facialHairID = m_FacialHair.CurIndex;
             basicAppearance.eyeBrows = m_EyeBrows.CurIndex;
 

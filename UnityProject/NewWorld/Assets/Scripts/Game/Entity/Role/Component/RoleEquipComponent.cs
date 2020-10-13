@@ -20,13 +20,13 @@ namespace Game.Logic
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
-            m_EquipmentMap.Add((int)EquipmentType.Helmet, new Equipment_Helmet(role.data.equipmentData.helmetID));
-            m_EquipmentMap.Add((int)EquipmentType.Torso, new Equipment_Torso(role.data.equipmentData.torsoID));
-            m_EquipmentMap.Add((int)EquipmentType.Hands, new Equipment_Hands(role.data.equipmentData.handsID));
-            m_EquipmentMap.Add((int)EquipmentType.Legs, new Equipment_Legs(role.data.equipmentData.legsID));
-            m_EquipmentMap.Add((int)EquipmentType.Hips, new Equipment_Hips(role.data.equipmentData.hipsID));
-            m_EquipmentMap.Add((int)EquipmentType.Shoulders, new Equipment_Shoulders(role.data.equipmentData.shouldersID));
-            m_EquipmentMap.Add((int)EquipmentType.Back, new Equipment_Back(role.data.equipmentData.backID));
+            m_EquipmentMap.Add((int)InventoryEquipSlot.Helmet, new Equipment_Helmet(role.data.equipmentData.helmetID));
+            m_EquipmentMap.Add((int)InventoryEquipSlot.Torso, new Equipment_Torso(role.data.equipmentData.torsoID));
+            m_EquipmentMap.Add((int)InventoryEquipSlot.Hands, new Equipment_Hands(role.data.equipmentData.handsID));
+            m_EquipmentMap.Add((int)InventoryEquipSlot.Legs, new Equipment_Legs(role.data.equipmentData.legsID));
+            m_EquipmentMap.Add((int)InventoryEquipSlot.Hips, new Equipment_Hips(role.data.equipmentData.hipsID));
+            m_EquipmentMap.Add((int)InventoryEquipSlot.Shoulders, new Equipment_Shoulders(role.data.equipmentData.shouldersID));
+            m_EquipmentMap.Add((int)InventoryEquipSlot.Back, new Equipment_Back(role.data.equipmentData.backID));
         }
 
         public void ApplyEquipment()
@@ -35,6 +35,18 @@ namespace Game.Logic
             {
                 equipment.Equip(role);
             }
+        }
+
+
+        public Equipment GetEquipmentBySlot(InventoryEquipSlot slot)
+        {
+            Equipment equipment;
+
+            if (m_EquipmentMap.TryGetValue((int)slot, out equipment))
+            {
+                return equipment;
+            }
+            return null;
         }
 
         public void Equip(Equipment equipment)

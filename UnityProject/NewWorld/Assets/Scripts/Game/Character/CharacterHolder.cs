@@ -23,8 +23,8 @@ namespace Game.Logic
     /// </summary>
     public class CharacterHolder : MonoBehaviour// TMonoSingleton<CharacterHolder>
     {
-        [Header("HeadCovering")]
         [Header("General")]
+        [Header("HeadCovering")]
         [SerializeField] private Transform m_TrsHeadCoveringBaseHair;//有头发的帽子
         [SerializeField] private Transform m_TrsHeadCoveringNoFacialHair;//没有胡子的帽子
         [SerializeField] private Transform m_TrsHeadCoveringNoHair;//没有头发的帽子
@@ -81,20 +81,23 @@ namespace Game.Logic
         [SerializeField] private Transform m_TrsHeadNoElementFemale;
 
 
-        public SkinnedMeshRenderer GetHelmetMesh(HelmetType type, int id)
+        public SkinnedMeshRenderer GetHelmetWithHeadMesh(HelmetType type, int id)
         {
             switch (type)
             {
                 case HelmetType.Normal:
+                    return GetHeadCoveringBaseHair(id);
+                case HelmetType.NoFacialHair:
+                    return GetHeadCoveringNoFacialHair(id);
+                case HelmetType.NoHair:
                     return GetHeadCoveringNoHair(id);
-                    // case HelmetType.NoFacialHair
+                    // case HelmetType.NoHead:
+                    //     return GetHeadNoElement(sex, id);
             }
-            // GetHeadCoveringBaseHair(id);
-            // GetHeadCoveringNoFacialHair(id);
-            return GetHeadCoveringNoHair(id);
+            return null;
         }
 
-        public SkinnedMeshRenderer GetMeshBySlot(AppearanceSlot slot, Sex sex, int id)
+        public SkinnedMeshRenderer GetMeshBySlot(AppearanceSlot slot, Sex sex, int id, params object[] args)
         {
             switch (slot)
             {
@@ -142,16 +145,16 @@ namespace Game.Logic
                     return GetElfEar(id);
                 case AppearanceSlot.HipsAttach:
                     return GetHipsAttachment(id);
-                case AppearanceSlot.HelmetWithoutHead:
-                    return GetHeadNoElement(sex, id);
                 case AppearanceSlot.BackAttach:
                     return GetBackAttachment(id);
+                case AppearanceSlot.HelmetWithoutHead:
+                    return GetHeadNoElement(sex, id);
                 case AppearanceSlot.HelmetWithHead:
-                    return GetHeadCoveringNoHair(id);
+                    HelmetType type = (HelmetType)args[0];
+                    return GetHelmetWithHeadMesh(type, id);
                 default:
                     return null;
             }
-
 
         }
 

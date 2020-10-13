@@ -16,11 +16,11 @@ namespace Game.Logic
     [TMonoSingletonAttribute("[Game]/[PlayerMgr]")]
     public class PlayerMgr : TMonoSingleton<PlayerMgr>
     {
-        private Role m_Role;
+        private Role_Player m_Role;
         private PlayerInventoryMgr m_InventoryMgr = null;
         private PlayerEquipmentMgr m_EquipmentMgr = null;
 
-        public Role role => m_Role;
+        public Role_Player role => m_Role;
         public PlayerInventoryMgr inventoryMgr => m_InventoryMgr;
         public PlayerEquipmentMgr equipmentMgr => m_EquipmentMgr;
 

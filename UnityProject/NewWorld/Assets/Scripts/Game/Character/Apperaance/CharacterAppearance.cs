@@ -121,7 +121,7 @@ namespace Game.Logic
         void RefeshAppearance()
         {
             SetAppearance(AppearanceSlot.Hair, m_AppearanceData.basicAppearance.hairID);
-            SetAppearance(AppearanceSlot.Head, m_AppearanceData.basicAppearance.faceID);
+            SetAppearance(AppearanceSlot.Head, m_AppearanceData.basicAppearance.headID);
             SetAppearance(AppearanceSlot.FacialHair, m_AppearanceData.basicAppearance.facialHairID);
             SetAppearance(AppearanceSlot.EyeBrows, m_AppearanceData.basicAppearance.eyeBrows);
             SetAppearance(AppearanceSlot.Hips, m_AppearanceData.hipsID);
@@ -145,35 +145,6 @@ namespace Game.Logic
 
             CombineMeshs();
         }
-
-        public void IsHideSlot(AppearanceSlot slot, bool hide)
-        {
-            switch (slot)
-            {
-                case AppearanceSlot.Hair:
-                    m_Hair.SetHide(hide);
-                    break;
-                case AppearanceSlot.Head:
-                    m_Head.SetHide(hide);
-                    break;
-                case AppearanceSlot.FacialHair:
-                    m_FacialHair?.SetHide(hide);
-                    break;
-                case AppearanceSlot.EyeBrows:
-                    m_Eyebrows.SetHide(hide);
-                    break;
-                case AppearanceSlot.Ear:
-                    m_ElfEar.SetHide(hide);
-                    break;
-                case AppearanceSlot.HelmetWithHead:
-                    m_HelmetWithHead.SetHide(hide);
-                    break;
-                case AppearanceSlot.HelmetWithoutHead:
-                    m_HelmetWithoutHead.SetHide(hide);
-                    break;
-            }
-        }
-
 
         public void SetAppearance(AppearanceSlot slot, int id)
         {
@@ -245,11 +216,9 @@ namespace Game.Logic
                 case AppearanceSlot.HipsAttach:
                     break;
                 case AppearanceSlot.HelmetWithoutHead:
-                    IsHideSlot(AppearanceSlot.HelmetWithHead, true);
                     SetHelmetWithoutHead(id);
                     break;
                 case AppearanceSlot.HelmetWithHead:
-                    IsHideSlot(AppearanceSlot.HelmetWithoutHead, true);
                     SetHelmetWithHead(id);
                     break;
                 case AppearanceSlot.BackAttach:
@@ -262,21 +231,26 @@ namespace Game.Logic
         #region SetPart
         public void SetHair(int id)
         {
-
             TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.Hair, m_AppearanceData.sex, id);
             if (data != null)
             {
                 m_Hair.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
                 m_AppearanceData.basicAppearance.hairID = id;
             }
-            // m_AppearanceData.basicAppearance.hairID = m_Hair.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
         }
 
         public void SetHead(int id)
         {
-            TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.Head, m_AppearanceData.sex, id);
-            if (data != null)
-                m_AppearanceData.basicAppearance.faceID = m_Head.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
+            if (id == -1)
+            {
+                m_AppearanceData.basicAppearance.headID = m_Head.SetSkin(m_AppearanceData.sex, -1);
+            }
+            else
+            {
+                TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.Head, m_AppearanceData.sex, id);
+                if (data != null)
+                    m_AppearanceData.basicAppearance.headID = m_Head.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
+            }
         }
 
         public void SetFacialHair(int id)
@@ -287,14 +261,20 @@ namespace Game.Logic
                 m_FacialHair.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
                 m_AppearanceData.basicAppearance.facialHairID = id;
             }
-            // m_AppearanceData.basicAppearance.facialHairID = m_FacialHair.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
         }
 
         public void SetEyebrows(int id)
         {
-            TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.EyeBrows, m_AppearanceData.sex, id);
-            if (data != null)
-                m_AppearanceData.basicAppearance.eyeBrows = m_Eyebrows.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
+            if (id == -1)
+            {
+                m_AppearanceData.basicAppearance.eyeBrows = m_Eyebrows.SetSkin(m_AppearanceData.sex, -1);
+            }
+            else
+            {
+                TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.EyeBrows, m_AppearanceData.sex, id);
+                if (data != null)
+                    m_AppearanceData.basicAppearance.eyeBrows = m_Eyebrows.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
+            }
         }
 
         public void SetTorso(int id)
@@ -399,20 +379,11 @@ namespace Game.Logic
 
         public void SetHelmetWithHead(int id)
         {
-            m_AppearanceData.helmetWithHeadID = m_HelmetWithHead.SetSkin(m_AppearanceData.sex, id);
+            m_AppearanceData.helmetWithHeadID = m_HelmetWithHead.SetSkin(m_AppearanceData.sex, id, m_AppearanceData.helmetWithoutHeadType);
         }
 
         #endregion
 
-        public void ApplyAppearance()
-        {
-            m_Skins.ForEach(skin => { skin.BeforeCombine(); });
-            // m_HeadCovering.gameObject.SetActive(true);
-            // m_HeadNoElements.gameObject.SetActive(true);
-            // m_HeadAttachment.gameObject.SetActive(true);
-            // m_BackAttachment.gameObject.SetActive(true);
-            // m_HipsAttachment.gameObject.SetActive(true);
-        }
         public void SetAppearanceData(RoleAppearanceData data)
         {
             m_AppearanceData = data;
@@ -423,7 +394,7 @@ namespace Game.Logic
 
         public void CombineMeshs()
         {
-            ApplyAppearance();
+            m_Skins.ForEach(skin => { skin.BeforeCombine(); });
             MeshHelper.CombineSkinnedMesh(transform.GetChild(0), material, m_Renderer);
         }
     }

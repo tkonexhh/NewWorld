@@ -21,13 +21,14 @@ namespace Game.Logic
 
         public void Init()
         {
-            PlayerEquipmentCellData cellData_Helmet = new PlayerEquipmentCellData(new Equipment_Helmet(PlayerMgr.S.role.data.equipmentData.helmetID));
-            PlayerEquipmentCellData cellData_Torso = new PlayerEquipmentCellData(new Equipment_Torso(PlayerMgr.S.role.data.equipmentData.torsoID));
-            PlayerEquipmentCellData cellData_Hands = new PlayerEquipmentCellData(new Equipment_Hands(PlayerMgr.S.role.data.equipmentData.handsID));
-            PlayerEquipmentCellData cellData_Legs = new PlayerEquipmentCellData(new Equipment_Legs(PlayerMgr.S.role.data.equipmentData.legsID));
-            PlayerEquipmentCellData cellData_Hips = new PlayerEquipmentCellData(new Equipment_Hips(PlayerMgr.S.role.data.equipmentData.hipsID));
-            PlayerEquipmentCellData cellData_Shoulders = new PlayerEquipmentCellData(new Equipment_Shoulders(PlayerMgr.S.role.data.equipmentData.shouldersID));
-            PlayerEquipmentCellData cellData_Back = new PlayerEquipmentCellData(new Equipment_Back(PlayerMgr.S.role.data.equipmentData.backID));
+
+            PlayerEquipmentCellData cellData_Helmet = new PlayerEquipmentCellData(PlayerMgr.S.role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Helmet));
+            PlayerEquipmentCellData cellData_Torso = new PlayerEquipmentCellData(PlayerMgr.S.role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Torso));
+            PlayerEquipmentCellData cellData_Hands = new PlayerEquipmentCellData(PlayerMgr.S.role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Hands));
+            PlayerEquipmentCellData cellData_Legs = new PlayerEquipmentCellData(PlayerMgr.S.role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Legs));
+            PlayerEquipmentCellData cellData_Hips = new PlayerEquipmentCellData(PlayerMgr.S.role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Hips));
+            PlayerEquipmentCellData cellData_Shoulders = new PlayerEquipmentCellData(PlayerMgr.S.role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Shoulders));
+            PlayerEquipmentCellData cellData_Back = new PlayerEquipmentCellData(PlayerMgr.S.role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Back));
 
             m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Helmet, cellData_Helmet);
             m_EquipmentViewData.InsertInventoryItem((int)InventoryEquipSlot.Torso, cellData_Torso);

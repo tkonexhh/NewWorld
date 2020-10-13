@@ -20,7 +20,6 @@ namespace Game.Logic
         [SerializeField] private SkinnedMeshRenderer m_Renderer;
 
         private int m_CurID;
-        private bool m_IsHide;
         private CharacterAppearance m_Character;
 
         public int curID => m_CurID;
@@ -34,7 +33,7 @@ namespace Game.Logic
             m_CurID = -100;
         }
 
-        public int SetSkin(Sex sex, int id)
+        public int SetSkin(Sex sex, int id, params object[] args)
         {
             if (m_CurID != id)
             {
@@ -45,14 +44,9 @@ namespace Game.Logic
                 else
                 {
                     SkinnedMeshRenderer newSkin = null;
-                    // if (m_Slot == AppearanceSlot.HelmetWithHead)
-                    // {
-                    //     newSkin = GameResMgr.S.globalRes.roleHolder.GetHelmetMesh(HelmetType.NoHair, id);
-                    // }
-                    // else
-                    {
-                        newSkin = GameResMgr.S.globalRes.roleHolder.GetMeshBySlot(m_Slot, sex, id);
-                    }
+
+                    newSkin = GameResMgr.S.globalRes.roleHolder.GetMeshBySlot(m_Slot, sex, id, args);
+
 
                     List<Transform> bones = new List<Transform>();
                     foreach (Transform bone in newSkin.bones)
@@ -75,19 +69,14 @@ namespace Game.Logic
 
             }
 
-            m_IsHide = false;
             gameObject.SetActive(id != -1);
             return m_CurID;
         }
 
-        public void SetHide(bool ishide)
-        {
-            m_IsHide = ishide;
-        }
 
         public void BeforeCombine()
         {
-            gameObject.SetActive(!m_IsHide);
+            gameObject.SetActive(true);
         }
     }
 
