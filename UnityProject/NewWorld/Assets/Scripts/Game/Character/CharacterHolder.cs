@@ -81,10 +81,16 @@ namespace Game.Logic
         [SerializeField] private Transform m_TrsHeadNoElementFemale;
 
 
-        public SkinnedMeshRenderer GetHelmetMesh(int id)
+        public SkinnedMeshRenderer GetHelmetMesh(HelmetType type, int id)
         {
-            GetHeadCoveringBaseHair(id);
-            GetHeadCoveringNoFacialHair(id);
+            switch (type)
+            {
+                case HelmetType.Normal:
+                    return GetHeadCoveringNoHair(id);
+                    // case HelmetType.NoFacialHair
+            }
+            // GetHeadCoveringBaseHair(id);
+            // GetHeadCoveringNoFacialHair(id);
             return GetHeadCoveringNoHair(id);
         }
 
@@ -140,6 +146,8 @@ namespace Game.Logic
                     return GetHeadNoElement(sex, id);
                 case AppearanceSlot.BackAttach:
                     return GetBackAttachment(id);
+                case AppearanceSlot.HelmetWithHead:
+                    return GetHeadCoveringNoHair(id);
                 default:
                     return null;
             }

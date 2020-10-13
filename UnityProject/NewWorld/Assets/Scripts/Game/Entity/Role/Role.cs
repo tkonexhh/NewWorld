@@ -79,16 +79,6 @@ namespace Game.Logic
         {
         }
 
-        public void Equip(Equipment equipment)
-        {
-            m_EquipComponent.Equip(equipment);
-        }
-
-        public void UnEquip(Equipment equipment)
-        {
-            m_EquipComponent.UnEquip(equipment);
-        }
-
         public void SetFocus(Transform focus)
         {
             m_IKComponent.SetFocusTarget(focus);

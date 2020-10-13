@@ -21,9 +21,13 @@ namespace Game.Logic
         private RoleControlComponent m_ControlComponent;
         private RoleFSMComponent m_FSMConponent;
 
-        public RoleInputComponent inputComponent => m_InputComponent;
         public RoleControlComponent controlComponent => m_ControlComponent;
         public RoleFSMComponent fsmComponent => m_FSMConponent;
+
+        public Role_Player() : base()
+        {
+
+        }
 
         protected override void OnResLoaded(GameObject target)
         {

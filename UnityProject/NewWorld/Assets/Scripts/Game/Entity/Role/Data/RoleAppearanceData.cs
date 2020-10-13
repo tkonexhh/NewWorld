@@ -51,8 +51,8 @@ namespace Game.Logic
         public int kneeRightID = -1;
         public int kneeLeftID = -1;
         public int hipsAttachID;
-        public int helmetWithHeadID;
-        public int helmetWithoutHeadID;
+        public int helmetWithHeadID = -1;
+        public int helmetWithoutHeadID = -1;
         public int backAttachID = -1;
 
         public Sex sex

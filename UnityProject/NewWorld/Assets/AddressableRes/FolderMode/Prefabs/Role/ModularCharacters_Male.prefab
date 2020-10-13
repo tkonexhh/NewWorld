@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184ea14d3d10e421d9f776b48f18c06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Slot: 22
+  m_Slot: 24
   m_Renderer: {fileID: 6477088781424225736}
 --- !u!1 &6968812957136774085
 GameObject:
@@ -3978,7 +3978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184ea14d3d10e421d9f776b48f18c06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Slot: 21
+  m_Slot: 23
   m_Renderer: {fileID: 7666273751984983858}
 --- !u!1 &7666273751971386432
 GameObject:

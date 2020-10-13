@@ -36,12 +36,13 @@ namespace Game.Logic
         public override void SetAppearance(CharacterAppearance appearance)
         {
             Debug.LogError("EquipmentAppearance_Helmet_Normal SetAppearance");
-            appearance.HideSlot(AppearanceSlot.HelmetWithoutHead);
+            // appearance.IsHideSlot(AppearanceSlot.HelmetWithoutHead, true);
             appearance.SetAppearance(AppearanceSlot.HelmetWithHead, id);
         }
 
         public override void Removeppearance(CharacterAppearance appearance)
         {
+            appearance.SetAppearance(AppearanceSlot.HelmetWithHead, -1);
         }
     }
 
@@ -54,9 +55,17 @@ namespace Game.Logic
 
         public override void SetAppearance(CharacterAppearance appearance)
         {
-            appearance.HideSlot(AppearanceSlot.FacialHair);
-            appearance.HideSlot(AppearanceSlot.HelmetWithoutHead);
+            Debug.LogError("EquipmentAppearance_Helmet_NoFacialHair SetAppearance");
+            // appearance.IsHideSlot(AppearanceSlot.FacialHair, true);
+            appearance.SetAppearance(AppearanceSlot.FacialHair, 0);
+            // appearance.IsHideSlot(AppearanceSlot.HelmetWithoutHead, true);
             appearance.SetAppearance(AppearanceSlot.HelmetWithHead, id);
+        }
+
+        public override void Removeppearance(CharacterAppearance appearance)
+        {
+            // appearance.IsHideSlot(AppearanceSlot.FacialHair, false);
+            appearance.SetAppearance(AppearanceSlot.HelmetWithHead, -1);
         }
     }
 
@@ -69,9 +78,16 @@ namespace Game.Logic
 
         public override void SetAppearance(CharacterAppearance appearance)
         {
-            appearance.HideSlot(AppearanceSlot.Hair);
-            appearance.HideSlot(AppearanceSlot.HelmetWithoutHead);
+            Debug.LogError("EquipmentAppearance_Helmet_NoHair SetAppearance");
+            appearance.IsHideSlot(AppearanceSlot.Hair, true);
+            // appearance.IsHideSlot(AppearanceSlot.HelmetWithoutHead, true);
             appearance.SetAppearance(AppearanceSlot.HelmetWithHead, id);
+        }
+
+        public override void Removeppearance(CharacterAppearance appearance)
+        {
+            appearance.IsHideSlot(AppearanceSlot.Hair, false);
+            appearance.SetAppearance(AppearanceSlot.HelmetWithHead, -1);
         }
     }
 
@@ -84,13 +100,22 @@ namespace Game.Logic
 
         public override void SetAppearance(CharacterAppearance appearance)
         {
-            appearance.HideSlot(AppearanceSlot.Hair);
-            appearance.HideSlot(AppearanceSlot.EyeBrows);
-            appearance.HideSlot(AppearanceSlot.Head);
-            appearance.HideSlot(AppearanceSlot.FacialHair);
-            appearance.HideSlot(AppearanceSlot.EyeBrows);
-            appearance.HideSlot(AppearanceSlot.HelmetWithHead);
+            appearance.IsHideSlot(AppearanceSlot.Hair, true);
+            appearance.IsHideSlot(AppearanceSlot.EyeBrows, true);
+            appearance.IsHideSlot(AppearanceSlot.Head, true);
+            appearance.IsHideSlot(AppearanceSlot.FacialHair, true);
+            // appearance.IsHideSlot(AppearanceSlot.HelmetWithHead, true);
             appearance.SetAppearance(AppearanceSlot.HelmetWithoutHead, id);
+        }
+
+        public override void Removeppearance(CharacterAppearance appearance)
+        {
+            appearance.IsHideSlot(AppearanceSlot.Hair, false);
+            appearance.IsHideSlot(AppearanceSlot.EyeBrows, false);
+            appearance.IsHideSlot(AppearanceSlot.Head, false);
+            appearance.IsHideSlot(AppearanceSlot.FacialHair, false);
+            appearance.IsHideSlot(AppearanceSlot.HelmetWithHead, false);
+            appearance.SetAppearance(AppearanceSlot.HelmetWithoutHead, -1);
         }
     }
 

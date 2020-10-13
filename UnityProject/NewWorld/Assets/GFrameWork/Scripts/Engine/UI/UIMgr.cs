@@ -150,7 +150,12 @@ namespace GFrame
             }
 
             ClosePanelInfo(panelInfo);
+        }
 
+        public void ToggleShowPanel<T>(T uiID) where T : System.IConvertible
+        {
+            int id = uiID.ToInt32(null);
+            // if()
         }
 
         #endregion

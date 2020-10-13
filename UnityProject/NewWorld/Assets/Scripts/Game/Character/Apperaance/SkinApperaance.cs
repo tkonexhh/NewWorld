@@ -23,16 +23,15 @@ namespace Game.Logic
         private bool m_IsHide;
         private CharacterAppearance m_Character;
 
-        private void Awake()
-        {
-            if (m_Renderer == null)
-                m_Renderer = GetComponent<SkinnedMeshRenderer>();
-            m_CurID = -100;
-        }
+        public int curID => m_CurID;
 
         public void Init(CharacterAppearance character)
         {
+            if (m_Renderer == null)
+                m_Renderer = GetComponent<SkinnedMeshRenderer>();
+
             m_Character = character;
+            m_CurID = -100;
         }
 
         public int SetSkin(Sex sex, int id)
@@ -46,16 +45,14 @@ namespace Game.Logic
                 else
                 {
                     SkinnedMeshRenderer newSkin = null;
-                    if (m_Slot == AppearanceSlot.HelmetWithHead)
-                    {
-                        newSkin = GameResMgr.S.globalRes.roleHolder.GetHelmetMesh(id);
-
-                    }
-                    else
+                    // if (m_Slot == AppearanceSlot.HelmetWithHead)
+                    // {
+                    //     newSkin = GameResMgr.S.globalRes.roleHolder.GetHelmetMesh(HelmetType.NoHair, id);
+                    // }
+                    // else
                     {
                         newSkin = GameResMgr.S.globalRes.roleHolder.GetMeshBySlot(m_Slot, sex, id);
                     }
-
 
                     List<Transform> bones = new List<Transform>();
                     foreach (Transform bone in newSkin.bones)
