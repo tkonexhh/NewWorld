@@ -115,6 +115,7 @@ namespace Game.Logic
 
         private void GetHurt()
         {
+            player.animComponent.SetAction(Random.Range(1, 6));
             player.animComponent.SetHurt(new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)));
             player.animComponent.SetGetHurtTrigger();
         }

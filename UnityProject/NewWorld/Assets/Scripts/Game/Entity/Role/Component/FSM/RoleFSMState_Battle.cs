@@ -32,8 +32,10 @@ namespace Game.Logic
             // entity.animComponent.SetWeaponSwitch(3);
 
             //0空拳
+            //1双手剑
             //3双手Axe
-            entity.animComponent.SetWeapon(3);
+
+            entity.animComponent.SetWeapon(1);
             entity.animComponent.SetWeaponSwitch(0);
             if (m_FSM == null)
             {
