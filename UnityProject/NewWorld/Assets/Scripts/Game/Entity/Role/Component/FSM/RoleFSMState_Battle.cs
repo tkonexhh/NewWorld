@@ -33,7 +33,8 @@ namespace Game.Logic
 
             //0空拳
             //1双手剑
-            //3双手Axe
+            //2双手矛
+            //3双手斧
 
             entity.animComponent.SetWeapon(1);
             entity.animComponent.SetWeaponSwitch(0);
