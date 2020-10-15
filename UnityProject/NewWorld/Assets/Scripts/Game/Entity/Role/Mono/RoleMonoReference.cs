@@ -21,7 +21,11 @@ namespace Game.Logic
         public Transform headAimTarget;
 
         [Header("Transform")]
-        public Transform transRoleHead;
+        public Transform boneHead;
+
+        // [Header("装备挂点")]
+        public Transform boneHandLeft;
+        public Transform boneHandRight;
 
     }
 

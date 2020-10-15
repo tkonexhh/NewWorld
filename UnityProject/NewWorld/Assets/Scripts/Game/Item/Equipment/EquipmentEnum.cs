@@ -23,6 +23,7 @@ namespace Game.Logic
         Hips,//臀部
         Legs,//腿
         Back,
+        Weapon,
         Length,
     }
 
@@ -35,6 +36,12 @@ namespace Game.Logic
         NoHair,
         NoFacialHair,
 
+    }
+
+
+    public enum WeaponType
+    {
+        TwoHandAxe,//双手斧
     }
 
 }

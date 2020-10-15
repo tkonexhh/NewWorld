@@ -24,6 +24,10 @@ namespace Game.Logic
         {
 
         }
+        public override void Removeppearance(CharacterAppearance appearance)
+        {
+
+        }
     }
 
     public class EquipmentAppearance_Helmet_Normal : EquipmentAppearance_Helmet

@@ -36,7 +36,7 @@ namespace Game.Logic
             //2双手矛
             //3双手斧
 
-            entity.animComponent.SetWeapon(1);
+            entity.animComponent.SetWeapon(3);
             entity.animComponent.SetWeaponSwitch(0);
             if (m_FSM == null)
             {
