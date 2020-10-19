@@ -10,13 +10,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-
+using GFrame;
 
 namespace Game.Logic
 {
     public class RoleTest : MonoBehaviour
     {
         [SerializeField] private CinemachineVirtualCamera m_Camera;
+
         // Start is called before the first frame update
         void Start()
         {

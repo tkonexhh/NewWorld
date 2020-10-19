@@ -18,11 +18,13 @@ namespace GFrame
         /// <returns></returns>
         public static bool IsBetween(this DateTime date, DateTime from, DateTime to) { return ((from <= date) && (to >= date)); }
         /// <summary>
+        /// 
         /// Returns the date as midnight
         /// </summary>
         /// <param name="date">Date.</param>
         public static DateTime Midnight(this DateTime date) { return new DateTime(date.Year, date.Month, date.Day); }
         /// <summary>
+        /// 返回某个月第一天
         /// Returns the first day of the month.
         /// </summary>
         /// <param name="date">Date.</param>

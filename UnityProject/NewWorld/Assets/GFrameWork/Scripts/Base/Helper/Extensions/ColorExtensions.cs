@@ -59,6 +59,7 @@ namespace GFrame
                 color.a);
         }
         /// <summary>
+        /// 获取颜色的亮度
         /// Returns the brightness of the Color, defined as the average off the three Color channels.
         /// </summary>
         /// <param name="color">The Color.</param>
@@ -66,6 +67,16 @@ namespace GFrame
         public static float Brightness(this Color color)
         {
             return (color.r + color.g + color.b) / 3;
+        }
+
+        /// <summary>
+        /// 获取颜色的灰度
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        public static float Greyness(this Color color)
+        {
+            return color.r * 0.299f + color.g * 0.587f + color.b * 0.114f;
         }
 
         /// <summary>
@@ -136,7 +147,7 @@ namespace GFrame
         /// <param name="color">The Color.</param>
         /// <param name="alpha">Alpha for the Color.</param>
         /// <returns></returns>
-        public static Color WithAlpha(this Color color, float alpha)
+        public static Color SetAlpha(this Color color, float alpha)
         {
             return new Color(color.r, color.g, color.b, alpha);
         }

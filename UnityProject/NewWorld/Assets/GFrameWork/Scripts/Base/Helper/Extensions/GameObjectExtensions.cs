@@ -100,15 +100,7 @@ namespace GFrame
         //     go.transform.SetParent(parent.transform);
         // }
 
-        static public T AddMissingComponent<T>(this GameObject go) where T : Component
-        {
-            T comp = go.GetComponent<T>();
-            if (comp == null)
-            {
-                comp = go.AddComponent<T>();
-            }
-            return comp;
-        }
+
 
 
 

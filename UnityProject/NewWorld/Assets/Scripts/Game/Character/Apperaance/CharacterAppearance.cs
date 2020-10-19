@@ -75,7 +75,7 @@ namespace Game.Logic
 
         private void Awake()
         {
-            m_Renderer = gameObject.AddMissingComponent<SkinnedMeshRenderer>();
+            m_Renderer = gameObject.RequireComponent<SkinnedMeshRenderer>();
             material = Instantiate(material);
 
             m_Bones.Init();

@@ -83,7 +83,7 @@ namespace Game.Logic
             }
 
             // 在当前预制下创建新的蒙皮渲染器,设置属性
-            SkinnedMeshRenderer combinedSkinnedRenderer = gameObject.AddMissingComponent<SkinnedMeshRenderer>();
+            SkinnedMeshRenderer combinedSkinnedRenderer = gameObject.RequireComponent<SkinnedMeshRenderer>();
             Mesh combinedMesh = new Mesh();
             combinedMesh.CombineMeshes(combineInstances.ToArray(), true, true);
             combinedSkinnedRenderer.sharedMesh = combinedMesh;
