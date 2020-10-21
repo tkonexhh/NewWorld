@@ -21,7 +21,7 @@ namespace Game.Logic
             player = role;
         }
 
-        public override void Execute(Role_Player role, float dt)
+        public override void Update(Role_Player role, float dt)
         {
             if (role.animComponent == null)
                 return;

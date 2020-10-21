@@ -16,6 +16,8 @@ namespace Game.Logic
     //用来存放所有需要拖入的组件 方便其他组件进行引用
     public class RoleMonoReference : MonoBehaviour
     {
+        public Rigidbody rigidbody;
+
         [Header("AnimIK")]
         public MultiAimConstraint headIK;
         public Transform headAimTarget;
@@ -26,6 +28,12 @@ namespace Game.Logic
         // [Header("装备挂点")]
         public Transform boneHandLeft;
         public Transform boneHandRight;
+
+        private void Awake()
+        {
+            if (rigidbody == null)
+                rigidbody = GetComponent<Rigidbody>();
+        }
 
     }
 

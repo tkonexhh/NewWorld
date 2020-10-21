@@ -22,7 +22,7 @@ namespace Game.Logic
             role.animComponent.SetCrouch(true);
         }
 
-        public override void Execute(Role_Player role, float dt)
+        public override void Update(Role_Player role, float dt)
         {
             if (role.animComponent == null)
                 return;

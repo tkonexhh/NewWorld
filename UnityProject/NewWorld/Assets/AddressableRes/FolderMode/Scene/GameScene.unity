@@ -904,6 +904,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64aa4b83d87a742b8a6f6cb2d320fc3f, type: 3}
+--- !u!4 &825486243 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 856864625733205866, guid: 64aa4b83d87a742b8a6f6cb2d320fc3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 825486242}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &828554736
 GameObject:
   m_ObjectHideFlags: 3
@@ -1749,12 +1755,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LookAt
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 825486243}
     - target: {fileID: 6646832267344586888, guid: a45f27b1be061405686598b7a627f6a9,
         type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 825486243}
     - target: {fileID: 6646832267344586889, guid: a45f27b1be061405686598b7a627f6a9,
         type: 3}
       propertyPath: m_Name
@@ -1814,6 +1820,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6646832268776140138, guid: a45f27b1be061405686598b7a627f6a9,
+        type: 3}
+      propertyPath: m_HorizontalDamping
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6646832268776140138, guid: a45f27b1be061405686598b7a627f6a9,
+        type: 3}
+      propertyPath: m_VerticalDamping
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a45f27b1be061405686598b7a627f6a9, type: 3}

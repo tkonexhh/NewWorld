@@ -17,12 +17,16 @@ namespace Game.Logic
     [RequireComponent(typeof(CharacterAppearance))]
     public partial class Role : Entity
     {
-        protected GameObject m_GameObject;
-        protected Transform m_Transform;
+        protected GameObject m_RootGameObject;
+        protected Transform m_RootTransform;
+        protected GameObject m_RoleGameObject;
+        protected Transform m_RoleTransform;
         protected RoleData m_Data;
 
-        public GameObject gameObject => m_GameObject;
-        public Transform transform => m_Transform;
+        public GameObject gameObject => m_RootGameObject;
+        public Transform transform => m_RootTransform;
+        public GameObject roleGameObject => m_RoleGameObject;
+        public Transform roleTransform => m_RoleTransform;
         public RoleData data => m_Data;
 
         protected RoleAppearanceComponent m_AppearanceComponent;
@@ -46,13 +50,15 @@ namespace Game.Logic
         public Role() : base()
         {
             m_Data = new RoleData(this);
-
+            m_RootGameObject = new GameObject();
+            m_RootTransform = m_RootGameObject.transform;
             //某些组件依赖此物体,需要等加载完成后才能添加组件
             AddressableResMgr.S.InstantiateAsync(resName, (target) =>
             {
                 // target.name = "Player";
-                m_GameObject = target;
-                m_Transform = m_GameObject.transform;
+                m_RoleGameObject = target;
+                m_RoleTransform = m_RoleGameObject.transform;
+                m_RoleTransform.transform.SetParent(m_RootGameObject.transform);
                 target.transform.localPosition = Vector3.zero;
 
                 m_MonoReference = target.GetComponent<RoleMonoReference>();

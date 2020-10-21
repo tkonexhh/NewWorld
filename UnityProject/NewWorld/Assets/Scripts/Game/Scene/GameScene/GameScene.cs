@@ -29,9 +29,9 @@ namespace Game.Logic
 
             PlayerMgr.S.role.onRoleCreated += (role) =>
             {
-                role.transform.SetXYZ(Vector3.zero);
-                // m_CameraPlayer.Follow = role.transform;
-                // m_CameraPlayer.LookAt = role.transform;
+                role.roleTransform.SetXYZ(Vector3.zero);
+                m_CameraPlayer.Follow = role.gameObject.transform;
+                m_CameraPlayer.LookAt = role.gameObject.transform;
             };
         }
     }

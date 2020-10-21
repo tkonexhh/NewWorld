@@ -27,7 +27,7 @@ namespace Game.Logic
             GameInputMgr.S.mainAction.Move.canceled += OnMoveCancled;
         }
 
-        public override void Execute(Role role, float dt)
+        public override void Update(Role role, float dt)
         {
             if (role.animComponent == null)
                 return;
@@ -36,7 +36,7 @@ namespace Game.Logic
             role.animComponent.SetVelocityZ(m_VecMove.sqrMagnitude);
 
             //控制角色朝向
-            player.transform.forward = new Vector3(m_VecMove.x, 0, m_VecMove.y);
+            player.roleTransform.forward = new Vector3(m_VecMove.x, 0, m_VecMove.y);
 
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -57,6 +57,11 @@ namespace Game.Logic
             {
                 (player.fsmComponent.stateMachine.currentState as RoleFSMState_Relax).SetRelaxState(RoleRelaxState.Crouch);
             }
+        }
+
+        public override void FixedUpdate(Role entity, float dt)
+        {
+            player.gameObject.transform.position += player.roleTransform.forward * m_VecMove.sqrMagnitude * dt * player.data.statusData.moveSpeed;
         }
 
         public override void Exit(Role entity)

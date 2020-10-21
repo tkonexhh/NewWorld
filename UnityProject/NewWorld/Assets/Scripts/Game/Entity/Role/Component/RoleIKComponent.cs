@@ -26,7 +26,7 @@ namespace Game.Logic
         {
             if (m_RootFocus)
             {
-                float dot = Vector3.Dot(role.transform.forward, m_RootFocus.transform.forward);
+                float dot = Vector3.Dot(role.roleTransform.forward, m_RootFocus.transform.forward);
                 float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
                 if (angle < 80)
                 {

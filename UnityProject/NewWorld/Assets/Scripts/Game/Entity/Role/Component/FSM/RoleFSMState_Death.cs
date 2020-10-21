@@ -25,7 +25,7 @@ namespace Game.Logic
             entity.animComponent.SetDeathTrigger();
         }
 
-        public override void Execute(Role role, float dt)
+        public override void Update(Role role, float dt)
         {
 
         }

@@ -24,7 +24,7 @@ namespace Game.Logic
         {
             base.Init(ownner);
             player = role as Role_Player;
-            m_Controller = role.gameObject.GetComponentInChildren<CharacterController>();
+            m_Controller = role.roleGameObject.GetComponentInChildren<CharacterController>();
 
         }
 

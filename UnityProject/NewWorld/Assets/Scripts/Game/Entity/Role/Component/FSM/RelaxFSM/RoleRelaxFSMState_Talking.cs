@@ -26,7 +26,7 @@ namespace Game.Logic
             RandomTalk(entity);
         }
 
-        public override void Execute(Role entity, float dt)
+        public override void Update(Role entity, float dt)
         {
             m_Timer += dt;
             if (m_Timer >= 2)

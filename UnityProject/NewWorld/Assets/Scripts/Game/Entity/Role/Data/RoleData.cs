@@ -17,12 +17,15 @@ namespace Game.Logic
     {
         private RoleAppearanceData m_AppearanceData;
         private RoleEquipmentData m_EquipmentData;
+        private RoleStatusData m_StatusData;
 
         public RoleAppearanceData appearanceData => m_AppearanceData;
         public RoleEquipmentData equipmentData => m_EquipmentData;
+        public RoleStatusData statusData => m_StatusData;
 
         public RoleData(Entity owner) : base(owner)
         {
+            m_StatusData = new RoleStatusData();
             m_AppearanceData = new RoleAppearanceData();
             m_AppearanceData.basicAppearance = new BasicAppearance();
             m_EquipmentData = new RoleEquipmentData();

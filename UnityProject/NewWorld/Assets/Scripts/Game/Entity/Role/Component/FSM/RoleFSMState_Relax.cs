@@ -46,9 +46,14 @@ namespace Game.Logic
             SetRelaxState(RoleRelaxState.Move);
         }
 
-        public override void Execute(Role role, float dt)
+        public override void Update(Role role, float dt)
         {
             m_FSM?.UpdateState(dt);
+        }
+
+        public override void FixedUpdate(Role entity, float dt)
+        {
+            m_FSM?.FixedUpdateState(dt);
         }
 
         public override void Exit(Role entity)

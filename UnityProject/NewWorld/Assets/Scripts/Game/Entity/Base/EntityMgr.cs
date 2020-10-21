@@ -36,6 +36,14 @@ namespace Game.Logic
                 _entities[i].Update(fDeltaTime);
             }
         }
+
+        public void FixedUpdate(float fDeltaTime)
+        {
+            for (int i = 0; i < _entities.Count; i++)
+            {
+                _entities[i].FixedUpdate(fDeltaTime);
+            }
+        }
     }
 
 }

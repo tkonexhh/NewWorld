@@ -19,7 +19,7 @@ namespace Game.Logic
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
-            m_Model = role.gameObject.GetComponentInChildren<WeaponModel_TwoHandAxe>();
+            m_Model = role.roleGameObject.GetComponentInChildren<WeaponModel_TwoHandAxe>();
 
             Debug.LogError(m_Model);
         }

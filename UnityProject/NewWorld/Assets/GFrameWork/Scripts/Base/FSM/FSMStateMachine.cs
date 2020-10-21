@@ -86,12 +86,30 @@ namespace GFrame
 
             if (m_GlobalState != null)
             {
-                m_GlobalState.Execute(m_Entity, dt);
+                m_GlobalState.Update(m_Entity, dt);
             }
 
             if (m_CurrentState != null)
             {
-                m_CurrentState.Execute(m_Entity, dt);
+                m_CurrentState.Update(m_Entity, dt);
+            }
+        }
+
+        public void FixedUpdateState(float dt)
+        {
+            if (!m_IsRunning)
+            {
+                return;
+            }
+
+            if (m_GlobalState != null)
+            {
+                m_GlobalState.FixedUpdate(m_Entity, dt);
+            }
+
+            if (m_CurrentState != null)
+            {
+                m_CurrentState.FixedUpdate(m_Entity, dt);
             }
         }
 

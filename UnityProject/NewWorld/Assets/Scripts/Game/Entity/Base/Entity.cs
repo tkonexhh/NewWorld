@@ -39,6 +39,11 @@ namespace Game.Logic
             _components.ForEach(p => p.Update(dt));
         }
 
+        public virtual void FixedUpdate(float dt)
+        {
+            _components.ForEach(p => p.FixedUpdate(dt));
+        }
+
     }
 
 }

@@ -39,6 +39,11 @@ namespace Game.Logic
             _components.ForEach(p => p.Update(Time.deltaTime));
         }
 
+        public void FixedUpdate()
+        {
+            EntityMgr.S.FixedUpdate(Time.fixedDeltaTime);
+        }
+
     }
 
 }

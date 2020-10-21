@@ -39,6 +39,11 @@ namespace Game.Logic
             m_FSM.UpdateState(dt);
         }
 
+        public override void FixedUpdate(float dt)
+        {
+            m_FSM.FixedUpdateState(dt);
+        }
+
         public void SetRoleState(RoleState state)
         {
             m_FSM.SetCurrentStateByID(state);

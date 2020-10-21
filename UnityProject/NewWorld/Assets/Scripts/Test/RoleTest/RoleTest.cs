@@ -25,8 +25,8 @@ namespace Game.Logic
             var role = EntityFactory.CreateRole();
             role.onRoleCreated += (r) =>
             {
-                m_Camera.Follow = r.transform;
-                m_Camera.LookAt = r.transform;
+                m_Camera.Follow = r.roleTransform;
+                m_Camera.LookAt = r.roleTransform;
             };
 
         }

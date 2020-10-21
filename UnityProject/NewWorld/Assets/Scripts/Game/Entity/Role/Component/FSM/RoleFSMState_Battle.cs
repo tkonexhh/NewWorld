@@ -52,7 +52,7 @@ namespace Game.Logic
             entity.animComponent.SetWeaponUnSheathTrigger();
         }
 
-        public override void Execute(Role role, float dt)
+        public override void Update(Role role, float dt)
         {
             if (role.animComponent == null)
                 return;

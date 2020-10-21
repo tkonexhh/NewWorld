@@ -14,7 +14,12 @@ namespace GFrame
         {
         }
 
-        public virtual void Execute(T entity, float dt)
+        public virtual void Update(T entity, float dt)
+        {
+
+        }
+
+        public virtual void FixedUpdate(T entity, float dt)
         {
 
         }

@@ -24,7 +24,7 @@ namespace Game.Logic
             player = role as Role_Player;
         }
 
-        public override void Execute(Role role, float dt)
+        public override void Update(Role role, float dt)
         {
             if (Input.GetKeyDown(KeyCode.Z))
             {

@@ -26,7 +26,7 @@ namespace Game.Logic
             entity.animComponent.SetActionTrigger();
         }
 
-        public override void Execute(Role entity, float dt)
+        public override void Update(Role entity, float dt)
         {
 
         }

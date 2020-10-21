@@ -89,7 +89,7 @@ namespace Game.Logic
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
-            m_Animator = role.gameObject.GetComponentInChildren<Animator>();
+            m_Animator = role.roleGameObject.GetComponentInChildren<Animator>();
 
             m_KeyHash_BoolMoving = Animator.StringToHash(m_Key_BoolMoving);
             m_KeyHash_BoolInjured = Animator.StringToHash(m_Key_BoolInjured);

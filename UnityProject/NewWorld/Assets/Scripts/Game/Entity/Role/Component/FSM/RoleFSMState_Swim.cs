@@ -26,7 +26,7 @@ namespace Game.Logic
             role.animComponent.SwimTrigger();
         }
 
-        public override void Execute(Role role, float dt)
+        public override void Update(Role role, float dt)
         {
             if (Input.GetKeyDown(KeyCode.C))
             {
