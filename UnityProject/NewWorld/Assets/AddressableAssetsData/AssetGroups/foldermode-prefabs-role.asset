@@ -21,10 +21,8 @@ MonoBehaviour:
     m_Address: ModularCharacters_Male
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 7666273751971387156, guid: 37a17d93ea857464799b21d70b00a57a,
-      type: 3}
-    m_TargetAsset: {fileID: 7666273751971387156, guid: 37a17d93ea857464799b21d70b00a57a,
-      type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 55398063928fa4ffa85c72624f78b9bc
     m_Address: ModularCharacters_Female
     m_ReadOnly: 0
@@ -47,10 +45,8 @@ MonoBehaviour:
     m_Address: ModularCharactersHolder
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 779722151024657977, guid: f6eef83f9401a454388773dbb4f5b220,
-      type: 3}
-    m_TargetAsset: {fileID: 779722151024657977, guid: f6eef83f9401a454388773dbb4f5b220,
-      type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9c683e4341b3a423397a98767a646554, type: 2}
   m_SchemaSet:

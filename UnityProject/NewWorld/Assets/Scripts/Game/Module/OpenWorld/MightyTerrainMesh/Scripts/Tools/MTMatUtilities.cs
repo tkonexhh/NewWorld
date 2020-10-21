@@ -47,28 +47,26 @@ namespace MightyTerrainMesh
             Texture2D alphaMap = AssetDatabase.LoadAssetAtPath<Texture2D>(alphaMapPath);
             //
             Material tMat = new Material(Shader.Find(shaderName));
-            tMat.SetTexture("_Control", alphaMap);
+            tMat.SetTexture("_SplatMap", alphaMap);
             if (tMat == null)
             {
                 Debug.LogError("export terrain material failed");
                 return;
             }
 
-
-
+            //TODO 如果是DCC软件导入进来的不采用TerrainLayer的方法
             for (int l = layerStart; l < layerStart + 4 && l < t.terrainData.terrainLayers.Length; ++l)
             {
                 int idx = l - layerStart;
                 TerrainLayer layer = t.terrainData.terrainLayers[l];
-                Vector2 tiling = new Vector2(t.terrainData.size.x / layer.tileSize.x,
-                    t.terrainData.size.z / layer.tileSize.y);
+
                 tMat.SetTexture(string.Format("_Splat{0}", idx), layer.diffuseTexture);
-                tMat.SetTextureOffset(string.Format("_Splat{0}", idx), layer.tileOffset);
-                tMat.SetTextureScale(string.Format("_Splat{0}", idx), tiling);
+                // tMat.SetTextureOffset(string.Format("_Splat{0}", idx), layer.tileOffset);
+                // tMat.SetTextureScale(string.Format("_Splat{0}", idx), tiling);
                 tMat.SetTexture(string.Format("_Normal{0}", idx), layer.normalMapTexture);
-                tMat.SetFloat(string.Format("_NormalScale{0}", idx), layer.normalScale);
-                tMat.SetFloat(string.Format("_Metallic{0}", idx), layer.metallic);
-                tMat.SetFloat(string.Format("_Smoothness{0}", idx), layer.smoothness);
+                // tMat.SetFloat(string.Format("_NormalScale{0}", idx), layer.normalScale);
+                // tMat.SetFloat(string.Format("_Metallic{0}", idx), layer.metallic);
+                // tMat.SetFloat(string.Format("_Smoothness{0}", idx), layer.smoothness);
             }
             AssetDatabase.CreateAsset(tMat, mathPath);
         }
@@ -86,7 +84,7 @@ namespace MightyTerrainMesh
             //base pass
             //Universal Render Pipeline/Terrain/Lit
             // SaveMaterail(dataName, t, 0, 0, "MT/Standard-BasePass");
-            SaveMaterail(dataName, t, 0, 0, "Universal Render Pipeline/Terrain/Lit");
+            SaveMaterail(dataName, t, 0, 0, Game.Logic.WorldDefine.MaterialShaderName);
             for (int i = 1; i < matCount; ++i)
             {
                 SaveMaterail(dataName, t, i, i * 4, "MT/Standard-AddPass");

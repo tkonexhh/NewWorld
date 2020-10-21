@@ -15,6 +15,8 @@ namespace Game.Logic
 {
     public class WorldDefine
     {
+        public const string MaterialShaderName = "XHH/Terrain";
+
         public const int ChunkSize = 1000;
         public static Vector2Int WorldSize = new Vector2Int(500, 500);
         public static float ChunckMaxDistance = 1.41422f;//根号2的近似值 1.414214

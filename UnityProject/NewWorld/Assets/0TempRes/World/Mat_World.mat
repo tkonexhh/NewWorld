@@ -93,11 +93,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SplatMap:
-        m_Texture: {fileID: 2800000, guid: b185a342b1eb3a344b75ffa4edf275e3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8b9eddcfb1e924e6eb7aa509d9c5a158, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaClip: 0
+    - _ApplyNormal: 0
     - _Blend: 0
     - _BumpScale: 1
     - _Cull: 2
@@ -122,4 +123,6 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Lerp: {r: 0.8, g: 0.6, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _SplatTiling: {r: 8, g: 8, b: 0, a: 0}

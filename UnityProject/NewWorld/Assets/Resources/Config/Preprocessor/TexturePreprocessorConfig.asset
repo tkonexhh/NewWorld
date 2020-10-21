@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0893e533fdd414c9a1693d82bbd61d, type: 3}
   m_Name: TexturePreprocessorConfig
   m_EditorClassIdentifier: 
+  IsEnabled: 1
+  IgnoreRegexList: []
   MaxTextureSize: 4096
   EnableReadWrite: 0
-  EnableMipmap: 0
+  EnableMipmap: 1
   EnableMipMapStreaming: 0
   AlphaSource: 0
   NativeTextureSizeMultiplier: 1

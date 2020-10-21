@@ -125,8 +125,18 @@ namespace Game.Logic
 
         public void SetVelocity(Vector2 vec)
         {
-            m_Animator.SetFloat(m_KeyHash_FloatVelocityX, vec.x);
-            m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, vec.y);
+            SetVelocityX(vec.x);
+            SetVelocityZ(vec.y);
+        }
+
+        public void SetVelocityX(float x)
+        {
+            m_Animator.SetFloat(m_KeyHash_FloatVelocityX, x);
+        }
+
+        public void SetVelocityZ(float z)
+        {
+            m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, z);
         }
 
         public void SetHurt(Vector2 vec)

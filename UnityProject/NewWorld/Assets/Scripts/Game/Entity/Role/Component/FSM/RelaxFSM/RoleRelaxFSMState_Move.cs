@@ -31,8 +31,12 @@ namespace Game.Logic
         {
             if (role.animComponent == null)
                 return;
+            //TODO 改为SmoothDamp
             m_VecMove = Vector2.Lerp(m_VecMove, m_InputMove, dt * m_VecSpeed);
-            role.animComponent.SetVelocity(m_VecMove);
+            role.animComponent.SetVelocityZ(m_VecMove.sqrMagnitude);
+
+            //控制角色朝向
+            player.transform.forward = new Vector3(m_VecMove.x, 0, m_VecMove.y);
 
             if (Input.GetKeyDown(KeyCode.R))
             {

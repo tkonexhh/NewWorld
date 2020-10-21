@@ -65,7 +65,8 @@ namespace Game.Logic
 
         private string GetDataName(Vector2Int pos)
         {
-            return "demo2";
+            return "MapChunk_" + pos.x + "-" + pos.y;
+            // return "demo2";
         }
 
         /// <summary>
@@ -104,38 +105,6 @@ namespace Game.Logic
             }
 
             return chunks;
-        }
-
-        private void CreateRangeChunck()
-        {
-            //根据位置加载四周的
-            CreateChunck(m_CurChunkPos);
-
-            for (int i = 1; i < m_Range + 1; i++)
-            {
-                for (int x = m_CurChunkPos.x - i; x <= m_CurChunkPos.x + i; x++)
-                {
-                    if (x < 0 || x > WorldDefine.WorldSize.x)
-                        continue;
-
-                    if (m_CurChunkPos.y + i <= WorldDefine.WorldSize.y)
-                        CreateChunck(new Vector2Int(x, m_CurChunkPos.y + i));
-                    if (m_CurChunkPos.y - i >= 0)
-                        CreateChunck(new Vector2Int(x, m_CurChunkPos.y - i));
-                }
-
-                for (int y = m_CurChunkPos.y - (i - 1); y <= m_CurChunkPos.y + (i - 1); y++)
-                {
-                    if (y < 0 || y > WorldDefine.WorldSize.y)
-                        continue;
-
-                    if (m_CurChunkPos.x - i >= 0)
-                        CreateChunck(new Vector2Int(m_CurChunkPos.x - i, y));
-
-                    if (m_CurChunkPos.x + i <= WorldDefine.WorldSize.x)
-                        CreateChunck(new Vector2Int(m_CurChunkPos.x + i, y));
-                }
-            }
         }
 
         private void Update()
@@ -186,9 +155,6 @@ namespace Game.Logic
                 chunk.Update();
                 chunk.SetDirty();
             });
-
-
-
 
         }
 
