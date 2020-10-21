@@ -15,14 +15,14 @@ namespace Game.Logic
 {
     public class Entity
     {
-        protected List<EntityComponennt> _components = new List<EntityComponennt>();
+        protected List<IEntityComponennt> _components = new List<IEntityComponennt>();
 
         public Entity()
         {
 
         }
 
-        protected virtual T AddComponent<T>(T component) where T : EntityComponennt
+        protected virtual T AddComponent<T>(T component) where T : IEntityComponennt
         {
             component.Init(this);
             _components.Add(component);
@@ -36,12 +36,12 @@ namespace Game.Logic
 
         public virtual void Update(float dt)
         {
-            _components.ForEach(p => p.Update(dt));
+            _components.ForEach(p => p.Excute(dt));
         }
 
         public virtual void FixedUpdate(float dt)
         {
-            _components.ForEach(p => p.FixedUpdate(dt));
+            _components.ForEach(p => p.FixedExcute(dt));
         }
 
     }

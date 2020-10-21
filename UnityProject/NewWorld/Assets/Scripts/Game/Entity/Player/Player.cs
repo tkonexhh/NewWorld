@@ -9,23 +9,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using GFrame;
 
 namespace Game.Logic
 {
-	public class Player : MonoBehaviour
-	{
-	    // Start is called before the first frame update
-	    void Start()
-	    {
-	        
-	    }
-	
-	    // Update is called once per frame
-	    void Update()
-	    {
-	        
-	    }
-	}
-	
+    public class Player : Entity
+    {
+        private Role_Player m_Role;
+
+        public Role_Player role => m_Role;
+
+        public delegate void OnRoleCreated(Role role);
+        public OnRoleCreated onRoleCreated;
+
+        public Player() : base()
+        {
+            AddressableResMgr.S.InstantiateAsync("Player", (target) =>
+            {
+                m_Role = new Role_Player();
+                m_Role.transform.SetParent(target.transform);
+            });
+
+        }
+    }
+
 }

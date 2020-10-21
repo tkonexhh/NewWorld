@@ -33,8 +33,8 @@ namespace Game.Logic
             Role setupRole = new Role();
             setupRole.onRoleCreated += (role) =>
             {
-                role.roleTransform.SetParent(m_TransRoleRoot);
-                role.roleTransform.localPosition = Vector3.zero;
+                role.transform.SetParent(m_TransRoleRoot);
+                role.transform.localPosition = Vector3.zero;
 
                 m_CameraControl.SetFocusRole(role);
             };

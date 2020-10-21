@@ -28,7 +28,7 @@ namespace Game.Logic
 
         }
 
-        public override void Update(float dt)
+        public override void Excute(float dt)
         {
             if (Input.GetKeyDown(KeyCode.T))
             {

@@ -51,11 +51,12 @@ namespace Game.Logic
         {
             m_Data = new RoleData(this);
             m_RootGameObject = new GameObject();
+            m_RootGameObject.name = "Role";
             m_RootTransform = m_RootGameObject.transform;
+            m_RootTransform.Reset();
             //某些组件依赖此物体,需要等加载完成后才能添加组件
             AddressableResMgr.S.InstantiateAsync(resName, (target) =>
             {
-                // target.name = "Player";
                 m_RoleGameObject = target;
                 m_RoleTransform = m_RoleGameObject.transform;
                 m_RoleTransform.transform.SetParent(m_RootGameObject.transform);
@@ -66,7 +67,9 @@ namespace Game.Logic
                 m_AppearanceComponent = AddComponent(new RoleAppearanceComponent());
                 m_EquipComponent = AddComponent(new RoleEquipComponent());
                 m_AnimComponent = AddComponent(new RoleAnimComponent());
-                m_IKComponent = AddComponent(new RoleIKComponent());
+                // m_IKComponent = AddComponent(new RoleIKComponent());
+                m_IKComponent = target.AddComponent<RoleIKComponent>();
+                AddComponent(m_IKComponent);
                 AddComponent(new RoleTestComponent());
 
                 m_AppearanceComponent.appearance.SetAppearanceData(m_Data.appearanceData);

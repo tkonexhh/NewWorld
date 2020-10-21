@@ -26,7 +26,11 @@ namespace Game.Logic
 
         public Role_Player() : base()
         {
-
+            m_RootGameObject.AddComponent<Rigidbody>();
+            var collider = m_RootGameObject.AddComponent<CapsuleCollider>();
+            collider.center = new Vector3(0, 0.9f, 0);
+            collider.radius = 0.25f;
+            collider.height = 1.8f;
         }
 
         protected override void OnResLoaded(GameObject target)

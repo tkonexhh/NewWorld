@@ -34,12 +34,12 @@ namespace Game.Logic
             SetRoleState(RoleState.Relax);
         }
 
-        public override void Update(float dt)
+        public override void Excute(float dt)
         {
             m_FSM.UpdateState(dt);
         }
 
-        public override void FixedUpdate(float dt)
+        public override void FixedExcute(float dt)
         {
             m_FSM.FixedUpdateState(dt);
         }
