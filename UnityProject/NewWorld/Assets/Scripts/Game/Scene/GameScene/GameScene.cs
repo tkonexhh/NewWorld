@@ -30,8 +30,8 @@ namespace Game.Logic
             PlayerMgr.S.role.onRoleCreated += (role) =>
             {
                 role.roleTransform.SetXYZ(Vector3.zero);
-                m_CameraPlayer.Follow = role.transform;
-                m_CameraPlayer.LookAt = role.transform;
+                // m_CameraPlayer.Follow = role.transform;
+                // m_CameraPlayer.LookAt = role.transform;
             };
         }
     }

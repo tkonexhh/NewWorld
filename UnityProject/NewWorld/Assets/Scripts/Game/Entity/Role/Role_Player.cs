@@ -21,12 +21,16 @@ namespace Game.Logic
         private RoleControlComponent m_ControlComponent;
         private RoleFSMComponent m_FSMConponent;
 
+        private Rigidbody m_Rigidbody;
+
         public RoleControlComponent controlComponent => m_ControlComponent;
         public RoleFSMComponent fsmComponent => m_FSMConponent;
+        public Rigidbody rigidbody => m_Rigidbody;
 
         public Role_Player() : base()
         {
-            m_RootGameObject.AddComponent<Rigidbody>();
+            m_Rigidbody = m_RootGameObject.AddComponent<Rigidbody>();
+            m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationY;
             var collider = m_RootGameObject.AddComponent<CapsuleCollider>();
             collider.center = new Vector3(0, 0.9f, 0);
             collider.radius = 0.25f;

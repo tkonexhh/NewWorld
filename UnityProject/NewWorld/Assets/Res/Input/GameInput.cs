@@ -35,13 +35,21 @@ namespace Game.Logic
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""b5def97d-d91c-4af8-a2ce-a5143666f523"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": ""WSAD"",
                     ""id"": ""4b268592-915f-4df5-bf3d-249fdcdf48a4"",
-                    ""path"": ""2DVector(mode=1)"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -156,6 +164,17 @@ namespace Game.Logic
                     ""processors"": """",
                     ""groups"": ""KeyBoard"",
                     ""action"": ""Any"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""29e5d86e-fdc3-4152-bcd9-dc0c8a91b99f"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard"",
+                    ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -393,6 +412,7 @@ namespace Game.Logic
             m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
             m_Main_Move = m_Main.FindAction("Move", throwIfNotFound: true);
             m_Main_Any = m_Main.FindAction("Any", throwIfNotFound: true);
+            m_Main_Run = m_Main.FindAction("Run", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Any = m_UI.FindAction("Any", throwIfNotFound: true);
@@ -452,12 +472,14 @@ namespace Game.Logic
         private IMainActions m_MainActionsCallbackInterface;
         private readonly InputAction m_Main_Move;
         private readonly InputAction m_Main_Any;
+        private readonly InputAction m_Main_Run;
         public struct MainActions
         {
             private @GameInput m_Wrapper;
             public MainActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Main_Move;
             public InputAction @Any => m_Wrapper.m_Main_Any;
+            public InputAction @Run => m_Wrapper.m_Main_Run;
             public InputActionMap Get() { return m_Wrapper.m_Main; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -473,6 +495,9 @@ namespace Game.Logic
                     @Any.started -= m_Wrapper.m_MainActionsCallbackInterface.OnAny;
                     @Any.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnAny;
                     @Any.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnAny;
+                    @Run.started -= m_Wrapper.m_MainActionsCallbackInterface.OnRun;
+                    @Run.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnRun;
+                    @Run.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnRun;
                 }
                 m_Wrapper.m_MainActionsCallbackInterface = instance;
                 if (instance != null)
@@ -483,6 +508,9 @@ namespace Game.Logic
                     @Any.started += instance.OnAny;
                     @Any.performed += instance.OnAny;
                     @Any.canceled += instance.OnAny;
+                    @Run.started += instance.OnRun;
+                    @Run.performed += instance.OnRun;
+                    @Run.canceled += instance.OnRun;
                 }
             }
         }
@@ -582,6 +610,7 @@ namespace Game.Logic
         {
             void OnMove(InputAction.CallbackContext context);
             void OnAny(InputAction.CallbackContext context);
+            void OnRun(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

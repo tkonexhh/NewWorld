@@ -15,7 +15,7 @@ namespace Game.Logic
 {
     public class RoleStatusData
     {
-        public float moveSpeed = 3;
+        public float moveSpeed = 1.5f;
     }
 
 }

@@ -20,13 +20,21 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Run",
+                    "type": "Button",
+                    "id": "b5def97d-d91c-4af8-a2ce-a5143666f523",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
                 {
                     "name": "WSAD",
                     "id": "4b268592-915f-4df5-bf3d-249fdcdf48a4",
-                    "path": "2DVector(mode=1)",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -141,6 +149,17 @@
                     "processors": "",
                     "groups": "KeyBoard",
                     "action": "Any",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "29e5d86e-fdc3-4152-bcd9-dc0c8a91b99f",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyBoard",
+                    "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
