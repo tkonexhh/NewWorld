@@ -19,7 +19,8 @@ namespace Game.Logic
 
         public Equipment_Weapon_TwoHandAxe(long id) : base(id)
         {
-            m_Appearance = new EquipmentAppearance_Weapon_TwoHandAxe((int)EquipmentConf.Appearance);
+            m_Appearance = new EquipmentAppearance_Weapon_TwoHandAxe(0);
+            // m_Appearance = new EquipmentAppearance_Weapon_TwoHandAxe((int)EquipmentConf.Appearance);
         }
     }
 

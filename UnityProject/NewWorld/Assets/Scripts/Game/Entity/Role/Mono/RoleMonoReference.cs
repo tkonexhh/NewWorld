@@ -19,7 +19,6 @@ namespace Game.Logic
         public Rigidbody rigidbody;
 
         [Header("AnimIK")]
-        public MultiAimConstraint headIK;
         public Transform headAimTarget;
 
         [Header("Transform")]

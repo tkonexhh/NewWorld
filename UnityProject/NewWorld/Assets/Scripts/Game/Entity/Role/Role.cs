@@ -70,7 +70,7 @@ namespace Game.Logic
                 // m_IKComponent = AddComponent(new RoleIKComponent());
                 m_IKComponent = target.AddComponent<RoleIKComponent>();
                 AddComponent(m_IKComponent);
-                AddComponent(new RoleTestComponent());
+                // AddComponent(new RoleTestComponent());
 
                 m_AppearanceComponent.appearance.SetAppearanceData(m_Data.appearanceData);
                 OnResLoaded(target);

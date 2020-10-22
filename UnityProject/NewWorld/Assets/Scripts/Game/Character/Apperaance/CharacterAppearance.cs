@@ -69,6 +69,10 @@ namespace Game.Logic
         [SerializeField] private SkinApperaance m_ElfEar;
 
 
+        [Header("武器挂点")]
+        [SerializeField] public Transform weaponBackAttachment;
+
+
         private List<SkinApperaance> m_Skins = new List<SkinApperaance>();
         public CharacterBone bone => m_Bones;
         public RoleAppearanceData data => m_AppearanceData;

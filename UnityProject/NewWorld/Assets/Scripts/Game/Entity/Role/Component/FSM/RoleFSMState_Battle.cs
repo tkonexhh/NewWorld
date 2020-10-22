@@ -63,6 +63,7 @@ namespace Game.Logic
         public override void Exit(Role entity)
         {
             entity.animComponent.SetWeaponSheathTrigger();
+            entity.animComponent.SetWeaponSwitch(-1);
         }
 
         public override void OnMsg(Role entity, int key, params object[] args)

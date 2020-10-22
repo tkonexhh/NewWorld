@@ -16,6 +16,11 @@ namespace Game.Logic
     public class WeaponModel : MonoBehaviour
     {
 
+        public void AttachWeapon()
+        {
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+        }
     }
 
 }

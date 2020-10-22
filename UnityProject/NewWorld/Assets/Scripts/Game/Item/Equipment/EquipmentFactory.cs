@@ -1,8 +1,8 @@
 /************************
-	FileName:/Scripts/Game/Mgr/PlayerMgr/PlayerInventoryFactory.cs
+	FileName:/Scripts/Game/Item/Equipment/EquipmentFactory.cs
 	CreateAuthor:neo.xu
-	CreateTime:9/3/2020 7:36:20 PM
-	Tip:9/3/2020 7:36:20 PM
+	CreateTime:10/22/2020 4:02:06 PM
+	Tip:10/22/2020 4:02:06 PM
 ************************/
 
 
@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class PlayerInventoryFactory
+    public class EquipmentFactory
     {
         public static Equipment CreateEquipment(TDItem itemConf)
         {
@@ -43,6 +43,8 @@ namespace Game.Logic
                 case EquipmentType.Back:
                     equipment = new Equipment_Back(itemConf.ID);
                     break;
+                case EquipmentType.Weapon:
+                    break;
             }
 
             if (equipment != null)
@@ -50,6 +52,20 @@ namespace Game.Logic
                 equipment.Conf = itemConf;
             }
             return equipment;
+        }
+
+
+        public static Equipment CreateEquipment(long itemID)
+        {
+            if (itemID == -1)
+                return null;
+
+            var itemConf = TDItemTable.GetData(itemID);
+
+            if (itemConf == null)
+                return null;
+
+            return CreateEquipment(itemConf);
         }
     }
 

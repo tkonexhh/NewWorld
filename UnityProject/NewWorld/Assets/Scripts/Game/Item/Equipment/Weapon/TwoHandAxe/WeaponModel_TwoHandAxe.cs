@@ -19,15 +19,11 @@ namespace Game.Logic
         public Transform leftHandPos;
 
 
-
         private void OnDrawGizmos()
         {
             Gizmos.color = new Color(0, 1, 0, 1.0f);
-            if (rightHandPos)
-            {
-                Gizmos.DrawWireSphere(rightHandPos.position, 0.05f);
-                Gizmos.DrawLine(rightHandPos.position, rightHandPos.position + rightHandPos.up * 0.15f);
-            }
+            Gizmos.DrawWireSphere(transform.position, 0.05f);
+            Gizmos.DrawLine(transform.position, transform.position + transform.up * 0.15f);
         }
     }
 

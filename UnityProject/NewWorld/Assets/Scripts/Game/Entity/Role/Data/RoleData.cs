@@ -35,7 +35,7 @@ namespace Game.Logic
             m_EquipmentData.legsID = 34;
             m_EquipmentData.hipsID = 35;
             m_EquipmentData.shouldersID = 63;
-            m_EquipmentData.backID = 86;
+            // m_EquipmentData.backID = 86;
         }
     }
 

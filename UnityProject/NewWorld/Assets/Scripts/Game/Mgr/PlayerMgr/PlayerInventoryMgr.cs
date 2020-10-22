@@ -85,7 +85,7 @@ namespace Game.Logic
 
         public void AddEquipment(TDItem itemConf)
         {
-            Equipment equipment = PlayerInventoryFactory.CreateEquipment(itemConf);
+            Equipment equipment = EquipmentFactory.CreateEquipment(itemConf);
             if (equipment == null)
             {
                 Debug.LogError("Failed to Add Equipment");

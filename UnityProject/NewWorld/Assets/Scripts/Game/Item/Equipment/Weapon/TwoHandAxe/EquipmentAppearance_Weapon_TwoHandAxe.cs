@@ -24,13 +24,15 @@ namespace Game.Logic
 
         public override void SetAppearance(CharacterAppearance appearance)
         {
-            AddressableResMgr.S.InstantiateAsync("SM_Wep_Axe_01", weapon =>
+            AddressableResMgr.S.InstantiateAsync("Axe", weapon =>
             {
                 m_ObjWeapon = weapon;
-                m_WeaponModel = m_ObjWeapon.GetComponent<WeaponModel_TwoHandAxe>();
+                m_ObjWeapon.transform.SetParent(appearance.weaponBackAttachment);
+                m_ObjWeapon.transform.ResetLocal();
 
-                //TODO 暂时用PlayerMgr.S.Role 之后换掉
-                // m_WeaponModel.rightHandPos
+
+                m_WeaponModel = m_ObjWeapon.GetComponent<WeaponModel_TwoHandAxe>();
+                m_WeaponModel.AttachWeapon();
 
             });
         }

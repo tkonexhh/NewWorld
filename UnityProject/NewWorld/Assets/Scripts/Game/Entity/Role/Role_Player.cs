@@ -42,6 +42,9 @@ namespace Game.Logic
             target.AddComponent<RoleAnimEvent>();
 
             m_EquipComponent.ApplyEquipment();
+
+            Equipment_Weapon_TwoHandAxe axe = new Equipment_Weapon_TwoHandAxe(1);
+            axe.Equip(this);
         }
     }
 
