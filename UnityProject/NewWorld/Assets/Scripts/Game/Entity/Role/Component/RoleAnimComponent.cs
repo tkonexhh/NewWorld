@@ -136,6 +136,7 @@ namespace Game.Logic
 
         public void SetVelocityZ(float z)
         {
+            // m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, Mathf.Lerp(m_Animator.GetFloat(m_KeyHash_FloatVelocityZ), z, 0.1f));
             m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, z);
         }
 

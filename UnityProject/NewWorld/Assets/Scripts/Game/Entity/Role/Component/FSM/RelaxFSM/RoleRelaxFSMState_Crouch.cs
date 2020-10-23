@@ -33,6 +33,11 @@ namespace Game.Logic
             {
                 (m_Role.fsmComponent.stateMachine.currentState as RoleFSMState_Relax).SetRelaxState(RoleRelaxState.Move);
             }
+
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                (m_Role.fsmComponent.stateMachine.currentState as RoleFSMState_Relax).SetRelaxState(RoleRelaxState.Crouch);
+            }
         }
 
         public override void Exit(Role role)

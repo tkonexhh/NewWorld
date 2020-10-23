@@ -17,6 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: fcf2637ad121b4b88a38c1d2537ddc90
   m_SerializeEntries:
+  - m_GUID: 554c2788fe0414366bf148a7cbf7e3d1
+    m_Address: Axe
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 8c924b6c457084e51b0088e446227512
     m_Address: SM_Wep_Axe_01
     m_ReadOnly: 0

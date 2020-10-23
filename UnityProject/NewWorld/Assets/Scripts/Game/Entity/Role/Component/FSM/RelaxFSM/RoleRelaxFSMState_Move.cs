@@ -19,10 +19,9 @@ namespace Game.Logic
         private Role_Player player;
         private Vector2 m_InputMove = Vector2.zero;
         private Vector2 m_VecMove = Vector2.zero;
-        private float m_VecSpeed = 4.5f;
         private bool m_Runing = false;
 
-        private Vector2 m_VelSpeedVelocity;
+        private Vector2 m_VelMoveVelocity;
         public override void Enter(Role role, params object[] args)
         {
             player = role as Role_Player;
@@ -36,16 +35,13 @@ namespace Game.Logic
         {
             if (role.animComponent == null)
                 return;
-            //TODO 改为SmoothDamp
-            m_VecMove = Vector2.SmoothDamp(m_VecMove, m_InputMove * (m_Runing ? 2.5f : 1), ref m_VelSpeedVelocity, dt);
-            // player.animComponent.SetVelocityZ(m_VecMove.sqrMagnitude);
+            m_VecMove = Vector2.SmoothDamp(m_VecMove, m_InputMove, ref m_VelMoveVelocity, dt);
 
             //控制角色朝向
             if (m_VecMove.sqrMagnitude > 0.01f)
             {
                 player.roleTransform.forward = Vector3.Slerp(player.roleTransform.forward, new Vector3(m_VecMove.x, 0, m_VecMove.y), 0.5f);
             }
-
 
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -71,15 +67,15 @@ namespace Game.Logic
         public override void FixedUpdate(Role entity, float dt)
         {
             // player.gameObject.transform.position += player.roleTransform.forward * m_VecMove.sqrMagnitude * dt * player.data.statusData.moveSpeed;
-            float speed = player.data.statusData.moveSpeed;
+            float speed = player.data.statusData.moveSpeed * (m_Runing ? 2.5f : 1);
             player.rigidbody.velocity = new Vector3(m_VecMove.x * speed, player.rigidbody.velocity.y, m_VecMove.y * speed);
             //去除掉Y轴速度带来的影响
             player.animComponent.SetVelocityZ(player.rigidbody.velocity.SetY(0).sqrMagnitude);
 
-            if (player.rigidbody.velocity.sqrMagnitude < 0.01f)
-            {
-                // player.controlComponent.Moving = false;
-            }
+            // if (player.rigidbody.velocity.sqrMagnitude < 0.01f)
+            // {
+            //     player.controlComponent.Moving = false;
+            // }
         }
 
         public override void Exit(Role entity)
@@ -103,7 +99,7 @@ namespace Game.Logic
         private void OnMoveCancled(InputAction.CallbackContext callback)
         {
             m_InputMove = Vector2.zero;
-            // player.controlComponent.Moving = false;
+            player.controlComponent.Moving = false;
         }
 
         private void OnRunPerformed(InputAction.CallbackContext callback)
