@@ -40,45 +40,40 @@ namespace Game.Logic
 
     public class RoleIK_LookAt
     {
+        private Role m_Role;
         private Transform m_Target;
         private LookAtIK m_LookAtIK;
 
         private Vector3 dir = Vector3.zero;
         private float weightV;
-        public float weightSmoothTime = 0.3f;
+        private Vector3 lastPosition;
+        private float m_AimSpeed = 1.5f;
 
-        private Role m_Role;
         public void Init(Role role)
         {
             m_Role = role;
             m_LookAtIK = role.monoReference.lookAtIK;
+            m_LookAtIK.solver.target = null;
+            lastPosition = m_LookAtIK.solver.IKPosition;
         }
 
         public void SetFocusTarget(Transform target)
         {
             m_Target = target;
-            m_LookAtIK.solver.target = m_Target;
         }
 
         public void Excute(float dt)
         {
             float targetWeight = m_Target == null ? 0 : 1;
-            m_LookAtIK.solver.IKPositionWeight = Mathf.SmoothDamp(m_LookAtIK.solver.IKPositionWeight, targetWeight, ref weightV, weightSmoothTime);
+            m_LookAtIK.solver.IKPositionWeight = Mathf.SmoothDamp(m_LookAtIK.solver.IKPositionWeight, targetWeight, ref weightV, 0.3f);
             if (m_LookAtIK.solver.IKPositionWeight <= 0f) return;
-            Vector3 targetDir = m_LookAtIK.solver.IKPosition - pivot;
-            dir = Vector3.Slerp(dir, targetDir, Time.deltaTime);
-            dir = Vector3.RotateTowards(dir, targetDir, Time.deltaTime, 45);
-            m_LookAtIK.solver.IKPosition = pivot + dir;
-        }
 
-        private Vector3 pivot
-        {
-            get
+            if (m_Target != null)
             {
-                return m_LookAtIK.transform.position + m_LookAtIK.transform.rotation * Vector3.up;
+                lastPosition = Vector3.Lerp(lastPosition, m_Target.position, dt * m_AimSpeed);
+                m_LookAtIK.solver.IKPosition = lastPosition;//Vector3.Lerp(lastPosition, target.position + offset, switchWeight);
             }
         }
-
 
     }
 }
