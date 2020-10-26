@@ -67,9 +67,8 @@ namespace Game.Logic
                 m_AppearanceComponent = AddComponent(new RoleAppearanceComponent());
                 m_EquipComponent = AddComponent(new RoleEquipComponent());
                 m_AnimComponent = AddComponent(new RoleAnimComponent());
-                // m_IKComponent = AddComponent(new RoleIKComponent());
-                m_IKComponent = target.AddComponent<RoleIKComponent>();
-                AddComponent(m_IKComponent);
+                m_IKComponent = AddComponent(new RoleIKComponent());
+
                 // AddComponent(new RoleTestComponent());
 
                 m_AppearanceComponent.appearance.SetAppearanceData(m_Data.appearanceData);

@@ -21,11 +21,16 @@ namespace Game.Logic
         private RoleControlComponent m_ControlComponent;
         private RoleFSMComponent m_FSMConponent;
 
+        //---------Mono---------------
+        private RoleAnimEvent m_AnimEvent;
+
         private Rigidbody m_Rigidbody;
 
         public RoleControlComponent controlComponent => m_ControlComponent;
         public RoleFSMComponent fsmComponent => m_FSMConponent;
         public Rigidbody rigidbody => m_Rigidbody;
+
+        public RoleAnimEvent animEvent => m_AnimEvent;
 
         public Role_Player() : base()
         {
@@ -43,12 +48,10 @@ namespace Game.Logic
             m_FSMConponent = AddComponent(new RoleFSMComponent());
             m_ControlComponent = AddComponent(new RoleControlComponent());
 
-            target.AddComponent<RoleAnimEvent>();
+            m_AnimEvent = target.AddComponent<RoleAnimEvent>();
+            m_AnimEvent.Init(this);
 
             m_EquipComponent.ApplyEquipment();
-
-            Equipment_Weapon_TwoHandAxe axe = new Equipment_Weapon_TwoHandAxe(1);
-            axe.Equip(this);
         }
     }
 

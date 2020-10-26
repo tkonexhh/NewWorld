@@ -29,13 +29,14 @@ namespace Game.Logic
             m_AppearanceData = new RoleAppearanceData();
             m_AppearanceData.basicAppearance = new BasicAppearance();
             m_EquipmentData = new RoleEquipmentData();
-            m_EquipmentData.helmetID = 4;
-            m_EquipmentData.torsoID = 24;
-            m_EquipmentData.handsID = 33;
-            m_EquipmentData.legsID = 34;
-            m_EquipmentData.hipsID = 35;
-            m_EquipmentData.shouldersID = 63;
+            // m_EquipmentData.helmetID = 4;
+            // m_EquipmentData.torsoID = 24;
+            // m_EquipmentData.handsID = 33;
+            // m_EquipmentData.legsID = 34;
+            // m_EquipmentData.hipsID = 35;
+            // m_EquipmentData.shouldersID = 63;
             // m_EquipmentData.backID = 86;
+            m_EquipmentData.weapon = 100;
         }
     }
 

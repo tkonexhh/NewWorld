@@ -16,7 +16,7 @@ namespace Game.Logic
     public class EquipmentAppearance_Weapon_TwoHandAxe : EquipmentAppearance_Weapon
     {
         private GameObject m_ObjWeapon;
-        private WeaponModel_TwoHandAxe m_WeaponModel;
+        // private WeaponModel m_WeaponModel;
         public EquipmentAppearance_Weapon_TwoHandAxe(int id) : base(id)
         {
 

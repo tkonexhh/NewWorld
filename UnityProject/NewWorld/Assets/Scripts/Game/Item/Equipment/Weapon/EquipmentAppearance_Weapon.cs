@@ -16,6 +16,8 @@ namespace Game.Logic
 {
     public class EquipmentAppearance_Weapon : EquipmentAppearance
     {
+        protected WeaponModel m_WeaponModel;
+        public WeaponModel weaponModel => m_WeaponModel;
         public EquipmentAppearance_Weapon(int id) : base(id)
         {
 

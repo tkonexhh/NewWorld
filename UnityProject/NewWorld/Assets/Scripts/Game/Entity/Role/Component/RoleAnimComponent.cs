@@ -13,6 +13,12 @@ using UnityEngine;
 
 namespace Game.Logic
 {
+    public enum RoleAnimatorLayer
+    {
+        Base = 0,
+        Upper,
+        Face,
+    }
     public class RoleAnimComponent : RoleBaseComponent
     {
         private Animator m_Animator;
@@ -279,6 +285,14 @@ namespace Game.Logic
         {
             m_Animator.SetTrigger(keyhash);
         }
+
+        #region Layer
+        //--------------------------
+        private void SetLayerWeight(RoleAnimatorLayer layer, float weight)
+        {
+            m_Animator.SetLayerWeight((int)layer, weight);
+        }
+        #endregion
     }
 
 }

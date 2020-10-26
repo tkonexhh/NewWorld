@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GFrame;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 namespace Game.Logic
 {
@@ -37,6 +38,20 @@ namespace Game.Logic
             //3双手斧
             entity.animComponent.SetWeaponSwitch(-1);
             entity.animComponent.SetWeapon(3);
+            //伸手抓武器
+            // 
+            var weapon = player.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Equipment_Weapon;
+            Debug.LogError(weapon);
+            var weaponHand = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe).rightHandPos;
+            entity.monoReference.fullBodyIK.solver.rightHandEffector.target = weaponHand;
+            // DOTween.To(delegate (float value)
+            // {
+            //     //向下取整
+            //     entity.monoReference.fullBodyIK.solver.rightHandEffector.positionWeight = value;
+            // }, 0, 1, 0.4f);
+            entity.monoReference.fullBodyIK.solver.rightHandEffector.positionWeight = 1;
+
+
 
             if (m_FSM == null)
             {

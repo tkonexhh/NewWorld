@@ -17,6 +17,7 @@ namespace Game.Logic
     {
         public override EquipmentType equipmentType => EquipmentType.Weapon;
         public virtual WeaponType weaponType => WeaponType.TwoHandAxe;
+        public EquipmentAppearance_Weapon appearance => m_Appearance as EquipmentAppearance_Weapon;
 
         public Equipment_Weapon(long id) : base(id)
         {

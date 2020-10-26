@@ -99,7 +99,7 @@ namespace Game.Logic
         private void OnMoveCancled(InputAction.CallbackContext callback)
         {
             m_InputMove = Vector2.zero;
-            player.controlComponent.Moving = false;
+            // player.controlComponent.Moving = false;
         }
 
         private void OnRunPerformed(InputAction.CallbackContext callback)

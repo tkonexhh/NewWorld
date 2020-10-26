@@ -30,6 +30,7 @@ namespace Game.Logic
         Hips,
         Shoulders,
         Back,
+        Weapon,
         Length
     }
 

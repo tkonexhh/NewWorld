@@ -23,6 +23,7 @@ namespace Game.Logic
         public int hipsID = -1;
         public int shouldersID = -1;
         public int backID = -1;
+        public int weapon = -1;
 
 
         public void SetData(EquipmentType type, int id)
@@ -34,22 +35,25 @@ namespace Game.Logic
                     break;
                 case EquipmentType.Torso:
                     torsoID = id;
-                    return;
+                    break;
                 case EquipmentType.Hands:
                     handsID = id;
-                    return;
+                    break;
                 case EquipmentType.Legs:
                     legsID = id;
-                    return;
+                    break;
                 case EquipmentType.Hips:
                     hipsID = id;
-                    return;
+                    break;
                 case EquipmentType.Shoulders:
                     shouldersID = id;
-                    return;
+                    break;
                 case EquipmentType.Back:
                     backID = id;
-                    return;
+                    break;
+                case EquipmentType.Weapon:
+                    weapon = id;
+                    break;
             }
         }
 

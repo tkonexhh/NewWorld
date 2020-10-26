@@ -5,11 +5,8 @@
 	Tip:9/25/2020 3:30:07 PM
 ************************/
 
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
+using RootMotion.FinalIK;
 
 namespace Game.Logic
 {
@@ -18,14 +15,15 @@ namespace Game.Logic
     {
 
         [Header("AnimIK")]
-        public Transform headAimTarget;
+        public LookAtIK lookAtIK;
+        public Transform lookTarget;
+        public FullBodyBipedIK fullBodyIK;
 
-        [Header("Transform")]
-        public Transform boneHead;
 
-        // [Header("装备挂点")]
-        public Transform boneHandLeft;
-        public Transform boneHandRight;
+
+        [Header("装备挂点")]
+        public Transform handLeftAttach;
+        public Transform handRightAttach;
 
 
     }

@@ -10,70 +10,75 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GFrame;
+using RootMotion.FinalIK;
 
 namespace Game.Logic
 {
-    public class RoleIKComponent : RoleBaseMonoComponent
+    public class RoleIKComponent : RoleBaseComponent
     {
-        private Transform m_RootFocus;
-        private float m_LookWeight = 0;
-        private float m_AimSpeed = 1.5f;
+        private RoleIK_LookAt m_LookAtIK;
 
-        public void SetFocusTarget(Transform focus)
+        public override void Init(Entity ownner)
         {
-            m_RootFocus = focus;
+            base.Init(ownner);
+            m_LookAtIK = new RoleIK_LookAt();
+            m_LookAtIK.Init(role);
         }
 
-        //Animation Rigging相关的暂时弃用
-        // public override void Update(float dt)
-        // {
-        //     if (m_RootFocus)
-        //     {
-        //         float dot = Vector3.Dot(role.roleTransform.forward, m_RootFocus.forward);
-        //         float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
-        //         if (angle < 80)
-        //         {
-        //             role.monoReference.headIK.weight = Mathf.Clamp01(role.monoReference.headIK.weight - m_AimSpeed * Time.deltaTime);
-        //         }
-        //         else
-        //         {
-        //             role.monoReference.headAimTarget.position = Vector3.Lerp(role.monoReference.headAimTarget.position, m_RootFocus.position, 3 * m_AimSpeed * Time.deltaTime);
-        //             role.monoReference.headIK.weight = Mathf.Clamp01(role.monoReference.headIK.weight + m_AimSpeed * Time.deltaTime);
-        //         }
-        //     }
-        //     else
-        //     {
-        //         role.monoReference.headIK.weight = Mathf.Clamp01(role.monoReference.headIK.weight - m_AimSpeed * Time.deltaTime);
-        //     }
-        // }
-
-        private void OnAnimatorIK(int layerIndex)
+        public void SetFocusTarget(Transform target)
         {
-            if (m_RootFocus)
-            {
-                float dot = Vector3.Dot(role.transform.forward, m_RootFocus.forward);
-                float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
-                // Debug.LogError(angle);
-                if (angle > 120 && angle < 160)
-                {
-                    m_LookWeight = Mathf.Clamp01(m_LookWeight - m_AimSpeed * Time.deltaTime);
-                }
-                else
-                {
-                    role.monoReference.headAimTarget.position = Vector3.Lerp(role.monoReference.headAimTarget.position, m_RootFocus.position, 3 * m_AimSpeed * Time.deltaTime);
-                    m_LookWeight = Mathf.Clamp01(m_LookWeight + m_AimSpeed * Time.deltaTime);
-                }
+            m_LookAtIK.SetFocusTarget(target);
+        }
 
-                role.animComponent.animator.SetLookAtWeight(m_LookWeight);
-                role.animComponent.animator.SetLookAtPosition(role.monoReference.headAimTarget.position);
-            }
-            else
-            {
-                m_LookWeight = Mathf.Clamp01(m_LookWeight - m_AimSpeed * Time.deltaTime);
-                role.animComponent.animator.SetLookAtWeight(m_LookWeight);
-            }
+        public override void Excute(float dt)
+        {
+            m_LookAtIK.Excute(dt);
+
         }
 
     }
 
+    public class RoleIK_LookAt
+    {
+        private Transform m_Target;
+        private LookAtIK m_LookAtIK;
+
+        private Vector3 dir = Vector3.zero;
+        private float weightV;
+        public float weightSmoothTime = 0.3f;
+
+        private Role m_Role;
+        public void Init(Role role)
+        {
+            m_Role = role;
+            m_LookAtIK = role.monoReference.lookAtIK;
+        }
+
+        public void SetFocusTarget(Transform target)
+        {
+            m_Target = target;
+            m_LookAtIK.solver.target = m_Target;
+        }
+
+        public void Excute(float dt)
+        {
+            float targetWeight = m_Target == null ? 0 : 1;
+            m_LookAtIK.solver.IKPositionWeight = Mathf.SmoothDamp(m_LookAtIK.solver.IKPositionWeight, targetWeight, ref weightV, weightSmoothTime);
+            if (m_LookAtIK.solver.IKPositionWeight <= 0f) return;
+            Vector3 targetDir = m_LookAtIK.solver.IKPosition - pivot;
+            dir = Vector3.Slerp(dir, targetDir, Time.deltaTime);
+            dir = Vector3.RotateTowards(dir, targetDir, Time.deltaTime, 45);
+            m_LookAtIK.solver.IKPosition = pivot + dir;
+        }
+
+        private Vector3 pivot
+        {
+            get
+            {
+                return m_LookAtIK.transform.position + m_LookAtIK.transform.rotation * Vector3.up;
+            }
+        }
+
+
+    }
 }
