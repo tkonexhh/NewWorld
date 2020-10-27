@@ -43,21 +43,43 @@ namespace Game.Logic
             //施法到目标
         }
 
-        public void WeaponSwitch(int value1)
+        public void WeaponSwitch(int value)
         {
-            // m_Role.monoReference.fullBodyIK.solver.rightHandEffector.target = null;
-            // m_Role.monoReference.fullBodyIK.solver.rightHandEffector.positionWeight = 1;
+            Debug.LogError("WeaponSwitch:" + value);
+            if (value == 0)
+            {
+                WeaponSheath();
+            }
+            else
+            {
+                WeaponUnSheath();
+            }
+        }
+
+        private void WeaponSheath()
+        {
             var weapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Equipment_Weapon;
             var hand = m_Role.monoReference.handRightAttach;
 
-            DOTween.To(delegate (float value)
-            {
-                //向下取整
-                m_Role.monoReference.fullBodyIK.solver.rightHandEffector.positionWeight = value;
-            }, 1, 0, 0.2f);
+            m_Role.iKComponent.rightHandIK.SetFocusTarget(null, Vector3.zero);
 
-            weapon.appearance.weaponModel.transform.SetParent(hand);
-            // m_Role.monoReference.fullBodyIK.solver.rightHandEffector.positionWeight = 0;
+            var model = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe);
+            var dis = -model.rightHandPos.transform.localPosition;
+            var angle = model.transform.localRotation;
+            model.transform.SetParent(hand, false);
+            // model.transform.RotateAround(model.rightHandPos.localPosition, Vector3.left, angle.y * 2);
+            model.transform.localPosition = dis;
+        }
+        private void WeaponUnSheath()
+        {
+            var weapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Equipment_Weapon;
+            var back = m_Role.appearanceComponent.appearance.weaponBackAttachment;
+
+            m_Role.iKComponent.rightHandIK.SetFocusTarget(null, Vector3.zero);
+
+            var model = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe);
+            model.transform.SetParent(back, false);
+            model.transform.localPosition = Vector3.zero;
         }
 
     }

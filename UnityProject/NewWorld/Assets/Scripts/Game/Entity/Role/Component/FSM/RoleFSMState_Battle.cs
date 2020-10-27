@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using GFrame;
 using UnityEngine.InputSystem;
-using DG.Tweening;
 
 namespace Game.Logic
 {
@@ -29,8 +28,6 @@ namespace Game.Logic
         public override void Enter(Role entity, params object[] args)
         {
             player = entity as Role_Player;
-            // entity.animComponent.SetWeapon(-1);
-            // entity.animComponent.SetWeaponSwitch(3);
 
             //0空拳
             //1双手剑
@@ -38,20 +35,9 @@ namespace Game.Logic
             //3双手斧
             entity.animComponent.SetWeaponSwitch(-1);
             entity.animComponent.SetWeapon(3);
-            //伸手抓武器
-            // 
-            var weapon = player.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Equipment_Weapon;
-            Debug.LogError(weapon);
-            var weaponHand = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe).rightHandPos;
-            entity.monoReference.fullBodyIK.solver.rightHandEffector.target = weaponHand;
-            // DOTween.To(delegate (float value)
-            // {
-            //     //向下取整
-            //     entity.monoReference.fullBodyIK.solver.rightHandEffector.positionWeight = value;
-            // }, 0, 1, 0.4f);
-            entity.monoReference.fullBodyIK.solver.rightHandEffector.positionWeight = 1;
+            entity.animComponent.SetWeaponUnSheathTrigger();
 
-
+            WeaponUnSheath();
 
             if (m_FSM == null)
             {
@@ -64,7 +50,7 @@ namespace Game.Logic
             }
 
             SetBattleState(RoleBattleState.Battle);
-            entity.animComponent.SetWeaponUnSheathTrigger();
+
         }
 
         public override void Update(Role role, float dt)
@@ -79,6 +65,8 @@ namespace Game.Logic
         {
             entity.animComponent.SetWeaponSheathTrigger();
             entity.animComponent.SetWeaponSwitch(-1);
+            entity.animComponent.SetWeapon(3);
+            WeaponSheath();
         }
 
         public override void OnMsg(Role entity, int key, params object[] args)
@@ -88,6 +76,22 @@ namespace Game.Logic
         public void SetBattleState(RoleBattleState state)
         {
             m_FSM.SetCurrentStateByID(state);
+        }
+
+        private void WeaponUnSheath()
+        {
+            //伸手抓武器
+            var weapon = player.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Equipment_Weapon;
+            var weaponHand = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe).rightHandPos;
+            player.iKComponent.rightHandIK.SetFocusTarget(weaponHand, Vector3.zero);
+        }
+
+        private void WeaponSheath()
+        {
+            var weapon = player.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Equipment_Weapon;
+            var model = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe);
+            var dis = -model.rightHandPos.transform.localPosition;
+            player.iKComponent.rightHandIK.SetFocusTarget(player.appearanceComponent.appearance.weaponBackAttachment, dis);
         }
 
     }

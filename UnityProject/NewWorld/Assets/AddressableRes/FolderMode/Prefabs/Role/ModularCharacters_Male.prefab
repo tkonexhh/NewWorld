@@ -156,12 +156,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464729913927793324}
-  m_LocalRotation: {x: 0.63826936, y: -0.3024331, z: 0.6382702, w: 0.3061985}
-  m_LocalPosition: {x: 0, y: 6.4, z: -0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalRotation: {x: 0.63826936, y: -0.30243304, z: 0.63827026, w: 0.30619857}
+  m_LocalPosition: {x: 0, y: -11.292639, z: -5.8166733}
+  m_LocalScale: {x: 100.000015, y: 100, z: 100}
   m_Children: []
-  m_Father: {fileID: 7666273751970905554}
-  m_RootOrder: 1
+  m_Father: {fileID: 7666273751970905556}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 129.019, y: -90.208984, z: -0.43798828}
 --- !u!1 &1937332321934626790
 GameObject:
@@ -281,7 +281,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3097633424160900383}
-  - component: {fileID: 8157281378441099687}
   - component: {fileID: 787898622228141800}
   m_Layer: 9
   m_Name: ArmR
@@ -302,41 +301,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8021611452446615005}
+  - {fileID: 2247978079491701217}
   m_Father: {fileID: 7937820238030145619}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8157281378441099687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2187412963683174523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5013856973b27429d937d256dc082f2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fixTransforms: 1
-  solver:
-    executedInEditor: 0
-    IKPosition: {x: 0, y: 0, z: 0}
-    IKPositionWeight: 1
-    root: {fileID: 0}
-    target: {fileID: 0}
-    tolerance: 0
-    maxIterations: 4
-    useRotationLimits: 1
-    XY: 0
-    bones: []
-    transform: {fileID: 0}
-    axis: {x: 0, y: 0, z: 1}
-    poleAxis: {x: 0, y: 1, z: 0}
-    polePosition: {x: 0, y: 0, z: 0}
-    poleWeight: 0
-    poleTarget: {fileID: 0}
-    clampWeight: 0.1
-    clampSmoothing: 2
 --- !u!114 &787898622228141800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +312,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2187412963683174523}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d9643e11c77c0d4fb27fbcf6ff4839c, type: 3}
   m_Name: 
@@ -597,7 +565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8021611452446615005}
   m_Layer: 9
-  m_Name: TwistRTarget
+  m_Name: RightHandEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -676,6 +644,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4740531800081362883}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6516257489359071273
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2247978079491701217}
+  m_Layer: 9
+  m_Name: RightShoulderEffector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2247978079491701217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6516257489359071273}
+  m_LocalRotation: {x: 0.9991343, y: -0.04127836, z: -0.005013823, w: -0.0012689828}
+  m_LocalPosition: {x: 0.19098908, y: 1.3904629, z: -0.04679033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3097633424160900383}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6968812957136774085
 GameObject:
@@ -3978,9 +3976,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7666273751970905564}
-  - {fileID: 665472454425999433}
   m_Father: {fileID: 7666273751970905556}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7666273751971385780
 GameObject:
@@ -4009,6 +4006,7 @@ Transform:
   m_LocalPosition: {x: -14.540745, y: 12.812172, z: -5.6263273e-13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 665472454425999433}
   - {fileID: 7666273751970905554}
   m_Father: {fileID: 7666273751970905188}
   m_RootOrder: 0
@@ -6216,6 +6214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookAtIK: {fileID: 1994951727415176959}
+  lookTarget: {fileID: 0}
   fullBodyIK: {fileID: 5486523673626845757}
   handLeftAttach: {fileID: 0}
   handRightAttach: {fileID: 7687292295139696810}
@@ -6246,7 +6245,7 @@ MonoBehaviour:
     leftHand: {fileID: 7666273751970905518}
     rightUpperArm: {fileID: 7666273751970905214}
     rightForearm: {fileID: 7666273751970905520}
-    rightHand: {fileID: 7666273751970905512}
+    rightHand: {fileID: 7687292295139696810}
     head: {fileID: 7666273751970905514}
     spine:
     - {fileID: 7666273751970905208}
@@ -6383,7 +6382,7 @@ MonoBehaviour:
         effectorPositionWeight: 0
         effectorRotationWeight: 0
         offset: {x: 0, y: 0, z: 0}
-      - transform: {fileID: 7666273751970905512}
+      - transform: {fileID: 7687292295139696810}
         weight: 1
         solverPosition: {x: 0, y: 0, z: 0}
         solverRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -6592,8 +6591,8 @@ MonoBehaviour:
       planeBone2: {fileID: 7666273751970905214}
       planeBone3: {fileID: 7666273751970905208}
       planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
-    - bone: {fileID: 7666273751970905512}
-      target: {fileID: 0}
+    - bone: {fileID: 7687292295139696810}
+      target: {fileID: 8021611452446615005}
       positionWeight: 0
       rotationWeight: 0
       position: {x: 0, y: 0, z: 0}
@@ -6658,7 +6657,7 @@ MonoBehaviour:
     - parentBone: {fileID: 7666273751970905544}
       bone1: {fileID: 7666273751970905214}
       bone2: {fileID: 7666273751970905520}
-      bone3: {fileID: 7666273751970905512}
+      bone3: {fileID: 7687292295139696810}
       maintainRotationWeight: 0
       weight: 1
     - parentBone: {fileID: 0}

@@ -15,7 +15,7 @@ namespace Game.Logic
 {
     public class WeaponModel : MonoBehaviour
     {
-
+        public Transform weapon;
         public void AttachWeapon()
         {
             transform.localPosition = Vector3.zero;
