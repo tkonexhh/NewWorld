@@ -16,13 +16,22 @@ namespace Game.Logic
 {
     public class MainMenuScene : AbstractScene
     {
+        [SerializeField] private Transform m_RoleRoot;
         protected override void OnSceneInit()
         {
             Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(UIMgr.S.uiRoot.uiCamera);
         }
         protected override void OnSceneEnter()
         {
-            UIMgr.S.OpenPanel(UIID.MainMenuPanel);
+            Debug.LogError("OnSceneEnter");
+            Role role = new Role();
+            role.onRoleCreated += (target) =>
+            {
+                target.transform.SetParent(m_RoleRoot);
+                target.transform.localPosition = Vector3.zero;
+                // m_RoleRoot.SetFocusRole(role);
+            };
+            // UIMgr.S.OpenPanel(UIID.MainMenuPanel);
         }
 
     }
