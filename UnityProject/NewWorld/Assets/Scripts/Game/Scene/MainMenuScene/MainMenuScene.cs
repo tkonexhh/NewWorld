@@ -23,13 +23,12 @@ namespace Game.Logic
         }
         protected override void OnSceneEnter()
         {
-            Debug.LogError("OnSceneEnter");
             Role role = new Role();
             role.onRoleCreated += (target) =>
             {
                 target.transform.SetParent(m_RoleRoot);
                 target.transform.localPosition = Vector3.zero;
-                // m_RoleRoot.SetFocusRole(role);
+                target.transform.localRotation = Quaternion.identity;
             };
             // UIMgr.S.OpenPanel(UIID.MainMenuPanel);
         }
