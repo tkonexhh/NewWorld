@@ -770,7 +770,7 @@ AnimatorState:
   - {fileID: 6688646793539054728}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 1
+  m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
   m_SpeedParameterActive: 0
@@ -13623,7 +13623,7 @@ AnimatorStateMachine:
   m_AnyStatePosition: {x: 120, y: 140, z: 0}
   m_EntryPosition: {x: 450, y: -50, z: 0}
   m_ExitPosition: {x: 860, y: 430, z: 0}
-  m_ParentStateMachinePosition: {x: 780, y: 30, z: 0}
+  m_ParentStateMachinePosition: {x: 840, y: 60, z: 0}
   m_DefaultState: {fileID: 9103108694952175402}
 --- !u!1101 &6155283873921111552
 AnimatorStateTransition:

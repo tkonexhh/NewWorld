@@ -16,7 +16,7 @@ namespace Game.Logic
     public class EquipmentAppearance_Weapon_TwoHandAxe : EquipmentAppearance_Weapon
     {
         private GameObject m_ObjWeapon;
-        // private WeaponModel m_WeaponModel;
+
         public EquipmentAppearance_Weapon_TwoHandAxe(int id) : base(id)
         {
 
@@ -30,10 +30,8 @@ namespace Game.Logic
                 m_ObjWeapon.transform.SetParent(appearance.weaponBackAttachment);
                 m_ObjWeapon.transform.ResetLocal();
 
-
                 m_WeaponModel = m_ObjWeapon.GetComponent<WeaponModel_TwoHandAxe>();
                 m_WeaponModel.AttachWeapon();
-
             });
         }
 

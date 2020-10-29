@@ -37,8 +37,8 @@ namespace Game.Logic
 
         public override void Excute(float dt)
         {
-            m_LookAtIK.Excute(dt);
-            m_RightHandIK.Excute(dt);
+            // m_LookAtIK.Excute(dt);
+            // m_RightHandIK.Excute(dt);
         }
 
     }
@@ -59,7 +59,6 @@ namespace Game.Logic
     {
         private Transform m_Target;
         private LookAtIK m_LookAtIK;
-        // private float weightV;
         private Vector3 lastPosition;
         private float m_AimSpeed = 1.3f;
 
@@ -95,8 +94,6 @@ namespace Game.Logic
             }
 
             m_LookAtIK.solver.IKPositionWeight = Mathf.Clamp01(m_LookAtIK.solver.IKPositionWeight + targetWeight * dt * m_AimSpeed);
-            // Debug.LogError(m_LookAtIK.solver.IKPositionWeight);
-            // m_LookAtIK.solver.IKPositionWeight = Mathf.SmoothDamp(m_LookAtIK.solver.IKPositionWeight, targetWeight, ref weightV, dt * 0.1f);
         }
     }
 
@@ -105,8 +102,7 @@ namespace Game.Logic
         private Transform m_Target;
         private Vector3 m_Offset;
         private IKEffector m_RightHandEffector;
-        // private float weightV;
-        // private Vector3 lastPosition;
+
         public override void Init(Role role)
         {
             base.Init(role);

@@ -2,43 +2,51 @@
 using System.Collections;
 using RootMotion.FinalIK;
 
-namespace RootMotion.Demos {
+namespace RootMotion.Demos
+{
 
-	/// <summary>
-	/// Simple GUI for quickly testing out interactions.
-	/// </summary>
-	public class InteractionSystemTestGUI : MonoBehaviour {
+    /// <summary>
+    /// Simple GUI for quickly testing out interactions.
+    /// </summary>
+    public class InteractionSystemTestGUI : MonoBehaviour
+    {
 
-		[Tooltip("The object to interact to")]
-		public InteractionObject interactionObject;
-		[Tooltip("The effectors to interact with")]
+        [Tooltip("The object to interact to")]
+        public InteractionObject interactionObject;
+        [Tooltip("The effectors to interact with")]
         public FullBodyBipedEffector[] effectors;
 
-		private InteractionSystem interactionSystem;
-		
-		void Awake() {
-			interactionSystem = GetComponent<InteractionSystem>();
-		}
+        private InteractionSystem interactionSystem;
 
-		void OnGUI() {
-			if (interactionSystem == null) return;
+        void Awake()
+        {
+            interactionSystem = GetComponent<InteractionSystem>();
+        }
 
-			if (GUILayout.Button("Start Interaction With " + interactionObject.name)) {
-				if (effectors.Length == 0) Debug.Log("Please select the effectors to interact with.");
+        void OnGUI()
+        {
+            if (interactionSystem == null) return;
+            if (interactionObject == null) return;
+            if (GUILayout.Button("Start Interaction With " + interactionObject.name))
+            {
+                if (effectors.Length == 0) Debug.Log("Please select the effectors to interact with.");
 
-				foreach (FullBodyBipedEffector e in effectors) {
-					interactionSystem.StartInteraction(e, interactionObject, true);
-				}
-			}
+                foreach (FullBodyBipedEffector e in effectors)
+                {
+                    interactionSystem.StartInteraction(e, interactionObject, true);
+                }
+            }
 
-			if (effectors.Length == 0) return;
+            if (effectors.Length == 0) return;
 
-			if (interactionSystem.IsPaused(effectors[0])) {
-				if (GUILayout.Button("Resume Interaction With " + interactionObject.name)) {
+            if (interactionSystem.IsPaused(effectors[0]))
+            {
+                if (GUILayout.Button("Resume Interaction With " + interactionObject.name))
+                {
 
-					interactionSystem.ResumeAll();
-				}
-			}
-		}
-	}
+                    interactionSystem.ResumeAll();
+                }
+            }
+        }
+    }
 }

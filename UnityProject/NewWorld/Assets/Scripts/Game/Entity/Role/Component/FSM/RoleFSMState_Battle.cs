@@ -5,9 +5,6 @@
 	Tip:9/28/2020 6:25:39 PM
 ************************/
 
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using GFrame;
 using UnityEngine.InputSystem;
@@ -82,8 +79,10 @@ namespace Game.Logic
         {
             //伸手抓武器
             var weapon = player.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Equipment_Weapon;
+
             var weaponHand = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe).rightHandPos;
             player.iKComponent.rightHandIK.SetFocusTarget(weaponHand, Vector3.zero);
+            player.monoReference.interactionSystem.StartInteraction(RootMotion.FinalIK.FullBodyBipedEffector.RightHand, weapon.appearance.weaponModel.handleObj, true);
         }
 
         private void WeaponSheath()
@@ -92,6 +91,7 @@ namespace Game.Logic
             var model = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe);
             var dis = -model.rightHandPos.transform.localPosition;
             player.iKComponent.rightHandIK.SetFocusTarget(player.appearanceComponent.appearance.weaponBackAttachment, dis);
+            player.monoReference.interactionSystem.StartInteraction(RootMotion.FinalIK.FullBodyBipedEffector.RightHand, weapon.appearance.weaponModel.handleObj, true);
         }
 
     }

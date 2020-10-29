@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 /************************
 	FileName:/Scripts/Game/Entity/Role/Role_Player.cs
 	CreateAuthor:neo.xu
@@ -9,7 +10,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using RootMotion.Demos;
+using RootMotion.FinalIK;
+using GFrame;
 
 namespace Game.Logic
 {
@@ -34,12 +37,12 @@ namespace Game.Logic
 
         public Role_Player() : base()
         {
-            m_Rigidbody = m_RootGameObject.AddComponent<Rigidbody>();
-            m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationY;
             var collider = m_RootGameObject.AddComponent<CapsuleCollider>();
             collider.center = new Vector3(0, 0.9f, 0);
             collider.radius = 0.25f;
             collider.height = 1.8f;
+            m_Rigidbody = m_RootGameObject.AddComponent<Rigidbody>();
+            m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         }
 
         protected override void OnResLoaded(GameObject target)
@@ -52,6 +55,15 @@ namespace Game.Logic
             m_AnimEvent.Init(this);
 
             m_EquipComponent.ApplyEquipment();
+
+            Timer.S.Post2Really(t =>
+            {
+                //test
+                var weapon = m_EquipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Equipment_Weapon;
+                var test = target.GetComponent<InteractionSystemTestGUI>();
+                test.interactionObject = weapon.appearance.weaponModel.handleObj;
+            }, 2.7f);
+
         }
     }
 

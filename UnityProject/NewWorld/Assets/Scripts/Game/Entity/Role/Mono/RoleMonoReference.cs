@@ -6,6 +6,7 @@
 ************************/
 
 using UnityEngine;
+using RootMotion;
 using RootMotion.FinalIK;
 
 namespace Game.Logic
@@ -19,7 +20,7 @@ namespace Game.Logic
         public Transform lookTarget;
         public FullBodyBipedIK fullBodyIK;
 
-
+        public InteractionSystem interactionSystem;
 
         [Header("装备挂点")]
         public Transform handLeftAttach;

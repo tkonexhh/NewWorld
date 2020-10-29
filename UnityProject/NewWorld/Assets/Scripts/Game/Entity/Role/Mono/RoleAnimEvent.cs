@@ -9,7 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
+using GFrame;
 
 
 namespace Game.Logic
@@ -60,26 +60,23 @@ namespace Game.Logic
         {
             var weapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Equipment_Weapon;
             var hand = m_Role.monoReference.handRightAttach;
+            var model = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe);
+            var dis = model.handleObj.transform.localPosition;
 
             m_Role.iKComponent.rightHandIK.SetFocusTarget(null, Vector3.zero);
-
-            var model = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe);
-            var dis = -model.rightHandPos.transform.localPosition;
-            var angle = model.transform.localRotation;
-            model.transform.SetParent(hand, false);
-            // model.transform.RotateAround(model.rightHandPos.localPosition, Vector3.left, angle.y * 2);
-            model.transform.localPosition = dis;
+            model.weapon.transform.SetParent(hand, false);
+            model.weapon.transform.localPosition = dis - model.WeaponOriginPos;
         }
         private void WeaponUnSheath()
         {
             var weapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Equipment_Weapon;
-            var back = m_Role.appearanceComponent.appearance.weaponBackAttachment;
 
             m_Role.iKComponent.rightHandIK.SetFocusTarget(null, Vector3.zero);
 
             var model = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe);
-            model.transform.SetParent(back, false);
-            model.transform.localPosition = Vector3.zero;
+            model.weapon.transform.SetParent(model.transform);
+            model.weapon.transform.localPosition = model.WeaponOriginPos;
+            model.weapon.transform.localRotation = Quaternion.identity;
         }
 
     }
