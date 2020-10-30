@@ -24,13 +24,15 @@ namespace Game.Logic
         protected override void OnSceneEnter()
         {
             Role role = new Role();
+            role.data.equipmentData.hipsID = 35;
             role.onRoleCreated += (target) =>
             {
                 target.transform.SetParent(m_RoleRoot);
                 target.transform.localPosition = Vector3.zero;
                 target.transform.localRotation = Quaternion.identity;
+                role.equipComponent.ApplyEquipment();
             };
-            // UIMgr.S.OpenPanel(UIID.MainMenuPanel);
+            UIMgr.S.OpenPanel(UIID.StartPanel);
         }
 
     }

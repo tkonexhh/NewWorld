@@ -152,6 +152,24 @@ namespace GFrame
             ClosePanelInfo(panelInfo);
         }
 
+        public void HidePanel(AbstractPanel panel)
+        {
+            if (panel == null) return;
+
+            PanelInfo panelInfo = FindPanelInfoByID(panel.panelID);
+            if (panelInfo == null)
+            {
+                panelInfo = GetPanelFromCache(panel.panelID, false);
+                if (panelInfo == null)
+                {
+                    Log.e("Not Find PanelInfo For Panel" + panel.name);
+                    // panel.OnPanelClose(true);
+                    panel.gameObject.SetActive(false);
+                }
+                return;
+            }
+        }
+
         public void ToggleShowPanel<T>(T uiID) where T : System.IConvertible
         {
             int id = uiID.ToInt32(null);

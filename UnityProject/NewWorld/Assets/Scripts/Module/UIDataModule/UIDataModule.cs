@@ -31,7 +31,7 @@ namespace Game.Logic
         {
             UIDataTable.SetLoadMode(LoadStrategy.Resource);
 
-            UIDataTable.AddPanelData(UIID.MainMenuPanel, "MainMenuPanel");
+            UIDataTable.AddPanelData(UIID.StartPanel, "StartPanel");
             UIDataTable.AddPanelData(UIID.LoadingPanel, "LoadingPanel");
             UIDataTable.AddPanelData(UIID.CreateCharacterPanel, "CreateCharacterPanel");
 

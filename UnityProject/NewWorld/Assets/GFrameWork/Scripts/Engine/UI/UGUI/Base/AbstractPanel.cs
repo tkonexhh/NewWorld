@@ -51,6 +51,11 @@ namespace GFrame
             SendViewEvent(ViewEvent.Action_ClosePanel);
         }
 
+        public void HideSelfPanel()
+        {
+            SendViewEvent(ViewEvent.Action_HidePanel);
+        }
+
 
         protected override void OnPageEvent(int key, params object[] args)
         {
@@ -60,6 +65,9 @@ namespace GFrame
             {
                 case ViewEvent.Action_ClosePanel:
                     UIMgr.S.ClosePanel(this);
+                    break;
+                case ViewEvent.Action_HidePanel:
+                    UIMgr.S.HidePanel(this);
                     break;
             }
         }
