@@ -1,5 +1,5 @@
 /************************
-	FileName:/Scripts/Game/Item/Equipment/Weapon/EquipmentAppearance_Weapon.cs
+	FileName:/Scripts/Game/Item/Equipment/Weapon/WeaponAppearance.cs
 	CreateAuthor:neo.xu
 	CreateTime:10/15/2020 10:46:47 AM
 	Tip:10/15/2020 10:46:47 AM
@@ -14,11 +14,11 @@ using GFrame;
 
 namespace Game.Logic
 {
-    public class EquipmentAppearance_Weapon : EquipmentAppearance
+    public class WeaponAppearance : EquipmentAppearance
     {
         protected WeaponModel m_WeaponModel;
         public WeaponModel weaponModel => m_WeaponModel;
-        public EquipmentAppearance_Weapon(int id) : base(id)
+        public WeaponAppearance(int id) : base(id)
         {
 
         }

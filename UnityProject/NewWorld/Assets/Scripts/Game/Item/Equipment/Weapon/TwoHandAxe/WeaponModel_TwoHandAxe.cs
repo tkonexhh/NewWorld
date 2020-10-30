@@ -15,8 +15,8 @@ namespace Game.Logic
 {
     public class WeaponModel_TwoHandAxe : WeaponModel
     {
-        public Transform rightHandPos;
-        public Transform leftHandPos;
+        // public Transform rightHandPos;
+        // public Transform leftHandPos;
 
 
         private void OnDrawGizmos()

@@ -48,35 +48,27 @@ namespace Game.Logic
             Debug.LogError("WeaponSwitch:" + value);
             if (value == 0)
             {
-                WeaponSheath();
+                AttachToHand();
             }
             else
             {
-                WeaponUnSheath();
+                AttachToOrigin();
             }
         }
 
-        private void WeaponSheath()
+        private void AttachToHand()
         {
-            var weapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Equipment_Weapon;
+            var weapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
             var hand = m_Role.monoReference.handRightAttach;
-            var model = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe);
-            var dis = model.handleObj.transform.localPosition;
+            weapon.AttachToHand(hand);
+            m_Role.iKComponent.rightHandIK.SetFocusTarget(null);
 
-            m_Role.iKComponent.rightHandIK.SetFocusTarget(null, Vector3.zero);
-            model.weapon.transform.SetParent(hand, false);
-            model.weapon.transform.localPosition = dis - model.WeaponOriginPos;
         }
-        private void WeaponUnSheath()
+        private void AttachToOrigin()
         {
-            var weapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Equipment_Weapon;
-
-            m_Role.iKComponent.rightHandIK.SetFocusTarget(null, Vector3.zero);
-
-            var model = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe);
-            model.weapon.transform.SetParent(model.transform);
-            model.weapon.transform.localPosition = model.WeaponOriginPos;
-            model.weapon.transform.localRotation = Quaternion.identity;
+            var weapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
+            weapon.AttachToOrigin();
+            m_Role.iKComponent.rightHandIK.SetFocusTarget(null);
         }
 
     }

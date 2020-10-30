@@ -8,14 +8,12 @@ namespace GFrame.Editor
     [CustomEditor(typeof(GButton))]
     public class GButtonEditor : UnityEditor.UI.ButtonEditor
     {
-        GButton gImage;
+        GButton gButton;
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            gImage = (GButton)target;
-            //gImage.raycastTarget = false;
-
+            gButton = (GButton)target;
         }
 
         public override void OnInspectorGUI()
@@ -24,7 +22,20 @@ namespace GFrame.Editor
             EditorGUILayout.Space();
             serializedObject.Update();
 
-            //EditorGUILayout.PropertyField(this.serializedObject.FindProperty("clickEffect"));
+            var prop_ScaleAnim = this.serializedObject.FindProperty("scaleAnim");
+            EditorGUILayout.PropertyField(prop_ScaleAnim);
+            if (prop_ScaleAnim.boolValue)
+            {
+                EditorGUILayout.PropertyField(this.serializedObject.FindProperty("clickDownScale"));
+                EditorGUILayout.PropertyField(this.serializedObject.FindProperty("normalScale"));
+            }
+
+            var prop_Sound = this.serializedObject.FindProperty("sound");
+            EditorGUILayout.PropertyField(prop_Sound);
+            if (prop_Sound.boolValue)
+            {
+                EditorGUILayout.PropertyField(this.serializedObject.FindProperty("clickEffect"));
+            }
 
             serializedObject.ApplyModifiedProperties();
         }

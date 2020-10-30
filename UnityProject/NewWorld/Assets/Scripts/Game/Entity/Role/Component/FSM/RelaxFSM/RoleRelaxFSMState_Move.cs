@@ -29,6 +29,7 @@ namespace Game.Logic
             GameInputMgr.S.mainAction.Move.canceled += OnMoveCancled;
             GameInputMgr.S.mainAction.Run.performed += OnRunPerformed;
             GameInputMgr.S.mainAction.Run.canceled += OnRunCancled;
+            player.animComponent.SetMoving(true);
         }
 
         public override void Update(Role role, float dt)
@@ -71,17 +72,13 @@ namespace Game.Logic
             player.rigidbody.velocity = new Vector3(m_VecMove.x * speed, player.rigidbody.velocity.y, m_VecMove.y * speed);
             //去除掉Y轴速度带来的影响
             player.animComponent.SetVelocityZ(player.rigidbody.velocity.SetY(0).sqrMagnitude);
-
-            // if (player.rigidbody.velocity.sqrMagnitude < 0.01f)
-            // {
-            //     player.controlComponent.Moving = false;
-            // }
         }
 
         public override void Exit(Role entity)
         {
             GameInputMgr.S.mainAction.Move.performed -= OnMovePerformed;
             GameInputMgr.S.mainAction.Move.canceled -= OnMoveCancled;
+            player.animComponent.SetMoving(false);
         }
 
         public override void OnMsg(Role entity, int key, params object[] args)
@@ -92,14 +89,11 @@ namespace Game.Logic
         private void OnMovePerformed(InputAction.CallbackContext callback)
         {
             m_InputMove = callback.ReadValue<Vector2>();
-            player.controlComponent.Moving = true;
-
         }
 
         private void OnMoveCancled(InputAction.CallbackContext callback)
         {
             m_InputMove = Vector2.zero;
-            // player.controlComponent.Moving = false;
         }
 
         private void OnRunPerformed(InputAction.CallbackContext callback)

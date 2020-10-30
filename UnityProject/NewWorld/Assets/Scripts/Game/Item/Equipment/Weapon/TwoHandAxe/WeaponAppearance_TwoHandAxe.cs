@@ -1,5 +1,5 @@
 /************************
-	FileName:/Scripts/Game/Item/Equipment/Weapon/TwoHandAxe/EquipmentAppearance_Weapon_TwoHandAxe.cs
+	FileName:/Scripts/Game/Item/Equipment/Weapon/TwoHandAxe/WeaponAppearance_TwoHandAxe.cs
 	CreateAuthor:neo.xu
 	CreateTime:10/15/2020 10:47:09 AM
 	Tip:10/15/2020 10:47:09 AM
@@ -13,11 +13,11 @@ using GFrame;
 
 namespace Game.Logic
 {
-    public class EquipmentAppearance_Weapon_TwoHandAxe : EquipmentAppearance_Weapon
+    public class WeaponAppearance_TwoHandAxe : WeaponAppearance
     {
         private GameObject m_ObjWeapon;
 
-        public EquipmentAppearance_Weapon_TwoHandAxe(int id) : base(id)
+        public WeaponAppearance_TwoHandAxe(int id) : base(id)
         {
 
         }

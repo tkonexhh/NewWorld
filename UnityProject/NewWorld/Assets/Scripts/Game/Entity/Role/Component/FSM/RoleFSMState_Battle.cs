@@ -34,6 +34,7 @@ namespace Game.Logic
             entity.animComponent.SetWeapon(3);
             entity.animComponent.SetWeaponUnSheathTrigger();
 
+            entity.animComponent.SetMoving(false);
             WeaponUnSheath();
 
             if (m_FSM == null)
@@ -78,20 +79,18 @@ namespace Game.Logic
         private void WeaponUnSheath()
         {
             //伸手抓武器
-            var weapon = player.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Equipment_Weapon;
-
-            var weaponHand = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe).rightHandPos;
-            player.iKComponent.rightHandIK.SetFocusTarget(weaponHand, Vector3.zero);
-            player.monoReference.interactionSystem.StartInteraction(RootMotion.FinalIK.FullBodyBipedEffector.RightHand, weapon.appearance.weaponModel.handleObj, true);
+            var weapon = player.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
+            var weaponHand = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe).handleObj;
+            player.iKComponent.rightHandIK.SetFocusTarget(weaponHand.transform);
+            // player.monoReference.interactionSystem.StartInteraction(RootMotion.FinalIK.FullBodyBipedEffector.RightHand, weapon.appearance.weaponModel.handleObj, true);
         }
 
         private void WeaponSheath()
         {
-            var weapon = player.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Equipment_Weapon;
+            var weapon = player.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
             var model = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe);
-            var dis = -model.rightHandPos.transform.localPosition;
-            player.iKComponent.rightHandIK.SetFocusTarget(player.appearanceComponent.appearance.weaponBackAttachment, dis);
-            player.monoReference.interactionSystem.StartInteraction(RootMotion.FinalIK.FullBodyBipedEffector.RightHand, weapon.appearance.weaponModel.handleObj, true);
+            player.iKComponent.rightHandIK.SetFocusTarget(model.handleObj.transform);
+            // player.monoReference.interactionSystem.StartInteraction(RootMotion.FinalIK.FullBodyBipedEffector.RightHand, weapon.appearance.weaponModel.handleObj, true);
         }
 
     }

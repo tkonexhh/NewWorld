@@ -15,7 +15,7 @@ namespace Game.Logic
             {
                 var model = (target as WeaponModel_TwoHandAxe);
                 // model..Rotate(model.).AttachWeapon();
-                model.transform.RotateAround(model.rightHandPos.localPosition, Vector3.forward, 30);
+                // model.transform.RotateAround(model.rightHandPos.localPosition, Vector3.forward, 30);
             }
         }
     }

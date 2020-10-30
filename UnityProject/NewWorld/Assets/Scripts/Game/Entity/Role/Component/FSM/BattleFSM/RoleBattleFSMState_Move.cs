@@ -31,7 +31,7 @@ namespace Game.Logic
             player = role;
             GameInputMgr.S.mainAction.Move.performed += OnMovePerformed;
             GameInputMgr.S.mainAction.Move.canceled += OnMoveCancled;
-            SetWeapon(-1);
+
         }
 
         public override void Update(Role_Player role, float dt)
@@ -93,6 +93,7 @@ namespace Game.Logic
         {
             GameInputMgr.S.mainAction.Move.performed -= OnMovePerformed;
             GameInputMgr.S.mainAction.Move.canceled -= OnMoveCancled;
+            player.animComponent.SetMoving(false);
         }
 
         public override void OnMsg(Role_Player entity, int key, params object[] args)
@@ -104,13 +105,12 @@ namespace Game.Logic
         {
             m_InputMove = callback.ReadValue<Vector2>();
             m_InputMove *= 6;
-            player.controlComponent.Moving = true;
+            player.animComponent.SetMoving(true);
         }
 
         private void OnMoveCancled(InputAction.CallbackContext callback)
         {
             m_InputMove = Vector2.zero;
-            player.controlComponent.Moving = false;
         }
 
         private void GetHurt()
@@ -126,10 +126,6 @@ namespace Game.Logic
             player.animComponent.SetCastTrigger();
         }
 
-        private void SetWeapon(int weapon)
-        {
-
-        }
     }
 
 }

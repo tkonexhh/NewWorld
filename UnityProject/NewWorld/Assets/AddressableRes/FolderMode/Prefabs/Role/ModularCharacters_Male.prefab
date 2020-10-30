@@ -6632,7 +6632,7 @@ MonoBehaviour:
       planeBone3: {fileID: 7666273751970905208}
       planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
     - bone: {fileID: 7666273751970905512}
-      target: {fileID: 0}
+      target: {fileID: 8021611452446615005}
       positionWeight: 0
       rotationWeight: 0
       position: {x: 0, y: 0, z: 0}

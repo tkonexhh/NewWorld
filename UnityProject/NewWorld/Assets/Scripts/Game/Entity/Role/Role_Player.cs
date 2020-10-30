@@ -59,7 +59,7 @@ namespace Game.Logic
             Timer.S.Post2Really(t =>
             {
                 //test
-                var weapon = m_EquipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Equipment_Weapon;
+                var weapon = m_EquipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
                 var test = target.GetComponent<InteractionSystemTestGUI>();
                 test.interactionObject = weapon.appearance.weaponModel.handleObj;
             }, 2.7f);

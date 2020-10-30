@@ -70,7 +70,7 @@ namespace Game.Logic
 
         public static Equipment CreateTestEquipment(long itemID)
         {
-            Equipment_Weapon_TwoHandAxe axe = new Equipment_Weapon_TwoHandAxe(1);
+            Weapon_TwoHandAxe axe = new Weapon_TwoHandAxe(1);
             return axe;
         }
     }
