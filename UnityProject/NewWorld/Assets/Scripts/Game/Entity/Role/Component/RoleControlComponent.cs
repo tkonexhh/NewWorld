@@ -16,15 +16,22 @@ namespace Game.Logic
 {
     public class RoleControlComponent : RoleBaseComponent
     {
-        private bool isInjured = false;
-        private bool canAction = true;
-
         private Role_Player player;
+
+        private Rigidbody m_Rigidbody;
+        private bool isInjured = false;
+
 
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
             player = (Role_Player)role;
+        }
+
+        public override void Excute(float dt)
+        {
+            player.animComponent.SetMoving(moving);
+            // Debug.LogError(player.animComponent.GetMoving());
         }
 
         public bool IsInjured
@@ -37,6 +44,43 @@ namespace Game.Logic
             }
         }
 
+        public bool moving
+        {
+            get => velocity.sqrMagnitude > 0.1f;
+        }
+
+        public Vector3 velocity
+        {
+            get => m_Rigidbody.velocity;
+            private set
+            {
+                m_Rigidbody.velocity = value;
+            }
+        }
+
+        public Vector3 roleForward
+        {
+            get => player.transform.forward;
+            private set
+            {
+                player.transform.forward = value;
+            }
+        }
+
+        public void SetRigidbody(Rigidbody rigidbody)
+        {
+            m_Rigidbody = rigidbody;
+        }
+
+        public void SetForward(Vector3 forward)
+        {
+            this.roleForward = forward;
+        }
+
+        public void SetVelocity(Vector3 velocity)
+        {
+            this.velocity = velocity;
+        }
 
     }
 

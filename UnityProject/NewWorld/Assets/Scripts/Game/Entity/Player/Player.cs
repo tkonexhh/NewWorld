@@ -15,20 +15,51 @@ namespace Game.Logic
 {
     public class Player : Entity
     {
+        private GameObject m_GameObject;
+        private Transform m_Transform;
+
         private Role_Player m_Role;
+
+        private PlayerMonoReference m_MonoReference;
+        private PlayerControlComponent m_ControlComponent;
+        private PlayerFSMComponent m_FSMComponent;
+
+        public PlayerMonoReference monoReference => m_MonoReference;
+        public PlayerControlComponent controlComponent => m_ControlComponent;
+        public PlayerFSMComponent fsmComponent => m_FSMComponent;
+
 
         public Role_Player role => m_Role;
 
-        public delegate void OnRoleCreated(Role role);
-        public OnRoleCreated onRoleCreated;
+        public delegate void OnPlayerCreated(Player role);
+        public OnPlayerCreated onPlayerCreated;
 
         public Player() : base()
         {
             AddressableResMgr.S.InstantiateAsync("Player", (target) =>
             {
+                m_GameObject = target;
+                m_Transform = target.transform;
+
+                m_MonoReference = target.GetComponent<PlayerMonoReference>();
+
                 m_Role = new Role_Player();
-                m_Role.transform.SetParent(target.transform);
+                m_Role.onRoleCreated += (role) =>
+                {
+                    role.gameObject.name = "Role";
+                    m_Role.transform.SetParent(m_Transform);
+                    m_FSMComponent = AddComponent(new PlayerFSMComponent());
+                    m_ControlComponent = AddComponent(new PlayerControlComponent());
+                    m_ControlComponent.SetRigidbody(m_MonoReference.rigidbody);
+
+                    if (onPlayerCreated != null)
+                    {
+                        onPlayerCreated(this);
+                    }
+                };
             });
+
+            EntityMgr.S.RegisterEntity(this);
 
         }
     }

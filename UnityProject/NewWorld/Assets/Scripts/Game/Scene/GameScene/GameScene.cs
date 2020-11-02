@@ -27,9 +27,9 @@ namespace Game.Logic
         {
             UIMgr.S.OpenPanel(UIID.GamePanel);
 
-            PlayerMgr.S.role.onRoleCreated += (role) =>
+            PlayerMgr.S.player.onPlayerCreated += (player) =>
             {
-                role.roleTransform.SetXYZ(Vector3.zero);
+                player.role.transform.SetXYZ(Vector3.zero);
                 // m_CameraPlayer.Follow = role.transform;
                 // m_CameraPlayer.LookAt = role.transform;
             };

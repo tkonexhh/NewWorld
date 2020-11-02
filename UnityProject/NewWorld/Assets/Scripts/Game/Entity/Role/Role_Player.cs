@@ -20,37 +20,11 @@ namespace Game.Logic
     {
         protected override string resName => "ModularCharacters_Male_Game";
 
-        private RoleInputComponent m_InputComponent;
-        private RoleControlComponent m_ControlComponent;
-        private RoleFSMComponent m_FSMConponent;
-
         //---------Mono---------------
         private RoleAnimEvent m_AnimEvent;
 
-        private Rigidbody m_Rigidbody;
-
-        public RoleControlComponent controlComponent => m_ControlComponent;
-        public RoleFSMComponent fsmComponent => m_FSMConponent;
-        public Rigidbody rigidbody => m_Rigidbody;
-
-        public RoleAnimEvent animEvent => m_AnimEvent;
-
-        public Role_Player() : base()
-        {
-            var collider = m_RootGameObject.AddComponent<CapsuleCollider>();
-            collider.center = new Vector3(0, 0.9f, 0);
-            collider.radius = 0.25f;
-            collider.height = 1.8f;
-            m_Rigidbody = m_RootGameObject.AddComponent<Rigidbody>();
-            m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-        }
-
         protected override void OnResLoaded(GameObject target)
         {
-            m_InputComponent = AddComponent(new RoleInputComponent());
-            m_FSMConponent = AddComponent(new RoleFSMComponent());
-            m_ControlComponent = AddComponent(new RoleControlComponent());
-
             m_AnimEvent = target.AddComponent<RoleAnimEvent>();
             m_AnimEvent.Init(this);
 

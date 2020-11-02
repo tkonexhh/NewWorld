@@ -23,7 +23,7 @@ namespace Game.Logic
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
-            m_Appearance = role.roleGameObject.GetComponentInChildren<CharacterAppearance>();
+            m_Appearance = role.gameObject.GetComponentInChildren<CharacterAppearance>();
 
             RegisterEvent();
         }

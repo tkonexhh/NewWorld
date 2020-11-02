@@ -95,7 +95,7 @@ namespace Game.Logic
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
-            m_Animator = role.roleGameObject.GetComponentInChildren<Animator>();
+            m_Animator = role.gameObject.GetComponentInChildren<Animator>();
 
             m_KeyHash_BoolMoving = Animator.StringToHash(m_Key_BoolMoving);
             m_KeyHash_BoolInjured = Animator.StringToHash(m_Key_BoolInjured);
@@ -155,6 +155,11 @@ namespace Game.Logic
         public void SetMoving(bool moving)
         {
             m_Animator.SetBool(m_KeyHash_BoolMoving, moving);
+        }
+
+        public bool GetMoving()
+        {
+            return m_Animator.GetBool(m_KeyHash_BoolMoving);
         }
 
         public void SetInjured(bool injured)
@@ -291,6 +296,18 @@ namespace Game.Logic
         private void SetLayerWeight(RoleAnimatorLayer layer, float weight)
         {
             m_Animator.SetLayerWeight((int)layer, weight);
+        }
+
+        public void PlayAnim(string animname, int layer)
+        {
+            m_Animator.Play(animname, layer);
+        }
+
+        public void GetCurrentAnim(int layer)
+        {
+            var current = m_Animator.GetCurrentAnimatorStateInfo(layer);
+            // current.tagHash
+            // m_Animator.CrossFade()
         }
         #endregion
     }
