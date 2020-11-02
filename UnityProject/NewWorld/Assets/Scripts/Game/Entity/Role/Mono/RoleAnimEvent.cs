@@ -45,7 +45,7 @@ namespace Game.Logic
 
         public void WeaponSwitch(int value)
         {
-            Debug.LogError("WeaponSwitch:" + value);
+            // Debug.LogError("WeaponSwitch:" + value);
             if (value == 0)
             {
                 AttachToHand();

@@ -87,11 +87,11 @@ namespace Game.Logic
             bool isMoving = player.role.animComponent.GetMoving();
             if (isMoving)
             {
-                player.role.animComponent.animator.CrossFade("Relax-Movement", 0.25f, 0, 0.6f);
+                player.role.animComponent.animator.CrossFade("Relax-Movement", 0.25f, 0, 0.4f);
             }
             else
             {
-                player.role.animComponent.animator.CrossFade("Idle", 0.25f, 0, 0.6f);
+                player.role.animComponent.animator.CrossFade("Idle", 0.25f, 0, 0.4f);
             }
 
             player.role.animComponent.PlayAnim("2Hand-Axe-Sheath-Back-Relax", 1);

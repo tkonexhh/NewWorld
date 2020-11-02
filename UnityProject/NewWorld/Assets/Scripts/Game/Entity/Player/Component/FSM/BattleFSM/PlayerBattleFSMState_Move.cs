@@ -116,13 +116,13 @@ namespace Game.Logic
         private void OnMovePerformed(InputAction.CallbackContext callback)
         {
             m_InputMove = callback.ReadValue<Vector2>();
-            // player.animComponent.SetMoving(true);
+            m_Player.role.animComponent.SetMoving(true);
         }
 
         private void OnMoveCancled(InputAction.CallbackContext callback)
         {
             m_InputMove = Vector2.zero;
-            // player.animComponent.SetMoving(false);
+            m_Player.role.animComponent.SetMoving(false);
         }
 
         private void GetHurt()

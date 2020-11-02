@@ -30,8 +30,8 @@ namespace Game.Logic
 
         public override void Excute(float dt)
         {
-            player.role.animComponent.SetMoving(moving);
-            // Debug.LogError(player.animComponent.GetMoving());
+            // player.role.animComponent.SetMoving(moving);
+            // Debug.LogError(player.role.animComponent.GetMoving());
         }
 
         public bool IsInjured
