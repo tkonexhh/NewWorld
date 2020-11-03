@@ -29,6 +29,14 @@ namespace Game.Logic
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""6f357db9-2900-4946-a8ec-dd54e5e97d72"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Any"",
                     ""type"": ""Button"",
                     ""id"": ""92f933a8-6bd2-4500-b0c7-ed1c9f97f06b"",
@@ -175,6 +183,17 @@ namespace Game.Logic
                     ""processors"": """",
                     ""groups"": ""KeyBoard"",
                     ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe538169-b4ac-4c3e-b780-32c6de44c33b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -411,6 +430,7 @@ namespace Game.Logic
             // Main
             m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
             m_Main_Move = m_Main.FindAction("Move", throwIfNotFound: true);
+            m_Main_Jump = m_Main.FindAction("Jump", throwIfNotFound: true);
             m_Main_Any = m_Main.FindAction("Any", throwIfNotFound: true);
             m_Main_Run = m_Main.FindAction("Run", throwIfNotFound: true);
             // UI
@@ -471,6 +491,7 @@ namespace Game.Logic
         private readonly InputActionMap m_Main;
         private IMainActions m_MainActionsCallbackInterface;
         private readonly InputAction m_Main_Move;
+        private readonly InputAction m_Main_Jump;
         private readonly InputAction m_Main_Any;
         private readonly InputAction m_Main_Run;
         public struct MainActions
@@ -478,6 +499,7 @@ namespace Game.Logic
             private @GameInput m_Wrapper;
             public MainActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Main_Move;
+            public InputAction @Jump => m_Wrapper.m_Main_Jump;
             public InputAction @Any => m_Wrapper.m_Main_Any;
             public InputAction @Run => m_Wrapper.m_Main_Run;
             public InputActionMap Get() { return m_Wrapper.m_Main; }
@@ -492,6 +514,9 @@ namespace Game.Logic
                     @Move.started -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
+                    @Jump.started -= m_Wrapper.m_MainActionsCallbackInterface.OnJump;
+                    @Jump.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnJump;
+                    @Jump.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnJump;
                     @Any.started -= m_Wrapper.m_MainActionsCallbackInterface.OnAny;
                     @Any.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnAny;
                     @Any.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnAny;
@@ -505,6 +530,9 @@ namespace Game.Logic
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
+                    @Jump.started += instance.OnJump;
+                    @Jump.performed += instance.OnJump;
+                    @Jump.canceled += instance.OnJump;
                     @Any.started += instance.OnAny;
                     @Any.performed += instance.OnAny;
                     @Any.canceled += instance.OnAny;
@@ -609,6 +637,7 @@ namespace Game.Logic
         public interface IMainActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
             void OnAny(InputAction.CallbackContext context);
             void OnRun(InputAction.CallbackContext context);
         }

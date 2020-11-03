@@ -32,10 +32,16 @@ namespace Game.Logic
         }
 
 
+
         public override void OnSingletonInit()
         {
             m_Input = new GameInput();
             EnableInput();
+        }
+
+
+        private void OnDestroy()
+        {
         }
 
         public void EnableInput()
