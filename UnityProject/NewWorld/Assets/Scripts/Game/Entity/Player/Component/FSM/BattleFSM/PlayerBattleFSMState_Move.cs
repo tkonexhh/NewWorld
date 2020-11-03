@@ -96,7 +96,7 @@ namespace Game.Logic
 
         public override void FixedUpdate(Player player, float dt)
         {
-            float speed = player.role.data.statusData.moveSpeed;
+            float speed = player.role.data.baseData.walkSpeed;
             player.controlComponent.SetVelocity(new Vector3(m_VecMove.x * speed, player.controlComponent.velocity.y, m_VecMove.y * speed));
             //去除掉Y轴速度带来的影响
             player.role.animComponent.SetVelocityZ(player.controlComponent.velocity.SetY(0).sqrMagnitude);

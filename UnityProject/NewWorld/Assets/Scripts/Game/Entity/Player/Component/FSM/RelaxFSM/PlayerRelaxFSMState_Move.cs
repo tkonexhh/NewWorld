@@ -16,32 +16,25 @@ namespace Game.Logic
 {
     public class PlayerRelaxFSMState_Move : FSMState<Player>
     {
-        private Player m_Player;
-        private Vector2 m_InputMove = Vector2.zero;
-        private Vector2 m_VecMove = Vector2.zero;
         private bool m_Runing = false;
+        private Vector3 m_MoveVelocity;
 
-        private Vector2 m_VelMoveVelocity;
         public override void Enter(Player player, params object[] args)
         {
-            m_Player = player;
-            GameInputMgr.S.mainAction.Move.performed += OnMovePerformed;
-            GameInputMgr.S.mainAction.Move.canceled += OnMoveCancled;
             GameInputMgr.S.mainAction.Run.performed += OnRunPerformed;
             GameInputMgr.S.mainAction.Run.canceled += OnRunCancled;
-            // player.animComponent.SetMoving(true);
+            player.role.animComponent.SetMoving(true);
         }
 
         public override void Update(Player player, float dt)
         {
             if (player.role.animComponent == null)
                 return;
-            m_VecMove = Vector2.SmoothDamp(m_VecMove, m_InputMove, ref m_VelMoveVelocity, dt);
 
             //控制角色朝向
-            if (m_VecMove.sqrMagnitude > 0.01f)
+            if (GameInputMgr.S.moveVec.sqrMagnitude > 0.01f)
             {
-                player.controlComponent.SetForward(Vector3.Slerp(player.controlComponent.roleForward, new Vector3(m_VecMove.x, 0, m_VecMove.y), 0.5f));
+                player.controlComponent.SetForward(Vector3.Slerp(player.controlComponent.roleForward, new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y), 0.5f));
             }
 
             if (Input.GetKeyDown(KeyCode.R))
@@ -67,34 +60,28 @@ namespace Game.Logic
 
         public override void FixedUpdate(Player player, float dt)
         {
-            float speed = player.role.data.statusData.moveSpeed * (m_Runing ? 2.5f : 1);
-            player.controlComponent.SetVelocity(new Vector3(m_VecMove.x * speed, player.controlComponent.velocity.y, m_VecMove.y * speed));
+            float maxSpeed = m_Runing ? player.role.data.baseData.runSpeed : player.role.data.baseData.walkSpeed;
+            Vector3 desiredVelocity = new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y) * maxSpeed;
+            m_MoveVelocity = player.controlComponent.velocity;
+            float maxSpeedChange = player.role.data.baseData.acceleration * dt;
+            m_MoveVelocity.x = Mathf.MoveTowards(m_MoveVelocity.x, desiredVelocity.x, maxSpeedChange);
+            m_MoveVelocity.z = Mathf.MoveTowards(m_MoveVelocity.z, desiredVelocity.z, maxSpeedChange);
+            // Debug.LogError(GameInputMgr.S.moveVec + "----" + m_MoveVelocity + "---" + maxSpeedChange + "----" + desiredVelocity);
+            player.controlComponent.velocity = m_MoveVelocity;
             //去除掉Y轴速度带来的影响
-            player.role.animComponent.SetVelocityZ(player.controlComponent.velocity.SetY(0).sqrMagnitude);
+            player.role.animComponent.SetVelocityZ(player.controlComponent.velocity.magnitude);
         }
 
-        public override void Exit(Player entity)
+        public override void Exit(Player player)
         {
-            GameInputMgr.S.mainAction.Move.performed -= OnMovePerformed;
-            GameInputMgr.S.mainAction.Move.canceled -= OnMoveCancled;
-            m_Player.role.animComponent.SetMoving(false);
+            GameInputMgr.S.mainAction.Run.performed -= OnRunPerformed;
+            GameInputMgr.S.mainAction.Run.canceled -= OnRunCancled;
+            player.role.animComponent.SetMoving(false);
         }
 
-        public override void OnMsg(Player entity, int key, params object[] args)
+        public override void OnMsg(Player player, int key, params object[] args)
         {
 
-        }
-
-        private void OnMovePerformed(InputAction.CallbackContext callback)
-        {
-            m_InputMove = callback.ReadValue<Vector2>();
-            m_Player.role.animComponent.SetMoving(true);
-        }
-
-        private void OnMoveCancled(InputAction.CallbackContext callback)
-        {
-            m_InputMove = Vector2.zero;
-            // player.animComponent.SetMoving(false);
         }
 
         private void OnRunPerformed(InputAction.CallbackContext callback)

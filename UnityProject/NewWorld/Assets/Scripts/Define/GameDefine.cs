@@ -15,7 +15,7 @@ namespace Game.Logic
 {
     public class GameDefine
     {
-        public const float role_Rotate_Speed = 10;
+
     }
 
 }

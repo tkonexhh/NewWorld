@@ -17,9 +17,7 @@ namespace Game.Logic
     public class PlayerControlComponent : EntityComponennt
     {
         private Player player;
-
         private Rigidbody m_Rigidbody;
-        private bool isInjured = false;
 
 
         public override void Init(Entity ownner)
@@ -34,25 +32,10 @@ namespace Game.Logic
             // Debug.LogError(player.role.animComponent.GetMoving());
         }
 
-        public bool IsInjured
-        {
-            get => isInjured;
-            set
-            {
-                isInjured = value;
-                player.role.animComponent.SetInjured(isInjured);
-            }
-        }
-
-        public bool moving
-        {
-            get => velocity.sqrMagnitude > 0.1f;
-        }
-
         public Vector3 velocity
         {
             get => m_Rigidbody.velocity;
-            private set
+            set
             {
                 m_Rigidbody.velocity = value;
             }

@@ -15,13 +15,22 @@ using GFrame;
 
 namespace Game.Logic
 {
-    public class GameInputMgr : TSingleton<GameInputMgr>
+    public class GameInputMgr : TMonoSingleton<GameInputMgr>
     {
         private GameInput m_Input;
 
         public GameInput.MainActions mainAction => m_Input.Main;
         public GameInput.UIActions uiAction => m_Input.UI;
         public GameInput.ShortcutActions shortcutActions => m_Input.Shortcut;
+
+        private readonly float moveSensitivity = 20.0f;//移动轴的灵敏度
+
+        public Vector2 moveVec
+        {
+            get;
+            private set;
+        }
+
 
         public override void OnSingletonInit()
         {
@@ -43,7 +52,11 @@ namespace Game.Logic
             m_Input.Shortcut.Disable();
         }
 
-
+        private void Update()
+        {
+            Vector2 moveInput = mainAction.Move.ReadValue<Vector2>();
+            moveVec = Vector2.Lerp(moveVec, moveInput, moveSensitivity * Time.deltaTime);
+        }
     }
 
 }
