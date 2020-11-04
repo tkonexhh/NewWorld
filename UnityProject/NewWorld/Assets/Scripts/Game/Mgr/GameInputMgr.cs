@@ -23,9 +23,16 @@ namespace Game.Logic
         public GameInput.UIActions uiAction => m_Input.UI;
         public GameInput.ShortcutActions shortcutActions => m_Input.Shortcut;
 
-        private readonly float moveSensitivity = 20.0f;//移动轴的灵敏度
+        private Vector2 m_VelMoveInput;
+        private readonly float moveSensitivity = 2.0f;//移动轴的灵敏度
 
         public Vector2 moveVec
+        {
+            get;
+            private set;
+        }
+
+        public Vector2 moveInput
         {
             get;
             private set;
@@ -60,8 +67,9 @@ namespace Game.Logic
 
         private void Update()
         {
-            Vector2 moveInput = mainAction.Move.ReadValue<Vector2>();
-            moveVec = Vector2.Lerp(moveVec, moveInput, moveSensitivity * Time.deltaTime);
+            moveInput = mainAction.Move.ReadValue<Vector2>();
+            // moveVec = Vector2.Lerp(moveVec, moveInput, moveSensitivity * Time.deltaTime);
+            moveVec = Vector2.SmoothDamp(moveVec, moveInput, ref m_VelMoveInput, moveSensitivity * Time.deltaTime);
         }
     }
 

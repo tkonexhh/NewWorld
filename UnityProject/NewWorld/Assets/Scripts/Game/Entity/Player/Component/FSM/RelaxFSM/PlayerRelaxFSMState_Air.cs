@@ -36,16 +36,8 @@ namespace Game.Logic
 
         public override void FixedUpdate(Player player, float dt)
         {
-            float maxSpeed = player.role.data.baseData.runSpeed;//: player.role.data.baseData.walkSpeed;
-            Vector3 desiredVelocity = new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y) * maxSpeed;
-            m_MoveVelocity = player.controlComponent.velocity;
-            float maxSpeedChange = player.role.data.baseData.airAcceleration * dt;
-            m_MoveVelocity.x = Mathf.MoveTowards(m_MoveVelocity.x, desiredVelocity.x, maxSpeedChange);
-            m_MoveVelocity.z = Mathf.MoveTowards(m_MoveVelocity.z, desiredVelocity.z, maxSpeedChange);
-            // Debug.LogError(GameInputMgr.S.moveVec + "----" + m_MoveVelocity + "---" + maxSpeedChange + "----" + desiredVelocity);
-            player.controlComponent.velocity = m_MoveVelocity;
-            //去除掉Y轴速度带来的影响
-            player.role.animComponent.SetVelocityZ(player.controlComponent.velocity.magnitude);
+            float maxSpeed = player.role.data.baseData.walkSpeed;//: player.role.data.baseData.walkSpeed;
+            player.controlComponent.Move(maxSpeed, player.role.data.baseData.airAcceleration, dt);
         }
 
         public override void Exit(Player player)
@@ -71,12 +63,7 @@ namespace Game.Logic
             {
                 Debug.LogError("Jump");
                 m_JumpChance += 1;
-                float jumpSpeed = Mathf.Sqrt(-2f * Physics.gravity.y * m_Player.role.data.baseData.jumpHeight);
-                if (m_Player.controlComponent.velocity.y > 0f)
-                {
-                    jumpSpeed = Mathf.Max(jumpSpeed - m_Player.controlComponent.velocity.y, 0f);
-                }
-                m_Player.controlComponent.velocity += new Vector3(0, jumpSpeed, 0);
+                m_Player.controlComponent.Jump();
             }
         }
 

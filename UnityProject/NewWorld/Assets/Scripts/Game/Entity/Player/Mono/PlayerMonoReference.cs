@@ -21,6 +21,16 @@ namespace Game.Logic
         public Run<Collision> onCollisionExit;
         public Run<Collision> onCollisionStay;
 
+        private void Update()
+        {
+
+        }
+
+        private void FixedUpdate()
+        {
+
+        }
+
         private void OnCollisionEnter(Collision other)
         {
             if (onCollisionEnter != null)

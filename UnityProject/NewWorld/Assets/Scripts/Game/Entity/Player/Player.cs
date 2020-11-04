@@ -50,7 +50,6 @@ namespace Game.Logic
                     m_Role.transform.SetParent(m_Transform);
                     m_FSMComponent = AddComponent(new PlayerFSMComponent());
                     m_ControlComponent = AddComponent(new PlayerControlComponent());
-                    m_ControlComponent.SetRigidbody(m_MonoReference.rigidbody);
 
                     if (onPlayerCreated != null)
                     {

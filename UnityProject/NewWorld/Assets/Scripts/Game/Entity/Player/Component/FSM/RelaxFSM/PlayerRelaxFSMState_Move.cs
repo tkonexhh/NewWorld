@@ -64,15 +64,7 @@ namespace Game.Logic
         public override void FixedUpdate(Player player, float dt)
         {
             float maxSpeed = m_Runing ? player.role.data.baseData.runSpeed : player.role.data.baseData.walkSpeed;
-            Vector3 desiredVelocity = new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y) * maxSpeed;
-            m_MoveVelocity = player.controlComponent.velocity;
-            float maxSpeedChange = player.role.data.baseData.acceleration * dt;
-            m_MoveVelocity.x = Mathf.MoveTowards(m_MoveVelocity.x, desiredVelocity.x, maxSpeedChange);
-            m_MoveVelocity.z = Mathf.MoveTowards(m_MoveVelocity.z, desiredVelocity.z, maxSpeedChange);
-            // Debug.LogError(GameInputMgr.S.moveVec + "----" + m_MoveVelocity + "---" + maxSpeedChange + "----" + desiredVelocity);
-            player.controlComponent.velocity = m_MoveVelocity;
-            //去除掉Y轴速度带来的影响
-            player.role.animComponent.SetVelocityZ(player.controlComponent.velocity.magnitude);
+            player.controlComponent.Move(maxSpeed, player.role.data.baseData.acceleration, dt);
         }
 
         public override void Exit(Player player)
@@ -101,6 +93,7 @@ namespace Game.Logic
         private void OnJumpPerformed(InputAction.CallbackContext callback)
         {
             //TODO 点击条约进入Air状态 但是air状态还在地面上
+            m_Player.controlComponent.Jump();
             (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Air);
         }
     }
