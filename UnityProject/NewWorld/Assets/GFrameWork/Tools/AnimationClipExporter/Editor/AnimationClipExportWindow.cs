@@ -13,21 +13,35 @@ namespace GFrame
             GetWindow<AnimationClipExportWindow>("动画导出工具(Mixamo)");
         }
 
+        private enum AnimType
+        {
+            // None = 0,
+            Legacy = 1,
+            Generic = 2,
+            Humanoid = 3,
+        }
+
         private Avatar avatar;
         private string animresPath;
         private string outPutPath;
+        private AnimType animType = AnimType.Humanoid;
+
 
         private void OnGUI()
         {
             GUILayout.BeginVertical();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("选择Avatar：");
+            GUILayout.Label("选择Avatar:");
             avatar = (Avatar)EditorGUILayout.ObjectField(avatar, typeof(Avatar), true);
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("资源路径");
+            animType = (AnimType)EditorGUILayout.EnumPopup("导出动画类型:", animType);
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("资源路径:");
             if (GUILayout.Button(string.IsNullOrEmpty(animresPath) ? "选择路径" : animresPath))
             {
                 animresPath = EditorUtility.OpenFolderPanel("资源路径", Application.dataPath, "");
@@ -42,8 +56,9 @@ namespace GFrame
             }
             GUILayout.EndHorizontal();
 
+
             GUILayout.BeginHorizontal();
-            GUILayout.Label("输出路径");
+            GUILayout.Label("输出路径:");
             if (GUILayout.Button(string.IsNullOrEmpty(outPutPath) ? "选择路径" : outPutPath))
             {
                 outPutPath = EditorUtility.OpenFolderPanel("输出路径", Application.dataPath, "");
@@ -54,21 +69,20 @@ namespace GFrame
                 else
                 {
                     outPutPath = PathHelper.ABSPath2AssetsPath(outPutPath) + "/";
-                    // outPutPath = outPutPath.Replace(Application.dataPath, "") + "/";
                 }
             }
             GUILayout.EndHorizontal();
 
-            GUILayout.BeginHorizontal();
+            // GUILayout.BeginHorizontal();
             if (GUILayout.Button("导出动画片段"))
             {
                 Export();
             }
-            if (GUILayout.Button("Clear"))
+            if (GUILayout.Button("清除进度条()"))
             {
                 EditorUtility.ClearProgressBar();
             }
-            GUILayout.EndHorizontal();
+            // GUILayout.EndHorizontal();
 
             GUILayout.EndVertical();
         }
@@ -92,7 +106,7 @@ namespace GFrame
                 Debug.LogError("outPutPath is null");
                 return;
             }
-            GetHumanoidAnmationClips(avatar, animresPath, outPutPath);
+            GetHumanoidAnmationClips(avatar, animresPath, outPutPath, animType);
         }
 
 
@@ -100,7 +114,7 @@ namespace GFrame
         static string[] loopFilter = new string[] { "walk", "idle", "run", "Walk", "Run", "Idle" };
 
 
-        static void GetHumanoidAnmationClips(Avatar avatar, string resPath, string outputPath)
+        static void GetHumanoidAnmationClips(Avatar avatar, string resPath, string outputPath, AnimType animType)
         {
             List<string> lstPaths = new List<string>();
             List<DirectoryInfo> lstDir = new List<DirectoryInfo>();
@@ -111,7 +125,7 @@ namespace GFrame
                 Log.e("未选中文件夹！");
                 return;
             }
-            // FileHelper.CreateDirctory(outputPath)
+
             string absPath = PathHelper.ABSPath2AssetsPath(outputPath);
             if (!Directory.Exists(absPath))
             {
@@ -138,17 +152,34 @@ namespace GFrame
                 {
                     if (isAvailable(lstFile[k].FullName))
                     {
-                        // ShowProgress(k / lstFile.Count, lstFile.Count, k, lstFile[k].Name);
+                        ShowProgress(k / lstFile.Count, lstFile.Count, k, lstFile[k].Name);
                         string assetPath = PathHelper.ABSPath2AssetsPath(lstFile[k].FullName);
                         ModelImporter modelImporter = AssetImporter.GetAtPath(assetPath) as ModelImporter;
-                        modelImporter.animationType = ModelImporterAnimationType.Human;
-                        // modelImporter.sourceAvatar = avatar;
+                        switch (animType)
+                        {
+                            case AnimType.Legacy:
+                                modelImporter.animationType = ModelImporterAnimationType.Legacy;
+                                break;
+                            case AnimType.Generic:
+                                modelImporter.animationType = ModelImporterAnimationType.Generic;
+                                modelImporter.autoGenerateAvatarMappingIfUnspecified = true;
+                                break;
+                            case AnimType.Humanoid:
+                                modelImporter.animationType = ModelImporterAnimationType.Human;
+                                modelImporter.autoGenerateAvatarMappingIfUnspecified = true;
+                                // if (avatar == null)
+                                //     modelImporter.autoGenerateAvatarMappingIfUnspecified = true;
+                                // else
+                                //     modelImporter.sourceAvatar = avatar;
+                                break;
+                        }
+
+
                         modelImporter.SaveAndReimport();
-                        Debug.LogError(avatar);
                         AnimationClip newClip = new AnimationClip();
-                        Debug.LogError(assetPath + "--" + AssetDatabase.LoadAssetAtPath<AnimationClip>(assetPath));
+                        var obj = AssetDatabase.LoadAssetAtPath<AnimationClip>(assetPath);
                         EditorUtility.CopySerialized(AssetDatabase.LoadAssetAtPath<AnimationClip>(assetPath), newClip);
-                        newClip.name = RenameAnim(lstFile[k].Name);
+                        newClip.name = RenameAnim(lstFile[k].Name, animType);
 
                         AnimationClipSettings settings = AnimationUtility.GetAnimationClipSettings(newClip);
                         settings.loopTime = isLoopAnim(newClip.name);
@@ -159,8 +190,8 @@ namespace GFrame
                         settings.loopBlendPositionXZ = true;
                         settings.loopBlendPositionY = true;
                         AnimationUtility.SetAnimationClipSettings(newClip, settings);
-
-                        AssetDatabase.CreateAsset(newClip, outputPath + newClip.name + ".anim");
+                        string newClipName = PathHelper.FileNameWithoutSuffix(newClip.name);
+                        AssetDatabase.CreateAsset(newClip, outputPath + newClipName + ".anim");
                         AssetDatabase.SaveAssets();
                     }
                 }
@@ -195,12 +226,24 @@ namespace GFrame
             return false;
         }
 
-        private static string RenameAnim(string name)
+        private static string RenameAnim(string name, AnimType type)
         {
             string newName = name.Replace(" ", "_").Replace(".fbx", "");
             if (!newName.Contains("@"))
             {
                 newName = "anim@" + newName;
+            }
+            switch (type)
+            {
+                case AnimType.Legacy:
+                    newName = "legacy_" + newName;
+                    break;
+                case AnimType.Generic:
+                    newName = "generic_" + newName;
+                    break;
+                case AnimType.Humanoid:
+                    newName = "humanoid_" + newName;
+                    break;
             }
             return newName;
         }

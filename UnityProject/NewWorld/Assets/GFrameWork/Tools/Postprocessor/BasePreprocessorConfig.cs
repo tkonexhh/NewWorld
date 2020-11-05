@@ -62,7 +62,6 @@ namespace GFrame.AssetPreprocessor
             for (var i = 0; i < regexStrings.Count; i++)
             {
                 var regexString = regexStrings[i];
-                Debug.LogError(regexString);
                 if (regexString == string.Empty)
                 {
                     regexStrings.RemoveAt(i);

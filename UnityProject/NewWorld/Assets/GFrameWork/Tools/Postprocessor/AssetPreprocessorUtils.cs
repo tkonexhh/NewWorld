@@ -21,7 +21,7 @@ namespace GFrame.AssetPreprocessor
                 //Assets/0Demo/Chr_ArmLowerLeft_Female_00_Static 8.fbx
                 // https://stackoverflow.com/questions/15275718/regular-expression-wildcard
                 //regexString = Regex.Escape(regexString).Replace("\\*", ".*?");
-                Debug.LogError(regexString + "---" + targetString + new Regex(regexString).IsMatch(targetString));
+                // Debug.LogError(regexString + "---" + targetString + new Regex(regexString).IsMatch(targetString));
                 return new Regex(regexString).IsMatch(targetString);
             });
 

@@ -23,7 +23,7 @@ namespace GFrame
 
         public static string ABSPath2AssetsPath(string absPath)
         {
-            string assetPath = absPath;
+            string assetPath = absPath.Replace("\\", "/");
             assetPath = assetPath.Replace(Application.dataPath, "");
             assetPath = "Assets" + assetPath;
             return assetPath;
