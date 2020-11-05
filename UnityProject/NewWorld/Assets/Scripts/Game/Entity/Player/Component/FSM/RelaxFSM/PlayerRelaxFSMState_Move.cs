@@ -34,12 +34,6 @@ namespace Game.Logic
             if (player.role.animComponent == null)
                 return;
 
-            //控制角色朝向
-            if (GameInputMgr.S.moveVec.sqrMagnitude > 0.01f)
-            {
-                player.controlComponent.SetForward(Vector3.Slerp(player.controlComponent.roleForward, new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y), 0.5f));
-            }
-
             if (Input.GetKeyDown(KeyCode.R))
             {
                 player.fsmComponent.SetRoleState(RoleState.Battle);
@@ -63,8 +57,14 @@ namespace Game.Logic
 
         public override void FixedUpdate(Player player, float dt)
         {
+            //控制角色朝向
+            if (GameInputMgr.S.moveVec.sqrMagnitude > 0.01f)
+            {
+                player.controlComponent.roleForward = Vector3.Slerp(player.controlComponent.roleForward, new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y), 0.5f);
+            }
+
             float maxSpeed = m_Runing ? player.role.data.baseData.runSpeed : player.role.data.baseData.walkSpeed;
-            player.controlComponent.Move(maxSpeed, player.role.data.baseData.acceleration, dt);
+            player.controlComponent.Move(GameInputMgr.S.moveVec, maxSpeed, player.role.data.baseData.acceleration);
         }
 
         public override void Exit(Player player)
@@ -94,7 +94,7 @@ namespace Game.Logic
         {
             //TODO 点击条约进入Air状态 但是air状态还在地面上
             m_Player.controlComponent.Jump();
-            (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Air);
+            // (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Air);
         }
     }
 

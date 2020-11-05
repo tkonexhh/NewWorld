@@ -62,10 +62,46 @@ namespace Game.Logic
             ClearState();
         }
 
+        private void UpdateState()
+        {
+            velocity = body.velocity;
+            if (onGround)
+            {
+                jumpPhase = 0;
+                if (groundContactCount > 1)
+                    contractNormal.Normalize();
+            }
+            else
+            {
+                contractNormal = Vector3.up;
+            }
+        }
+
         void ClearState()
         {
             groundContactCount = 0;
             contractNormal = Vector3.zero;
+        }
+
+        private Vector3 ProjectOnContactPlane(Vector3 vector)
+        {
+            return vector - contractNormal * Vector3.Dot(vector, contractNormal);
+        }
+        void AdjustVelocity()
+        {
+            Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
+            Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
+
+            float currentX = Vector3.Dot(velocity, xAxis);
+            float currentz = Vector3.Dot(velocity, zAxis);
+
+            Vector3 desiredVelocity = new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y) * maxSpeed;
+            float acceleration = onGround ? maxAcceleration : maxAirAcceleration;
+            float maxSpeedChange = acceleration * Time.fixedDeltaTime;
+            float newX = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+            float newZ = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+
+            velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentz);
         }
 
 
@@ -85,20 +121,7 @@ namespace Game.Logic
             }
         }
 
-        private void UpdateState()
-        {
-            velocity = body.velocity;
-            if (onGround)
-            {
-                jumpPhase = 0;
-                if (groundContactCount > 1)
-                    contractNormal.Normalize();
-            }
-            else
-            {
-                contractNormal = Vector3.up;
-            }
-        }
+
 
         private void OnCollisionEnter(Collision other)
         {
@@ -123,26 +146,7 @@ namespace Game.Logic
             }
         }
 
-        private Vector3 ProjectOnContactPlane(Vector3 vector)
-        {
-            return vector - contractNormal * Vector3.Dot(vector, contractNormal);
-        }
-        void AdjustVelocity()
-        {
-            Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
-            Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
 
-            float currentX = Vector3.Dot(velocity, xAxis);
-            float currentz = Vector3.Dot(velocity, zAxis);
-
-            Vector3 desiredVelocity = new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y) * maxSpeed;
-            float acceleration = onGround ? maxAcceleration : maxAirAcceleration;
-            float maxSpeedChange = acceleration * Time.fixedDeltaTime;
-            float newX = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
-            float newZ = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
-
-            velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentz);
-        }
     }
 
 }

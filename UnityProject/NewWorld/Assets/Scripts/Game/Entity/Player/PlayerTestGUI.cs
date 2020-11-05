@@ -16,6 +16,12 @@ namespace Game.Logic
     public class PlayerTestGUI : MonoBehaviour
     {
         public bool showInputMoveVec = true;
+        private Rigidbody m_Rigidbody;
+
+        private void Awake()
+        {
+            m_Rigidbody = GetComponent<Rigidbody>();
+        }
         private void OnDrawGizmos()
         {
             if (showInputMoveVec)
@@ -24,7 +30,12 @@ namespace Game.Logic
                 Gizmos.DrawWireSphere(transform.position + 1.0f * new Vector3(GameInputMgr.S.moveInput.x, 0, GameInputMgr.S.moveInput.y), 0.1f);
                 Gizmos.color = Color.green;
                 Gizmos.DrawWireSphere(transform.position + 2.0f * new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y), 0.1f);
+                Gizmos.color = Color.grey;
+
             }
+
+            if (m_Rigidbody)
+                Gizmos.DrawWireSphere(transform.position + 2.5f * m_Rigidbody.velocity.normalized, 0.1f);
         }
     }
 

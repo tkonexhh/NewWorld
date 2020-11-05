@@ -43,9 +43,11 @@ namespace Game.Logic
                 }
                 else
                 {
-                    SkinnedMeshRenderer newSkin = null;
-
-                    newSkin = GameResMgr.S.globalRes.roleHolder.GetMeshBySlot(m_Slot, sex, id, args);
+                    if (GameResMgr.S.globalRes.roleHolder == null)
+                    {
+                        return m_CurID;
+                    }
+                    SkinnedMeshRenderer newSkin = GameResMgr.S.globalRes.roleHolder.GetMeshBySlot(m_Slot, sex, id, args);
 
 
                     List<Transform> bones = new List<Transform>();

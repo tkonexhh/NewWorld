@@ -22,6 +22,12 @@ namespace Game.Logic
         private float m_MinGroundDotProduct;//
         private int m_GroundContactCount;//接触的面的数量
         private bool onGround => m_GroundContactCount > 0;//是否在地面上
+        private bool m_DesireJump = false;
+        private Vector3 m_Velocity;//速度
+        private Vector2 m_MoveDir;//移动方向
+        private float m_MaxSpeed;//最大速度
+        private float m_Acceleration;//加速度
+
 
         public Vector3 velocity
         {
@@ -35,11 +41,12 @@ namespace Game.Logic
         public Vector3 roleForward
         {
             get => player.role.transform.forward;
-            private set
+            set
             {
                 player.role.transform.forward = value;
             }
         }
+
 
         public override void Init(Entity ownner)
         {
@@ -57,38 +64,18 @@ namespace Game.Logic
 
         public override void FixedExcute(float dt)
         {
-        }
-
-        public void SetForward(Vector3 forward)
-        {
-            this.roleForward = forward;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="maxSpeed">最大速度</param>
-        /// <param name="acceleration">加速度</param>
-        /// <param name="dt">dt</param>
-        public void Move(float maxSpeed, float acceleration, float dt)
-        {
-            Vector3 desiredVelocity = new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y) * maxSpeed;
-            Vector3 velocity = this.velocity;
-            float maxSpeedChange = player.role.data.baseData.acceleration * dt;
-            velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
-            velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
-            // Debug.LogError(GameInputMgr.S.moveVec + "----" + m_MoveVelocity + "---" + maxSpeedChange + "----" + desiredVelocity);
-            this.velocity = velocity;
-            //去除掉Y轴速度带来的影响
-            player.role.animComponent.SetVelocityZ(this.velocity.magnitude);
+            UpdateState();
+            CheckMove();
+            CheckJump();
+            this.velocity = m_Velocity;
+            ClearState();
         }
 
         void UpdateState()
         {
-            velocity = this.velocity;
+            m_Velocity = this.velocity;
             if (onGround)
             {
-                // jumpPhase = 0;
                 if (m_GroundContactCount > 1)
                     m_ContractNormal.Normalize();
             }
@@ -104,36 +91,63 @@ namespace Game.Logic
             m_ContractNormal = Vector3.zero;
         }
 
-        void AdjustVelocity(float maxSpeed, float acceleration)
+        private void CheckMove()
         {
             Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
             Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
 
-            float currentX = Vector3.Dot(velocity, xAxis);
-            float currentz = Vector3.Dot(velocity, zAxis);
+            float currentX = Vector3.Dot(m_Velocity, xAxis);
+            float currentz = Vector3.Dot(m_Velocity, zAxis);
 
-            Vector3 desiredVelocity = new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y) * maxSpeed;
-            float maxSpeedChange = acceleration * Time.fixedDeltaTime;
-            float newX = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
-            float newZ = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+            Vector3 desiredVelocity = new Vector3(m_MoveDir.x, 0, m_MoveDir.y) * m_MaxSpeed;
+            //经过测试 如果加速度比较小的话，上坡会很慢，这里提供一个斜坡加速度支持
+            float angle = Vector3.Dot(Vector3.up, m_ContractNormal);
+            m_Acceleration *= (1 + (1 - angle) * player.role.data.baseData.clambAccelerationRate);
 
-            velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentz);
+            // Debug.LogError(angle + "--" + acceleration);
+            float maxSpeedChange = m_Acceleration * Time.fixedDeltaTime;
+
+            float newX = Mathf.MoveTowards(m_Velocity.x, desiredVelocity.x, maxSpeedChange);
+            float newZ = Mathf.MoveTowards(m_Velocity.z, desiredVelocity.z, maxSpeedChange);
+
+            m_Velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentz);
+            player.role.animComponent.SetVelocityZ(this.velocity.magnitude);
         }
+
+
 
         private Vector3 ProjectOnContactPlane(Vector3 vector)
         {
             return vector - m_ContractNormal * Vector3.Dot(vector, m_ContractNormal);
         }
 
+        private void CheckJump()
+        {
+            if (!m_DesireJump)
+                return;
+            m_DesireJump = false;
+
+            float jumpSpeed = Mathf.Sqrt(-2f * Physics.gravity.y * player.role.data.baseData.jumpHeight);
+            float alignedSpeed = Vector3.Dot(m_Velocity, m_ContractNormal);
+            if (alignedSpeed > 0f)
+            {
+                jumpSpeed = Mathf.Max(jumpSpeed - alignedSpeed, 0f);
+            }
+            // m_Velocity += m_ContractNormal * jumpSpeed;
+            m_Velocity += Vector3.up * jumpSpeed;
+        }
+
+
         public void Jump()
         {
-            Debug.LogError("Jump");
-            float jumpSpeed = Mathf.Sqrt(-2f * Physics.gravity.y * player.role.data.baseData.jumpHeight);
-            if (this.velocity.y > 0f)
-            {
-                jumpSpeed = Mathf.Max(jumpSpeed - this.velocity.y, 0f);
-            }
-            this.velocity += new Vector3(0, jumpSpeed, 0);
+            m_DesireJump = true;
+        }
+
+        public void Move(Vector2 moveDir, float speed, float acceleration)
+        {
+            m_MoveDir = moveDir;
+            m_MaxSpeed = speed;
+            m_Acceleration = acceleration;
         }
 
 

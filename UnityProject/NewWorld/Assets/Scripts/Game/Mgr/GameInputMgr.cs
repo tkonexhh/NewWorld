@@ -15,6 +15,7 @@ using GFrame;
 
 namespace Game.Logic
 {
+    [TMonoSingletonAttribute("[Game]/[Tools]/[GameInputMgr]")]
     public class GameInputMgr : TMonoSingleton<GameInputMgr>
     {
         private GameInput m_Input;

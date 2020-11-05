@@ -43,7 +43,7 @@ namespace Game.Logic
             //控制角色朝向
             if (m_VecMove.sqrMagnitude > 0.01f)
             {
-                player.controlComponent.SetForward(Vector3.Slerp(player.controlComponent.roleForward, new Vector3(m_VecMove.x, 0, m_VecMove.y), 0.5f));
+                player.controlComponent.roleForward = Vector3.Slerp(player.controlComponent.roleForward, new Vector3(m_VecMove.x, 0, m_VecMove.y), 0.5f);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -97,7 +97,7 @@ namespace Game.Logic
         public override void FixedUpdate(Player player, float dt)
         {
             float maxSpeed = player.role.data.baseData.walkSpeed;
-            player.controlComponent.Move(maxSpeed, player.role.data.baseData.acceleration, dt);
+            // player.controlComponent.Move(maxSpeed, player.role.data.baseData.acceleration, dt);
             // player.controlComponent.SetVelocity(new Vector3(m_VecMove.x * speed, player.controlComponent.velocity.y, m_VecMove.y * speed));
             // //去除掉Y轴速度带来的影响
             // player.role.animComponent.SetVelocityZ(player.controlComponent.velocity.SetY(0).sqrMagnitude);

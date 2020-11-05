@@ -37,7 +37,7 @@ namespace Game.Logic
         public override void FixedUpdate(Player player, float dt)
         {
             float maxSpeed = player.role.data.baseData.walkSpeed;//: player.role.data.baseData.walkSpeed;
-            player.controlComponent.Move(maxSpeed, player.role.data.baseData.airAcceleration, dt);
+            // player.controlComponent.Move(maxSpeed, player.role.data.baseData.airAcceleration, dt);
         }
 
         public override void Exit(Player player)
