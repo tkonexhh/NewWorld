@@ -20,6 +20,9 @@ namespace Game.Logic
         [SerializeField, Range(0, 10f)] private float jumpHeight = 2f;
         [SerializeField, Range(0, 5)] private int maxAirJumps = 0;
         [SerializeField, Range(0, 90)] private float maxGroundAngle = 25f;
+        [SerializeField, Range(0f, 100f)] private float maxSnapSpeed = 100f;//最大捕捉速度
+        [SerializeField, Min(0f)] private float maxSnapDistance = 1f;//最大捕捉距离
+        [SerializeField] LayerMask groundMask = -1;
         private Rigidbody body;
 
         private Vector3 velocity;
@@ -30,6 +33,10 @@ namespace Game.Logic
         int jumpPhase;
         float minGroundDotProduct;
         Vector3 contractNormal;
+
+
+        //S3
+        int stepsSinceLastGrounded, stepsSinceLastJump;
 
         private void Awake()
         {
@@ -45,7 +52,8 @@ namespace Game.Logic
 
         private void Update()
         {
-            GetComponent<Renderer>().material.SetColor("_BaseColor", Color.white * (groundContactCount * 0.25f));
+            // GetComponent<Renderer>().material.SetColor("_BaseColor", Color.white * (groundContactCount * 0.25f));
+            GetComponent<Renderer>().material.SetColor("_BaseColor", onGround ? Color.black : Color.white);
         }
 
         private void FixedUpdate()
@@ -64,9 +72,12 @@ namespace Game.Logic
 
         private void UpdateState()
         {
+            stepsSinceLastGrounded += 1;
+            stepsSinceLastJump += 1;
             velocity = body.velocity;
-            if (onGround)
+            if (onGround || SnapToGround())
             {
+                stepsSinceLastGrounded = 0;
                 jumpPhase = 0;
                 if (groundContactCount > 1)
                     contractNormal.Normalize();
@@ -110,6 +121,7 @@ namespace Game.Logic
             if (onGround || jumpPhase < maxAirJumps)
             {
                 Debug.LogError("Jump");
+                stepsSinceLastJump = 0;
                 jumpPhase += 1;
                 float jumpSpeed = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
                 float alignedSpeed = Vector3.Dot(velocity, contractNormal);
@@ -147,6 +159,36 @@ namespace Game.Logic
         }
 
 
+        bool SnapToGround()
+        {
+            if (stepsSinceLastGrounded > 1 || stepsSinceLastJump <= 2)
+            {
+                return false;
+            }
+            float speed = velocity.magnitude;
+            if (speed > maxSnapSpeed)
+            {
+                return false;
+            }
+
+            if (!Physics.Raycast(body.position, Vector3.down, out RaycastHit hit, maxSnapDistance, groundMask))
+            {
+                return false;
+            }
+
+            if (hit.normal.y < minGroundDotProduct)
+            {
+                return false;
+            }
+
+            groundContactCount = 1;
+            contractNormal = hit.normal;
+
+            float dot = Vector3.Dot(velocity, hit.normal);
+            if (dot > 0)
+                velocity = (velocity - hit.normal * dot).normalized * speed;
+            return true;
+        }
     }
 
 }

@@ -28,6 +28,12 @@ namespace Game.Logic
         private float m_MaxSpeed;//最大速度
         private float m_Acceleration;//加速度
 
+        //捕捉
+        //防止被很小的高度巅飞起来
+        private float m_MaxSnapSpeed = 100f;
+        private float m_MaxSnapDistance = 1;
+        LayerMask groundMask = -1;
+        int stepsSinceLastGrounded, stepsSinceLastJump;
 
         public Vector3 velocity
         {
@@ -73,9 +79,12 @@ namespace Game.Logic
 
         void UpdateState()
         {
+            stepsSinceLastGrounded += 1;
+            stepsSinceLastJump += 1;
             m_Velocity = this.velocity;
-            if (onGround)
+            if (onGround || SnapToGround())
             {
+                stepsSinceLastGrounded = 0;
                 if (m_GroundContactCount > 1)
                     m_ContractNormal.Normalize();
             }
@@ -172,6 +181,38 @@ namespace Game.Logic
                     m_ContractNormal += normal;
                 }
             }
+        }
+
+
+        bool SnapToGround()
+        {
+            if (stepsSinceLastGrounded > 1 || stepsSinceLastJump <= 2)
+            {
+                return false;
+            }
+            float speed = velocity.magnitude;
+            if (speed > m_MaxSnapSpeed)
+            {
+                return false;
+            }
+
+            if (!Physics.Raycast(player.monoReference.rigidbody.position, Vector3.down, out RaycastHit hit, m_MaxSnapDistance, groundMask))
+            {
+                return false;
+            }
+
+            if (hit.normal.y < m_MinGroundDotProduct)
+            {
+                return false;
+            }
+
+            m_GroundContactCount = 1;
+            m_ContractNormal = hit.normal;
+
+            float dot = Vector3.Dot(velocity, hit.normal);
+            if (dot > 0)
+                velocity = (velocity - hit.normal * dot).normalized * speed;
+            return true;
         }
 
     }
