@@ -17,6 +17,8 @@ namespace Game.Logic
     {
         public const int Layer_Ground = 8;
         public const int Layer_Role = 9;
+        public const int Layer_InventoryRole = 10;
+        public const int Layer_Stairs = 11;
     }
 
 }
