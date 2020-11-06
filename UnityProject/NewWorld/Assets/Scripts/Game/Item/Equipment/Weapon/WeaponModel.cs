@@ -17,23 +17,19 @@ namespace Game.Logic
     {
         [Header("武器模型")]
         public GameObject weapon;
-        [Header("武器握点")]
-        public InteractionObject handleObj;
+        public Transform rightHand;
 
-        private Vector3 m_PosOriginPos;
-        public Vector3 WeaponOriginPos
+        public Vector3 weaponOriginPos
         {
-            get
-            {
-                return m_PosOriginPos;
-            }
+            get;
+            private set;
         }
 
         public void AttachWeapon()
         {
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
-            m_PosOriginPos = weapon.transform.localPosition;
+            weaponOriginPos = weapon.transform.localPosition;
         }
     }
 

@@ -29,15 +29,6 @@ namespace Game.Logic
             m_AnimEvent.Init(this);
 
             m_EquipComponent.ApplyEquipment();
-
-            Timer.S.Post2Really(t =>
-            {
-                //test
-                var weapon = m_EquipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
-                var test = target.GetComponent<InteractionSystemTestGUI>();
-                test.interactionObject = weapon.appearance.weaponModel.handleObj;
-            }, 2.7f);
-
         }
     }
 

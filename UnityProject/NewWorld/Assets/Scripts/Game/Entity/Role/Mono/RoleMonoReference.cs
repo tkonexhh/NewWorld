@@ -19,13 +19,14 @@ namespace Game.Logic
         public LookAtIK lookAtIK;
         public Transform lookTarget;
         public FullBodyBipedIK fullBodyIK;
+        public HandPoser rightHandPoser;
+        public HandPoser leftHandPoser;
 
         public InteractionSystem interactionSystem;
 
         [Header("装备挂点")]
         public Transform handLeftAttach;
         public Transform handRightAttach;
-
 
     }
 

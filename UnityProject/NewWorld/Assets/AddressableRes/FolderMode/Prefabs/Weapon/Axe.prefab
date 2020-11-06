@@ -108,9 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 8958450467169985184}
-  handleObj: {fileID: 8515014728252548287}
-  rightHandPos: {fileID: 8324327109910840118}
-  leftHandPos: {fileID: 0}
+  rightHand: {fileID: 5527565798134049455}
 --- !u!1 &1772114420367042902
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +396,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8324327109910840118}
-  - component: {fileID: 8515014728252548287}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: Untagged
@@ -421,89 +418,6 @@ Transform:
   m_Father: {fileID: 6101137918692706590}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -11.054001, y: 0, z: 0}
---- !u!114 &8515014728252548287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5833332390975560336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41f425a4a83914b04af3f1642c000f5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  otherLookAtTarget: {fileID: 0}
-  otherTargetsRoot: {fileID: 0}
-  positionOffsetSpace: {fileID: 0}
-  weightCurves:
-  - type: 0
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: -0.39011255
-        outSlope: -0.39011255
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.73699343
-        value: 0.7124896
-        inSlope: -1.4623116
-        outSlope: -1.4623116
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1.0152588
-        value: 0.0072231293
-        inSlope: -2.5345106
-        outSlope: -2.5345106
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  - type: 1
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  multipliers:
-  - curve: 0
-    multiplier: 1
-    result: 7
-  - curve: 0
-    multiplier: 1
-    result: 10
-  events: []
 --- !u!1 &6146193151039077631
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,7 +427,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5527565798134049455}
-  - component: {fileID: 7918799054456506198}
   m_Layer: 9
   m_Name: Hand_R
   m_TagString: Untagged
@@ -538,28 +451,6 @@ Transform:
   m_Father: {fileID: 8324327109910840118}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 98.21399, y: 86.335, z: -49.563995}
---- !u!114 &7918799054456506198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6146193151039077631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c15924752853459490d29011ba18d1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectorType: 6
-  multipliers: []
-  interactionSpeedMlp: 1
-  pivot: {fileID: 8324327109910840118}
-  rotationMode: 0
-  twistAxis: {x: 0, y: 1, z: 0}
-  twistWeight: 1
-  swingWeight: 0
-  threeDOFWeight: 1
-  rotateOnce: 1
 --- !u!1 &6903299303077446202
 GameObject:
   m_ObjectHideFlags: 0

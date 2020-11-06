@@ -17,14 +17,10 @@ namespace Game.Logic
     public class PlayerRelaxFSMState_Move : FSMState<Player>
     {
         private Player m_Player;
-        private bool m_Runing = false;
 
         public override void Enter(Player player, params object[] args)
         {
             m_Player = player;
-            // GameInputMgr.S.mainAction.Jump.performed += OnJumpPerformed;
-            // GameInputMgr.S.mainAction.Run.performed += OnRunPerformed;
-            // GameInputMgr.S.mainAction.Run.canceled += OnRunCancled;
             player.role.animComponent.SetMoving(true);
         }
 
@@ -61,30 +57,12 @@ namespace Game.Logic
             {
                 player.controlComponent.roleForward = Vector3.Slerp(player.controlComponent.roleForward, new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y), 0.5f);
             }
-
+            player.role.animComponent.SetVelocityZ(player.controlComponent.velocity.magnitude);
         }
 
         public override void Exit(Player player)
         {
-            // GameInputMgr.S.mainAction.Jump.performed -= OnJumpPerformed;
-            // GameInputMgr.S.mainAction.Run.performed -= OnRunPerformed;
-            // GameInputMgr.S.mainAction.Run.canceled -= OnRunCancled;
             player.role.animComponent.SetMoving(false);
-        }
-
-        public override void OnMsg(Player player, int key, params object[] args)
-        {
-
-        }
-
-        private void OnRunPerformed(InputAction.CallbackContext callback)
-        {
-            m_Runing = true;
-        }
-
-        private void OnRunCancled(InputAction.CallbackContext callback)
-        {
-            m_Runing = false;
         }
     }
 

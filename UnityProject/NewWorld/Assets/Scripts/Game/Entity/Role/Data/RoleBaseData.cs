@@ -15,7 +15,7 @@ namespace Game.Logic
 {
     public class RoleBaseData
     {
-        public readonly float walkSpeed = 1.2f;//移动最大速度
+        public readonly float walkSpeed = 1.4f;//移动最大速度
         public readonly float runSpeed = 1.2f * 2.5f;
         public readonly float acceleration = 7;//移动最大加速度//不能小于5
         public readonly float clambAccelerationRate = 5;//爬坡提供更高的加速度 的倍率

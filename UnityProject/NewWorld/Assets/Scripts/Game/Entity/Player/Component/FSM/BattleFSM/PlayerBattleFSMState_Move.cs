@@ -21,30 +21,20 @@ namespace Game.Logic
     }
     public class PlayerBattleFSMState_Move : FSMState<Player>
     {
-        // private Role_Player player;
         private Player m_Player;
-        private Vector2 m_InputMove = Vector2.zero;
-        private Vector2 m_VecMove = Vector2.zero;
-        private Vector2 m_VelMoveVelocity;
+
 
         public override void Enter(Player player, params object[] args)
         {
             m_Player = player;
-            GameInputMgr.S.mainAction.Move.performed += OnMovePerformed;
-            GameInputMgr.S.mainAction.Move.canceled += OnMoveCancled;
-
+            player.role.animComponent.SetMoving(true);
         }
 
         public override void Update(Player player, float dt)
         {
             if (player.role.animComponent == null)
                 return;
-            m_VecMove = Vector2.SmoothDamp(m_VecMove, m_InputMove, ref m_VelMoveVelocity, dt);
-            //控制角色朝向
-            if (m_VecMove.sqrMagnitude > 0.01f)
-            {
-                player.controlComponent.roleForward = Vector3.Slerp(player.controlComponent.roleForward, new Vector3(m_VecMove.x, 0, m_VecMove.y), 0.5f);
-            }
+
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
@@ -56,7 +46,7 @@ namespace Game.Logic
                 (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Blocking);
             }
 
-            if (m_InputMove.sqrMagnitude < 0.1f)
+            if (GameInputMgr.S.moveVec.sqrMagnitude < 0.1f)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -96,34 +86,17 @@ namespace Game.Logic
 
         public override void FixedUpdate(Player player, float dt)
         {
-            float maxSpeed = player.role.data.baseData.walkSpeed;
-            // player.controlComponent.Move(maxSpeed, player.role.data.baseData.acceleration, dt);
-            // player.controlComponent.SetVelocity(new Vector3(m_VecMove.x * speed, player.controlComponent.velocity.y, m_VecMove.y * speed));
-            // //去除掉Y轴速度带来的影响
-            // player.role.animComponent.SetVelocityZ(player.controlComponent.velocity.SetY(0).sqrMagnitude);
+            // 控制角色朝向
+            if (GameInputMgr.S.moveVec.sqrMagnitude > 0.01f)
+            {
+                player.controlComponent.roleForward = Vector3.Slerp(player.controlComponent.roleForward, new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y), 0.5f);
+            }
+            player.role.animComponent.SetVelocityZ(player.controlComponent.velocity.magnitude);
         }
 
-        public override void Exit(Player role)
+        public override void Exit(Player player)
         {
-            GameInputMgr.S.mainAction.Move.performed -= OnMovePerformed;
-            GameInputMgr.S.mainAction.Move.canceled -= OnMoveCancled;
-        }
-
-        public override void OnMsg(Player entity, int key, params object[] args)
-        {
-
-        }
-
-        private void OnMovePerformed(InputAction.CallbackContext callback)
-        {
-            m_InputMove = callback.ReadValue<Vector2>();
-            m_Player.role.animComponent.SetMoving(true);
-        }
-
-        private void OnMoveCancled(InputAction.CallbackContext callback)
-        {
-            m_InputMove = Vector2.zero;
-            m_Player.role.animComponent.SetMoving(false);
+            player.role.animComponent.SetMoving(false);
         }
 
         private void GetHurt()

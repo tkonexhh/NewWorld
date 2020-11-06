@@ -38,7 +38,7 @@ namespace Game.Logic
         public override void Excute(float dt)
         {
             m_LookAtIK.Excute(dt);
-            m_RightHandIK.Excute(dt);
+            // m_RightHandIK.Excute(dt);
         }
 
     }
@@ -100,12 +100,11 @@ namespace Game.Logic
     public class RoleIK_RightHand : RoleIKBase
     {
         private Transform m_Target;
-        private IKEffector m_RightHandEffector;
+        private IKEffector rightHand => role.monoReference.fullBodyIK.solver.rightHandEffector;
 
         public override void Init(Role role)
         {
             base.Init(role);
-            m_RightHandEffector = role.monoReference.fullBodyIK.solver.rightHandEffector;
         }
 
         public void SetFocusTarget(Transform target)
@@ -116,14 +115,22 @@ namespace Game.Logic
         public override void Excute(float dt)
         {
             float targetWeight = m_Target == null ? -1 : 1;
-            m_RightHandEffector.positionWeight = Mathf.Clamp01(m_RightHandEffector.positionWeight + targetWeight * dt * 4.5f );
+            rightHand.positionWeight = Mathf.Clamp01(rightHand.positionWeight + targetWeight * dt * 4.5f);
             // m_RightHandEffector.rotationWeight = Mathf.Clamp01(m_RightHandEffector.rotationWeight + targetWeight * dt * 5.5f) * 0.5f;
 
             if (m_Target != null)
             {
-                m_RightHandEffector.target.position = Vector3.Slerp(m_RightHandEffector.target.position, m_Target.position, dt * 20.0f );
+                rightHand.target.position = Vector3.Slerp(rightHand.target.position, m_Target.position, dt * 20.0f);
                 // m_RightHandEffector.target.rotation = Quaternion.Slerp(m_RightHandEffector.target.rotation, m_Target.rotation, dt * 20.0f);
             }
+        }
+    }
+
+    public class RoleIK_LeftHand : RoleIKBase
+    {
+        private IKEffector leftHand => role.monoReference.fullBodyIK.solver.leftHandEffector;
+        public override void Excute(float dt)
+        {
         }
     }
 }

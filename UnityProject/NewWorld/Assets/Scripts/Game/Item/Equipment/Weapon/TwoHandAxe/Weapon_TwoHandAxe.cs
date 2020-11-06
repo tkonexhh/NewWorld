@@ -23,29 +23,19 @@ namespace Game.Logic
             // m_Appearance = new EquipmentAppearance_Weapon_TwoHandAxe((int)EquipmentConf.Appearance);
         }
 
-        public override void UnSheath()
-        {
-            var weaponHand = appearance.weaponModel.handleObj.gameObject;//..rightHandPos;
-        }
-
-        public override void Sheath()
-        {
-
-        }
-
         public override void AttachToHand(Transform hand)
         {
-            var dis = appearance.weaponModel.handleObj.transform.localPosition;
-            appearance.weaponModel.weapon.transform.SetParent(hand, false);
-            appearance.weaponModel.weapon.transform.localPosition = dis - appearance.weaponModel.WeaponOriginPos;
-            appearance.weaponModel.weapon.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            // var dis = appearance.weaponModel.rightHand.transform.localPosition;
+            // appearance.weaponModel.weapon.transform.SetParent(hand, false);
+            // appearance.weaponModel.weapon.transform.localPosition = dis - appearance.weaponModel.weaponOriginPos;
+            // appearance.weaponModel.weapon.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
 
         public override void AttachToOrigin()
         {
             var model = appearance.weaponModel;
             model.weapon.transform.SetParent(model.transform);
-            model.weapon.transform.localPosition = model.WeaponOriginPos;
+            model.weapon.transform.localPosition = model.weaponOriginPos;
             model.weapon.transform.localRotation = Quaternion.identity;
         }
     }

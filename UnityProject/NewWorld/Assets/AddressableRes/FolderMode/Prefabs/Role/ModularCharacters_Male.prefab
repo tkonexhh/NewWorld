@@ -780,11 +780,11 @@ MonoBehaviour:
       axis: {x: 0, y: -0.08045107, z: 0.9967586}
       baseForwardOffsetEuler: {x: 0, y: 0, z: 0}
     eyes: []
-    bodyWeight: 0.1
-    headWeight: 0.9
+    bodyWeight: 0.5
+    headWeight: 1
     eyesWeight: 1
     clampWeight: 0.5
-    clampWeightHead: 0.5
+    clampWeightHead: 0.7
     clampWeightEyes: 0.5
     clampSmoothing: 2
     spineWeightCurve:
@@ -5998,8 +5998,6 @@ GameObject:
   - component: {fileID: 194169991}
   - component: {fileID: 7712420835987196628}
   - component: {fileID: 5486523673626845757}
-  - component: {fileID: 1950830234902888165}
-  - component: {fileID: 3696655740486385774}
   m_Layer: 9
   m_Name: ModularCharacters_Male
   m_TagString: Untagged
@@ -6254,7 +6252,9 @@ MonoBehaviour:
   lookAtIK: {fileID: 1994951727415176959}
   lookTarget: {fileID: 0}
   fullBodyIK: {fileID: 5486523673626845757}
-  interactionSystem: {fileID: 1950830234902888165}
+  rightHandPoser: {fileID: 9144361023627162611}
+  leftHandPoser: {fileID: 7957133762742990142}
+  interactionSystem: {fileID: 0}
   handLeftAttach: {fileID: 0}
   handRightAttach: {fileID: 7687292295139696810}
 --- !u!114 &5486523673626845757
@@ -6437,10 +6437,10 @@ MonoBehaviour:
         bone1: {fileID: 0}
         bone2: {fileID: 0}
         bone3: {fileID: 0}
-        bendGoal: {fileID: 0}
+        bendGoal: {fileID: 7666273751970905520}
         direction: {x: 1, y: 0, z: 0}
         rotationOffset: {x: 0, y: 0, z: 0, w: 0}
-        weight: 0
+        weight: 0.4
         defaultLocalDirection: {x: 0, y: 0, z: 0}
         defaultChildDirection: {x: 0, y: 0, z: 0}
     - pin: 0
@@ -6631,7 +6631,7 @@ MonoBehaviour:
       planeBone3: {fileID: 7666273751970905208}
       planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
     - bone: {fileID: 7666273751970905512}
-      target: {fileID: 8021611452446615005}
+      target: {fileID: 0}
       positionWeight: 0
       rotationWeight: 0
       position: {x: 0, y: 0, z: 0}
@@ -6716,48 +6716,6 @@ MonoBehaviour:
     spineStiffness: 0.5
     pullBodyVertical: 0.5
     pullBodyHorizontal: 0
---- !u!114 &1950830234902888165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7666273751971387156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 537b81dc57e504256a6c74c4bcf6bca9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetTag: 
-  fadeInTime: 0.3
-  speed: 1
-  resetToDefaultsSpeed: 1
-  characterCollider: {fileID: 0}
-  FPSCamera: {fileID: 0}
-  camRaycastLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  camRaycastDistance: 1
-  fullBody: {fileID: 5486523673626845757}
-  lookAt:
-    ik: {fileID: 0}
-    lerpSpeed: 5
-    weightSpeed: 1
-    isPaused: 0
---- !u!114 &3696655740486385774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7666273751971387156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cc0304f5a703416ebff81ad105ddf18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionObject: {fileID: 0}
-  effectors: 06000000
 --- !u!1 &7666273751971387168
 GameObject:
   m_ObjectHideFlags: 0
