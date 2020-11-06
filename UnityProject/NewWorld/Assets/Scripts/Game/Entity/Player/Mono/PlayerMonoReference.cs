@@ -16,6 +16,7 @@ namespace Game.Logic
     public class PlayerMonoReference : MonoBehaviour
     {
         public Rigidbody rigidbody;
+        public CapsuleCollider rigidbodyCollider;
 
         public Run<Collision> onCollisionEnter;
         public Run<Collision> onCollisionExit;

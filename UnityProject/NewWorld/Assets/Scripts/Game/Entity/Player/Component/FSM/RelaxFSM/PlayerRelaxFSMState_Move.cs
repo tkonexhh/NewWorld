@@ -18,14 +18,13 @@ namespace Game.Logic
     {
         private Player m_Player;
         private bool m_Runing = false;
-        private Vector3 m_MoveVelocity;
 
         public override void Enter(Player player, params object[] args)
         {
             m_Player = player;
-            GameInputMgr.S.mainAction.Jump.performed += OnJumpPerformed;
-            GameInputMgr.S.mainAction.Run.performed += OnRunPerformed;
-            GameInputMgr.S.mainAction.Run.canceled += OnRunCancled;
+            // GameInputMgr.S.mainAction.Jump.performed += OnJumpPerformed;
+            // GameInputMgr.S.mainAction.Run.performed += OnRunPerformed;
+            // GameInputMgr.S.mainAction.Run.canceled += OnRunCancled;
             player.role.animComponent.SetMoving(true);
         }
 
@@ -63,15 +62,13 @@ namespace Game.Logic
                 player.controlComponent.roleForward = Vector3.Slerp(player.controlComponent.roleForward, new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y), 0.5f);
             }
 
-            float maxSpeed = m_Runing ? player.role.data.baseData.runSpeed : player.role.data.baseData.walkSpeed;
-            player.controlComponent.Move(GameInputMgr.S.moveVec, maxSpeed, player.role.data.baseData.acceleration);
         }
 
         public override void Exit(Player player)
         {
-            GameInputMgr.S.mainAction.Jump.performed -= OnJumpPerformed;
-            GameInputMgr.S.mainAction.Run.performed -= OnRunPerformed;
-            GameInputMgr.S.mainAction.Run.canceled -= OnRunCancled;
+            // GameInputMgr.S.mainAction.Jump.performed -= OnJumpPerformed;
+            // GameInputMgr.S.mainAction.Run.performed -= OnRunPerformed;
+            // GameInputMgr.S.mainAction.Run.canceled -= OnRunCancled;
             player.role.animComponent.SetMoving(false);
         }
 
@@ -88,13 +85,6 @@ namespace Game.Logic
         private void OnRunCancled(InputAction.CallbackContext callback)
         {
             m_Runing = false;
-        }
-
-        private void OnJumpPerformed(InputAction.CallbackContext callback)
-        {
-            //TODO 点击条约进入Air状态 但是air状态还在地面上
-            m_Player.controlComponent.Jump();
-            // (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Air);
         }
     }
 

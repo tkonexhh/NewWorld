@@ -5998,7 +5998,6 @@ GameObject:
   - component: {fileID: 194169991}
   - component: {fileID: 7712420835987196628}
   - component: {fileID: 5486523673626845757}
-  - component: {fileID: 8142061802533764398}
   - component: {fileID: 1950830234902888165}
   - component: {fileID: 3696655740486385774}
   m_Layer: 9
@@ -6717,44 +6716,6 @@ MonoBehaviour:
     spineStiffness: 0.5
     pullBodyVertical: 0.5
     pullBodyHorizontal: 0
---- !u!114 &8142061802533764398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7666273751971387156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c72e1df647af4c0098866e944a04b01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weight: 1
-  solver:
-    layers:
-      serializedVersion: 2
-      m_Bits: 256
-    maxStep: 0.5
-    heightOffset: 0
-    footSpeed: 2.5
-    footRadius: 0.15
-    footCenterOffset: 0
-    prediction: 0.05
-    footRotationWeight: 1
-    footRotationSpeed: 7
-    maxFootRotationAngle: 45
-    rotateSolver: 0
-    pelvisSpeed: 5
-    pelvisDamper: 0
-    lowerPelvisWeight: 1
-    liftPelvisWeight: 0
-    rootSphereCastRadius: 0.1
-    overstepFallsDown: 1
-    quality: 2
-  ik: {fileID: 5486523673626845757}
-  spineBend: 2
-  spineSpeed: 3
-  spine: []
 --- !u!114 &1950830234902888165
 MonoBehaviour:
   m_ObjectHideFlags: 0

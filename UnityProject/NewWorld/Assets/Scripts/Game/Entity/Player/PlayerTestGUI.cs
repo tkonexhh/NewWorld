@@ -35,7 +35,7 @@ namespace Game.Logic
             }
 
             if (m_Rigidbody)
-                Gizmos.DrawWireSphere(transform.position + 2.5f * m_Rigidbody.velocity.normalized, 0.1f);
+                Gizmos.DrawWireSphere(transform.position + m_Rigidbody.velocity, 0.1f);
         }
     }
 

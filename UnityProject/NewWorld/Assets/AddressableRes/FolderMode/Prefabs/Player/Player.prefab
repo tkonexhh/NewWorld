@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 66715247983251937}
+  rigidbodyCollider: {fileID: 1890747099158675861}
 --- !u!96 &6858813156087305787
 TrailRenderer:
   serializedVersion: 2

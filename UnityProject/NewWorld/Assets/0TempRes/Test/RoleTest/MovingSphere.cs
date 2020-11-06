@@ -19,10 +19,10 @@ namespace Game.Logic
         [SerializeField, Range(0, 100f)] private float maxAcceleration = 10f, maxAirAcceleration = 1f;
         [SerializeField, Range(0, 10f)] private float jumpHeight = 2f;
         [SerializeField, Range(0, 5)] private int maxAirJumps = 0;
-        [SerializeField, Range(0, 90)] private float maxGroundAngle = 25f;
+        [SerializeField, Range(0, 90)] private float maxGroundAngle = 25f, maxStairAngle = 50f;
         [SerializeField, Range(0f, 100f)] private float maxSnapSpeed = 100f;//最大捕捉速度
         [SerializeField, Min(0f)] private float maxSnapDistance = 1f;//最大捕捉距离
-        [SerializeField] LayerMask groundMask = -1;
+        [SerializeField] LayerMask groundMask = -1, stairsMask = -1;
         private Rigidbody body;
 
         private Vector3 velocity;
@@ -31,8 +31,13 @@ namespace Game.Logic
         bool onGround => groundContactCount > 0;
         int groundContactCount;
         int jumpPhase;
-        float minGroundDotProduct;
+        float minGroundDotProduct, minStairsDotProduct;
         Vector3 contractNormal;
+
+        //Steep
+        Vector3 steepNormal;
+        int steepContactCount;
+        bool OnSteep => steepContactCount > 0;
 
 
         //S3
@@ -41,6 +46,7 @@ namespace Game.Logic
         private void Awake()
         {
             minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
+            minStairsDotProduct = Mathf.Cos(maxStairAngle * Mathf.Deg2Rad);
             body = GetComponent<Rigidbody>();
             GameInputMgr.S.mainAction.Jump.performed += OnJumpPerformed;
         }
@@ -75,10 +81,13 @@ namespace Game.Logic
             stepsSinceLastGrounded += 1;
             stepsSinceLastJump += 1;
             velocity = body.velocity;
-            if (onGround || SnapToGround())
+            if (onGround || SnapToGround() || CheckSteepContacts())
             {
                 stepsSinceLastGrounded = 0;
-                jumpPhase = 0;
+                if (stepsSinceLastJump > 1)
+                {
+                    jumpPhase = 0;
+                }
                 if (groundContactCount > 1)
                     contractNormal.Normalize();
             }
@@ -92,6 +101,9 @@ namespace Game.Logic
         {
             groundContactCount = 0;
             contractNormal = Vector3.zero;
+
+            steepContactCount = 0;
+            steepNormal = Vector3.zero;
         }
 
         private Vector3 ProjectOnContactPlane(Vector3 vector)
@@ -118,18 +130,41 @@ namespace Game.Logic
 
         void Jump()
         {
-            if (onGround || jumpPhase < maxAirJumps)
+            Vector3 jumpDirection;
+            if (onGround)
+            {
+                jumpDirection = contractNormal;
+            }
+            else if (OnSteep)
+            {
+                jumpDirection = steepNormal;
+                jumpPhase = 0;
+            }
+            else if (maxAirJumps > 0 && jumpPhase <= maxAirJumps)
+            {
+                if (jumpPhase == 0)
+                {
+                    jumpPhase = 1;
+                }
+                jumpDirection = contractNormal;
+            }
+            else
+            {
+                return;
+            }
+
+            // if (onGround || jumpPhase < maxAirJumps)
             {
                 Debug.LogError("Jump");
                 stepsSinceLastJump = 0;
                 jumpPhase += 1;
                 float jumpSpeed = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
-                float alignedSpeed = Vector3.Dot(velocity, contractNormal);
+                float alignedSpeed = Vector3.Dot(velocity, jumpDirection);
                 if (alignedSpeed > 0f)
                 {
                     jumpSpeed = Mathf.Max(jumpSpeed - alignedSpeed, 0f);
                 }
-                velocity += contractNormal * jumpSpeed;
+                velocity += jumpDirection * jumpSpeed;
             }
         }
 
@@ -147,13 +182,19 @@ namespace Game.Logic
 
         private void EvaluateCollision(Collision collision)
         {
+            float minDot = GetMinDot(collision.gameObject.layer);
             for (int i = 0; i < collision.contactCount; i++)
             {
                 Vector3 normal = collision.GetContact(i).normal;
-                if (normal.y >= minGroundDotProduct)
+                if (normal.y >= minDot)
                 {
                     groundContactCount += 1;
                     contractNormal += normal;
+                }
+                else if (normal.y > -0.01f)
+                {
+                    steepContactCount += 1;
+                    steepNormal += normal;
                 }
             }
         }
@@ -176,7 +217,7 @@ namespace Game.Logic
                 return false;
             }
 
-            if (hit.normal.y < minGroundDotProduct)
+            if (hit.normal.y < GetMinDot(hit.collider.gameObject.layer))
             {
                 return false;
             }
@@ -188,6 +229,27 @@ namespace Game.Logic
             if (dot > 0)
                 velocity = (velocity - hit.normal * dot).normalized * speed;
             return true;
+        }
+
+        float GetMinDot(int layer)
+        {
+            return (stairsMask & (1 << layer)) == 0 ? minGroundDotProduct : minStairsDotProduct;
+        }
+
+        bool CheckSteepContacts()
+        {
+            if (steepContactCount > 1)
+            {
+                steepNormal.Normalize();
+                if (steepNormal.y >= minGroundDotProduct)
+                {
+                    groundContactCount = 1;
+                    contractNormal = steepNormal;
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 

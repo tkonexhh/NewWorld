@@ -69,7 +69,7 @@ namespace GFrame
 
             if (m_GlobalState != null)
             {
-                m_GlobalState.Enter(m_Entity, args);
+                m_GlobalState.DoEnter(m_Entity, args);
             }
 
             //#if UNITY_EDITOR
@@ -156,7 +156,7 @@ namespace GFrame
 
             if (m_CurrentState != null)
             {
-                m_CurrentState.Enter(m_Entity, args);
+                m_CurrentState.DoEnter(m_Entity, args);
             }
 
             //#if UNITY_EDITOR
