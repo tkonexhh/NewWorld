@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GFrame;
+using DG.Tweening;
 
 
 namespace Game.Logic
@@ -28,12 +29,38 @@ namespace Game.Logic
 
         [SerializeField] private Button m_BtnCreate;
 
+
+        [SerializeField] private Image m_ImgSelected;
+        [SerializeField] private Toggle[] m_Toggles;
+
         private Sex m_CurrentSex = Sex.Male;
 
         protected override void OnUIInit()
         {
             m_BtnCreate.onClick.AddListener(OnClickCreate);
             RefeshSex();
+
+            m_ImgSelected.rectTransform.sizeDelta = m_Toggles[0].rectTransform().sizeDelta;
+            m_ImgSelected.transform.localPosition = m_Toggles[0].transform.localPosition;
+            for (int i = 0; i < m_Toggles.Length; i++)
+            {
+                int index = i;
+                m_Toggles[i].onValueChanged.AddListener((isOn) =>
+                {
+                    if (isOn)
+                    {
+                        SelectPage(index);
+                    }
+                });
+            }
+            SelectPage(0);
+        }
+
+        private void SelectPage(int index)
+        {
+            m_Toggles[index].Select();
+            m_ImgSelected.transform.DOKill();
+            m_ImgSelected.transform.DOLocalMoveX(m_Toggles[index].transform.localPosition.x, 0.2f);
         }
 
         private void RefeshSex()

@@ -107,30 +107,22 @@ namespace Game.Logic
             m_FSM.SetCurrentStateByID(state);
         }
 
+        /// <summary>
+        /// 伸手拿武器
+        /// </summary>
         private void WeaponUnSheath()
         {
-            //伸手抓武器
             var weapon = m_Player.role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
-            var weaponModel = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe);
-            var rightHand = m_Player.role.monoReference.fullBodyIK.solver.rightHandEffector;
-            rightHand.position = weaponModel.rightHand.position;
-            rightHand.rotation = weaponModel.rightHand.rotation;
-            rightHand.positionWeight = 1;
-            rightHand.rotationWeight = 1;
-            m_Player.role.monoReference.rightHandPoser.poseRoot = weaponModel.rightHand;
-            // var weaponHand = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe).handleObj;
-            // m_Player.role.iKComponent.rightHandIK.SetFocusTarget(weaponHand.transform);
-
-            // player.monoReference.interactionSystem.StartInteraction(RootMotion.FinalIK.FullBodyBipedEffector.RightHand, weapon.appearance.weaponModel.handleObj, true);
+            weapon.UnSheath(m_Player.role);
         }
 
+        /// <summary>
+        /// 把武器放回去
+        /// </summary>
         private void WeaponSheath()
         {
-            // var weapon = m_Player.role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
-            // var model = (weapon.appearance.weaponModel as WeaponModel_TwoHandAxe);
-            // m_Player.role.iKComponent.rightHandIK.SetFocusTarget(model.handleObj.transform);
-
-            // player.monoReference.interactionSystem.StartInteraction(RootMotion.FinalIK.FullBodyBipedEffector.RightHand, weapon.appearance.weaponModel.handleObj, true);
+            var weapon = m_Player.role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
+            weapon.Sheath(m_Player.role);
         }
 
     }

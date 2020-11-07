@@ -9,7 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 
 namespace Game.Logic
 {
@@ -25,10 +25,14 @@ namespace Game.Logic
 
         public override void AttachToHand(Transform hand)
         {
-            // var dis = appearance.weaponModel.rightHand.transform.localPosition;
-            // appearance.weaponModel.weapon.transform.SetParent(hand, false);
-            // appearance.weaponModel.weapon.transform.localPosition = dis - appearance.weaponModel.weaponOriginPos;
-            // appearance.weaponModel.weapon.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            float localScale = appearance.weaponModel.rightHand.transform.localScale.x;
+            Debug.LogError(localScale);
+
+            Vector3 pos = hand.InverseTransformPoint(appearance.weaponModel.rightHand.transform.localPosition);
+            Vector3 rot = hand.InverseTransformVector(appearance.weaponModel.rightHand.transform.localPosition);
+            appearance.weaponModel.weapon.transform.SetParent(hand);
+            appearance.weaponModel.weapon.transform.localPosition = pos / 100;
+            appearance.weaponModel.weapon.transform.localRotation = Quaternion.Euler(rot / 100);
         }
 
         public override void AttachToOrigin()
@@ -38,6 +42,20 @@ namespace Game.Logic
             model.weapon.transform.localPosition = model.weaponOriginPos;
             model.weapon.transform.localRotation = Quaternion.identity;
         }
+
+        public override void UnSheath(Role role)
+        {
+            role.iKComponent.rightHandIK.SetFocusTarget(appearance.weaponModel.rightHand);
+            role.iKComponent.rightHandIK.SetHandPoser(appearance.weaponModel.rightHand);
+        }
+
+        public override void Sheath(Role role)
+        {
+            role.iKComponent.rightHandIK.SetFocusTarget(null);
+            role.iKComponent.rightHandIK.SetHandPoser(null);
+        }
+
+
     }
 
 }

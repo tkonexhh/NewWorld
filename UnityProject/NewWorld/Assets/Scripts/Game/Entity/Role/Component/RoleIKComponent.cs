@@ -38,7 +38,7 @@ namespace Game.Logic
         public override void Excute(float dt)
         {
             m_LookAtIK.Excute(dt);
-            // m_RightHandIK.Excute(dt);
+            m_RightHandIK.Excute(dt);
         }
 
     }
@@ -101,10 +101,14 @@ namespace Game.Logic
     {
         private Transform m_Target;
         private IKEffector rightHand => role.monoReference.fullBodyIK.solver.rightHandEffector;
+        private HandPoser handPoser => role.monoReference.rightHandPoser;
 
         public override void Init(Role role)
         {
             base.Init(role);
+            rightHand.positionWeight = 0;
+            rightHand.rotationWeight = 0;
+            handPoser.weight = 0;
         }
 
         public void SetFocusTarget(Transform target)
@@ -112,17 +116,23 @@ namespace Game.Logic
             m_Target = target;
         }
 
+        public void SetHandPoser(Transform hand)
+        {
+            handPoser.poseRoot = hand;
+        }
+
         public override void Excute(float dt)
         {
-            float targetWeight = m_Target == null ? -1 : 1;
-            rightHand.positionWeight = Mathf.Clamp01(rightHand.positionWeight + targetWeight * dt * 4.5f);
-            // m_RightHandEffector.rotationWeight = Mathf.Clamp01(m_RightHandEffector.rotationWeight + targetWeight * dt * 5.5f) * 0.5f;
-
             if (m_Target != null)
             {
-                rightHand.target.position = Vector3.Slerp(rightHand.target.position, m_Target.position, dt * 20.0f);
-                // m_RightHandEffector.target.rotation = Quaternion.Slerp(m_RightHandEffector.target.rotation, m_Target.rotation, dt * 20.0f);
+                rightHand.position = m_Target.transform.position;
+                rightHand.rotation = m_Target.transform.rotation;
             }
+
+            float targetWeight = m_Target == null ? -1 : 1;
+
+            rightHand.positionWeight = Mathf.Clamp01(rightHand.positionWeight + targetWeight * dt * 4.5f);
+            handPoser.weight = rightHand.positionWeight;
         }
     }
 

@@ -24,12 +24,12 @@ namespace Game.Logic
 
         }
 
-        public virtual void UnSheath()
+        public virtual void UnSheath(Role role)
         {
 
         }
 
-        public virtual void Sheath()
+        public virtual void Sheath(Role role)
         {
 
         }
