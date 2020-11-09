@@ -68,7 +68,7 @@ namespace GFrame
             m_PoolMap.Clear();
         }
 
-        public GameObject GetObject(string poolName)
+        public GameObject Allocate(string poolName)
         {
             GameObjectPool cell = null;
             if (!m_PoolMap.TryGetValue(poolName, out cell))
@@ -77,7 +77,7 @@ namespace GFrame
                 return null;
             }
 
-            return cell.GetObject();
+            return cell.Allocate();
         }
 
         public void Recycle(string poolName, GameObject obj)

@@ -15,7 +15,7 @@ namespace GFrame
 {
 
 
-    public class AbstractPage : MonoBehaviour
+    public abstract class AbstractPage : MonoBehaviour
     {
 
         protected int m_PanelID = -1;

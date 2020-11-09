@@ -15,9 +15,12 @@ namespace Game.Logic
 {
     public class WeaponModel_TwoHandAxe : WeaponModel
     {
-        // public Transform rightHandPos;
-        // public Transform leftHandPos;
+        public Collider hitCollider;
 
+        public override void Init()
+        {
+            hitCollider.gameObject.SetActive(false);
+        }
 
         private void OnDrawGizmos()
         {

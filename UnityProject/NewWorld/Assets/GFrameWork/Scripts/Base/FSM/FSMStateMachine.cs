@@ -145,11 +145,11 @@ namespace GFrame
             {
                 if (m_PreviousState == null)
                 {
-                    Log.i("State:{0}", m_CurrentState.stateName);
+                    Log.i("{0} State:{1}", m_Entity, m_CurrentState.stateName);
                 }
                 else
                 {
-                    Log.i("State:{0}->{1}", m_PreviousState.stateName, m_CurrentState.stateName);
+                    Log.i("{0} State:{1}->{2}", m_Entity, m_PreviousState.stateName, m_CurrentState.stateName);
                 }
             }
 #endif

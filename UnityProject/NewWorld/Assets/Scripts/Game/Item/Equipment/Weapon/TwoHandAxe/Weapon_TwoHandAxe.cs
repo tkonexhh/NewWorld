@@ -1,3 +1,4 @@
+using System.Linq;
 /************************
 	FileName:/Scripts/Game/Item/Equipment/Weapon/TwoHandAxe/Equipment_Weapon_TwoHandAxe.cs
 	CreateAuthor:neo.xu
@@ -17,6 +18,8 @@ namespace Game.Logic
     {
         public override WeaponType weaponType => WeaponType.TwoHandAxe;
 
+        public WeaponModel_TwoHandAxe weaponModel => appearance.weaponModel as WeaponModel_TwoHandAxe;
+
         public Weapon_TwoHandAxe(long id) : base(id)
         {
             m_Appearance = new WeaponAppearance_TwoHandAxe(0);
@@ -26,7 +29,6 @@ namespace Game.Logic
         public override void AttachToHand(Transform hand)
         {
             float localScale = appearance.weaponModel.rightHand.transform.localScale.x;
-            Debug.LogError(localScale);
 
             Vector3 pos = hand.InverseTransformPoint(appearance.weaponModel.rightHand.transform.localPosition);
             Vector3 rot = hand.InverseTransformVector(appearance.weaponModel.rightHand.transform.localPosition);
@@ -53,6 +55,16 @@ namespace Game.Logic
         {
             role.iKComponent.rightHandIK.SetFocusTarget(null);
             role.iKComponent.rightHandIK.SetHandPoser(null);
+        }
+
+        public override void Hit()
+        {
+            var hitCollider = weaponModel.hitCollider;
+            hitCollider.gameObject.SetActive(true);
+            var hits = Physics.OverlapBox(hitCollider.transform.position, weaponModel.hitCollider.bounds.size, hitCollider.transform.rotation);
+            Debug.LogError(hits.Length);
+
+            hitCollider.gameObject.SetActive(false);
         }
 
 

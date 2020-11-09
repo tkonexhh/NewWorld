@@ -69,8 +69,12 @@ namespace Game.Logic
         private void Update()
         {
             moveInput = mainAction.Move.ReadValue<Vector2>();
-            // moveVec = Vector2.Lerp(moveVec, moveInput, moveSensitivity * Time.deltaTime);
             moveVec = Vector2.SmoothDamp(moveVec, moveInput, ref m_VelMoveInput, moveSensitivity * Time.deltaTime);
+        }
+
+        public void ClearMove()
+        {
+
         }
     }
 

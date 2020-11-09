@@ -27,7 +27,8 @@ namespace Game.Logic
         public override void Enter(Player player, params object[] args)
         {
             m_Player = player;
-            player.role.animComponent.SetMoving(true);
+            GameInputMgr.S.mainAction.AttackL.performed += OnAttackLPerformed;
+            GameInputMgr.S.mainAction.AttackR.performed += OnAttackRPerformed;
         }
 
         public override void Update(Player player, float dt)
@@ -35,7 +36,7 @@ namespace Game.Logic
             if (player.role.animComponent == null)
                 return;
 
-
+            player.role.animComponent.SetMoving(GameInputMgr.S.moveVec.sqrMagnitude > 0.1f);
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 GetHurt();
@@ -46,22 +47,6 @@ namespace Game.Logic
                 (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Blocking);
             }
 
-            if (GameInputMgr.S.moveVec.sqrMagnitude < 0.1f)
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    player.role.animComponent.SetLeftRight(1);
-                    player.role.animComponent.SetAction(Random.Range(1, 4));
-                    player.role.animComponent.SetAttackTrigger();
-                }
-
-                if (Input.GetMouseButtonDown(1))
-                {
-                    player.role.animComponent.SetLeftRight(2);
-                    player.role.animComponent.SetAction(Random.Range(1, 4));
-                    player.role.animComponent.SetAttackTrigger();
-                }
-            }
 
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
@@ -96,7 +81,8 @@ namespace Game.Logic
 
         public override void Exit(Player player)
         {
-            player.role.animComponent.SetMoving(false);
+            GameInputMgr.S.mainAction.AttackL.performed -= OnAttackLPerformed;
+            GameInputMgr.S.mainAction.AttackR.performed -= OnAttackRPerformed;
         }
 
         private void GetHurt()
@@ -110,6 +96,27 @@ namespace Game.Logic
         {
             m_Player.role.animComponent.SetAction(action);
             m_Player.role.animComponent.SetCastTrigger();
+        }
+
+        private void OnAttackLPerformed(InputAction.CallbackContext callback)
+        {
+            bool isMoving = m_Player.role.animComponent.GetMoving();
+            if (isMoving)
+                return;
+            m_Player.role.animComponent.SetLeftRight(1);
+            m_Player.role.animComponent.SetAction(1);
+            // m_Player.role.animComponent.SetAction(Random.Range(1, 4));
+            m_Player.role.animComponent.SetAttackTrigger();
+        }
+
+        private void OnAttackRPerformed(InputAction.CallbackContext callback)
+        {
+            bool isMoving = m_Player.role.animComponent.GetMoving();
+            if (isMoving)
+                return;
+            m_Player.role.animComponent.SetLeftRight(2);
+            m_Player.role.animComponent.SetAction(Random.Range(1, 4));
+            m_Player.role.animComponent.SetAttackTrigger();
         }
 
     }

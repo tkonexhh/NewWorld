@@ -17,6 +17,7 @@ namespace Game.Logic
     public class RoleAnimEvent : MonoBehaviour
     {
         private Role m_Role;
+        private Weapon m_CurWeapon;
         public void Init(Role role)
         {
             m_Role = role;
@@ -35,7 +36,17 @@ namespace Game.Logic
 
         public void Hit()
         {
+            Debug.LogError("Hit");
 
+            int random = Random.Range(0, 100);
+            DamageTextEnum type = DamageTextEnum.Normal;
+            if (random < 10)
+            {
+                type = DamageTextEnum.Crit;
+            }
+            WorldUIPanel.S.ShowDamage(PlayerMgr.S.role.transform.position, new Vector3(Random.Range(-40, 40), Random.Range(-40, 40) + 60, 0), type, Random.Range(1, 200));
+
+            m_CurWeapon?.Hit();
         }
 
         public void Shoot()
@@ -58,17 +69,18 @@ namespace Game.Logic
 
         private void AttachToHand()
         {
-            var weapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
+            m_CurWeapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
             var hand = m_Role.monoReference.handRightAttach;
-            weapon.AttachToHand(hand);
+            m_CurWeapon.AttachToHand(hand);
             m_Role.iKComponent.rightHandIK.SetFocusTarget(null);
 
         }
         private void AttachToOrigin()
         {
-            var weapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
-            weapon.AttachToOrigin();
+            m_CurWeapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
+            m_CurWeapon.AttachToOrigin();
             m_Role.iKComponent.rightHandIK.SetFocusTarget(null);
+            m_CurWeapon = null;
         }
 
     }

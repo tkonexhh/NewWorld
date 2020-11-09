@@ -21,7 +21,6 @@ namespace Game.Logic
         public override void Enter(Player player, params object[] args)
         {
             m_Player = player;
-            player.role.animComponent.SetMoving(true);
         }
 
         public override void Update(Player player, float dt)
@@ -29,6 +28,7 @@ namespace Game.Logic
             if (player.role.animComponent == null)
                 return;
 
+            player.role.animComponent.SetMoving(GameInputMgr.S.moveVec.sqrMagnitude > 0.1f);
             if (Input.GetKeyDown(KeyCode.R))
             {
                 player.fsmComponent.SetRoleState(RoleState.Battle);
@@ -62,7 +62,6 @@ namespace Game.Logic
 
         public override void Exit(Player player)
         {
-            player.role.animComponent.SetMoving(false);
         }
     }
 

@@ -25,6 +25,8 @@ namespace Game.Logic
             private set;
         }
 
+        public virtual void Init() { }
+
         public void AttachWeapon()
         {
             transform.localPosition = Vector3.zero;

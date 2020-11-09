@@ -22,6 +22,8 @@ namespace Game.Logic
         //Game
         Inventorypanel,
         GamePanel,
+        //Effect
+        WorldUIPanel,
     }
 
 }

@@ -18,8 +18,10 @@ namespace Game.Logic
     {
         private RoleIK_LookAt m_LookAtIK;
         private RoleIK_RightHand m_RightHandIK;
+        private RoleIK_LeftHand m_LeftHandIK;
 
         public RoleIK_RightHand rightHandIK => m_RightHandIK;
+        public RoleIK_LeftHand leftHandIK => m_LeftHandIK;
 
         public override void Init(Entity ownner)
         {
@@ -28,6 +30,8 @@ namespace Game.Logic
             m_LookAtIK.Init(role);
             m_RightHandIK = new RoleIK_RightHand();
             m_RightHandIK.Init(role);
+            m_LeftHandIK = new RoleIK_LeftHand();
+            m_LeftHandIK.Init(role);
         }
 
         public void SetFocusTarget(Transform target)
@@ -39,6 +43,7 @@ namespace Game.Logic
         {
             m_LookAtIK.Excute(dt);
             m_RightHandIK.Excute(dt);
+            // m_LeftHandIK.Excute(dt);
         }
 
     }
@@ -97,23 +102,22 @@ namespace Game.Logic
         }
     }
 
-    public class RoleIK_RightHand : RoleIKBase
+    public class RoleIKHand : RoleIKBase
     {
-        private Transform m_Target;
-        private IKEffector rightHand => role.monoReference.fullBodyIK.solver.rightHandEffector;
-        private HandPoser handPoser => role.monoReference.rightHandPoser;
-
+        protected Transform target;
+        protected virtual IKEffector hand => role.monoReference.fullBodyIK.solver.rightHandEffector;
+        protected virtual HandPoser handPoser => role.monoReference.rightHandPoser;
         public override void Init(Role role)
         {
             base.Init(role);
-            rightHand.positionWeight = 0;
-            rightHand.rotationWeight = 0;
+            hand.positionWeight = 0;
+            hand.rotationWeight = 0;
             handPoser.weight = 0;
         }
 
         public void SetFocusTarget(Transform target)
         {
-            m_Target = target;
+            this.target = target;
         }
 
         public void SetHandPoser(Transform hand)
@@ -123,24 +127,26 @@ namespace Game.Logic
 
         public override void Excute(float dt)
         {
-            if (m_Target != null)
+            if (target != null)
             {
-                rightHand.position = m_Target.transform.position;
-                rightHand.rotation = m_Target.transform.rotation;
+                hand.position = target.transform.position;
+                hand.rotation = target.transform.rotation;
             }
-
-            float targetWeight = m_Target == null ? -1 : 1;
-
-            rightHand.positionWeight = Mathf.Clamp01(rightHand.positionWeight + targetWeight * dt * 4.5f);
-            handPoser.weight = rightHand.positionWeight;
+            float targetWeight = target == null ? -1 : 1;
+            hand.positionWeight = Mathf.Clamp01(hand.positionWeight + targetWeight * dt * 3.0f);
+            handPoser.weight = hand.positionWeight;
         }
     }
 
-    public class RoleIK_LeftHand : RoleIKBase
+    public class RoleIK_RightHand : RoleIKHand
     {
-        private IKEffector leftHand => role.monoReference.fullBodyIK.solver.leftHandEffector;
-        public override void Excute(float dt)
-        {
-        }
+        protected override IKEffector hand => role.monoReference.fullBodyIK.solver.rightHandEffector;
+        protected override HandPoser handPoser => role.monoReference.rightHandPoser;
+    }
+
+    public class RoleIK_LeftHand : RoleIKHand
+    {
+        protected override IKEffector hand => role.monoReference.fullBodyIK.solver.leftHandEffector;
+        protected override HandPoser handPoser => role.monoReference.leftHandPoser;
     }
 }

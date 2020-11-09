@@ -109,6 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 8958450467169985184}
   rightHand: {fileID: 5527565798134049455}
+  hitCollider: {fileID: 7947836183800726286}
 --- !u!1 &1772114420367042902
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +482,50 @@ Transform:
   m_Father: {fileID: 3405592625501899622}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7234292399182306872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3245835618618245755}
+  - component: {fileID: 7947836183800726286}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3245835618618245755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7234292399182306872}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.819, z: 0.337}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8954949940157303148}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7947836183800726286
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7234292399182306872}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.34, y: 0.7, z: 0.36}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8005640268016846262
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,7 +609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4840057146292850, guid: 181c5c49a962f96468635ea191e01184, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.069
+      value: 0.048
       objectReference: {fileID: 0}
     - target: {fileID: 4840057146292850, guid: 181c5c49a962f96468635ea191e01184, type: 3}
       propertyPath: m_LocalRotation.x

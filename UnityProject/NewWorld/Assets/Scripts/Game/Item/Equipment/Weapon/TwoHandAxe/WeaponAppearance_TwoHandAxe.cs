@@ -31,6 +31,7 @@ namespace Game.Logic
                 m_ObjWeapon.transform.ResetLocal();
 
                 m_WeaponModel = m_ObjWeapon.GetComponent<WeaponModel_TwoHandAxe>();
+                m_WeaponModel.Init();
                 m_WeaponModel.AttachWeapon();
             });
         }

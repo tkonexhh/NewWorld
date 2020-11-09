@@ -26,6 +26,7 @@ namespace Game.Logic
         protected override void OnSceneEnter()
         {
             UIMgr.S.OpenPanel(UIID.GamePanel);
+            UIMgr.S.OpenTopPanel(UIID.WorldUIPanel);
 
             PlayerMgr.S.player.onPlayerCreated += (player) =>
             {

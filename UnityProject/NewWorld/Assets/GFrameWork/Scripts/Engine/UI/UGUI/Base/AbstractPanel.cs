@@ -15,7 +15,7 @@ namespace GFrame
 {
 
     [RequireComponent(typeof(Canvas))]
-    public class AbstractPanel : AbstractPage
+    public abstract class AbstractPanel : AbstractPage
     {
         protected int m_SortingOrder = -1;
         protected int m_MaxSortingOrder = -1;

@@ -43,6 +43,11 @@ namespace Game.Logic
         {
 
         }
+
+        public virtual void Hit()
+        {
+
+        }
     }
 
 }

@@ -51,6 +51,22 @@ namespace Game.Logic
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""AttackL"",
+                    ""type"": ""Button"",
+                    ""id"": ""e18bc34b-721b-4e98-87d7-cc05b5664230"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""AttackR"",
+                    ""type"": ""Button"",
+                    ""id"": ""80cd85ad-9515-46a0-950d-cab81a73ac3e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -194,6 +210,28 @@ namespace Game.Logic
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3c1bf15-11dc-4011-b2ad-6182d07438a1"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackL"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61033f5b-d9f7-44ff-9eec-12f50e4520c0"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -433,6 +471,8 @@ namespace Game.Logic
             m_Main_Jump = m_Main.FindAction("Jump", throwIfNotFound: true);
             m_Main_Any = m_Main.FindAction("Any", throwIfNotFound: true);
             m_Main_Run = m_Main.FindAction("Run", throwIfNotFound: true);
+            m_Main_AttackL = m_Main.FindAction("AttackL", throwIfNotFound: true);
+            m_Main_AttackR = m_Main.FindAction("AttackR", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Any = m_UI.FindAction("Any", throwIfNotFound: true);
@@ -494,6 +534,8 @@ namespace Game.Logic
         private readonly InputAction m_Main_Jump;
         private readonly InputAction m_Main_Any;
         private readonly InputAction m_Main_Run;
+        private readonly InputAction m_Main_AttackL;
+        private readonly InputAction m_Main_AttackR;
         public struct MainActions
         {
             private @GameInput m_Wrapper;
@@ -502,6 +544,8 @@ namespace Game.Logic
             public InputAction @Jump => m_Wrapper.m_Main_Jump;
             public InputAction @Any => m_Wrapper.m_Main_Any;
             public InputAction @Run => m_Wrapper.m_Main_Run;
+            public InputAction @AttackL => m_Wrapper.m_Main_AttackL;
+            public InputAction @AttackR => m_Wrapper.m_Main_AttackR;
             public InputActionMap Get() { return m_Wrapper.m_Main; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -523,6 +567,12 @@ namespace Game.Logic
                     @Run.started -= m_Wrapper.m_MainActionsCallbackInterface.OnRun;
                     @Run.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnRun;
                     @Run.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnRun;
+                    @AttackL.started -= m_Wrapper.m_MainActionsCallbackInterface.OnAttackL;
+                    @AttackL.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnAttackL;
+                    @AttackL.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnAttackL;
+                    @AttackR.started -= m_Wrapper.m_MainActionsCallbackInterface.OnAttackR;
+                    @AttackR.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnAttackR;
+                    @AttackR.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnAttackR;
                 }
                 m_Wrapper.m_MainActionsCallbackInterface = instance;
                 if (instance != null)
@@ -539,6 +589,12 @@ namespace Game.Logic
                     @Run.started += instance.OnRun;
                     @Run.performed += instance.OnRun;
                     @Run.canceled += instance.OnRun;
+                    @AttackL.started += instance.OnAttackL;
+                    @AttackL.performed += instance.OnAttackL;
+                    @AttackL.canceled += instance.OnAttackL;
+                    @AttackR.started += instance.OnAttackR;
+                    @AttackR.performed += instance.OnAttackR;
+                    @AttackR.canceled += instance.OnAttackR;
                 }
             }
         }
@@ -640,6 +696,8 @@ namespace Game.Logic
             void OnJump(InputAction.CallbackContext context);
             void OnAny(InputAction.CallbackContext context);
             void OnRun(InputAction.CallbackContext context);
+            void OnAttackL(InputAction.CallbackContext context);
+            void OnAttackR(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

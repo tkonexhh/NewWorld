@@ -20,10 +20,7 @@ namespace GFrame
         private int m_InitialSize;
         private Transform m_Root;
 
-        public string PoolName
-        {
-            get { return m_PoolName; }
-        }
+        public string PoolName => m_PoolName;
 
         private readonly Stack<GameObject> pool = new Stack<GameObject>();
 
@@ -46,7 +43,7 @@ namespace GFrame
         }
 
 
-        public GameObject GetObject()
+        public GameObject Allocate()
         {
             var obj = pool.Count > 0 ? pool.Pop() : CreateInstance();
             obj.SetActive(true);

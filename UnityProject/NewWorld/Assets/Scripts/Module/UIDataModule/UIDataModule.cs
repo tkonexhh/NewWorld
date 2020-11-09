@@ -37,6 +37,9 @@ namespace Game.Logic
 
             UIDataTable.AddPanelData(UIID.GamePanel, "GamePanel");
             UIDataTable.AddPanelData(UIID.Inventorypanel, "Inventorypanel");
+
+            UIDataTable.AddPanelData(UIID.WorldUIPanel, "WorldUIPanel");
+
         }
     }
 
