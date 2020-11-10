@@ -72,7 +72,7 @@ namespace Game.Logic
         public override void FixedUpdate(Player player, float dt)
         {
             // 控制角色朝向
-            if (GameInputMgr.S.moveVec.sqrMagnitude > 0.01f)
+            if (player.role.animComponent.canRotate && GameInputMgr.S.moveVec.sqrMagnitude > 0.01f)
             {
                 player.controlComponent.roleForward = Vector3.Slerp(player.controlComponent.roleForward, new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y), 0.5f);
             }
@@ -103,6 +103,9 @@ namespace Game.Logic
             bool isMoving = m_Player.role.animComponent.GetMoving();
             if (isMoving)
                 return;
+
+            if (!m_Player.role.animComponent.canAttack) return;
+
             m_Player.role.animComponent.SetLeftRight(1);
             m_Player.role.animComponent.SetAction(1);
             // m_Player.role.animComponent.SetAction(Random.Range(1, 4));

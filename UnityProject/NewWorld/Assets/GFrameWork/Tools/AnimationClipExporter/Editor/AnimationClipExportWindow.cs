@@ -78,6 +78,10 @@ namespace GFrame
             {
                 Export();
             }
+            if (GUILayout.Button("重命名FBX动画片段"))
+            {
+                Rename();
+            }
             if (GUILayout.Button("清除进度条()"))
             {
                 EditorUtility.ClearProgressBar();
@@ -85,6 +89,82 @@ namespace GFrame
             // GUILayout.EndHorizontal();
 
             GUILayout.EndVertical();
+        }
+
+        private void Rename()
+        {
+            List<string> lstPaths = new List<string>();
+            List<DirectoryInfo> lstDir = new List<DirectoryInfo>();
+            lstDir.Add(new DirectoryInfo(PathHelper.AssetsPath2ABSPath(animresPath)));
+
+            if (lstDir == null)
+            {
+                Log.e("未选中文件夹！");
+                return;
+            }
+
+
+            List<FileInfo> lstFile = new List<FileInfo>();
+
+            for (int i = 0; i < lstDir.Count; i++)
+            {
+                FileInfo[] files = lstDir[i].GetFiles("*", SearchOption.AllDirectories);
+                if (files == null || files.Length == 0) return;
+
+                for (int j = 0; j < files.Length; j++)
+                {
+                    if (!files[j].FullName.Contains(".meta"))
+                    {
+                        lstFile.Add(files[j]);
+                    }
+                }
+                if (lstFile.Count == 0) return;
+
+                for (int k = 0; k < lstFile.Count; k++)
+                {
+                    if (isAvailable(lstFile[k].FullName))
+                    {
+                        ShowProgress(k / lstFile.Count, lstFile.Count, k, lstFile[k].Name);
+                        string assetPath = PathHelper.ABSPath2AssetsPath(lstFile[k].FullName);
+                        ModelImporter modelImporter = AssetImporter.GetAtPath(assetPath) as ModelImporter;
+                        switch (animType)
+                        {
+                            case AnimType.Legacy:
+                                modelImporter.animationType = ModelImporterAnimationType.Legacy;
+                                break;
+                            case AnimType.Generic:
+                                modelImporter.animationType = ModelImporterAnimationType.Generic;
+                                modelImporter.autoGenerateAvatarMappingIfUnspecified = true;
+                                break;
+                            case AnimType.Humanoid:
+                                modelImporter.animationType = ModelImporterAnimationType.Human;
+                                // modelImporter.autoGenerateAvatarMappingIfUnspecified = true;
+                                if (avatar == null)
+                                    modelImporter.autoGenerateAvatarMappingIfUnspecified = true;
+                                else
+                                    modelImporter.sourceAvatar = avatar;
+                                break;
+                        }
+                        var clips = modelImporter.defaultClipAnimations;
+                        ModelImporterClipAnimation[] newClips = new ModelImporterClipAnimation[clips.Length];
+                        for (int n = 0; n < clips.Length; n++)
+                        {
+                            ModelImporterClipAnimation clip = clips[i];
+                            clips[i].name = RenameClip(lstFile[k].Name);
+                            clips[i].loopTime = isLoopAnim(clips[i].name);
+                            clips[i].keepOriginalOrientation = true;
+                            clips[i].keepOriginalPositionXZ = true;
+                            clips[i].keepOriginalPositionY = true;
+                            newClips[n] = clip;
+                        }
+                        modelImporter.clipAnimations = newClips;
+                        modelImporter.SaveAndReimport();
+                    }
+                }
+            }
+
+            EditorUtility.ClearProgressBar();
+            AssetDatabase.Refresh();
         }
 
         private void Export()
@@ -106,7 +186,7 @@ namespace GFrame
                 Debug.LogError("outPutPath is null");
                 return;
             }
-            GetHumanoidAnmationClips(avatar, animresPath, outPutPath, animType);
+            GetAnmationClips(avatar, animresPath, outPutPath, animType);
         }
 
 
@@ -114,7 +194,7 @@ namespace GFrame
         static string[] loopFilter = new string[] { "walk", "idle", "run", "Walk", "Run", "Idle" };
 
 
-        static void GetHumanoidAnmationClips(Avatar avatar, string resPath, string outputPath, AnimType animType)
+        static void GetAnmationClips(Avatar avatar, string resPath, string outputPath, AnimType animType)
         {
             List<string> lstPaths = new List<string>();
             List<DirectoryInfo> lstDir = new List<DirectoryInfo>();
@@ -155,6 +235,7 @@ namespace GFrame
                         ShowProgress(k / lstFile.Count, lstFile.Count, k, lstFile[k].Name);
                         string assetPath = PathHelper.ABSPath2AssetsPath(lstFile[k].FullName);
                         ModelImporter modelImporter = AssetImporter.GetAtPath(assetPath) as ModelImporter;
+
                         switch (animType)
                         {
                             case AnimType.Legacy:
@@ -166,11 +247,11 @@ namespace GFrame
                                 break;
                             case AnimType.Humanoid:
                                 modelImporter.animationType = ModelImporterAnimationType.Human;
-                                modelImporter.autoGenerateAvatarMappingIfUnspecified = true;
-                                // if (avatar == null)
-                                //     modelImporter.autoGenerateAvatarMappingIfUnspecified = true;
-                                // else
-                                //     modelImporter.sourceAvatar = avatar;
+                                // modelImporter.autoGenerateAvatarMappingIfUnspecified = true;
+                                if (avatar == null)
+                                    modelImporter.autoGenerateAvatarMappingIfUnspecified = true;
+                                else
+                                    modelImporter.sourceAvatar = avatar;
                                 break;
                         }
 
@@ -201,6 +282,11 @@ namespace GFrame
             }
         }
 
+
+
+
+
+
         private static bool isAvailable(string fileName)
         {
             for (int i = 0; i < formatFilter.Length; i++)
@@ -228,7 +314,7 @@ namespace GFrame
 
         private static string RenameAnim(string name, AnimType type)
         {
-            string newName = name.Replace(" ", "_").Replace(".fbx", "");
+            string newName = name.Replace(" ", "_").Replace(".fbx", "").Replace(".", "_").Replace("__", "_");
             if (!newName.Contains("@"))
             {
                 newName = "anim@" + newName;
@@ -245,6 +331,12 @@ namespace GFrame
                     newName = "humanoid_" + newName;
                     break;
             }
+            return newName;
+        }
+
+        private static string RenameClip(string name)
+        {
+            string newName = name.Replace(" ", "_").Replace(".fbx", "").Replace(".", "_").Replace("__", "_");
             return newName;
         }
 

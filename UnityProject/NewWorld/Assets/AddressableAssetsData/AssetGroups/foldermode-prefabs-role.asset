@@ -35,12 +35,6 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
-  - m_GUID: e0dac01e589ea40acabba3334c5bd7db
-    m_Address: ModularCharacters_Male_Backup
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: f6eef83f9401a454388773dbb4f5b220
     m_Address: ModularCharactersHolder
     m_ReadOnly: 0

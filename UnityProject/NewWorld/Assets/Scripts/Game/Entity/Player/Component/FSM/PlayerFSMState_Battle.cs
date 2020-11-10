@@ -33,20 +33,8 @@ namespace Game.Logic
             player.role.animComponent.SetWeaponSwitch(-1);
             player.role.animComponent.SetWeapon(3);
             player.role.animComponent.SetWeaponUnSheathTrigger();
-            // entity.animComponent.SetMoving(true);
 
-
-            bool isMoving = player.role.animComponent.GetMoving();
-            if (isMoving)
-            {
-                player.role.animComponent.animator.CrossFade("2Hand-Axe-Movement-Blend", 0.25f, 0, 0.8f);
-            }
-            else
-            {
-                player.role.animComponent.animator.CrossFade("2Hand-Axe-Idle", 0.25f, 0, 0.6f);
-            }
             //不同的动画层不要用trigger来触发，只会触发一次，trigger会被吞掉，直接使用play来暂时解决
-            player.role.animComponent.PlayAnim("2Hand-Axe-Unsheath-Back-Relax", 1);
             WeaponUnSheath();
 
             if (m_FSM == null)
@@ -94,7 +82,7 @@ namespace Game.Logic
                 player.role.animComponent.animator.CrossFade("Idle", 0.25f, 0, 0.4f);
             }
 
-            player.role.animComponent.PlayAnim("2Hand-Axe-Sheath-Back-Relax", 1);
+
             WeaponSheath();
         }
 

@@ -47,27 +47,53 @@ namespace Game.Logic
 
         public override void UnSheath(Role role)
         {
+            bool isMoving = role.animComponent.GetMoving();
+            if (isMoving)
+            {
+                role.animComponent.animator.CrossFade("2Hand-Axe-Movement-Blend", 0.25f, 0, 0.8f);
+            }
+            else
+            {
+                role.animComponent.animator.CrossFade("2Hand-Axe-Idle", 0.25f, 0, 0.6f);
+            }
+
+            role.animComponent.PlayAnim("2Hand-Axe-Unsheath-Back", 1);
             role.iKComponent.rightHandIK.SetFocusTarget(appearance.weaponModel.rightHand);
             role.iKComponent.rightHandIK.SetHandPoser(appearance.weaponModel.rightHand);
         }
 
         public override void Sheath(Role role)
         {
+            role.animComponent.PlayAnim("2Hand-Axe-Sheath-Back", 1);
             role.iKComponent.rightHandIK.SetFocusTarget(null);
             role.iKComponent.rightHandIK.SetHandPoser(null);
         }
 
-        public override void Hit()
+        public override void Hit(Role role)
         {
             var hitCollider = weaponModel.hitCollider;
             hitCollider.gameObject.SetActive(true);
-            var hits = Physics.OverlapBox(hitCollider.transform.position, weaponModel.hitCollider.bounds.size, hitCollider.transform.rotation);
-            Debug.LogError(hits.Length);
+            var hits = Physics.OverlapBox(hitCollider.transform.position, weaponModel.hitCollider.bounds.size, hitCollider.transform.rotation, 1 << LayerDefine.Layer_HitCollider);
 
+            if (hits.Length > 0)
+            {
+                Debug.LogError(hits[0].gameObject.name);
+                CalcDamage();
+                role.animComponent.AnimStopFrame(10);
+            }
             hitCollider.gameObject.SetActive(false);
         }
 
-
+        private void CalcDamage()
+        {
+            int random = Random.Range(0, 100);
+            DamageTextEnum type = DamageTextEnum.Normal;
+            if (random < 10)
+            {
+                type = DamageTextEnum.Crit;
+            }
+            WorldUIPanel.S.ShowDamage(PlayerMgr.S.role.transform.position, new Vector3(Random.Range(-40, 40), Random.Range(-40, 40) + 60, 0), type, Random.Range(1, 200));
+        }
     }
 
 }

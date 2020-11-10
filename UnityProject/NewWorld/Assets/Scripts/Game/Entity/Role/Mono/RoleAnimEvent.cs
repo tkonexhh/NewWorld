@@ -36,17 +36,19 @@ namespace Game.Logic
 
         public void Hit()
         {
-            Debug.LogError("Hit");
+            m_CurWeapon?.Hit(m_Role);
+        }
 
-            int random = Random.Range(0, 100);
-            DamageTextEnum type = DamageTextEnum.Normal;
-            if (random < 10)
-            {
-                type = DamageTextEnum.Crit;
-            }
-            WorldUIPanel.S.ShowDamage(PlayerMgr.S.role.transform.position, new Vector3(Random.Range(-40, 40), Random.Range(-40, 40) + 60, 0), type, Random.Range(1, 200));
+        public void CanAttack(int canAttack)
+        {
+            Debug.LogError("CanAttack:" + canAttack);
+            m_Role.animComponent.canAttack = canAttack == 1;
+        }
 
-            m_CurWeapon?.Hit();
+        public void CanRotate(int canRotate)
+        {
+            Debug.LogError("CanRotate:" + canRotate);
+            m_Role.animComponent.canRotate = canRotate == 1;
         }
 
         public void Shoot()

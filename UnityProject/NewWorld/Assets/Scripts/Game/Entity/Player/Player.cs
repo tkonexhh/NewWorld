@@ -17,7 +17,7 @@ namespace Game.Logic
     {
         private GameObject m_GameObject;
         private Transform m_Transform;
-
+        private PlayerData m_Data;
         private Role_Player m_Role;
 
         private PlayerMonoReference m_MonoReference;
@@ -36,6 +36,7 @@ namespace Game.Logic
 
         public Player() : base()
         {
+            m_Data = new PlayerData(this);
             AddressableResMgr.S.InstantiateAsync("Player", (target) =>
             {
                 m_GameObject = target;

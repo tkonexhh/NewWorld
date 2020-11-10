@@ -44,7 +44,7 @@ namespace Game.Logic
 
         }
 
-        public virtual void Hit()
+        public virtual void Hit(Role role)
         {
 
         }

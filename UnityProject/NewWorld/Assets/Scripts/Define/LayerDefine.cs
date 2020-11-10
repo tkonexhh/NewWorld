@@ -19,6 +19,8 @@ namespace Game.Logic
         public const int Layer_Role = 9;
         public const int Layer_InventoryRole = 10;
         public const int Layer_Stairs = 11;
+        public const int Layer_FootIK = 12;
+        public const int Layer_HitCollider = 13;
     }
 
 }
