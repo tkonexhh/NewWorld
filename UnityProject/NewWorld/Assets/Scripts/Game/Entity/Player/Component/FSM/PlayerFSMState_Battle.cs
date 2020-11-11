@@ -31,8 +31,7 @@ namespace Game.Logic
             //2双手矛
             //3双手斧
             player.role.animComponent.SetWeaponSwitch(-1);
-            player.role.animComponent.SetWeapon(3);
-            player.role.animComponent.SetWeaponUnSheathTrigger();
+
 
             //不同的动画层不要用trigger来触发，只会触发一次，trigger会被吞掉，直接使用play来暂时解决
             WeaponUnSheath();
@@ -66,9 +65,9 @@ namespace Game.Logic
 
         public override void Exit(Player player)
         {
-            player.role.animComponent.SetWeaponSheathTrigger();
-            player.role.animComponent.SetWeaponSwitch(-1);
-            player.role.animComponent.SetWeapon(3);
+
+            // player.role.animComponent.SetWeaponSwitch(-1);
+            // player.role.animComponent.SetWeapon(3);
 
             // entity.animComponent.animator.CrossFade();
             //下半身动画也需要插值到Idle动画

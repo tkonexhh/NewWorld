@@ -29,6 +29,7 @@ namespace Game.Logic
             m_Player = player;
             GameInputMgr.S.mainAction.AttackL.performed += OnAttackLPerformed;
             GameInputMgr.S.mainAction.AttackR.performed += OnAttackRPerformed;
+            m_Player.role.animComponent.canAttack = true;
         }
 
         public override void Update(Player player, float dt)
@@ -76,7 +77,7 @@ namespace Game.Logic
             {
                 player.controlComponent.roleForward = Vector3.Slerp(player.controlComponent.roleForward, new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y), 0.5f);
             }
-            player.role.animComponent.SetVelocityZ(player.controlComponent.velocity.magnitude);
+            player.role.animComponent.SetVelocityZ(player.controlComponent.velocity.sqrMagnitude);
         }
 
         public override void Exit(Player player)
@@ -105,9 +106,22 @@ namespace Game.Logic
                 return;
 
             if (!m_Player.role.animComponent.canAttack) return;
-
+            // Debug.LogError("Attack");
+            m_Player.role.animComponent.canAttack = false;
             m_Player.role.animComponent.SetLeftRight(1);
-            m_Player.role.animComponent.SetAction(1);
+            if (m_Player.role.animComponent.canCombo)
+            {
+                Debug.LogError("combo");
+                m_Player.role.animComponent.canCombo = false;
+                int nowAction = m_Player.role.animComponent.GetAction();
+                m_Player.role.animComponent.SetAction(nowAction + 1);
+            }
+            else
+            {
+                Debug.LogError("FirstAttack");
+                m_Player.role.animComponent.SetAction(1);
+            }
+
             // m_Player.role.animComponent.SetAction(Random.Range(1, 4));
             m_Player.role.animComponent.SetAttackTrigger();
         }

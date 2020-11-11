@@ -127,6 +127,7 @@ namespace GFrame.Editor
 
                 GameObject textGo = new GameObject("Text", typeof(GText));
                 textGo.transform.SetParent(go.transform);
+                textGo.transform.localScale = Vector3.one;
                 Text text = textGo.GetComponent<Text>();
                 HandleText(text);
                 RectTransform rectText = text.GetComponent<RectTransform>();
@@ -297,6 +298,7 @@ namespace GFrame.Editor
             GameObject go = new GameObject(defaultName, typeof(T));
             go.transform.SetParent(Selection.activeTransform);
             go.transform.SetLocalPos(Vector3.zero);
+            go.transform.localScale = Vector3.one;
             Selection.activeGameObject = go;
             callback(go);
             return go;

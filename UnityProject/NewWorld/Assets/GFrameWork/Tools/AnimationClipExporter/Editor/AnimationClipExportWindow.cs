@@ -152,6 +152,9 @@ namespace GFrame
                             ModelImporterClipAnimation clip = clips[i];
                             clips[i].name = RenameClip(lstFile[k].Name);
                             clips[i].loopTime = isLoopAnim(clips[i].name);
+                            clip.lockRootHeightY = true;
+                            clip.lockRootPositionXZ = true;
+                            clip.lockRootRotation = true;
                             clips[i].keepOriginalOrientation = true;
                             clips[i].keepOriginalPositionXZ = true;
                             clips[i].keepOriginalPositionY = true;

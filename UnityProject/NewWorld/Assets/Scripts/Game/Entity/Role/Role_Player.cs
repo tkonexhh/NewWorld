@@ -22,10 +22,14 @@ namespace Game.Logic
 
         //---------Mono---------------
         private RoleAnimEvent m_AnimEvent;
+        private RoleControlComponent m_ControlComponent;
+
+        public RoleControlComponent controlComponent => m_ControlComponent;
 
         protected override void OnResLoaded(GameObject target)
         {
             m_AnimEvent = target.AddComponent<RoleAnimEvent>();
+            m_ControlComponent = AddComponent(new RoleControlComponent());
             m_AnimEvent.Init(this);
 
             m_EquipComponent.ApplyEquipment();

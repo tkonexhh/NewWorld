@@ -23,6 +23,12 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: 447f200a61e94459cbfb9d3ef8cfa043
+    m_Address: ModularCharacters_Male_Test
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 55398063928fa4ffa85c72624f78b9bc
     m_Address: ModularCharacters_Female
     m_ReadOnly: 0

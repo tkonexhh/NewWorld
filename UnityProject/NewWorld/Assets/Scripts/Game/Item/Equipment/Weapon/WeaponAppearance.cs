@@ -18,6 +18,9 @@ namespace Game.Logic
     {
         protected WeaponModel m_WeaponModel;
         public WeaponModel weaponModel => m_WeaponModel;
+        public Run<WeaponModel> onWeaponLoaded;
+        protected virtual string weaponResName => "";
+        private GameObject m_ObjWeapon;
         public WeaponAppearance(int id) : base(id)
         {
 
@@ -25,11 +28,26 @@ namespace Game.Logic
 
         public override void SetAppearance(CharacterAppearance appearance)
         {
+            AddressableResMgr.S.InstantiateAsync(weaponResName, weapon =>
+            {
+                m_ObjWeapon = weapon;
+                m_ObjWeapon.transform.SetParent(appearance.weaponBackAttachment);
+                m_ObjWeapon.transform.ResetLocal();
 
+                m_WeaponModel = m_ObjWeapon.GetComponent<WeaponModel>();
+                m_WeaponModel.Init();
+                m_WeaponModel.AttachWeapon();
+
+                if (onWeaponLoaded != null)
+                {
+                    onWeaponLoaded(m_WeaponModel);
+                }
+            });
         }
         public override void Removeppearance(CharacterAppearance appearance)
         {
-
+            m_WeaponModel = null;
+            AddressableResMgr.S.ReleaseInstance(m_ObjWeapon);
         }
     }
 

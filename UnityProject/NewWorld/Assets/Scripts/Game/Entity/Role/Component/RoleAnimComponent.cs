@@ -19,6 +19,14 @@ namespace Game.Logic
         Upper,
         Face,
     }
+
+    public enum RoleAnimationType
+    {
+        Move,
+        Attack,
+        WeaponSwitch,
+    }
+
     public class RoleAnimComponent : RoleBaseComponent
     {
         private Animator m_Animator;
@@ -44,8 +52,8 @@ namespace Game.Logic
         private string m_Key_Trigger_TurnLeft = "TurnLeftTrigger";
         private string m_Key_Trigger_TurnRight = "TurnLeftTrigger";
         private string m_Key_Trigger_Action = "ActionTrigger";
-        private string m_Key_Trigger_WeaponSheath = "WeaponSheathTrigger";
-        private string m_Key_Trigger_WeaponUnSheath = "WeaponUnsheathTrigger";
+        // private string m_Key_Trigger_WeaponSheath = "WeaponSheathTrigger";
+        // private string m_Key_Trigger_WeaponUnSheath = "WeaponUnsheathTrigger";
         private string m_Key_Trigger_Death = "DeathTrigger";
         private string m_Key_Trigger_Revive = "ReviveTrigger";
         private string m_Key_Trigger_GetHurt = "GetHurtTrigger";
@@ -77,8 +85,6 @@ namespace Game.Logic
         private int m_KeyHash_TriggerTurnLeft;
         private int m_KeyHash_TriggerTurnRight;
         private int m_KeyHash_TriggerAction;
-        private int m_KeyHash_TriggerWeaponSheath;
-        private int m_KeyHash_TriggerWeaponUnSheath;
         private int m_KeyHash_TriggerDeath;
         private int m_KeyHash_TriggerRevive;
         private int m_KeyHash_TriggerGetHurt;
@@ -95,7 +101,9 @@ namespace Game.Logic
 
         public Animator animator => m_Animator;
 
+
         public bool canAttack { get; set; }
+        public bool canCombo { get; set; }
         public bool canRotate { get; set; }
 
 
@@ -123,8 +131,6 @@ namespace Game.Logic
             m_KeyHash_TriggerTurnLeft = Animator.StringToHash(m_Key_Trigger_TurnLeft);
             m_KeyHash_TriggerTurnRight = Animator.StringToHash(m_Key_Trigger_TurnRight);
             m_KeyHash_TriggerAction = Animator.StringToHash(m_Key_Trigger_Action);
-            m_KeyHash_TriggerWeaponSheath = Animator.StringToHash(m_Key_Trigger_WeaponSheath);
-            m_KeyHash_TriggerWeaponUnSheath = Animator.StringToHash(m_Key_Trigger_WeaponUnSheath);
             m_KeyHash_TriggerDeath = Animator.StringToHash(m_Key_Trigger_Death);
             m_KeyHash_TriggerRevive = Animator.StringToHash(m_Key_Trigger_Revive);
             m_KeyHash_TriggerGetHurt = Animator.StringToHash(m_Key_Trigger_GetHurt);
@@ -200,6 +206,11 @@ namespace Game.Logic
             m_Animator.SetInteger(m_KeyHash_IntAction, index);
         }
 
+        public int GetAction()
+        {
+            return m_Animator.GetInteger(m_KeyHash_IntAction);
+        }
+
         /// <summary>
         /// 0 null
         /// 1 left 左手
@@ -233,16 +244,6 @@ namespace Game.Logic
         public void SetActionTrigger()
         {
             m_Animator.SetTrigger(m_KeyHash_TriggerAction);
-        }
-
-        public void SetWeaponSheathTrigger()
-        {
-            m_Animator.SetTrigger(m_KeyHash_TriggerWeaponSheath);
-        }
-
-        public void SetWeaponUnSheathTrigger()
-        {
-            m_Animator.SetTrigger(m_KeyHash_TriggerWeaponUnSheath);
         }
 
         public void SetDeathTrigger()

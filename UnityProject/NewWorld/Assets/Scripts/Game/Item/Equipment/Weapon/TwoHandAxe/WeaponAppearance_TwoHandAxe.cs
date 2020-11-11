@@ -15,32 +15,13 @@ namespace Game.Logic
 {
     public class WeaponAppearance_TwoHandAxe : WeaponAppearance
     {
-        private GameObject m_ObjWeapon;
+        protected override string weaponResName => "Axe";
 
         public WeaponAppearance_TwoHandAxe(int id) : base(id)
         {
 
         }
 
-        public override void SetAppearance(CharacterAppearance appearance)
-        {
-            AddressableResMgr.S.InstantiateAsync("Axe", weapon =>
-            {
-                m_ObjWeapon = weapon;
-                m_ObjWeapon.transform.SetParent(appearance.weaponBackAttachment);
-                m_ObjWeapon.transform.ResetLocal();
-
-                m_WeaponModel = m_ObjWeapon.GetComponent<WeaponModel_TwoHandAxe>();
-                m_WeaponModel.Init();
-                m_WeaponModel.AttachWeapon();
-            });
-        }
-
-        public override void Removeppearance(CharacterAppearance appearance)
-        {
-            m_WeaponModel = null;
-            AddressableResMgr.S.ReleaseInstance(m_ObjWeapon);
-        }
     }
 
 }

@@ -16,9 +16,9 @@ namespace Game.Logic
 {
     public class RoleAnimEvent : MonoBehaviour
     {
-        private Role m_Role;
+        private Role_Player m_Role;
         private Weapon m_CurWeapon;
-        public void Init(Role role)
+        public void Init(Role_Player role)
         {
             m_Role = role;
         }
@@ -39,10 +39,16 @@ namespace Game.Logic
             m_CurWeapon?.Hit(m_Role);
         }
 
-        public void CanAttack(int canAttack)
+        public void CanAttack()
         {
-            Debug.LogError("CanAttack:" + canAttack);
-            m_Role.animComponent.canAttack = canAttack == 1;
+            // Debug.LogError("CanAttack:");
+            m_Role.animComponent.canAttack = true;
+        }
+
+        public void CanCombo()
+        {
+            // Debug.LogError("CanCombo:");
+            m_Role.animComponent.canCombo = true;
         }
 
         public void CanRotate(int canRotate)
@@ -67,6 +73,11 @@ namespace Game.Logic
             {
                 AttachToOrigin();
             }
+        }
+
+        public void WeaponSwitchComplete()
+        {
+            m_Role.controlComponent.WeaponSwitchComplete();
         }
 
         private void AttachToHand()

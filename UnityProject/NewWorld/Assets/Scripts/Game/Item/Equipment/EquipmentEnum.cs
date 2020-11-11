@@ -42,6 +42,8 @@ namespace Game.Logic
     public enum WeaponType
     {
         TwoHandAxe,//双手斧
+        TwoHandSword,
+        Length
     }
 
 }

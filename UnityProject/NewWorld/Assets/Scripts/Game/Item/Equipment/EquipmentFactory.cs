@@ -68,10 +68,23 @@ namespace Game.Logic
             return CreateEquipment(itemConf);
         }
 
-        public static Equipment CreateTestEquipment(long itemID)
+        public static Weapon CreateTestEquipment(WeaponType type)
         {
-            Weapon_TwoHandAxe axe = new Weapon_TwoHandAxe(1);
-            return axe;
+            Weapon weapon;
+            switch (type)
+            {
+                case WeaponType.TwoHandAxe:
+                    weapon = new Weapon_TwoHandAxe(1);
+                    break;
+                case WeaponType.TwoHandSword:
+                    weapon = new Weapon_TwoHandSword(1);
+                    break;
+                default:
+                    weapon = null;
+                    break;
+            }
+
+            return weapon;
         }
     }
 

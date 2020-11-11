@@ -18816,30 +18816,6 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Finger_01
-      humanName: Left Little Proximal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: Finger_02
-      humanName: Left Little Intermediate
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: Finger_03
-      humanName: Left Little Distal
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
     - boneName: Thumb_01 1
       humanName: Right Thumb Proximal
       limit:
@@ -18888,8 +18864,32 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
+    - boneName: Finger_01
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Finger_02
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Finger_03
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
     - boneName: Finger_01 1
-      humanName: Right Little Proximal
+      humanName: Right Middle Proximal
       limit:
         min: {x: 0, y: 0, z: 0}
         max: {x: 0, y: 0, z: 0}
@@ -18897,7 +18897,7 @@ ModelImporter:
         length: 0
         modified: 0
     - boneName: Finger_02 1
-      humanName: Right Little Intermediate
+      humanName: Right Middle Intermediate
       limit:
         min: {x: 0, y: 0, z: 0}
         max: {x: 0, y: 0, z: 0}
@@ -18905,7 +18905,7 @@ ModelImporter:
         length: 0
         modified: 0
     - boneName: Finger_03 1
-      humanName: Right Little Distal
+      humanName: Right Middle Distal
       limit:
         min: {x: 0, y: 0, z: 0}
         max: {x: 0, y: 0, z: 0}
@@ -22876,7 +22876,7 @@ ModelImporter:
     - name: Finger_01
       parentName: Hand_L
       position: {x: -9.982526, y: -0.11595894, z: -3.2833402}
-      rotation: {x: -0.0024864315, y: -0.043879747, z: 0.056519255, w: 0.9974337}
+      rotation: {x: 0.0006001773, y: -0.08457371, z: 0.03887484, w: 0.99565846}
       scale: {x: 1, y: 1, z: 1}
     - name: Finger_02
       parentName: Finger_01
@@ -22896,7 +22896,7 @@ ModelImporter:
     - name: IndexFinger_01
       parentName: Hand_L
       position: {x: -10.396562, y: 0.39871514, z: 2.6726496}
-      rotation: {x: 0.00028049533, y: 0.065794446, z: 0.004253931, w: 0.99782413}
+      rotation: {x: 0.0009836981, y: -0.082881816, z: 0.0053069126, w: 0.9965448}
       scale: {x: 1, y: 1, z: 1}
     - name: IndexFinger_02
       parentName: IndexFinger_01
@@ -22916,7 +22916,7 @@ ModelImporter:
     - name: Thumb_01
       parentName: Hand_L
       position: {x: -3.5140479, y: -1.1706916, z: 4.5055394}
-      rotation: {x: 0.01192802, y: 0.3203638, z: 0.056063794, w: 0.94555897}
+      rotation: {x: 0.009149505, y: 0.29994443, z: 0.04401613, w: 0.9528967}
       scale: {x: 1, y: 1, z: 1}
     - name: Thumb_02
       parentName: Thumb_01
@@ -22961,7 +22961,7 @@ ModelImporter:
     - name: Finger_01 1
       parentName: Hand_R
       position: {x: 9.9825, y: 0.116, z: 3.28334}
-      rotation: {x: -0.0024864315, y: -0.043879747, z: 0.056519255, w: 0.9974337}
+      rotation: {x: 0.00060003804, y: -0.084573075, z: 0.03887597, w: 0.99565846}
       scale: {x: 1, y: 1, z: 1}
     - name: Finger_02 1
       parentName: Finger_01 1
@@ -22981,7 +22981,7 @@ ModelImporter:
     - name: IndexFinger_01 1
       parentName: Hand_R
       position: {x: 10.3966, y: -0.399, z: -2.67265}
-      rotation: {x: 0.00028049533, y: 0.065794446, z: 0.004253931, w: 0.99782413}
+      rotation: {x: 0.0009863799, y: -0.08288095, z: 0.00530201, w: 0.99654484}
       scale: {x: 1, y: 1, z: 1}
     - name: IndexFinger_02 1
       parentName: IndexFinger_01 1
@@ -23001,7 +23001,7 @@ ModelImporter:
     - name: Thumb_01 1
       parentName: Hand_R
       position: {x: 3.514, y: 1.171, z: -4.50554}
-      rotation: {x: 0.0119460765, y: 0.32034892, z: 0.056099415, w: 0.94556165}
+      rotation: {x: 0.009170421, y: 0.29995397, z: 0.04406991, w: 0.9528911}
       scale: {x: 1, y: 1, z: 1}
     - name: Thumb_02 1
       parentName: Thumb_01 1

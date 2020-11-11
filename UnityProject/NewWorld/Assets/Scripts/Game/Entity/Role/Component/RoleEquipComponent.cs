@@ -27,7 +27,7 @@ namespace Game.Logic
             m_EquipmentMap.Add((int)InventoryEquipSlot.Hips, EquipmentFactory.CreateEquipment(role.data.equipmentData.hipsID));
             m_EquipmentMap.Add((int)InventoryEquipSlot.Shoulders, EquipmentFactory.CreateEquipment(role.data.equipmentData.shouldersID));
             m_EquipmentMap.Add((int)InventoryEquipSlot.Back, EquipmentFactory.CreateEquipment(role.data.equipmentData.backID));
-            m_EquipmentMap.Add((int)InventoryEquipSlot.Weapon, EquipmentFactory.CreateTestEquipment(role.data.equipmentData.weapon));
+            m_EquipmentMap.Add((int)InventoryEquipSlot.Weapon, EquipmentFactory.CreateTestEquipment(WeaponType.TwoHandAxe));
         }
 
         public void ApplyEquipment()
@@ -36,6 +36,16 @@ namespace Game.Logic
             {
                 equipment?.Equip(role);
             }
+        }
+
+        public Weapon GetWeapon()
+        {
+            var equipment = GetEquipmentBySlot(InventoryEquipSlot.Weapon);
+            if (equipment != null)
+            {
+                return equipment as Weapon;
+            }
+            return null;
         }
 
         public Equipment GetEquipmentBySlot(InventoryEquipSlot slot)

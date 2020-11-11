@@ -26,12 +26,21 @@ namespace Game.Logic
 
         public virtual void UnSheath(Role role)
         {
-
+            // role.animComponent.SetWeaponUnSheathTrigger();
         }
 
         public virtual void Sheath(Role role)
         {
-
+            role.animComponent.SetWeapon(0);
+            bool isMoving = role.animComponent.GetMoving();
+            if (isMoving)
+            {
+                role.animComponent.animator.CrossFade("Relaxed_WalkRun_Blend", 0.25f, 0, 0.25f);
+            }
+            else
+            {
+                role.animComponent.animator.CrossFade("Idle", 0.6f, 0, 0.6f);
+            }
         }
 
         public virtual void AttachToHand(Transform hand)
@@ -47,6 +56,12 @@ namespace Game.Logic
         public virtual void Hit(Role role)
         {
 
+        }
+
+        public void Remove()
+        {
+            GameObject.Destroy(appearance.weaponModel.gameObject);
+            GameObject.Destroy(appearance.weaponModel.weapon);
         }
     }
 

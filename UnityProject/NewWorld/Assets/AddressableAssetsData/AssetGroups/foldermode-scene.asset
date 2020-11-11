@@ -23,6 +23,12 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: 64ceafecf76e141ae996fb690b35c71c
+    m_Address: FirstScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 7ce67d51b9f484a6cbfb9c39900e349c
     m_Address: GameScene
     m_ReadOnly: 0
