@@ -52,14 +52,14 @@ namespace Game.Logic
             bool isMoving = role.animComponent.GetMoving();
             if (isMoving)
             {
-                role.animComponent.animator.CrossFade("2Hand-Axe-Movement-Blend", 0.65f, 0, 0.5f);
+                role.animComponent.animator.CrossFade("2Hand-Axe-Movement-Blend", 0.15f, 0, 0.25f);
             }
             else
             {
                 role.animComponent.animator.CrossFade("2Hand-Axe-Idle", 0.6f, 0, 0.6f);
             }
 
-            role.animComponent.PlayAnim("2Hand-Axe-Unsheath-Back", 1);
+            role.animComponent.animator.CrossFade("2Hand-Axe-Unsheath-Back", 0.2f, 1, 0.2f);
             role.iKComponent.rightHandIK.SetFocusTarget(appearance.weaponModel.rightHand);
             role.iKComponent.rightHandIK.SetHandPoser(appearance.weaponModel.rightHand);
         }
@@ -67,7 +67,7 @@ namespace Game.Logic
         public override void Sheath(Role role)
         {
             base.Sheath(role);
-            role.animComponent.PlayAnim("2Hand-Axe-Sheath-Back", 1);
+            role.animComponent.animator.CrossFade("2Hand-Axe-Sheath-Back", 0.2f, 1, 0.2f);
             role.iKComponent.rightHandIK.SetFocusTarget(null);
             role.iKComponent.rightHandIK.SetHandPoser(null);
         }

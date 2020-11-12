@@ -39,7 +39,7 @@ namespace Game.Logic
             }
             else
             {
-                role.animComponent.animator.CrossFade("Idle", 0.6f, 0, 0.6f);
+                role.animComponent.animator.CrossFade("Idle", 0.3f, 0, 0.3f);
             }
         }
 

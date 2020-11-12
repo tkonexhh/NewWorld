@@ -28,6 +28,10 @@ namespace Game.Logic
         public Transform handLeftAttach;
         public Transform handRightAttach;
 
+
+        public float fadeDur = 0.2f;
+        public float fadeOffset = 0.2f;
+
     }
 
 }
