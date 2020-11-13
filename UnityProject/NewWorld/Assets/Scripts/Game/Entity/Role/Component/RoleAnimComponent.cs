@@ -52,8 +52,6 @@ namespace Game.Logic
         private string m_Key_Trigger_TurnLeft = "TurnLeftTrigger";
         private string m_Key_Trigger_TurnRight = "TurnLeftTrigger";
         private string m_Key_Trigger_Action = "ActionTrigger";
-        // private string m_Key_Trigger_WeaponSheath = "WeaponSheathTrigger";
-        // private string m_Key_Trigger_WeaponUnSheath = "WeaponUnsheathTrigger";
         private string m_Key_Trigger_Death = "DeathTrigger";
         private string m_Key_Trigger_Revive = "ReviveTrigger";
         private string m_Key_Trigger_GetHurt = "GetHurtTrigger";

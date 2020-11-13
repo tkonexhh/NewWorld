@@ -76,6 +76,9 @@ namespace Game.Logic
                 bool armed = role.controlComponent.armed;
                 m_BtnSheath.gameObject.SetActive(armed);
                 m_BtnUnSheath.gameObject.SetActive(!armed);
+
+                m_BtnWeaponEquip.gameObject.SetActive(!armed);
+                m_BtnWeaponUnEquip.gameObject.SetActive(!armed);
             }
         }
 
@@ -90,7 +93,6 @@ namespace Game.Logic
             if (role.controlComponent.weaponSwitching) return;//正在切换中
             m_Weapon = EquipmentFactory.CreateTestEquipment(m_WeaponType);
             role.equipComponent.Equip(m_Weapon);
-
             UpdateBtn();
         }
 
