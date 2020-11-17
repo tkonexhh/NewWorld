@@ -24,7 +24,13 @@ namespace Game.Logic
 
         float m_SpeedZ;
         float m_SpeedX;
+        float m_LastSpeedX;
+        float m_LastSpeedZ;
+        float m_DesireSpeedX;
+        float m_DesireSpeedZ;
         private RoleAnimTestPanel m_Panel;
+
+        private RoleAnimTest role => m_Panel.role;
 
         public void Init(RoleAnimTestPanel panel)
         {
@@ -42,22 +48,55 @@ namespace Game.Logic
         {
             m_SliderVelX.value = 0.5f;
             m_SliderVelZ.value = 0.5f;
+            UpdateText();
         }
         private void OnVelZChange(float v)
         {
+            m_LastSpeedZ = m_SpeedZ;
+            m_DesireSpeedZ = (v - 0.5f) * 6 * 2;
             m_SpeedZ = (v - 0.5f) * 6 * 2;
-            m_TMPVelZ.text = m_SpeedZ.ToString("N2");
-            m_Panel.role.animComponent.SetMoving(m_SpeedZ != 0 || m_SpeedX != 0);
-            m_Panel.role.animComponent.SetVelocityZ(m_SpeedZ);
+            Check();
         }
 
         private void OnVelXChange(float v)
         {
+            m_LastSpeedX = m_SpeedX;
+            m_DesireSpeedX = (v - 0.5f) * 6 * 2;
             m_SpeedX = (v - 0.5f) * 6 * 2;
-            m_TMPVelX.text = m_SpeedX.ToString("N2");
-            m_Panel.role.animComponent.SetMoving(m_SpeedZ != 0 || m_SpeedX != 0);
-            m_Panel.role.animComponent.SetVelocityX(m_SpeedX);
+            Check();
         }
+
+        private void Check()
+        {
+            if (m_SpeedZ == 0 && (m_LastSpeedZ > 3.0f) && !m_Panel.role.controlComponent.armed)
+            {
+                RunToStop();
+            }
+            else
+            {
+                SetVel();
+            }
+
+        }
+        private void UpdateText()
+        {
+            m_TMPVelZ.text = m_SpeedZ.ToString("N2");
+            m_TMPVelX.text = m_SpeedX.ToString("N2");
+        }
+
+        private void SetVel()
+        {
+            UpdateText();
+            role.animComponent.SetMoving(m_SpeedZ != 0 || m_SpeedX != 0);
+            role.animComponent.SetVelocityX(m_SpeedX);
+            role.animComponent.SetVelocityZ(m_SpeedZ);
+        }
+
+        private void RunToStop()
+        {
+            role.controlComponent.RunToStop();
+        }
+
 
     }
 

@@ -34,7 +34,7 @@ MonoBehaviour:
     rootSphereCastRadius: 0.1
     overstepFallsDown: 1
     quality: 2
-  ik: {fileID: 5486523673626845757, guid: 37a17d93ea857464799b21d70b00a57a, type: 3}
+  ik: {fileID: 3288805013245140579, guid: 447f200a61e94459cbfb9d3ef8cfa043, type: 3}
   spineBend: 2
   spineSpeed: 3
   spine:

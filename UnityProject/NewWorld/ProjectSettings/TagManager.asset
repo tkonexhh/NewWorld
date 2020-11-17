@@ -16,7 +16,7 @@ TagManager:
   - Ground
   - Role
   - InventoryRole
-  - Stairs
+  - 
   - FootIK
   - HitCollider
   - 

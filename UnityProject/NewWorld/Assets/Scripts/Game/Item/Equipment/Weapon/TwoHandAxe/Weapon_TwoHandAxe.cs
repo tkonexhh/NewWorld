@@ -72,6 +72,13 @@ namespace Game.Logic
             role.iKComponent.rightHandIK.SetHandPoser(null);
         }
 
+        public override void Death(Role role)
+        {
+            base.Death(role);
+            //Block不可以移动
+            role.animComponent.animator.CrossFade("2Hand-Axe-Death1", 0.25f, 0, 0.1f);
+        }
+
         public override void Block(Role role)
         {
             base.Block(role);

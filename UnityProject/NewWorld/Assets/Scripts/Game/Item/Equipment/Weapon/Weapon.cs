@@ -23,6 +23,8 @@ namespace Game.Logic
         {
 
         }
+
+        public virtual void Death(Role role) { }
         public virtual void Block(Role role) { }
         public virtual void UnBlock(Role role) { }
         public virtual void UnSheath(Role role) { }

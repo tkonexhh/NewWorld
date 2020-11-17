@@ -44,7 +44,7 @@ namespace Game.Logic
 
                 m_MonoReference = target.GetComponent<PlayerMonoReference>();
 
-                m_Role = new Role_Player();
+                m_Role = new RoleAnimTest();
                 m_Role.onRoleCreated += (role) =>
                 {
                     role.gameObject.name = "Role";

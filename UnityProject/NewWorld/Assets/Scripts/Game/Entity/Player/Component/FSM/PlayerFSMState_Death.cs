@@ -18,22 +18,22 @@ namespace Game.Logic
     {
 
 
-        public override void Enter(Player entity, params object[] args)
+        public override void Enter(Player player, params object[] args)
         {
-            entity.role.animComponent.SetDeathTrigger();
+            player.role.controlComponent.Death();
         }
 
-        public override void Update(Player role, float dt)
-        {
-
-        }
-
-        public override void Exit(Player entity)
+        public override void Update(Player player, float dt)
         {
 
         }
 
-        public override void OnMsg(Player entity, int key, params object[] args)
+        public override void Exit(Player player)
+        {
+
+        }
+
+        public override void OnMsg(Player player, int key, params object[] args)
         {
 
         }

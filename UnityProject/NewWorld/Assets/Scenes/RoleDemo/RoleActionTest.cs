@@ -17,6 +17,8 @@ namespace Game.Logic
     {
         [SerializeField] private Button m_BtnTalking;
         [SerializeField] private Button m_BtnStopTalking;
+        [SerializeField] private Button m_BtnDeath;
+        [SerializeField] private Button m_BtnRevive;
 
         private RoleAnimTestPanel m_Panel;
         private RoleAnimTest role => m_Panel.role;
@@ -25,6 +27,8 @@ namespace Game.Logic
             m_Panel = panel;
             m_BtnTalking.onClick.AddListener(OnClickTalking);
             m_BtnStopTalking.onClick.AddListener(OnClickStopTalking);
+            m_BtnDeath.onClick.AddListener(OnClickDeath);
+            m_BtnRevive.onClick.AddListener(OnClickRevive);
         }
 
         private void OnClickTalking()
@@ -35,6 +39,16 @@ namespace Game.Logic
         private void OnClickStopTalking()
         {
             role.controlComponent.EndTalking();
+        }
+
+        private void OnClickDeath()
+        {
+            role.controlComponent.Death();
+        }
+
+        private void OnClickRevive()
+        {
+
         }
     }
 

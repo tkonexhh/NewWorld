@@ -30,9 +30,16 @@ namespace Game.Logic
         /// <value></value>
         public bool armed { get; private set; }
 
-
-
         public Run onWeaponSwitchComplete;
+
+        //TODO 当速度小于X时，Vel采用插值过渡，当Vel进入到跑步时候，采用急停
+        public void RunToStop()
+        {
+            role.animComponent.animator.CrossFade("RunToStop", 0.05f, 0, 0.1f);
+            role.animComponent.SetMoving(false);
+            role.animComponent.SetVelocityX(0);
+            role.animComponent.SetVelocityZ(0);
+        }
 
         public void Arm()
         {
@@ -106,6 +113,18 @@ namespace Game.Logic
 
             var weapon = role.equipComponent.GetWeapon();
             weapon.UnBlock(role);
+        }
+
+
+        public void Death()
+        {
+            var weapon = role.equipComponent.GetWeapon();
+            if (weapon == null)
+            {
+                role.animComponent.animator.CrossFade("Unarmed-Death1", 0.2f, 0, 0.2f);
+            }
+            else
+                weapon.Death(role);
         }
     }
 
