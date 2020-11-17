@@ -36,7 +36,6 @@ namespace Game.Logic
         private string m_Key_BoolMoving = "Moving";
         private string m_Key_BoolInjured = "Injured";
         private string m_Key_BoolCrouch = "Crouch";
-        private string m_Key_BoolBlock = "Blocking";
 
         private string m_Key_IntAction = "Action";
         private string m_Key_IntLeftRight = "LeftRight";
@@ -54,7 +53,6 @@ namespace Game.Logic
         private string m_Key_Trigger_Death = "DeathTrigger";
         private string m_Key_Trigger_Revive = "ReviveTrigger";
         private string m_Key_Trigger_GetHurt = "GetHurtTrigger";
-        private string m_Key_Trigger_Block = "BlockTrigger";
         private string m_Key_Trigger_BlockBreak = "BlockBreakTrigger";
         private string m_Key_Trigger_Cast = "CastTrigger";
         private string m_Key_Trigger_AttackCast = "AttackCastTrigger";
@@ -66,7 +64,6 @@ namespace Game.Logic
         private int m_KeyHash_BoolMoving;
         private int m_KeyHash_BoolInjured;
         private int m_KeyHash_BoolCrouch;
-        private int m_KeyHash_BoolBlock;
 
         private int m_KeyHash_IntAction;
         private int m_KeyHash_IntLeftRight;
@@ -84,7 +81,6 @@ namespace Game.Logic
         private int m_KeyHash_TriggerDeath;
         private int m_KeyHash_TriggerRevive;
         private int m_KeyHash_TriggerGetHurt;
-        private int m_KeyHash_TriggerBlock;
         private int m_KeyHash_TriggerBlockBreak;
         private int m_KeyHash_TriggerCast;
         private int m_KeyHash_TriggerAttackCast;
@@ -114,7 +110,6 @@ namespace Game.Logic
             m_KeyHash_BoolMoving = Animator.StringToHash(m_Key_BoolMoving);
             m_KeyHash_BoolInjured = Animator.StringToHash(m_Key_BoolInjured);
             m_KeyHash_BoolCrouch = Animator.StringToHash(m_Key_BoolCrouch);
-            m_KeyHash_BoolBlock = Animator.StringToHash(m_Key_BoolBlock);
             m_KeyHash_IntAction = Animator.StringToHash(m_Key_IntAction);
             m_KeyHash_IntLeftRight = Animator.StringToHash(m_Key_IntLeftRight);
             m_KeyHash_IntWeapon = Animator.StringToHash(m_Key_IntWeapon);
@@ -129,7 +124,6 @@ namespace Game.Logic
             m_KeyHash_TriggerDeath = Animator.StringToHash(m_Key_Trigger_Death);
             m_KeyHash_TriggerRevive = Animator.StringToHash(m_Key_Trigger_Revive);
             m_KeyHash_TriggerGetHurt = Animator.StringToHash(m_Key_Trigger_GetHurt);
-            m_KeyHash_TriggerBlock = Animator.StringToHash(m_Key_Trigger_Block);
             m_KeyHash_TriggerBlockBreak = Animator.StringToHash(m_Key_Trigger_BlockBreak);
             m_KeyHash_TriggerCast = Animator.StringToHash(m_Key_Trigger_Cast);
             m_KeyHash_TriggerAttackCast = Animator.StringToHash(m_Key_Trigger_AttackCast);
@@ -184,10 +178,6 @@ namespace Game.Logic
             m_Animator.SetBool(m_KeyHash_BoolCrouch, crouch);
         }
 
-        public void SetBlocking(bool block)
-        {
-            m_Animator.SetBool(m_KeyHash_BoolBlock, block);
-        }
         #endregion
 
         #region int
@@ -249,11 +239,6 @@ namespace Game.Logic
         public void SetGetHurtTrigger()
         {
             m_Animator.SetTrigger(m_KeyHash_TriggerGetHurt);
-        }
-
-        public void SetBlockTrigger()
-        {
-            m_Animator.SetTrigger(m_KeyHash_TriggerBlock);
         }
 
         public void SetBlockBreakTrigger()

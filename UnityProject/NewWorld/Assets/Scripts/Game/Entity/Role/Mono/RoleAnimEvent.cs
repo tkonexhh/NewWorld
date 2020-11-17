@@ -77,7 +77,7 @@ namespace Game.Logic
 
         public void WeaponSwitchComplete()
         {
-            Debug.LogError("WeaponSwitchComplete");
+            // Debug.Log\Error("WeaponSwitchComplete");
             m_Role.controlComponent.WeaponSwitchComplete();
         }
 

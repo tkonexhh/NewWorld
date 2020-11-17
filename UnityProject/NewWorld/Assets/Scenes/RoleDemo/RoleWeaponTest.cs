@@ -22,6 +22,8 @@ namespace Game.Logic
         [SerializeField] private Button m_BtnWeaponUnEquip;
         [SerializeField] private Button m_BtnUnSheath;
         [SerializeField] private Button m_BtnSheath;
+        [SerializeField] private Button m_BtnBlock;
+        [SerializeField] private Button m_BtnUnBlock;
 
         private RoleAnimTestPanel m_Panel;
         private WeaponType m_WeaponType;
@@ -44,6 +46,8 @@ namespace Game.Logic
             m_BtnWeaponUnEquip.onClick.AddListener(OnClickUnEquip);
             m_BtnUnSheath.onClick.AddListener(OnClickUnSheath);
             m_BtnSheath.onClick.AddListener(OnClickSheath);
+            m_BtnBlock.onClick.AddListener(OnClickBlock);
+            m_BtnUnBlock.onClick.AddListener(OnClickUnBlock);
             m_Weapon = m_Panel.role.equipComponent.GetWeapon();
             UpdateBtn();
 
@@ -119,6 +123,20 @@ namespace Game.Logic
             if (role.controlComponent.weaponSwitching) return;//正在切换中
             role.controlComponent.UnArm();
             HideAllBtn();
+        }
+
+        private void OnClickBlock()
+        {
+            if (m_Weapon == null) return;
+            if (role.controlComponent.weaponSwitching) return;//正在切换中
+            role.controlComponent.Block();
+        }
+
+        private void OnClickUnBlock()
+        {
+            if (m_Weapon == null) return;
+            if (role.controlComponent.weaponSwitching) return;//正在切换中
+            role.controlComponent.UnBlock();
         }
     }
 

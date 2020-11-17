@@ -23,11 +23,10 @@ namespace Game.Logic
         {
 
         }
+        public virtual void Block(Role role) { }
+        public virtual void UnBlock(Role role) { }
+        public virtual void UnSheath(Role role) { }
 
-        public virtual void UnSheath(Role role)
-        {
-            // role.animComponent.SetWeaponUnSheathTrigger();
-        }
 
         public virtual void Sheath(Role role)
         {

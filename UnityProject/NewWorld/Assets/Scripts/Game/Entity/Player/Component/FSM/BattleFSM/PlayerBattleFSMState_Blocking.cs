@@ -18,9 +18,7 @@ namespace Game.Logic
         private Role_Player player;
         public override void Enter(Player player, params object[] args)
         {
-
-            player.role.animComponent.SetBlocking(true);
-            player.role.animComponent.SetBlockTrigger();
+            player.role.controlComponent.Block();
         }
 
         public override void Update(Player player, float dt)
@@ -46,7 +44,7 @@ namespace Game.Logic
 
         public override void Exit(Player player)
         {
-            player.role.animComponent.SetBlocking(false);
+            player.role.controlComponent.UnBlock();
         }
 
         public override void OnMsg(Player player, int key, params object[] args)

@@ -30,7 +30,6 @@ namespace Game.Logic
         /// <value></value>
         public bool armed { get; private set; }
 
-        public bool talking { get; private set; }
 
 
         public Run onWeaponSwitchComplete;
@@ -79,24 +78,35 @@ namespace Game.Logic
                 return;
             }
 
-            talking = true;
-            PlayTalkAnim();
+            string talkAnimName = "Talk" + UnityEngine.Random.Range(1, 9);
+            role.animComponent.animator.CrossFade(talkAnimName, 0.2f, 0, 0f);
 
         }
 
         public void EndTalking()
         {
-            talking = false;
-
             role.animComponent.animator.CrossFade("Idle", 0.2f, 0, 0.2f);
         }
 
-        private void PlayTalkAnim()
+        public void Block()
         {
-            string talkAnimName = "Talk" + UnityEngine.Random.Range(1, 9);
-            role.animComponent.animator.CrossFade(talkAnimName, 0.2f, 0, 0f);
+            //没有武装不能进行防守
+            if (!armed)
+                return;
+
+            var weapon = role.equipComponent.GetWeapon();
+            weapon.Block(role);
         }
 
+        public void UnBlock()
+        {
+            //没有武装不能进行防守
+            if (!armed)
+                return;
+
+            var weapon = role.equipComponent.GetWeapon();
+            weapon.UnBlock(role);
+        }
     }
 
 }
