@@ -34,7 +34,6 @@ namespace Game.Logic
 
 
         public Run onWeaponSwitchComplete;
-        // private Run onAnimComplete;
 
         public void Arm()
         {
@@ -79,7 +78,7 @@ namespace Game.Logic
                 UnArm();
                 return;
             }
-            // onAnimComplete += ChekTalkAnimComplete;
+
             talking = true;
             PlayTalkAnim();
 
@@ -88,44 +87,16 @@ namespace Game.Logic
         public void EndTalking()
         {
             talking = false;
-            // onAnimComplete -= ChekTalkAnimComplete;
-            role.animComponent.animator.CrossFade("Idle", 0.2f, 0, 0.2f);
-        }
 
-        private void ChekTalkAnimComplete()
-        {
-            // var info = role.animComponent.animator.GetCurrentAnimatorStateInfo(0);
-            // if (info.IsName("Talk1"))
-            // {
-            //     PlayTalkAnim();
-            // }
+            role.animComponent.animator.CrossFade("Idle", 0.2f, 0, 0.2f);
         }
 
         private void PlayTalkAnim()
         {
-            Debug.LogError("PlayTalkAnim");
-            // string talkAnimName = "Talk" + UnityEngine.Random.Range(1, 8);
-            // string talkAnimName = "Talk1";
-            // role.animComponent.animator.CrossFade(talkAnimName, 0.2f, 0, 0f);
-            // var clip = role.animComponent.animator.GetCurrentAnimatorClipInfo(0);
-            // Debug.LogError(clip[0].clip.name);
-            // var clip2 = role.animComponent.animator.GetCurrentAnimatorClipInfo(0);
-            // Debug.LogError(clip2[0].clip.name);
-            // role.animComponent.animator.Play(talkAnimName, 0);
+            string talkAnimName = "Talk" + UnityEngine.Random.Range(1, 9);
+            role.animComponent.animator.CrossFade(talkAnimName, 0.2f, 0, 0f);
         }
 
-
-        public override void Excute(float dt)
-        {
-            // if (onAnimComplete != null)
-            // {
-            //     var info = role.animComponent.animator.GetCurrentAnimatorStateInfo(0);
-            //     if (info.normalizedTime >= 1.0f)
-            //     {
-            //         onAnimComplete();
-            //     }
-            // }
-        }
     }
 
 }

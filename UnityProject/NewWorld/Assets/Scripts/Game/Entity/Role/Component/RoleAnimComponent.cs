@@ -38,7 +38,6 @@ namespace Game.Logic
         private string m_Key_BoolCrouch = "Crouch";
         private string m_Key_BoolBlock = "Blocking";
 
-        private string m_Key_IntTalking = "Talking";
         private string m_Key_IntAction = "Action";
         private string m_Key_IntLeftRight = "LeftRight";
         private string m_Key_IntWeapon = "Weapon";
@@ -69,7 +68,6 @@ namespace Game.Logic
         private int m_KeyHash_BoolCrouch;
         private int m_KeyHash_BoolBlock;
 
-        private int m_KeyHash_IntTalking;
         private int m_KeyHash_IntAction;
         private int m_KeyHash_IntLeftRight;
         private int m_KeyHash_IntWeapon;
@@ -117,7 +115,6 @@ namespace Game.Logic
             m_KeyHash_BoolInjured = Animator.StringToHash(m_Key_BoolInjured);
             m_KeyHash_BoolCrouch = Animator.StringToHash(m_Key_BoolCrouch);
             m_KeyHash_BoolBlock = Animator.StringToHash(m_Key_BoolBlock);
-            m_KeyHash_IntTalking = Animator.StringToHash(m_Key_IntTalking);
             m_KeyHash_IntAction = Animator.StringToHash(m_Key_IntAction);
             m_KeyHash_IntLeftRight = Animator.StringToHash(m_Key_IntLeftRight);
             m_KeyHash_IntWeapon = Animator.StringToHash(m_Key_IntWeapon);
@@ -194,11 +191,6 @@ namespace Game.Logic
         #endregion
 
         #region int
-        public void SetTalking(int index)
-        {
-            m_Animator.SetInteger(m_KeyHash_IntTalking, index);
-        }
-
         public void SetAction(int index)
         {
             m_Animator.SetInteger(m_KeyHash_IntAction, index);
