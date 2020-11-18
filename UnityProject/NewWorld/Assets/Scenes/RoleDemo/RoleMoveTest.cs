@@ -1,3 +1,4 @@
+using System;
 /************************
 	FileName:/Scenes/RoleDemo/RoleMoveTest.cs
 	CreateAuthor:neo.xu
@@ -26,8 +27,6 @@ namespace Game.Logic
         float m_SpeedX;
         float m_LastSpeedX;
         float m_LastSpeedZ;
-        float m_DesireSpeedX;
-        float m_DesireSpeedZ;
         private RoleAnimTestPanel m_Panel;
 
         private RoleAnimTest role => m_Panel.role;
@@ -53,7 +52,6 @@ namespace Game.Logic
         private void OnVelZChange(float v)
         {
             m_LastSpeedZ = m_SpeedZ;
-            m_DesireSpeedZ = (v - 0.5f) * 6 * 2;
             m_SpeedZ = (v - 0.5f) * 6 * 2;
             Check();
         }
@@ -61,10 +59,10 @@ namespace Game.Logic
         private void OnVelXChange(float v)
         {
             m_LastSpeedX = m_SpeedX;
-            m_DesireSpeedX = (v - 0.5f) * 6 * 2;
             m_SpeedX = (v - 0.5f) * 6 * 2;
             Check();
         }
+
 
         private void Check()
         {

@@ -426,13 +426,6 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0
-        functionName: CanAttack
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.4172727
         functionName: Hit
         data: 
@@ -447,7 +440,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.75499994
+      - time: 0.91842407
         functionName: CanAttack
         data: 
         objectReferenceParameter: {instanceID: 0}

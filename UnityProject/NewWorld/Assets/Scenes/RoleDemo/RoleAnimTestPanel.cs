@@ -19,6 +19,7 @@ namespace Game.Logic
         [SerializeField] private RoleWeaponTest m_Weapon;
         [SerializeField] private RoleMoveTest m_Move;
         [SerializeField] private RoleActionTest m_Action;
+        [SerializeField] private RoleAttackTest m_Attack;
 
         private RoleAnimTest m_Role;
         public RoleAnimTest role => m_Role;
@@ -36,6 +37,7 @@ namespace Game.Logic
                 m_Weapon.Init(this);
                 m_Move.Init(this);
                 m_Action.Init(this);
+                m_Attack.Init(this);
             };
 
         }

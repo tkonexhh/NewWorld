@@ -41,20 +41,20 @@ namespace Game.Logic
 
         public void CanAttack()
         {
-            // Debug.LogError("CanAttack:");
-            m_Role.animComponent.canAttack = true;
+            Debug.LogError("CanAttack:");
+            m_Role.controlComponent.canAttack = true;
         }
 
         public void CanCombo()
         {
-            // Debug.LogError("CanCombo:");
-            m_Role.animComponent.canCombo = true;
+            Debug.LogError("CanCombo:");
+            m_Role.controlComponent.canCombo = true;
         }
 
         public void CanRotate(int canRotate)
         {
             Debug.LogError("CanRotate:" + canRotate);
-            m_Role.animComponent.canRotate = canRotate == 1;
+            m_Role.controlComponent.canRotate = canRotate == 1;
         }
 
         public void Shoot()

@@ -92,6 +92,26 @@ namespace Game.Logic
             role.animComponent.animator.CrossFade("2Hand-Axe-Movement-Blend", 0.25f, 0, 0.1f);
         }
 
+        public override void Attack(Role_Player role)
+        {
+            base.Attack(role);
+
+            if (role.controlComponent.canAttack)
+            {
+                // Debug.LogError("Attack");
+                role.controlComponent.canAttack = false;
+                role.controlComponent.canCombo = false;
+                role.animComponent.animator.Play("AttackCombo", 0);
+            }
+            else if (role.controlComponent.canCombo)
+            {
+                Debug.LogError("Combo");
+                role.controlComponent.canCombo = false;
+                role.animComponent.CanComboTrigger();
+            }
+
+        }
+
         public override void Hit(Role role)
         {
             var hitCollider = weaponModel.hitCollider;

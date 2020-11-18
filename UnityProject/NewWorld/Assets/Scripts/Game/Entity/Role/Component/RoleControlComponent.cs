@@ -30,7 +30,19 @@ namespace Game.Logic
         /// <value></value>
         public bool armed { get; private set; }
 
+        public bool canAttack { get; set; }
+        public bool canCombo { get; set; }
+        public bool canRotate { get; set; }
+
         public Run onWeaponSwitchComplete;
+
+        public override void Init(Entity ownner)
+        {
+            base.Init(ownner);
+            canAttack = true;
+            canRotate = true;
+            canCombo = false;
+        }
 
         //TODO 当速度小于X时，Vel采用插值过渡，当Vel进入到跑步时候，采用急停
         public void RunToStop()
@@ -125,6 +137,18 @@ namespace Game.Logic
             }
             else
                 weapon.Death(role);
+        }
+
+
+        public void Attack()
+        {
+            //没有武装不能进行攻击
+            if (!armed)
+                return;
+            // if (canAttack)
+            //     canCombo = false;
+            var weapon = role.equipComponent.GetWeapon();
+            weapon.Attack(role as Role_Player);
         }
     }
 

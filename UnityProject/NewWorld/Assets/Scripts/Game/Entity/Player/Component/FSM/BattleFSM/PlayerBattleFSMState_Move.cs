@@ -29,7 +29,7 @@ namespace Game.Logic
             m_Player = player;
             GameInputMgr.S.mainAction.AttackL.performed += OnAttackLPerformed;
             GameInputMgr.S.mainAction.AttackR.performed += OnAttackRPerformed;
-            m_Player.role.animComponent.canAttack = true;
+            m_Player.role.controlComponent.canAttack = true;
         }
 
         public override void Update(Player player, float dt)
@@ -73,7 +73,7 @@ namespace Game.Logic
         public override void FixedUpdate(Player player, float dt)
         {
             // 控制角色朝向
-            if (player.role.animComponent.canRotate && GameInputMgr.S.moveVec.sqrMagnitude > 0.01f)
+            if (player.role.controlComponent.canRotate && GameInputMgr.S.moveVec.sqrMagnitude > 0.01f)
             {
                 player.controlComponent.roleForward = Vector3.Slerp(player.controlComponent.roleForward, new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y), 0.5f);
             }
@@ -105,25 +105,11 @@ namespace Game.Logic
             if (isMoving)
                 return;
 
-            if (!m_Player.role.animComponent.canAttack) return;
+            if (!m_Player.role.controlComponent.canAttack) return;
             // Debug.LogError("Attack");
-            m_Player.role.animComponent.canAttack = false;
+            m_Player.role.controlComponent.canAttack = false;
             m_Player.role.animComponent.SetLeftRight(1);
-            if (m_Player.role.animComponent.canCombo)
-            {
-                Debug.LogError("combo");
-                m_Player.role.animComponent.canCombo = false;
-                int nowAction = m_Player.role.animComponent.GetAction();
-                m_Player.role.animComponent.SetAction(nowAction + 1);
-            }
-            else
-            {
-                Debug.LogError("FirstAttack");
-                m_Player.role.animComponent.SetAction(1);
-            }
-
-            // m_Player.role.animComponent.SetAction(Random.Range(1, 4));
-            m_Player.role.animComponent.SetAttackTrigger();
+            m_Player.role.controlComponent.Attack();
         }
 
         private void OnAttackRPerformed(InputAction.CallbackContext callback)
@@ -132,8 +118,7 @@ namespace Game.Logic
             if (isMoving)
                 return;
             m_Player.role.animComponent.SetLeftRight(2);
-            m_Player.role.animComponent.SetAction(Random.Range(1, 4));
-            m_Player.role.animComponent.SetAttackTrigger();
+            m_Player.role.controlComponent.Attack();
         }
 
     }
