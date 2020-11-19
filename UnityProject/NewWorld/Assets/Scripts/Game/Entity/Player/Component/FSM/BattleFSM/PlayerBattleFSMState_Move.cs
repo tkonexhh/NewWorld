@@ -29,7 +29,7 @@ namespace Game.Logic
             m_Player = player;
             GameInputMgr.S.mainAction.AttackL.performed += OnAttackLPerformed;
             GameInputMgr.S.mainAction.AttackR.performed += OnAttackRPerformed;
-            m_Player.role.controlComponent.canAttack = true;
+            m_Player.role.controlComponent.firstAttack = true;
         }
 
         public override void Update(Player player, float dt)
@@ -105,9 +105,6 @@ namespace Game.Logic
             if (isMoving)
                 return;
 
-            if (!m_Player.role.controlComponent.canAttack) return;
-            // Debug.LogError("Attack");
-            m_Player.role.controlComponent.canAttack = false;
             m_Player.role.animComponent.SetLeftRight(1);
             m_Player.role.controlComponent.Attack();
         }

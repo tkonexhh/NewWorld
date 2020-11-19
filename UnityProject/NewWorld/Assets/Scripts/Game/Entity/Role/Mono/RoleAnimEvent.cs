@@ -18,6 +18,9 @@ namespace Game.Logic
     {
         private Role_Player m_Role;
         private Weapon m_CurWeapon;
+
+        public bool canCombo { get; set; }
+
         public void Init(Role_Player role)
         {
             m_Role = role;
@@ -41,22 +44,23 @@ namespace Game.Logic
 
         public void CanAttack()
         {
-            // Debug.LogError("CanAttack:");
-            m_Role.controlComponent.canAttack = true;
+            m_Role.controlComponent.firstAttack = true;
         }
 
-        public void CanCombo()
+        public void CanCombo(int value)
         {
-            // Debug.LogError("CanCombo:");
-            m_Role.controlComponent.canCombo = true;
+            canCombo = value == 1;
+            // Debug.LogError("CanCombo:" + canCombo);
         }
 
         public void Combo()
         {
-            if (m_Role.controlComponent.canCombo)
+            // Debug.LogError("Combo");
+            if (m_Role.controlComponent.desireToCombo)
             {
-                m_Role.controlComponent.canCombo = false;
-                m_Role.animComponent.ComboTrigger();
+                m_Role.controlComponent.desireToCombo = false;
+                m_CurWeapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
+                m_CurWeapon.Combo(m_Role);
             }
         }
 

@@ -24,6 +24,7 @@ namespace Game.Logic
         private RoleAnimEvent m_AnimEvent;
         private RoleControlComponent m_ControlComponent;
 
+        public RoleAnimEvent animEvent => m_AnimEvent;
         public RoleControlComponent controlComponent => m_ControlComponent;
 
         protected override void OnResLoaded(GameObject target)

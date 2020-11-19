@@ -30,8 +30,8 @@ namespace Game.Logic
         /// <value></value>
         public bool armed { get; private set; }
 
-        public bool canAttack { get; set; }
-        public bool canCombo { get; set; }
+        public bool firstAttack { get; set; }
+        public bool desireToCombo { get; set; }
         public bool canRotate { get; set; }
 
         public Run onWeaponSwitchComplete;
@@ -39,9 +39,9 @@ namespace Game.Logic
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
-            canAttack = true;
+            firstAttack = true;
+            desireToCombo = false;
             canRotate = true;
-            canCombo = false;
         }
 
         //TODO 当速度小于X时，Vel采用插值过渡，当Vel进入到跑步时候，采用急停
@@ -145,11 +145,24 @@ namespace Game.Logic
             //没有武装不能进行攻击
             if (!armed)
                 return;
-            // if (canAttack)
-            //     canCombo = false;
 
-            var weapon = role.equipComponent.GetWeapon();
-            weapon.Attack(role as Role_Player);
+            if (firstAttack)
+            {
+                firstAttack = false;
+                desireToCombo = false;
+                var weapon = role.equipComponent.GetWeapon();
+                weapon.Attack(role as Role_Player);
+            }
+            else
+            {
+                //检测动作是否在连击触发区间内
+                if ((role as Role_Player).animEvent.canCombo)
+                {
+                    desireToCombo = true;
+                    firstAttack = false;
+                }
+            }
+
         }
     }
 

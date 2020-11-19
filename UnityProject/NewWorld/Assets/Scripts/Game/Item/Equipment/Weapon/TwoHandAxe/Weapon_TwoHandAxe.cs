@@ -96,14 +96,13 @@ namespace Game.Logic
         public override void Attack(Role_Player role)
         {
             base.Attack(role);
+            role.animComponent.animator.CrossFade("AttackCombo", 0.2f, 0, 0);
+        }
 
-            if (role.controlComponent.canAttack)
-            {
-                role.controlComponent.canAttack = false;
-                role.controlComponent.canCombo = false;
-                role.animComponent.animator.CrossFade("AttackCombo", 0.2f, 0, 0);
-            }
-
+        public override void Combo(Role_Player role)
+        {
+            base.Combo(role);
+            role.animComponent.ComboTrigger();
         }
 
         public override void Hit(Role role)

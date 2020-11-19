@@ -29,6 +29,7 @@ namespace Game.Logic
         public virtual void UnBlock(Role role) { }
         public virtual void UnSheath(Role role) { }
         public virtual void Attack(Role_Player role) { }
+        public virtual void Combo(Role_Player role) { }
 
 
         public virtual void Sheath(Role role)
