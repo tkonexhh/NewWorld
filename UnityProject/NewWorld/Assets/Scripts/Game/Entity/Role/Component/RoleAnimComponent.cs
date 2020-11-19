@@ -58,7 +58,7 @@ namespace Game.Logic
         private string m_Key_Trigger_CastEnd = "CastEndTrigger";
         private string m_Key_Trigger_AttackKick = "AttackKickTrigger";
         private string m_Key_Trigger_Swim = "SwimTrigger";
-        private string m_Key_Trigger_CanCombo = "ComboTrigger";
+        private string m_Key_Trigger_Combo = "ComboTrigger";
 
         private int m_KeyHash_BoolMoving;
         private int m_KeyHash_BoolInjured;
@@ -85,7 +85,7 @@ namespace Game.Logic
         private int m_KeyHash_TriggerCastEnd;
         private int m_KeyHash_TriggerAttactKick;
         private int m_KeyHash_TriggerSwim;
-        private int m_KeyHash_TriggerCanCombo;
+        private int m_KeyHash_TriggerCombo;
 
         #endregion
 
@@ -120,7 +120,7 @@ namespace Game.Logic
             m_KeyHash_TriggerCastEnd = Animator.StringToHash(m_Key_Trigger_CastEnd);
             m_KeyHash_TriggerAttactKick = Animator.StringToHash(m_Key_Trigger_AttackKick);
             m_KeyHash_TriggerSwim = Animator.StringToHash(m_Key_Trigger_Swim);
-            m_KeyHash_TriggerCanCombo = Animator.StringToHash(m_Key_Trigger_CanCombo);
+            m_KeyHash_TriggerCombo = Animator.StringToHash(m_Key_Trigger_Combo);
             #endregion
         }
 
@@ -255,9 +255,9 @@ namespace Game.Logic
             SetTrigger(m_KeyHash_TriggerSwim);
         }
 
-        public void CanComboTrigger()
+        public void ComboTrigger()
         {
-            SetTrigger(m_KeyHash_TriggerCanCombo);
+            SetTrigger(m_KeyHash_TriggerCombo);
         }
 
         private void SetTrigger(int keyhash)

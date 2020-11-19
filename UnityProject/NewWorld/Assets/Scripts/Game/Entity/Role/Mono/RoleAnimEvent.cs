@@ -41,14 +41,23 @@ namespace Game.Logic
 
         public void CanAttack()
         {
-            Debug.LogError("CanAttack:");
+            // Debug.LogError("CanAttack:");
             m_Role.controlComponent.canAttack = true;
         }
 
         public void CanCombo()
         {
-            Debug.LogError("CanCombo:");
+            // Debug.LogError("CanCombo:");
             m_Role.controlComponent.canCombo = true;
+        }
+
+        public void Combo()
+        {
+            if (m_Role.controlComponent.canCombo)
+            {
+                m_Role.controlComponent.canCombo = false;
+                m_Role.animComponent.ComboTrigger();
+            }
         }
 
         public void CanRotate(int canRotate)
@@ -77,7 +86,7 @@ namespace Game.Logic
 
         public void WeaponSwitchComplete()
         {
-            // Debug.Log\Error("WeaponSwitchComplete");
+            // Debug.LogError("WeaponSwitchComplete");
             m_Role.controlComponent.WeaponSwitchComplete();
         }
 

@@ -3296,7 +3296,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 2Hand-Axe-Sheath-Back
-  m_Speed: 1.2
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7503485900578448881}
@@ -3309,8 +3309,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 2781760653709797403, guid: c3962559ccd0c4c208645dbf21cc4c4f,
-    type: 3}
+  m_Motion: {fileID: 7400000, guid: 166b0c1eb92bef242afb8b58b4769773, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -3627,7 +3626,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 30, y: 340, z: 0}
   m_EntryPosition: {x: 400, y: -110, z: 0}
-  m_ExitPosition: {x: 820, y: 280, z: 0}
+  m_ExitPosition: {x: 1110, y: 130, z: 0}
   m_ParentStateMachinePosition: {x: 390, y: -170, z: 0}
   m_DefaultState: {fileID: -7819119796099390592}
 --- !u!1102 &-4924633355340872109
@@ -3894,7 +3893,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.1
   m_TransitionOffset: 0
-  m_ExitTime: 0.6
+  m_ExitTime: 0.75
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -5536,6 +5535,14 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
+  - first: {fileID: -177810326644747418}
+    second:
+    - {fileID: -2963906196992857108}
+    - {fileID: 6919250883069187083}
+  - first: {fileID: -6519285689655740087}
+    second:
+    - {fileID: 4929330645486212273}
+    - {fileID: -8683839497975286089}
   - first: {fileID: -8701469058250121557}
     second:
     - {fileID: 8859692564698750610}
@@ -5546,14 +5553,6 @@ AnimatorStateMachine:
     second:
     - {fileID: 4188678214860035441}
     - {fileID: 3901285679858173273}
-  - first: {fileID: -6519285689655740087}
-    second:
-    - {fileID: 4929330645486212273}
-    - {fileID: -8683839497975286089}
-  - first: {fileID: -177810326644747418}
-    second:
-    - {fileID: -2963906196992857108}
-    - {fileID: 6919250883069187083}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 390, y: -20, z: 0}
   m_EntryPosition: {x: 80, y: 100, z: 0}
@@ -5669,18 +5668,18 @@ AnimatorStateMachine:
   - first: {fileID: -1988884344313049597}
     second:
     - {fileID: -7781855893540480895}
-  - first: {fileID: 7729330359480362577}
-    second:
-    - {fileID: 8298740478076248926}
-    - {fileID: 8959159903156225176}
-  - first: {fileID: -7402904088330761281}
-    second:
-    - {fileID: -4237665309775879641}
-    - {fileID: 2257825732672491862}
   - first: {fileID: 3486424626324075854}
     second:
     - {fileID: -5725583277941233832}
     - {fileID: -5479444572847345326}
+  - first: {fileID: -7402904088330761281}
+    second:
+    - {fileID: -4237665309775879641}
+    - {fileID: 2257825732672491862}
+  - first: {fileID: 7729330359480362577}
+    second:
+    - {fileID: 8298740478076248926}
+    - {fileID: 8959159903156225176}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 460, y: 30, z: 0}
   m_EntryPosition: {x: 90, y: 220, z: 0}
@@ -5980,14 +5979,14 @@ AnimatorStateMachine:
   - first: {fileID: 2757015133002976149}
     second:
     - {fileID: -8575090164853325739}
-  - first: {fileID: -2145573745927635304}
-    second:
-    - {fileID: 4208008555904052753}
-    - {fileID: 656770753575811008}
   - first: {fileID: -4496482064542081423}
     second:
     - {fileID: -2705523732569740186}
     - {fileID: -317465879907665590}
+  - first: {fileID: -2145573745927635304}
+    second:
+    - {fileID: 4208008555904052753}
+    - {fileID: 656770753575811008}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 580, y: 360, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
@@ -7156,7 +7155,7 @@ AnimatorStateMachine:
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: -9153043961295662718}
-    m_Position: {x: 410, y: -70, z: 0}
+    m_Position: {x: 400, y: -60, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
@@ -7758,145 +7757,145 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Injured
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Crouch
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Velocity X
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Velocity Z
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Hurt X
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Hurt Z
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: LeftRight
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Weapon
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: WeaponSwitch
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Action
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: -1
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: TurnLeftTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: TurnRightTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ActionTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ReviveTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: GetHurtTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: BlockBreakTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: CastTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: AttackCastTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: CastEndTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: AttackKickTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: SwimTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ClimbLadderTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ComboTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -8967,12 +8966,6 @@ AnimatorStateMachine:
   - first: {fileID: -448486111758831186}
     second:
     - {fileID: 4297280712317006357}
-  - first: {fileID: 7020894367282377278}
-    second:
-    - {fileID: 2267099158187733308}
-  - first: {fileID: -4133180309071076660}
-    second:
-    - {fileID: -1554355343688358916}
   - first: {fileID: 1670636672646896519}
     second:
     - {fileID: 7023639429521208559}
@@ -8981,10 +8974,6 @@ AnimatorStateMachine:
     second:
     - {fileID: -5209787106941063306}
     - {fileID: 2080715863489526097}
-  - first: {fileID: -2829572773356006195}
-    second:
-    - {fileID: 2021795899243637321}
-    - {fileID: 3130964069223663969}
   - first: {fileID: -4454594571958742761}
     second:
     - {fileID: 69096537790647581}
@@ -8993,6 +8982,16 @@ AnimatorStateMachine:
     second:
     - {fileID: 1985083762744139289}
     - {fileID: 3878924422304975212}
+  - first: {fileID: 7020894367282377278}
+    second:
+    - {fileID: 2267099158187733308}
+  - first: {fileID: -4133180309071076660}
+    second:
+    - {fileID: -1554355343688358916}
+  - first: {fileID: -2829572773356006195}
+    second:
+    - {fileID: 2021795899243637321}
+    - {fileID: 3130964069223663969}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: -180, y: 260, z: 0}
@@ -12352,7 +12351,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 2Hand-Axe-Unsheath-Back
-  m_Speed: 1.2
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4591984685946761345}
@@ -12365,8 +12364,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 9060655724930118553, guid: 6321574864b0048ebaaf349793932281,
-    type: 3}
+  m_Motion: {fileID: 7400000, guid: 7bd1cbaed89606444a440dfadd052f7c, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

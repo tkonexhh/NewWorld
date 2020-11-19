@@ -147,6 +147,7 @@ namespace Game.Logic
                 return;
             // if (canAttack)
             //     canCombo = false;
+
             var weapon = role.equipComponent.GetWeapon();
             weapon.Attack(role as Role_Player);
         }

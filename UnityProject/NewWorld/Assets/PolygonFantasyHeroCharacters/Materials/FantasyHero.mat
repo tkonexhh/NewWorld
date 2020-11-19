@@ -125,6 +125,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_2EB47423: 2.55
     - _BodyArt_Amount: 0.4958654
     - _Emission: 0
     - _Emmision: 0

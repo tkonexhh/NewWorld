@@ -16,6 +16,7 @@ namespace Game.Logic
 {
     public class RoleAnimTestPanel : MonoBehaviour
     {
+        [SerializeField] private RoleCommonTest m_Common;
         [SerializeField] private RoleWeaponTest m_Weapon;
         [SerializeField] private RoleMoveTest m_Move;
         [SerializeField] private RoleActionTest m_Action;
@@ -34,6 +35,7 @@ namespace Game.Logic
             m_Role.onRoleCreated += (r) =>
             {
                 r.transform.rotation = Quaternion.Euler(0, 150, 0);
+                m_Common.Init(this);
                 m_Weapon.Init(this);
                 m_Move.Init(this);
                 m_Action.Init(this);
