@@ -22,6 +22,7 @@ namespace Game.Logic
         [SerializeField] private Slider m_SliderVelX;
         [SerializeField] private TextMeshProUGUI m_TMPVelZ;
         [SerializeField] private TextMeshProUGUI m_TMPVelX;
+        [SerializeField] private Button m_BtnRoll;
 
         float m_SpeedZ;
         float m_SpeedX;
@@ -41,6 +42,7 @@ namespace Game.Logic
             OnVelXChange(0.5f);
 
             m_BtnReset.onClick.AddListener(OnClickReset);
+            m_BtnRoll.onClick.AddListener(OnClickRoll);
         }
 
         private void OnClickReset()
@@ -95,7 +97,10 @@ namespace Game.Logic
             role.controlComponent.RunToStop();
         }
 
-
+        private void OnClickRoll()
+        {
+            role.controlComponent.Roll();
+        }
     }
 
 }

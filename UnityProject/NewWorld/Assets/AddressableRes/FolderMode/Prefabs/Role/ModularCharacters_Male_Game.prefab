@@ -34,7 +34,7 @@ MonoBehaviour:
     rootSphereCastRadius: 0.1
     overstepFallsDown: 1
     quality: 2
-  ik: {fileID: 3288805013245140579, guid: 64aa4b83d87a742b8a6f6cb2d320fc3f, type: 3}
+  ik: {fileID: 3288805013245140579}
   spineBend: 2
   spineSpeed: 3
   spine:
@@ -127,6 +127,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ModularCharacters_Male_Game
       objectReference: {fileID: 0}
+    - target: {fileID: 7666273751980746772, guid: 37a17d93ea857464799b21d70b00a57a,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 8411fbf95d46f4a47a6c965c7da7daa2, type: 2}
     - target: {fileID: 7687292295139696810, guid: 37a17d93ea857464799b21d70b00a57a,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -150,3 +155,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7025653396078902366}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3288805013245140579 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5486523673626845757, guid: 37a17d93ea857464799b21d70b00a57a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7025653396078902366}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856864625733102410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70e525c82ce9413fa4d940ad7fcf1db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

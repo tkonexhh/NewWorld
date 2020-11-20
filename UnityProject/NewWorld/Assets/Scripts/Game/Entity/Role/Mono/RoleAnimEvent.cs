@@ -56,11 +56,20 @@ namespace Game.Logic
         public void Combo()
         {
             // Debug.LogError("Combo");
-            if (m_Role.controlComponent.desireToCombo)
+            // if (m_Role.controlComponent.desireToCombo)
+            // {
+            //     m_Role.controlComponent.desireToCombo = false;
+            //     m_CurWeapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
+            //     m_CurWeapon.Combo(m_Role);
+            // }
+
+            if (m_Role.controlComponent.attackType != AttackTypeEnum.None)
             {
-                m_Role.controlComponent.desireToCombo = false;
+
+                // m_Role.controlComponent.desireToCombo = false;
                 m_CurWeapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
                 m_CurWeapon.Combo(m_Role);
+                m_Role.controlComponent.attackType = AttackTypeEnum.None;
             }
         }
 
@@ -108,6 +117,12 @@ namespace Game.Logic
             m_CurWeapon.AttachToOrigin();
             m_Role.iKComponent.rightHandIK.SetFocusTarget(null);
             m_CurWeapon = null;
+        }
+
+
+        public void RollComplete()
+        {
+            m_Role.controlComponent.rolling = false;
         }
 
     }

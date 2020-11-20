@@ -31,10 +31,7 @@ namespace Game.Logic
             //2双手矛
             //3双手斧
             player.role.animComponent.SetWeaponSwitch(-1);
-
-
-            //不同的动画层不要用trigger来触发，只会触发一次，trigger会被吞掉，直接使用play来暂时解决
-            WeaponUnSheath();
+            m_Player.role.controlComponent.Arm();
 
             if (m_FSM == null)
             {
@@ -65,24 +62,7 @@ namespace Game.Logic
 
         public override void Exit(Player player)
         {
-
-            // player.role.animComponent.SetWeaponSwitch(-1);
-            // player.role.animComponent.SetWeapon(3);
-
-            // entity.animComponent.animator.CrossFade();
-            //下半身动画也需要插值到Idle动画
-            bool isMoving = player.role.animComponent.GetMoving();
-            if (isMoving)
-            {
-                player.role.animComponent.animator.CrossFade("Relax-Movement", 0.25f, 0, 0.4f);
-            }
-            else
-            {
-                player.role.animComponent.animator.CrossFade("Idle", 0.25f, 0, 0.4f);
-            }
-
-
-            WeaponSheath();
+            player.role.controlComponent.UnArm();
         }
 
         public override void OnMsg(Player entity, int key, params object[] args)
@@ -92,24 +72,6 @@ namespace Game.Logic
         public void SetBattleState(RoleBattleState state)
         {
             m_FSM.SetCurrentStateByID(state);
-        }
-
-        /// <summary>
-        /// 伸手拿武器
-        /// </summary>
-        private void WeaponUnSheath()
-        {
-            var weapon = m_Player.role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
-            weapon.UnSheath(m_Player.role);
-        }
-
-        /// <summary>
-        /// 把武器放回去
-        /// </summary>
-        private void WeaponSheath()
-        {
-            var weapon = m_Player.role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
-            weapon.Sheath(m_Player.role);
         }
 
     }

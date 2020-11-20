@@ -424,7 +424,86 @@ ModelImporter:
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
+      curves:
+      - name: animSpeed
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.15833434
+            value: 1
+            inSlope: 0.006686922
+            outSlope: 0.006686922
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.23461899
+          - serializedVersion: 3
+            time: 0.23659463
+            value: 0.19799808
+            inSlope: -0.0029173759
+            outSlope: -0.0029173759
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.73060566
+            outWeight: 1
+          - serializedVersion: 3
+            time: 0.34124982
+            value: 1.0019569
+            inSlope: -0.0005205853
+            outSlope: -0.0005205853
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.328557
+          - serializedVersion: 3
+            time: 0.58019286
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.64175403
+            value: 0.15
+            inSlope: -0.0027402458
+            outSlope: -0.0027402458
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.6986519
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          preInfinity: 2
+          postInfinity: 2
+          rotationOrder: 4
       events:
       - time: 0.4172727
         functionName: Hit

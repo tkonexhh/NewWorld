@@ -38,7 +38,6 @@ namespace Game.Logic
         private string m_Key_BoolCrouch = "Crouch";
 
         private string m_Key_IntAction = "Action";
-        private string m_Key_IntLeftRight = "LeftRight";
         private string m_Key_IntWeapon = "Weapon";
         private string m_Key_IntWeaponSwitch = "WeaponSwitch";
 
@@ -59,13 +58,13 @@ namespace Game.Logic
         private string m_Key_Trigger_AttackKick = "AttackKickTrigger";
         private string m_Key_Trigger_Swim = "SwimTrigger";
         private string m_Key_Trigger_Combo = "ComboTrigger";
+        private string m_Key_Trigger_Combo2 = "Combo2Trigger";
 
         private int m_KeyHash_BoolMoving;
         private int m_KeyHash_BoolInjured;
         private int m_KeyHash_BoolCrouch;
 
         private int m_KeyHash_IntAction;
-        private int m_KeyHash_IntLeftRight;
         private int m_KeyHash_IntWeapon;
         private int m_KeyHash_IntWeaponSwitch;
 
@@ -86,6 +85,7 @@ namespace Game.Logic
         private int m_KeyHash_TriggerAttactKick;
         private int m_KeyHash_TriggerSwim;
         private int m_KeyHash_TriggerCombo;
+        private int m_KeyHash_TriggerCombo2;
 
         #endregion
 
@@ -102,7 +102,6 @@ namespace Game.Logic
             m_KeyHash_BoolInjured = Animator.StringToHash(m_Key_BoolInjured);
             m_KeyHash_BoolCrouch = Animator.StringToHash(m_Key_BoolCrouch);
             m_KeyHash_IntAction = Animator.StringToHash(m_Key_IntAction);
-            m_KeyHash_IntLeftRight = Animator.StringToHash(m_Key_IntLeftRight);
             m_KeyHash_IntWeapon = Animator.StringToHash(m_Key_IntWeapon);
             m_KeyHash_IntWeaponSwitch = Animator.StringToHash(m_Key_IntWeaponSwitch);
             m_KeyHash_FloatVelocityX = Animator.StringToHash(m_Key_FloatVelocityX);
@@ -121,6 +120,7 @@ namespace Game.Logic
             m_KeyHash_TriggerAttactKick = Animator.StringToHash(m_Key_Trigger_AttackKick);
             m_KeyHash_TriggerSwim = Animator.StringToHash(m_Key_Trigger_Swim);
             m_KeyHash_TriggerCombo = Animator.StringToHash(m_Key_Trigger_Combo);
+            m_KeyHash_TriggerCombo2 = Animator.StringToHash(m_Key_Trigger_Combo2);
             #endregion
         }
 
@@ -179,18 +179,6 @@ namespace Game.Logic
         public int GetAction()
         {
             return m_Animator.GetInteger(m_KeyHash_IntAction);
-        }
-
-        /// <summary>
-        /// 0 null
-        /// 1 left 左手
-        /// 2 right 右手
-        /// 3 double 双手
-        /// </summary>
-        /// <param name="leftorRight"></param>
-        public void SetLeftRight(int leftorRight)
-        {
-            m_Animator.SetInteger(m_KeyHash_IntLeftRight, leftorRight);
         }
 
         /// <summary>
@@ -258,6 +246,11 @@ namespace Game.Logic
         public void ComboTrigger()
         {
             SetTrigger(m_KeyHash_TriggerCombo);
+        }
+
+        public void Combo2Trigger()
+        {
+            SetTrigger(m_KeyHash_TriggerCombo2);
         }
 
         private void SetTrigger(int keyhash)

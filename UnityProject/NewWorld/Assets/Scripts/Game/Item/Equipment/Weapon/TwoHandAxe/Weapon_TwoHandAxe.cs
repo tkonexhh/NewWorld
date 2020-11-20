@@ -99,10 +99,54 @@ namespace Game.Logic
             role.animComponent.animator.CrossFade("AttackCombo", 0.2f, 0, 0);
         }
 
+        public override void Attack2(Role_Player role)
+        {
+            base.Attack2(role);
+            role.animComponent.animator.CrossFade("Attack2Combo", 0.2f, 0, 0);
+        }
+
         public override void Combo(Role_Player role)
         {
             base.Combo(role);
-            role.animComponent.ComboTrigger();
+            if (role.controlComponent.attackType == AttackTypeEnum.Light)
+            {
+                role.animComponent.ComboTrigger();
+            }
+            else if (role.controlComponent.attackType == AttackTypeEnum.Heavy)
+            {
+                role.animComponent.Combo2Trigger();
+            }
+
+        }
+
+        public override void SpecialAttackStart(Role_Player role)
+        {
+            role.animComponent.animator.CrossFade("Special_Start", 0.1f, 0, 0);
+        }
+
+        public override void SpecialAttackEnd(Role_Player role)
+        {
+            role.animComponent.animator.CrossFade("Special_End", 0.2f, 0, 0);
+        }
+
+        public override void Roll(Role_Player role, RollDir dir)
+        {
+            switch (dir)
+            {
+                case RollDir.Forward:
+                    role.animComponent.animator.CrossFade("2Hand-Axe-Roll-Forward", 0.2f, 0, 0);
+                    break;
+                case RollDir.Backward:
+                    role.animComponent.animator.CrossFade("2Hand-Axe-Roll-Backward", 0.2f, 0, 0);
+                    break;
+                case RollDir.Left:
+                    role.animComponent.animator.CrossFade("2Hand-Axe-Roll-Left", 0.2f, 0, 0);
+                    break;
+                case RollDir.Right:
+                    role.animComponent.animator.CrossFade("2Hand-Axe-Roll-Right", 0.2f, 0, 0);
+                    break;
+            }
+
         }
 
         public override void Hit(Role role)

@@ -11,9 +11,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using GFrame;
 using System;
+using Random = UnityEngine.Random;
 
 namespace Game.Logic
 {
+    public enum AttackTypeEnum
+    {
+        None,
+        Light,//轻攻击
+        Heavy,//重攻击
+    }
     public class RoleControlComponent : RoleBaseComponent
     {
         private bool m_DesiredToArm = false;
@@ -31,8 +38,14 @@ namespace Game.Logic
         public bool armed { get; private set; }
 
         public bool firstAttack { get; set; }
-        public bool desireToCombo { get; set; }
+        public AttackTypeEnum attackType { get; set; }
         public bool canRotate { get; set; }
+
+        /// <summary>
+        /// 是否翻滚中
+        /// </summary>
+        /// <value></value>
+        public bool rolling { get; set; }
 
         public Run onWeaponSwitchComplete;
 
@@ -40,7 +53,8 @@ namespace Game.Logic
         {
             base.Init(ownner);
             firstAttack = true;
-            desireToCombo = false;
+            // desireToCombo = false;
+            attackType = AttackTypeEnum.None;
             canRotate = true;
         }
 
@@ -149,7 +163,8 @@ namespace Game.Logic
             if (firstAttack)
             {
                 firstAttack = false;
-                desireToCombo = false;
+                // desireToCombo = false;
+                attackType = AttackTypeEnum.None;
                 var weapon = role.equipComponent.GetWeapon();
                 weapon.Attack(role as Role_Player);
             }
@@ -158,11 +173,71 @@ namespace Game.Logic
                 //检测动作是否在连击触发区间内
                 if ((role as Role_Player).animEvent.canCombo)
                 {
-                    desireToCombo = true;
+                    // desireToCombo = true;
+                    attackType = AttackTypeEnum.Light;
                     firstAttack = false;
                 }
             }
+        }
 
+        public void Attack2()
+        {
+            //没有武装不能进行攻击
+            if (!armed)
+                return;
+
+            if (firstAttack)
+            {
+                firstAttack = false;
+                // desireToCombo = false;
+                attackType = AttackTypeEnum.None;
+                var weapon = role.equipComponent.GetWeapon();
+                weapon.Attack2(role as Role_Player);
+            }
+            else
+            {
+                //检测动作是否在连击触发区间内
+                if ((role as Role_Player).animEvent.canCombo)
+                {
+                    // desireToCombo = true;
+                    attackType = AttackTypeEnum.Heavy;
+                    firstAttack = false;
+                }
+            }
+        }
+
+        public void SpecialAttackStart()
+        {
+            if (!armed)
+                return;
+
+            var weapon = role.equipComponent.GetWeapon();
+            weapon.SpecialAttackStart(role as Role_Player);
+
+        }
+
+        public void SpecialAttackEnd()
+        {
+            if (!armed)
+                return;
+
+            var weapon = role.equipComponent.GetWeapon();
+            weapon.SpecialAttackEnd(role as Role_Player);
+        }
+
+        public void Roll()
+        {
+            //TODO 暂时改成只有武器才能翻滚
+            if (!armed)
+                return;
+
+            //如果正在翻滚就不能在翻滚了
+            if (rolling)
+                return;
+
+            rolling = true;
+            var weapon = role.equipComponent.GetWeapon();
+            weapon.Roll(role as Role_Player, (RollDir)Random.Range(0, 4));
         }
     }
 

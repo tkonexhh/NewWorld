@@ -29,7 +29,12 @@ namespace Game.Logic
         public virtual void UnBlock(Role role) { }
         public virtual void UnSheath(Role role) { }
         public virtual void Attack(Role_Player role) { }
+        public virtual void Attack2(Role_Player role) { }
         public virtual void Combo(Role_Player role) { }
+        public virtual void SpecialAttackStart(Role_Player role) { }
+        public virtual void SpecialAttackEnd(Role_Player role) { }
+        public virtual void Roll(Role_Player role, RollDir dir) { }
+
 
 
         public virtual void Sheath(Role role)

@@ -105,7 +105,7 @@ namespace Game.Logic
             if (isMoving)
                 return;
 
-            m_Player.role.animComponent.SetLeftRight(1);
+            // m_Player.role.animComponent.SetLeftRight(1);
             m_Player.role.controlComponent.Attack();
         }
 
@@ -114,7 +114,7 @@ namespace Game.Logic
             bool isMoving = m_Player.role.animComponent.GetMoving();
             if (isMoving)
                 return;
-            m_Player.role.animComponent.SetLeftRight(2);
+            // m_Player.role.animComponent.SetLeftRight(2);
             m_Player.role.controlComponent.Attack();
         }
 
