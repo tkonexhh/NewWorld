@@ -77,11 +77,62 @@ namespace Game.Logic
         public override void FixedExcute(float dt)
         {
             m_FSM?.FixedUpdateState(dt);
+
+            if (player.role.controlComponent.canRotate)
+            {
+                HandleRotation(dt);
+            }
+
+            if (player.role.controlComponent.canMove)
+            {
+                HandleMove(dt);
+            }
+
         }
 
         public void SetControlState(ControlState state)
         {
             m_FSM.SetCurrentStateByID(state);
+        }
+
+
+        private Vector3 normalVector;
+        private void HandleMove(float dt)
+        {
+            Vector3 targetDir = Vector3.zero;
+            targetDir = GameCameraMgr.S.mainCamera.transform.forward * GameInputMgr.S.moveInput.y;
+            targetDir += GameCameraMgr.S.mainCamera.transform.right * GameInputMgr.S.moveInput.x;
+            targetDir.Normalize();
+            targetDir.y = 0;
+
+            float speed = player.role.data.baseData.walkSpeed;
+            targetDir *= speed;
+
+            Vector3 projectedVel = Vector3.ProjectOnPlane(targetDir, normalVector);
+            player.monoReference.rigidbody.velocity = projectedVel;
+        }
+
+        private void HandleRotation(float dt)
+        {
+            Vector3 targetDir = Vector3.zero;
+            float moveOverride = GameInputMgr.S.moveAmount;
+
+            targetDir = GameCameraMgr.S.mainCamera.transform.forward * GameInputMgr.S.moveInput.y;
+            targetDir += GameCameraMgr.S.mainCamera.transform.right * GameInputMgr.S.moveInput.x;
+            targetDir.Normalize();
+
+            targetDir.y = 0;
+
+
+            if (targetDir == Vector3.zero)
+            {
+                targetDir = forward;
+            }
+
+            float rs = 10;
+            Quaternion tr = Quaternion.LookRotation(targetDir);
+            Quaternion targetRotation = Quaternion.Slerp(player.transform.rotation, tr, rs * dt);
+            player.transform.rotation = targetRotation;
         }
     }
 }

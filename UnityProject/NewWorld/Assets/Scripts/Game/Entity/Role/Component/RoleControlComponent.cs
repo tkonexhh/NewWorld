@@ -40,6 +40,7 @@ namespace Game.Logic
         public bool firstAttack { get; set; }
         public AttackTypeEnum attackType { get; set; }
         public bool canRotate { get; set; }
+        public bool canMove { get; set; }
 
         /// <summary>
         /// 是否翻滚中
@@ -62,6 +63,7 @@ namespace Game.Logic
             // desireToCombo = false;
             attackType = AttackTypeEnum.None;
             canRotate = true;
+            canMove = true;
         }
 
         //TODO 当速度小于X时，Vel采用插值过渡，当Vel进入到跑步时候，采用急停

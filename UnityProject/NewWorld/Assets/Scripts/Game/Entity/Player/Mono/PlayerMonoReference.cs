@@ -17,6 +17,7 @@ namespace Game.Logic
     {
         public Rigidbody rigidbody;
         public CapsuleCollider rigidbodyCollider;
+        public Transform cameraLookPoint;
 
         public Run<Collision> onCollisionEnter;
         public Run<Collision> onCollisionExit;

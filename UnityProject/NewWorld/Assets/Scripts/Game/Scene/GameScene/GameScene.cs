@@ -17,7 +17,7 @@ namespace Game.Logic
 {
     public class GameScene : AbstractScene
     {
-        [SerializeField] private CinemachineVirtualCamera m_CameraPlayer;
+        [SerializeField] private CinemachineFreeLook m_CameraPlayer;
 
         protected override void OnSceneInit()
         {
@@ -31,8 +31,7 @@ namespace Game.Logic
             PlayerMgr.S.player.onPlayerCreated += (player) =>
             {
                 player.role.transform.SetXYZ(Vector3.zero);
-                // m_CameraPlayer.Follow = role.transform;
-                // m_CameraPlayer.LookAt = role.transform;
+                GameCameraMgr.S.InitFreeLook(m_CameraPlayer);
             };
         }
     }

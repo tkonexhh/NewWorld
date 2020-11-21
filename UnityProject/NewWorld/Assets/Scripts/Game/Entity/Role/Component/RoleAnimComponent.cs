@@ -95,7 +95,7 @@ namespace Game.Logic
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
-            m_Animator = role.gameObject.GetComponentInChildren<Animator>();
+            m_Animator = role.monoReference.animator;
 
             #region key keyhash
             m_KeyHash_BoolMoving = Animator.StringToHash(m_Key_BoolMoving);
@@ -126,20 +126,75 @@ namespace Game.Logic
 
 
         #region Setter
-        public void SetVelocity(Vector2 vec)
+        public void SetVelocity(float x, float z)
         {
-            SetVelocityX(vec.x);
-            SetVelocityZ(vec.y);
+            float vX = 0;
+            float max = 6;
+            if (x > 0 && x < 0.55f)
+            {
+                vX = 0.5f;
+            }
+            else if (x > 0.55f)
+            {
+                vX = 1;
+            }
+            else if (x < 0 && x > -0.55f)
+            {
+                vX = -0.5f;
+            }
+            else if (x < -0.55f)
+            {
+                vX = -1;
+            }
+
+            float vZ = 0;
+            if (z > 0 && z < 0.55f)
+            {
+                vZ = 0.5f;
+            }
+            else if (z > 0.55f)
+            {
+                vZ = 1;
+            }
+            else if (z < 0 && z > -0.55f)
+            {
+                vZ = -0.5f;
+            }
+            else if (z < -0.55f)
+            {
+                vZ = -1;
+            }
+
+            m_Animator.SetFloat(m_KeyHash_FloatVelocityX, vX, 0.1f, Time.deltaTime);
+            m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, vZ, 0.1f, Time.deltaTime);
         }
 
         public void SetVelocityX(float x)
         {
-            m_Animator.SetFloat(m_KeyHash_FloatVelocityX, x);
+            m_Animator.SetFloat(m_KeyHash_FloatVelocityX, x, 0.1f, Time.deltaTime);
         }
 
         public void SetVelocityZ(float z)
         {
-            m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, z);
+            float vZ = 0;
+            if (z > 0 && z < 0.55f)
+            {
+                vZ = 0.5f;
+            }
+            else if (z > 0.55f)
+            {
+                vZ = 1;
+            }
+            else if (z < 0 && z > -0.55f)
+            {
+                vZ = -0.5f;
+            }
+            else if (z < -0.55f)
+            {
+                vZ = -1;
+            }
+            vZ *= 3;
+            m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, vZ, 0.1f, Time.deltaTime);
         }
 
         public void SetHurt(Vector2 vec)

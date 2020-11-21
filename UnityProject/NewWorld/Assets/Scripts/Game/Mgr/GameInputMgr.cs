@@ -35,7 +35,7 @@ namespace Game.Logic
 
         public Vector2 moveInput { get; private set; }
         public Vector2 cameraInput { get; private set; }
-
+        public float moveAmount { get; private set; }
 
         public override void OnSingletonInit()
         {
@@ -66,7 +66,7 @@ namespace Game.Logic
         {
             moveInput = mainAction.Move.ReadValue<Vector2>();
             moveVec = Vector2.SmoothDamp(moveVec, moveInput, ref m_VelMoveInput, moveSensitivity * Time.deltaTime);
-
+            moveAmount = Mathf.Clamp01(Mathf.Abs(moveVec.x) + Mathf.Abs(moveVec.y));
             cameraInput = mainAction.Camera.ReadValue<Vector2>();
         }
 

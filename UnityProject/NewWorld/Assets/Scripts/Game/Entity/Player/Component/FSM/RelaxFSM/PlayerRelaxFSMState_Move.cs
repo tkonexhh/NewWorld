@@ -53,15 +53,7 @@ namespace Game.Logic
         public override void FixedUpdate(Player player, float dt)
         {
             // 控制角色朝向
-            // if (player.role.controlComponent.canRotate)
-            // {
-            //     Vector2 velXZ = new Vector2(player.controlComponent.velocity.x, player.controlComponent.velocity.z);
-            //     if (velXZ.sqrMagnitude > 0.01f)
-            //     {
-            //         player.controlComponent.roleForward = Vector3.Slerp(player.controlComponent.roleForward, new Vector3(velXZ.x, 0, velXZ.y), 0.5f);
-            //     }
-            // }
-            player.role.animComponent.SetVelocityZ(player.controlComponent.velocity.sqrMagnitude);
+            player.role.animComponent.SetVelocityZ(GameInputMgr.S.moveAmount);
         }
 
         public override void Exit(Player player)

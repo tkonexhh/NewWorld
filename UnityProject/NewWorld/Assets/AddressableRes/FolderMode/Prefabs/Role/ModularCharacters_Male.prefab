@@ -6317,6 +6317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608965828b36447df91dc40bb00392cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 7666273751980746772}
+  headLook: {fileID: 93402615808433575}
   lookAtIK: {fileID: 1994951727415176959}
   lookTarget: {fileID: 0}
   fullBodyIK: {fileID: 5486523673626845757}
@@ -7725,6 +7727,36 @@ MonoBehaviour:
     m_MaintainTargetRotationOffset: 1
   m_SourceObjectsGUIToggle: 1
   m_SettingsGUIToggle: 1
+--- !u!1 &8499334434251654678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 93402615808433575}
+  m_Layer: 9
+  m_Name: HeadLook
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &93402615808433575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8499334434251654678}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.613, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7937820238030145619}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9085434912421232658
 GameObject:
   m_ObjectHideFlags: 0
@@ -7815,6 +7847,7 @@ Transform:
   - {fileID: 3097633424160900383}
   - {fileID: 4447674124832697633}
   - {fileID: 6968812957375457637}
+  - {fileID: 93402615808433575}
   m_Father: {fileID: 7666273751970890548}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
