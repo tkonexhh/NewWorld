@@ -45,6 +45,14 @@ namespace Game.Logic
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""55a558af-49db-4e3a-8c30-947690179d7e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Any"",
                     ""type"": ""Button"",
                     ""id"": ""92f933a8-6bd2-4500-b0c7-ed1c9f97f06b"",
@@ -262,6 +270,17 @@ namespace Game.Logic
                     ""processors"": ""StickDeadzone"",
                     ""groups"": """",
                     ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dfbee602-f29e-407a-b5f5-17b3669af112"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -500,6 +519,7 @@ namespace Game.Logic
             m_Main_Camera = m_Main.FindAction("Camera", throwIfNotFound: true);
             m_Main_Move = m_Main.FindAction("Move", throwIfNotFound: true);
             m_Main_Jump = m_Main.FindAction("Jump", throwIfNotFound: true);
+            m_Main_Roll = m_Main.FindAction("Roll", throwIfNotFound: true);
             m_Main_Any = m_Main.FindAction("Any", throwIfNotFound: true);
             m_Main_Run = m_Main.FindAction("Run", throwIfNotFound: true);
             m_Main_AttackL = m_Main.FindAction("AttackL", throwIfNotFound: true);
@@ -564,6 +584,7 @@ namespace Game.Logic
         private readonly InputAction m_Main_Camera;
         private readonly InputAction m_Main_Move;
         private readonly InputAction m_Main_Jump;
+        private readonly InputAction m_Main_Roll;
         private readonly InputAction m_Main_Any;
         private readonly InputAction m_Main_Run;
         private readonly InputAction m_Main_AttackL;
@@ -575,6 +596,7 @@ namespace Game.Logic
             public InputAction @Camera => m_Wrapper.m_Main_Camera;
             public InputAction @Move => m_Wrapper.m_Main_Move;
             public InputAction @Jump => m_Wrapper.m_Main_Jump;
+            public InputAction @Roll => m_Wrapper.m_Main_Roll;
             public InputAction @Any => m_Wrapper.m_Main_Any;
             public InputAction @Run => m_Wrapper.m_Main_Run;
             public InputAction @AttackL => m_Wrapper.m_Main_AttackL;
@@ -597,6 +619,9 @@ namespace Game.Logic
                     @Jump.started -= m_Wrapper.m_MainActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnJump;
+                    @Roll.started -= m_Wrapper.m_MainActionsCallbackInterface.OnRoll;
+                    @Roll.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnRoll;
+                    @Roll.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnRoll;
                     @Any.started -= m_Wrapper.m_MainActionsCallbackInterface.OnAny;
                     @Any.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnAny;
                     @Any.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnAny;
@@ -622,6 +647,9 @@ namespace Game.Logic
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
+                    @Roll.started += instance.OnRoll;
+                    @Roll.performed += instance.OnRoll;
+                    @Roll.canceled += instance.OnRoll;
                     @Any.started += instance.OnAny;
                     @Any.performed += instance.OnAny;
                     @Any.canceled += instance.OnAny;
@@ -734,6 +762,7 @@ namespace Game.Logic
             void OnCamera(InputAction.CallbackContext context);
             void OnMove(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnRoll(InputAction.CallbackContext context);
             void OnAny(InputAction.CallbackContext context);
             void OnRun(InputAction.CallbackContext context);
             void OnAttackL(InputAction.CallbackContext context);

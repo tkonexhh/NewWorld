@@ -30,6 +30,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Roll",
+                    "type": "Button",
+                    "id": "55a558af-49db-4e3a-8c30-947690179d7e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Any",
                     "type": "Button",
                     "id": "92f933a8-6bd2-4500-b0c7-ed1c9f97f06b",
@@ -247,6 +255,17 @@
                     "processors": "StickDeadzone",
                     "groups": "",
                     "action": "Camera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dfbee602-f29e-407a-b5f5-17b3669af112",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

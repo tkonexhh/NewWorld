@@ -113,6 +113,7 @@ namespace Game.Logic
         public void RollComplete()
         {
             m_Role.controlComponent.rolling = false;
+            m_Role.monoReference.animator.applyRootMotion = false;
         }
 
         public void DodgeComplete()

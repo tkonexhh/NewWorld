@@ -26,10 +26,10 @@ namespace Game.Logic
 
         public override void Update(Player player, float dt)
         {
-            if (Input.GetKeyDown(KeyCode.Z))
-            {
-                player.fsmComponent.SetRoleState(RoleState.Death);
-            }
+            // if (Input.GetKeyDown(KeyCode.Z))
+            // {
+            //     player.fsmComponent.SetRoleState(RoleState.Death);
+            // }
 
             if (Input.GetKeyDown(KeyCode.X))
             {

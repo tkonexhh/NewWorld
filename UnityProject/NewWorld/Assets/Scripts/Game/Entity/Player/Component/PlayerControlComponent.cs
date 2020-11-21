@@ -61,6 +61,8 @@ namespace Game.Logic
         {
             base.Init(ownner);
             player = (Player)ownner;
+            GameInputMgr.S.mainAction.Roll.performed += i => player.role.controlComponent.Roll();
+            player.role.monoReference.onAnimatorMove += OnAnimatorMove;
             // m_FSM = new FSMStateMachine<Player>(player);
             // m_FSM.stateFactory = new FSMStateFactory<Player>(false);
             // m_FSM.stateFactory.RegisterState(ControlState.Ground, new PlayerControlFSMState_Ground());
@@ -83,7 +85,7 @@ namespace Game.Logic
                 HandleRotation(dt);
             }
 
-            if (player.role.controlComponent.canMove)
+            if (player.role.controlComponent.canMove && !player.role.controlComponent.rolling)
             {
                 HandleMove(dt);
             }
@@ -133,6 +135,16 @@ namespace Game.Logic
             Quaternion tr = Quaternion.LookRotation(targetDir);
             Quaternion targetRotation = Quaternion.Slerp(player.transform.rotation, tr, rs * dt);
             player.transform.rotation = targetRotation;
+        }
+
+
+        private void OnAnimatorMove(Vector3 deletaPos)
+        {
+            //drag加速度
+            player.monoReference.rigidbody.drag = 0;
+            deletaPos.y = 0;
+            Vector3 vel = deletaPos / Time.deltaTime;
+            velocity = vel;
         }
     }
 }

@@ -244,6 +244,8 @@ namespace Game.Logic
                 return;
 
             rolling = true;
+            //翻滚的时候使用apply motion
+            role.monoReference.animator.applyRootMotion = true;
             var weapon = role.equipComponent.GetWeapon();
             weapon.Roll(role as Role_Player, (RollDir)Random.Range(0, 4));
         }
