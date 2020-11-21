@@ -24,35 +24,16 @@ namespace Game.Logic
     public class RoleControlComponent : RoleBaseComponent
     {
         private bool m_DesiredToArm = false;
-
-        /// <summary>
-        /// 正在切换武器中
-        /// </summary>
-        /// <value></value>
-        public bool weaponSwitching { get; private set; }
-
-        /// <summary>
-        /// 是否装备武器
-        /// </summary>
-        /// <value></value>
-        public bool armed { get; private set; }
+        public bool weaponSwitching { get; private set; }// 正在切换武器中
+        public bool armed { get; private set; }// 是否装备武器
 
         public bool firstAttack { get; set; }
         public AttackTypeEnum attackType { get; set; }
         public bool canRotate { get; set; }
         public bool canMove { get; set; }
-
-        /// <summary>
-        /// 是否翻滚中
-        /// </summary>
-        /// <value></value>
-        public bool rolling { get; set; }
-
-        /// <summary>
-        /// 闪避中
-        /// </summary>
-        /// <value></value>
-        public bool dodgeing { get; set; }
+        public bool running { get; set; }
+        public bool rolling { get; set; }//是否翻滚中
+        public bool dodgeing { get; set; }// 闪避中
 
         public Run onWeaponSwitchComplete;
 
@@ -64,6 +45,20 @@ namespace Game.Logic
             attackType = AttackTypeEnum.None;
             canRotate = true;
             canMove = true;
+        }
+
+        public bool CanMove()
+        {
+            if (canMove)
+            {
+                if (rolling || dodgeing)
+                    return false;
+
+                return true;
+            }
+
+            return false;
+
         }
 
         //TODO 当速度小于X时，Vel采用插值过渡，当Vel进入到跑步时候，采用急停

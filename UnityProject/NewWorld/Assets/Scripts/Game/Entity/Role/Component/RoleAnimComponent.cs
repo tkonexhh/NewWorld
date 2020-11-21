@@ -174,7 +174,7 @@ namespace Game.Logic
             m_Animator.SetFloat(m_KeyHash_FloatVelocityX, x, 0.1f, Time.deltaTime);
         }
 
-        public void SetVelocityZ(float z)
+        public void SetVelocityZ(float z, bool isSprint = false)
         {
             float vZ = 0;
             if (z > 0 && z < 0.55f)
@@ -194,6 +194,10 @@ namespace Game.Logic
                 vZ = -1;
             }
             vZ *= 3;
+            if (isSprint)
+            {
+                vZ = 6;
+            }
             m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, vZ, 0.1f, Time.deltaTime);
         }
 

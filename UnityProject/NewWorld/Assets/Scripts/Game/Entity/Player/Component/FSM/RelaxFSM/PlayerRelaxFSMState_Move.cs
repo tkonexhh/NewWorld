@@ -53,7 +53,7 @@ namespace Game.Logic
         public override void FixedUpdate(Player player, float dt)
         {
             // 控制角色朝向
-            player.role.animComponent.SetVelocityZ(GameInputMgr.S.moveAmount);
+            player.role.animComponent.SetVelocityZ(GameInputMgr.S.moveAmount, player.role.controlComponent.running);
         }
 
         public override void Exit(Player player)

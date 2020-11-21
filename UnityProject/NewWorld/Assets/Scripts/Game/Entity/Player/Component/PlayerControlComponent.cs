@@ -56,13 +56,20 @@ namespace Game.Logic
             }
         }
 
+
         FSMStateMachine<Player> m_FSM;
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
             player = (Player)ownner;
             GameInputMgr.S.mainAction.Roll.performed += i => player.role.controlComponent.Roll();
+            GameInputMgr.S.mainAction.Run.performed += i => player.role.controlComponent.running = true;
+            GameInputMgr.S.mainAction.Run.canceled += i => player.role.controlComponent.running = false;
             player.role.monoReference.onAnimatorMove += OnAnimatorMove;
+
+
+
+
             // m_FSM = new FSMStateMachine<Player>(player);
             // m_FSM.stateFactory = new FSMStateFactory<Player>(false);
             // m_FSM.stateFactory.RegisterState(ControlState.Ground, new PlayerControlFSMState_Ground());
@@ -74,6 +81,7 @@ namespace Game.Logic
         public override void Excute(float dt)
         {
             m_FSM?.UpdateState(dt);
+
         }
 
         public override void FixedExcute(float dt)
@@ -85,7 +93,7 @@ namespace Game.Logic
                 HandleRotation(dt);
             }
 
-            if (player.role.controlComponent.canMove && !player.role.controlComponent.rolling)
+            if (player.role.controlComponent.CanMove())
             {
                 HandleMove(dt);
             }
@@ -101,13 +109,16 @@ namespace Game.Logic
         private Vector3 normalVector;
         private void HandleMove(float dt)
         {
+            if (player.role.controlComponent.rolling)
+                return;
+
             Vector3 targetDir = Vector3.zero;
             targetDir = GameCameraMgr.S.mainCamera.transform.forward * GameInputMgr.S.moveInput.y;
             targetDir += GameCameraMgr.S.mainCamera.transform.right * GameInputMgr.S.moveInput.x;
             targetDir.Normalize();
             targetDir.y = 0;
 
-            float speed = player.role.data.baseData.walkSpeed;
+            float speed = player.role.controlComponent.running ? player.role.data.baseData.runSpeed : player.role.data.baseData.walkSpeed;
             targetDir *= speed;
 
             Vector3 projectedVel = Vector3.ProjectOnPlane(targetDir, normalVector);
