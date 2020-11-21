@@ -47,6 +47,12 @@ namespace Game.Logic
         /// <value></value>
         public bool rolling { get; set; }
 
+        /// <summary>
+        /// 闪避中
+        /// </summary>
+        /// <value></value>
+        public bool dodgeing { get; set; }
+
         public Run onWeaponSwitchComplete;
 
         public override void Init(Entity ownner)
@@ -232,12 +238,27 @@ namespace Game.Logic
                 return;
 
             //如果正在翻滚就不能在翻滚了
-            if (rolling)
+            if (rolling || dodgeing)
                 return;
 
             rolling = true;
             var weapon = role.equipComponent.GetWeapon();
             weapon.Roll(role as Role_Player, (RollDir)Random.Range(0, 4));
+        }
+
+        public void Dodge()
+        {
+            //TODO 暂时改成只有武器才能翻滚
+            if (!armed)
+                return;
+
+            //如果正在翻滚就不能在翻滚了
+            if (dodgeing || rolling)
+                return;
+
+            dodgeing = true;
+            var weapon = role.equipComponent.GetWeapon();
+            weapon.Dodge(role as Role_Player, (DodgeDir)Random.Range(0, 2));
         }
     }
 

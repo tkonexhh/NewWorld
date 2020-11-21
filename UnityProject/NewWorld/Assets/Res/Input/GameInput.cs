@@ -21,10 +21,18 @@ namespace Game.Logic
             ""id"": ""d2ad7121-9cd0-43ee-b6d4-c1e965cc7f78"",
             ""actions"": [
                 {
+                    ""name"": ""Camera"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""80550caf-c344-4839-b854-5bc366143838"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Move"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""eb9e8b92-9731-4492-9c19-510b5ed5d7c0"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -73,7 +81,7 @@ namespace Game.Logic
                 {
                     ""name"": ""WSAD"",
                     ""id"": ""4b268592-915f-4df5-bf3d-249fdcdf48a4"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -128,7 +136,7 @@ namespace Game.Logic
                 {
                     ""name"": ""Arrow"",
                     ""id"": ""e268f849-8a38-469c-86f1-4d1f5fb4a757"",
-                    ""path"": ""2DVector(mode=1)"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -232,6 +240,28 @@ namespace Game.Logic
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""AttackR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a2816e6e-86ec-4e71-964a-031f8ef32b6c"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": ""NormalizeVector2"",
+                    ""groups"": """",
+                    ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""387aa068-4484-40aa-bed9-c92f6abe791d"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone"",
+                    ""groups"": """",
+                    ""action"": ""Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -467,6 +497,7 @@ namespace Game.Logic
 }");
             // Main
             m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
+            m_Main_Camera = m_Main.FindAction("Camera", throwIfNotFound: true);
             m_Main_Move = m_Main.FindAction("Move", throwIfNotFound: true);
             m_Main_Jump = m_Main.FindAction("Jump", throwIfNotFound: true);
             m_Main_Any = m_Main.FindAction("Any", throwIfNotFound: true);
@@ -530,6 +561,7 @@ namespace Game.Logic
         // Main
         private readonly InputActionMap m_Main;
         private IMainActions m_MainActionsCallbackInterface;
+        private readonly InputAction m_Main_Camera;
         private readonly InputAction m_Main_Move;
         private readonly InputAction m_Main_Jump;
         private readonly InputAction m_Main_Any;
@@ -540,6 +572,7 @@ namespace Game.Logic
         {
             private @GameInput m_Wrapper;
             public MainActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Camera => m_Wrapper.m_Main_Camera;
             public InputAction @Move => m_Wrapper.m_Main_Move;
             public InputAction @Jump => m_Wrapper.m_Main_Jump;
             public InputAction @Any => m_Wrapper.m_Main_Any;
@@ -555,6 +588,9 @@ namespace Game.Logic
             {
                 if (m_Wrapper.m_MainActionsCallbackInterface != null)
                 {
+                    @Camera.started -= m_Wrapper.m_MainActionsCallbackInterface.OnCamera;
+                    @Camera.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnCamera;
+                    @Camera.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnCamera;
                     @Move.started -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnMove;
@@ -577,6 +613,9 @@ namespace Game.Logic
                 m_Wrapper.m_MainActionsCallbackInterface = instance;
                 if (instance != null)
                 {
+                    @Camera.started += instance.OnCamera;
+                    @Camera.performed += instance.OnCamera;
+                    @Camera.canceled += instance.OnCamera;
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
@@ -692,6 +731,7 @@ namespace Game.Logic
         }
         public interface IMainActions
         {
+            void OnCamera(InputAction.CallbackContext context);
             void OnMove(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
             void OnAny(InputAction.CallbackContext context);

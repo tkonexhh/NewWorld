@@ -57,6 +57,7 @@ namespace Game.Logic
 
         public override void FixedUpdate(Player entity, float dt)
         {
+            Debug.LogError("Air");
             UpdateState();
             AdjustVelocity(maxSpeed, maxAcceleration, Vector3.up, ref m_Velocity);
             entity.controlComponent.velocity = m_Velocity;
@@ -127,7 +128,7 @@ namespace Game.Logic
             Vector3 jumpDirection = Vector3.up;
             if (OnSteep)
             {
-                Debug.LogError("OnSteep");
+                // Debug.LogError("OnSteep");
                 jumpDirection = (steepNormal + Vector3.up).normalized;
                 m_JumpChance = 0;
             }

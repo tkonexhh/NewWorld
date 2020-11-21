@@ -50,23 +50,13 @@ namespace Game.Logic
         public void CanCombo(int value)
         {
             canCombo = value == 1;
-            // Debug.LogError("CanCombo:" + canCombo);
         }
 
         public void Combo()
         {
             // Debug.LogError("Combo");
-            // if (m_Role.controlComponent.desireToCombo)
-            // {
-            //     m_Role.controlComponent.desireToCombo = false;
-            //     m_CurWeapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
-            //     m_CurWeapon.Combo(m_Role);
-            // }
-
             if (m_Role.controlComponent.attackType != AttackTypeEnum.None)
             {
-
-                // m_Role.controlComponent.desireToCombo = false;
                 m_CurWeapon = m_Role.equipComponent.GetEquipmentBySlot(InventoryEquipSlot.Weapon) as Weapon;
                 m_CurWeapon.Combo(m_Role);
                 m_Role.controlComponent.attackType = AttackTypeEnum.None;
@@ -75,8 +65,8 @@ namespace Game.Logic
 
         public void CanRotate(int canRotate)
         {
-            Debug.LogError("CanRotate:" + canRotate);
-            m_Role.controlComponent.canRotate = canRotate == 1;
+            // Debug.LogError("CanRotate:" + canRotate);
+            // m_Role.controlComponent.canRotate = canRotate == 1;
         }
 
         public void Shoot()
@@ -123,6 +113,11 @@ namespace Game.Logic
         public void RollComplete()
         {
             m_Role.controlComponent.rolling = false;
+        }
+
+        public void DodgeComplete()
+        {
+            m_Role.controlComponent.dodgeing = false;
         }
 
     }

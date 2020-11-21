@@ -33,12 +33,8 @@ namespace Game.Logic
             private set;
         }
 
-        public Vector2 moveInput
-        {
-            get;
-            private set;
-        }
-
+        public Vector2 moveInput { get; private set; }
+        public Vector2 cameraInput { get; private set; }
 
 
         public override void OnSingletonInit()
@@ -70,11 +66,14 @@ namespace Game.Logic
         {
             moveInput = mainAction.Move.ReadValue<Vector2>();
             moveVec = Vector2.SmoothDamp(moveVec, moveInput, ref m_VelMoveInput, moveSensitivity * Time.deltaTime);
+
+            cameraInput = mainAction.Camera.ReadValue<Vector2>();
         }
 
         public void ClearMove()
         {
-
+            moveVec = Vector2.zero;
+            moveInput = Vector2.zero;
         }
     }
 

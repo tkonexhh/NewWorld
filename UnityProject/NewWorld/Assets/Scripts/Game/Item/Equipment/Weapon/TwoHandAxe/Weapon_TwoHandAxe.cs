@@ -146,6 +146,19 @@ namespace Game.Logic
                     role.animComponent.animator.CrossFade("2Hand-Axe-Roll-Right", 0.2f, 0, 0);
                     break;
             }
+        }
+
+        public override void Dodge(Role_Player role, DodgeDir dir)
+        {
+            switch (dir)
+            {
+                case DodgeDir.Left:
+                    role.animComponent.animator.CrossFade("2Hand-Axe-Dodge-Left", 0.2f, 0, 0);
+                    break;
+                case DodgeDir.Right:
+                    role.animComponent.animator.CrossFade("2Hand-Axe-Dodge-Right", 0.2f, 0, 0);
+                    break;
+            }
 
         }
 

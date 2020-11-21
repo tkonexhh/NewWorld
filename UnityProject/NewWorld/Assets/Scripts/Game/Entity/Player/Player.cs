@@ -27,8 +27,8 @@ namespace Game.Logic
         public PlayerMonoReference monoReference => m_MonoReference;
         public PlayerControlComponent controlComponent => m_ControlComponent;
         public PlayerFSMComponent fsmComponent => m_FSMComponent;
-
-
+        public GameObject gameObject => m_GameObject;
+        public Transform transform => m_Transform;
         public Role_Player role => m_Role;
 
         public delegate void OnPlayerCreated(Player role);

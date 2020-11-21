@@ -38,6 +38,15 @@ namespace Game.Logic
             get => player.monoReference.rigidbody.position;
         }
 
+        public Vector3 forward
+        {
+            get => player.transform.forward;
+            set
+            {
+                player.transform.forward = value;
+            }
+        }
+
         public Vector3 roleForward
         {
             get => player.role.transform.forward;
@@ -52,11 +61,11 @@ namespace Game.Logic
         {
             base.Init(ownner);
             player = (Player)ownner;
-            m_FSM = new FSMStateMachine<Player>(player);
-            m_FSM.stateFactory = new FSMStateFactory<Player>(false);
-            m_FSM.stateFactory.RegisterState(ControlState.Ground, new PlayerControlFSMState_Ground());
-            m_FSM.stateFactory.RegisterState(ControlState.Air, new PlayerControlFSMState_Air());
-            m_FSM.SetCurrentStateByID(ControlState.Ground);
+            // m_FSM = new FSMStateMachine<Player>(player);
+            // m_FSM.stateFactory = new FSMStateFactory<Player>(false);
+            // m_FSM.stateFactory.RegisterState(ControlState.Ground, new PlayerControlFSMState_Ground());
+            // m_FSM.stateFactory.RegisterState(ControlState.Air, new PlayerControlFSMState_Air());
+            // m_FSM.SetCurrentStateByID(ControlState.Ground);
 
         }
 
