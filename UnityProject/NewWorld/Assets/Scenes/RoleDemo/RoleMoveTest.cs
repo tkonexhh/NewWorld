@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Random = UnityEngine.Random;
 
 namespace Game.Logic
 {
@@ -101,7 +102,7 @@ namespace Game.Logic
 
         private void OnClickRoll()
         {
-            role.controlComponent.Roll();
+            role.controlComponent.Roll((RollDir)Random.Range(0, 4));
         }
 
         private void OnClickDodge()

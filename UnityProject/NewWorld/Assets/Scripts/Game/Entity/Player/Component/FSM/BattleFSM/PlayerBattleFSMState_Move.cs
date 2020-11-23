@@ -28,7 +28,7 @@ namespace Game.Logic
         {
             m_Player = player;
             GameInputMgr.S.mainAction.AttackL.performed += OnAttackLPerformed;
-            GameInputMgr.S.mainAction.AttackR.performed += OnAttackRPerformed;
+            // GameInputMgr.S.mainAction.AttackR.performed += OnAttackRPerformed;
             m_Player.role.controlComponent.firstAttack = true;
         }
 
@@ -72,13 +72,13 @@ namespace Game.Logic
 
         public override void FixedUpdate(Player player, float dt)
         {
-            player.role.animComponent.SetVelocityZ(GameInputMgr.S.moveAmount);
+            player.role.animComponent.SetVelocityZ(GameInputMgr.S.moveAmount, player.role.controlComponent.running);
         }
 
         public override void Exit(Player player)
         {
             GameInputMgr.S.mainAction.AttackL.performed -= OnAttackLPerformed;
-            GameInputMgr.S.mainAction.AttackR.performed -= OnAttackRPerformed;
+            // GameInputMgr.S.mainAction.AttackR.performed -= OnAttackRPerformed;
         }
 
         private void GetHurt()
@@ -96,21 +96,12 @@ namespace Game.Logic
 
         private void OnAttackLPerformed(InputAction.CallbackContext callback)
         {
-            bool isMoving = m_Player.role.animComponent.GetMoving();
-            if (isMoving)
-                return;
-
-            // m_Player.role.animComponent.SetLeftRight(1);
             m_Player.role.controlComponent.Attack();
         }
 
         private void OnAttackRPerformed(InputAction.CallbackContext callback)
         {
-            bool isMoving = m_Player.role.animComponent.GetMoving();
-            if (isMoving)
-                return;
-            // m_Player.role.animComponent.SetLeftRight(2);
-            m_Player.role.controlComponent.Attack();
+            m_Player.role.controlComponent.Attack2();
         }
 
     }

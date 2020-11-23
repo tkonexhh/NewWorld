@@ -320,13 +320,8 @@ namespace Game.Logic
         #endregion
 
         #region Layer
-        //--------------------------
-        private void SetLayerWeight(RoleAnimatorLayer layer, float weight)
-        {
-            m_Animator.SetLayerWeight((int)layer, weight);
-        }
 
-        public void PlayAnim(string animname, int layer)
+        public void PlayTargetAnim(string animname, int layer)
         {
             m_Animator.Play(animname, layer);
         }

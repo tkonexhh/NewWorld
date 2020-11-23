@@ -45,6 +45,9 @@ namespace Game.Logic
         public void CanAttack()
         {
             m_Role.controlComponent.firstAttack = true;
+            m_Role.controlComponent.canMove = true;
+            m_Role.controlComponent.canRotate = true;
+            m_Role.controlComponent.usingMotion = false;
         }
 
         public void CanCombo(int value)
@@ -65,8 +68,8 @@ namespace Game.Logic
 
         public void CanRotate(int canRotate)
         {
-            // Debug.LogError("CanRotate:" + canRotate);
-            // m_Role.controlComponent.canRotate = canRotate == 1;
+            m_Role.controlComponent.canRotate = canRotate == 1;
+            // Debug.LogError("CanRotate:" + m_Role.controlComponent.canRotate);
         }
 
         public void Shoot()
@@ -113,12 +116,20 @@ namespace Game.Logic
         public void RollComplete()
         {
             m_Role.controlComponent.rolling = false;
-            m_Role.monoReference.animator.applyRootMotion = false;
+            m_Role.controlComponent.usingMotion = false;
+            m_Role.controlComponent.firstAttack = true;
         }
 
         public void DodgeComplete()
         {
             m_Role.controlComponent.dodgeing = false;
+            m_Role.controlComponent.usingMotion = false;
+            m_Role.controlComponent.firstAttack = true;
+        }
+
+        public void Land()
+        {
+
         }
 
     }

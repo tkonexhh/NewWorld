@@ -34,6 +34,10 @@ namespace Game.Logic
         public bool running { get; set; }
         public bool rolling { get; set; }//是否翻滚中
         public bool dodgeing { get; set; }// 闪避中
+        public bool usingMotion { get; set; }
+        //TODO 改成FSM
+        public bool isInAir { get; set; }//是否在空中
+        public bool isGround { get; set; }//是否在地面
 
         public Run onWeaponSwitchComplete;
 
@@ -45,6 +49,11 @@ namespace Game.Logic
             attackType = AttackTypeEnum.None;
             canRotate = true;
             canMove = true;
+            usingMotion = false;
+
+
+            isGround = true;
+            isInAir = false;
         }
 
         public bool CanMove()
@@ -162,11 +171,12 @@ namespace Game.Logic
             //没有武装不能进行攻击
             if (!armed)
                 return;
-
+            usingMotion = true;
+            canMove = false;
+            canRotate = false;
             if (firstAttack)
             {
                 firstAttack = false;
-                // desireToCombo = false;
                 attackType = AttackTypeEnum.None;
                 var weapon = role.equipComponent.GetWeapon();
                 weapon.Attack(role as Role_Player);
@@ -176,7 +186,6 @@ namespace Game.Logic
                 //检测动作是否在连击触发区间内
                 if ((role as Role_Player).animEvent.canCombo)
                 {
-                    // desireToCombo = true;
                     attackType = AttackTypeEnum.Light;
                     firstAttack = false;
                 }
@@ -188,11 +197,12 @@ namespace Game.Logic
             //没有武装不能进行攻击
             if (!armed)
                 return;
-
+            usingMotion = true;
+            canMove = false;
+            canRotate = false;
             if (firstAttack)
             {
                 firstAttack = false;
-                // desireToCombo = false;
                 attackType = AttackTypeEnum.None;
                 var weapon = role.equipComponent.GetWeapon();
                 weapon.Attack2(role as Role_Player);
@@ -202,7 +212,6 @@ namespace Game.Logic
                 //检测动作是否在连击触发区间内
                 if ((role as Role_Player).animEvent.canCombo)
                 {
-                    // desireToCombo = true;
                     attackType = AttackTypeEnum.Heavy;
                     firstAttack = false;
                 }
@@ -228,7 +237,7 @@ namespace Game.Logic
             weapon.SpecialAttackEnd(role as Role_Player);
         }
 
-        public void Roll()
+        public void Roll(RollDir dir)
         {
             //TODO 暂时改成只有武器才能翻滚
             if (!armed)
@@ -239,10 +248,11 @@ namespace Game.Logic
                 return;
 
             rolling = true;
+            usingMotion = true;
             //翻滚的时候使用apply motion
-            role.monoReference.animator.applyRootMotion = true;
+            // role.monoReference.animator.applyRootMotion = true;
             var weapon = role.equipComponent.GetWeapon();
-            weapon.Roll(role as Role_Player, (RollDir)Random.Range(0, 4));
+            weapon.Roll(role as Role_Player, dir);
         }
 
         public void Dodge()
@@ -256,8 +266,48 @@ namespace Game.Logic
                 return;
 
             dodgeing = true;
+            usingMotion = true;
             var weapon = role.equipComponent.GetWeapon();
             weapon.Dodge(role as Role_Player, (DodgeDir)Random.Range(0, 2));
+        }
+
+        public void BackToMovement()
+        {
+            var weapon = role.equipComponent.GetWeapon();
+            if (armed && weapon != null)
+            {
+                role.animComponent.animator.CrossFade("2Hand-Axe-Movement-Blend", 0.1f, 0, 0);
+            }
+            else
+            {
+                role.animComponent.animator.CrossFade("Relaxed_Movement_Blend", 0.15f, 0, 0);
+            }
+        }
+
+        public void Land()
+        {
+            var weapon = role.equipComponent.GetWeapon();
+            if (armed && weapon != null)
+            {
+                role.animComponent.animator.CrossFade("2Hand-Axe-Land", 0.15f, 0, 0);
+            }
+            else
+            {
+                role.animComponent.animator.CrossFade("Land", 0.15f, 0, 0);
+            }
+        }
+
+        public void Fall()
+        {
+            var weapon = role.equipComponent.GetWeapon();
+            if (armed && weapon != null)
+            {
+                role.animComponent.animator.CrossFade("2Hand-Axe-Fall", 0.15f, 0, 0);
+            }
+            else
+            {
+                role.animComponent.animator.CrossFade("Fall", 0.15f, 0, 0);
+            }
         }
     }
 

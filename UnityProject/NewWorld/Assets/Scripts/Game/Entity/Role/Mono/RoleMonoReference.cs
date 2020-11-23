@@ -17,8 +17,9 @@ namespace Game.Logic
     {
         public Animator animator;
 
-        [Header("头部")]
+
         public Transform headLook;
+        public Transform kneeLook;
 
         [Header("AnimIK")]
         public LookAtIK lookAtIK;
@@ -34,11 +35,11 @@ namespace Game.Logic
         public Transform handRightAttach;
 
 
-        public float fadeDur = 0.2f;
-        public float fadeOffset = 0.2f;
-
 
         public Run<Vector3> onAnimatorMove;
+
+        public float kneeHeight => kneeLook.localPosition.y;
+
 
 
         private void OnAnimatorMove()

@@ -381,6 +381,36 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+--- !u!1 &2707352234989224442
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9173134350933569065}
+  m_Layer: 9
+  m_Name: KneeLook
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9173134350933569065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2707352234989224442}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.432, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7937820238030145619}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2920982715511587427
 GameObject:
   m_ObjectHideFlags: 0
@@ -6319,6 +6349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7666273751980746772}
   headLook: {fileID: 93402615808433575}
+  kneeLook: {fileID: 9173134350933569065}
   lookAtIK: {fileID: 1994951727415176959}
   lookTarget: {fileID: 0}
   fullBodyIK: {fileID: 5486523673626845757}
@@ -6327,8 +6358,6 @@ MonoBehaviour:
   interactionSystem: {fileID: 0}
   handLeftAttach: {fileID: 0}
   handRightAttach: {fileID: 7687292295139696810}
-  fadeDur: 0.2
-  fadeOffset: 0.2
 --- !u!114 &5486523673626845757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7848,6 +7877,7 @@ Transform:
   - {fileID: 4447674124832697633}
   - {fileID: 6968812957375457637}
   - {fileID: 93402615808433575}
+  - {fileID: 9173134350933569065}
   m_Father: {fileID: 7666273751970890548}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

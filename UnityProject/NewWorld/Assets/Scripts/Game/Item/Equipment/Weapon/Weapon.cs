@@ -44,7 +44,7 @@ namespace Game.Logic
             bool isMoving = role.animComponent.GetMoving();
             if (isMoving)
             {
-                role.animComponent.animator.CrossFade("Relaxed_WalkRun_Blend", 0.25f, 0, 0.25f);
+                role.animComponent.animator.CrossFade("Relaxed_Movement_Blend", 0.25f, 0, 0.25f);
             }
             else
             {
