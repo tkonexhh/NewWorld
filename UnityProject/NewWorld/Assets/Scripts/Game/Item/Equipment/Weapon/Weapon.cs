@@ -24,7 +24,6 @@ namespace Game.Logic
 
         }
 
-        public virtual void Death(Role role) { }
         public virtual void Block(Role role) { }
         public virtual void UnBlock(Role role) { }
         public virtual void UnSheath(Role role) { }
@@ -33,7 +32,6 @@ namespace Game.Logic
         public virtual void Combo(Role_Player role) { }
         public virtual void SpecialAttackStart(Role_Player role) { }
         public virtual void SpecialAttackEnd(Role_Player role) { }
-        public virtual void Roll(Role_Player role, RollDir dir) { }
         public virtual void Dodge(Role_Player role, DodgeDir dir) { }
 
 

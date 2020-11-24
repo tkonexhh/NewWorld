@@ -73,12 +73,6 @@ namespace Game.Logic
             role.iKComponent.rightHandIK.SetHandPoser(null);
         }
 
-        public override void Death(Role role)
-        {
-            base.Death(role);
-            //Block不可以移动
-            role.animComponent.animator.CrossFade("2Hand-Axe-Death1", 0.25f, 0, 0.1f);
-        }
 
         public override void Block(Role role)
         {
@@ -127,25 +121,6 @@ namespace Game.Logic
         public override void SpecialAttackEnd(Role_Player role)
         {
             role.animComponent.animator.CrossFade("Special_End", 0.2f, 0, 0);
-        }
-
-        public override void Roll(Role_Player role, RollDir dir)
-        {
-            switch (dir)
-            {
-                case RollDir.Forward:
-                    role.animComponent.animator.CrossFade("2Hand-Axe-Roll-Forward", 0.2f, 0, 0);
-                    break;
-                case RollDir.Backward:
-                    role.animComponent.animator.CrossFade("2Hand-Axe-Roll-Backward", 0.2f, 0, 0);
-                    break;
-                case RollDir.Left:
-                    role.animComponent.animator.CrossFade("2Hand-Axe-Roll-Left", 0.2f, 0, 0);
-                    break;
-                case RollDir.Right:
-                    role.animComponent.animator.CrossFade("2Hand-Axe-Roll-Right", 0.2f, 0, 0);
-                    break;
-            }
         }
 
         public override void Dodge(Role_Player role, DodgeDir dir)

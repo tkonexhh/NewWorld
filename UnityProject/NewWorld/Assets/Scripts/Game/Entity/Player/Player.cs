@@ -43,6 +43,7 @@ namespace Game.Logic
                 m_Transform = target.transform;
 
                 m_MonoReference = target.GetComponent<PlayerMonoReference>();
+                m_MonoReference.player = this;
 
                 m_Role = new RoleAnimTest();
                 m_Role.onRoleCreated += (role) =>

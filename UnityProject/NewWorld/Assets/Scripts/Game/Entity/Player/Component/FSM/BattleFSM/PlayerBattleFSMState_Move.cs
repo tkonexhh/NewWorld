@@ -28,7 +28,6 @@ namespace Game.Logic
         {
             m_Player = player;
             GameInputMgr.S.mainAction.AttackL.performed += OnAttackLPerformed;
-            // GameInputMgr.S.mainAction.AttackR.performed += OnAttackRPerformed;
             m_Player.role.controlComponent.firstAttack = true;
         }
 
@@ -78,7 +77,6 @@ namespace Game.Logic
         public override void Exit(Player player)
         {
             GameInputMgr.S.mainAction.AttackL.performed -= OnAttackLPerformed;
-            // GameInputMgr.S.mainAction.AttackR.performed -= OnAttackRPerformed;
         }
 
         private void GetHurt()
@@ -97,11 +95,6 @@ namespace Game.Logic
         private void OnAttackLPerformed(InputAction.CallbackContext callback)
         {
             m_Player.role.controlComponent.Attack();
-        }
-
-        private void OnAttackRPerformed(InputAction.CallbackContext callback)
-        {
-            m_Player.role.controlComponent.Attack2();
         }
 
     }

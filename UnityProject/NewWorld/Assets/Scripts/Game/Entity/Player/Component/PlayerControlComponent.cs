@@ -56,75 +56,20 @@ namespace Game.Logic
             }
         }
 
-
         float minDistanceNeededToFall = 1f;//变为下落状态的距离
         float inAirTimer;
 
-
-        FSMStateMachine<Player> m_FSM;
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
             player = (Player)ownner;
-            GameInputMgr.S.mainAction.Roll.performed += OnRollPerformed;
-            GameInputMgr.S.mainAction.Run.performed += i => player.role.controlComponent.running = true;
-            GameInputMgr.S.mainAction.Run.canceled += i => player.role.controlComponent.running = false;
             player.role.monoReference.onAnimatorMove += OnAnimatorMove;
 
-            // m_FSM = new FSMStateMachine<Player>(player);
-            // m_FSM.stateFactory = new FSMStateFactory<Player>(false);
-            // m_FSM.stateFactory.RegisterState(ControlState.Ground, new PlayerControlFSMState_Ground());
-            // m_FSM.stateFactory.RegisterState(ControlState.Air, new PlayerControlFSMState_Air());
-            // m_FSM.SetCurrentStateByID(ControlState.Ground);
-
         }
 
-        private void OnRollPerformed(InputAction.CallbackContext callback)
-        {
-            if (GameInputMgr.S.moveAmount == 0f)
-            {
-                player.role.controlComponent.Roll(RollDir.Backward);
-            }
-            else
-            {
-                Vector3 rollDir = Vector3.zero;
-                rollDir = GameCameraMgr.S.mainCamera.transform.forward * GameInputMgr.S.moveInput.y;
-                rollDir += GameCameraMgr.S.mainCamera.transform.right * GameInputMgr.S.moveInput.x;
-                rollDir.Normalize();
-                rollDir.y = 0;
-
-                if (rollDir.x > rollDir.y)
-                {
-                    //水平翻滚
-                    if (rollDir.x < 0)
-                    {
-                        player.role.controlComponent.Roll(RollDir.Left);
-                    }
-                    else
-                    {
-                        player.role.controlComponent.Roll(RollDir.Right);
-                    }
-                }
-                else
-                {
-                    //水平翻滚
-                    if (rollDir.y < 0)
-                    {
-                        player.role.controlComponent.Roll(RollDir.Backward);
-                    }
-                    else
-                    {
-                        player.role.controlComponent.Roll(RollDir.Forward);
-                    }
-                }
-            }
-
-        }
 
         public override void Excute(float dt)
         {
-            m_FSM?.UpdateState(dt);
-
             if (player.role.controlComponent.isInAir)
             {
                 inAirTimer += Time.deltaTime;
@@ -134,70 +79,14 @@ namespace Game.Logic
 
         public override void FixedExcute(float dt)
         {
-            m_FSM?.FixedUpdateState(dt);
-            if (player.role.controlComponent.canRotate)
-            {
-                HandleRotation(dt);
-            }
-
-            if (player.role.controlComponent.canMove && !player.role.controlComponent.usingMotion)
-            {
-                HandleMove(dt);
-            }
 
             HandleFalling(dt, moveDir);
 
         }
 
-        public void SetControlState(ControlState state)
-        {
-            m_FSM.SetCurrentStateByID(state);
-        }
-
         Vector3 targetPosition;
         private Vector3 normalVector;
         private Vector3 moveDir;
-        private void HandleMove(float dt)
-        {
-            if (player.role.controlComponent.rolling)
-                return;
-
-            moveDir = Vector3.zero;
-            moveDir = GameCameraMgr.S.mainCamera.transform.forward * GameInputMgr.S.moveInput.y;
-            moveDir += GameCameraMgr.S.mainCamera.transform.right * GameInputMgr.S.moveInput.x;
-            moveDir.Normalize();
-            moveDir.y = 0;
-
-            float speed = player.role.controlComponent.running ? player.role.data.baseData.runSpeed : player.role.data.baseData.walkSpeed;
-            moveDir *= speed;
-
-            Vector3 projectedVel = Vector3.ProjectOnPlane(moveDir, normalVector);
-            player.monoReference.rigidbody.velocity = projectedVel;
-        }
-
-        private void HandleRotation(float dt)
-        {
-            Vector3 targetDir = Vector3.zero;
-            float moveOverride = GameInputMgr.S.moveAmount;
-
-            targetDir = GameCameraMgr.S.mainCamera.transform.forward * GameInputMgr.S.moveInput.y;
-            targetDir += GameCameraMgr.S.mainCamera.transform.right * GameInputMgr.S.moveInput.x;
-            targetDir.Normalize();
-
-            targetDir.y = 0;
-
-
-            if (targetDir == Vector3.zero)
-            {
-                targetDir = forward;
-            }
-
-            float rs = 10;
-            Quaternion tr = Quaternion.LookRotation(targetDir);
-            Quaternion targetRotation = Quaternion.Slerp(player.transform.rotation, tr, rs * dt);
-            player.transform.rotation = targetRotation;
-        }
-
 
         private void HandleFalling(float dt, Vector3 moveDir)
         {
@@ -293,12 +182,14 @@ namespace Game.Logic
 
         private void OnAnimatorMove(Vector3 deletaPos)
         {
+            if (!player.role.controlComponent.usingMotion)
+                return;
+
             //drag加速度
             player.monoReference.rigidbody.drag = 0;
             deletaPos.y = 0;
             Vector3 vel = deletaPos / Time.deltaTime;
             velocity = vel;
-            // Debug.LogError(deletaPos + "---" + velocity);
         }
     }
 }

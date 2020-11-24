@@ -23,6 +23,8 @@ namespace Game.Logic
         public Run<Collision> onCollisionExit;
         public Run<Collision> onCollisionStay;
 
+        public Player player { get; set; }
+
         private void Update()
         {
 
