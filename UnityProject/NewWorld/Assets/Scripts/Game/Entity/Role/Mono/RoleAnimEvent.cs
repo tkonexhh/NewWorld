@@ -42,6 +42,7 @@ namespace Game.Logic
             m_CurWeapon?.Hit(m_Role);
         }
 
+
         public void CanAttack()
         {
             m_Role.controlComponent.firstAttack = true;
@@ -66,10 +67,17 @@ namespace Game.Logic
             }
         }
 
-        public void CanRotate(int canRotate)
+        public void CanRotate(int value)
         {
-            m_Role.controlComponent.canRotate = canRotate == 1;
+            m_Role.controlComponent.canRotate = value == 1;
             // Debug.LogError("CanRotate:" + m_Role.controlComponent.canRotate);
+        }
+
+
+        public void CanMove(int value)
+        {
+            m_Role.controlComponent.canMove = value == 1;
+            // Debug.LogError("CanMove:" + m_Role.controlComponent.canMove);
         }
 
         public void Shoot()

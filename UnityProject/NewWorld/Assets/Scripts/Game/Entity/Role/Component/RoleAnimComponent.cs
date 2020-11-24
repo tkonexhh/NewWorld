@@ -36,7 +36,6 @@ namespace Game.Logic
         private string m_Key_BoolMoving = "Moving";
         private string m_Key_BoolInjured = "Injured";
         private string m_Key_BoolCrouch = "Crouch";
-        private string m_Key_Bool_ApplyRootMotion = "ApplyRootMotion";
 
         private string m_Key_IntAction = "Action";
         private string m_Key_IntWeapon = "Weapon";
@@ -64,7 +63,6 @@ namespace Game.Logic
         private int m_KeyHash_BoolMoving;
         private int m_KeyHash_BoolInjured;
         private int m_KeyHash_BoolCrouch;
-        private int m_KeyHash_BoolApplyRootMotion;
 
 
         private int m_KeyHash_IntAction;
@@ -104,7 +102,6 @@ namespace Game.Logic
             m_KeyHash_BoolMoving = Animator.StringToHash(m_Key_BoolMoving);
             m_KeyHash_BoolInjured = Animator.StringToHash(m_Key_BoolInjured);
             m_KeyHash_BoolCrouch = Animator.StringToHash(m_Key_BoolCrouch);
-            m_KeyHash_BoolApplyRootMotion = Animator.StringToHash(m_Key_Bool_ApplyRootMotion);
             m_KeyHash_IntAction = Animator.StringToHash(m_Key_IntAction);
             m_KeyHash_IntWeapon = Animator.StringToHash(m_Key_IntWeapon);
             m_KeyHash_IntWeaponSwitch = Animator.StringToHash(m_Key_IntWeaponSwitch);
@@ -126,8 +123,6 @@ namespace Game.Logic
             m_KeyHash_TriggerCombo = Animator.StringToHash(m_Key_Trigger_Combo);
             m_KeyHash_TriggerCombo2 = Animator.StringToHash(m_Key_Trigger_Combo2);
             #endregion
-
-            SetApplyRootMotion(false);
         }
 
 
@@ -231,16 +226,6 @@ namespace Game.Logic
         public void SetCrouch(bool crouch)
         {
             m_Animator.SetBool(m_KeyHash_BoolCrouch, crouch);
-        }
-
-        public void SetApplyRootMotion(bool apply)
-        {
-            m_Animator.SetBool(m_KeyHash_BoolApplyRootMotion, apply);
-        }
-
-        public bool GetApplyRootMotion()
-        {
-            return m_Animator.GetBool(m_KeyHash_BoolApplyRootMotion);
         }
 
         #endregion

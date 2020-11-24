@@ -35,14 +35,6 @@ namespace Game.Logic
         public bool rolling { get; set; }//是否翻滚中
         public bool dodgeing { get; set; }// 闪避中
         public bool usingMotion { get; set; }
-        // public bool usingMotion
-        // {
-        //     get => role.animComponent.GetApplyRootMotion();
-        //     set;
-        // }
-        //TODO 改成FSM
-        public bool isInAir { get; set; }//是否在空中
-        public bool isGround { get; set; }//是否在地面
 
         public Run onWeaponSwitchComplete;
         private RoleAnimName m_AnimName;
@@ -56,24 +48,6 @@ namespace Game.Logic
             canRotate = true;
             canMove = true;
             usingMotion = false;
-
-
-            isGround = true;
-            isInAir = false;
-        }
-
-        public bool CanMove()
-        {
-            if (canMove)
-            {
-                if (rolling || dodgeing)
-                    return false;
-
-                return true;
-            }
-
-            return false;
-
         }
 
         //TODO 当速度小于X时，Vel采用插值过渡，当Vel进入到跑步时候，采用急停
@@ -283,6 +257,7 @@ namespace Game.Logic
 
         public void Land()
         {
+            canMove = false;
             role.animComponent.animator.CrossFade(m_AnimName.land, 0.15f, 0, 0);
         }
 

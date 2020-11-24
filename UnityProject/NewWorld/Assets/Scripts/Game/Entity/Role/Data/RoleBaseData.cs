@@ -22,7 +22,7 @@ namespace Game.Logic
         public readonly float airAcceleration = 4;//空中的加速度
         public readonly float jumpHeight = 1.0f;
         public readonly int jumpCount = 2;//多段跳
-        public readonly float fallSpeed = 100;//下落速度
+        public readonly float fallSpeed = 160;//下落速度
     }
 
 }

@@ -23,6 +23,7 @@ namespace Game.Logic
         Roll,
         // Jump,
         Fall,
+        Land,
         Talking,
         Sit,
     }
@@ -47,6 +48,7 @@ namespace Game.Logic
                 m_FSM.stateFactory.RegisterState(RoleRelaxState.Move, new PlayerRelaxFSMState_Move());
                 m_FSM.stateFactory.RegisterState(RoleRelaxState.Air, new PlayerRelaxFSMState_Air());
                 m_FSM.stateFactory.RegisterState(RoleRelaxState.Roll, new PlayerRelaxFSMState_Roll());
+                m_FSM.stateFactory.RegisterState(RoleRelaxState.Land, new PlayerRelaxFSMState_Land());
                 // m_FSM.stateFactory.RegisterState(RoleRelaxState.Idle, new RoleRelaxFSMState_Idle());
                 m_FSM.stateFactory.RegisterState(RoleRelaxState.Crouch, new PlayerRelaxFSMState_Crouch());
             }
@@ -72,9 +74,9 @@ namespace Game.Logic
         {
         }
 
-        public void SetRelaxState(RoleRelaxState state)
+        public void SetRelaxState(RoleRelaxState state, params object[] args)
         {
-            m_FSM.SetCurrentStateByID(state);
+            m_FSM.SetCurrentStateByID(state, args);
         }
 
     }

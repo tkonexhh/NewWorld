@@ -14,19 +14,13 @@ using UnityEngine.InputSystem;
 
 namespace Game.Logic
 {
-    public enum RoleWeapon
-    {
-        Unarmed = 0,
-        DualHandAxe = 3,
-    }
-    public class PlayerBattleFSMState_Move : FSMState<Player>
-    {
-        private Player m_Player;
 
+    public class PlayerBattleFSMState_Move : PlayerBaseMoveState
+    {
 
         public override void Enter(Player player, params object[] args)
         {
-            m_Player = player;
+            base.Enter(player, args);
             GameInputMgr.S.mainAction.AttackL.performed += OnAttackLPerformed;
             m_Player.role.controlComponent.firstAttack = true;
         }
@@ -69,10 +63,6 @@ namespace Game.Logic
             }
         }
 
-        public override void FixedUpdate(Player player, float dt)
-        {
-            player.role.animComponent.SetVelocityZ(GameInputMgr.S.moveAmount, player.role.controlComponent.running);
-        }
 
         public override void Exit(Player player)
         {
@@ -95,6 +85,26 @@ namespace Game.Logic
         private void OnAttackLPerformed(InputAction.CallbackContext callback)
         {
             m_Player.role.controlComponent.Attack();
+        }
+
+        protected override void OnHitGround(RaycastHit hit)
+        {
+            if (GameInputMgr.S.moveAmount > 0)
+            {
+                //TODO 如果刚刚落地的话，坐标需要插值过去
+                // player.transform.position = Vector3.Lerp(player.transform.position, targetPosition, dt);
+                m_Player.transform.position = targetPosition;
+            }
+            else
+            {
+                m_Player.transform.position = targetPosition;
+            }
+        }
+
+        protected override void OnInAir(Vector3 moveDir)
+        {
+            Debug.LogError("To Air");
+            // (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Air, m_MoveDir);
         }
 
     }
