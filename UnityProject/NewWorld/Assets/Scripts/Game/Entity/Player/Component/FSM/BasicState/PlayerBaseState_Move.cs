@@ -13,7 +13,7 @@ using GFrame;
 
 namespace Game.Logic
 {
-    public class PlayerBaseMoveState : FSMState<Player>
+    public class PlayerBaseState_Move : FSMState<Player>
     {
         protected Player m_Player;
         protected Vector3 targetPosition;

@@ -41,7 +41,7 @@ namespace Game.Logic
             if (!player.role.controlComponent.usingMotion)
                 return;
 
-            Debug.LogError(deletaPos);
+            // Debug.LogError(deletaPos);
             //drag加速度
             player.monoReference.rigidbody.drag = 0;
             deletaPos.y = 0;

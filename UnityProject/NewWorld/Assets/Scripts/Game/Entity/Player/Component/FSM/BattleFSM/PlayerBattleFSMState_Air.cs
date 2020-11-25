@@ -1,20 +1,19 @@
 /************************
-	FileName:/Scripts/Game/Entity/Player/Component/FSM/RelaxFSM/PlayerRelaxFSMState_Air.cs
+	FileName:/Scripts/Game/Entity/Player/Component/FSM/BattleFSM/PlayerBattleFSMState_Air.cs
 	CreateAuthor:neo.xu
-	CreateTime:11/3/2020 7:26:03 PM
-	Tip:11/3/2020 7:26:03 PM
+	CreateTime:11/25/2020 12:29:25 PM
+	Tip:11/25/2020 12:29:25 PM
 ************************/
 
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using GFrame;
+
 
 namespace Game.Logic
 {
-    public class PlayerRelaxFSMState_Air : PlayerBaseState_Air
+    public class PlayerBattleFSMState_Air : PlayerBaseState_Air
     {
 
         protected override void OnHitGround(RaycastHit hit)
@@ -22,15 +21,17 @@ namespace Game.Logic
             if (m_AirTimer > 0.5f)
             {
                 Debug.LogError("InAirTimer:" + m_AirTimer);
-                (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Land);
+                (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Land);
             }
             else
             {
                 // Debug.LogError("Back To Ground");
                 m_Player.role.controlComponent.BackToMovement();
-                (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Move);
+                (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Move);
             }
         }
+
+
     }
 
 }

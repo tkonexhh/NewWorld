@@ -14,13 +14,12 @@ using UnityEngine.InputSystem;
 
 namespace Game.Logic
 {
-    public class PlayerRelaxFSMState_Move : PlayerBaseMoveState
+    public class PlayerRelaxFSMState_Move : PlayerBaseState_Move
     {
 
         public override void Enter(Player player, params object[] args)
         {
             base.Enter(player, args);
-            m_Player = player;
             GameInputMgr.S.mainAction.Roll.performed += OnRollPerformed;
             GameInputMgr.S.mainAction.Run.performed += OnRunPerformed;
             GameInputMgr.S.mainAction.Run.canceled += OnRunCanceled;

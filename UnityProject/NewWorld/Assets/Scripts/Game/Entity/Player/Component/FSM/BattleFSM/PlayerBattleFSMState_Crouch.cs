@@ -27,7 +27,7 @@ namespace Game.Logic
 
             if (Input.GetKeyUp(KeyCode.LeftControl))
             {
-                (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Battle);
+                (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Move);
             }
         }
 

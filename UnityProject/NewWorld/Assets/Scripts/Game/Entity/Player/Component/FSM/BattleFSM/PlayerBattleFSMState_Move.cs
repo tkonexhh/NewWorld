@@ -15,13 +15,16 @@ using UnityEngine.InputSystem;
 namespace Game.Logic
 {
 
-    public class PlayerBattleFSMState_Move : PlayerBaseMoveState
+    public class PlayerBattleFSMState_Move : PlayerBaseState_Move
     {
 
         public override void Enter(Player player, params object[] args)
         {
             base.Enter(player, args);
-            GameInputMgr.S.mainAction.AttackL.performed += OnAttackLPerformed;
+            GameInputMgr.S.mainAction.AttackL.canceled += OnAttackLCanceled;
+            GameInputMgr.S.mainAction.Roll.performed += OnRollPerformed;
+            GameInputMgr.S.mainAction.Run.performed += OnRunPerformed;
+            GameInputMgr.S.mainAction.Run.canceled += OnRunCanceled;
             m_Player.role.controlComponent.firstAttack = true;
         }
 
@@ -66,7 +69,10 @@ namespace Game.Logic
 
         public override void Exit(Player player)
         {
-            GameInputMgr.S.mainAction.AttackL.performed -= OnAttackLPerformed;
+            GameInputMgr.S.mainAction.AttackL.canceled -= OnAttackLCanceled;
+            GameInputMgr.S.mainAction.Roll.performed -= OnRollPerformed;
+            GameInputMgr.S.mainAction.Run.performed -= OnRunPerformed;
+            GameInputMgr.S.mainAction.Run.canceled -= OnRunCanceled;
         }
 
         private void GetHurt()
@@ -82,29 +88,37 @@ namespace Game.Logic
             m_Player.role.animComponent.SetCastTrigger();
         }
 
-        private void OnAttackLPerformed(InputAction.CallbackContext callback)
+        private void OnAttackLCanceled(InputAction.CallbackContext callback)
         {
             m_Player.role.controlComponent.Attack();
         }
 
+        private void OnRunPerformed(InputAction.CallbackContext callback)
+        {
+            m_Player.role.controlComponent.running = true;
+        }
+
+        private void OnRunCanceled(InputAction.CallbackContext callback)
+        {
+            m_Player.role.controlComponent.running = false;
+        }
+
+
+        private void OnRollPerformed(InputAction.CallbackContext callback)
+        {
+            (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Roll);
+        }
+
+
         protected override void OnHitGround(RaycastHit hit)
         {
-            if (GameInputMgr.S.moveAmount > 0)
-            {
-                //TODO 如果刚刚落地的话，坐标需要插值过去
-                // player.transform.position = Vector3.Lerp(player.transform.position, targetPosition, dt);
-                m_Player.transform.position = targetPosition;
-            }
-            else
-            {
-                m_Player.transform.position = targetPosition;
-            }
+            m_Player.transform.position = targetPosition;
         }
 
         protected override void OnInAir(Vector3 moveDir)
         {
             Debug.LogError("To Air");
-            // (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Air, m_MoveDir);
+            (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Air, m_MoveDir);
         }
 
     }

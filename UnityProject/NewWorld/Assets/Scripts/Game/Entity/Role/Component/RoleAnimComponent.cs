@@ -202,6 +202,11 @@ namespace Game.Logic
             m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, vZ, 0.1f, Time.deltaTime);
         }
 
+        public void ResetVelocityZ()
+        {
+            m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, 0, 0.1f, Time.deltaTime);
+        }
+
         public void SetHurt(Vector2 vec)
         {
             m_Animator.SetFloat(m_KeyHash_FloatHurtX, vec.x);

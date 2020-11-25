@@ -16,6 +16,7 @@ namespace Game.Logic
 {
     public enum RoleRelaxState
     {
+        None,
         Idle,
         Move,
         Air,
@@ -37,12 +38,11 @@ namespace Game.Logic
         public override void Enter(Player entity, params object[] args)
         {
             // player = entity as Role_Player;
-
-
             if (m_FSM == null)
             {
                 m_FSM = new FSMStateMachine<Player>(entity);
                 m_FSM.stateFactory = new FSMStateFactory<Player>(false);
+                m_FSM.stateFactory.RegisterState(RoleRelaxState.None, new PlayerBaseState_None());
                 m_FSM.stateFactory.RegisterState(RoleRelaxState.Talking, new PlayerRelaxFSMState_Talking());
                 m_FSM.stateFactory.RegisterState(RoleRelaxState.Sit, new PlayerRelaxFSMState_Sit());
                 m_FSM.stateFactory.RegisterState(RoleRelaxState.Move, new PlayerRelaxFSMState_Move());
@@ -56,21 +56,22 @@ namespace Game.Logic
             SetRelaxState(RoleRelaxState.Move);
         }
 
-        public override void Update(Player role, float dt)
+        public override void Update(Player player, float dt)
         {
             m_FSM?.UpdateState(dt);
         }
 
-        public override void FixedUpdate(Player entity, float dt)
+        public override void FixedUpdate(Player player, float dt)
         {
             m_FSM?.FixedUpdateState(dt);
         }
 
-        public override void Exit(Player entity)
+        public override void Exit(Player player)
         {
+            SetRelaxState(RoleRelaxState.None);
         }
 
-        public override void OnMsg(Player entity, int key, params object[] args)
+        public override void OnMsg(Player player, int key, params object[] args)
         {
         }
 

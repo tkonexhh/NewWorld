@@ -13,9 +13,13 @@ namespace Game.Logic
 {
     public enum RoleBattleState
     {
-        Battle,
+        None,
+        Move,
         Blocking,
         Crouch,
+        Land,
+        Roll,
+        Air,
     }
     public class PlayerFSMState_Battle : FSMState<Player>
     {
@@ -38,12 +42,16 @@ namespace Game.Logic
                 m_FSM = new FSMStateMachine<Player>(player);
                 m_FSM.SetGlobalState(new PlayerBattleFSMState_Global());
                 m_FSM.stateFactory = new FSMStateFactory<Player>(false);
-                m_FSM.stateFactory.RegisterState(RoleBattleState.Battle, new PlayerBattleFSMState_Move());
+                m_FSM.stateFactory.RegisterState(RoleBattleState.None, new PlayerBaseState_None());
+                m_FSM.stateFactory.RegisterState(RoleBattleState.Air, new PlayerBattleFSMState_Air());
+                m_FSM.stateFactory.RegisterState(RoleBattleState.Move, new PlayerBattleFSMState_Move());
+                m_FSM.stateFactory.RegisterState(RoleBattleState.Land, new PlayerBattleFSMState_Land());
+                m_FSM.stateFactory.RegisterState(RoleBattleState.Roll, new PlayerBattleFSMState_Roll());
                 m_FSM.stateFactory.RegisterState(RoleBattleState.Blocking, new PlayerBattleFSMState_Blocking());
                 m_FSM.stateFactory.RegisterState(RoleBattleState.Crouch, new PlayerBattleFSMState_Crouch());
             }
 
-            SetBattleState(RoleBattleState.Battle);
+            SetBattleState(RoleBattleState.Move);
 
         }
 
@@ -63,15 +71,12 @@ namespace Game.Logic
         public override void Exit(Player player)
         {
             player.role.controlComponent.UnArm();
+            SetBattleState(RoleBattleState.None);
         }
 
-        public override void OnMsg(Player entity, int key, params object[] args)
+        public void SetBattleState(RoleBattleState state, params object[] args)
         {
-        }
-
-        public void SetBattleState(RoleBattleState state)
-        {
-            m_FSM.SetCurrentStateByID(state);
+            m_FSM.SetCurrentStateByID(state, args);
         }
 
     }
