@@ -23,19 +23,23 @@ namespace Game.Logic
             player.role.controlComponent.canMove = false;
             player.role.controlComponent.canRotate = false;
             player.role.controlComponent.Land();
+            player.role.animComponent.SetVelocityZ(0);
+
         }
 
         public override void FixedUpdate(Player player, float dt)
         {
+            // GameInputMgr.S.ClearMove();
+            player.role.animComponent.SetVelocityZ(0);
             if (player.role.controlComponent.canMove)
             {
-                GameInputMgr.S.ClearMove();
-                player.controlComponent.velocity = Vector3.zero;
+                Debug.LogError("Back To Move");
                 (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Move);
             }
 
             CheckGround();
             player.transform.position = Vector3.Lerp(player.transform.position, targetPosition, dt);
+            // player.transform.position = targetPosition;
         }
 
         public override void Exit(Player player)
@@ -51,11 +55,14 @@ namespace Game.Logic
             //将检测点抬高到膝盖的位置，同时collider的位置也如此
             origin.y += m_Player.role.monoReference.kneeHeight;
             targetPosition = m_Player.transform.position;
+            Debug.DrawRay(origin, -Vector3.up * 0.7f, Color.red, 0.1f);
             if (Physics.Raycast(origin, -Vector3.up, out hit, 0.7f, 1 << LayerDefine.Layer_Ground))//检测是否落到地上了
             {
-
                 Vector3 tp = hit.point;
+                // Debug.LogError(tp.y + "---" + targetPosition.y);
                 targetPosition.y = tp.y;
+                m_Player.monoReference.rigidbody.drag = 0;
+                m_Player.monoReference.rigidbody.velocity = Vector3.zero;
             }
         }
     }

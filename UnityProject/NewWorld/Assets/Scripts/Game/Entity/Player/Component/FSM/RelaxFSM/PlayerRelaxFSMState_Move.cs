@@ -83,21 +83,12 @@ namespace Game.Logic
 
         protected override void OnHitGround(RaycastHit hit)
         {
-            if (GameInputMgr.S.moveAmount > 0)
-            {
-                //TODO 如果刚刚落地的话，坐标需要插值过去
-                // player.transform.position = Vector3.Lerp(player.transform.position, targetPosition, dt);
-                m_Player.transform.position = targetPosition;
-            }
-            else
-            {
-                m_Player.transform.position = targetPosition;
-            }
+            m_Player.transform.position = targetPosition;
         }
 
         protected override void OnInAir(Vector3 moveDir)
         {
-            Debug.LogError("To Air");
+            // Debug.LogError("To Air");
             (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Air, m_MoveDir);
         }
 

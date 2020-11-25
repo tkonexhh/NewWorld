@@ -73,7 +73,7 @@ namespace Game.Logic
 
         private void HandleMove(float dt)
         {
-            if (m_Player.role.controlComponent.rolling)
+            if (m_Player.role.controlComponent.usingMotion)
                 return;
 
             m_MoveDir = Vector3.zero;
@@ -97,7 +97,7 @@ namespace Game.Logic
             //将检测点抬高到膝盖的位置，同时collider的位置也如此
             origin.y += m_Player.role.monoReference.kneeHeight;//0.5f就是ground DetectionRayStartPoint 从人物那个位置向下打射线
 
-            Debug.DrawRay(origin, m_Player.transform.forward, Color.green, 0.1f);
+            // Debug.DrawRay(origin, m_Player.transform.forward, Color.green, 0.1f);
             if (Physics.Raycast(origin, m_Player.transform.forward, out hit, 0.4f))//如果脚前面前面有物体贴着的话，不可以移动了
             {
                 moveDir = Vector3.zero;
@@ -107,7 +107,7 @@ namespace Game.Logic
             dir.Normalize();
             origin += dir * m_Player.monoReference.rigidbodyCollider.radius;
             targetPosition = m_Player.transform.position;
-            Debug.DrawRay(origin, -Vector3.up * minDistanceNeededToFall, Color.red, 0.1f);
+            // Debug.DrawRay(origin, -Vector3.up * minDistanceNeededToFall, Color.red, 0.1f);
             if (Physics.Raycast(origin, -Vector3.up, out hit, minDistanceNeededToFall, 1 << LayerDefine.Layer_Ground))//检测是否落到地上了
             {
                 normalVector = hit.normal;

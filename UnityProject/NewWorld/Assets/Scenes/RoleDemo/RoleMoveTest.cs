@@ -25,6 +25,7 @@ namespace Game.Logic
         [SerializeField] private TextMeshProUGUI m_TMPVelX;
         [SerializeField] private Button m_BtnRoll;
         [SerializeField] private Button m_BtnDodge;
+        [SerializeField] private Button m_BtnLand;
 
         float m_SpeedZ;
         float m_SpeedX;
@@ -46,6 +47,7 @@ namespace Game.Logic
             m_BtnReset.onClick.AddListener(OnClickReset);
             m_BtnRoll.onClick.AddListener(OnClickRoll);
             m_BtnDodge.onClick.AddListener(OnClickDodge);
+            m_BtnLand.onClick.AddListener(OnClickLand);
         }
 
         private void OnClickReset()
@@ -108,6 +110,11 @@ namespace Game.Logic
         private void OnClickDodge()
         {
             role.controlComponent.Dodge();
+        }
+
+        private void OnClickLand()
+        {
+            role.controlComponent.Land();
         }
     }
 

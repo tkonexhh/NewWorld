@@ -49,7 +49,7 @@ namespace Game.Logic
             }
             else
             {
-                Debug.LogError("Back To Ground");
+                // Debug.LogError("Back To Ground");
                 m_Player.role.controlComponent.BackToMovement();
                 (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Move);
             }

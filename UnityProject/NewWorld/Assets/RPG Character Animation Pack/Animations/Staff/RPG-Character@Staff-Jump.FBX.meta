@@ -870,7 +870,7 @@ ModelImporter:
           postInfinity: 2
           rotationOrder: 4
       events:
-      - time: 0.9404077
+      - time: 0.701648
         functionName: CanMove
         data: 
         objectReferenceParameter: {instanceID: 0}
