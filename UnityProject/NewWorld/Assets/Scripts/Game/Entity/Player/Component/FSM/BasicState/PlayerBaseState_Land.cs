@@ -29,7 +29,7 @@ namespace Game.Logic
 
         public override void FixedUpdate(Player player, float dt)
         {
-            player.role.animComponent.SetVelocityZ(0);
+            player.role.animComponent.ResetVelocityZ();
 
             CheckGround();
             player.transform.position = Vector3.Lerp(player.transform.position, targetPosition, dt);

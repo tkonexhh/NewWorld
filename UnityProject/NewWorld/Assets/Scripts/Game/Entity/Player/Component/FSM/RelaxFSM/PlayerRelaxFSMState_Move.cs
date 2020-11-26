@@ -50,15 +50,37 @@ namespace Game.Logic
             {
                 (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Crouch);
             }
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                player.role.controlComponent.Boost();
+            }
+
+
+            if (GameInputMgr.S.lastMoveInput != Vector2.zero && GameInputMgr.S.moveInput == Vector2.zero)//
+            {
+                if (player.role.animComponent.GetVelocityZ() > 7f)
+                {
+                    m_Player.monoReference.rigidbody.drag = 0;
+                    m_Player.role.animComponent.ResetVelocityZ();
+                    Debug.LogError("Run To Stop");
+                    m_Player.role.controlComponent.RunToStop();
+                }
+
+            }
+
         }
 
-        // public override void FixedUpdate(Player player, float dt)
-        // {
-        //     base.FixedUpdate(player, dt);
-        // }
+        public override void FixedUpdate(Player player, float dt)
+        {
+            base.FixedUpdate(player, dt);
+
+
+        }
 
         public override void Exit(Player player)
         {
+            base.Exit(player);
             GameInputMgr.S.mainAction.Roll.performed -= OnRollPerformed;
             GameInputMgr.S.mainAction.Run.performed -= OnRunPerformed;
             GameInputMgr.S.mainAction.Run.canceled -= OnRunCanceled;

@@ -24,13 +24,15 @@ namespace Game.Logic
         public override void Enter(Player player, params object[] args)
         {
             m_Player = player;
+            m_Player.role.monoReference.onAnimatorMove += OnAnimatorMove;
         }
 
 
         public override void FixedUpdate(Player player, float dt)
         {
             // 控制角色朝向
-            player.role.animComponent.SetVelocityZ(GameInputMgr.S.moveAmount, player.role.controlComponent.running);
+            if (!player.role.animComponent.GetInterActing())
+                player.role.animComponent.SetVelocityZ(GameInputMgr.S.moveAmount, player.role.controlComponent.running);
 
             if (player.role.controlComponent.canRotate)
             {
@@ -43,6 +45,17 @@ namespace Game.Logic
             }
 
             HandleGroundHit(dt, m_MoveDir);
+        }
+
+        public override void Exit(Player player)
+        {
+            m_Player.role.monoReference.onAnimatorMove -= OnAnimatorMove;
+        }
+
+        private void OnAnimatorMove(Vector3 deletaPos)
+        {
+            // Debug.LogError(deletaPos.sqrMagnitude);
+            // Debug.LogError(deletaPos.sqrMagnitude.Remap(0, 0.005f, 0, 1));
         }
 
 
@@ -85,8 +98,19 @@ namespace Game.Logic
             float speed = m_Player.role.controlComponent.running ? m_Player.role.data.baseData.runSpeed : m_Player.role.data.baseData.walkSpeed;
             m_MoveDir *= speed;
 
+            float remapSpeed = 1;
+            if (m_Player.role.controlComponent.running)
+            {
+                remapSpeed = m_Player.role.animComponent.GetVelocityZ().Remap(3, 6, 0, 1);
+            }
+            else
+            {
+                remapSpeed = m_Player.role.animComponent.GetVelocityZ().Remap(0, 3, 0, 1);
+            }
+
             Vector3 projectedVel = Vector3.ProjectOnPlane(m_MoveDir, normalVector);
-            m_Player.monoReference.rigidbody.velocity = projectedVel;
+            //这里希望速度也能够配合动画进行缓动
+            m_Player.monoReference.rigidbody.velocity = projectedVel * remapSpeed;
         }
 
 

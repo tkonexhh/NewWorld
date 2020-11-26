@@ -69,6 +69,7 @@ namespace Game.Logic
 
         public override void Exit(Player player)
         {
+            base.Exit(player);
             GameInputMgr.S.mainAction.AttackL.canceled -= OnAttackLCanceled;
             GameInputMgr.S.mainAction.Roll.performed -= OnRollPerformed;
             GameInputMgr.S.mainAction.Run.performed -= OnRunPerformed;

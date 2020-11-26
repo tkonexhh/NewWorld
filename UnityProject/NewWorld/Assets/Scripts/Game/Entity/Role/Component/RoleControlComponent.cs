@@ -53,10 +53,11 @@ namespace Game.Logic
         //TODO 当速度小于X时，Vel采用插值过渡，当Vel进入到跑步时候，采用急停
         public void RunToStop()
         {
+            if (role.animComponent.GetInterActing()) return;
             role.animComponent.animator.CrossFade("RunToStop", 0.05f, 0, 0.1f);
             role.animComponent.SetMoving(false);
             role.animComponent.SetVelocityX(0);
-            role.animComponent.SetVelocityZ(0);
+
         }
 
         public void Arm()
@@ -291,6 +292,12 @@ namespace Game.Logic
             {
                 GetHurt();
             }
+        }
+
+        public void Boost()
+        {
+            if (role.animComponent.GetInterActing()) return;
+            role.animComponent.animator.CrossFade(m_AnimName.boost, 0.2f, 1, 0.1f);
         }
     }
 

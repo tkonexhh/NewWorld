@@ -38,6 +38,7 @@ namespace Game.Logic
 
         public override void Exit(Player player)
         {
+            base.Exit(player);
             m_AirTimer = 0;
         }
 

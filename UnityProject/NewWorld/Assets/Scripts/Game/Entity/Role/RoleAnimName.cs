@@ -24,6 +24,13 @@ namespace Game.Logic
         public virtual string roll_Backward => "Staff-Roll-Backward";
         public virtual string roll_Left => "Staff-Roll-Left";
         public virtual string roll_Right => "Staff-Roll-Right";
+
+        public virtual string boost => "Boost";
+    }
+
+    public class RoleWeaponAnimName : RoleAnimName
+    {
+
     }
 
     public class TowHandAxeAnimName : RoleAnimName
@@ -37,6 +44,9 @@ namespace Game.Logic
         public override string roll_Backward => "2Hand-Axe-Roll-Backward";
         public override string roll_Left => "2Hand-Axe-Roll-Left";
         public override string roll_Right => "2Hand-Axe-Roll-Right";
+
+
+        public override string boost => "2Hand-Axe-Boost";
     }
 
 }

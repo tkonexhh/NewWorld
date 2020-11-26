@@ -1,3 +1,4 @@
+using System;
 /************************
 	FileName:/Scripts/Game/Entity/Role/Component/RoleAnimComponent.cs
 	CreateAuthor:neo.xu
@@ -36,6 +37,7 @@ namespace Game.Logic
         private string m_Key_BoolMoving = "Moving";
         private string m_Key_BoolInjured = "Injured";
         private string m_Key_BoolCrouch = "Crouch";
+        private string m_Key_BoolInterActing = "InterActing";
 
         private string m_Key_IntAction = "Action";
         private string m_Key_IntWeapon = "Weapon";
@@ -63,6 +65,7 @@ namespace Game.Logic
         private int m_KeyHash_BoolMoving;
         private int m_KeyHash_BoolInjured;
         private int m_KeyHash_BoolCrouch;
+        private int m_KeyHash_BoolInterActing;
 
 
         private int m_KeyHash_IntAction;
@@ -102,6 +105,7 @@ namespace Game.Logic
             m_KeyHash_BoolMoving = Animator.StringToHash(m_Key_BoolMoving);
             m_KeyHash_BoolInjured = Animator.StringToHash(m_Key_BoolInjured);
             m_KeyHash_BoolCrouch = Animator.StringToHash(m_Key_BoolCrouch);
+            m_KeyHash_BoolInterActing = Animator.StringToHash(m_Key_BoolInterActing);
             m_KeyHash_IntAction = Animator.StringToHash(m_Key_IntAction);
             m_KeyHash_IntWeapon = Animator.StringToHash(m_Key_IntWeapon);
             m_KeyHash_IntWeaponSwitch = Animator.StringToHash(m_Key_IntWeaponSwitch);
@@ -199,12 +203,29 @@ namespace Game.Logic
             {
                 vZ = 6;
             }
-            m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, vZ, 0.1f, Time.deltaTime);
+
+            float dampTime = 0.1f;
+            if (isSprint)//到进入跑步的时候，时间略微放缓
+                dampTime = 0.3f;
+            else
+            {
+                float velZ = GetVelocityZ();//当从run到walk的时候，时间也略微放缓
+                if (velZ > 3.0f)
+                    dampTime = 0.3f;
+            }
+
+
+            m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, vZ, dampTime, Time.deltaTime);
+        }
+
+        public float GetVelocityZ()
+        {
+            return m_Animator.GetFloat(m_KeyHash_FloatVelocityZ);
         }
 
         public void ResetVelocityZ()
         {
-            m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, 0, 0.1f, Time.deltaTime);
+            m_Animator.SetFloat(m_KeyHash_FloatVelocityZ, 0);
         }
 
         public void SetHurt(Vector2 vec)
@@ -231,6 +252,11 @@ namespace Game.Logic
         public void SetCrouch(bool crouch)
         {
             m_Animator.SetBool(m_KeyHash_BoolCrouch, crouch);
+        }
+
+        public bool GetInterActing()
+        {
+            return m_Animator.GetBool(m_KeyHash_BoolInterActing);
         }
 
         #endregion
