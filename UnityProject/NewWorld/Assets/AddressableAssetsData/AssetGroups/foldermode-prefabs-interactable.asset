@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: foldermode-prefabs-interactable
+  m_EditorClassIdentifier: 
+  m_GroupName: foldermode-prefabs-interactable
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 68a56865042eb4cd6b5d6fdfc9abbe0a
+  m_SerializeEntries:
+  - m_GUID: c92f7c1fe8a9f461eaf454dd6ac8e553
+    m_Address: Chest_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9c683e4341b3a423397a98767a646554, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b563128b346d24bd6913c5f8a902f7e0, type: 2}

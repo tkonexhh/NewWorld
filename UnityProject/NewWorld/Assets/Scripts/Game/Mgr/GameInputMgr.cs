@@ -78,6 +78,17 @@ namespace Game.Logic
             moveVec = Vector2.zero;
             moveInput = Vector2.zero;
         }
+
+
+        public Vector3 CovertInputToObject(Transform trans)
+        {
+            Vector3 dir = Vector3.zero;
+            dir = trans.forward * moveInput.y;
+            dir += trans.right * moveInput.x;
+            dir.Normalize();
+
+            return dir;
+        }
     }
 
 }

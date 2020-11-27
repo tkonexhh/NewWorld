@@ -31,8 +31,8 @@ namespace Game.Logic
         public override void FixedUpdate(Player player, float dt)
         {
             // 控制角色朝向
-            if (!player.role.animComponent.GetInterActing())
-                player.role.animComponent.SetVelocityZ(GameInputMgr.S.moveAmount, player.role.controlComponent.running);
+            if (!m_Player.role.animComponent.GetInterActing())
+                m_Player.role.animComponent.SetVelocityZ(GameInputMgr.S.moveAmount, m_Player.role.controlComponent.running);
 
             if (player.role.controlComponent.canRotate)
             {
@@ -111,6 +111,7 @@ namespace Game.Logic
             Vector3 projectedVel = Vector3.ProjectOnPlane(m_MoveDir, normalVector);
             //这里希望速度也能够配合动画进行缓动
             m_Player.monoReference.rigidbody.velocity = projectedVel * remapSpeed;
+
         }
 
 
@@ -121,9 +122,10 @@ namespace Game.Logic
             //将检测点抬高到膝盖的位置，同时collider的位置也如此
             origin.y += m_Player.role.monoReference.kneeHeight;//0.5f就是ground DetectionRayStartPoint 从人物那个位置向下打射线
 
-            // Debug.DrawRay(origin, m_Player.transform.forward, Color.green, 0.1f);
+            Debug.DrawRay(origin, m_Player.transform.forward, Color.green, 0.1f);
             if (Physics.Raycast(origin, m_Player.transform.forward, out hit, 0.4f))//如果脚前面前面有物体贴着的话，不可以移动了
             {
+                m_Player.role.animComponent.SetVelocityZ(0);
                 moveDir = Vector3.zero;
             }
 
@@ -143,6 +145,8 @@ namespace Game.Logic
             {
                 OnInAir(moveDir);
             }
+
+
         }
 
 

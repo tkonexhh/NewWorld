@@ -16,20 +16,17 @@ namespace Game.Logic
 {
     public class PlayerFSMState_Global : FSMState<Player>
     {
-        // private Role_Player player;
 
+        private Player m_Player;
 
         public override void Enter(Player player, params object[] args)
         {
-            // player = role as Role_Player;
+            m_Player = player;
         }
 
         public override void Update(Player player, float dt)
         {
-            // if (Input.GetKeyDown(KeyCode.Z))
-            // {
-            //     player.fsmComponent.SetRoleState(RoleState.Death);
-            // }
+
 
             if (Input.GetKeyDown(KeyCode.X))
             {
@@ -42,14 +39,32 @@ namespace Game.Logic
             }
         }
 
+        public override void FixedUpdate(Player entity, float dt)
+        {
+            CheckInteractableObject();
+        }
+
         public override void Exit(Player player)
         {
 
         }
 
-        public override void OnMsg(Player player, int key, params object[] args)
+        private void CheckInteractableObject()
         {
+            RaycastHit hit;
 
+            if (Physics.SphereCast(m_Player.transform.position, 0.3f, m_Player.transform.forward, out hit, 1f))
+            {
+                var interactable = hit.collider.GetComponent<InteractableObject>();
+                if (interactable != null)
+                {
+                    Debug.LogError(interactable);
+                    if (Input.GetKeyDown(KeyCode.F))
+                    {
+                        interactable.Interact(m_Player.role);
+                    }
+                }
+            }
         }
     }
 
