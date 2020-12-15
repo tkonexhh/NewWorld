@@ -41,6 +41,11 @@ namespace GFrame
             OnPanelOpen(args);
         }
 
+        public void PanelHide()
+        {
+            OnPanelHide();
+        }
+
         public void OnPanelClose(bool destroy)
         {
             SendViewEvent(ViewEvent.OnPanelClose);
@@ -120,6 +125,7 @@ namespace GFrame
 
         #region 子类需重载
         protected virtual void OnPanelOpen(params object[] args) { }
+        protected virtual void OnPanelHide() { }
         #endregion
 
 

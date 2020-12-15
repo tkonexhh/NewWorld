@@ -74,6 +74,8 @@ namespace GFrame
 
 
         #region  public Func
+
+        #region OpenPanel
         public void OpenPanel<T>(T uiID, params object[] args) where T : System.IConvertible
         {
             OpenPanel(uiID, PanelSortType.Auto, null, args);
@@ -107,7 +109,7 @@ namespace GFrame
 
             if (panelInfo.isReady)
             {
-                Debug.LogError("panel is Ready");
+                // Debug.LogError("panel is Ready");
             }
             else
             {
@@ -116,6 +118,41 @@ namespace GFrame
 
             panelInfo.SetActive(true);
             panelInfo.OpenPanel();
+        }
+        #endregion
+
+
+        #region HidePanel
+        public void HidePanel<T>(T uiID) where T : System.IConvertible
+        {
+
+            PanelInfo panelInfo = LoadPanelInfo(uiID.ToInt32(null));
+            if (panelInfo == null)
+            {
+                return;
+            }
+
+            panelInfo.SetActive(false);
+            panelInfo.HidePanel();
+        }
+        #endregion
+
+        public void ToggleShowPanel<T>(T uiID) where T : System.IConvertible
+        {
+            PanelInfo panelInfo = LoadPanelInfo(uiID.ToInt32(null));
+            if (panelInfo == null)
+            {
+                return;
+            }
+
+            if (panelInfo.isOpen)
+            {
+                HidePanel(uiID);
+            }
+            else
+            {
+                OpenPanel(uiID, PanelSortType.Auto, null);
+            }
         }
 
         public void ClosePanelAsUIID<T>(T uiID) where T : System.IConvertible
@@ -170,11 +207,6 @@ namespace GFrame
             }
         }
 
-        public void ToggleShowPanel<T>(T uiID) where T : System.IConvertible
-        {
-            int id = uiID.ToInt32(null);
-            // if()
-        }
 
         #endregion
 

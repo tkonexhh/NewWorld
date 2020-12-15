@@ -42,7 +42,7 @@ namespace Game.Logic
 
         private PlayerEquipmentCellData CreateCellData(InventoryEquipSlot slot)
         {
-            var equipment = PlayerMgr.S.role.equipComponent.GetEquipmentBySlot(slot);
+            var equipment = GamePlayMgr.S.playerMgr.role.equipComponent.GetEquipmentBySlot(slot);
 
             if (equipment != null)
             {

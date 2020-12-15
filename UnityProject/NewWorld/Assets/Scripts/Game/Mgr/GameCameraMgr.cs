@@ -62,9 +62,11 @@ namespace Game.Logic
         public void InitFreeLook(CinemachineFreeLook cinemachineFreeLook)
         {
             m_CameraPlayer = cinemachineFreeLook;
-            m_CameraPlayer.Follow = PlayerMgr.S.player.transform;
+            // m_CameraPlayer.Follow = PlayerMgr.S.player.transform;
+            m_CameraPlayer.Follow = GamePlayMgr.S.playerMgr.player.transform;
             // m_CameraPlayer.LookAt = PlayerMgr.S.player.monoReference.cameraLookPoint;
-            m_CameraPlayer.LookAt = PlayerMgr.S.player.role.monoReference.headLook;
+            // m_CameraPlayer.LookAt = PlayerMgr.S.player.role.monoReference.headLook;
+            m_CameraPlayer.LookAt = GamePlayMgr.S.playerMgr.player.role.monoReference.headLook;
             //    m_CameraPlayer.
             // m_CameraPlayer.GetRig(0).LookAt = PlayerMgr.S.player.role.monoReference.headLook;
             // m_CameraPlayer.GetRig(2).LookAt = PlayerMgr.S.player.role.monoReference.headLook;

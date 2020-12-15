@@ -32,7 +32,7 @@ namespace Game.Logic
             {
                 target.transform.position = Vector3.one * 5000;
                 m_CharacterAppearance = target.GetComponentInChildren<CharacterAppearance>();
-                m_CharacterAppearance.SetAppearanceData(PlayerMgr.S.role.data.appearanceData);
+                m_CharacterAppearance.SetAppearanceData(GamePlayMgr.S.playerMgr.role.data.appearanceData);
             });
 
             GameInputMgr.S.uiAction.Rotate.performed += OnRoleRotatePerformed;

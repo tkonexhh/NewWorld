@@ -108,7 +108,7 @@ namespace Game.Logic
             {
                 type = DamageTextEnum.Crit;
             }
-            WorldUIPanel.S.ShowDamage(PlayerMgr.S.role.transform.position, new Vector3(Random.Range(-40, 40), Random.Range(-40, 40) + 60, 0), type, Random.Range(1, 200));
+            WorldUIPanel.S.ShowDamage(GamePlayMgr.S.playerMgr.role.transform.position, new Vector3(Random.Range(-40, 40), Random.Range(-40, 40) + 60, 0), type, Random.Range(1, 200));
         }
     }
 

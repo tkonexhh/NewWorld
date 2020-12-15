@@ -295,14 +295,14 @@ namespace Game.Logic
             var nowEquipment = cellView.CellData as PlayerEquipmentCellData;
             if (nowEquipment != null)
             {
-                PlayerMgr.S.role.equipComponent.UnEquip(nowEquipment.equipment);
+                GamePlayMgr.S.playerMgr.role.equipComponent.UnEquip(nowEquipment.equipment);
                 GFrame.EventSystem.S.Send(EventID.OnAddInventory, new PlayerInventoryCellData(nowEquipment.item));
             }
 
             var equipCellData = new PlayerEquipmentCellData(equipment);
             ApplyCell(cellView, (int)cellView.slot, equipCellData);
             Debug.LogError(equipment);
-            PlayerMgr.S.role.equipComponent.Equip(equipment);
+            GamePlayMgr.S.playerMgr.role.equipComponent.Equip(equipment);
             GFrame.EventSystem.S.Send(EventID.OnRefeshAppearance, cellView.slot, equipment, nowEquipment?.equipment);
         }
 
@@ -311,7 +311,7 @@ namespace Game.Logic
             var nowEquipment = cellView.CellData as PlayerEquipmentCellData;
             if (nowEquipment != null)
             {
-                PlayerMgr.S.role.equipComponent.UnEquip(nowEquipment.equipment);
+                GamePlayMgr.S.playerMgr.role.equipComponent.UnEquip(nowEquipment.equipment);
                 GFrame.EventSystem.S.Send(EventID.OnAddInventory, new PlayerInventoryCellData(nowEquipment.item));
             }
 

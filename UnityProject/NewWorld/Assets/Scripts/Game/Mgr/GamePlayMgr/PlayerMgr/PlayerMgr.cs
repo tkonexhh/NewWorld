@@ -13,10 +13,8 @@ using GFrame;
 
 namespace Game.Logic
 {
-    [TMonoSingletonAttribute("[Game]/[PlayerMgr]")]
-    public class PlayerMgr : TMonoSingleton<PlayerMgr>
+    public class PlayerMgr : IEngineComponent
     {
-        // private Role_Player m_Role;
         private Player m_Player;
         private PlayerInventoryMgr m_InventoryMgr = null;
         private PlayerEquipmentMgr m_EquipmentMgr = null;
@@ -26,28 +24,19 @@ namespace Game.Logic
         public PlayerInventoryMgr inventoryMgr => m_InventoryMgr;
         public PlayerEquipmentMgr equipmentMgr => m_EquipmentMgr;
 
-
-        public override void OnSingletonInit()
+        public void Init()
         {
-            m_InventoryMgr = gameObject.AddComponent<PlayerInventoryMgr>();
-            m_EquipmentMgr = gameObject.AddComponent<PlayerEquipmentMgr>();
-
+            m_InventoryMgr = new PlayerInventoryMgr();
+            m_EquipmentMgr = new PlayerEquipmentMgr();
 
             m_InventoryMgr.OnInit();
             m_EquipmentMgr.OnInit();
 
-
-            // m_Role = new Role_Player();
             m_Player = new Player();
         }
 
-        public void Init()
-        {
 
-        }
-
-
-        private void Update()
+        public void Update(float dt)
         {
             m_InventoryMgr?.OnUpdate();
             m_EquipmentMgr?.OnUpdate();

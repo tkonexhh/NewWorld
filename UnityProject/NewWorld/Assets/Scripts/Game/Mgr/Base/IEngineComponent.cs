@@ -15,8 +15,7 @@ namespace Game.Logic
 {
     public interface IEngineComponent
     {
-
-        void Init(IEngineMgr mgr);
+        void Init();
         void Update(float dt);
     }
 

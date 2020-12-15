@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class PlayerEquipmentMgr : MonoBehaviour, IPlayerMgr
+    public class PlayerEquipmentMgr : IPlayerMgr
     {
         #region IPlayerComponent
         public void OnInit()

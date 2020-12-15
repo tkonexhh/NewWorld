@@ -26,10 +26,13 @@ namespace Game.Logic
         }
         protected override void OnSceneEnter()
         {
+            GamePlayMgr.S.Init();
+
+
             UIMgr.S.OpenPanel(UIID.GamePanel);
             UIMgr.S.OpenTopPanel(UIID.WorldUIPanel);
 
-            PlayerMgr.S.player.onPlayerCreated += (player) =>
+            GamePlayMgr.S.playerMgr.player.onPlayerCreated += (player) =>
             {
                 player.transform.position = m_RoleOriginPos.position;
                 player.role.transform.localPosition = Vector3.zero;

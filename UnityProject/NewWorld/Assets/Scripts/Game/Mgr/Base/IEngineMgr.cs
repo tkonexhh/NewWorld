@@ -15,7 +15,8 @@ namespace Game.Logic
 {
     public interface IEngineMgr
     {
-
+        void Init();
+        void Update();
     }
 
 }

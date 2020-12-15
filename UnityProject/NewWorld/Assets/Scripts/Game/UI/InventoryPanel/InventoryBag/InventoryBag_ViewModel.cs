@@ -21,14 +21,14 @@ namespace Game.Logic
 
         public void Init()
         {
-            var supplys = PlayerMgr.S.inventoryMgr.LstSupply;
+            var supplys = GamePlayMgr.S.playerMgr.inventoryMgr.LstSupply;
             supplys.ForEach((item) =>
             {
                 PlayerInventoryCellData cellData = new PlayerInventoryCellData(item);
                 m_SupplyViewData.InsertInventoryItem(m_SupplyViewData.GetInsertableId(cellData).Value, cellData);
             });
 
-            var equips = PlayerMgr.S.inventoryMgr.LstEquipment;
+            var equips = GamePlayMgr.S.playerMgr.inventoryMgr.LstEquipment;
             equips.ForEach((item) =>
             {
                 PlayerInventoryCellData cellData = new PlayerInventoryCellData(item);

@@ -60,10 +60,10 @@ namespace Game.Logic
             switch (type)
             {
                 case InventoryToggleType.Equipment:
-                    m_ShowItems = PlayerMgr.S.inventoryMgr.LstEquipment.Cast<AbstractItem>().ToList();
+                    m_ShowItems = GamePlayMgr.S.playerMgr.inventoryMgr.LstEquipment.Cast<AbstractItem>().ToList();
                     break;
                 case InventoryToggleType.Supplies:
-                    m_ShowItems = PlayerMgr.S.inventoryMgr.LstSupply.Cast<AbstractItem>().ToList();
+                    m_ShowItems = GamePlayMgr.S.playerMgr.inventoryMgr.LstSupply.Cast<AbstractItem>().ToList();
                     break;
             }
 

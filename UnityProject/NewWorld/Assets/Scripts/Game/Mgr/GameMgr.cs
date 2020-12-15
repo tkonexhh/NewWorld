@@ -42,7 +42,7 @@ namespace Game.Logic
             AddComponent(new DataBaseModule());
 
             //TODO
-            GamePlayMgr.S.Init();
+            // GamePlayMgr.S.Init();
         }
 
         protected override void OnModuleAwake()

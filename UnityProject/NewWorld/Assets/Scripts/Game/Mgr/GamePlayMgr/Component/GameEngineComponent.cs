@@ -15,8 +15,7 @@ namespace Game.Logic
 {
     public abstract class GameEngineComponent : IEngineComponent
     {
-        public virtual void Init(IEngineMgr mgr) { }
-
+        public virtual void Init() { }
         public virtual void Update(float dt) { }
     }
 

@@ -13,30 +13,22 @@ using GFrame;
 
 namespace Game.Logic
 {
-    public class GamePlayMgr : TMonoSingleton<GamePlayMgr>, IEngineMgr
+    public class GamePlayMgr : AbstractMgr<GamePlayMgr>
     {
-        protected List<IEngineComponent> _components = new List<IEngineComponent>();
-        protected virtual T AddComponent<T>(T component) where T : IEngineComponent
-        {
-            component.Init(this);
-            _components.Add(component);
-            return component;
-        }
+        public PlayerMgr playerMgr { get; private set; }
+        public EnvironmentMgr environmentMgr { get; private set; }
 
-        public override void OnSingletonInit()
-        {
-
-        }
-
-        public void Init()
+        public override void Init()
         {
             AddComponent(new GameInputComponent());
+            playerMgr = AddComponent(new PlayerMgr());
+            environmentMgr = AddComponent(new EnvironmentMgr());
         }
 
-        public void Update()
+        public override void Update()
         {
+            base.Update();
             EntityMgr.S.Update(Time.deltaTime);
-            _components.ForEach(p => p.Update(Time.deltaTime));
         }
 
         public void FixedUpdate()

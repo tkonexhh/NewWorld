@@ -17,7 +17,7 @@ namespace Game.Logic
 {
     public class GameInputComponent : GameEngineComponent
     {
-        public override void Init(IEngineMgr mgr)
+        public override void Init()
         {
             GameInputMgr.S.shortcutActions.Inventory.started += OnInventoryPerformed;
         }
@@ -25,7 +25,8 @@ namespace Game.Logic
         private void OnInventoryPerformed(InputAction.CallbackContext callback)
         {
             //交换显示
-            UIMgr.S.OpenPanel(UIID.Inventorypanel);
+            UIMgr.S.ToggleShowPanel(UIID.Inventorypanel);
+            // UIMgr.S.OpenPanel(UIID.Inventorypanel);
         }
 
     }
