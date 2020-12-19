@@ -17,6 +17,7 @@ namespace Game.Logic
     {
         public virtual void Init() { }
         public virtual void Update(float dt) { }
+        public virtual void FixedUpdate(float dt) { }
     }
 
 

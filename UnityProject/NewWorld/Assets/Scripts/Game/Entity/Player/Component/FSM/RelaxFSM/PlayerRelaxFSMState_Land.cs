@@ -15,10 +15,7 @@ namespace Game.Logic
 {
     public class PlayerRelaxFSMState_Land : PlayerBaseState_Land
     {
-        protected override void OnLandComplete()
-        {
-            (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Move);
-        }
+
     }
 
 }

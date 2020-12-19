@@ -19,7 +19,7 @@ namespace Game.Logic
         protected Vector3 targetPosition;
         protected Vector3 normalVector;
         protected Vector3 m_MoveDir;
-        private float minDistanceNeededToFall = 1.0f;
+        private float minDistanceNeededToFall = 0.5f;
 
         public override void Enter(Player player, params object[] args)
         {
@@ -133,7 +133,7 @@ namespace Game.Logic
             dir.Normalize();
             origin += dir * m_Player.monoReference.rigidbodyCollider.radius;
             targetPosition = m_Player.transform.position;
-            // Debug.DrawRay(origin, -Vector3.up * minDistanceNeededToFall, Color.red, 0.1f);
+            Debug.DrawRay(origin, -Vector3.up * minDistanceNeededToFall, Color.red, 0.1f);
             if (Physics.Raycast(origin, -Vector3.up, out hit, minDistanceNeededToFall, 1 << LayerDefine.Layer_Ground))//检测是否落到地上了
             {
                 normalVector = hit.normal;

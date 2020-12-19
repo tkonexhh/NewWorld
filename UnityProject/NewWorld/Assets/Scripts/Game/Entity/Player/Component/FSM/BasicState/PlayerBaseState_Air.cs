@@ -9,7 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 
 namespace Game.Logic
 {
@@ -23,6 +23,7 @@ namespace Game.Logic
             base.Enter(player, args);
             m_AirTimer = 0;
             isFailing = false;
+            GameInputMgr.S.mainAction.Jump.performed += OnJumpPerformed;
         }
 
         public override void Update(Player player, float dt)
@@ -40,6 +41,7 @@ namespace Game.Logic
         {
             base.Exit(player);
             m_AirTimer = 0;
+            GameInputMgr.S.mainAction.Jump.performed -= OnJumpPerformed;
         }
 
 
@@ -58,6 +60,20 @@ namespace Game.Logic
             Vector3 vel = m_Player.controlComponent.velocity;
             vel.Normalize();
             m_Player.controlComponent.velocity = vel * m_Player.role.data.baseData.walkSpeed * 2;
+        }
+
+        private void OnJumpPerformed(InputAction.CallbackContext callback)
+        {
+            m_Player.role.controlComponent.JumpFlip();
+            if (m_Player.fsmComponent.stateMachine.currentState is PlayerFSMState_Battle stateBattle)
+            {
+                stateBattle.SetBattleState(RoleBattleState.Jump);
+            }
+            else if (m_Player.fsmComponent.stateMachine.currentState is PlayerFSMState_Relax stateRelax)
+            {
+                stateRelax.SetRelaxState(RoleRelaxState.Jump);
+            }
+
         }
     }
 

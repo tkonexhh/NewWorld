@@ -50,6 +50,12 @@ namespace Game.Logic
             usingMotion = false;
         }
 
+        public void Idle()
+        {
+            role.animComponent.animator.CrossFade(m_AnimName.idle, 0.35f, 0, 0);
+        }
+
+
         //TODO 当速度小于X时，Vel采用插值过渡，当Vel进入到跑步时候，采用急停
         public void RunToStop()
         {
@@ -253,7 +259,17 @@ namespace Game.Logic
 
         public void BackToMovement()
         {
-            role.animComponent.animator.CrossFade(m_AnimName.movement, 0.15f, 0, 0);
+            role.animComponent.animator.CrossFade(m_AnimName.movement, 0.3f, 0, 0.1f);
+        }
+
+        public void Jump()
+        {
+            role.animComponent.animator.CrossFade(m_AnimName.jump, 0.15f, 0, 0);
+        }
+
+        public void JumpFlip()
+        {
+            role.animComponent.animator.CrossFade(m_AnimName.jumpFlip, 0.15f, 0, 0);
         }
 
         public void Land()
@@ -265,6 +281,11 @@ namespace Game.Logic
         public void Fall()
         {
             role.animComponent.animator.CrossFade(m_AnimName.fall, 0.15f, 0, 0);
+        }
+
+        public void Crouch()
+        {
+            role.animComponent.animator.CrossFade(m_AnimName.crouch, 0.15f, 0, 0);
         }
 
         public void Death()

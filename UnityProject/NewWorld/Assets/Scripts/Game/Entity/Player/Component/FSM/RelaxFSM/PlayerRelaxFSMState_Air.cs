@@ -19,7 +19,7 @@ namespace Game.Logic
 
         protected override void OnHitGround(RaycastHit hit)
         {
-            if (m_AirTimer > 0.5f)
+            if (m_AirTimer > 0.8f)
             {
                 Debug.LogError("InAirTimer:" + m_AirTimer);
                 (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Land);

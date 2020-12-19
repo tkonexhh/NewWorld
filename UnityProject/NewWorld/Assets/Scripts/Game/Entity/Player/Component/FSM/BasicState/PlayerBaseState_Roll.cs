@@ -34,12 +34,16 @@ namespace Game.Logic
             //检测是否roll完成
             if (!player.role.controlComponent.rolling)
             {
-                OnRollComplete();
-                // (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Move);
+                if (m_Player.fsmComponent.stateMachine.currentState is PlayerFSMState_Battle stateBattle)
+                {
+                    stateBattle.SetBattleState(RoleBattleState.Move);
+                }
+                else if (m_Player.fsmComponent.stateMachine.currentState is PlayerFSMState_Relax stateRelax)
+                {
+                    stateRelax.SetRelaxState(RoleRelaxState.Move);
+                }
             }
         }
-
-        protected virtual void OnRollComplete() { }
 
         private void StartRoll()
         {

@@ -21,13 +21,6 @@ namespace Game.Logic
         Face,
     }
 
-    public enum RoleAnimationType
-    {
-        Move,
-        Attack,
-        WeaponSwitch,
-    }
-
     public class RoleAnimComponent : RoleBaseComponent
     {
         private Animator m_Animator;
@@ -36,7 +29,6 @@ namespace Game.Logic
         #region key keyhash
         private string m_Key_BoolMoving = "Moving";
         private string m_Key_BoolInjured = "Injured";
-        private string m_Key_BoolCrouch = "Crouch";
         private string m_Key_BoolInterActing = "InterActing";
 
         private string m_Key_IntAction = "Action";
@@ -64,7 +56,6 @@ namespace Game.Logic
 
         private int m_KeyHash_BoolMoving;
         private int m_KeyHash_BoolInjured;
-        private int m_KeyHash_BoolCrouch;
         private int m_KeyHash_BoolInterActing;
 
 
@@ -104,7 +95,6 @@ namespace Game.Logic
             #region key keyhash
             m_KeyHash_BoolMoving = Animator.StringToHash(m_Key_BoolMoving);
             m_KeyHash_BoolInjured = Animator.StringToHash(m_Key_BoolInjured);
-            m_KeyHash_BoolCrouch = Animator.StringToHash(m_Key_BoolCrouch);
             m_KeyHash_BoolInterActing = Animator.StringToHash(m_Key_BoolInterActing);
             m_KeyHash_IntAction = Animator.StringToHash(m_Key_IntAction);
             m_KeyHash_IntWeapon = Animator.StringToHash(m_Key_IntWeapon);
@@ -247,11 +237,6 @@ namespace Game.Logic
         public void SetInjured(bool injured)
         {
             m_Animator.SetBool(m_KeyHash_BoolInjured, injured);
-        }
-
-        public void SetCrouch(bool crouch)
-        {
-            m_Animator.SetBool(m_KeyHash_BoolCrouch, crouch);
         }
 
         public bool GetInterActing()

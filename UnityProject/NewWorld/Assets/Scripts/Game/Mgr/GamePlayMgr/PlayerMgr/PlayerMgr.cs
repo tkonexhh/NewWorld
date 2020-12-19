@@ -13,7 +13,7 @@ using GFrame;
 
 namespace Game.Logic
 {
-    public class PlayerMgr : IEngineComponent
+    public class PlayerMgr : GameEngineComponent
     {
         private Player m_Player;
         private PlayerInventoryMgr m_InventoryMgr = null;
@@ -24,7 +24,7 @@ namespace Game.Logic
         public PlayerInventoryMgr inventoryMgr => m_InventoryMgr;
         public PlayerEquipmentMgr equipmentMgr => m_EquipmentMgr;
 
-        public void Init()
+        public override void Init()
         {
             m_InventoryMgr = new PlayerInventoryMgr();
             m_EquipmentMgr = new PlayerEquipmentMgr();
@@ -36,7 +36,7 @@ namespace Game.Logic
         }
 
 
-        public void Update(float dt)
+        public override void Update(float dt)
         {
             m_InventoryMgr?.OnUpdate();
             m_EquipmentMgr?.OnUpdate();

@@ -14,42 +14,8 @@ using UnityEngine.InputSystem;
 
 namespace Game.Logic
 {
-    public class PlayerRelaxFSMState_Crouch : FSMState<Player>
+    public class PlayerRelaxFSMState_Crouch : PlayerBaseState_Crouch
     {
-        // private Player m_;
-
-        public override void Enter(Player player, params object[] args)
-        {
-            // m_Role = role as Role_Player;
-            player.role.animComponent.SetCrouch(true);
-        }
-
-        public override void Update(Player player, float dt)
-        {
-            if (player.role.animComponent == null)
-                return;
-
-            if (Input.GetKeyUp(KeyCode.LeftControl))
-            {
-                (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Move);
-            }
-
-            if (Input.GetKeyDown(KeyCode.LeftControl))
-            {
-                (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Crouch);
-            }
-        }
-
-        public override void Exit(Player player)
-        {
-            player.role.animComponent.SetCrouch(false);
-        }
-
-        public override void OnMsg(Player role, int key, params object[] args)
-        {
-
-        }
-
 
     }
 

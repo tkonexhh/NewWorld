@@ -83,6 +83,14 @@ namespace Game.Logic
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""8a93e145-a670-4870-8ec9-df0d9e2b9eb3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -224,7 +232,7 @@ namespace Game.Logic
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyBoard"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -281,6 +289,17 @@ namespace Game.Logic
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0131eb65-5ea8-4a04-9893-cc510c281cf7"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard"",
+                    ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -524,6 +543,7 @@ namespace Game.Logic
             m_Main_Run = m_Main.FindAction("Run", throwIfNotFound: true);
             m_Main_AttackL = m_Main.FindAction("AttackL", throwIfNotFound: true);
             m_Main_AttackR = m_Main.FindAction("AttackR", throwIfNotFound: true);
+            m_Main_Crouch = m_Main.FindAction("Crouch", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Any = m_UI.FindAction("Any", throwIfNotFound: true);
@@ -589,6 +609,7 @@ namespace Game.Logic
         private readonly InputAction m_Main_Run;
         private readonly InputAction m_Main_AttackL;
         private readonly InputAction m_Main_AttackR;
+        private readonly InputAction m_Main_Crouch;
         public struct MainActions
         {
             private @GameInput m_Wrapper;
@@ -601,6 +622,7 @@ namespace Game.Logic
             public InputAction @Run => m_Wrapper.m_Main_Run;
             public InputAction @AttackL => m_Wrapper.m_Main_AttackL;
             public InputAction @AttackR => m_Wrapper.m_Main_AttackR;
+            public InputAction @Crouch => m_Wrapper.m_Main_Crouch;
             public InputActionMap Get() { return m_Wrapper.m_Main; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -634,6 +656,9 @@ namespace Game.Logic
                     @AttackR.started -= m_Wrapper.m_MainActionsCallbackInterface.OnAttackR;
                     @AttackR.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnAttackR;
                     @AttackR.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnAttackR;
+                    @Crouch.started -= m_Wrapper.m_MainActionsCallbackInterface.OnCrouch;
+                    @Crouch.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnCrouch;
+                    @Crouch.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnCrouch;
                 }
                 m_Wrapper.m_MainActionsCallbackInterface = instance;
                 if (instance != null)
@@ -662,6 +687,9 @@ namespace Game.Logic
                     @AttackR.started += instance.OnAttackR;
                     @AttackR.performed += instance.OnAttackR;
                     @AttackR.canceled += instance.OnAttackR;
+                    @Crouch.started += instance.OnCrouch;
+                    @Crouch.performed += instance.OnCrouch;
+                    @Crouch.canceled += instance.OnCrouch;
                 }
             }
         }
@@ -767,6 +795,7 @@ namespace Game.Logic
             void OnRun(InputAction.CallbackContext context);
             void OnAttackL(InputAction.CallbackContext context);
             void OnAttackR(InputAction.CallbackContext context);
+            void OnCrouch(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

@@ -36,12 +36,17 @@ namespace Game.Logic
 
             if (player.role.controlComponent.canMove)
             {
-                OnLandComplete();
-                // (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Move);
+                m_Player.role.animComponent.ResetVelocityZ();
+                if (m_Player.fsmComponent.stateMachine.currentState is PlayerFSMState_Battle stateBattle)
+                {
+                    stateBattle.SetBattleState(RoleBattleState.Move);
+                }
+                else if (m_Player.fsmComponent.stateMachine.currentState is PlayerFSMState_Relax stateRelax)
+                {
+                    stateRelax.SetRelaxState(RoleRelaxState.Move);
+                }
             }
         }
-
-        protected virtual void OnLandComplete() { }
 
         public override void Exit(Player player)
         {

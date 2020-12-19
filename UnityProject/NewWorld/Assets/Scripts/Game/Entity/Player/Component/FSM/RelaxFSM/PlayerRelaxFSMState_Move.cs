@@ -23,6 +23,8 @@ namespace Game.Logic
             GameInputMgr.S.mainAction.Roll.performed += OnRollPerformed;
             GameInputMgr.S.mainAction.Run.performed += OnRunPerformed;
             GameInputMgr.S.mainAction.Run.canceled += OnRunCanceled;
+            GameInputMgr.S.mainAction.Jump.performed += OnJumpPerformed;
+            GameInputMgr.S.mainAction.Crouch.performed += OnCrouchPerformed;
         }
 
         public override void Update(Player player, float dt)
@@ -84,6 +86,8 @@ namespace Game.Logic
             GameInputMgr.S.mainAction.Roll.performed -= OnRollPerformed;
             GameInputMgr.S.mainAction.Run.performed -= OnRunPerformed;
             GameInputMgr.S.mainAction.Run.canceled -= OnRunCanceled;
+            GameInputMgr.S.mainAction.Jump.performed -= OnJumpPerformed;
+            GameInputMgr.S.mainAction.Crouch.performed -= OnCrouchPerformed;
         }
 
         private void OnRunPerformed(InputAction.CallbackContext callback)
@@ -100,6 +104,21 @@ namespace Game.Logic
         private void OnRollPerformed(InputAction.CallbackContext callback)
         {
             (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Roll);
+        }
+
+        private void OnJumpPerformed(InputAction.CallbackContext callback)
+        {
+            m_MoveDir = Vector3.zero;
+            m_MoveDir = GameCameraMgr.S.mainCamera.transform.forward * GameInputMgr.S.moveInput.y;
+            m_MoveDir += GameCameraMgr.S.mainCamera.transform.right * GameInputMgr.S.moveInput.x;
+            m_MoveDir.y = 0;
+            m_Player.role.controlComponent.Jump();
+            (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Jump);
+        }
+
+        private void OnCrouchPerformed(InputAction.CallbackContext callback)
+        {
+            (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Crouch);
         }
 
         protected override void OnHitGround(RaycastHit hit)

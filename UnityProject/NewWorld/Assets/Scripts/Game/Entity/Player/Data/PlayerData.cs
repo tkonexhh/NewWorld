@@ -15,6 +15,7 @@ namespace Game.Logic
 {
     public class PlayerData : EntityData
     {
+        public static int jumpCount = 0;
         public PlayerData(Entity owner) : base(owner)
         {
 

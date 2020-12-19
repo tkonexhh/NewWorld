@@ -115,7 +115,6 @@
                 float sun = pow(saturate(-vdotl), _SunRadius);//0.037
                 float step_sun = saturate(sun * 2);//round(sun);
                 float3 sunCol = step_sun * _SunCol;
-                // return float4(sunCol, 1);
 
                 float vdotlMoon = dot(normalize(lDirWS + _MoonOffset.xyz), vDirWS) ;
                 float moon = pow(saturate(vdotlMoon), _MoonRadius);
@@ -178,7 +177,8 @@
                 float3 finalCloudCol = cloudCol * clouds ;
                 
                 float3 finalSunMoon = (moonCol + sunCol) ;
-                float3 finalRGB = finalSkyCol + finalCloudCol + finalSunMoon * (1 - clouds);//moonCol + sunCol;//skyGradient;//
+                float3 finalRGB = finalSkyCol + finalCloudCol + finalSunMoon;
+                // float3 finalRGB = finalSkyCol + finalCloudCol + finalSunMoon * (1 - clouds);
                 // return float4(finalSunMoon * (step(clouds, 0)), 1);
                 //处理星空
 

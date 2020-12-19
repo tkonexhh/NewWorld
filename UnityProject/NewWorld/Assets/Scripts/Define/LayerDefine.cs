@@ -23,4 +23,10 @@ namespace Game.Logic
         public const int Layer_HitCollider = 13;
     }
 
+
+    public class TagDefine
+    {
+        public const string TAG_MAINLIGHT = "MainLight";
+    }
+
 }

@@ -13,19 +13,50 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-	public class SkyboxComponent : MonoBehaviour
-	{
-	    // Start is called before the first frame update
-	    void Start()
-	    {
-	        
-	    }
-	
-	    // Update is called once per frame
-	    void Update()
-	    {
-	        
-	    }
-	}
-	
+    public class SkyboxComponent : EnvironmentComponent
+    {
+        private Material m_MatSkyBox;
+        private Light m_MainLight;//主光源
+        private Light m_BiMainLight;//副主光源
+        private float totalTime = 24 * 3600;
+        private Vector3 m_LightDir = Vector3.up;
+        public override void Init(EnvironmentMgr mgr)
+        {
+            base.Init(mgr);
+            m_MatSkyBox = RenderSettings.skybox;
+            //获取到当前的天空盒材质
+            //获得到场景中的主光源(Taiyang)
+            var lightGo = GameObject.FindGameObjectWithTag(TagDefine.TAG_MAINLIGHT);
+            if (lightGo != null)
+            {
+                m_MainLight = lightGo.GetComponent<Light>();
+                SetLightRotation(environmentMgr.time);
+
+            }
+        }
+
+        public override void Update(float dt)
+        {
+            if (m_MainLight != null)
+            {
+                SetLightRotation(environmentMgr.time);
+            }
+        }
+
+
+        private void SetLightRotation(float time)
+        {
+            m_MainLight.transform.localRotation = Quaternion.Euler(m_LightDir * 360.0f * (time / totalTime));
+        }
+    }
+
+
+    public class SkyBoxMaterial
+    {
+
+    }
+
+
+
+
 }

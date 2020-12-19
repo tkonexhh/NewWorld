@@ -13,33 +13,8 @@ using GFrame;
 
 namespace Game.Logic
 {
-    public class PlayerBattleFSMState_Crouch : FSMState<Player>
+    public class PlayerBattleFSMState_Crouch : PlayerBaseState_Crouch
     {
-        public override void Enter(Player player, params object[] args)
-        {
-            player.role.animComponent.SetCrouch(true);
-        }
-
-        public override void Update(Player player, float dt)
-        {
-            if (player.role.animComponent == null)
-                return;
-
-            if (Input.GetKeyUp(KeyCode.LeftControl))
-            {
-                (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Move);
-            }
-        }
-
-        public override void Exit(Player player)
-        {
-            player.role.animComponent.SetCrouch(false);
-        }
-
-        public override void OnMsg(Player entity, int key, params object[] args)
-        {
-
-        }
 
     }
 

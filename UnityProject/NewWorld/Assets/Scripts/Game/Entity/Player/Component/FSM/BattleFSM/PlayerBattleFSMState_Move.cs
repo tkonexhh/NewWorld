@@ -22,6 +22,7 @@ namespace Game.Logic
         {
             base.Enter(player, args);
             GameInputMgr.S.mainAction.AttackL.canceled += OnAttackLCanceled;
+            GameInputMgr.S.mainAction.Jump.performed += OnJumpPerformed;
             GameInputMgr.S.mainAction.Roll.performed += OnRollPerformed;
             GameInputMgr.S.mainAction.Run.performed += OnRunPerformed;
             GameInputMgr.S.mainAction.Run.canceled += OnRunCanceled;
@@ -74,6 +75,7 @@ namespace Game.Logic
             GameInputMgr.S.mainAction.Roll.performed -= OnRollPerformed;
             GameInputMgr.S.mainAction.Run.performed -= OnRunPerformed;
             GameInputMgr.S.mainAction.Run.canceled -= OnRunCanceled;
+            GameInputMgr.S.mainAction.Jump.performed -= OnJumpPerformed;
         }
 
         private void GetHurt()
@@ -108,6 +110,23 @@ namespace Game.Logic
         private void OnRollPerformed(InputAction.CallbackContext callback)
         {
             (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Roll);
+        }
+
+        private void OnJumpPerformed(InputAction.CallbackContext callback)
+        {
+            // if (GameInputMgr.S.moveAmount > 0)
+            {
+                Debug.LogError("Jump");
+                m_MoveDir = Vector3.zero;
+                m_MoveDir = GameCameraMgr.S.mainCamera.transform.forward * GameInputMgr.S.moveInput.y;
+                m_MoveDir += GameCameraMgr.S.mainCamera.transform.right * GameInputMgr.S.moveInput.x;
+                m_MoveDir.y = 0;
+                m_Player.role.controlComponent.Jump();
+                Quaternion jumpRotation = Quaternion.Euler(m_MoveDir);
+                // m_Player.transform.rotation = jumpRotation;
+                (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Jump);
+
+            }
         }
 
 

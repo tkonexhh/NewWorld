@@ -15,10 +15,5 @@ namespace Game.Logic
 {
     public class PlayerBattleFSMState_Roll : PlayerBaseState_Roll
     {
-        protected override void OnRollComplete()
-        {
-            (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Move);
-        }
-
     }
 }
