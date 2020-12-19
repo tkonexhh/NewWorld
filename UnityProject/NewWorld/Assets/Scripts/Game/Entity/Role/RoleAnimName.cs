@@ -33,6 +33,12 @@ namespace Game.Logic
         public string sit = "Sit-Sitdown";
         public string sit_Idle = "Sit-Idle";
         public string sit_StandUp = "Sit-Standup";
+
+        public string sleep = "Sleep-SleepDown";
+        public string sleep_Idle = "Sleep-Idle";
+        public string sleep_StandUp = "Sleep-Standup";
+
+        public string pickUp = "Pickup";
     }
 
     public class RoleWeaponAnimName : RoleAnimName

@@ -332,6 +332,21 @@ namespace Game.Logic
             role.animComponent.animator.CrossFade(m_AnimName.sit_StandUp, 0.1f, 0, 0);
         }
 
+        public void Sleep()
+        {
+            role.animComponent.animator.CrossFade(m_AnimName.sleep, 0.1f, 0, 0);
+        }
+
+        public void SleepStandUp()
+        {
+            role.animComponent.animator.CrossFade(m_AnimName.sleep_StandUp, 0.1f, 0, 0);
+        }
+
+        public void PickUp()
+        {
+
+        }
+
         #endregion
 
     }

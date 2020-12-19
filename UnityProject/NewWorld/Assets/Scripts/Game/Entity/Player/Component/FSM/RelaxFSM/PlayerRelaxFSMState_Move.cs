@@ -48,6 +48,11 @@ namespace Game.Logic
                 (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Sit);
             }
 
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Sleep);
+            }
+
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Crouch);
