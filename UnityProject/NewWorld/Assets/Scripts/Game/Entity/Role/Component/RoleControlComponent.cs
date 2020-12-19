@@ -39,6 +39,8 @@ namespace Game.Logic
         public Run onWeaponSwitchComplete;
         private RoleAnimName m_AnimName;
 
+        public RoleAnimName animName => m_AnimName;
+
         public override void Init(Entity ownner)
         {
             base.Init(ownner);
@@ -55,7 +57,6 @@ namespace Game.Logic
             role.animComponent.animator.CrossFade(m_AnimName.idle, 0.35f, 0, 0);
         }
 
-
         //TODO 当速度小于X时，Vel采用插值过渡，当Vel进入到跑步时候，采用急停
         public void RunToStop()
         {
@@ -63,7 +64,6 @@ namespace Game.Logic
             role.animComponent.animator.CrossFade("RunToStop", 0.05f, 0, 0.1f);
             role.animComponent.SetMoving(false);
             role.animComponent.SetVelocityX(0);
-
         }
 
         public void Arm()
@@ -93,33 +93,6 @@ namespace Game.Logic
             m_DesiredToArm = false;
             if (onWeaponSwitchComplete != null)
                 onWeaponSwitchComplete();
-        }
-
-        public void StartTalking()
-        {
-            //如果拿了武器的话先收刀
-            if (armed)
-            {
-                Run callback = null;
-                callback = () =>
-                {
-                    StartTalking();
-                    onWeaponSwitchComplete -= callback;
-                };
-
-                onWeaponSwitchComplete += callback;
-                UnArm();
-                return;
-            }
-
-            string talkAnimName = "Talk" + UnityEngine.Random.Range(1, 9);
-            role.animComponent.animator.CrossFade(talkAnimName, 0.2f, 0, 0f);
-
-        }
-
-        public void EndTalking()
-        {
-            role.animComponent.animator.CrossFade("Idle", 0.2f, 0, 0.2f);
         }
 
         public void Block()
@@ -285,7 +258,7 @@ namespace Game.Logic
 
         public void Crouch()
         {
-            role.animComponent.animator.CrossFade(m_AnimName.crouch, 0.15f, 0, 0);
+            role.animComponent.animator.CrossFade(m_AnimName.crouch, 0.25f, 0, 0);
         }
 
         public void Death()
@@ -320,6 +293,47 @@ namespace Game.Logic
             if (role.animComponent.GetInterActing()) return;
             role.animComponent.animator.CrossFade(m_AnimName.boost, 0.2f, 1, 0.1f);
         }
+
+        #region Relax Action
+        public void StartTalking()
+        {
+            //如果拿了武器的话先收刀
+            if (armed)
+            {
+                Run callback = null;
+                callback = () =>
+                {
+                    StartTalking();
+                    onWeaponSwitchComplete -= callback;
+                };
+
+                onWeaponSwitchComplete += callback;
+                UnArm();
+                return;
+            }
+
+            string talkAnimName = "Talk" + UnityEngine.Random.Range(1, 9);
+            role.animComponent.animator.CrossFade(talkAnimName, 0.2f, 0, 0f);
+
+        }
+
+        public void EndTalking()
+        {
+            role.animComponent.animator.CrossFade(m_AnimName.idle, 0.2f, 0, 0.2f);
+        }
+
+        public void Sit()
+        {
+            role.animComponent.animator.CrossFade(m_AnimName.sit, 0.1f, 0, 0);
+        }
+
+        public void SitStandUp()
+        {
+            role.animComponent.animator.CrossFade(m_AnimName.sit_StandUp, 0.1f, 0, 0);
+        }
+
+        #endregion
+
     }
 
 }

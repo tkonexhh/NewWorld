@@ -29,6 +29,10 @@ namespace Game.Logic
         public virtual string roll_Right => "Staff-Roll-Right";
         public virtual string crouch => "Crouch";
         public virtual string boost => "Boost";
+
+        public string sit = "Sit-Sitdown";
+        public string sit_Idle = "Sit-Idle";
+        public string sit_StandUp = "Sit-Standup";
     }
 
     public class RoleWeaponAnimName : RoleAnimName

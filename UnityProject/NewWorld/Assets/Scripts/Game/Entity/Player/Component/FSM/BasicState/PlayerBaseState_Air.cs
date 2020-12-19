@@ -44,8 +44,6 @@ namespace Game.Logic
             GameInputMgr.S.mainAction.Jump.performed -= OnJumpPerformed;
         }
 
-
-
         protected override void OnInAir(Vector3 moveDir)
         {
             if (!isFailing)
@@ -60,6 +58,35 @@ namespace Game.Logic
             Vector3 vel = m_Player.controlComponent.velocity;
             vel.Normalize();
             m_Player.controlComponent.velocity = vel * m_Player.role.data.baseData.walkSpeed * 2;
+        }
+
+        protected override void OnHitGround(RaycastHit hit)
+        {
+            if (m_AirTimer > 0.8f)
+            {
+                Debug.LogError("InAirTimer:" + m_AirTimer);
+
+                if (m_Player.fsmComponent.stateMachine.currentState is PlayerFSMState_Battle stateBattle)
+                {
+                    stateBattle.SetBattleState(RoleBattleState.Land);
+                }
+                else if (m_Player.fsmComponent.stateMachine.currentState is PlayerFSMState_Relax stateRelax)
+                {
+                    stateRelax.SetRelaxState(RoleRelaxState.Land);
+                }
+            }
+            else
+            {
+                m_Player.role.controlComponent.BackToMovement();
+                if (m_Player.fsmComponent.stateMachine.currentState is PlayerFSMState_Battle stateBattle)
+                {
+                    stateBattle.SetBattleState(RoleBattleState.Move);
+                }
+                else if (m_Player.fsmComponent.stateMachine.currentState is PlayerFSMState_Relax stateRelax)
+                {
+                    stateRelax.SetRelaxState(RoleRelaxState.Move);
+                }
+            }
         }
 
         private void OnJumpPerformed(InputAction.CallbackContext callback)

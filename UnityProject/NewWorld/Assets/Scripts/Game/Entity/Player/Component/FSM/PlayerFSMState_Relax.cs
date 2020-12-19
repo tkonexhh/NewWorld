@@ -23,8 +23,8 @@ namespace Game.Logic
         Crouch,
         Roll,
         Jump,
-        // Fall,
         Land,
+        //Action
         Talking,
         Sit,
     }

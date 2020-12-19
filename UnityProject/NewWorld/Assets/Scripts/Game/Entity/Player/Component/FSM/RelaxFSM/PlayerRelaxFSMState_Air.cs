@@ -16,21 +16,6 @@ namespace Game.Logic
 {
     public class PlayerRelaxFSMState_Air : PlayerBaseState_Air
     {
-
-        protected override void OnHitGround(RaycastHit hit)
-        {
-            if (m_AirTimer > 0.8f)
-            {
-                Debug.LogError("InAirTimer:" + m_AirTimer);
-                (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Land);
-            }
-            else
-            {
-                // Debug.LogError("Back To Ground");
-                m_Player.role.controlComponent.BackToMovement();
-                (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Move);
-            }
-        }
     }
 
 }

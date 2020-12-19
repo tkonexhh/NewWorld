@@ -18,12 +18,14 @@ namespace Game.Logic
     {
         protected Player m_Player;
         private Vector3 targetPosition;
+        private bool m_ToIdle = false;
 
         public override void Enter(Player player, params object[] args)
         {
             m_Player = player;
             GameInputMgr.S.mainAction.Crouch.canceled += OnCrouchCanceled;
             player.role.controlComponent.Crouch();
+            m_ToIdle = false;
         }
 
         public override void Exit(Player player)
@@ -31,17 +33,29 @@ namespace Game.Logic
             GameInputMgr.S.mainAction.Crouch.canceled -= OnCrouchCanceled;
         }
 
+        public override void Update(Player player, float dt)
+        {
+            AnimatorStateInfo info = player.role.monoReference.animator.GetCurrentAnimatorStateInfo(0);
+            // 判断动画是否播放完成
+            if (player.role.monoReference.animator.IsInTransition(0) && info.IsName(player.role.controlComponent.animName.crouch) && info.normalizedTime >= 1f)
+            {
+                if (m_Player.fsmComponent.stateMachine.currentState is PlayerFSMState_Battle stateBattle)
+                {
+                    stateBattle.SetBattleState(RoleBattleState.Move);
+                }
+                else if (m_Player.fsmComponent.stateMachine.currentState is PlayerFSMState_Relax stateRelax)
+                {
+                    stateRelax.SetRelaxState(RoleRelaxState.Move);
+                }
+            }
+        }
+
         private void OnCrouchCanceled(InputAction.CallbackContext callback)
         {
+            if (m_ToIdle) return;
+            m_ToIdle = true;
             m_Player.role.controlComponent.Idle();
-            if (m_Player.fsmComponent.stateMachine.currentState is PlayerFSMState_Battle stateBattle)
-            {
-                stateBattle.SetBattleState(RoleBattleState.Move);
-            }
-            else if (m_Player.fsmComponent.stateMachine.currentState is PlayerFSMState_Relax stateRelax)
-            {
-                stateRelax.SetRelaxState(RoleRelaxState.Move);
-            }
+            //TODO 等待起身完毕之后才可以再次走路
         }
 
         public override void FixedUpdate(Player player, float dt)

@@ -16,36 +16,63 @@ namespace Game.Logic
 {
     public class PlayerRelaxFSMState_Sit : FSMState<Player>
     {
-        private Player m_Role;
+        private Player m_Player;
+        private Vector3 targetPosition;
 
         public override void Enter(Player player, params object[] args)
         {
-            m_Role = player;
+            m_Player = player;
             GameInputMgr.S.mainAction.Any.performed += OnAnyPerformed;
-            player.role.animComponent.SetAction(0);
-            player.role.animComponent.SetActionTrigger();
-        }
-
-        public override void Update(Player player, float dt)
-        {
-
+            player.role.controlComponent.Sit();
         }
 
         public override void Exit(Player player)
         {
-            player.role.animComponent.SetAction(-1);
-            player.role.animComponent.SetActionTrigger();
             GameInputMgr.S.mainAction.Any.performed -= OnAnyPerformed;
         }
 
-        public override void OnMsg(Player player, int key, params object[] args)
+        public override void Update(Player player, float dt)
         {
+            AnimatorStateInfo info = player.role.monoReference.animator.GetCurrentAnimatorStateInfo(0);
+            // 判断动画是否播放完成
+            if (info.IsName(player.role.controlComponent.animName.sit_StandUp) && info.normalizedTime >= 1f)
+            {
+                m_Player.role.controlComponent.Idle();
+                (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Move);
+            }
+        }
 
+        public override void FixedUpdate(Player player, float dt)
+        {
+            CheckGround();
+            player.transform.position = Vector3.Lerp(player.transform.position, targetPosition, dt);
+        }
+
+        private void CheckGround()
+        {
+            RaycastHit hit;
+            Vector3 origin = m_Player.transform.position;
+            //将检测点抬高到膝盖的位置，同时collider的位置也如此
+            origin.y += m_Player.role.monoReference.kneeHeight;
+            targetPosition = m_Player.transform.position;
+            Debug.DrawRay(origin, -Vector3.up * 0.8f, Color.red, 0.1f);
+            if (Physics.Raycast(origin, -Vector3.up, out hit, 0.8f, 1 << LayerDefine.Layer_Ground))//检测是否落到地上了
+            {
+                Vector3 tp = hit.point;
+                // Debug.LogError(tp.y + "---" + targetPosition.y);
+                targetPosition.y = tp.y + 0.2f;
+                m_Player.monoReference.rigidbody.drag = 0;
+                m_Player.monoReference.rigidbody.velocity = Vector3.zero;
+            }
         }
 
         private void OnAnyPerformed(InputAction.CallbackContext callback)
         {
-            (m_Role.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Move);
+            AnimatorStateInfo info = m_Player.role.monoReference.animator.GetCurrentAnimatorStateInfo(0);
+            if (info.IsName(m_Player.role.controlComponent.animName.sit_Idle) && !m_Player.role.monoReference.animator.IsInTransition(0))
+            {
+                m_Player.role.controlComponent.SitStandUp();
+            }
         }
     }
 
