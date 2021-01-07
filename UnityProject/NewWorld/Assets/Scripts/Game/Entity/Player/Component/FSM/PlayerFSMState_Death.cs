@@ -14,18 +14,21 @@ using UnityEngine.InputSystem;
 
 namespace Game.Logic
 {
-    public class RoleFSMState_Death : FSMState<Player>
+    public class RoleFSMState_Death : PlayerBaseState_GroundCheck
     {
-
 
         public override void Enter(Player player, params object[] args)
         {
+            base.Enter(player);
             player.role.controlComponent.Death();
         }
 
         public override void Update(Player player, float dt)
         {
-
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                player.fsmComponent.SetRoleState(RoleState.Revive);
+            }
         }
 
         public override void Exit(Player player)
@@ -33,10 +36,7 @@ namespace Game.Logic
 
         }
 
-        public override void OnMsg(Player player, int key, params object[] args)
-        {
 
-        }
     }
 
 }

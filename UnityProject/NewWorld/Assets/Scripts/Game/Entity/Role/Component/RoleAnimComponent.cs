@@ -42,7 +42,6 @@ namespace Game.Logic
 
         private string m_Key_Trigger_TurnLeft = "TurnLeftTrigger";
         private string m_Key_Trigger_TurnRight = "TurnLeftTrigger";
-        private string m_Key_Trigger_Action = "ActionTrigger";
         private string m_Key_Trigger_Revive = "ReviveTrigger";
         private string m_Key_Trigger_GetHurt = "GetHurtTrigger";
         private string m_Key_Trigger_BlockBreak = "BlockBreakTrigger";
@@ -70,7 +69,6 @@ namespace Game.Logic
 
         private int m_KeyHash_TriggerTurnLeft;
         private int m_KeyHash_TriggerTurnRight;
-        private int m_KeyHash_TriggerAction;
         private int m_KeyHash_TriggerRevive;
         private int m_KeyHash_TriggerGetHurt;
         private int m_KeyHash_TriggerBlockBreak;
@@ -105,7 +103,6 @@ namespace Game.Logic
             m_KeyHash_FloatHurtZ = Animator.StringToHash(m_Key_FloatHurtZ);
             m_KeyHash_TriggerTurnLeft = Animator.StringToHash(m_Key_Trigger_TurnLeft);
             m_KeyHash_TriggerTurnRight = Animator.StringToHash(m_Key_Trigger_TurnRight);
-            m_KeyHash_TriggerAction = Animator.StringToHash(m_Key_Trigger_Action);
             m_KeyHash_TriggerRevive = Animator.StringToHash(m_Key_Trigger_Revive);
             m_KeyHash_TriggerGetHurt = Animator.StringToHash(m_Key_Trigger_GetHurt);
             m_KeyHash_TriggerBlockBreak = Animator.StringToHash(m_Key_Trigger_BlockBreak);
@@ -275,10 +272,6 @@ namespace Game.Logic
         }
 
         #endregion
-        public void SetActionTrigger()
-        {
-            m_Animator.SetTrigger(m_KeyHash_TriggerAction);
-        }
 
         public void ReviveTrigger()
         {

@@ -8,7 +8,7 @@ namespace GFrame
     /// <summary>
     /// 在Vector前面加上 就只会渲染 xy分量
     /// </summary>
-    public class VectorTwoDrawer : MaterialPropertyDrawer
+    public class Vector2Drawer : MaterialPropertyDrawer
     {
         public override void OnGUI(Rect position, MaterialProperty prop, string label, MaterialEditor editor)
         {

@@ -18,6 +18,7 @@ namespace Game.Logic
         public virtual string idle => "Idle";
         public virtual string movement => "Relaxed_Movement_Blend";
         public virtual string death => "Unarmed-Death1";
+        public virtual string revive => "Revive";
         public virtual string jump => "Jump";
         public virtual string jumpFlip => "Jump-Flip";
         public virtual string land => "Land";
@@ -38,7 +39,7 @@ namespace Game.Logic
         public string sleep_Idle = "Sleep-Idle";
         public string sleep_StandUp = "Sleep-Standup";
 
-        public string pickUp = "Pickup";
+        public virtual string pickUp => "Pickup";
     }
 
     public class RoleWeaponAnimName : RoleAnimName
@@ -51,6 +52,7 @@ namespace Game.Logic
         public override string idle => "2Hand-Axe-Idle";
         public override string movement => "2Hand-Axe-Movement-Blend";
         public override string death => "2Hand-Axe-Death1";
+        public override string revive => "2Hand-Axe-Revive1";
         public override string jump => "2Hand-Axe-Jump";
         public override string land => "2Hand-Axe-Land";
         public override string fall => "2Hand-Axe-Fall";
@@ -61,6 +63,8 @@ namespace Game.Logic
         public override string roll_Right => "2Hand-Axe-Roll-Right";
         public override string crouch => "2Hand-Axe-Idle-Crouch";
         public override string boost => "2Hand-Axe-Boost";
+
+        public override string pickUp => "2Hand-Axe-Pickup";
     }
 
 }

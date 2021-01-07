@@ -13,9 +13,24 @@ using UnityEngine;
 
 namespace Game.Logic
 {
-    public class RoleStatusData : CharacterStatusData
+    public class RoleStatusData
     {
+        public int hp;
+        public int maxHp;
+        public bool death = false;
 
+        public bool injured => hp < maxHp / 10.0f;//小于1/10血就是受伤状态
+
+
+        public void GetDamage(int damage)
+        {
+            hp -= damage;
+            if (hp <= 0)
+            {
+                hp = 0;
+                death = true;
+            }
+        }
     }
 
 }

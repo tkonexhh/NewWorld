@@ -29,6 +29,7 @@ namespace Game.Logic
             m_FSM.stateFactory.RegisterState(RoleState.Relax, new PlayerFSMState_Relax());
             m_FSM.stateFactory.RegisterState(RoleState.Battle, new PlayerFSMState_Battle());
             m_FSM.stateFactory.RegisterState(RoleState.Death, new RoleFSMState_Death());
+            m_FSM.stateFactory.RegisterState(RoleState.Revive, new RoleFSMState_Revive());
             m_FSM.stateFactory.RegisterState(RoleState.Swim, new RoleFSMState_Swim());
 
             SetRoleState(RoleState.Relax);
@@ -37,6 +38,11 @@ namespace Game.Logic
         public override void Excute(float dt)
         {
             m_FSM.UpdateState(dt);
+
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                SetRoleState(RoleState.Death);
+            }
         }
 
         public override void FixedExcute(float dt)
@@ -56,6 +62,7 @@ namespace Game.Logic
         Battle,
         Swim,
         Death,
+        Revive,
     }
 
 }

@@ -53,6 +53,15 @@ namespace Game.Logic
                 (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Sleep);
             }
 
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                player.role.controlComponent.PickUp();
+                player.monoReference.rigidbody.velocity = Vector3.zero;
+                player.monoReference.rigidbody.drag = 0;
+                player.role.animComponent.ResetVelocityZ();
+                GameInputMgr.S.ClearMove();
+            }
+
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Crouch);
@@ -73,7 +82,6 @@ namespace Game.Logic
                     Debug.LogError("Run To Stop");
                     m_Player.role.controlComponent.RunToStop();
                 }
-
             }
 
         }
@@ -81,8 +89,6 @@ namespace Game.Logic
         public override void FixedUpdate(Player player, float dt)
         {
             base.FixedUpdate(player, dt);
-
-
         }
 
         public override void Exit(Player player)

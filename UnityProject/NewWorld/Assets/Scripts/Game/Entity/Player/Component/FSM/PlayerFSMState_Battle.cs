@@ -72,6 +72,7 @@ namespace Game.Logic
 
         public override void Exit(Player player)
         {
+            //TODO如果是死亡的话，不需要UnArm
             player.role.controlComponent.UnArm();
             SetBattleState(RoleBattleState.None);
         }

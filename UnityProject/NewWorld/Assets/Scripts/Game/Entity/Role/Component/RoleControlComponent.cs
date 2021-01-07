@@ -266,8 +266,15 @@ namespace Game.Logic
             canMove = false;
             canRotate = false;
             usingMotion = true;
-
             role.animComponent.animator.CrossFade(m_AnimName.death, 0.2f, 0, 0.2f);
+        }
+
+        public void Revive()
+        {
+            canMove = false;
+            canRotate = false;
+            usingMotion = true;
+            role.animComponent.animator.CrossFade(m_AnimName.revive, 0.2f, 0, 0.2f);
         }
 
         public void GetHurt()
@@ -344,7 +351,9 @@ namespace Game.Logic
 
         public void PickUp()
         {
-
+            canMove = false;
+            canRotate = false;
+            role.animComponent.animator.CrossFade(m_AnimName.pickUp, 0.1f, 0, 0);
         }
 
         #endregion

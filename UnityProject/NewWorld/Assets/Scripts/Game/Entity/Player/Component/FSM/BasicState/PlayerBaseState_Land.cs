@@ -66,7 +66,7 @@ namespace Game.Logic
             {
                 Vector3 tp = hit.point;
                 // Debug.LogError(tp.y + "---" + targetPosition.y);
-                targetPosition.y = tp.y;
+                targetPosition.y = tp.y + 0.2f;
                 m_Player.monoReference.rigidbody.drag = 0;
                 m_Player.monoReference.rigidbody.velocity = Vector3.zero;
             }
