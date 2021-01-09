@@ -32,8 +32,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Alpha: 214.2
-    - _AlphaInt: 134
+    - _Alpha: 135
+    - _AlphaInt: 119
     - _Blend: 4
     - _Blend2: 5
     - _Fancy: 0
@@ -42,6 +42,6 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _HDRColor: {r: 1, g: 1, b: 1, a: 1}
     - _Vector2: {r: 2.71, g: 2.3, b: 0, a: 0}
-    - _Vector2Int: {r: 266, g: -132, b: 1, a: 1}
+    - _Vector2Int: {r: 404, g: -132, b: 1, a: 1}
     - _Vector3: {r: 3.3, g: 1, b: 1, a: 0}
-    - _Vector3Int: {r: 117, g: 110, b: 128, a: 1}
+    - _Vector3Int: {r: 204, g: 143, b: 141, a: 1}

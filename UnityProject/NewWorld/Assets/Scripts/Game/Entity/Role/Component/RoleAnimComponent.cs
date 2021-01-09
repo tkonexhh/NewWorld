@@ -352,7 +352,7 @@ namespace Game.Logic
 
         public override void FixedExcute(float dt)
         {
-            if (animator.speed == 0 && m_StopAnimFrame > 0)
+            if (m_StopAnimFrame > 0 && m_Animator.speed == 0)
             {
                 m_StopAnimFrame--;
                 if (m_StopAnimFrame == 0)

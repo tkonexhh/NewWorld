@@ -21,6 +21,8 @@ namespace Game.Logic
         [SerializeField] private Button m_BtnEnterGame;
         [SerializeField] private Button m_BtnNewRole;
 
+        private MainMenuScene m_Scene;
+
         protected override void OnUIInit()
         {
             m_BtnEnterGame.onClick.AddListener(OnClickEnterGame);
@@ -30,6 +32,11 @@ namespace Game.Logic
         protected override void OnOpen()
         {
 
+        }
+
+        public void InitMainScene(MainMenuScene scene)
+        {
+            m_Scene = scene;
         }
 
         private void OnClickEnterGame()
@@ -47,9 +54,17 @@ namespace Game.Logic
         private void OnClickNewRole()
         {
             CloseSelfPanel();
-            //TODO 看看如何设计Hide
-            // HideSelfPanel();
-            UIMgr.S.OpenPanel(UIID.CreateCharacterPanel);
+            UIMgr.S.OpenPanel(UIID.CreateCharacterPanel, (panel) =>
+            {
+                ((CreateCharacterPanel)panel).InitMainScene(m_Scene);
+            });
+
+            if (m_Scene != null)
+            {
+                m_Scene.cameraControl.LookCreate();
+                m_Scene.ControlRotate();
+            }
+
         }
     }
 

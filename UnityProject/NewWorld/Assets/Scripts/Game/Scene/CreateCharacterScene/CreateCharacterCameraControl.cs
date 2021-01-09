@@ -21,8 +21,6 @@ namespace Game.Logic
 
         private Role m_FocusRole;
 
-        private CameraType m_CameraType;
-
         private void Awake()
         {
             m_CameraBody.Priority = 10;
@@ -102,7 +100,7 @@ namespace Game.Logic
 
     public partial class CreateCharacterCameraControl
     {
-        public enum CameraType
+        internal enum CameraType
         {
             Body,
             Face,

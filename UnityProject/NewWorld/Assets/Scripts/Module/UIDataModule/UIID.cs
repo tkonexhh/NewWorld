@@ -16,7 +16,6 @@ namespace Game.Logic
     public enum UIID
     {
         StartPanel,
-        // MainMenuPanel,
         LoadingPanel,
         CreateCharacterPanel,
         //Game

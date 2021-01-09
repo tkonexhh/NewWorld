@@ -14,10 +14,9 @@ namespace GFrame
 {
     public class UGridListView : IUListView
     {
-        [SerializeField]
-        public int m_MaxRow;
-        [SerializeField]
-        public int m_MaxCol;
+        [SerializeField] private int m_MaxRow;
+        [SerializeField] private int m_MaxCol;
+        public Alignment alignment = Alignment.Mid;
 
         private int numPerRow;
         private int numPerColumn;
@@ -53,6 +52,20 @@ namespace GFrame
 
             // spawn pool for listitems
             lstItems = new List<GameObject>();
+        }
+
+        protected override void AdjustViewportSize(Vector2 contentSize)
+        {
+            // if (alignment == Alignment.Mid)
+            // {
+            //     Debug.LogError(111);
+            //     if (contentSize.x < scrollRectSize.x || contentSize.y < scrollRectSize.y)
+            //     {
+
+            //         viewPort.sizeDelta = contentSize;
+            //         viewPort.anchoredPosition = new Vector2(contentSize.x * -0.5f, contentSize.y * 0.5f);
+            //     }
+            // }
         }
 
         public override int GetMaxShowItemNum()
@@ -113,7 +126,7 @@ namespace GFrame
                 offset.x = -(contentRectSize.x - itemSize.x) / 2 + offsetIndex * (itemSize.x + spacing.x);
             }
 
-            return basePos + offset + padding;
+            return basePos + offset + padding + new Vector2(-padding.x, 0);
         }
 
         public override Vector2 GetContentSize()

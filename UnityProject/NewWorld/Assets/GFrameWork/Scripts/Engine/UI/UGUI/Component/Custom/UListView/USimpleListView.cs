@@ -30,6 +30,18 @@ namespace GFrame
         //     base.Init();
         // }
 
+        protected override void AdjustViewportSize(Vector2 contentSize)
+        {
+            if (alignment == Alignment.Mid)
+            {
+                if (contentSize.x < scrollRectSize.x || contentSize.y < scrollRectSize.y)
+                {
+                    viewPort.sizeDelta = contentSize;
+                    viewPort.anchoredPosition = new Vector2(contentSize.x * -0.5f, contentSize.y * 0.5f);
+                }
+            }
+        }
+
         public override int GetMaxShowItemNum()
         {
             int max = 0;

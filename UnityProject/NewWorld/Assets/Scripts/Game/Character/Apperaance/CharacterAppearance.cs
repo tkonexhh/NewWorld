@@ -235,7 +235,7 @@ namespace Game.Logic
         #region SetPart
         public void SetHair(int id)
         {
-            TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.Hair, m_AppearanceData.sex, id);
+            TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByID(AppearanceSlot.Hair, m_AppearanceData.sex, id);
             if (data != null)
             {
                 m_Hair.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
@@ -251,7 +251,7 @@ namespace Game.Logic
             }
             else
             {
-                TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.Head, m_AppearanceData.sex, id);
+                TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByID(AppearanceSlot.Head, m_AppearanceData.sex, id);
                 if (data != null)
                     m_AppearanceData.basicAppearance.headID = m_Head.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
             }
@@ -259,7 +259,7 @@ namespace Game.Logic
 
         public void SetFacialHair(int id)
         {
-            TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.FacialHair, m_AppearanceData.sex, id);
+            TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByID(AppearanceSlot.FacialHair, m_AppearanceData.sex, id);
             if (data != null)
             {
                 m_FacialHair.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
@@ -275,7 +275,7 @@ namespace Game.Logic
             }
             else
             {
-                TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByIndex(AppearanceSlot.EyeBrows, m_AppearanceData.sex, id);
+                TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByID(AppearanceSlot.EyeBrows, m_AppearanceData.sex, id);
                 if (data != null)
                     m_AppearanceData.basicAppearance.eyeBrows = m_Eyebrows.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
             }

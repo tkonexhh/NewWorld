@@ -53,9 +53,9 @@ namespace Game.Logic
 
         protected override void OnModuleStart()
         {
-            // EnterMainMenuScene();
+            EnterMainMenuScene();
             // EnterCreateRole();
-            EnterGameScene();
+            // EnterGameScene();
         }
 
         private void EnterMainMenuScene()

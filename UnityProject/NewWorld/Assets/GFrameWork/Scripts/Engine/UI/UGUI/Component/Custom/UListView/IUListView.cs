@@ -83,6 +83,7 @@ namespace GFrame
         [Tooltip("List Item Object, must set")]
         public IUListItemView itemPrefab;
         public Layout layout;
+        // [Tooltip("x:up y:down z:left w:right")]
         public Vector2 padding;
         public Vector2 spacing;
 

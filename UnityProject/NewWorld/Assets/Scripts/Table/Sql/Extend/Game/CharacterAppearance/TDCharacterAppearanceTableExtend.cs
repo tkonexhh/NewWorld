@@ -42,7 +42,7 @@ namespace Game.Logic
             switch (slot)
             {
                 case AppearanceSlot.Hair:
-                    return m_HairData.GetDataCount();//m_HairDataMap.Count;
+                    return m_HairData.GetDataCount(sex);
                 case AppearanceSlot.Head:
                     return m_HeadData.GetDataCount(sex);
                 case AppearanceSlot.FacialHair:
@@ -53,18 +53,34 @@ namespace Game.Logic
             return 0;
         }
 
-        public static TDCharacterAppearance GetAppearanceByIndex(AppearanceSlot slot, Sex sex, int index)
+        public static TDCharacterAppearance GetAppearanceByID(AppearanceSlot slot, Sex sex, int index)
         {
             switch (slot)
             {
                 case AppearanceSlot.Hair:
-                    return m_HairData.GetAppearanceByIndex(index);
+                    return m_HairData.GetAppearanceByID(sex, index);
                 case AppearanceSlot.Head:
-                    return m_HeadData.GetAppearanceByIndex(sex, index);
+                    return m_HeadData.GetAppearanceByID(sex, index);
                 case AppearanceSlot.FacialHair:
-                    return m_FacialHairData.GetAppearanceByIndex(sex, index);
+                    return m_FacialHairData.GetAppearanceByID(sex, index);
                 case AppearanceSlot.EyeBrows:
-                    return m_EyeBrowsData.GetAppearanceByIndex(sex, index);
+                    return m_EyeBrowsData.GetAppearanceByID(sex, index);
+            }
+            return null;
+        }
+
+        public static TDCharacterAppearanceData GetAppearanceDataGroup(AppearanceSlot slot, Sex sex)
+        {
+            switch (slot)
+            {
+                case AppearanceSlot.Hair:
+                    return m_HairData;
+                case AppearanceSlot.Head:
+                    return m_HeadData;
+                case AppearanceSlot.FacialHair:
+                    return m_FacialHairData;
+                case AppearanceSlot.EyeBrows:
+                    return m_EyeBrowsData;
             }
             return null;
         }
@@ -76,35 +92,63 @@ namespace Game.Logic
         public virtual void OnAddData(TDCharacterAppearance conf)
         {
         }
+
+        public virtual int GetDataCount(Sex sex)
+        {
+            return 0;
+        }
+
+        public virtual TDCharacterAppearance GetAppearanceByID(Sex sex, int id)
+        {
+            return null;
+        }
+
+        public virtual TDCharacterAppearance GetAppearanceByIndex(Sex sex, int index)
+        {
+            return null;
+        }
     }
 
     public class TDCharacterAppearanceData_General : TDCharacterAppearanceData
     {
-        private Dictionary<long, TDCharacterAppearance> m_DataMap = new Dictionary<long, TDCharacterAppearance>();
+        private Dictionary<int, TDCharacterAppearance> m_DataMap = new Dictionary<int, TDCharacterAppearance>();
+        private List<TDCharacterAppearance> m_LstData = new List<TDCharacterAppearance>();
         public override void OnAddData(TDCharacterAppearance conf)
         {
-            m_DataMap.Add(m_DataMap.Count, conf);
+            m_DataMap.Add((int)conf.Appearance, conf);
+            m_LstData.Add(conf);
         }
 
-        public int GetDataCount()
+        public override int GetDataCount(Sex sex)
         {
             return m_DataMap.Count;
         }
 
-        public TDCharacterAppearance GetAppearanceByIndex(int index)
+        public override TDCharacterAppearance GetAppearanceByID(Sex sex, int id)
         {
             TDCharacterAppearance data;
-            if (m_DataMap.TryGetValue(index, out data))
+            if (m_DataMap.TryGetValue(id, out data))
             {
                 return data;
             }
             return null;
         }
+
+        public override TDCharacterAppearance GetAppearanceByIndex(Sex sex, int index)
+        {
+            if (index < 0 || index > m_LstData.Count)
+                return null;
+
+            return m_LstData[index];
+        }
+
     }
 
     public class TDCharacterAppearanceData_Sexual : TDCharacterAppearanceData
     {
         private Dictionary<int, Dictionary<long, TDCharacterAppearance>> m_DataMap = new Dictionary<int, Dictionary<long, TDCharacterAppearance>>();
+        private List<TDCharacterAppearance> m_LstDataMale = new List<TDCharacterAppearance>();
+        private List<TDCharacterAppearance> m_LstDataFemale = new List<TDCharacterAppearance>();
 
         public override void OnAddData(TDCharacterAppearance conf)
         {
@@ -116,9 +160,20 @@ namespace Game.Logic
             }
 
             map.Add(map.Count, conf);
+            if (conf.sex == Sex.Male)
+            {
+                m_LstDataMale.Add(conf);
+            }
+            else
+            {
+                m_LstDataFemale.Add(conf);
+            }
+
+
         }
 
-        public int GetDataCount(Sex sex)
+
+        public override int GetDataCount(Sex sex)
         {
             Dictionary<long, TDCharacterAppearance> map;
             if (m_DataMap.TryGetValue((int)sex, out map))
@@ -128,19 +183,30 @@ namespace Game.Logic
             return 0;
         }
 
-        public TDCharacterAppearance GetAppearanceByIndex(Sex sex, int index)
+        public override TDCharacterAppearance GetAppearanceByID(Sex sex, int id)
         {
             Dictionary<long, TDCharacterAppearance> headData;
             if (m_DataMap.TryGetValue((int)sex, out headData))
             {
                 TDCharacterAppearance data;
-                if (headData.TryGetValue(index, out data))
+                if (headData.TryGetValue(id, out data))
                 {
                     return data;
                 }
                 return null;
             }
             return null;
+        }
+
+        public override TDCharacterAppearance GetAppearanceByIndex(Sex sex, int index)
+        {
+            if (index < 0)
+                return null;
+            var lstData = sex == Sex.Male ? m_LstDataMale : m_LstDataFemale;
+            if (index > lstData.Count)
+                return null;
+
+            return lstData[index];
         }
     }
 

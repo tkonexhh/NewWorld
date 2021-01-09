@@ -15,6 +15,15 @@ using DG.Tweening;
 
 namespace Game.Logic
 {
+    public enum CreateCharacterAppearanceSlot
+    {
+        Hair,
+        Head,
+        FacialHair,
+        EyeBrows,
+    }
+
+
     public class CreateCharacterToggle : MonoBehaviour
     {
         [SerializeField] private Toggle m_Toggle;
