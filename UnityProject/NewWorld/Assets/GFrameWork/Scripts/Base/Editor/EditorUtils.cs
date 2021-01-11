@@ -33,24 +33,5 @@ namespace GFrame.Editor
 
             AssetDatabase.Refresh();
         }
-
-        [MenuItem("Tools/GFrame/Allocate Engine Define", false, 1)]
-        public static void AllocateEngineDefine()
-        {
-            //    projec
-            var asset = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/Tagmanager.asset");
-            if (asset != null)
-            { // sanity checking
-                var so = new SerializedObject(asset);
-                var tags = so.FindProperty("tags");
-                var numTags = tags.arraySize;
-                for (int i = 0; i < numTags; i++)
-                {
-                    var existingTag = tags.GetArrayElementAtIndex(i);
-                    Debug.LogError(existingTag.name);
-                }
-            }
-
-        }
     }
 }

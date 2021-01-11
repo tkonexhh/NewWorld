@@ -62,7 +62,7 @@ namespace Game.Logic
             origin.y += m_Player.role.monoReference.kneeHeight;
             targetPosition = m_Player.transform.position;
             Debug.DrawRay(origin, -Vector3.up * 0.7f, Color.red, 0.1f);
-            if (Physics.Raycast(origin, -Vector3.up, out hit, 0.7f, 1 << LayerDefine.Layer_Ground))//检测是否落到地上了
+            if (Physics.Raycast(origin, -Vector3.up, out hit, 0.7f, 1 << LayerDefine.LAYER_GROUND))//检测是否落到地上了
             {
                 Vector3 tp = hit.point;
                 // Debug.LogError(tp.y + "---" + targetPosition.y);

@@ -89,7 +89,7 @@ namespace Game.Logic
         {
             var hitCollider = weaponModel.hitCollider;
             hitCollider.gameObject.SetActive(true);
-            var hits = Physics.OverlapBox(hitCollider.transform.position, weaponModel.hitCollider.bounds.size, hitCollider.transform.rotation, 1 << LayerDefine.Layer_HitCollider);
+            var hits = Physics.OverlapBox(hitCollider.transform.position, weaponModel.hitCollider.bounds.size, hitCollider.transform.rotation, 1 << LayerDefine.LAYER_HITCOLLIDER);
 
             if (hits.Length > 0)
             {

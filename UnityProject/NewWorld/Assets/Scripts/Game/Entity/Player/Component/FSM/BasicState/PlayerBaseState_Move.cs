@@ -134,7 +134,7 @@ namespace Game.Logic
             origin += dir * m_Player.monoReference.rigidbodyCollider.radius;
             targetPosition = m_Player.transform.position;
             Debug.DrawRay(origin, -Vector3.up * minDistanceNeededToFall, Color.red, 0.1f);
-            if (Physics.Raycast(origin, -Vector3.up, out hit, minDistanceNeededToFall, 1 << LayerDefine.Layer_Ground))//检测是否落到地上了
+            if (Physics.Raycast(origin, -Vector3.up, out hit, minDistanceNeededToFall, 1 << LayerDefine.LAYER_GROUND))//检测是否落到地上了
             {
                 normalVector = hit.normal;
                 Vector3 tp = hit.point;
