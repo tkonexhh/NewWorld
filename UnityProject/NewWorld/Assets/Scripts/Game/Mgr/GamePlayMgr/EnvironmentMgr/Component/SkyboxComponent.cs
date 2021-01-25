@@ -25,13 +25,12 @@ namespace Game.Logic
             base.Init(mgr);
             m_MatSkyBox = RenderSettings.skybox;
             //获取到当前的天空盒材质
-            //获得到场景中的主光源(Taiyang)
+            //获得到场景中的主光源(太阳)
             var lightGo = GameObject.FindGameObjectWithTag(TagDefine.TAG_MAINLIGHT);
             if (lightGo != null)
             {
                 m_MainLight = lightGo.GetComponent<Light>();
                 SetLightRotation(environmentMgr.time);
-
             }
         }
 
@@ -43,9 +42,9 @@ namespace Game.Logic
             }
         }
 
-
         private void SetLightRotation(float time)
         {
+            time -= 5 * 3600;
             m_MainLight.transform.localRotation = Quaternion.Euler(m_LightDir * 360.0f * (time / totalTime));
         }
     }

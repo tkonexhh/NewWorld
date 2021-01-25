@@ -19,12 +19,25 @@ namespace Game.Logic
     public class GameCameraMgr : TMonoSingleton<GameCameraMgr>
     {
         private CinemachineFreeLook m_CameraPlayer;
+        private PostEffect m_CameraPostEffect;
 
         public Camera mainCamera
         {
             get => Camera.main;
-            // set;
         }
+
+        public PostEffect postEffect
+        {
+            get
+            {
+                if (m_CameraPostEffect == null)
+                {
+                    m_CameraPostEffect = mainCamera.GetComponent<PostEffect>();
+                }
+                return m_CameraPostEffect;
+            }
+        }
+
 
 
         public override void OnSingletonInit()

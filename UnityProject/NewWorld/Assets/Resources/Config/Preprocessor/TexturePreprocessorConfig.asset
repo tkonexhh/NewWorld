@@ -16,7 +16,7 @@ MonoBehaviour:
   IgnoreRegexList: []
   MaxTextureSize: 4096
   EnableReadWrite: 0
-  EnableMipmap: 1
+  EnableMipmap: 0
   EnableMipMapStreaming: 0
   AlphaSource: 0
   NativeTextureSizeMultiplier: 1

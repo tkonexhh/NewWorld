@@ -38,6 +38,11 @@ namespace Game.Logic
                 player.fsmComponent.SetRoleState(RoleState.Battle);
             }
 
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                GameCameraMgr.S.postEffect.StartScan();
+            }
+
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 (player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Talking);

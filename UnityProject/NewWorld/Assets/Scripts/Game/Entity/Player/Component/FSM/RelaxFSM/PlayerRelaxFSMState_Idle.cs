@@ -26,10 +26,9 @@ namespace Game.Logic
 
         public override void Update(Player player, float dt)
         {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                player.fsmComponent.SetRoleState(RoleState.Battle);
-            }
+
+
+
         }
 
         public override void Exit(Player player)

@@ -3,9 +3,20 @@
     Properties
     {
         [HideInInspector]_MainTex ("Base (RGB)", 2D) = "white" { }
-        _ScanDepth ("Scan Depth", Range(0, 1)) = 0
+        _ScanRange ("Scan Depth", Range(0, 100)) = 0
+        _MaxRange ("Max Depth", float) = 200
         _ScanWidth ("Scan Width", float) = 1
         _ScanCenter ("ScanCenter", vector) = (0, 0, 0, 0)
+        _Temp1 ("Temp1", float) = 100
+        _Temp2 ("Temp2", Range(-0.5, 5)) = 100
+        _StepFogTex ("StepFogTex", 2D) = "white" { }
+        _LineColor ("LineColor", Color) = (1, 1, 1, 1)
+
+
+        [Header(Kernel)]//卷积核
+        _Slope1 ("Slope 1", vector) = (0, 0, 0, 0)
+        _Slope2 ("Slope 2", vector) = (0, 0, 0, 0)
+        _Slope3 ("Slope 3", vector) = (0, 0, 0, 0)
     }
     SubShader
     {
@@ -18,15 +29,25 @@
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
-
+            #include "../CustomHlsl/CustomHlsl.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
-            float _ScanDepth, _ScanWidth;
+            float _ScanRange, _MaxRange, _ScanWidth;
             float3 _ScanCenter;
             float4x4 _FarClipRay;
+            float4x4 _CameraToWorld;
+            float _Temp1, _Temp2;
+            float4 _LineColor;
+
+            float3 _Slope1, _Slope2, _Slope3;
+            float4 _MainTex_TexelSize;
             CBUFFER_END
             TEXTURE2D(_MainTex);SAMPLER(sampler_MainTex);
             TEXTURE2D(_CameraDepthTexture); SAMPLER(sampler_CameraDepthTexture);
+            TEXTURE2D(_CameraDepthNormalsTexture);
+            TEXTURE2D(_StepFogTex);
+
+            
 
             struct Attributes
             {
@@ -75,28 +96,96 @@
                 return output;
             }
 
-            float4 frag(Varyings input): SV_Target
+            half Edge(Texture2D tex, SamplerState sampleState, float2 uv, float2 texelSize)
             {
-                float4 color = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
-                float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, sampler_CameraDepthTexture, input.uv);
-                float linearDepth = Linear01Depth(depth, _ZBufferParams);
-                // return linearDepth;
-                float3 pixelWorldPos = _WorldSpaceCameraPos + linearDepth * input.interpolatedRay;
-                float pixelDistance = distance(pixelWorldPos, _ScanCenter);
-                // return float4(_ScanCenter, 1);
-                return pixelDistance < _ScanWidth?0: color;
-                
-                return float4(pixelWorldPos, 1);
+                const half Gx[9] = {
+                    - 1, 0, 1,
+                    - 2, 0, 2,
+                    - 1, 0, 1
+                };
+
+                const half Gy[9] = {
+                    - 1, -2, -1,
+                    0, 0, 0,
+                    1, 2, 1
+                };
+
+                half edgeX, edgeY;
+                for (int x = -1; x < 2; x ++)
+                {
+                    for (int y = -1; y < 2; y ++)
+                    {
+                        half dx = texelSize.x * x;
+                        half dy = texelSize.y * y;
+                        half color = SAMPLE_TEXTURE2D(tex, sampleState, uv + half2(dx, dy));
+                        color = Grey(color);
+                        edgeX += Gx[(x + 1) * 3 + y + 1] * color;
+                        edgeY += Gy[(x + 1) * 3 + y + 1] * color;
+                    }
+                }
                 
 
-                //通过像素深度是否在扫描的一定范围
-                if (linearDepth < _ScanDepth && linearDepth > _ScanDepth - _ScanWidth && linearDepth < 1)
+                return(abs(edgeX) + abs(edgeY));
+            }
+
+
+            half edge2(half2 uv, float2 xy)
+            {
+                half offset = 0;
+                half center = Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, sampler_CameraDepthTexture, uv), _ZBufferParams);
+                for (int i = -1; i < 2; i ++)
                 {
-                    float diff = 1 - (_ScanDepth - linearDepth) / (_ScanWidth);
-                    // _ScanColor *= diff;
-                    return lerp(color, float4(1, 0, 0, 1), diff);
+                    for (int j = -1; j < 2; j ++)
+                    {
+                        offset += center - Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, sampler_CameraDepthTexture, uv +
+                        half2(i * xy.x, j * xy.y)), _ZBufferParams);
+                    }
                 }
-                return color ;
+                return abs(offset) * 1000;
+            }
+
+            float4 frag(Varyings input): SV_Target
+            {
+                float4 var_Screen = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
+                
+                float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, sampler_CameraDepthTexture, input.uv);
+                float linearDepth = Linear01Depth(depth, _ZBufferParams);
+                float3 pixelWorldPos = _WorldSpaceCameraPos + linearDepth * input.interpolatedRay;
+
+                pixelWorldPos.y = _ScanCenter.y;//向上全部归内
+                float pixelDistance = distance(pixelWorldPos, _ScanCenter);
+                // return var_Screen;
+                float edge = edge2(input.uv, _MainTex_TexelSize);
+                // return edge ;
+
+                return round(frac(pixelDistance));
+                // float4 var_Normal = SAMPLE_TEXTURE2D(_CameraDepthNormalsTexture, sampler_MainTex, input.uv);//解析_CameraDepthNormal
+                // float3 normalSS = DecodeViewNormalStereo(var_Normal);//转成屏幕空间法线
+                // float3 normalWS = mul((float3x3)_CameraToWorld, normalSS);//专成世界空间法线
+
+                // return saturate(round(sin(pixelWorldPos.x * _Temp1) + _Temp2)) * _LineColor;
+                //绘制屏幕方向的直线
+                // if (abs(normalWS.y > 0.7) && linearDepth < 1)
+                //     return var_Screen + saturate(round(sin(pixelWorldPos.x * _Temp1) + _Temp2)) * _LineColor;
+                // else
+                // return var_Screen;
+
+                // // return float4(normalWS, 1);
+                // return pixelDistance < _ScanWidth?var_Screen: Grey(var_Screen);
+                // return saturate(1 - pow(pixelDistance / _Temp1, _Temp2)) * var_Screen;
+
+                // if (_FirstScan - pixelDistance < 0 && linearDepth < 1)
+                //     return _LineColor ;
+
+                if (_ScanRange - pixelDistance > 0 && linearDepth < 1)
+                {
+                    real scanPercent = 1 - (_ScanRange - linearDepth) / _ScanWidth;
+                    real maxPercent = 1 - (_MaxRange - linearDepth) / _ScanWidth;
+                    real percent = lerp(1, 0, saturate(scanPercent / maxPercent));
+                    var_Screen = lerp(var_Screen, _LineColor, percent);
+                }
+
+                return var_Screen;
             }
             
             ENDHLSL

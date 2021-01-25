@@ -16,13 +16,13 @@ namespace Game.Logic
     public class EnvironmentMgr : GameEngineComponent
     {
         public float time { get; private set; }//24*60*60 按秒算
-        private float m_TimeSpeed = 200;
+        private float m_TimeSpeed = 4;
 
         private List<EnvironmentComponent> _Components = new List<EnvironmentComponent>();
 
         public override void Init()
         {
-            time = GetTime(5, 11, 1);
+            time = GetTime(10, 0, 0);
 
             _Components.Add(new SkyboxComponent());
 
@@ -36,7 +36,6 @@ namespace Game.Logic
         public override void Update(float dt)
         {
             time += Time.deltaTime * m_TimeSpeed;
-
             foreach (var com in _Components)
             {
                 com.Update(dt);

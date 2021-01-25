@@ -211,6 +211,15 @@ MonoBehaviour:
   jumpHeight: 1
   maxAirJumps: 4
   maxGroundAngle: 40
+  maxStairAngle: 50
+  maxSnapSpeed: 100
+  maxSnapDistance: 1
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 14135
+  stairsMask:
+    serializedVersion: 2
+    m_Bits: 14135
 --- !u!54 &5155377327217281506
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: foldermode-scene-mainmenuscene
+  m_EditorClassIdentifier: 
+  m_GroupName: foldermode-scene-mainmenuscene
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 766e4cd7f35b64a5580f0549bcdc01ac
+  m_SerializeEntries:
+  - m_GUID: 8d9f93d6237f34318ad7023c38679a1d
+    m_Address: Lightmap-0_comp_light
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: bd8eb47ac5edd4bc79767a6fd2536fb3
+    m_Address: LightingData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: c37e27eb719a34cab9087935f9a8795f
+    m_Address: Lightmap-0_comp_dir
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9c683e4341b3a423397a98767a646554, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 0cbdcdff19d77417aba4826ff27741c1, type: 2}

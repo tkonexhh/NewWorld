@@ -20,14 +20,16 @@ namespace Game.Logic
         [SerializeField] private CinemachineFreeLook m_CameraPlayer;
         [SerializeField] private Transform m_RoleOriginPos;
 
+        private PostEffect m_CameraPostEffect;
+
         protected override void OnSceneInit()
         {
             Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(UIMgr.S.uiRoot.uiCamera);
         }
+
         protected override void OnSceneEnter()
         {
             GamePlayMgr.S.Init();
-
 
             UIMgr.S.OpenPanel(UIID.GamePanel);
             UIMgr.S.OpenTopPanel(UIID.WorldUIPanel);
@@ -37,7 +39,16 @@ namespace Game.Logic
                 player.transform.position = m_RoleOriginPos.position;
                 player.role.transform.localPosition = Vector3.zero;
                 GameCameraMgr.S.InitFreeLook(m_CameraPlayer);
+                m_CameraPostEffect = GameCameraMgr.S.mainCamera.GetComponent<PostEffect>();
             };
+        }
+
+        private void Update()
+        {
+            if (m_CameraPostEffect != null)
+            {
+                m_CameraPostEffect.SetCenter(GamePlayMgr.S.playerMgr.player.transform.position);
+            }
         }
     }
 
