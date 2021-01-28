@@ -83,15 +83,15 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _ScanDepth: 0
-    - _ScanRange: 40
+    - _ScanRange: 36.48267
     - _ScanWidth: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _Temp1: 5
-    - _Temp2: -0.12
+    - _Temp1: 18.55
+    - _Temp2: 1.496
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
@@ -99,12 +99,12 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FogColor: {r: 1, g: 1, b: 1, a: 1}
-    - _LineColor: {r: 0.735849, g: 0.4483599, b: 0.2742079, a: 1}
+    - _LineColor: {r: 0.051886797, g: 0.69467545, b: 1, a: 1}
     - _Matrix0: {r: 1326.2844, g: -1593.8389, b: -1034.9004, a: 0}
     - _Matrix1: {r: -1658.8655, g: -1593.8374, b: -279.6763, a: 0}
     - _Matrix2: {r: -1914.262, g: -209.75546, b: -1289.1763, a: 0}
     - _Matrix3: {r: 1070.888, g: -209.75687, b: -2044.4004, a: 0}
-    - _ScanCenter: {r: 0, g: 0, b: 0, a: 0}
+    - _ScanCenter: {r: 3.3470168, g: -1.2696114e-17, b: 2.8589106, a: 0}
     - _Slope1: {r: 1, g: 2, b: 1, a: 0}
     - _Slope2: {r: -1, g: 2, b: 0, a: 0}
     - _Slope3: {r: 0, g: -2, b: 1, a: 0}

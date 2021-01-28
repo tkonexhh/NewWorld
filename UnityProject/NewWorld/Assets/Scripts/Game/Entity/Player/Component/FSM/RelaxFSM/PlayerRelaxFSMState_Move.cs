@@ -40,7 +40,7 @@ namespace Game.Logic
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                GameCameraMgr.S.postEffect.StartScan();
+                GameCameraMgr.S.postEffect.StartScan(player.transform.position);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha1))

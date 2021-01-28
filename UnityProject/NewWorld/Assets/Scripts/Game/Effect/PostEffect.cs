@@ -62,27 +62,28 @@ namespace Game.Logic
 
             m_Mat.SetMatrix("_FarClipRay", farFarClipPos);
 
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit))
-            {
-                scanTimer = 0;
-                ScanPoint = hit.point;
-            }
-            m_Mat.SetVector("_ScanCenter", ScanPoint);
+            // RaycastHit hit;
+            // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            // if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit))
+            // {
+            //     scanTimer = 0;
+            //     ScanPoint = hit.point;
+            // }
+            // m_Mat.SetVector("_ScanCenter", ScanPoint);
 
             scanTimer += Time.deltaTime * scanSpeed;
             scanTimer = Mathf.Min(m_MaxRange, scanTimer);
 
 
             m_Mat.SetFloat("_ScanRange", scanTimer);
-            m_Mat.SetMatrix("_CameraToWorld", m_Camera.cameraToWorldMatrix);
+            // m_Mat.SetMatrix("_CameraToWorld", m_Camera.cameraToWorldMatrix);
 
         }
 
-        public void StartScan()
+        public void StartScan(Vector3 center)
         {
             scanTimer = 0;
+            SetCenter(center);
         }
 
 

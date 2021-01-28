@@ -141,7 +141,7 @@
                         half2(i * xy.x, j * xy.y)), _ZBufferParams);
                     }
                 }
-                return abs(offset) * 1000;
+                return abs(offset) * 10000;
             }
 
             float4 frag(Varyings input): SV_Target
@@ -149,42 +149,31 @@
                 float4 var_Screen = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
                 
                 float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, sampler_CameraDepthTexture, input.uv);
+                
                 float linearDepth = Linear01Depth(depth, _ZBufferParams);
                 float3 pixelWorldPos = _WorldSpaceCameraPos + linearDepth * input.interpolatedRay;
 
                 pixelWorldPos.y = _ScanCenter.y;//向上全部归内
                 float pixelDistance = distance(pixelWorldPos, _ScanCenter);
-                // return var_Screen;
-                float edge = edge2(input.uv, _MainTex_TexelSize);
-                // return edge ;
-
-                return round(frac(pixelDistance));
-                // float4 var_Normal = SAMPLE_TEXTURE2D(_CameraDepthNormalsTexture, sampler_MainTex, input.uv);//解析_CameraDepthNormal
-                // float3 normalSS = DecodeViewNormalStereo(var_Normal);//转成屏幕空间法线
-                // float3 normalWS = mul((float3x3)_CameraToWorld, normalSS);//专成世界空间法线
-
-                // return saturate(round(sin(pixelWorldPos.x * _Temp1) + _Temp2)) * _LineColor;
-                //绘制屏幕方向的直线
-                // if (abs(normalWS.y > 0.7) && linearDepth < 1)
-                //     return var_Screen + saturate(round(sin(pixelWorldPos.x * _Temp1) + _Temp2)) * _LineColor;
-                // else
-                // return var_Screen;
-
-                // // return float4(normalWS, 1);
-                // return pixelDistance < _ScanWidth?var_Screen: Grey(var_Screen);
-                // return saturate(1 - pow(pixelDistance / _Temp1, _Temp2)) * var_Screen;
-
-                // if (_FirstScan - pixelDistance < 0 && linearDepth < 1)
-                //     return _LineColor ;
+                
+                float edge = saturate(edge2(input.uv, _MainTex_TexelSize));
+                float edgeCircleMask = 1 - saturate(round(sin(pixelDistance * _Temp1) + _Temp2)) + edge;
+                float centerCircleMask = saturate(pow(pixelDistance / 20, 2));//中间透明区
+                // return centerCircleMask;
+                float4 var_Scan = (edgeCircleMask) * _LineColor + var_Screen;
 
                 if (_ScanRange - pixelDistance > 0 && linearDepth < 1)
                 {
-                    real scanPercent = 1 - (_ScanRange - linearDepth) / _ScanWidth;
-                    real maxPercent = 1 - (_MaxRange - linearDepth) / _ScanWidth;
+                    real scanPercent = 1 - (_ScanRange - pixelDistance) / _ScanWidth;
+                    real maxPercent = 1 - (_MaxRange - pixelDistance) / _ScanWidth;
                     real percent = lerp(1, 0, saturate(scanPercent / maxPercent));
-                    var_Screen = lerp(var_Screen, _LineColor, percent);
+                    
+                    return pow(percent, 10) * _LineColor * (1 + 2 * edgeCircleMask) + var_Screen;
+
+                    // return pow(percent, 20) * _LineColor * centerCircleMask + percent * edgeCircleMask * centerCircleMask * _LineColor * 2 + var_Screen;
                 }
 
+                
                 return var_Screen;
             }
             
