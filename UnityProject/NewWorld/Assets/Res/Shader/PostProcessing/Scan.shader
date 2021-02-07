@@ -9,7 +9,6 @@
         _ScanCenter ("ScanCenter", vector) = (0, 0, 0, 0)
         _Temp1 ("Temp1", float) = 100
         _Temp2 ("Temp2", Range(-0.5, 5)) = 100
-        _StepFogTex ("StepFogTex", 2D) = "white" { }
         _LineColor ("LineColor", Color) = (1, 1, 1, 1)
 
 
@@ -45,7 +44,6 @@
             TEXTURE2D(_MainTex);SAMPLER(sampler_MainTex);
             TEXTURE2D(_CameraDepthTexture); SAMPLER(sampler_CameraDepthTexture);
             TEXTURE2D(_CameraDepthNormalsTexture);
-            TEXTURE2D(_StepFogTex);
 
             
 
@@ -168,9 +166,8 @@
                     real maxPercent = 1 - (_MaxRange - pixelDistance) / _ScanWidth;
                     real percent = lerp(1, 0, saturate(scanPercent / maxPercent));
                     
-                    return pow(percent, 10) * _LineColor * (1 + 2 * edgeCircleMask) + var_Screen;
 
-                    // return pow(percent, 20) * _LineColor * centerCircleMask + percent * edgeCircleMask * centerCircleMask * _LineColor * 2 + var_Screen;
+                    return pow(percent, 20) * _LineColor * centerCircleMask + percent * edgeCircleMask * centerCircleMask * _LineColor * 2 + var_Screen;
                 }
 
                 

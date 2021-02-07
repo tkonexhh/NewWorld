@@ -16,8 +16,14 @@ namespace GFrame
     [TMonoSingletonAttribute("[GFrame]/[Tools]/[AudioMgr]")]
     public class AudioMgr : TMonoSingleton<AudioMgr>
     {
-        protected float m_SoundVolume;
-        protected float m_MusicVolume;
+        [SerializeField, Range(0f, 1f)] private float m_MasterVolume = 1f;
+        [SerializeField, Range(0f, 1f)] private float m_SoundVolume = 1f;
+        [SerializeField, Range(0f, 1f)] private float m_MusicVolume = 1f;
+
+        public void PlayAudio(AudioConfigurationSO setting, Vector3 position = default)
+        {
+
+        }
 
 
     }
