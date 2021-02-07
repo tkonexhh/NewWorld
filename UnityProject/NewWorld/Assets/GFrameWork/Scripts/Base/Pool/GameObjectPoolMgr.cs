@@ -18,7 +18,7 @@ namespace GFrame
     public class GameObjectPoolMgr : TMonoSingleton<GameObjectPoolMgr>
     {
         private Dictionary<string, GameObjectPool> m_PoolMap = new Dictionary<string, GameObjectPool>();
-        public void AddPool(string poolName, GameObject prefab, int initCount)
+        public void AddPool(string poolName, GameObject prefab, int initCount, Transform transform = default)
         {
             if (m_PoolMap.ContainsKey(poolName))
             {
@@ -26,6 +26,10 @@ namespace GFrame
                 return;
             }
             GameObjectPool pool = new GameObjectPool();
+            if (transform == default)
+            {
+                transform = this.transform;
+            }
             pool.InitPool(poolName, transform, prefab, initCount);
             // GameObject poolObj = new GameObject();
             // poolObj.transform.SetParent(transform);

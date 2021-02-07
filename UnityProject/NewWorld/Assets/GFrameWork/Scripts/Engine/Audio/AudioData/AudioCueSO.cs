@@ -17,10 +17,20 @@ namespace GFrame
     public class AudioCueSO : ScriptableObject
     {
         public bool looping = false;
-        [SerializeField] private AudioClipsGroup[] audioClipsGroups = default;
+        [SerializeField] private AudioClipsGroup[] audioClipsGroups = default;//可以有多个Group 然后一次播放这些Group的Audio Clip
 
 
-        // public AudioClip[] GetClip(){}
+        public AudioClip[] GetClips()
+        {
+            int numOfGroups = audioClipsGroups.Length;
+            AudioClip[] resultingClips = new AudioClip[numOfGroups];
+
+            for (int i = 0; i < numOfGroups; i++)
+            {
+                resultingClips[i] = audioClipsGroups[i].GetNextClip();
+            }
+            return resultingClips;
+        }
     }
 
     [System.Serializable]

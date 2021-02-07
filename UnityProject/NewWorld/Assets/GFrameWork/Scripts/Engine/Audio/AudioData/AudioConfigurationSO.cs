@@ -24,7 +24,7 @@ namespace GFrame
         [Range(0f, 1f)] public float Volume = 1f;//音量
         [Range(-3f, 3f)] public float Pitch = 1f;//音频源的音高
         [Range(-1f, 1f)] public float PanStereo = 0f;
-        [Range(0f, 1f)] public float SpatialBlend = 1f;//设置 3D 空间化计算（衰减、多普勒效应等）对该 AudioSource 的影响程度。0.0 使声音变成全 2D 效果，1.0 使其变成全 3D。
+        [Range(0f, 1f), Tooltip("0:2D声音 1:3D声音")] public float SpatialBlend = 1f;//设置 3D 空间化计算（衰减、多普勒效应等）对该 AudioSource 的影响程度。0.0 使声音变成全 2D 效果，1.0 使其变成全 3D。
         [Range(0f, 1.1f)] public float ReverbZoneMix = 1f;//将来自 AudioSource 的信号混合到与混响区关联的全局混响中的量。
 
         [Header("3D sound Settings")]
@@ -46,8 +46,6 @@ namespace GFrame
             get { return (int)_priorityLevel; }
             set { _priorityLevel = (PriorityLevel)value; }
         }
-
-
 
         private enum PriorityLevel
         {
