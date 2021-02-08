@@ -23,6 +23,9 @@ namespace GFrame
         [SerializeField, Range(0f, 1f)] private float m_SoundVolume = 1f;
         [SerializeField, Range(0f, 1f)] private float m_MusicVolume = 1f;
 
+        // private SoundEmitterList _soundEmitterList;
+
+
         private const string POOL_NAME = "SoundEmitter";
         public override void OnSingletonInit()
         {

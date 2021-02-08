@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7bcbadaa113341dc867d2c09bc89f47, type: 3}
-  m_Name: 2DAudioConfigurationSO
+  m_Name: 2DSound_AudioConfigSO
   m_EditorClassIdentifier: 
   _priorityLevel: 128
   Mute: 0
   Volume: 1
   Pitch: 1
   PanStereo: 0
-  SpatialBlend: 1
+  SpatialBlend: 0
   ReverbZoneMix: 1
   DopplerLevel: 1
   Spread: 0

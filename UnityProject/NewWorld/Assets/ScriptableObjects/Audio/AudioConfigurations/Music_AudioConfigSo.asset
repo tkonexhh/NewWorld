@@ -17,7 +17,7 @@ MonoBehaviour:
   Volume: 1
   Pitch: 1
   PanStereo: 0
-  SpatialBlend: 1
+  SpatialBlend: 0
   ReverbZoneMix: 1
   DopplerLevel: 1
   Spread: 0

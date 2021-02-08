@@ -44,6 +44,7 @@ namespace GFrame
 
         public AudioClip GetNextClip()
         {
+            Debug.LogError(audioClips.Length);
             if (audioClips.Length == 0)
             {
                 return audioClips[0];
@@ -75,7 +76,7 @@ namespace GFrame
                 }
             }
             m_LastClipPlayed = m_NextClipToPlay;
-            return null;
+            return audioClips[m_NextClipToPlay];
         }
     }
 

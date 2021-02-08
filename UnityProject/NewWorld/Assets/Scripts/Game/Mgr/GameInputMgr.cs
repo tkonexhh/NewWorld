@@ -10,15 +10,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 using GFrame;
 
 
 namespace Game.Logic
 {
     [TMonoSingletonAttribute("[Game]/[Tools]/[GameInputMgr]")]
-    public class GameInputMgr : TMonoSingleton<GameInputMgr>
+    public class GameInputMgr : TMonoSingleton<GameInputMgr>, GameInput.IMainActions
     {
         private GameInput m_Input;
+
+        public event UnityAction<Vector2> cameraMoveEvent = delegate { };
+        public event UnityAction enableMouseControlCameraEvent = delegate { };
+        public event UnityAction disableMouseControlCameraEvent = delegate { };
 
         public GameInput.MainActions mainAction => m_Input.Main;
         public GameInput.UIActions uiAction => m_Input.UI;
@@ -70,7 +75,7 @@ namespace Game.Logic
             moveInput = mainAction.Move.ReadValue<Vector2>();
             moveVec = Vector2.SmoothDamp(moveVec, moveInput, ref m_VelMoveInput, moveSensitivity * Time.deltaTime);
             moveAmount = Mathf.Clamp01(Mathf.Abs(moveVec.x) + Mathf.Abs(moveVec.y));
-            cameraInput = mainAction.Camera.ReadValue<Vector2>();
+            cameraInput = mainAction.RotateCamera.ReadValue<Vector2>();
         }
 
         public void ClearMove()
@@ -88,6 +93,32 @@ namespace Game.Logic
             dir.Normalize();
 
             return dir;
+        }
+
+        ////////////
+        public void OnRotateCamera(InputAction.CallbackContext context)
+        {
+            cameraMoveEvent.Invoke(context.ReadValue<Vector2>());
+        }
+        public void OnMove(InputAction.CallbackContext context) { }
+        public void OnJump(InputAction.CallbackContext context) { }
+        public void OnRoll(InputAction.CallbackContext context) { }
+        public void OnAny(InputAction.CallbackContext context) { }
+        public void OnRun(InputAction.CallbackContext context) { }
+        public void OnAttackL(InputAction.CallbackContext context) { }
+        public void OnAttackR(InputAction.CallbackContext context) { }
+        public void OnCrouch(InputAction.CallbackContext context) { }
+        public void OnMouseControlCamera(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                enableMouseControlCameraEvent.Invoke();
+            }
+
+            if (context.phase == InputActionPhase.Canceled)
+            {
+                disableMouseControlCameraEvent.Invoke();
+            }
         }
     }
 

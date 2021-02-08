@@ -26,6 +26,7 @@ namespace GFrame
 
         public void PlayAudioClip(AudioClip clip, AudioConfigurationSO setting, Vector3 position = default)
         {
+            Debug.LogError("SoundEmitter Play");
             m_AudioSource.clip = clip;
             setting.ApplyTo(m_AudioSource);
             m_AudioSource.transform.position = position;
