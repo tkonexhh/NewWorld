@@ -20,10 +20,10 @@ namespace Game.Logic
         public override void Enter(Player player, params object[] args)
         {
             base.Enter(player, args);
-            GameInputMgr.S.mainAction.Roll.performed += OnRollPerformed;
+            GameInputMgr.S.rollEvent += OnRoll;
             GameInputMgr.S.mainAction.Run.performed += OnRunPerformed;
             GameInputMgr.S.mainAction.Run.canceled += OnRunCanceled;
-            GameInputMgr.S.mainAction.Jump.performed += OnJumpPerformed;
+            GameInputMgr.S.jumpEvent += OnJump;
             GameInputMgr.S.mainAction.Crouch.performed += OnCrouchPerformed;
         }
 
@@ -99,10 +99,10 @@ namespace Game.Logic
         public override void Exit(Player player)
         {
             base.Exit(player);
-            GameInputMgr.S.mainAction.Roll.performed -= OnRollPerformed;
+            GameInputMgr.S.rollEvent -= OnRoll;
             GameInputMgr.S.mainAction.Run.performed -= OnRunPerformed;
             GameInputMgr.S.mainAction.Run.canceled -= OnRunCanceled;
-            GameInputMgr.S.mainAction.Jump.performed -= OnJumpPerformed;
+            GameInputMgr.S.jumpEvent -= OnJump;
             GameInputMgr.S.mainAction.Crouch.performed -= OnCrouchPerformed;
         }
 
@@ -117,17 +117,14 @@ namespace Game.Logic
         }
 
 
-        private void OnRollPerformed(InputAction.CallbackContext callback)
+        private void OnRoll()
         {
             (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Roll);
         }
 
-        private void OnJumpPerformed(InputAction.CallbackContext callback)
+        private void OnJump()
         {
-            m_MoveDir = Vector3.zero;
-            m_MoveDir = GameCameraMgr.S.mainCamera.transform.forward * GameInputMgr.S.moveInput.y;
-            m_MoveDir += GameCameraMgr.S.mainCamera.transform.right * GameInputMgr.S.moveInput.x;
-            m_MoveDir.y = 0;
+            m_MoveDir = m_Player.controlComponent.movementInput;
             m_Player.role.controlComponent.Jump();
             (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Jump);
         }

@@ -25,7 +25,7 @@ namespace Game.Logic
         public virtual void Start() { }
         public virtual void Excute(float dt) { }
         public virtual void FixedExcute(float dt) { }
-
+        public virtual void Destroy() { }
         #endregion
     }
 

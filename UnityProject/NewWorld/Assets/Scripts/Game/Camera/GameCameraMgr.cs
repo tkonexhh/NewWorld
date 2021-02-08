@@ -14,12 +14,26 @@ using Cinemachine;
 
 namespace Game.Logic
 {
-    public class CameraMgr : MonoBehaviour
+    [TMonoSingletonAttribute("[GFrame]/[Tools]/[GameCameraMgr]")]
+    public class GameCameraMgr : TMonoSingleton<GameCameraMgr>
     {
         public Camera mainCamera;
         public CinemachineFreeLook freeLookVCam;
         [SerializeField, Range(.5f, 3f)] private float m_SpeedMultiplier = 1f;//TODO: make this modifiable in the game settings
         private bool m_CameraMovementLock = false;
+        private bool m_IsRightMouseButtonClick = false;
+        private PostEffect m_CameraPostEffect;
+        public PostEffect postEffect
+        {
+            get
+            {
+                if (m_CameraPostEffect == null)
+                {
+                    m_CameraPostEffect = mainCamera.GetComponent<PostEffect>();
+                }
+                return m_CameraPostEffect;
+            }
+        }
 
         public void SetTarget(Transform follow, Transform lookat)
         {
@@ -34,7 +48,7 @@ namespace Game.Logic
             GameInputMgr.S.disableMouseControlCameraEvent += OnDisableMouseControlCamera;
         }
 
-        private void OnDisable()
+        private void OnDestory()
         {
             GameInputMgr.S.cameraMoveEvent -= OnCameraMove;
             GameInputMgr.S.enableMouseControlCameraEvent -= OnEnableMouseControlCamera;
@@ -43,14 +57,24 @@ namespace Game.Logic
 
         private void OnEnableMouseControlCamera()
         {
+            m_IsRightMouseButtonClick = true;
+
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
+            StartCoroutine(DisableMouseControlForFrame());
+        }
+
+        IEnumerator DisableMouseControlForFrame()
+        {
             m_CameraMovementLock = true;
+            yield return new WaitForEndOfFrame();
+            m_CameraMovementLock = false;
         }
 
         private void OnDisableMouseControlCamera()
         {
+            m_IsRightMouseButtonClick = false;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
@@ -61,6 +85,7 @@ namespace Game.Logic
         private void OnCameraMove(Vector2 cameraMovement)
         {
             if (m_CameraMovementLock) return;
+            if (!m_IsRightMouseButtonClick) return;
 
             freeLookVCam.m_XAxis.m_InputAxisValue = cameraMovement.x * Time.smoothDeltaTime * m_SpeedMultiplier;
             freeLookVCam.m_YAxis.m_InputAxisValue = cameraMovement.y * Time.smoothDeltaTime * m_SpeedMultiplier;

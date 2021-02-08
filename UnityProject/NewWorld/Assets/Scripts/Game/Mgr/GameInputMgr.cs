@@ -24,6 +24,9 @@ namespace Game.Logic
         public event UnityAction<Vector2> cameraMoveEvent = delegate { };
         public event UnityAction enableMouseControlCameraEvent = delegate { };
         public event UnityAction disableMouseControlCameraEvent = delegate { };
+        public event UnityAction<Vector2> moveEvent = delegate { };
+        public event UnityAction jumpEvent = delegate { };
+        public event UnityAction rollEvent = delegate { };
 
         public GameInput.MainActions mainAction => m_Input.Main;
         public GameInput.UIActions uiAction => m_Input.UI;
@@ -41,12 +44,12 @@ namespace Game.Logic
 
         public Vector2 lastMoveInput { get; private set; }
         public Vector2 moveInput { get; private set; }
-        public Vector2 cameraInput { get; private set; }
         public float moveAmount { get; private set; }
 
         public override void OnSingletonInit()
         {
             m_Input = new GameInput();
+            m_Input.Main.SetCallbacks(this);
             EnableInput();
         }
 
@@ -75,7 +78,6 @@ namespace Game.Logic
             moveInput = mainAction.Move.ReadValue<Vector2>();
             moveVec = Vector2.SmoothDamp(moveVec, moveInput, ref m_VelMoveInput, moveSensitivity * Time.deltaTime);
             moveAmount = Mathf.Clamp01(Mathf.Abs(moveVec.x) + Mathf.Abs(moveVec.y));
-            cameraInput = mainAction.RotateCamera.ReadValue<Vector2>();
         }
 
         public void ClearMove()
@@ -84,25 +86,23 @@ namespace Game.Logic
             moveInput = Vector2.zero;
         }
 
-
-        public Vector3 CovertInputToObject(Transform trans)
-        {
-            Vector3 dir = Vector3.zero;
-            dir = trans.forward * moveInput.y;
-            dir += trans.right * moveInput.x;
-            dir.Normalize();
-
-            return dir;
-        }
-
         ////////////
         public void OnRotateCamera(InputAction.CallbackContext context)
         {
             cameraMoveEvent.Invoke(context.ReadValue<Vector2>());
         }
-        public void OnMove(InputAction.CallbackContext context) { }
-        public void OnJump(InputAction.CallbackContext context) { }
-        public void OnRoll(InputAction.CallbackContext context) { }
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            moveEvent.Invoke(context.ReadValue<Vector2>());
+        }
+        public void OnJump(InputAction.CallbackContext context)
+        {
+            jumpEvent.Invoke();
+        }
+        public void OnRoll(InputAction.CallbackContext context)
+        {
+            rollEvent.Invoke();
+        }
         public void OnAny(InputAction.CallbackContext context) { }
         public void OnRun(InputAction.CallbackContext context) { }
         public void OnAttackL(InputAction.CallbackContext context) { }

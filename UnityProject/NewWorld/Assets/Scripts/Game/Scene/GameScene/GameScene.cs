@@ -17,9 +17,7 @@ namespace Game.Logic
 {
     public class GameScene : AbstractScene
     {
-        [SerializeField] private CinemachineFreeLook m_CameraPlayer;
         [SerializeField] private Transform m_RoleOriginPos;
-
 
         protected override void OnSceneInit()
         {
@@ -37,7 +35,7 @@ namespace Game.Logic
             {
                 player.transform.position = m_RoleOriginPos.position;
                 player.role.transform.localPosition = Vector3.zero;
-                GameCameraMgr.S.InitFreeLook(m_CameraPlayer);
+                GameCameraMgr.S.SetTarget(player.transform, player.role.monoReference.headLook);
             };
         }
 

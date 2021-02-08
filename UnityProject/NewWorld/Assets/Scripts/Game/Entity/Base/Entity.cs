@@ -44,6 +44,11 @@ namespace Game.Logic
             _components.ForEach(p => p.FixedExcute(dt));
         }
 
+        public virtual void OnDestroy()
+        {
+            _components.ForEach(p => p.Destroy());
+        }
+
     }
 
 }

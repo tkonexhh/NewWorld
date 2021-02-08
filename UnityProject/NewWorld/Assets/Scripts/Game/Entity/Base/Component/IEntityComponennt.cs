@@ -19,6 +19,7 @@ namespace Game.Logic
         void Start();
         void Excute(float dt);
         void FixedExcute(float dt);
+        void Destroy();
     }
 
 }

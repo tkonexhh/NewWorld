@@ -83,7 +83,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _ScanDepth: 0
-    - _ScanRange: 28.418034
+    - _ScanRange: 40
     - _ScanWidth: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0

@@ -547,6 +547,11 @@ namespace Game.Logic
                     ""devicePath"": ""<Keyboard>"",
                     ""isOptional"": true,
                     ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
                 }
             ]
         }

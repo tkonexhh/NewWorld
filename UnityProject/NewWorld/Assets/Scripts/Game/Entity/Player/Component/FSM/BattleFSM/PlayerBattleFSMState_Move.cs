@@ -22,7 +22,7 @@ namespace Game.Logic
         {
             base.Enter(player, args);
             GameInputMgr.S.mainAction.AttackL.canceled += OnAttackLCanceled;
-            GameInputMgr.S.mainAction.Jump.performed += OnJumpPerformed;
+            GameInputMgr.S.jumpEvent += OnJump;
             GameInputMgr.S.mainAction.Roll.performed += OnRollPerformed;
             GameInputMgr.S.mainAction.Run.performed += OnRunPerformed;
             GameInputMgr.S.mainAction.Run.canceled += OnRunCanceled;
@@ -75,7 +75,7 @@ namespace Game.Logic
             GameInputMgr.S.mainAction.Roll.performed -= OnRollPerformed;
             GameInputMgr.S.mainAction.Run.performed -= OnRunPerformed;
             GameInputMgr.S.mainAction.Run.canceled -= OnRunCanceled;
-            GameInputMgr.S.mainAction.Jump.performed -= OnJumpPerformed;
+            GameInputMgr.S.jumpEvent -= OnJump;
         }
 
         private void GetHurt()
@@ -112,13 +112,11 @@ namespace Game.Logic
             (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Roll);
         }
 
-        private void OnJumpPerformed(InputAction.CallbackContext callback)
+        private void OnJump()
         {
             Debug.LogError("Jump");
-            m_MoveDir = Vector3.zero;
-            m_MoveDir = GameCameraMgr.S.mainCamera.transform.forward * GameInputMgr.S.moveInput.y;
-            m_MoveDir += GameCameraMgr.S.mainCamera.transform.right * GameInputMgr.S.moveInput.x;
-            m_MoveDir.y = 0;
+            m_MoveDir = m_Player.controlComponent.movementInput;
+
             m_Player.role.controlComponent.Jump();
             (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Jump);
 
