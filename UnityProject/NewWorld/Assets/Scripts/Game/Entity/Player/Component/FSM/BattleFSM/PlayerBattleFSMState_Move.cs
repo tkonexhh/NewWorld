@@ -34,7 +34,7 @@ namespace Game.Logic
             if (player.role.animComponent == null)
                 return;
 
-            player.role.animComponent.SetMoving(GameInputMgr.S.moveVec.sqrMagnitude > 0.1f);
+            player.role.animComponent.SetMoving(player.controlComponent.movementVector.magnitude > 0.1f);
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 GetHurt();
@@ -114,12 +114,8 @@ namespace Game.Logic
 
         private void OnJump()
         {
-            Debug.LogError("Jump");
-            m_MoveDir = m_Player.controlComponent.movementInput;
-
             m_Player.role.controlComponent.Jump();
             (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Jump);
-
         }
 
 
@@ -131,7 +127,7 @@ namespace Game.Logic
         protected override void OnInAir(Vector3 moveDir)
         {
             Debug.LogError("To Air");
-            (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Air, m_MoveDir);
+            (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Air);
         }
 
     }

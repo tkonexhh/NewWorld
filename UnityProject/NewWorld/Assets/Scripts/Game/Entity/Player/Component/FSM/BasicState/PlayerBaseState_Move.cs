@@ -18,7 +18,6 @@ namespace Game.Logic
         protected Player m_Player;
         protected Vector3 targetPosition;
         protected Vector3 normalVector;
-        protected Vector3 m_MoveDir;
         private float minDistanceNeededToFall = 0.5f;
 
         public override void Enter(Player player, params object[] args)
@@ -44,7 +43,7 @@ namespace Game.Logic
                 HandleMove(dt);
             }
 
-            HandleGroundHit(dt, m_MoveDir);
+            HandleGroundHit(dt, m_Player.controlComponent.movementVector);
         }
 
         public override void Exit(Player player)
@@ -80,9 +79,7 @@ namespace Game.Logic
             if (m_Player.role.controlComponent.usingMotion)
                 return;
 
-            m_MoveDir = m_Player.controlComponent.movementVector;
-
-            Vector3 projectedVel = Vector3.ProjectOnPlane(m_MoveDir, normalVector);
+            Vector3 projectedVel = Vector3.ProjectOnPlane(m_Player.controlComponent.movementVector, normalVector);
             //这里希望速度也能够配合动画进行缓动
             m_Player.monoReference.rigidbody.velocity = projectedVel;
         }

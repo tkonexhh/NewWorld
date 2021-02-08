@@ -27,9 +27,9 @@ namespace Game.Logic
             if (showInputMoveVec)
             {
                 Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(transform.position + 1.0f * new Vector3(GameInputMgr.S.moveInput.x, 0, GameInputMgr.S.moveInput.y), 0.1f);
+                // Gizmos.DrawWireSphere(transform.position + 1.0f * new Vector3(GameInputMgr.S.moveInput.x, 0, GameInputMgr.S.moveInput.y), 0.1f);
                 Gizmos.color = Color.green;
-                Gizmos.DrawWireSphere(transform.position + 2.0f * new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y), 0.1f);
+                // Gizmos.DrawWireSphere(transform.position + 2.0f * new Vector3(GameInputMgr.S.moveVec.x, 0, GameInputMgr.S.moveVec.y), 0.1f);
                 Gizmos.color = Color.grey;
 
             }

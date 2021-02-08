@@ -21,8 +21,8 @@ namespace Game.Logic
         {
             base.Enter(player, args);
             GameInputMgr.S.rollEvent += OnRoll;
-            GameInputMgr.S.mainAction.Run.performed += OnRunPerformed;
-            GameInputMgr.S.mainAction.Run.canceled += OnRunCanceled;
+            GameInputMgr.S.enableRunEvent += OnEnableRun;
+            GameInputMgr.S.disableRunEvent += OnDisableRun;
             GameInputMgr.S.jumpEvent += OnJump;
             GameInputMgr.S.mainAction.Crouch.performed += OnCrouchPerformed;
         }
@@ -32,7 +32,7 @@ namespace Game.Logic
             if (player.role.animComponent == null)
                 return;
 
-            player.role.animComponent.SetMoving(GameInputMgr.S.moveVec.sqrMagnitude > 0.1f);
+            player.role.animComponent.SetMoving(player.controlComponent.movementVector.magnitude > 0.1f);
             if (Input.GetKeyDown(KeyCode.R))
             {
                 player.fsmComponent.SetRoleState(RoleState.Battle);
@@ -78,16 +78,16 @@ namespace Game.Logic
             }
 
 
-            if (GameInputMgr.S.lastMoveInput != Vector2.zero && GameInputMgr.S.moveInput == Vector2.zero)//
-            {
-                if (player.role.animComponent.GetVelocityZ() > 7f)
-                {
-                    m_Player.monoReference.rigidbody.drag = 0;
-                    m_Player.role.animComponent.ResetVelocityZ();
-                    Debug.LogError("Run To Stop");
-                    m_Player.role.controlComponent.RunToStop();
-                }
-            }
+            // if (GameInputMgr.S.lastMoveInput != Vector2.zero && GameInputMgr.S.moveInput == Vector2.zero)//
+            // {
+            //     if (player.role.animComponent.GetVelocityZ() > 7f)
+            //     {
+            //         m_Player.monoReference.rigidbody.drag = 0;
+            //         m_Player.role.animComponent.ResetVelocityZ();
+            //         Debug.LogError("Run To Stop");
+            //         m_Player.role.controlComponent.RunToStop();
+            //     }
+            // }
 
         }
 
@@ -100,18 +100,20 @@ namespace Game.Logic
         {
             base.Exit(player);
             GameInputMgr.S.rollEvent -= OnRoll;
-            GameInputMgr.S.mainAction.Run.performed -= OnRunPerformed;
-            GameInputMgr.S.mainAction.Run.canceled -= OnRunCanceled;
+            GameInputMgr.S.enableRunEvent -= OnEnableRun;
+            GameInputMgr.S.disableRunEvent -= OnDisableRun;
             GameInputMgr.S.jumpEvent -= OnJump;
             GameInputMgr.S.mainAction.Crouch.performed -= OnCrouchPerformed;
         }
 
-        private void OnRunPerformed(InputAction.CallbackContext callback)
+
+
+        private void OnEnableRun()
         {
             m_Player.role.controlComponent.running = true;
         }
 
-        private void OnRunCanceled(InputAction.CallbackContext callback)
+        private void OnDisableRun()
         {
             m_Player.role.controlComponent.running = false;
         }
@@ -124,7 +126,6 @@ namespace Game.Logic
 
         private void OnJump()
         {
-            m_MoveDir = m_Player.controlComponent.movementInput;
             m_Player.role.controlComponent.Jump();
             (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Jump);
         }
@@ -142,7 +143,7 @@ namespace Game.Logic
         protected override void OnInAir(Vector3 moveDir)
         {
             // Debug.LogError("To Air");
-            (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Air, m_MoveDir);
+            (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Air);
         }
 
     }

@@ -47,17 +47,13 @@ namespace Game.Logic
 
         private void StartRoll()
         {
-            if (GameInputMgr.S.moveAmount == 0f)
+            if (m_Player.controlComponent.movementInput.magnitude == 0f)//啥也不按默认向后滚
             {
                 m_Player.role.controlComponent.Roll(RollDir.Backward);
             }
             else
             {
-                Vector3 rollDir = Vector3.zero;
-                rollDir = m_Player.transform.forward * GameInputMgr.S.moveInput.y;
-                rollDir += m_Player.transform.right * GameInputMgr.S.moveInput.x;
-                rollDir.Normalize();
-                rollDir.y = 0;
+                Vector3 rollDir = m_Player.controlComponent.movementInput;
 
                 if (rollDir.x > rollDir.y)
                 {

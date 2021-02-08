@@ -17,8 +17,6 @@ namespace Game.Logic
     public class PlayerBaseState_Jump : FSMState<Player>
     {
         protected Player m_Player;
-        protected Vector3 m_MoveDir;
-
 
         public override void Enter(Player player, params object[] args)
         {
@@ -31,11 +29,9 @@ namespace Game.Logic
         {
         }
 
-
         public override void FixedUpdate(Player player, float dt)
         {
             base.FixedUpdate(player, dt);
-
 
             if (player.role.controlComponent.canRotate)
             {
@@ -64,15 +60,7 @@ namespace Game.Logic
 
         private void HandleRotation(float dt)
         {
-            Vector3 targetDir = Vector3.zero;
-            float moveOverride = GameInputMgr.S.moveAmount;
-
-            targetDir = GameCameraMgr.S.mainCamera.transform.forward * GameInputMgr.S.moveInput.y;
-            targetDir += GameCameraMgr.S.mainCamera.transform.right * GameInputMgr.S.moveInput.x;
-            targetDir.Normalize();
-
-            targetDir.y = 0;
-
+            Vector3 targetDir = m_Player.controlComponent.movementInput;
 
             if (targetDir == Vector3.zero)
             {
@@ -90,27 +78,11 @@ namespace Game.Logic
             if (m_Player.role.controlComponent.usingMotion)
                 return;
 
-            m_MoveDir = Vector3.zero;
-            m_MoveDir = GameCameraMgr.S.mainCamera.transform.forward * GameInputMgr.S.moveInput.y;
-            m_MoveDir += GameCameraMgr.S.mainCamera.transform.right * GameInputMgr.S.moveInput.x;
-            m_MoveDir.Normalize();
-            m_MoveDir.y = 0;
-
-            float speed = m_Player.role.controlComponent.running ? m_Player.role.data.baseData.runSpeed : m_Player.role.data.baseData.walkSpeed;
-            m_MoveDir *= speed;
-
-            float remapSpeed = 1;
-            if (m_Player.role.controlComponent.running)
-            {
-                remapSpeed = m_Player.role.animComponent.GetVelocityZ().Remap(3, 6, 0, 1);
-            }
-            else
-            {
-                remapSpeed = m_Player.role.animComponent.GetVelocityZ().Remap(0, 3, 0, 1);
-            }
-
             //这里希望速度也能够配合动画进行缓动
-            m_Player.monoReference.rigidbody.velocity = new Vector3(m_MoveDir.x * remapSpeed, m_Player.monoReference.rigidbody.velocity.y, m_MoveDir.z * remapSpeed);
+            m_Player.monoReference.rigidbody.velocity = new Vector3(
+                m_Player.controlComponent.movementVector.x,
+                m_Player.monoReference.rigidbody.velocity.y,
+                m_Player.controlComponent.movementVector.z);
 
         }
     }

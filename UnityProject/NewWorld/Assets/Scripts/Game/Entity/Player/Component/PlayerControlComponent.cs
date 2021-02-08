@@ -85,7 +85,7 @@ namespace Game.Logic
             movementVector = Vector3.zero;
             Vector3 velocity = movementVector;
             Vector3 input = movementInput;
-            float speed = 2;
+            float speed = 2 * (player.role.controlComponent.running ? 2 : 1);
             float acceleration = 40;
             SetVelocityPerAxis(ref velocity.x, input.x, acceleration, speed);
             SetVelocityPerAxis(ref velocity.z, input.z, acceleration, speed);
