@@ -21,14 +21,14 @@ namespace Game.Logic
         public override void Enter(Player player, params object[] args)
         {
             m_Player = player;
-            GameInputMgr.S.mainAction.Crouch.canceled += OnCrouchCanceled;
+            GameInputMgr.S.disableCrouchEvent += OnDisableCrouch;
             player.role.controlComponent.Crouch();
             m_ToIdle = false;
         }
 
         public override void Exit(Player player)
         {
-            GameInputMgr.S.mainAction.Crouch.canceled -= OnCrouchCanceled;
+            GameInputMgr.S.disableCrouchEvent -= OnDisableCrouch;
         }
 
         public override void Update(Player player, float dt)
@@ -48,7 +48,7 @@ namespace Game.Logic
             }
         }
 
-        private void OnCrouchCanceled(InputAction.CallbackContext callback)
+        private void OnDisableCrouch()
         {
             if (m_ToIdle) return;
             m_ToIdle = true;

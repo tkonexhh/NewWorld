@@ -82,7 +82,7 @@ namespace Game.Logic
 
         private void RecalculateMovementVector()
         {
-            movementVector = Vector3.zero;
+            // movementVector = Vector3.zero;
             Vector3 velocity = movementVector;
             Vector3 input = movementInput;
             float speed = 2 * (player.role.controlComponent.running ? 2 : 1);
@@ -98,7 +98,7 @@ namespace Game.Logic
             {
                 if (currentAxisSpeed != 0f)
                 {
-
+                    ApplyAirResistance(ref currentAxisSpeed);
                 }
             }
             else
@@ -113,9 +113,18 @@ namespace Game.Logic
                 }
                 else
                 {
-                    // ApplyAirResistance(ref currentAxisSpeed);
+                    ApplyAirResistance(ref currentAxisSpeed);
                 }
             }
+        }
+
+        private void ApplyAirResistance(ref float value)
+        {
+            float sign = Mathf.Sign(value);
+
+            value -= sign * 5 * Time.deltaTime;
+            if (Mathf.Sign(value) != sign)
+                value = 0;
         }
 
     }

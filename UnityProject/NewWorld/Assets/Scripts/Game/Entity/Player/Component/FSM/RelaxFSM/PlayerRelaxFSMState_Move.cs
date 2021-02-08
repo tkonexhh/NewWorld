@@ -24,7 +24,7 @@ namespace Game.Logic
             GameInputMgr.S.enableRunEvent += OnEnableRun;
             GameInputMgr.S.disableRunEvent += OnDisableRun;
             GameInputMgr.S.jumpEvent += OnJump;
-            GameInputMgr.S.mainAction.Crouch.performed += OnCrouchPerformed;
+            GameInputMgr.S.enableCrouchEvent += OnEnableCrouch;
         }
 
         public override void Update(Player player, float dt)
@@ -103,7 +103,7 @@ namespace Game.Logic
             GameInputMgr.S.enableRunEvent -= OnEnableRun;
             GameInputMgr.S.disableRunEvent -= OnDisableRun;
             GameInputMgr.S.jumpEvent -= OnJump;
-            GameInputMgr.S.mainAction.Crouch.performed -= OnCrouchPerformed;
+            GameInputMgr.S.enableCrouchEvent -= OnEnableCrouch;
         }
 
 
@@ -130,7 +130,7 @@ namespace Game.Logic
             (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Jump);
         }
 
-        private void OnCrouchPerformed(InputAction.CallbackContext callback)
+        private void OnEnableCrouch()
         {
             (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Crouch);
         }

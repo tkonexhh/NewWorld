@@ -21,7 +21,7 @@ namespace Game.Logic
         public override void Enter(Player player, params object[] args)
         {
             m_Player = player;
-            GameInputMgr.S.mainAction.Move.performed += OnMovePerformed;
+            // GameInputMgr.S.mainAction.Move.performed += OnMovePerformed;
         }
 
         public override void Update(Player player, float dt)
@@ -33,7 +33,7 @@ namespace Game.Logic
 
         public override void Exit(Player player)
         {
-            GameInputMgr.S.mainAction.Move.performed -= OnMovePerformed;
+            // GameInputMgr.S.mainAction.Move.performed -= OnMovePerformed;
         }
 
         private void OnMovePerformed(InputAction.CallbackContext callback)

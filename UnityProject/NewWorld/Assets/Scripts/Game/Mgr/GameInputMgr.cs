@@ -28,7 +28,10 @@ namespace Game.Logic
         public event UnityAction enableRunEvent = delegate { };
         public event UnityAction disableRunEvent = delegate { };
         public event UnityAction jumpEvent = delegate { };
+        public event UnityAction jumpCanceledEvent = delegate { };
         public event UnityAction rollEvent = delegate { };
+        public event UnityAction enableCrouchEvent = delegate { };
+        public event UnityAction disableCrouchEvent = delegate { };
 
         public GameInput.MainActions mainAction => m_Input.Main;
         public GameInput.UIActions uiAction => m_Input.UI;
@@ -102,7 +105,15 @@ namespace Game.Logic
         }
         public void OnAttackL(InputAction.CallbackContext context) { }
         public void OnAttackR(InputAction.CallbackContext context) { }
-        public void OnCrouch(InputAction.CallbackContext context) { }
+        public void OnCrouch(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+                enableCrouchEvent.Invoke();
+
+            if (context.phase == InputActionPhase.Canceled)
+                disableCrouchEvent.Invoke();
+        }
+
         public void OnMouseControlCamera(InputAction.CallbackContext context)
         {
             if (context.phase == InputActionPhase.Performed)

@@ -23,9 +23,9 @@ namespace Game.Logic
             base.Enter(player, args);
             GameInputMgr.S.mainAction.AttackL.canceled += OnAttackLCanceled;
             GameInputMgr.S.jumpEvent += OnJump;
-            GameInputMgr.S.mainAction.Roll.performed += OnRollPerformed;
-            GameInputMgr.S.mainAction.Run.performed += OnRunPerformed;
-            GameInputMgr.S.mainAction.Run.canceled += OnRunCanceled;
+            GameInputMgr.S.rollEvent += OnRoll;
+            GameInputMgr.S.enableRunEvent += OnEnableRun;
+            GameInputMgr.S.disableRunEvent += OnDisableRun;
             m_Player.role.controlComponent.firstAttack = true;
         }
 
@@ -72,9 +72,9 @@ namespace Game.Logic
         {
             base.Exit(player);
             GameInputMgr.S.mainAction.AttackL.canceled -= OnAttackLCanceled;
-            GameInputMgr.S.mainAction.Roll.performed -= OnRollPerformed;
-            GameInputMgr.S.mainAction.Run.performed -= OnRunPerformed;
-            GameInputMgr.S.mainAction.Run.canceled -= OnRunCanceled;
+            GameInputMgr.S.rollEvent -= OnRoll;
+            GameInputMgr.S.enableRunEvent -= OnEnableRun;
+            GameInputMgr.S.disableRunEvent -= OnDisableRun;
             GameInputMgr.S.jumpEvent -= OnJump;
         }
 
@@ -96,18 +96,18 @@ namespace Game.Logic
             m_Player.role.controlComponent.Attack();
         }
 
-        private void OnRunPerformed(InputAction.CallbackContext callback)
+        private void OnEnableRun()
         {
             m_Player.role.controlComponent.running = true;
         }
 
-        private void OnRunCanceled(InputAction.CallbackContext callback)
+        private void OnDisableRun()
         {
             m_Player.role.controlComponent.running = false;
         }
 
 
-        private void OnRollPerformed(InputAction.CallbackContext callback)
+        private void OnRoll()
         {
             (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Roll);
         }

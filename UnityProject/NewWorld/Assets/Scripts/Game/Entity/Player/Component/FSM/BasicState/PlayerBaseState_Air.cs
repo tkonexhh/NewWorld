@@ -23,7 +23,7 @@ namespace Game.Logic
             base.Enter(player, args);
             m_AirTimer = 0;
             isFailing = false;
-            GameInputMgr.S.mainAction.Jump.performed += OnJumpPerformed;
+            GameInputMgr.S.jumpEvent += OnJump;
         }
 
         public override void Update(Player player, float dt)
@@ -41,7 +41,7 @@ namespace Game.Logic
         {
             base.Exit(player);
             m_AirTimer = 0;
-            GameInputMgr.S.mainAction.Jump.performed -= OnJumpPerformed;
+            GameInputMgr.S.jumpEvent -= OnJump;
         }
 
         protected override void OnInAir(Vector3 moveDir)
@@ -89,7 +89,7 @@ namespace Game.Logic
             }
         }
 
-        private void OnJumpPerformed(InputAction.CallbackContext callback)
+        private void OnJump()
         {
             m_Player.role.controlComponent.JumpFlip();
             if (m_Player.fsmComponent.stateMachine.currentState is PlayerFSMState_Battle stateBattle)
