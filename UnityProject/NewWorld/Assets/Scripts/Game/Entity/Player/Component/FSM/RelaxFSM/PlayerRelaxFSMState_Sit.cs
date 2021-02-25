@@ -20,13 +20,13 @@ namespace Game.Logic
         public override void Enter(Player player, params object[] args)
         {
             m_Player = player;
-            GameInputMgr.S.mainAction.Any.performed += OnAnyPerformed;
+            GameInputMgr.S.anyEvent += OnAny;
             player.role.controlComponent.Sit();
         }
 
         public override void Exit(Player player)
         {
-            GameInputMgr.S.mainAction.Any.performed -= OnAnyPerformed;
+            GameInputMgr.S.anyEvent -= OnAny;
         }
 
         public override void Update(Player player, float dt)
@@ -40,7 +40,7 @@ namespace Game.Logic
             }
         }
 
-        private void OnAnyPerformed(InputAction.CallbackContext callback)
+        private void OnAny()
         {
             AnimatorStateInfo info = m_Player.role.monoReference.animator.GetCurrentAnimatorStateInfo(0);
             if (info.IsName(m_Player.role.controlComponent.animName.sit_Idle) && !m_Player.role.monoReference.animator.IsInTransition(0))

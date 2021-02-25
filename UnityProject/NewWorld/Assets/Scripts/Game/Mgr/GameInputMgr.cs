@@ -17,7 +17,7 @@ using GFrame;
 namespace Game.Logic
 {
     [TMonoSingletonAttribute("[Game]/[Tools]/[GameInputMgr]")]
-    public class GameInputMgr : TMonoSingleton<GameInputMgr>, GameInput.IMainActions
+    public class GameInputMgr : TMonoSingleton<GameInputMgr>, GameInput.IMainActions, GameInput.IShortcutActions
     {
         private GameInput m_Input;
 
@@ -32,19 +32,27 @@ namespace Game.Logic
         public event UnityAction rollEvent = delegate { };
         public event UnityAction enableCrouchEvent = delegate { };
         public event UnityAction disableCrouchEvent = delegate { };
+        public event UnityAction attackLEvent = delegate { };
+        public event UnityAction anyEvent = delegate { };
 
-        public GameInput.MainActions mainAction => m_Input.Main;
+        //Shortcut
+        public event UnityAction openInventoryEvent = delegate { };
+
+
         public GameInput.UIActions uiAction => m_Input.UI;
-        public GameInput.ShortcutActions shortcutActions => m_Input.Shortcut;
 
 
 
 
         public override void OnSingletonInit()
         {
-            m_Input = new GameInput();
-            m_Input.Main.SetCallbacks(this);
-            EnableInput();
+            if (m_Input == null)
+            {
+                m_Input = new GameInput();
+                m_Input.Main.SetCallbacks(this);
+                m_Input.Shortcut.SetCallbacks(this);
+            }
+            EnableAllInput();
         }
 
 
@@ -52,25 +60,28 @@ namespace Game.Logic
         {
         }
 
-        public void EnableInput()
+        public void EnableAllInput()
         {
             m_Input.UI.Enable();
             m_Input.Main.Enable();
             m_Input.Shortcut.Enable();
         }
 
-        public void DisableInput()
+        public void DisableAllInput()
         {
             m_Input.UI.Disable();
             m_Input.Main.Disable();
             m_Input.Shortcut.Disable();
         }
 
-
-        public void ClearMove()
+        public void EnableGameInput()
         {
+            m_Input.Main.Enable();
+        }
 
-            //moveInput = Vector2.zero;
+        public void DisableGameInput()
+        {
+            m_Input.Main.Disable();
         }
 
         ////////////
@@ -90,20 +101,29 @@ namespace Game.Logic
         {
             rollEvent.Invoke();
         }
-        public void OnAny(InputAction.CallbackContext context) { }
+        public void OnAny(InputAction.CallbackContext context)
+        {
+            anyEvent.Invoke();
+        }
         public void OnRun(InputAction.CallbackContext context)
         {
-            if (context.phase == InputActionPhase.Performed)
+            switch (context.phase)
             {
-                enableRunEvent.Invoke();
-            }
-
-            if (context.phase == InputActionPhase.Canceled)
-            {
-                disableRunEvent.Invoke();
+                case InputActionPhase.Performed:
+                    enableRunEvent.Invoke();
+                    break;
+                case InputActionPhase.Canceled:
+                    disableRunEvent.Invoke();
+                    break;
             }
         }
-        public void OnAttackL(InputAction.CallbackContext context) { }
+        public void OnAttackL(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Canceled)
+            {
+                attackLEvent.Invoke();
+            }
+        }
         public void OnAttackR(InputAction.CallbackContext context) { }
         public void OnCrouch(InputAction.CallbackContext context)
         {
@@ -126,6 +146,15 @@ namespace Game.Logic
                 disableMouseControlCameraEvent.Invoke();
             }
         }
+
+
+        #region ShortCut
+        public void OnInventory(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+                openInventoryEvent.Invoke();
+        }
+        #endregion
     }
 
 }

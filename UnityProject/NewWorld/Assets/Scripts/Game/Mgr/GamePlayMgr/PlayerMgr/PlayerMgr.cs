@@ -18,6 +18,7 @@ namespace Game.Logic
         private Player m_Player;
         private PlayerInventoryMgr m_InventoryMgr = null;
         private PlayerEquipmentMgr m_EquipmentMgr = null;
+        private PlayerInputMgr m_InputMgr = null;
 
         public Role_Player role => m_Player.role;
         public Player player => m_Player;
@@ -28,9 +29,11 @@ namespace Game.Logic
         {
             m_InventoryMgr = new PlayerInventoryMgr();
             m_EquipmentMgr = new PlayerEquipmentMgr();
+            m_InputMgr = new PlayerInputMgr();
 
             m_InventoryMgr.OnInit();
             m_EquipmentMgr.OnInit();
+            m_InputMgr.OnInit();
 
             m_Player = new Player();
         }

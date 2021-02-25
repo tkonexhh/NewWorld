@@ -401,7 +401,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 13111
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -1011,17 +1011,17 @@ PrefabInstance:
     - target: {fileID: 6899394218373389420, guid: a5953636e1ee44fcda7a8bddd2ba1467,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.69631636
+      value: 0.69631624
       objectReference: {fileID: 0}
     - target: {fileID: 6899394218373389420, guid: a5953636e1ee44fcda7a8bddd2ba1467,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.11869798
+      value: 0.11869795
       objectReference: {fileID: 0}
     - target: {fileID: 6899394218373389420, guid: a5953636e1ee44fcda7a8bddd2ba1467,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6977862
+      value: 0.69778633
       objectReference: {fileID: 0}
     - target: {fileID: 6899394218373389420, guid: a5953636e1ee44fcda7a8bddd2ba1467,
         type: 3}
@@ -1101,22 +1101,22 @@ PrefabInstance:
     - target: {fileID: 6899394219675824623, guid: a5953636e1ee44fcda7a8bddd2ba1467,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.69631636
+      value: 0.6963163
       objectReference: {fileID: 0}
     - target: {fileID: 6899394219675824623, guid: a5953636e1ee44fcda7a8bddd2ba1467,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.118697956
+      value: 0.11869794
       objectReference: {fileID: 0}
     - target: {fileID: 6899394219675824623, guid: a5953636e1ee44fcda7a8bddd2ba1467,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6977862
+      value: 0.6977863
       objectReference: {fileID: 0}
     - target: {fileID: 6899394219675824623, guid: a5953636e1ee44fcda7a8bddd2ba1467,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.11894853
+      value: -0.11894852
       objectReference: {fileID: 0}
     - target: {fileID: 6901036712747490963, guid: a5953636e1ee44fcda7a8bddd2ba1467,
         type: 3}

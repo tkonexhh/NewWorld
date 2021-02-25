@@ -20,14 +20,14 @@ namespace Game.Logic
         public override void Enter(Player player, params object[] args)
         {
             m_Player = player;
-            GameInputMgr.S.mainAction.Any.performed += OnAnyPerformed;
+            GameInputMgr.S.anyEvent += OnAny;
             player.role.controlComponent.StartTalking();
 
         }
 
         public override void Exit(Player player)
         {
-            GameInputMgr.S.mainAction.Any.performed -= OnAnyPerformed;
+            GameInputMgr.S.anyEvent -= OnAny;
             player.role.controlComponent.EndTalking();
         }
 
@@ -37,7 +37,7 @@ namespace Game.Logic
         }
 
 
-        private void OnAnyPerformed(InputAction.CallbackContext callback)
+        private void OnAny()
         {
             (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Relax).SetRelaxState(RoleRelaxState.Move);
         }

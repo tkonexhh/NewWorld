@@ -20,7 +20,6 @@ namespace Game.Logic
 
         public override void Init()
         {
-            AddComponent(new GameInputComponent());
             playerMgr = AddComponent(new PlayerMgr());
             environmentMgr = AddComponent(new EnvironmentMgr());
         }

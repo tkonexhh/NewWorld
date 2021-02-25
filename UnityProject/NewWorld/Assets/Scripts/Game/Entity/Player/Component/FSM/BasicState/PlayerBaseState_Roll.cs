@@ -22,7 +22,6 @@ namespace Game.Logic
         {
             m_Player = player;
             StartRoll();
-            GameInputMgr.S.ClearMove();
         }
         public override void FixedUpdate(Player player, float dt)
         {

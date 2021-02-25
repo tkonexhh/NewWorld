@@ -21,7 +21,7 @@ namespace Game.Logic
         public override void Enter(Player player, params object[] args)
         {
             base.Enter(player, args);
-            GameInputMgr.S.mainAction.AttackL.canceled += OnAttackLCanceled;
+            GameInputMgr.S.attackLEvent += OnAttackL;
             GameInputMgr.S.jumpEvent += OnJump;
             GameInputMgr.S.rollEvent += OnRoll;
             GameInputMgr.S.enableRunEvent += OnEnableRun;
@@ -71,7 +71,7 @@ namespace Game.Logic
         public override void Exit(Player player)
         {
             base.Exit(player);
-            GameInputMgr.S.mainAction.AttackL.canceled -= OnAttackLCanceled;
+            GameInputMgr.S.attackLEvent -= OnAttackL;
             GameInputMgr.S.rollEvent -= OnRoll;
             GameInputMgr.S.enableRunEvent -= OnEnableRun;
             GameInputMgr.S.disableRunEvent -= OnDisableRun;
@@ -91,7 +91,7 @@ namespace Game.Logic
             m_Player.role.animComponent.SetCastTrigger();
         }
 
-        private void OnAttackLCanceled(InputAction.CallbackContext callback)
+        private void OnAttackL()
         {
             m_Player.role.controlComponent.Attack();
         }

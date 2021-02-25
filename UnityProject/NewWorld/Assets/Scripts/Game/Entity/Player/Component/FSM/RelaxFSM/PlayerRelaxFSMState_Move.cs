@@ -64,7 +64,6 @@ namespace Game.Logic
                 player.monoReference.rigidbody.velocity = Vector3.zero;
                 player.monoReference.rigidbody.drag = 0;
                 player.role.animComponent.ResetVelocityZ();
-                GameInputMgr.S.ClearMove();
             }
 
             if (Input.GetKeyDown(KeyCode.LeftControl))

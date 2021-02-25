@@ -137,21 +137,23 @@ namespace GFrame
         }
         #endregion
 
-        public void ToggleShowPanel<T>(T uiID) where T : System.IConvertible
+        public bool ToggleShowPanel<T>(T uiID) where T : System.IConvertible
         {
             PanelInfo panelInfo = LoadPanelInfo(uiID.ToInt32(null));
             if (panelInfo == null)
             {
-                return;
+                return false;
             }
 
             if (panelInfo.isOpen)
             {
                 HidePanel(uiID);
+                return false;
             }
             else
             {
                 OpenPanel(uiID, PanelSortType.Auto, null);
+                return true;
             }
         }
 
