@@ -13,10 +13,11 @@ using GFrame;
 
 namespace Game.Logic
 {
+
     public class EnvironmentMgr : GameEngineComponent
     {
         public float time { get; private set; }//24*60*60 按秒算
-        private float m_TimeSpeed = 4;
+        private float m_TimeSpeed = 4;//4
 
         private List<EnvironmentComponent> _Components = new List<EnvironmentComponent>();
 

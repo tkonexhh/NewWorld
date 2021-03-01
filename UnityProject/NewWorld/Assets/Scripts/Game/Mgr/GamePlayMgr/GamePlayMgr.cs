@@ -13,6 +13,7 @@ using GFrame;
 
 namespace Game.Logic
 {
+    [TMonoSingletonAttribute("[Game]/[GamePlayMgr]")]
     public class GamePlayMgr : AbstractMgr<GamePlayMgr>
     {
         public PlayerMgr playerMgr { get; private set; }
