@@ -19,7 +19,7 @@ namespace GFrame
                 Init(entity);
             }
 
-            Enter(entity);
+            Enter(entity, args);
         }
 
 

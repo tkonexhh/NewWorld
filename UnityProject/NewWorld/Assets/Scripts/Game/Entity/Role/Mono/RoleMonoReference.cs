@@ -17,7 +17,7 @@ namespace Game.Logic
     {
         public Animator animator;
 
-
+        public Transform lockOn;
         public Transform headLook;
         public Transform kneeLook;
 

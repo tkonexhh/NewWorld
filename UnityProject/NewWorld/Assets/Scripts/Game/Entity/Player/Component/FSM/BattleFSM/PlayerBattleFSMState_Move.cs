@@ -35,6 +35,12 @@ namespace Game.Logic
                 return;
 
             player.role.animComponent.SetMoving(player.controlComponent.movementVector.magnitude > 0.1f);
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                FindFocusTarget();
+            }
+
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 GetHurt();
@@ -118,6 +124,18 @@ namespace Game.Logic
             (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.Jump);
         }
 
+        private void FindFocusTarget()
+        {
+            //在玩家周围查找
+            var colliders = Physics.OverlapSphere(m_Player.transform.position, 20, 1 << LayerDefine.LAYER_ROLE);
+            if (colliders.Length > 0)
+            {
+                var target = colliders[0].transform;
+                var mono = target.GetComponent<RoleMonoReference>();
+                if (mono != null)
+                    (m_Player.fsmComponent.stateMachine.currentState as PlayerFSMState_Battle).SetBattleState(RoleBattleState.LockOn, mono.lockOn);
+            }
+        }
 
         protected override void OnHitGround(RaycastHit hit)
         {
