@@ -21,6 +21,7 @@ namespace Game.Logic
             base.Enter(player, args);
             Transform target = (Transform)args[0];
             GameCameraMgr.S.FocusTarget(target);
+            player.role.iKComponent.SetFocusTarget(target);
             GameInputMgr.S.attackLEvent += OnAttackL;
             GameInputMgr.S.jumpEvent += OnJump;
             GameInputMgr.S.rollEvent += OnRoll;
@@ -83,6 +84,7 @@ namespace Game.Logic
             GameInputMgr.S.disableRunEvent -= OnDisableRun;
             GameInputMgr.S.jumpEvent -= OnJump;
             GameCameraMgr.S.SetType(GameCameraType.FreeLook);
+            player.role.iKComponent.SetFocusTarget(null);
         }
 
         private void GetHurt()
