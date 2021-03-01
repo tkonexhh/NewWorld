@@ -25,6 +25,7 @@ namespace GFrame
     public class Log
     {
         private static LogLevel m_LogLevel = LogLevel.Normal;
+        private static Log4NetLog logger = new Log4NetLog();
 
         public static LogLevel Level
         {
@@ -38,7 +39,8 @@ namespace GFrame
             {
                 return;
             }
-            Debug.Log(msg);
+            // Debug.Log(msg);
+            logger.i(msg);
         }
 
         public static void i(string msg, params object[] args)
@@ -47,7 +49,8 @@ namespace GFrame
             {
                 return;
             }
-            Debug.LogFormat(msg, args);
+            // Debug.LogFormat(msg, args);
+            logger.i(msg, args);
         }
 
         public static void e(object msg)
@@ -56,7 +59,8 @@ namespace GFrame
             {
                 return;
             }
-            Debug.LogError(msg);
+            // Debug.LogError(msg);
+            logger.e(msg);
         }
 
         public static void e(Exception e)
@@ -65,7 +69,8 @@ namespace GFrame
             {
                 return;
             }
-            Debug.LogException(e);
+            // Debug.LogException(e);
+            logger.e(e);
         }
 
         public static void e(string msg, params object[] args)
@@ -74,7 +79,8 @@ namespace GFrame
             {
                 return;
             }
-            Debug.LogErrorFormat(msg, args);
+            // Debug.LogErrorFormat(msg, args);
+            logger.e(msg, args);
         }
 
         public static void w(object msg)
@@ -83,7 +89,8 @@ namespace GFrame
             {
                 return;
             }
-            Debug.LogWarning(msg);
+            // Debug.LogWarning(msg);
+            logger.w(msg);
         }
 
         public static void w(string msg, params object[] args)
@@ -92,7 +99,8 @@ namespace GFrame
             {
                 return;
             }
-            Debug.LogWarningFormat(msg, args);
+            // Debug.LogWarningFormat(msg, args);
+            logger.w(msg, args);
         }
     }
 }

@@ -6,9 +6,10 @@
 /Assets/AssetStoreTools*
 .vs/
 /Out/Android/
-/UnityProject/Framework/Library/
-/UnityProject/Framework/Temp/
-/UnityProject/Framework/Temp/UnityLockfile
+/UnityProject/NewWorld/Logs/
+/UnityProject/NewWorld/Library/
+/UnityProject/NewWorld/Temp/
+/UnityProject/NewWorld/Temp/UnityLockfile
 
 *Library/
 *Temp/
