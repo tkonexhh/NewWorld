@@ -22,4 +22,5 @@ public class TagDefine
 	public const string TAG_PLAYER = "Player";
 	public const string TAG_GAMECONTROLLER = "GameController";
 	public const string TAG_MAINLIGHT = "MainLight";
+	public const string TAG_MOONLIGHT = "MoonLight";
 }

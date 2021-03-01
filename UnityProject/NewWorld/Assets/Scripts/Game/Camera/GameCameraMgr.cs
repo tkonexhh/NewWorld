@@ -14,12 +14,12 @@ using Cinemachine;
 
 namespace Game.Logic
 {
-    [TMonoSingletonAttribute("[GFrame]/[Tools]/[GameCameraMgr]")]
+    [TMonoSingletonAttribute("[Game]/[Tools]/[GameCameraMgr]")]
     public class GameCameraMgr : TMonoSingleton<GameCameraMgr>
     {
         public Camera mainCamera;
         public CinemachineFreeLook freeLookVCam;
-        [SerializeField, Range(.5f, 3f)] private float m_SpeedMultiplier = 1f;//TODO: make this modifiable in the game settings
+        [SerializeField, Range(.5f, 3f)] private float m_SpeedMultiplier = 3f;//TODO: make this modifiable in the game settings
         private bool m_CameraMovementLock = false;
         private bool m_IsRightMouseButtonClick = false;
         private PostEffect m_CameraPostEffect;

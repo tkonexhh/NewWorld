@@ -17,21 +17,25 @@ namespace Game.Logic
     {
         private Material m_MatSkyBox;
         private Light m_MainLight;//主光源
-        private Light m_BiMainLight;//副主光源
-        private float totalTime = 24 * 3600;
-        private Vector3 m_LightDir = Vector3.up;
+        private Light m_MoonLight;//副光源
+        private const float TOTALTIME = 24 * 3600;
+        private bool m_IsNight = false;
+
+
         public override void Init(EnvironmentMgr mgr)
         {
             base.Init(mgr);
             m_MatSkyBox = RenderSettings.skybox;
-            //获取到当前的天空盒材质
-            //获得到场景中的主光源(太阳)
-            var lightGo = GameObject.FindGameObjectWithTag(TagDefine.TAG_MAINLIGHT);
-            if (lightGo != null)
+
+            var mainLightGo = GameObject.FindGameObjectWithTag(TagDefine.TAG_MAINLIGHT);
+            var moonLightGo = GameObject.FindGameObjectWithTag(TagDefine.TAG_MOONLIGHT);
+            if (mainLightGo != null && moonLightGo != null)
             {
-                m_MainLight = lightGo.GetComponent<Light>();
+                m_MainLight = mainLightGo.GetComponent<Light>();
+                m_MoonLight = moonLightGo.GetComponent<Light>();
                 SetLightRotation(environmentMgr.time);
             }
+
         }
 
         public override void Update(float dt)
@@ -45,7 +49,53 @@ namespace Game.Logic
         private void SetLightRotation(float time)
         {
             time -= 5 * 3600;
-            m_MainLight.transform.localRotation = Quaternion.Euler(m_LightDir * 360.0f * (time / totalTime));
+            m_MainLight.transform.localRotation = Quaternion.Euler(Vector3.up * 360.0f * (time / TOTALTIME));
+            m_MoonLight.transform.localRotation = Quaternion.Euler(Vector3.up * 360.0f * ((time + TOTALTIME / 2) / TOTALTIME));
+            CheckDayNight();
+            // Debug.LogError(m_MainLight.transform.localRotation.eulerAngles.y + "--" + m_MoonLight.transform.localRotation.eulerAngles.y);
+        }
+
+        private void CheckDayNight()
+        {
+            if (m_IsNight)
+            {
+                if (m_MoonLight.transform.localRotation.eulerAngles.y > 180)
+                {
+                    StartDay();
+                }
+            }
+            else
+            {
+                if (m_MainLight.transform.localRotation.eulerAngles.y > 180)
+                {
+                    StartNight();
+                }
+            }
+        }
+
+        private void StartDay()
+        {
+            Debug.LogError("StartDay");
+            m_IsNight = false;
+            m_MainLight.shadows = LightShadows.Soft;
+            m_MoonLight.shadows = LightShadows.None;
+            SetGlobalShader(m_MainLight);
+        }
+
+        private void StartNight()
+        {
+            Debug.LogError("StartNight");
+            m_IsNight = true;
+            m_MainLight.shadows = LightShadows.None;
+            m_MoonLight.shadows = LightShadows.Soft;
+            SetGlobalShader(m_MoonLight);
+        }
+
+        private void SetGlobalShader(Light light)
+        {
+            Shader.SetGlobalVector("_MainLightPosition", light.transform.position);
+            Shader.SetGlobalFloat("_MainLightAttenuation", light.range);
+            Shader.SetGlobalColor("_MainLightColor", light.color);
         }
     }
 
