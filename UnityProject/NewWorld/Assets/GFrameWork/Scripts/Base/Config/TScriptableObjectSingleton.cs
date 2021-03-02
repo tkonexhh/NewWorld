@@ -18,11 +18,11 @@ namespace GFrame
 
             if (obj == null)
             {
-                Log.e("#Not Find " + typeof(T).Name + " Config File");
+                Debug.LogError("#Not Find " + typeof(T).Name + " Config File");
                 return null;
             }
 
-            Log.i("#Success Load " + typeof(T).Name + " Config.");
+            // Debug.Log("#Success Load " + typeof(T).Name + " Config.");
 
             s_Instance = obj as T;
 

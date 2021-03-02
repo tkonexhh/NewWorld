@@ -19,5 +19,14 @@
         		<conversionPattern value="%date Thread[%thread] %-5level %logger - %message%newline" />
     		</layout>
 		</appender>
+		<appender name="UdpAppender" type="GFrame.Debugger.Log4Net.Appender.UnityUdpRemotingAppender">
+			<localPort value="9000" />
+			<remoteAddress value="127.0.0.1" />
+			<remotePort value="8085" />
+			<filter type="log4net.Filter.LevelRangeFilter">
+			  <param name="LevelMin" value="DEBUG" />
+			  <param name="LevelMax" value="FATAL" />
+			</filter>
+		</appender>
 	</log4net>	
 </configuration>
