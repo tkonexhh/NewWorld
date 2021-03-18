@@ -76,13 +76,14 @@ namespace Game.Logic
                 case (int)EventID.OnRefeshAppearance:
                     if (m_CharacterAppearance != null)
                     {
-                        InventoryEquipSlot slot = (InventoryEquipSlot)args[0];
-                        Equipment equipment = (Equipment)args[1];
-                        Equipment oldEquipment = (Equipment)args[2];
-                        oldEquipment?.equipmentAppearance.Removeppearance(m_CharacterAppearance);
-                        //对装备栏角色产生装备效果
-                        equipment?.equipmentAppearance.ApplyAppearance(m_CharacterAppearance);
-                        m_CharacterAppearance.CombineMeshs();
+                        m_CharacterAppearance.RefeshAppearance();
+                        // InventoryEquipSlot slot = (InventoryEquipSlot)args[0];
+                        // Equipment equipment = (Equipment)args[1];
+                        // Equipment oldEquipment = (Equipment)args[2];
+                        // oldEquipment?.equipmentAppearance.Removeppearance(m_CharacterAppearance);
+                        // //对装备栏角色产生装备效果
+                        // equipment?.equipmentAppearance.ApplyAppearance(m_CharacterAppearance);
+                        // m_CharacterAppearance.CombineMeshs();
 
                     }
                     break;

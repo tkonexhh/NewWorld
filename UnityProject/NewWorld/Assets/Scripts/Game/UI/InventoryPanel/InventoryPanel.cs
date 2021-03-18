@@ -41,6 +41,13 @@ namespace Game.Logic
         protected override void OnOpen()
         {
             base.OnOpen();
+            GameInputMgr.S.DisableGameInput();
+        }
+
+        protected override void OnClose()
+        {
+            base.OnClose();
+            GameInputMgr.S.EnableGameInput();
         }
 
 

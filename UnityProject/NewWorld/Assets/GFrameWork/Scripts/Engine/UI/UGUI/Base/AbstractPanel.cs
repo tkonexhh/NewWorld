@@ -41,11 +41,6 @@ namespace GFrame
             OnPanelOpen(args);
         }
 
-        public void PanelHide()
-        {
-            OnPanelHide();
-        }
-
         public void OnPanelClose(bool destroy)
         {
             SendViewEvent(ViewEvent.OnPanelClose);

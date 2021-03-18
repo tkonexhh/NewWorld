@@ -28,7 +28,6 @@ namespace GFrame
         private int m_PanelID;
         private int m_UIID;
         private int m_SortingOrder = -1;
-        private bool m_IsOpen = false;
         private ePanelState m_PanelState = ePanelState.UnInit;
 
         private Action<AbstractPanel> m_OpenCallback;
@@ -36,7 +35,20 @@ namespace GFrame
         #region setter getter
         public int panelID => m_PanelID;
         public int uiID => m_UIID;
-        public bool isOpen => m_IsOpen;
+        public bool isOpen
+        {
+            get
+            {
+                if (m_Panel == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return m_Panel.hasOpen;
+                }
+            }
+        }
 
         public int sortingOrder
         {
@@ -112,7 +124,6 @@ namespace GFrame
         {
             if (m_PanelState != ePanelState.UnInit) return;
 
-
             m_PanelState = ePanelState.Loading;
             UIData data = UIDataTable.Get(m_UIID);
 
@@ -153,7 +164,6 @@ namespace GFrame
         public void SetActive(bool visible)
         {
             if (m_Panel == null) return;
-            m_IsOpen = visible;
             if (visible)
             {
                 if (!m_Panel.gameObject.activeSelf)
@@ -189,21 +199,14 @@ namespace GFrame
 
         public void OpenPanel()
         {
-            m_IsOpen = true;
             m_Panel.OnPanelOpen(true);
             CallOpenCallback();
         }
 
-        public void HidePanel()
-        {
-            m_IsOpen = false;
-            m_Panel.PanelHide();
-        }
 
         public void ClosePanel(bool destory)
         {
             if (m_Panel == null) return;
-            m_IsOpen = true;
             m_Panel.OnPanelClose(destory);
             if (destory)
             {

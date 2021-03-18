@@ -122,7 +122,7 @@ namespace Game.Logic
             // InitColor();
         }
 
-        void RefeshAppearance()
+        public void RefeshAppearance()
         {
             SetAppearance(AppearanceSlot.Hair, m_AppearanceData.basicAppearance.hairID);
             SetAppearance(AppearanceSlot.Head, m_AppearanceData.basicAppearance.headID);
@@ -245,16 +245,8 @@ namespace Game.Logic
 
         public void SetHead(int id)
         {
-            if (id == -1)
-            {
-                m_AppearanceData.basicAppearance.headID = m_Head.SetSkin(m_AppearanceData.sex, -1);
-            }
-            else
-            {
-                TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByID(AppearanceSlot.Head, m_AppearanceData.sex, id);
-                if (data != null)
-                    m_AppearanceData.basicAppearance.headID = m_Head.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
-            }
+            TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByID(AppearanceSlot.Head, m_AppearanceData.sex, id);
+            m_AppearanceData.basicAppearance.headID = m_Head.SetSkin(m_AppearanceData.sex, data != null ? (int)data.Appearance : -1);
         }
 
         public void SetFacialHair(int id)
@@ -269,16 +261,8 @@ namespace Game.Logic
 
         public void SetEyebrows(int id)
         {
-            if (id == -1)
-            {
-                m_AppearanceData.basicAppearance.eyeBrows = m_Eyebrows.SetSkin(m_AppearanceData.sex, -1);
-            }
-            else
-            {
-                TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByID(AppearanceSlot.EyeBrows, m_AppearanceData.sex, id);
-                if (data != null)
-                    m_AppearanceData.basicAppearance.eyeBrows = m_Eyebrows.SetSkin(m_AppearanceData.sex, (int)data.Appearance);
-            }
+            TDCharacterAppearance data = TDCharacterAppearanceTable.GetAppearanceByID(AppearanceSlot.EyeBrows, m_AppearanceData.sex, id);
+            m_AppearanceData.basicAppearance.eyeBrows = m_Eyebrows.SetSkin(m_AppearanceData.sex, data != null ? (int)data.Appearance : -1);
         }
 
         public void SetTorso(int id)

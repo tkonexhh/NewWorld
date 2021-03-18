@@ -301,7 +301,7 @@ namespace Game.Logic
 
             var equipCellData = new PlayerEquipmentCellData(equipment);
             ApplyCell(cellView, (int)cellView.slot, equipCellData);
-            Debug.LogError(equipment);
+            // Debug.LogError(equipment);
             GamePlayMgr.S.playerMgr.role.equipComponent.Equip(equipment);
             GFrame.EventSystem.S.Send(EventID.OnRefeshAppearance, cellView.slot, equipment, nowEquipment?.equipment);
         }

@@ -36,6 +36,11 @@ namespace GFrame
             get { return m_UIID; }
             set { m_UIID = value; }
         }
+
+        public bool hasOpen
+        {
+            get { return m_HasOpen; }
+        }
         #endregion
 
         #region life
@@ -86,7 +91,7 @@ namespace GFrame
             if (args == null || args.Length <= 0) return;
 
             ViewEvent e = (ViewEvent)args[0];
-            //默认事件已经处理了
+            //默认事件已经处理�?
             switch (e)
             {
                 case ViewEvent.OnPanelClose:
@@ -134,13 +139,12 @@ namespace GFrame
             }
         }
 
-
         #region 子类需重载
         //初始化面板
         protected virtual void OnUIInit() { }
         //面板开启进入，可重入界面会多次进入
         protected virtual void OnOpen() { }
-        //面板被关闭的时候进入
+        //面板被关闭的时候
         protected virtual void OnClose() { }
         protected virtual void OnSortingLayerUpdate() { }
         protected virtual void OnParamUpdate() { }

@@ -51,7 +51,6 @@ namespace Game.Logic
             height = (int)Conf.Height;
         }
 
-
     }
 
 }

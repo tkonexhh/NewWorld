@@ -5,7 +5,7 @@
 	Tip:3/1/2021 5:04:17 PM
 ************************/
 
-
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace GFrame
 {
-    public interface IBinding
+    public interface IBinding : IDisposable
     {
         IBindingContext BindingContext { get; set; }
         object Target { get; }

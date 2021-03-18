@@ -311,6 +311,7 @@ namespace Game.Logic
             if (targetCell.CellData is PlayerInventoryCellData inventoryCellData)
             {
                 if (inventoryCellData.item is Equipment) { HandleEquipmentOptionClick(targetCell); }
+                if (inventoryCellData.item is SupplyItem) { HandleSupplyItemOptionClick(targetCell); }
             }
         }
 
@@ -348,7 +349,17 @@ namespace Game.Logic
                 ApplyCell(cellView, cellIndex.Value, null);
                 GFrame.EventSystem.S.Send(EventID.OnEquipInventroy, cellData);
             }
+        }
 
+        private void HandleSupplyItemOptionClick(IInventoryCellView cellView)
+        {
+            int? cellIndex = GetIndex(cellView);
+            if (cellIndex.HasValue)
+            {
+                PlayerInventoryCellData cellData = cellView.CellData as PlayerInventoryCellData;
+                ApplyCell(cellView, cellIndex.Value, null);
+                Debug.LogError("HandleSupplyItemOptionClick");
+            }
         }
 
         #endregion

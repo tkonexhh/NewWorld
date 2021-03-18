@@ -26,15 +26,7 @@ namespace Game.Logic
         private void OnInventoryPerformed()
         {
             //交换显示
-            bool show = UIMgr.S.ToggleShowPanel(UIID.Inventorypanel);
-            if (show)
-            {
-                GameInputMgr.S.DisableGameInput();
-            }
-            else
-            {
-                GameInputMgr.S.EnableGameInput();
-            }
+            UIMgr.S.ToggleShowPanel(UIID.Inventorypanel);
         }
     }
 

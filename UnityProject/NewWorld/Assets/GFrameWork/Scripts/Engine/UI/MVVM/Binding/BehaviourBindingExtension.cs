@@ -22,7 +22,9 @@ namespace GFrame
             {
                 if (binder == null)
                 {
-                    BindingFactory bindingFactory = new BindingFactory();//BindingFactory(sourceFactory, targetFactory);
+                    SourceProxyFactory sourceFactory = new SourceProxyFactory();
+                    TargetProxyFactory targetFactory = new TargetProxyFactory();
+                    BindingFactory bindingFactory = new BindingFactory(sourceFactory, targetFactory);//BindingFactory(sourceFactory, targetFactory);
                     binder = new BinderBase(bindingFactory);
                 }
 

@@ -56,6 +56,27 @@ namespace GFrame
         }
 
         protected abstract void OnDataContextChanged();
+
+        #region IDisposable Support     
+
+        protected virtual void Dispose(bool disposing)
+        {
+            this.bindingContext = null;
+            this.dataContext = null;
+            this.target = null;
+        }
+
+        ~AbstractBinding()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 
 }

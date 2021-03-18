@@ -117,7 +117,7 @@ namespace Game.Logic
             m_OldEyeBrowsID = appearance.data.basicAppearance.eyeBrows;
             m_OldHeadID = appearance.data.basicAppearance.headID;
 
-            appearance.SetAppearance(AppearanceSlot.Hair, 0);
+            appearance.SetAppearance(AppearanceSlot.Hair, -1);
             appearance.SetAppearance(AppearanceSlot.EyeBrows, -1);
             appearance.SetAppearance(AppearanceSlot.Head, -1);
             appearance.SetAppearance(AppearanceSlot.FacialHair, 0);

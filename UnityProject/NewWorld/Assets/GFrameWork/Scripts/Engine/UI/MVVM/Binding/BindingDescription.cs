@@ -18,8 +18,15 @@ namespace GFrame
         public string TargetName { get; set; }
         public string UpdateTrigger { get; set; }
 
+        public SourceDescription Source { get; set; }
+
         public BindingDescription()
         {
+        }
+
+        public BindingDescription(string targetName)
+        {
+            this.TargetName = targetName;
         }
 
         public override string ToString()

@@ -123,18 +123,18 @@ namespace GFrame
 
 
         #region HidePanel
-        public void HidePanel<T>(T uiID) where T : System.IConvertible
-        {
+        // public void HidePanel<T>(T uiID) where T : System.IConvertible
+        // {
 
-            PanelInfo panelInfo = LoadPanelInfo(uiID.ToInt32(null));
-            if (panelInfo == null)
-            {
-                return;
-            }
+        //     PanelInfo panelInfo = LoadPanelInfo(uiID.ToInt32(null));
+        //     if (panelInfo == null)
+        //     {
+        //         return;
+        //     }
 
-            panelInfo.SetActive(false);
-            panelInfo.HidePanel();
-        }
+        //     panelInfo.SetActive(false);
+        //     panelInfo.HidePanel();
+        // }
         #endregion
 
         public bool ToggleShowPanel<T>(T uiID) where T : System.IConvertible
@@ -147,7 +147,7 @@ namespace GFrame
 
             if (panelInfo.isOpen)
             {
-                HidePanel(uiID);
+                ClosePanel(panelInfo.abstractPanel);
                 return false;
             }
             else
